@@ -28,25 +28,15 @@ class MaxOneProblem(TargetProblem):
 
     def string_representation(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
-        s = delimiter
-        for i in range(0, indentation):
-            s += indentation_symbol  
-        s += group_start
-        s+= super().string_representation(delimiter, indentation, indentation_symbol, '', '')
-        s+= delimiter
-        for i in range(0, indentation):
-            s += indentation_symbol  
-        s += group_end 
-        return s
+        return ''
 
     def __str__(self)->str:
-        return self.string_representation('|', 0, '', '{', '}')
-
+        return ''
     def __repr__(self)->str:
-        return self.string_representation('\n', 0, '   ', '{', '}')
+        return ''
 
     def __format__(self, spec:str)->str:
-        return self.string_representation('|')
+        return ''
 
 
 class MaxOneProblemIntSolution(TargetSolution):
@@ -156,30 +146,16 @@ class MaxOneProblemIntSolution(TargetSolution):
 
     def string_representation(self, delimiter:str='\n', indentation:int=0, indentation_symbol:str='   ', 
             group_start:str='{', group_end:str='}',)->str:
-        s = delimiter
-        for i in range(0, indentation):
-            s += indentation_symbol  
-        s += group_start
-        s += super().string_representation(delimiter, indentation, indentation_symbol, '', '')
-        s += delimiter
-        s += delimiter
-        for i in range(0, indentation):
-            s += indentation_symbol  
-        s += 'representation=' + bin(self.__representation)
-        s += delimiter
-        for i in range(0, indentation):
-            s += indentation_symbol  
-        s += group_end 
-        return s
+        return ''
 
     def __str__(self)->str:
-        return self.string_representation('\n', 0, '   ', '{', '}')
+        return ''
 
     def __repr__(self)->str:
-        return self.string_representation('\n', 0, '   ', '{', '}')
+        return ''
 
     def __format__(self, spec:str)->str:
-        return self.string_representation('\n', 0, '   ', '{', '}')
+        return ''
 
 
 problem_to_solve:MaxOneProblem = MaxOneProblem(dim=10)
@@ -198,5 +174,6 @@ optimizer:VnsOptimizer = VnsOptimizer(target_problem=problem_to_solve,
 optimizer.solution_code_distance_cache_cs.is_caching = False
 optimizer.output_control.write_to_output_file = False
 optimizer.optimize()
-print('Best solution: {}'.format(optimizer.best_solution))            
-#print('Optimizer: {}'.format(optimizer))
+print('Best solution: {}'.format(optimizer.best_solution.solution_code()))            
+print('Best solution fitness: {}'.format(optimizer.best_solution.fitness_value()))
+print('Number of iterations: {}'.format(optimizer.iteration))            
