@@ -1,7 +1,12 @@
 from pathlib import Path
 directory = Path(__file__).resolve()
 import sys
+sys.path.append(directory.parent)
+sys.path.append(directory.parent.parent)
+sys.path.append(directory.parent.parent.parent)
 sys.path.append(directory.parent.parent.parent.parent)
+sys.path.append(directory.parent.parent.parent.parent.parent)
+sys.path.append(directory.parent.parent.parent.parent.parent.parent)
 
 import unittest   
 import unittest.mock as mock
@@ -12,7 +17,7 @@ class TestVnSOptimizerProperties(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
-        print("setUpClass\n")
+        print("setUpClass TestVnSOptimizerProperties\n")
 
     def setUp(self):
         self.evaluations_max = 42
@@ -51,7 +56,7 @@ class TestVnSOptimizerProperties(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        print("\ntearDownClass")
+        print("\ntearDownClass TestVnSOptimizerProperties")
     
 if __name__ == '__main__':
     unittest.main()

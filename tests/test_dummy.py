@@ -10,7 +10,7 @@ class TestDummy(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
-        print("setUpClass\n")
+        print("setUpClass TestDummy\n")
 
     def setUp(self):
         self.dummy_val = 42
@@ -34,7 +34,7 @@ class TestDummy(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        print("\ntearDownClass")
+        print("\ntearDownClass TestDummy")
     
 if __name__ == '__main__':
     unittest.main()

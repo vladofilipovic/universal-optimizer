@@ -6,9 +6,12 @@
         "Filipović",
         "intersphinx",
         "levelname",
+        "maxdepth",
         "metaheuristic",
+        "quickstart",
         "rtype",
         "scdc",
+        "toctree",
         "viewcode"
     ],
     "editor.indentSize": "tabSize",

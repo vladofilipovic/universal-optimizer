@@ -6,7 +6,7 @@
 Universal optimizer - Optimization algorithms library
 =====================================================
 
-Library `Universal optimizer` contains various optimization methods. Library is developed in `Python` programming language, using `poetry` tool for project management, `unittest`  library for unit testing and `Sphinx` for documentation generation.
+Library  `Universal optimizer <https://github.com/math-rs-comp-int/universal-optimizer>`_ contains various optimization methods. Library is developed in `Python <https://www.python.org/>`_ programming language, using `poetry <https://python-poetry.org/>`_ tool for project management, `unittest <https://docs.python.org/3/library/unittest.html>`_ library for unit testing and `Sphinx <https://www.sphinx-doc.org/en/master/>`_ for documentation generation.
 
 
 .. toctree::
