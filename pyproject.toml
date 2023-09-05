@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "universal-optimizer"
+version = "0.1.4"
+description = "Universal Optimizer Library"
+authors = ["Vladimir Filipovic <vladofilipovic@hotmail.com>"]
+license = "Apache 2.0"
+readme = "README.md"
+packages = [{include = "uo"},{include = "app"},]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pathlib = "^1.0.1"
+bitstring = "^4.1.1"
+
+[tool.poetry.group.docs] 
+optional = true
+
+[tool.poetry.group.docs.dependencies]
+sphinx = "^7.2.5"
+sphinx-copybutton = "^0.5.2"
+sphinx-rtd-theme = "^1.3.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

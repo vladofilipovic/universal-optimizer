@@ -1,0 +1,11 @@
+..  _Problem_Max_Ones:
+
+Max Ones Problem
+================
+
+* Max Ones Problem. Problem is represented with class :ref:`MaxOnesProblem<py_max_ones_problem>`.
+
+    - `BitArray` representation for solution of Max Ones Problem. Implementation of the solution with such representation is given with class :ref:`MaxOnesProblemBitArraySolution <py_max_ones_problem_bit_array_solution>`.  
+
+    - `int` representation for solution of Max Ones Problem. Implementation of the solution with such representation is given with class :ref:`MaxOnesProblemIntSolution <py_max_ones_problem_int_solution>`.  
+
