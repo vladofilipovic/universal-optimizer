@@ -15,7 +15,7 @@ uo.algorithm.metaheuristic.variable\_neighborhood\_search.vns\_optimizer module
 uo.algorithm.metaheuristic.variable\_neighborhood\_search.vns\_support\_for\_target\_solution module
 ----------------------------------------------------------------------------------------------------
 
-.. automodule:: uo.algorithm.metaheuristic.variable_neighborhood_search.vns_support_for_target_solution
+.. automodule:: uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support
    :members:
    :undoc-members:
    :show-inheritance:
