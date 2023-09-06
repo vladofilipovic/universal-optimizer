@@ -17,12 +17,14 @@ from app.utils.logger import logger
 
 class MaxOnesProblem(TargetProblem):
     
-    def __init__(self, file_path:str)->None:
+    def __init__(self, file_path:str=None, dim:int=None)->None:
         """
         Create new MaxOnesProblem instance
-        :param file_path:str -- path of the file with data for the parget problem instance 
+        :param str file_path: path of the file with data for the parget problem instance 
+        :param int dim: dimension of the problem
         """
-        super().__init__("MaxOnesProblem", False, file_path)
+        super().__init__(name="MaxOnesProblem", is_minimization=False, file_path=file_path, dimension=dim)
+
 
     def __copy__(self):
         """

@@ -3,6 +3,13 @@
 
 The :mod:`~app.max_ones_problem.max_ones_problem_int_solution` contains class :class:`~app.max_ones_problem.max_ones_problem_int_solution.MaxOnesProblemIntSolution`, that represents solution of the :ref:`Problem_Max_Ones`, where `int` representation of the problem has been used.
 """
+
+from random import randint
+
+from uo.target_problem.target_problem import TargetProblem
+from uo.target_solution.target_solution import ObjectiveFitnessFeasibility
+from uo.target_solution.target_solution import TargetSolution
+
 class MaxOneProblemIntSolution(TargetSolution):
     
     def __init__(self)->None:
@@ -26,12 +33,21 @@ class MaxOneProblemIntSolution(TargetSolution):
     def representation(self, value:int)->None:
         self.__representation = value
 
-    def random_init(self, problem:TargetProblem)->None:
-        self.representation = random()
+    def make_to_be_feasible(self, problem:TargetProblem):
         mask:int = ~0
         mask <<= 32-problem.dimension
         mask = ~mask 
         self.__representation &= mask
+
+    def random_init(self, problem:TargetProblem)->None:
+        if problem.dimension is None:
+            raise ValueError("Problem dimension should not be None!")
+        if problem.dimension <= 0:
+            raise ValueError("Problem dimension should be positive!")
+        if problem.dimension >= 32:
+            raise ValueError("Problem dimension should be less than 32!")
+        self.representation = randint(0, 2^problem.dimension-1)
+        self.make_to_be_feasible(problem)
 
     def solution_code(self)->str:
         return bin(self.__representation)
