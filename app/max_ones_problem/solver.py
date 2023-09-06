@@ -31,6 +31,9 @@ from app.max_ones_problem.command_line import parse_arguments
 
 from app.max_ones_problem.max_ones_problem import MaxOnesProblem
 from app.max_ones_problem.max_ones_problem_bit_array_solution import MaxOnesProblemBitArraySolution
+from app.max_ones_problem.max_ones_problem_bit_array_solution_vns_support import MaxOnesProblemBitArraySolutionVnsSupport
+from app.max_ones_problem.max_ones_problem_int_solution import MaxOnesProblemIntSolution
+from app.max_ones_problem.max_ones_problem_int_solution_vns_support import MaxOnesProblemIntSolutionVnsSupport
 
 """ 
 Solver.
@@ -55,72 +58,72 @@ def main():
             if key is not None and val is not None:
                 parameters[key] = val
         logger.debug('Execution parameters: {}'.format(parameters))
+        # set optimization type (minimization or maximization)
+        if parameters['optimization_type'] == 'minimization':
+            is_minimization:bool = True
+        elif parameters['optimization_type'] == 'maximization':
+            is_minimization:bool = False
+        else:
+            raise ValueError("Either minimization or maximization should be selected.")
+        # output setup
+        if parameters['writeToOutputFile'] is None:
+            write_to_output_file:bool = False
+        else:
+            write_to_output_file:bool = bool(parameters['writeToOutputFile'])
+        if parameters['outputFilePath'] is not None and  parameters['outputFilePath'] != '':
+            output_file_path_parts:list[str] = parameters['outputFilePath'].split('/')
+        else:
+            output_file_path_parts:list[str] = ['outputs', 'out']
+        output_file_name_ext:str = output_file_path_parts[-1]
+        output_file_name_parts:list[str] = output_file_name_ext.split('.')
+        if len(output_file_name_parts) > 1:
+            output_file_ext:str = output_file_name_parts[-1]
+            output_file_name_parts.pop()
+            output_file_name = '.'.join(output_file_name_parts)
+        else:
+            output_file_ext = 'txt'
+            output_file_name = output_file_name_parts[0]
+        dt = datetime.now()
+        output_file_path_parts.pop()
+        output_file_dir:str =  '/'.join(output_file_path_parts)
+        output_file_path_parts.append( output_file_name +  '-' + parameters['algorithm'] + '-' +
+                parameters['optimization_type'][0:3] + '-' + dt.strftime("%Y-%m-%d-%H-%M-%S.%f") + '.' + 
+                output_file_ext)
+        output_file_path:str = '/'.join(output_file_path_parts)
+        logger.debug("Output file path: {}".format(output_file_path))
+        ensure_dir(output_file_dir)
+        output_file = open(output_file_path, "w", encoding="utf-8")
+        # input file setup
+        input_file_path:str = parameters['inputFilePath']
+        input_format:str = parameters['inputFormat']
+        # finishing criteria setup
+        max_number_iterations:int = parameters['maxNumberIterations']
+        max_time_for_execution_in_seconds = parameters['maxTimeForExecutionSeconds']
+        # random seed setup
+        if( int(parameters['randomSeed']) > 0 ):
+            r_seed:int = int(parameters['randomSeed'])
+            logger.info("RandomSeed is predefined. Predefined seed value:  %d" % r_seed)
+            if write_to_output_file:
+                output_file.write("# RandomSeed is predefined. Predefined seed value:  %d\n" % r_seed)
+            random.seed(r_seed)
+        else:
+            r_seed = randrange(sys.maxsize)
+            logger.info("RandomSeed is not predefined. Generated seed value:  %d" % r_seed)
+            if write_to_output_file:
+                output_file.write("# RandomSeed is not predefined. Generated seed value:  %d\n" % r_seed)
+            seed(r_seed)
+        # evaluation cache setup
+        evaluation_cache_is_used:bool = parameters['evaluationCacheIsUsed']
+        # calculation distances cache setup
+        calculation_solution_distance_cache_is_used = parameters['calculationSolutionDistanceCacheIsUsed']
+        # bookkeeping setup
+        keep_all_solution_codes:bool = parameters['keepAllSolutionCodes']
         if parameters['algorithm'] == 'vns':
             logger.debug('VNS started.') 
-            # set optimization type (minimization or maximization)
-            if parameters['optimization_type'] == 'minimization':
-                is_minimization:bool = True
-            elif parameters['optimization_type'] == 'maximization':
-                is_minimization:bool = False
-            else:
-                raise ValueError("Either minimization or maximization should be selected.")
-            # output setup
-            if parameters['writeToOutputFile'] is None:
-                write_to_output_file:bool = False
-            else:
-                write_to_output_file:bool = bool(parameters['writeToOutputFile'])
-            if parameters['outputFilePath'] is not None and  parameters['outputFilePath'] != '':
-                output_file_path_parts:list[str] = parameters['outputFilePath'].split('/')
-            else:
-                output_file_path_parts:list[str] = ['outputs', 'out']
-            output_file_name_ext:str = output_file_path_parts[-1]
-            output_file_name_parts:list[str] = output_file_name_ext.split('.')
-            if len(output_file_name_parts) > 1:
-                output_file_ext:str = output_file_name_parts[-1]
-                output_file_name_parts.pop()
-                output_file_name = '.'.join(output_file_name_parts)
-            else:
-                output_file_ext = 'txt'
-                output_file_name = output_file_name_parts[0]
-            dt = datetime.now()
-            output_file_path_parts.pop()
-            output_file_dir:str =  '/'.join(output_file_path_parts)
-            output_file_path_parts.append( output_file_name +  '-' + parameters['algorithm'] + '-' +
-                    parameters['optimization_type'][0:3] + '-' + dt.strftime("%Y-%m-%d-%H-%M-%S.%f") + '.' + 
-                    output_file_ext)
-            output_file_path:str = '/'.join(output_file_path_parts)
-            logger.debug("Output file path: {}".format(output_file_path))
-            ensure_dir(output_file_dir)
-            output_file = open(output_file_path, "w", encoding="utf-8")
             start_time = datetime.now()
             if write_to_output_file:
                 output_file.write("# VNS started at: %s\n" % str(start_time))
                 output_file.write('# Execution parameters: {}\n'.format(parameters))
-            # input file setup
-            input_file_path:str = parameters['inputFilePath']
-            input_format:str = parameters['inputFormat']
-            # finishing criteria setup
-            max_number_iterations:int = parameters['maxNumberIterations']
-            max_time_for_execution_in_seconds = parameters['maxTimeForExecutionSeconds']
-            # random seed setup
-            if( int(parameters['randomSeed']) > 0 ):
-                r_seed:int = int(parameters['randomSeed'])
-                logger.info("RandomSeed is predefined. Predefined seed value:  %d" % r_seed)
-                if write_to_output_file:
-                    output_file.write("# RandomSeed is predefined. Predefined seed value:  %d\n" % r_seed)
-                random.seed(r_seed)
-            else:
-                r_seed = randrange(sys.maxsize)
-                logger.info("RandomSeed is not predefined. Generated seed value:  %d" % r_seed)
-                if write_to_output_file:
-                    output_file.write("# RandomSeed is not predefined. Generated seed value:  %d\n" % r_seed)
-                seed(r_seed)
-            # evaluation cache setup
-            evaluation_cache_is_used:bool = parameters['evaluationCacheIsUsed']
-            # calculation distances cache setup
-            calculation_solution_distance_cache_is_used = parameters['calculationSolutionDistanceCacheIsUsed']
-            # bookkeeping setup
-            keep_all_solution_codes:bool = parameters['keepAllSolutionCodes']
             # parameters for VNS process setup
             k_min:int = parameters['kMin']
             k_max:int = parameters['kMax']
@@ -130,7 +133,17 @@ def main():
             problem = MaxOnesProblem(input_file_path)
             problem.load_from_file(input_format)
             # initial solution for solving
-            initial_solution = MaxOnesProblemBitArraySolution()
+            solution_type:str = parameters['solutionType']
+            initial_solution = None
+            vns_support = None
+            if solution_type=='BitArray':
+                initial_solution = MaxOnesProblemBitArraySolution()
+                vns_support = MaxOnesProblemBitArraySolutionVnsSupport()
+            elif solution_type=='int':
+                initial_solution = MaxOnesProblemIntSolution()
+                vns_support = MaxOnesProblemIntSolutionVnsSupport()
+            else:
+                raise ValueError("Invalid solution/representation type is chosen.")
             initial_solution.evaluation_cache_cs.is_caching = evaluation_cache_is_used
             initial_solution.random_init(problem=problem)
             #logger.debug('Initial solution: {}'.format(initial_solution))
@@ -138,7 +151,8 @@ def main():
             optimizer = VnsOptimizer(evaluations_max=max_number_iterations, 
                     seconds_max=max_time_for_execution_in_seconds, random_seed=r_seed, 
                     keep_all_solution_codes=keep_all_solution_codes, target_problem=problem, 
-                    initial_solution=initial_solution, k_min=k_min, k_max=k_max, max_local_optima=max_local_optima, 
+                    initial_solution=initial_solution, problem_solution_vns_support=vns_support,
+                    k_min=k_min, k_max=k_max, max_local_optima=max_local_optima, 
                     local_search_type=local_search_type)
             #logger.debug('Optimizer: {}'.format(optimizer))
             optimizer.optimize()

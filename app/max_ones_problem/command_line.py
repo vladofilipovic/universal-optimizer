@@ -28,7 +28,8 @@ default_parameters_cl = {
         'kMin': 1,
         'kMax': 3,
         'maxLocalOptima':7,
-        'localSearchType': 'local_search_best_improvement'
+        'localSearchType': 'local_search_best_improvement',
+        'solutionType': 'BitArray'
 }
 
 
@@ -77,6 +78,10 @@ def parse_arguments():
                 choices=['local_search_best_improvement', 'local_search_first_improvement'],  
                 default='local_search_best_improvement', 
                 help=("VNS parameter that determines local search type."))
+        parser_vns.add_argument('--solutionType', type=str, 
+                choices=['BitArray', 'int'],  
+                default='BitArray', 
+                help=("VNS parameter that determines solution (representation) type."))
         parser_vns.add_argument( "--log", default="warning", help=("Provide logging level. "
                 "Example --log debug', default='warning'") )
 
