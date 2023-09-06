@@ -161,7 +161,7 @@ class VnsOptimizer(Metaheuristic, Generic[S_co]):
 
     def __shaking_ls__(self)->bool:
         """
-        Shaking phase of the VNS algorithm
+        Shaking and local search phase of the VNS algorithm
 
         :return: if result obtain by shaking is better than initial
         :rtype: bool
@@ -170,7 +170,8 @@ class VnsOptimizer(Metaheuristic, Generic[S_co]):
         #logger.debug('Current: {}'.format(self.current_solution))
         #logger.debug('Best: {}'.format(self.current_solution))
         shaking_points:list[str] = self.__select_shaking_points__()
-        if not self.current_solution.vns_randomize(self.target_problem, self.__k_current, shaking_points):
+        if not self.current_solution.vns_randomize(self.__k_current, self.target_problem, self.current_solution,
+                shaking_points):
             return False
         if self.__k_current in self.__shaking_counts:
             self.__shaking_counts[self.__k_current] += 1

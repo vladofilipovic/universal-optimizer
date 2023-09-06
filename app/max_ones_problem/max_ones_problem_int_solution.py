@@ -65,7 +65,7 @@ class MaxOneProblemIntSolution(TargetSolution):
         result = (rep_1 ^ rep_2).count(True)
         return result 
 
-    def best_1_change(self, problem:TargetProblem)->bool:
+    def best_1_change_full(self, problem:TargetProblem)->bool:
         best_ind:int = None
         best_fv:float = self.fitness_value
         for i in range(0, problem.dimension):
@@ -83,8 +83,28 @@ class MaxOneProblemIntSolution(TargetSolution):
             self.representation ^= mask
             self.evaluate(problem)
             if self.fitness_value != best_fv:
-                raise Exception('Fitness calculation within best_1_change function is not correct.')
+                raise Exception('Fitness calculation within best_1_change_full function is not correct.')
             return True
+        return False
+
+    def best_1_change_first(self, problem:TargetProblem)->bool:
+        best_ind:int = None
+        best_fv:float = self.fitness_value
+        for i in range(0, problem.dimension):
+            mask:int = 1 << i
+            mask = ~mask
+            self.representation ^= mask 
+            new_fv = self.calculate_objective_fitness_feasibility(problem).fitness_value
+            if new_fv > best_fv:
+                best_ind = i
+                best_fv = new_fv
+                mask:int = 1 << best_ind
+                mask = ~mask
+                self.representation ^= mask
+                self.evaluate(problem)
+                if self.fitness_value != best_fv:
+                    raise Exception('Fitness calculation within best_1_change_first function is not correct.')
+                return True
         return False
 
     def string_representation(self, delimiter:str='\n', indentation:int=0, indentation_symbol:str='   ', 

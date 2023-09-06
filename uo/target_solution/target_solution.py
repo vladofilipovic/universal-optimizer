@@ -210,9 +210,20 @@ class TargetSolution(metaclass=ABCMeta):
         self.is_feasible = solution.is_feasible;
 
     @abstractmethod
-    def best_1_change(self, problem:TargetProblem)->bool:
+    def best_1_change_full(self, problem:TargetProblem)->bool:
         """
-        Change the best one within solution 
+        Change the best one within solution, with "best improvement" approach 
+
+        :param TargetProblem problem: problem that is solved
+        :return: if the best one is changed, or not
+        :rtype: bool
+        """        
+        raise NotImplementedError
+
+    @abstractmethod
+    def best_1_change_first(self, problem:TargetProblem)->bool:
+        """
+        Change the best one within solution, with "first improvement" approach 
 
         :param TargetProblem problem: problem that is solved
         :return: if the best one is changed, or not

@@ -188,7 +188,20 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         :rtype: TargetSolution
         """
         while True:
-            if not solution.best_1_change(self.target_problem):
+            if not solution.best_1_change_full(self.target_problem):
+                break
+        return solution
+
+    def local_search_first_improvement(self, solution:TargetSolution)->TargetSolution:
+        """
+        Executes first improvement variant of the local search procedure 
+        
+        :param TargetSolution solution: solution which is initial point for local search
+        :return: result of the local search procedure 
+        :rtype: TargetSolution
+        """
+        while True:
+            if not solution.best_1_change_first(self.target_problem):
                 break
         return solution
 

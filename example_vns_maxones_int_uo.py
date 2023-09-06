@@ -5,6 +5,7 @@ from random import choice
 from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.target_solution import ObjectiveFitnessFeasibility
 from uo.target_solution.target_solution import TargetSolution
+from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
 class MaxOneProblem(TargetProblem):
@@ -85,7 +86,7 @@ class MaxOneProblemIntSolution(TargetSolution):
         result = (rep_1 ^ rep_2).count(True)
         return result 
 
-    def best_1_change(self, problem:TargetProblem)->bool:
+    def best_1_change_full(self, problem:TargetProblem)->bool:
         best_ind:int = None
         best_fv:float = self.fitness_value
         for i in range(0, problem.dimension):
@@ -103,46 +104,30 @@ class MaxOneProblemIntSolution(TargetSolution):
             self.representation ^= mask
             self.evaluate(problem)
             if self.fitness_value != best_fv:
-                raise Exception('Fitness calculation within best_1_change function is not correct.')
+                raise Exception('Fitness calculation within best_1_change_full function is not correct.')
             return True
         return False
 
-    def vns_randomize(self, problem:TargetProblem, k:int, solution_codes:list[str])->bool:
-        """
-        Random VNS shaking of k parts such that new solution code does not differ more than k from all solution codes 
-        inside shakingPoints 
-        :param problem:TargetProblem -- problem that is solved
-        :param k:int -- parameter for VNS
-        :param solution_codes:list[str] -- solution codes that should be randomized
-        :return: bool -- if randomization is successful 
-        """    
-        tries:int = 0
-        limit:int = 10000
-        while tries < limit:
-            positions:list[int] = []
-            for i in range(0,k):
-                positions.append(choice(range(k)))
-            new_representation:int = self.representation
-            mask:int = 0
-            for p in positions:
-                mask |= 1 << p
+    def best_1_change_first(self, problem:TargetProblem)->bool:
+        best_ind:int = None
+        best_fv:float = self.fitness_value
+        for i in range(0, problem.dimension):
+            mask:int = 1 << i
             mask = ~mask
-            self.representation ^= mask
-            all_ok:bool = True
-            for sc in solution_codes:
-                sc_representation = int(sc,2)
-                if sc_representation != 0:
-                    comp_result:int = (sc_representation ^ new_representation).bit_count()
-                    if comp_result > k:
-                        all_ok = False
-            if all_ok:
-                break
-        if tries < limit:
-            self.representation = new_representation
-            self.evaluate(problem)
-            return True
-        else:
-            return False 
+            self.representation ^= mask 
+            new_fv = self.calculate_objective_fitness_feasibility(problem).fitness_value
+            if new_fv > best_fv:
+                best_ind = i
+                best_fv = new_fv
+                mask:int = 1 << best_ind
+                mask = ~mask
+                self.representation ^= mask
+                self.evaluate(problem)
+                if self.fitness_value != best_fv:
+                    raise Exception('Fitness calculation within best_1_change_first function is not correct.')
+                return True
+        return False
+
 
     def string_representation(self, delimiter:str='\n', indentation:int=0, indentation_symbol:str='   ', 
             group_start:str='{', group_end:str='}',)->str:
@@ -157,12 +142,52 @@ class MaxOneProblemIntSolution(TargetSolution):
     def __format__(self, spec:str)->str:
         return ''
 
+class MaxOneProblemIntSolutionVnsSupport(ProblemSolutionVnsSupport):
+
+    def vns_randomize(self, k:int, problem:TargetProblem, solution:TargetSolution, solution_codes:list[str])->bool:
+        """
+        Random VNS shaking of k parts such that new solution code does not differ more than k from all solution codes 
+        inside shakingPoints 
+        :param problem:TargetProblem -- problem that is solved
+        :param k:int -- parameter for VNS
+        :param solution_codes:list[str] -- solution codes that should be randomized
+        :return: bool -- if randomization is successful 
+        """    
+        tries:int = 0
+        limit:int = 10000
+        while tries < limit:
+            positions:list[int] = []
+            for i in range(0,k):
+                positions.append(choice(range(k)))
+            new_representation:int = solution.representation
+            mask:int = 0
+            for p in positions:
+                mask |= 1 << p
+            mask = ~mask
+            solution.representation ^= mask
+            all_ok:bool = True
+            for sc in solution_codes:
+                sc_representation = int(sc,2)
+                if sc_representation != 0:
+                    comp_result:int = (sc_representation ^ new_representation).bit_count()
+                    if comp_result > k:
+                        all_ok = False
+            if all_ok:
+                break
+        if tries < limit:
+            solution.representation = new_representation
+            solution.evaluate(problem)
+            return True
+        else:
+            return False 
 
 problem_to_solve:MaxOneProblem = MaxOneProblem(dim=10)
 initial_solution:MaxOneProblemIntSolution = MaxOneProblemIntSolution()
 initial_solution.random_init(problem_to_solve)
+vns_support:MaxOneProblemIntSolutionVnsSupport = MaxOneProblemIntSolutionVnsSupport()
 optimizer:VnsOptimizer = VnsOptimizer(target_problem=problem_to_solve, 
         initial_solution=initial_solution, 
+        problem_solution_vns_support=vns_support,
         evaluations_max=0, 
         seconds_max=10, 
         random_seed=None, 

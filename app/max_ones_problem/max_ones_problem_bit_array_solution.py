@@ -127,10 +127,11 @@ class MaxOnesProblemBitArraySolution(TargetSolution):
         result = (rep_1 ^ rep_2).count(True)
         return result 
 
-    def best_1_change(self, problem:TargetProblem)->bool:
+    def best_1_change_full(self, problem:TargetProblem)->bool:
         """
-        Change the best one within solution 
-        :param problem:TargetProblem -- problem that is solved
+        Change the best one within solution, by trying "best improvement" approach 
+
+        :param TargetProblem problem: problem that is solved
         :return: bool -- if the best one is changed, or not
         """        
         best_ind:int = None
@@ -146,45 +147,32 @@ class MaxOnesProblemBitArraySolution(TargetSolution):
             self.representation.invert(best_ind)
             self.evaluate(problem)
             if self.fitness_value != best_fv:
-                raise Exception('Fitness calculation within best_1_change function is not correct.')
+                raise Exception('Fitness calculation within best_1_change_full function is not correct.')
             return True
         return False
 
-    def vns_randomize(self, problem:TargetProblem, k:int, solution_codes:list[str])->bool:
+    def best_1_change_first(self, problem:TargetProblem)->bool:
         """
-        Random VNS shaking of k parts such that new solution code does not differ more than k from all solution codes 
-        inside shakingPoints 
-        :param problem:TargetProblem -- problem that is solved
-        :param k:int -- parameter for VNS
-        :param solution_codes:list[str] -- solution codes that should be randomized
-        :return: bool -- if randomization is successful 
-        """    
-        tries:int = 0
-        limit:int = 10000
-        while tries < limit:
-            positions:list[int] = []
-            for i in range(0,k):
-                positions.append(choice(range(k)))
-            new_representation:BitArray = deepcopy(self.representation)
-            for p in positions:
-                new_representation.invert(p)
-            all_ok:bool = True
-            #logger.debug(solution_codes)
-            for sc in solution_codes:
-                sc_representation = self.__representation_string_to_bit_array__(sc)
-                if sc_representation is not None and sc_representation != '':
-                    comp_result:int = (sc_representation ^ new_representation).count(value=1)
-                    if comp_result > k:
-                        all_ok = False
-            if all_ok:
-                break
-        if tries < limit:
-            self.representation = new_representation
-            self.evaluate(problem)
-            return True
-        else:
-            return False 
-        
+        Change the best one within solution, by trying "first improvement" approach 
+
+        :param TargetProblem problem: problem that is solved
+        :return: bool -- if the best one is changed, or not
+        """        
+        best_ind:int = None
+        best_fv:float = self.fitness_value
+        for i in range(0, len(self.representation)):
+            self.representation.invert(i) 
+            new_fv = self.calculate_objective_fitness_feasibility(problem).fitness_value
+            if new_fv > best_fv:
+                best_ind = i
+                best_fv = new_fv
+                self.evaluate(problem)
+                if self.fitness_value != best_fv:
+                    raise Exception('Fitness calculation within best_1_change_first function is not correct.')
+                return True
+        return False
+
+
     def string_representation(self, delimiter:str='\n', indentation:int=0, indentation_symbol:str='   ', 
             group_start:str='{', group_end:str='}',)->str:
         """
