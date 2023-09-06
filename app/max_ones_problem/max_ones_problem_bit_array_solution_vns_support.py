@@ -9,6 +9,7 @@ from pathlib import Path
 directory = Path(__file__).resolve()
 sys.path.append(directory)
 sys.path.append(directory.parent)
+sys.path.append(directory.parent.parent.parent)
 
 from copy import deepcopy
 from random import choice
@@ -66,8 +67,7 @@ class MaxOnesProblemBitArraySolutionVnsSupport(ProblemSolutionVnsSupport):
             for i in range(0,k):
                 positions.append(choice(range(k)))
             new_representation:BitArray = deepcopy(solution.representation)
-            for p in positions:
-                new_representation.invert(p)
+            new_representation.invert(positions)
             all_ok:bool = True
             #logger.debug(solution_codes)
             for sc in solution_codes:
