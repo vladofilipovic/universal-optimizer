@@ -12,7 +12,6 @@ sys.path.append(directory.parent.parent)
 sys.path.append(directory.parent.parent.parent)
 
 from copy import deepcopy
-
 from random import choice
 from random import randint
 
@@ -20,7 +19,9 @@ from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.target_solution import ObjectiveFitnessFeasibility
 from uo.target_solution.target_solution import TargetSolution
 
-class MaxOneProblemIntSolution(TargetSolution):
+from app.utils.logger import logger
+
+class MaxOnesProblemIntSolution(TargetSolution):
     
     def __init__(self)->None:
         super().__init__("MaxOneProblemIntSolution", fitness_value=None, objective_value=None, is_feasible=False)

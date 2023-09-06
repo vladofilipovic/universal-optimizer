@@ -20,8 +20,6 @@ from uo.target_solution.target_solution import ObjectiveFitnessFeasibility
 from uo.target_solution.target_solution import TargetSolution
 
 from app.utils.logger import logger
-from app.max_ones_problem.max_ones_problem import MaxOnesProblem
-
 
 class MaxOnesProblemBitArraySolution(TargetSolution):
     
