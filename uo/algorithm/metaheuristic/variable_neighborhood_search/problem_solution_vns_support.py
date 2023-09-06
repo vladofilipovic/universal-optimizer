@@ -8,6 +8,7 @@ sys.path.append(directory.parent.parent.parent)
 from abc import ABCMeta, abstractmethod
 
 from uo.target_problem.target_problem import TargetProblem
+from uo.target_solution.target_solution import TargetSolution
 
 class ProblemSolutionVnsSupport(metaclass=ABCMeta):
     

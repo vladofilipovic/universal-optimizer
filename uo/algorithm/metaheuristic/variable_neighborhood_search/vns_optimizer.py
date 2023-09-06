@@ -49,7 +49,7 @@ class VnsOptimizer(Metaheuristic, Generic[S_co]):
         :param int k_max: `k_max` parameter for VNS
         :param int max_local_optima: max_local_optima parameter for VNS
         :param local_search_type: type of the local search
-        :type local_search_type: str, possible values: 'local_search_best_improvement'
+        :type local_search_type: str, possible values: 'local_search_best_improvement', 'local_search_first_improvement' 
         """
         super().__init__('vns', evaluations_max, seconds_max, random_seed, keep_all_solution_codes, target_problem)
         self.__current_solution:S_co = initial_solution
@@ -170,8 +170,8 @@ class VnsOptimizer(Metaheuristic, Generic[S_co]):
         #logger.debug('Current: {}'.format(self.current_solution))
         #logger.debug('Best: {}'.format(self.current_solution))
         shaking_points:list[str] = self.__select_shaking_points__()
-        if not self.current_solution.vns_randomize(self.__k_current, self.target_problem, self.current_solution,
-                shaking_points):
+        if not self.__problem_solution_vns_support.vns_randomize(self.__k_current, self.target_problem, 
+                self.current_solution, shaking_points):
             return False
         if self.__k_current in self.__shaking_counts:
             self.__shaking_counts[self.__k_current] += 1
@@ -182,6 +182,8 @@ class VnsOptimizer(Metaheuristic, Generic[S_co]):
         self.current_solution.evaluate(self.target_problem)
         if self.__local_search_type == 'local_search_best_improvement':
             self.current_solution = self.local_search_best_improvement(self.current_solution)
+        elif self.__local_search_type == 'local_search_first_improvement':
+            self.current_solution = self.local_search_first_improvement(self.current_solution)
         else:
             raise ValueError( 'Value \'{} \' for VNS local_search_type is not supported'.format(
                     self.__local_search_type))
