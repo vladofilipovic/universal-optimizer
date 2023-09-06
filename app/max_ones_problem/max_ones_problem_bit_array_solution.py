@@ -8,7 +8,6 @@ from pathlib import Path
 directory = Path(__file__).resolve()
 sys.path.append(directory)
 sys.path.append(directory.parent)
-sys.path.append(directory.parent.parent)
 
 from copy import deepcopy
 from random import choice
