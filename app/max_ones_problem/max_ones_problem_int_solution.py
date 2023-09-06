@@ -4,6 +4,9 @@
 The :mod:`~app.max_ones_problem.max_ones_problem_int_solution` contains class :class:`~app.max_ones_problem.max_ones_problem_int_solution.MaxOnesProblemIntSolution`, that represents solution of the :ref:`Problem_Max_Ones`, where `int` representation of the problem has been used.
 """
 
+from copy import deepcopy
+
+from random import choice
 from random import randint
 
 from uo.target_problem.target_problem import TargetProblem
@@ -107,7 +110,7 @@ class MaxOneProblemIntSolution(TargetSolution):
             self.representation ^= mask
             all_ok:bool = True
             for sc in solution_codes:
-                sc_representation = bin(sc,2)
+                sc_representation = int(sc,2)
                 if sc_representation != 0:
                     comp_result:int = (sc_representation ^ new_representation).bit_count()
                     if comp_result > k:
