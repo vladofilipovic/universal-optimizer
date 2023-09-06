@@ -21,18 +21,19 @@ from uo.utils.logger import logger
 from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.target_solution import TargetSolution
 from uo.algorithm.metaheuristic.metaheuristic import Metaheuristic
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_support_for_target_solution import VnsSupportForTargetSolution
+from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
 
-S_co = TypeVar("S_co", covariant=True, bound=TargetSolution) # and bound by VnsSupportForTargetSolution 
+S_co = TypeVar("S_co", covariant=True, bound=TargetSolution) 
 
 class VnsOptimizer(Metaheuristic, Generic[S_co]):
     """
-    Instance of the class :class:`~uo.algorithm.metaheuristic.variable_neighborhood_search.VnsOptimizer` encapsulate :ref:`Algorithm_Variable_Neighborhood_Search` optimization algorithm.
+    Instance of the class :class:`~uo.algorithm.metaheuristic.variable_neighborhood_search.VnsOptimizer` encapsulate 
+    :ref:`Algorithm_Variable_Neighborhood_Search` optimization algorithm.
     """
     
     def __init__(self, evaluations_max:int, seconds_max:int, random_seed:int, keep_all_solution_codes:bool, 
-            target_problem:TargetProblem, initial_solution:S_co, k_min:int, k_max:int, max_local_optima:int, 
-            local_search_type:str)->None:
+            target_problem:TargetProblem, initial_solution:S_co, problem_solution_vns_support:ProblemSolutionVnsSupport, 
+            k_min:int, k_max:int, max_local_optima:int, local_search_type:str)->None:
         """
         Create new instance of class :class:`~uo.algorithm.metaheuristic.variable_neighborhood_search.VnsOptimizer`. 
         That instance implements :ref:`VNS<Algorithm_Variable_Neighborhood_Search>` algorithm. 
@@ -43,12 +44,16 @@ class VnsOptimizer(Metaheuristic, Generic[S_co]):
         :param bool keep_all_solution_codes: if all solution codes will be remembered
         :param TargetProblem target_problem: problem to be solved
         :param S_co initial_solution: initial solution of the problem that is optimized by VNS 
+        :param ProblemSolutionVnsSupport problem_solution_vns_support: placeholder for additional methods for VNS execution, which depend of precise solution type 
         :param int k_min: `k_min` parameter for VNS
         :param int k_max: `k_max` parameter for VNS
         :param int max_local_optima: max_local_optima parameter for VNS
+        :param local_search_type: type of the local search
+        :type local_search_type: str, possible values: 'local_search_best_improvement'
         """
         super().__init__('vns', evaluations_max, seconds_max, random_seed, keep_all_solution_codes, target_problem)
         self.__current_solution:S_co = initial_solution
+        self.__problem_solution_vns_support:ProblemSolutionVnsSupport = problem_solution_vns_support
         self.__k_min:int = k_min
         self.__k_max:int = k_max
         self.__max_local_optima:int = max_local_optima
@@ -237,6 +242,9 @@ class VnsOptimizer(Metaheuristic, Generic[S_co]):
         for i in range(0, indentation):
             s += indentation_symbol  
         s += 'k_max=' + str(self.k_max) + delimiter
+        s += delimiter
+        s += '__problem_solution_vns_support=' + self.__problem_solution_vns_support.string_representation(delimiter, 
+                indentation + 1, indentation_symbol, group_start, group_end) + delimiter 
         for i in range(0, indentation):
             s += indentation_symbol  
         s += '__max_local_optima=' + str(self.__max_local_optima) + delimiter 

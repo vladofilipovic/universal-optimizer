@@ -87,43 +87,6 @@ class MaxOneProblemIntSolution(TargetSolution):
             return True
         return False
 
-    def vns_randomize(self, problem:TargetProblem, k:int, solution_codes:list[str])->bool:
-        """
-        Random VNS shaking of k parts such that new solution code does not differ more than k from all solution codes 
-        inside shakingPoints 
-        :param problem:TargetProblem -- problem that is solved
-        :param k:int -- parameter for VNS
-        :param solution_codes:list[str] -- solution codes that should be randomized
-        :return: bool -- if randomization is successful 
-        """    
-        tries:int = 0
-        limit:int = 10000
-        while tries < limit:
-            positions:list[int] = []
-            for i in range(0,k):
-                positions.append(choice(range(k)))
-            new_representation:int = self.representation
-            mask:int = 0
-            for p in positions:
-                mask |= 1 << p
-            mask = ~mask
-            self.representation ^= mask
-            all_ok:bool = True
-            for sc in solution_codes:
-                sc_representation = int(sc,2)
-                if sc_representation != 0:
-                    comp_result:int = (sc_representation ^ new_representation).bit_count()
-                    if comp_result > k:
-                        all_ok = False
-            if all_ok:
-                break
-        if tries < limit:
-            self.representation = new_representation
-            self.evaluate(problem)
-            return True
-        else:
-            return False 
-
     def string_representation(self, delimiter:str='\n', indentation:int=0, indentation_symbol:str='   ', 
             group_start:str='{', group_end:str='}',)->str:
         s = delimiter

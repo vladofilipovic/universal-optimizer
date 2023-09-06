@@ -18,13 +18,12 @@ from bitstring import BitArray
 from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.target_solution import ObjectiveFitnessFeasibility
 from uo.target_solution.target_solution import TargetSolution
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_support_for_target_solution import VnsSupportForTargetSolution
 
 from app.utils.logger import logger
 from app.max_ones_problem.max_ones_problem import MaxOnesProblem
 
 
-class MaxOnesProblemBitArraySolution(TargetSolution, VnsSupportForTargetSolution):
+class MaxOnesProblemBitArraySolution(TargetSolution):
     
     def __init__(self)->None:
         """
@@ -109,7 +108,7 @@ class MaxOnesProblemBitArraySolution(TargetSolution, VnsSupportForTargetSolution
                 ones_count += 1
         return ObjectiveFitnessFeasibility(ones_count, ones_count, True)
 
-    def __representation_string_to_bit_array__(self, representation_str:str)->BitArray:
+    def representation_string_to_bit_array(self, representation_str:str)->BitArray:
         """
         Obtain BitArray representation from string representation
         :param representation_str:str -- solution's representation as string

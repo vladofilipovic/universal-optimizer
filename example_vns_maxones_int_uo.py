@@ -130,7 +130,7 @@ class MaxOneProblemIntSolution(TargetSolution):
             self.representation ^= mask
             all_ok:bool = True
             for sc in solution_codes:
-                sc_representation = bin(sc,2) #TODO
+                sc_representation = int(sc,2)
                 if sc_representation != 0:
                     comp_result:int = (sc_representation ^ new_representation).bit_count()
                     if comp_result > k:
