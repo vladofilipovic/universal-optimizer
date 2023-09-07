@@ -33,7 +33,28 @@ How-to Guides
 
 - **Execution of the developed applications**
 
-- **Unit testing of the developed applications**
+    - Execute *stripped* illustrative example (executes VNS on Max-Ones problem with binary representation within `int`, uses classes only from`uo`) 
+
+    .. code-block::
+        :caption: Execute illustrative example
+
+            > python example_vns_maxones_int_uo
+
+    - Execute *enhanced* illustrative example (executes VNS on Max-Ones problem with binary representation within `int`, uses classes from both `uo` and `app`) 
+
+    .. code-block::
+        :caption: Execute illustrative example
+
+            > python example_vns_maxones_int_app
+
+- **Running of all the unit tests within developed applications**
+
+    - Execute command for running tests from directory `/` 
+
+    .. code-block::
+        :caption: Run all unit tests within project
+
+            > python -m unittest
 
 - **Building documentation for the library**
 
