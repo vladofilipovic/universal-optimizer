@@ -31,8 +31,9 @@ class TestVnSOptimizerProperties(unittest.TestCase):
         type(self.problem).dimension = mock.PropertyMock(return_value=42)
 
         self.vns_optimizer = VnsOptimizer(evaluations_max=self.evaluations_max, seconds_max=42, random_seed=42, 
-                keep_all_solution_codes=True, target_problem=self.problem, initial_solution=None, k_min=3, k_max=42, 
-                max_local_optima=42, local_search_type='first_improvement')
+                keep_all_solution_codes=True, target_problem=self.problem, initial_solution=None, 
+                problem_solution_vns_support=None, k_min=3, k_max=42, max_local_optima=42, 
+                local_search_type='first_improvement')
         return
     
     def test_name_should_be_vns(self):
