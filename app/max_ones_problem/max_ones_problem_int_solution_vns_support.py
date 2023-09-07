@@ -1,5 +1,5 @@
 """ 
-.. _py_max_ones_problem_int_solution:
+.. _py_max_ones_problem_int_solution_vns_support:
 
 The :mod:`~app.max_ones_problem.max_ones_problem_int_solution_vns_support` contains class :class:`~app.max_ones_problem.max_ones_problem_int_solution_vns_support.MaxOnesProblemIntSolutionVnsSupport`, that represents solution of the :ref:`Problem_Max_Ones`, where `int` representation of the problem has been used.
 """

@@ -1,7 +1,7 @@
 How-to Guides
 =============
 
-- Installation the library from provided source code
+- **Installation the library from provided source code**
 
     1. Installing  and initializing `poetry`
 
@@ -31,24 +31,36 @@ How-to Guides
 
             > poetry install --with docs
 
+- **Execution of the developed applications**
 
-- Building documentation of the library
+- **Unit testing of the developed applications**
 
-    1. Change current directory to `/docs` 
+- **Building documentation for the library**
+
+    1. Build documentation sources into `/docs/source` folder from `python` source files 
+
+    .. code-block::
+        :caption: Build documentation sources
+
+            > sphinx-apidoc -o /docs/source/ uo
+            > sphinx-apidoc -o /docs/source/ app
+
+
+    2. Change current directory to `/docs` 
 
     .. code-block::
         :caption: Change directory
 
             > cd docs
 
-    2. Clean previous HTML documentation 
+    3. Clean previously builded HTML documentation 
 
     .. code-block::
         :caption: Clean HTML documentation 
 
             /docs> ./make clean html
 
-    3. Build HTML documentation from `/docs/source` directory. Created documentation is within `/docs/build/html` directory. 
+    4. Build HTML documentation from `/docs/source` directory. Created documentation is within `/docs/build/html` directory. 
 
     .. code-block::
         :caption: Clean HTML documentation 
