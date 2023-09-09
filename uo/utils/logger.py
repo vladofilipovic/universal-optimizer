@@ -2,6 +2,7 @@ from pathlib import Path
 directory = Path(__file__).resolve()
 import sys
 sys.path.append(directory.parent)
+sys.path.append(directory.parent.parent)
 
 import os
 import logging

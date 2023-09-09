@@ -9,7 +9,6 @@ Subpackages
 
    opt.multi_objective
    opt.single_objective
-   opt.utils
 
 Module contents
 ---------------
