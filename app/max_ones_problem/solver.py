@@ -31,10 +31,10 @@ from app.max_ones_problem.command_line import default_parameters_cl
 from app.max_ones_problem.command_line import parse_arguments
 
 from app.max_ones_problem.max_ones_problem import MaxOnesProblem
-from app.max_ones_problem.max_ones_problem_bit_array_solution import MaxOnesProblemBitArraySolution
-from app.max_ones_problem.max_ones_problem_bit_array_solution_vns_support import MaxOnesProblemBitArraySolutionVnsSupport
-from app.max_ones_problem.max_ones_problem_int_solution import MaxOnesProblemIntSolution
-from app.max_ones_problem.max_ones_problem_int_solution_vns_support import MaxOnesProblemIntSolutionVnsSupport
+from app.max_ones_problem.max_ones_problem_binary_bit_array_solution import MaxOneProblemBinaryBitArraySolution
+from app.max_ones_problem.max_ones_problem_binary_bit_array_solution_vns_support import MaxOneProblemBinaryBitArraySolutionVnsSupport
+from app.max_ones_problem.max_ones_problem_binary_int_solution import MaxOneProblemBinaryIntSolution
+from app.max_ones_problem.max_ones_problem_binary_int_solution_vns_support import MaxOneProblemBinaryIntSolutionVnsSupport
 
 """ 
 Solver.
@@ -138,11 +138,11 @@ def main():
             initial_solution = None
             vns_support = None
             if solution_type=='BitArray':
-                initial_solution = MaxOnesProblemBitArraySolution()
-                vns_support = MaxOnesProblemBitArraySolutionVnsSupport()
+                initial_solution = MaxOneProblemBinaryBitArraySolution()
+                vns_support = MaxOneProblemBinaryBitArraySolutionVnsSupport()
             elif solution_type=='int':
-                initial_solution = MaxOnesProblemIntSolution()
-                vns_support = MaxOnesProblemIntSolutionVnsSupport()
+                initial_solution = MaxOneProblemBinaryIntSolution()
+                vns_support = MaxOneProblemBinaryIntSolutionVnsSupport()
             else:
                 raise ValueError("Invalid solution/representation type is chosen.")
             initial_solution.evaluation_cache_cs.is_caching = evaluation_cache_is_used

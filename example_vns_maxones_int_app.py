@@ -5,13 +5,13 @@ from random import choice
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
 from app.max_ones_problem.max_ones_problem import MaxOnesProblem
-from app.max_ones_problem.max_ones_problem_int_solution import MaxOneProblemIntSolution
-from app.max_ones_problem.max_ones_problem_int_solution_vns_support import MaxOnesProblemIntSolutionVnsSupport
+from app.max_ones_problem.max_ones_problem_binary_int_solution import MaxOneProblemIntSolution
+from app.max_ones_problem.max_ones_problem_binary_int_solution_vns_support import MaxOneProblemBinaryIntSolutionVnsSupport
 
 problem_to_solve:MaxOnesProblem = MaxOnesProblem(dim=10)
 initial_solution:MaxOneProblemIntSolution = MaxOneProblemIntSolution()
 initial_solution.random_init(problem_to_solve)
-vns_support:MaxOnesProblemIntSolutionVnsSupport = MaxOnesProblemIntSolutionVnsSupport()
+vns_support:MaxOneProblemBinaryIntSolutionVnsSupport = MaxOneProblemBinaryIntSolutionVnsSupport()
 optimizer:VnsOptimizer = VnsOptimizer(target_problem=problem_to_solve, 
         initial_solution=initial_solution, 
         problem_solution_vns_support=vns_support,

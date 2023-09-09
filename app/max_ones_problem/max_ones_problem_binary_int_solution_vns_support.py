@@ -1,51 +1,36 @@
 """ 
-..  _py_max_ones_problem_bit_array_solution_vns_support:
+.. _py_max_ones_problem_int_solution_vns_support:
 
-The :mod:`~app.max_ones_problem.max_ones_problem_bit_array_solution_vns_support` contains class :class:`~app.max_ones_problem.max_ones_problem_bit_array_solution_vns_support.MaxOnesProblemBitArraySolutionVnsSupport`, that represents supporting parts of the `VNS` algorithm, where solution of the :ref:`Problem_Max_Ones` have `BitArray` representation.
+The :mod:`~app.max_ones_problem.max_ones_problem_binary_int_solution_vns_support` contains class :class:`~app.max_ones_problem.max_ones_problem_binary_int_solution_vns_support.MaxOneProblemBinaryIntSolutionVnsSupport`, that represents solution of the :ref:`Problem_Max_Ones`, where `int` representation of the problem has been used.
 """
 
 import sys
 from pathlib import Path
 directory = Path(__file__).resolve()
-sys.path.append(directory)
 sys.path.append(directory.parent)
+sys.path.append(directory.parent.parent)
 sys.path.append(directory.parent.parent.parent)
 
 from copy import deepcopy
+
 from random import choice
-from random import random
-from bitstring import BitArray
+from random import randint
 
 from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.target_solution import ObjectiveFitnessFeasibility
 from uo.target_solution.target_solution import TargetSolution
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
 
-from app.utils.logger import logger
-from app.max_ones_problem.max_ones_problem import MaxOnesProblem
-
-
-class MaxOnesProblemBitArraySolutionVnsSupport(ProblemSolutionVnsSupport):
+class MaxOneProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport):
     
     def __init__(self)->None:
-        """
-        Create new MaxOnesProblemBitArraySolutionVnsSupport instance
-        """
         return
 
     def __copy__(self):
-        """
-        Internal copy of the MaxOnesProblemBitArraySolutionVnsSupport
-        :return: MaxOnesProblemBitArraySolutionVnsSupport -- new MaxOnesProblemBitArraySolutionVnsSupport instance with the same properties
-        """
         sol = deepcopy(self)
         return sol
 
     def copy(self):
-        """
-        Copy the MaxOnesProblemBitArraySolutionVnsSupport
-        :return: MaxOnesProblemBitArraySolutionVnsSupport -- new MaxOnesProblemBitArraySolutionVnsSupport instance with the same properties
-        """
         return self.__copy__()
         
     def vns_randomize(self, k:int, problem:TargetProblem, solution:TargetSolution, solution_codes:list[str])->bool:
@@ -66,14 +51,17 @@ class MaxOnesProblemBitArraySolutionVnsSupport(ProblemSolutionVnsSupport):
             positions:list[int] = []
             for i in range(0,k):
                 positions.append(choice(range(k)))
-            new_representation:BitArray = deepcopy(solution.representation)
-            new_representation.invert(positions)
+            new_representation:int = solution.representation
+            mask:int = 0
+            for p in positions:
+                mask |= 1 << p
+            mask = ~mask
+            solution.representation ^= mask
             all_ok:bool = True
-            #logger.debug(solution_codes)
             for sc in solution_codes:
-                sc_representation = solution.representation_string_to_bit_array(sc)
-                if sc_representation is not None and sc_representation != '':
-                    comp_result:int = (sc_representation ^ new_representation).count(value=1)
+                sc_representation = int(sc,2)
+                if sc_representation != 0:
+                    comp_result:int = (sc_representation ^ new_representation).bit_count()
                     if comp_result > k:
                         all_ok = False
             if all_ok:
@@ -84,5 +72,4 @@ class MaxOnesProblemBitArraySolutionVnsSupport(ProblemSolutionVnsSupport):
             return True
         else:
             return False 
-        
 
