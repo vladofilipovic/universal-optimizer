@@ -87,9 +87,9 @@ def main():
         dt = datetime.now()
         output_file_path_parts.pop()
         output_file_dir:str =  '/'.join(output_file_path_parts)
-        output_file_path_parts.append( output_file_name +  '-' + parameters['algorithm'] + '-' +
-                parameters['optimization_type'][0:3] + '-' + dt.strftime("%Y-%m-%d-%H-%M-%S.%f") + '.' + 
-                output_file_ext)
+        output_file_path_parts.append( output_file_name +  '-maxones-' + parameters['solutionType'] + '-' + 
+                parameters['algorithm'] + '-' + parameters['optimization_type'][0:3] + '-' + 
+                dt.strftime("%Y-%m-%d-%H-%M-%S.%f") + '.' + output_file_ext)
         output_file_path:str = '/'.join(output_file_path_parts)
         logger.debug("Output file path: {}".format(output_file_path))
         ensure_dir(output_file_dir)
