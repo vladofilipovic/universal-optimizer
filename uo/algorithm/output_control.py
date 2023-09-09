@@ -41,6 +41,14 @@ class OutputControl:
         """
         return self.__write_to_output
 
+    @output_file.setter
+    def output_file(self, value)->None:
+        """
+        Property setter for the output file
+        """
+        self.__output_file = value
+
+
     def string_representation(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
         """

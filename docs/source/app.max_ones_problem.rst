@@ -23,7 +23,7 @@ app.max\_ones\_problem.max\_ones\_problem module
 app.max\_ones\_problem.max\_ones\_problem\_bit\_array\_solution module
 ----------------------------------------------------------------------------------
 
-.. automodule:: app.max_ones_problem.max_ones_problem_bit_array_solution
+.. automodule:: app.max_ones_problem.max_ones_problem_binary_bit_array_solution
    :members:
    :undoc-members:
    :show-inheritance:

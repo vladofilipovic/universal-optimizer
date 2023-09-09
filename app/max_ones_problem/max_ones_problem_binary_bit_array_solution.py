@@ -1,7 +1,7 @@
 """ 
 ..  _py_max_ones_problem_bit_array_solution:
 
-The :mod:`~app.max_ones_problem.max_ones_problem_bit_array_solution` contains class :class:`~app.max_ones_problem.max_ones_problem_bit_array_solution.MaxOnesProblemBitArraySolution`, that represents solution of the :ref:`Problem_Max_Ones`, where `BitArray` representation of the problem has been used.
+The :mod:`~app.max_ones_problem.max_ones_problem_binary_bit_array_solution` contains class :class:`~app.max_ones_problem.max_ones_problem_binary_bit_array_solution.MaxOnesProblemBinaryBitArraySolution`, that represents solution of the :ref:`Problem_Max_Ones`, where `BitArray` representation of the problem has been used.
 """
 import sys
 from pathlib import Path
@@ -21,34 +21,34 @@ from uo.target_solution.target_solution import TargetSolution
 
 from app.utils.logger import logger
 
-class MaxOnesProblemBitArraySolution(TargetSolution):
+class MaxOnesProblemBinaryBitArraySolution(TargetSolution):
     
     def __init__(self)->None:
         """
-        Create new MaxOnesProblemBitArraySolution instance
+        Create new MaxOnesProblemBinaryBitArraySolution instance
         """
-        super().__init__("MaxOnesProblemBitArraySolution", fitness_value=None, objective_value=None, is_feasible=False)
+        super().__init__("MaxOnesProblemBinaryBitArraySolution", fitness_value=None, objective_value=None, is_feasible=False)
         self.__representation:BitArray = BitArray()
 
     def __copy__(self):
         """
-        Internal copy of the MaxOnesProblemBitArraySolution
-        :return: MaxOnesProblemBitArraySolution -- new MaxOnesProblemBitArraySolution instance with the same properties
+        Internal copy of the MaxOnesProblemBinaryBitArraySolution
+        :return: MaxOnesProblemBinaryBitArraySolution -- new MaxOnesProblemBinaryBitArraySolution instance with the same properties
         """
         sol = deepcopy(self)
         return sol
 
     def copy(self):
         """
-        Copy the MaxOnesProblemBitArraySolution
-        :return: MaxOnesProblemBitArraySolution -- new MaxOnesProblemBitArraySolution instance with the same properties
+        Copy the MaxOnesProblemBinaryBitArraySolution
+        :return: MaxOnesProblemBinaryBitArraySolution -- new MaxOnesProblemBinaryBitArraySolution instance with the same properties
         """
         return self.__copy__()
         
     def copy_to(self, destination)->None:
         """
-        Copy the MaxOnesProblemBitArraySolution to the already existing destination MaxOnesProblemBitArraySolution
-        :param destination:MaxOnesProblemBitArraySolution -- destination MaxOnesProblemBitArraySolution
+        Copy the MaxOnesProblemBinaryBitArraySolution to the already existing destination MaxOnesProblemBinaryBitArraySolution
+        :param destination:MaxOnesProblemBinaryBitArraySolution -- destination MaxOnesProblemBinaryBitArraySolution
         """
         destination = self.__copy__()
 

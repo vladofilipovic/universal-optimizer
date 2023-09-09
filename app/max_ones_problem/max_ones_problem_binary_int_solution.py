@@ -1,7 +1,7 @@
 """ 
 .. _py_max_ones_problem_int_solution:
 
-The :mod:`~app.max_ones_problem.max_ones_problem_int_solution` contains class :class:`~app.max_ones_problem.max_ones_problem_int_solution.MaxOnesProblemIntSolution`, that represents solution of the :ref:`Problem_Max_Ones`, where `int` representation of the problem has been used.
+The :mod:`~app.max_ones_problem.max_ones_problem_binary_int_solution` contains class :class:`~app.max_ones_problem.max_ones_problem_binary_int_solution.MaxOnesProblemBinaryIntSolution`, that represents solution of the :ref:`Problem_Max_Ones`, where `int` representation of the problem has been used.
 """
 
 import sys
@@ -21,10 +21,10 @@ from uo.target_solution.target_solution import TargetSolution
 
 from app.utils.logger import logger
 
-class MaxOnesProblemIntSolution(TargetSolution):
+class MaxOnesProblemBinaryIntSolution(TargetSolution):
     
     def __init__(self)->None:
-        super().__init__("MaxOneProblemIntSolution", fitness_value=None, objective_value=None, is_feasible=False)
+        super().__init__("MaxOnesProblemBinaryIntSolution", fitness_value=None, objective_value=None, is_feasible=False)
 
     def __copy__(self):
         sol = deepcopy(self)
