@@ -153,7 +153,7 @@ class Algorithm(metaclass=ABCMeta):
         """
         Property getter for the output control of the executing algorithm
         
-        :return: Output control of the executing algorithm
+        :return: output control of the executing algorithm
         :rtype: `OutputControl`
         """
         return self.__output_control

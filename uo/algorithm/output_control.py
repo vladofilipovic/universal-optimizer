@@ -26,7 +26,7 @@ class OutputControl:
         """
         Property getter for determining if write to output 
 
-        :return: if write_to_output, or not 
+        :return: if write to output during algorithm execution, or not 
         :rtype: bool
         """
         return self.__write_to_output

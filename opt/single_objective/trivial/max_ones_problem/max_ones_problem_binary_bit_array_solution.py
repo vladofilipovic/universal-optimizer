@@ -34,23 +34,28 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution):
 
     def __copy__(self):
         """
-        Internal copy of the MaxOnesProblemBinaryBitArraySolution
-        :return: MaxOnesProblemBinaryBitArraySolution -- new MaxOnesProblemBinaryBitArraySolution instance with the same properties
+        Internal copy of the `MaxOnesProblemBinaryBitArraySolution`
+
+        :return: new `MaxOnesProblemBinaryBitArraySolution` instance with the same properties
+        :rtype: MaxOnesProblemBinaryBitArraySolution
         """
         sol = deepcopy(self)
         return sol
 
     def copy(self):
         """
-        Copy the MaxOnesProblemBinaryBitArraySolution
-        :return: MaxOnesProblemBinaryBitArraySolution -- new MaxOnesProblemBinaryBitArraySolution instance with the same properties
+        Copy the `MaxOnesProblemBinaryBitArraySolution`
+        
+        :return: new `MaxOnesProblemBinaryBitArraySolution` instance with the same properties
+        :rtype: `MaxOnesProblemBinaryBitArraySolution`
         """
         return self.__copy__()
         
     def copy_to(self, destination)->None:
         """
-        Copy the MaxOnesProblemBinaryBitArraySolution to the already existing destination MaxOnesProblemBinaryBitArraySolution
-        :param destination:MaxOnesProblemBinaryBitArraySolution -- destination MaxOnesProblemBinaryBitArraySolution
+        Copy the `MaxOnesProblemBinaryBitArraySolution` to the already existing destination `MaxOnesProblemBinaryBitArraySolution`
+
+        :param `MaxOnesProblemBinaryBitArraySolution` destination: destination `MaxOnesProblemBinaryBitArraySolution`
         """
         destination = self.__copy__()
 
@@ -58,7 +63,9 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution):
     def representation(self)->BitArray:
         """
         Property getter for the target solution representation
-        :return: BitArray -- the target solution instance representation
+
+        :return: the target solution instance representation
+        :rtype: `bitstring.BitArray`
         """
         return self.__representation
 
@@ -66,7 +73,8 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution):
     def representation(self, value:BitArray)->None:
         """
         Property setter for representation of the target solution
-        :param value:BitArray -- representation of the target solution
+
+        :param `BitArray` value: representation of the target solution
         """
         self.__representation = value
 
@@ -86,7 +94,9 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution):
     def solution_code(self)->str:
         """
         Solution code of the target solution
-        :return: str -- solution code 
+
+        :return: solution code
+        :rtype: str 
         """
         s:str = ''
         for bit in self.representation:
@@ -98,9 +108,11 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution):
 
     def calculate_objective_fitness_feasibility(self, problem:TargetProblem)->ObjectiveFitnessFeasibility:
         """
-        Fitness calculation of the max ones solution
-        :param problem:TargetProblem -- problem that is solved
-        :return: ObjectiveFitnessFeasibility -- objective value, fitness value and feasibility of the solution instance  
+        Fitness calculation of the max ones binary BitArray solution
+
+        :param TargetProblem problem: problem that is solved
+        :return: objective value, fitness value and feasibility of the solution instance  
+        :rtype: `ObjectiveFitnessFeasibility`
         """
         ones_count = 0
         for i in range(problem.dimension):
@@ -110,17 +122,22 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution):
 
     def representation_string_to_bit_array(self, representation_str:str)->BitArray:
         """
-        Obtain BitArray representation from string representation
-        :param representation_str:str -- solution's representation as string
-        :return: BitArray -- solution's representation as BitArray
+        Obtain `BitArray` representation from string representation
+
+        :param str representation_str: solution's representation as string
+        :return: solution's representation as BitArray
+        :rtype: `BitArray`
         """
         ret:BitArray(bin=representation_str)
 
     def solution_code_distance(solution_code_1:str, solution_code_2:str)->float:
         """
         Calculating distance between two solutions determined by its code
-        :param solution_code_1:str -- solution code for the first solution
-        :param solution_code_2:str -- solution code for the second solution
+
+        :param str solution_code_1: solution code for the first solution
+        :param str solution_code_2: solution code for the second solution
+        :return: distance between two solutions represented by its code
+        :rtype: float
         """
         rep_1:BitArray = self.__representation_string_to_bit_array__(solution_code_1)
         rep_2:BitArray = self.__representation_string_to_bit_array__(solution_code_2)
@@ -131,12 +148,19 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution):
             group_start:str='{', group_end:str='}',)->str:
         """
         String representation of the target solution instance
-        :param delimiter: str -- delimiter between fields
-        :param indentation:int -- level of indentation
-        :param indentation_symbol:str -- indentation symbol
-        :param group_start -- group start string 
-        :param group_end -- group end string 
-        :return: str -- string representation of target solution instance
+
+        :param delimiter: delimiter between fields
+        :type delimiter: str
+        :param indentation: level of indentation
+        :type indentation: int, optional, default value 0
+        :param indentation_symbol: indentation symbol
+        :type indentation_symbol: str, optional, default value ''
+        :param group_start: group start string 
+        :type group_start: str, optional, default value '{'
+        :param group_end: group end string 
+        :type group_end: str, optional, default value '}'
+        :return: string representation of instance that controls output
+        :rtype: str
         """        
         s = delimiter
         for i in range(0, indentation):
@@ -157,22 +181,28 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution):
     def __str__(self)->str:
         """
         String representation of the target solution instance
-        :return: str -- string representation of the target solution instance
+
+        :return: string representation of the target solution instance
+        :rtype: str
         """
         return self.string_representation('\n', 0, '   ', '{', '}')
 
     def __repr__(self)->str:
         """
         Representation of the target solution instance
-        :return: str -- string representation of the solution instance
+
+        :return: string representation of the solution instance
+        :rtype: str
         """
         return self.string_representation('\n', 0, '   ', '{', '}')
 
     def __format__(self, spec:str)->str:
         """
         Formatted the target solution instance
-        :param spec: str -- format specification
-        :return: str -- formatted target solution instance
+
+        :param str spec: format specification
+        :return: formatted target solution instance
+        :rtype: str
         """
         return self.string_representation('\n', 0, '   ', '{', '}')
 

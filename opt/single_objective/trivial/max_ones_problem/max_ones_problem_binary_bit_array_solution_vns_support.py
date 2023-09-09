@@ -155,25 +155,25 @@ class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport):
         :type group_start: str, optional, default value '{'
         :param group_end: group end string 
         :type group_end: str, optional, default value '}'
-        :return: string representation of instance that controls output
+        :return: string representation of vns support instance
         :rtype: str
         """        
         return 'MaxOnesProblemBinaryBitArraySolutionVnsSupport'
 
     def __str__(self)->str:
         """
-        String representation of the cache control and statistics structure
+        String representation of the vns support instance
 
-        :return: string representation of the cache control and statistics structure
+        :return: string representation of the vns support instance
         :rtype: str
         """
         return self.string_representation('|')
 
     def __repr__(self)->str:
         """
-        Representation of the cache control and statistics structure
+        Representation of the vns support instance
 
-        :return: string representation of cache control and statistics structure
+        :return: string representation of the vns support instance
         :rtype: str
         """
         return self.string_representation('\n')
@@ -181,10 +181,10 @@ class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport):
 
     def __format__(self, spec:str)->str:
         """
-        Formatted the cache control and statistics structure
+        Formatted the vns support instance
 
         :param str spec: format specification
-        :return: formatted cache control and statistics structure
+        :return: formatted vns support instance
         :rtype: str
         """
         return self.string_representation('|')

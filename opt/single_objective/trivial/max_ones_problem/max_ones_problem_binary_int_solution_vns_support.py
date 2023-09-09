@@ -26,13 +26,28 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vn
 class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport):
     
     def __init__(self)->None:
+        """
+        Create new `MaxOnesProblemBinaryIntSolutionVnsSupport` instance
+        """
         return
 
     def __copy__(self):
-        sol = deepcopy(self)
-        return sol
+        """
+        Internal copy of the `MaxOnesProblemBinaryIntSolutionVnsSupport`
+
+        :return: new `MaxOnesProblemBinaryIntSolutionVnsSupport` instance with the same properties
+        :rtype: MaxOnesProblemBinaryIntSolutionVnsSupport
+        """
+        sup = deepcopy(self)
+        return sup
 
     def copy(self):
+        """
+        Copy the `MaxOnesProblemBinaryIntSolutionVnsSupport`
+        
+        :return: new `MaxOnesProblemBinaryIntSolutionVnsSupport` instance with the same properties
+        :rtype: `MaxOnesProblemBinaryIntSolutionVnsSupport`
+        """        
         return self.__copy__()
         
     def randomize(self, k:int, problem:TargetProblem, solution:TargetSolution, solution_codes:list[str])->bool:
@@ -78,7 +93,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport):
     def string_representation(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
         """
-        String representation of the target solution instance
+        String representation of the vns support structure
 
         :param delimiter: delimiter between fields
         :type delimiter: str
@@ -90,25 +105,25 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport):
         :type group_start: str, optional, default value '{'
         :param group_end: group end string 
         :type group_end: str, optional, default value '}'
-        :return: string representation of instance that controls output
+        :return: string representation of vns support instance
         :rtype: str
         """        
         return 'MaxOnesProblemBinaryIntSolutionVnsSupport'
 
     def __str__(self)->str:
         """
-        String representation of the cache control and statistics structure
+        String representation of the vns support structure
 
-        :return: string representation of the cache control and statistics structure
+        :return: string representation of the vns support structure
         :rtype: str
         """
         return self.string_representation('|')
 
     def __repr__(self)->str:
         """
-        Representation of the cache control and statistics structure
+        Representation of the vns support structure
 
-        :return: string representation of cache control and statistics structure
+        :return: string representation of the vns support structure
         :rtype: str
         """
         return self.string_representation('\n')
