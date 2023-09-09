@@ -16,7 +16,7 @@ from copy import deepcopy
 
 from uo.target_problem.target_problem import TargetProblem
 
-from app.utils.logger import logger
+from opt.utils.logger import logger
 
 class MaxOnesProblem(TargetProblem):
     

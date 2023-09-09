@@ -9,7 +9,7 @@ import os
 import logging
 import datetime as dt
 
-from app.utils.files import ensure_dir
+from opt.utils.files import ensure_dir
 
 '''
 Start logger config

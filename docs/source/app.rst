@@ -8,8 +8,8 @@ Subpackages
    :maxdepth: 4
 
    opt.single_objective.trivial.max_ones_problem
-   app.traveling_salesperson_problems
-   app.utils
+   opt.traveling_salesperson_problems
+   opt.utils
 
 Module contents
 ---------------

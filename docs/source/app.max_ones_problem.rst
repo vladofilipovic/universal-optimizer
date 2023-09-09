@@ -1,10 +1,10 @@
-app.max\_ones\_problem package
+opt.max\_ones\_problem package
 ==============================
 
 Submodules
 ----------
 
-app.max\_ones\_problem.command\_line module
+opt.max\_ones\_problem.command\_line module
 -------------------------------------------
 
 .. automodule:: opt.single_objective.trivial.max_ones_problem.command_line
@@ -12,7 +12,7 @@ app.max\_ones\_problem.command\_line module
    :undoc-members:
    :show-inheritance:
 
-app.max\_ones\_problem.max\_ones\_problem module
+opt.max\_ones\_problem.max\_ones\_problem module
 ------------------------------------------------
 
 .. automodule:: opt.single_objective.trivial.max_ones_problem.max_ones_problem
@@ -20,7 +20,7 @@ app.max\_ones\_problem.max\_ones\_problem module
    :undoc-members:
    :show-inheritance:
 
-app.max\_ones\_problem.max\_ones\_problem\_bit\_array\_solution module
+opt.max\_ones\_problem.max\_ones\_problem\_bit\_array\_solution module
 ----------------------------------------------------------------------------------
 
 .. automodule:: opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution
@@ -28,7 +28,7 @@ app.max\_ones\_problem.max\_ones\_problem\_bit\_array\_solution module
    :undoc-members:
    :show-inheritance:
 
-app.max\_ones\_problem.solver\_vns module
+opt.max\_ones\_problem.solver\_vns module
 -----------------------------------------
 
 .. automodule:: opt.single_objective.trivial.max_ones_problem.solver

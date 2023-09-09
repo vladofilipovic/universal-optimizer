@@ -1,4 +1,4 @@
-cd app/max_ones_problem
+cd opt/single_objective/trivial/max_ones_problem
 @echo -----------
 solver.py -h
 @echo -----------

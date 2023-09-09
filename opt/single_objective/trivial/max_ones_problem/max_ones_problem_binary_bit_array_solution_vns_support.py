@@ -23,7 +23,7 @@ from uo.target_solution.target_solution import ObjectiveFitnessFeasibility
 from uo.target_solution.target_solution import TargetSolution
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
 
-from app.utils.logger import logger
+from opt.utils.logger import logger
 from opt.single_objective.trivial.max_ones_problem.max_ones_problem import MaxOnesProblem
 
 
