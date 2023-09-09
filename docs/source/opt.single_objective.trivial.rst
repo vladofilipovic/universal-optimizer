@@ -1,5 +1,5 @@
-app package
-===========
+opt.single\_objective.trivial package
+=====================================
 
 Subpackages
 -----------
@@ -8,13 +8,11 @@ Subpackages
    :maxdepth: 4
 
    opt.single_objective.trivial.max_ones_problem
-   opt.traveling_salesperson_problems
-   opt.utils
 
 Module contents
 ---------------
 
-.. automodule:: app
+.. automodule:: opt.single_objective.trivial
    :members:
    :undoc-members:
    :show-inheritance:
