@@ -72,15 +72,17 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution):
     @representation.setter
     def representation(self, value:BitArray)->None:
         """
-        Property setter for representation of the target solution
+        Property setter for representation of the solution
 
-        :param `BitArray` value: representation of the target solution
+        :param `BitArray` value: representation of the solution
         """
         self.__representation = value
 
     def random_init(self, problem:TargetProblem)->None:
         """
-        Random initialization of the target solution
+        Random initialization of the solution
+
+        :param `TargetProblem` problem: problem which is solved by solution
         """
         #logger.debug( "\nSolution: {}".format(self))
         self.representation = BitArray(problem.dimension)
@@ -89,7 +91,6 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution):
                 self.representation[i] = True
             else:
                 self.representation[i] = False
-
 
     def solution_code(self)->str:
         """
@@ -120,15 +121,16 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution):
                 ones_count += 1
         return ObjectiveFitnessFeasibility(ones_count, ones_count, True)
 
-    def representation_string_to_bit_array(self, representation_str:str)->BitArray:
+    def native_representation_from_solution_code(self, representation_str:str)->BitArray:
         """
-        Obtain `BitArray` representation from string representation
+        Obtain `BitArray` representation from string representation of the BitArray binary solution of the Max Ones problem 
 
         :param str representation_str: solution's representation as string
         :return: solution's representation as BitArray
         :rtype: `BitArray`
         """
-        ret:BitArray(bin=representation_str)
+        ret:BitArray = BitArray(bin=representation_str)
+        return ret
 
     def solution_code_distance(solution_code_1:str, solution_code_2:str)->float:
         """
@@ -139,15 +141,15 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution):
         :return: distance between two solutions represented by its code
         :rtype: float
         """
-        rep_1:BitArray = self.__representation_string_to_bit_array__(solution_code_1)
-        rep_2:BitArray = self.__representation_string_to_bit_array__(solution_code_2)
+        rep_1:BitArray = self.native_representation_from_solution_code(solution_code_1)
+        rep_2:BitArray = self.native_representation_from_solution_code(solution_code_2)
         result = (rep_1 ^ rep_2).count(True)
         return result 
 
     def string_representation(self, delimiter:str='\n', indentation:int=0, indentation_symbol:str='   ', 
             group_start:str='{', group_end:str='}',)->str:
         """
-        String representation of the target solution instance
+        String representation of the solution instance
 
         :param delimiter: delimiter between fields
         :type delimiter: str
@@ -180,16 +182,16 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution):
 
     def __str__(self)->str:
         """
-        String representation of the target solution instance
+        String representation of the solution instance
 
-        :return: string representation of the target solution instance
+        :return: string representation of the solution instance
         :rtype: str
         """
         return self.string_representation('\n', 0, '   ', '{', '}')
 
     def __repr__(self)->str:
         """
-        Representation of the target solution instance
+        Representation of the solution instance
 
         :return: string representation of the solution instance
         :rtype: str
@@ -198,10 +200,10 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution):
 
     def __format__(self, spec:str)->str:
         """
-        Formatted the target solution instance
+        Formatted the solution instance
 
         :param str spec: format specification
-        :return: formatted target solution instance
+        :return: formatted solution instance
         :rtype: str
         """
         return self.string_representation('\n', 0, '   ', '{', '}')

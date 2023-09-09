@@ -14,14 +14,15 @@ sys.path.append(directory.parent.parent.parent.parent)
 sys.path.append(directory.parent.parent.parent.parent.parent)
 
 from copy import deepcopy
-
 from random import choice
 from random import randint
 
-from uo.target_problem.target_problem import TargetProblem
+from uo.utils.logger import logger
 from uo.target_solution.target_solution import ObjectiveFitnessFeasibility
-from uo.target_solution.target_solution import TargetSolution
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
+
+from opt.single_objective.trivial.max_ones_problem.max_ones_problem import MaxOnesProblem
+from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution import MaxOnesProblemBinaryIntSolution
 
 class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport):
     
@@ -50,14 +51,14 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport):
         """        
         return self.__copy__()
         
-    def randomize(self, k:int, problem:TargetProblem, solution:TargetSolution, solution_codes:list[str])->bool:
+    def randomize(self, k:int, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryIntSolution, solution_codes:list[str])->bool:
         """
         Random VNS shaking of k parts such that new solution code does not differ more than k from all solution codes 
         inside shakingPoints 
 
         :param int k: int parameter for VNS
-        :param `TargetProblem` problem: problem that is solved
-        :param `TargetSolution` solution: solution used for the problem that is solved
+        :param `MaxOnesProblem` problem: problem that is solved
+        :param `MaxOnesProblemBinaryIntSolution` solution: solution used for the problem that is solved
         :param `list[str]` solution_codes: solution codes that should be randomized
         :return: if randomization is successful
         :rtype: bool
@@ -90,10 +91,99 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport):
         else:
             return False 
 
+    def __change_bit_find_best_helper__(self, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryIntSolution)->bool:
+        """
+        Improving the best solution by inverting one bit of the representation, e.g. with "best improvement" approach 
+
+        :param `MaxOnesProblem` problem: problem that is solved
+        :param `MaxOnesProblemBinaryIntSolution` solution: solution that is potentially improved
+        :return: if the best one is changed, or not
+        :rtype: bool
+        """        
+        best_ind:int = None
+        best_fv:float = solution.fitness_value
+        for i in range(0, problem.dimension):
+            mask:int = 1 << i
+            mask = ~mask
+            solution.representation ^= mask 
+            new_fv = solution.calculate_objective_fitness_feasibility(problem).fitness_value
+            if new_fv > best_fv:
+                best_ind = i
+                best_fv = new_fv
+            solution.representation ^= mask 
+        if best_ind is not None:
+            mask:int = 1 << best_ind
+            mask = ~mask
+            solution.representation ^= mask
+            solution.evaluate(problem)
+            if solution.fitness_value != best_fv:
+                raise Exception('Fitness calculation within best_1_change_full function is not correct.')
+            return True
+        return False
+
+    def local_search_best_improvement(self, k:int, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryIntSolution)->MaxOnesProblemBinaryIntSolution:
+        """
+        Executes "best improvement" variant of the local search procedure 
+        
+        :param int k: int parameter for VNS
+        :param `MaxOnesProblem` problem: problem that is solved
+        :param `MaxOnesProblemBinaryIntSolution` solution: solution used for the problem that is solved
+        :return: result of the local search procedure 
+        :rtype: MaxOnesProblemBinaryIntSolution
+        """
+        while True:
+            if not self.__change_bit_find_best_helper__(problem, solution):
+                break
+        return solution
+
+    def __change_bit_find_better_helper__(self, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryIntSolution)->bool:
+        """
+        Improving the best solution by inverting one bit of the representation, e.g. with "first improvement" approach 
+
+        :param `MaxOnesProblem` problem: problem that is solved
+        :param `MaxOnesProblemBinaryIntSolution` solution: solution that is potentially improved
+        :return: if the best one is changed, or not
+        :rtype: bool
+        """        
+        best_ind:int = None
+        best_fv:float = self.fitness_value
+        for i in range(0, problem.dimension):
+            mask:int = 1 << i
+            mask = ~mask
+            self.representation ^= mask 
+            new_fv = self.calculate_objective_fitness_feasibility(problem).fitness_value
+            if new_fv > best_fv:
+                best_ind = i
+                best_fv = new_fv
+                mask:int = 1 << best_ind
+                mask = ~mask
+                self.representation ^= mask
+                self.evaluate(problem)
+                if self.fitness_value != best_fv:
+                    raise Exception('Fitness calculation within `change_bit_find_better_helper` function is not correct.')
+                return True
+        return False
+
+    def local_search_first_improvement(self, k:int, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryIntSolution)->MaxOnesProblemBinaryIntSolution:
+        """
+        Executes "first improvement" variant of the local search procedure 
+        
+        :param int k: int parameter for VNS
+        :param `MaxOnesProblem` problem: problem that is solved
+        :param `MaxOnesProblemBinaryIntSolution` solution: solution used for the problem that is solved
+        :return: result of the local search procedure 
+        :rtype: MaxOnesProblemBinaryIntSolution
+        """
+        while True:
+            if not self.__change_bit_find_better_helper__(problem, solution):
+                break
+        return solution
+
+
     def string_representation(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
         """
-        String representation of the vns support structure
+        String representation of the vns support instance
 
         :param delimiter: delimiter between fields
         :type delimiter: str
@@ -112,18 +202,18 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport):
 
     def __str__(self)->str:
         """
-        String representation of the vns support structure
+        String representation of the vns support instance
 
-        :return: string representation of the vns support structure
+        :return: string representation of the vns support instance
         :rtype: str
         """
         return self.string_representation('|')
 
     def __repr__(self)->str:
         """
-        Representation of the vns support structure
+        Representation of the vns support instance
 
-        :return: string representation of the vns support structure
+        :return: string representation of the vns support instance
         :rtype: str
         """
         return self.string_representation('\n')
@@ -131,10 +221,10 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport):
 
     def __format__(self, spec:str)->str:
         """
-        Formatted the cache control and statistics structure
+        Formatted the vns support instance
 
         :param str spec: format specification
-        :return: formatted cache control and statistics structure
+        :return: formatted vns support instance
         :rtype: str
         """
         return self.string_representation('|')

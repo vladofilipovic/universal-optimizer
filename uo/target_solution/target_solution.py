@@ -1,3 +1,7 @@
+""" 
+The :mod:`~uo.target_solution.target_solution` module describes the class :class:`~uo.target_solution.TargetSolution`.
+"""
+
 from pathlib import Path
 directory = Path(__file__).resolve()
 import sys
@@ -145,6 +149,16 @@ class TargetSolution(metaclass=ABCMeta):
 
         :return: solution code 
         :rtype: str
+        """
+        raise NotImplementedError
+
+    @abstractmethod
+    def native_representation_from_solution_code(self, representation_str:str):
+        """
+        Obtain native representation from solution code of the `Solution` instance
+
+        :param str representation_str: solution's representation as string (e.g. solution code)
+        :return: solution's native representation 
         """
         raise NotImplementedError
 

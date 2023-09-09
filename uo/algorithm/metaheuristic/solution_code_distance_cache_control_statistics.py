@@ -1,3 +1,8 @@
+""" 
+The :mod:`~uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics` module describes the class :class:`~uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics.SolutionCodeDistanceCacheControlStatistics`.
+"""
+
+
 from pathlib import Path
 directory = Path(__file__).resolve()
 import sys

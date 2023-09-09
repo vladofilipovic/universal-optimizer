@@ -91,6 +91,12 @@ class VnsOptimizer(Metaheuristic, Generic[S_co]):
         """
         return self.__current_solution
 
+    def write_to_output(self):
+        """
+        Write data to output file, if allowed        
+        """
+        pass 
+
     @current_solution.setter
     def current_solution(self, value:S_co)->None:
         """
@@ -181,7 +187,8 @@ class VnsOptimizer(Metaheuristic, Generic[S_co]):
         self.evaluation += 1
         self.current_solution.evaluate(self.target_problem)
         if self.__local_search_type == 'local_search_best_improvement':
-            self.current_solution = self.local_search_best_improvement(self.current_solution)
+            self.current_solution = self.__problem_solution_vns_support.local_search_best_improvement(self.__k_current,
+            self.target_problem, self.current_solution)
         elif self.__local_search_type == 'local_search_first_improvement':
             self.current_solution = self.local_search_first_improvement(self.current_solution)
         else:

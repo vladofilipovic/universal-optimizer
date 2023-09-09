@@ -1,3 +1,7 @@
+""" 
+The :mod:`~uo.algorithm.output_control` module describes the class :class:`~uo.algorithm.OutputControl`.
+"""
+
 from pathlib import Path
 directory = Path(__file__).resolve()
 import sys

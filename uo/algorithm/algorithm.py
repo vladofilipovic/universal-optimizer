@@ -1,3 +1,7 @@
+""" 
+The :mod:`~uo.algorithm.algorithm` module describes the class :class:`~uo.algorithm.Algorithm`.
+"""
+
 from pathlib import Path
 directory = Path(__file__).resolve()
 import sys

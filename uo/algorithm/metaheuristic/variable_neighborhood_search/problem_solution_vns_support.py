@@ -34,7 +34,7 @@ class ProblemSolutionVnsSupport(metaclass=ABCMeta):
     @abstractmethod
     def local_search_best_improvement(self, k:int, problem:TargetProblem, solution:TargetSolution)->TargetSolution:
         """
-        Executes best improvement variant of the local search procedure 
+        Executes "best improvement" variant of the local search procedure 
         
         :param int k: int parameter for VNS
         :param `TargetProblem` problem: problem that is solved
@@ -47,7 +47,7 @@ class ProblemSolutionVnsSupport(metaclass=ABCMeta):
     @abstractmethod
     def local_search_first_improvement(self, k:int, problem:TargetProblem, solution:TargetSolution)->TargetSolution:
         """
-        Executes best improvement variant of the local search procedure 
+        Executes "first improvement" variant of the local search procedure 
         
         :param int k: int parameter for VNS
         :param `TargetProblem` problem: problem that is solved

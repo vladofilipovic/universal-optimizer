@@ -1,3 +1,7 @@
+""" 
+The :mod:`~uo.target_solution.evaluation_cache_control_statistics` module describes the class :class:`~uo.target_solution.EvaluationCacheControlStatistics`.
+"""
+
 from pathlib import Path
 directory = Path(__file__).resolve()
 import sys

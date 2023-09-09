@@ -1,3 +1,7 @@
+""" 
+The :mod:`~uo.algorithm.metaheuristic.metaheuristic` module describes the class :class:`~uo.algorithm.metaheuristic.metaheuristic.Metaheuristic`.
+"""
+
 from pathlib import Path
 directory = Path(__file__).resolve()
 import sys
@@ -179,32 +183,6 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         delta = datetime.now() - self.execution_started
         return delta.total_seconds()
 
-    def local_search_best_improvement(self, solution:TargetSolution)->TargetSolution:
-        """
-        Executes best improvement variant of the local search procedure 
-        
-        :param TargetSolution solution: solution which is initial point for local search
-        :return: result of the local search procedure 
-        :rtype: TargetSolution
-        """
-        while True:
-            if not solution.best_1_change_full(self.target_problem):
-                break
-        return solution
-
-    def local_search_first_improvement(self, solution:TargetSolution)->TargetSolution:
-        """
-        Executes first improvement variant of the local search procedure 
-        
-        :param TargetSolution solution: solution which is initial point for local search
-        :return: result of the local search procedure 
-        :rtype: TargetSolution
-        """
-        while True:
-            if not solution.best_1_change_first(self.target_problem):
-                break
-        return solution
-
     def main_loop(self)->None:
         """
         Main loop of the metaheuristic algorithm
@@ -302,8 +280,12 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
             dist = TargetSolution.solution_code_distance(code_x, code_y)
             return dist
 
-    def wtrite_to_output():
-        pass
+    @abstractmethod
+    def write_to_output(self):
+        """
+        Write data to output file, if allowed        
+        """
+        raise NotImplementedError
 
     def string_representation(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
             group_end:str ='}')->str:
@@ -361,7 +343,6 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
             s += indentation_symbol  
         s += group_end 
         return s
-
 
     @abstractmethod
     def __str__(self)->str:

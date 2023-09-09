@@ -1,3 +1,7 @@
+""" 
+The :mod:`~uo.target_problem.target_problem` module describes the class :class:`~uo.target_problem.TargetProblem`.
+"""
+
 from pathlib import Path
 directory = Path(__file__).resolve()
 import sys
