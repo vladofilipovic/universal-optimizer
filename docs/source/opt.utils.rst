@@ -1,21 +1,21 @@
-app.utils package
+opt.utils package
 =================
 
 Submodules
 ----------
 
-app.utils.files module
+opt.utils.files module
 ----------------------
 
-.. automodule:: app.utils.files
+.. automodule:: opt.utils.files
    :members:
    :undoc-members:
    :show-inheritance:
 
-app.utils.logger module
+opt.utils.logger module
 -----------------------
 
-.. automodule:: app.utils.logger
+.. automodule:: opt.utils.logger
    :members:
    :undoc-members:
    :show-inheritance:
@@ -23,7 +23,7 @@ app.utils.logger module
 Module contents
 ---------------
 
-.. automodule:: app.utils
+.. automodule:: opt.utils
    :members:
    :undoc-members:
    :show-inheritance:

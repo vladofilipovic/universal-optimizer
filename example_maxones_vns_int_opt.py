@@ -4,9 +4,9 @@ from random import choice
 
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
-from app.max_ones_problem.max_ones_problem import MaxOnesProblem
-from app.max_ones_problem.max_ones_problem_binary_int_solution import MaxOnesProblemBinaryIntSolution
-from app.max_ones_problem.max_ones_problem_binary_int_solution_vns_support import MaxOnesProblemBinaryIntSolutionVnsSupport
+from opt.single_objective.trivial.max_ones_problem.max_ones_problem import MaxOnesProblem
+from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution import MaxOnesProblemBinaryIntSolution
+from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution_vns_support import MaxOnesProblemBinaryIntSolutionVnsSupport
 
 problem_to_solve:MaxOnesProblem = MaxOnesProblem(dim=10)
 initial_solution:MaxOnesProblemBinaryIntSolution = MaxOnesProblemBinaryIntSolution()

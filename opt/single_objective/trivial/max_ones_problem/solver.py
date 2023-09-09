@@ -1,5 +1,5 @@
 """ 
-The :mod:`app.max_ones_problem.solver` contains programming code that optimize :ref:`Max Ones<Problem_Max_Ones>` Problem with various optimization techniques.
+The :mod:`opt.single_objective.trivial.max_ones_problem.solver` contains programming code that optimize :ref:`Max Ones<Problem_Max_Ones>` Problem with various optimization techniques.
 """
 import sys
 
@@ -24,17 +24,17 @@ from collections import namedtuple
 
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
-from app.utils.files import ensure_dir 
-from app.utils.logger import logger
+from opt.utils.files import ensure_dir 
+from opt.utils.logger import logger
 
-from app.max_ones_problem.command_line import default_parameters_cl
-from app.max_ones_problem.command_line import parse_arguments
+from opt.single_objective.trivial.max_ones_problem.command_line import default_parameters_cl
+from opt.single_objective.trivial.max_ones_problem.command_line import parse_arguments
 
-from app.max_ones_problem.max_ones_problem import MaxOnesProblem
-from app.max_ones_problem.max_ones_problem_binary_bit_array_solution import MaxOnesProblemBinaryBitArraySolution
-from app.max_ones_problem.max_ones_problem_binary_bit_array_solution_vns_support import MaxOnesProblemBinaryBitArraySolutionVnsSupport
-from app.max_ones_problem.max_ones_problem_binary_int_solution import MaxOnesProblemBinaryIntSolution
-from app.max_ones_problem.max_ones_problem_binary_int_solution_vns_support import MaxOnesProblemBinaryIntSolutionVnsSupport
+from opt.single_objective.trivial.max_ones_problem.max_ones_problem import MaxOnesProblem
+from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution import MaxOnesProblemBinaryBitArraySolution
+from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution_vns_support import MaxOnesProblemBinaryBitArraySolutionVnsSupport
+from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution import MaxOnesProblemBinaryIntSolution
+from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution_vns_support import MaxOnesProblemBinaryIntSolutionVnsSupport
 
 """ 
 Solver.

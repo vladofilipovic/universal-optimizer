@@ -195,7 +195,7 @@ optimizer:VnsOptimizer = VnsOptimizer(target_problem=problem_to_solve,
         k_min=1, 
         k_max=3, 
         max_local_optima=10, 
-        local_search_type='first_improvement')
+        local_search_type='local_search_first_improvement')
 optimizer.solution_code_distance_cache_cs.is_caching = False
 optimizer.output_control.write_to_output_file = False
 optimizer.optimize()

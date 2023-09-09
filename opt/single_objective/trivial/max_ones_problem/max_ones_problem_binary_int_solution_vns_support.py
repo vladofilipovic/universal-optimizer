@@ -1,7 +1,7 @@
 """ 
 .. _py_max_ones_problem_int_solution_vns_support:
 
-The :mod:`~app.max_ones_problem.max_ones_problem_binary_int_solution_vns_support` contains class :class:`~app.max_ones_problem.max_ones_problem_binary_int_solution_vns_support.MaxOnesProblemBinaryIntSolutionVnsSupport`, that represents solution of the :ref:`Problem_Max_Ones`, where `int` representation of the problem has been used.
+The :mod:`~opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution_vns_support` contains class :class:`~opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution_vns_support.MaxOnesProblemBinaryIntSolutionVnsSupport`, that represents solution of the :ref:`Problem_Max_Ones`, where `int` representation of the problem has been used.
 """
 
 import sys
@@ -10,6 +10,8 @@ directory = Path(__file__).resolve()
 sys.path.append(directory.parent)
 sys.path.append(directory.parent.parent)
 sys.path.append(directory.parent.parent.parent)
+sys.path.append(directory.parent.parent.parent.parent)
+sys.path.append(directory.parent.parent.parent.parent.parent)
 
 from copy import deepcopy
 

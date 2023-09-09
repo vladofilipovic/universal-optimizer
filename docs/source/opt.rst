@@ -1,4 +1,4 @@
-app package
+opt package
 ===========
 
 Subpackages
@@ -7,14 +7,14 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   app.max_ones_problem
-   app.traveling_salesperson_problems
-   app.utils
+   opt.multi_objective
+   opt.single_objective
+   opt.utils
 
 Module contents
 ---------------
 
-.. automodule:: app
+.. automodule:: opt
    :members:
    :undoc-members:
    :show-inheritance:

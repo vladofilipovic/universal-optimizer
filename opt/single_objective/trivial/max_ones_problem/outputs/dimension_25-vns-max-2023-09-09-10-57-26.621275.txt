@@ -1,0 +1,3 @@
+# RandomSeed is not predefined. Generated seed value:  3496820552375794516
+# VNS started at: 2023-09-09 10:57:26.622277
+# Execution parameters: {'algorithm': 'vns', 'optimization_type': 'maximization', 'writeToOutputFile': True, 'outputFilePath': 'outputs/dimension_25.txt', 'inputFilePath': 'inputs/dimension_25.txt', 'inputFormat': 'txt', 'maxNumberIterations': 0, 'maxTimeForExecutionSeconds': 10, 'randomSeed': 0, 'evaluationCacheIsUsed': True, 'calculationSolutionDistanceCacheIsUsed': True, 'keepAllSolutionCodes': True, 'kMin': 1, 'kMax': 3, 'maxLocalOptima': 5, 'localSearchType': 'local_search_best_improvement', 'solutionType': 'BitArray', 'log': 'warning'}

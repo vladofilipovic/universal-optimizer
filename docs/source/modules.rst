@@ -6,10 +6,10 @@ Library
 
    uo
 
-Applications
+Optimization
 ============
 
 .. toctree::
    :maxdepth: 4
 
-   app
+   opt

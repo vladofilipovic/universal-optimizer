@@ -1,7 +1,7 @@
 """ 
 .. _py_max_ones_problem_int_solution:
 
-The :mod:`~app.max_ones_problem.max_ones_problem_binary_int_solution` contains class :class:`~app.max_ones_problem.max_ones_problem_binary_int_solution.MaxOnesProblemBinaryIntSolution`, that represents solution of the :ref:`Problem_Max_Ones`, where `int` representation of the problem has been used.
+The :mod:`~opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution` contains class :class:`~opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution.MaxOnesProblemBinaryIntSolution`, that represents solution of the :ref:`Problem_Max_Ones`, where `int` representation of the problem has been used.
 """
 
 import sys
@@ -10,6 +10,8 @@ directory = Path(__file__).resolve()
 sys.path.append(directory.parent)
 sys.path.append(directory.parent.parent)
 sys.path.append(directory.parent.parent.parent)
+sys.path.append(directory.parent.parent.parent.parent)
+sys.path.append(directory.parent.parent.parent.parent.parent)
 
 from copy import deepcopy
 from random import choice
@@ -19,7 +21,7 @@ from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.target_solution import ObjectiveFitnessFeasibility
 from uo.target_solution.target_solution import TargetSolution
 
-from app.utils.logger import logger
+from opt.utils.logger import logger
 
 class MaxOnesProblemBinaryIntSolution(TargetSolution):
     

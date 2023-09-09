@@ -63,8 +63,8 @@ How-to Guides
     .. code-block::
         :caption: Build documentation sources
 
-            > sphinx-apidoc -o /docs/source/ uo
-            > sphinx-apidoc -o /docs/source/ app
+            > sphinx-apidoc -o docs/source/ uo
+            > sphinx-apidoc -o docs/source/ opt
 
 
     2. Change current directory to `/docs` 
