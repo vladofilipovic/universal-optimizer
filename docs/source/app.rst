@@ -7,7 +7,7 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   app.max_ones_problem
+   opt.single_objective.trivial.max_ones_problem
    app.traveling_salesperson_problems
    app.utils
 

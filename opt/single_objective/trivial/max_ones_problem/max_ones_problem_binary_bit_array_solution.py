@@ -1,7 +1,7 @@
 """ 
 ..  _py_max_ones_problem_bit_array_solution:
 
-The :mod:`~app.max_ones_problem.max_ones_problem_binary_bit_array_solution` contains class :class:`~app.max_ones_problem.max_ones_problem_binary_bit_array_solution.MaxOnesProblemBinaryBitArraySolution`, that represents solution of the :ref:`Problem_Max_Ones`, where `BitArray` representation of the problem has been used.
+The :mod:`~opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution` contains class :class:`~opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution.MaxOnesProblemBinaryBitArraySolution`, that represents solution of the :ref:`Problem_Max_Ones`, where `BitArray` representation of the problem has been used.
 """
 import sys
 from pathlib import Path

@@ -1,7 +1,7 @@
 """ 
 ..  _py_max_ones_problem_bit_array_solution_vns_support:
 
-The :mod:`~app.max_ones_problem.max_ones_problem_binary_bit_array_solution_vns_support` contains class :class:`~app.max_ones_problem.max_ones_problem_binary_bit_array_solution_vns_support.MaxOnesProblemBinaryBitArraySolutionVnsSupport`, that represents supporting parts of the `VNS` algorithm, where solution of the :ref:`Problem_Max_Ones` have `BitArray` representation.
+The :mod:`~opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution_vns_support` contains class :class:`~opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution_vns_support.MaxOnesProblemBinaryBitArraySolutionVnsSupport`, that represents supporting parts of the `VNS` algorithm, where solution of the :ref:`Problem_Max_Ones` have `BitArray` representation.
 """
 
 import sys
@@ -24,7 +24,7 @@ from uo.target_solution.target_solution import TargetSolution
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
 
 from app.utils.logger import logger
-from app.max_ones_problem.max_ones_problem import MaxOnesProblem
+from opt.single_objective.trivial.max_ones_problem.max_ones_problem import MaxOnesProblem
 
 
 class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport):

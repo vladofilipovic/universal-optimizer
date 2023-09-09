@@ -1,7 +1,7 @@
 """ 
 ..  _py_max_ones_problem:
 
-The :mod:`~app.max_ones_problem.max_ones_problem` contains class :class:`~app.max_ones_problem.max_ones_problem.MaxOnesProblem`, that represents :ref:`Problem_Max_Ones`.
+The :mod:`~opt.single_objective.trivial.max_ones_problem.max_ones_problem` contains class :class:`~opt.single_objective.trivial.max_ones_problem.max_ones_problem.MaxOnesProblem`, that represents :ref:`Problem_Max_Ones`.
 """
 import sys
 from pathlib import Path
