@@ -1,7 +1,7 @@
 """ 
 .. _py_max_ones_problem_int_solution_vns_support:
 
-The :mod:`~app.max_ones_problem.max_ones_problem_binary_int_solution_vns_support` contains class :class:`~app.max_ones_problem.max_ones_problem_binary_int_solution_vns_support.MaxOneProblemBinaryIntSolutionVnsSupport`, that represents solution of the :ref:`Problem_Max_Ones`, where `int` representation of the problem has been used.
+The :mod:`~app.max_ones_problem.max_ones_problem_binary_int_solution_vns_support` contains class :class:`~app.max_ones_problem.max_ones_problem_binary_int_solution_vns_support.MaxOnesProblemBinaryIntSolutionVnsSupport`, that represents solution of the :ref:`Problem_Max_Ones`, where `int` representation of the problem has been used.
 """
 
 import sys
@@ -21,7 +21,7 @@ from uo.target_solution.target_solution import ObjectiveFitnessFeasibility
 from uo.target_solution.target_solution import TargetSolution
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
 
-class MaxOneProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport):
+class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport):
     
     def __init__(self)->None:
         return

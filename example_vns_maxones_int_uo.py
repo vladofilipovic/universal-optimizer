@@ -8,7 +8,7 @@ from uo.target_solution.target_solution import TargetSolution
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
-class MaxOneProblem(TargetProblem):
+class MaxOnesProblem(TargetProblem):
 
     def __init__(self, dim:int)->None:
         if dim <= 0:
@@ -40,10 +40,10 @@ class MaxOneProblem(TargetProblem):
         return ''
 
 
-class MaxOneProblemIntSolution(TargetSolution):
+class MaxOnesProblemIntSolution(TargetSolution):
     
     def __init__(self)->None:
-        super().__init__("MaxOneProblemIntSolution", fitness_value=None, objective_value=None, is_feasible=False)
+        super().__init__("MaxOnesProblemIntSolution", fitness_value=None, objective_value=None, is_feasible=False)
         self.__representation = 42
 
     def __copy__(self):
@@ -142,7 +142,7 @@ class MaxOneProblemIntSolution(TargetSolution):
     def __format__(self, spec:str)->str:
         return ''
 
-class MaxOneProblemIntSolutionVnsSupport(ProblemSolutionVnsSupport):
+class MaxOnesProblemIntSolutionVnsSupport(ProblemSolutionVnsSupport):
 
     def vns_randomize(self, k:int, problem:TargetProblem, solution:TargetSolution, solution_codes:list[str])->bool:
         """
@@ -181,10 +181,10 @@ class MaxOneProblemIntSolutionVnsSupport(ProblemSolutionVnsSupport):
         else:
             return False 
 
-problem_to_solve:MaxOneProblem = MaxOneProblem(dim=10)
-initial_solution:MaxOneProblemIntSolution = MaxOneProblemIntSolution()
+problem_to_solve:MaxOnesProblem = MaxOnesProblem(dim=10)
+initial_solution:MaxOnesProblemIntSolution = MaxOnesProblemIntSolution()
 initial_solution.random_init(problem_to_solve)
-vns_support:MaxOneProblemIntSolutionVnsSupport = MaxOneProblemIntSolutionVnsSupport()
+vns_support:MaxOnesProblemIntSolutionVnsSupport = MaxOnesProblemIntSolutionVnsSupport()
 optimizer:VnsOptimizer = VnsOptimizer(target_problem=problem_to_solve, 
         initial_solution=initial_solution, 
         problem_solution_vns_support=vns_support,

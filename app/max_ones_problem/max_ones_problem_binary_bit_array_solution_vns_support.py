@@ -1,7 +1,7 @@
 """ 
 ..  _py_max_ones_problem_bit_array_solution_vns_support:
 
-The :mod:`~app.max_ones_problem.max_ones_problem_binary_bit_array_solution_vns_support` contains class :class:`~app.max_ones_problem.max_ones_problem_binary_bit_array_solution_vns_support.MaxOneProblemBinaryBitArraySolutionVnsSupport`, that represents supporting parts of the `VNS` algorithm, where solution of the :ref:`Problem_Max_Ones` have `BitArray` representation.
+The :mod:`~app.max_ones_problem.max_ones_problem_binary_bit_array_solution_vns_support` contains class :class:`~app.max_ones_problem.max_ones_problem_binary_bit_array_solution_vns_support.MaxOnesProblemBinaryBitArraySolutionVnsSupport`, that represents supporting parts of the `VNS` algorithm, where solution of the :ref:`Problem_Max_Ones` have `BitArray` representation.
 """
 
 import sys
@@ -25,26 +25,26 @@ from app.utils.logger import logger
 from app.max_ones_problem.max_ones_problem import MaxOnesProblem
 
 
-class MaxOneProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport):
+class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport):
     
     def __init__(self)->None:
         """
-        Create new MaxOneProblemBinaryBitArraySolutionVnsSupport instance
+        Create new MaxOnesProblemBinaryBitArraySolutionVnsSupport instance
         """
         return
 
     def __copy__(self):
         """
-        Internal copy of the MaxOneProblemBinaryBitArraySolutionVnsSupport
-        :return: MaxOneProblemBinaryBitArraySolutionVnsSupport -- new MaxOneProblemBinaryBitArraySolutionVnsSupport instance with the same properties
+        Internal copy of the MaxOnesProblemBinaryBitArraySolutionVnsSupport
+        :return: MaxOnesProblemBinaryBitArraySolutionVnsSupport -- new MaxOnesProblemBinaryBitArraySolutionVnsSupport instance with the same properties
         """
         sol = deepcopy(self)
         return sol
 
     def copy(self):
         """
-        Copy the MaxOneProblemBinaryBitArraySolutionVnsSupport
-        :return: MaxOneProblemBinaryBitArraySolutionVnsSupport -- new MaxOneProblemBinaryBitArraySolutionVnsSupport instance with the same properties
+        Copy the MaxOnesProblemBinaryBitArraySolutionVnsSupport
+        :return: MaxOnesProblemBinaryBitArraySolutionVnsSupport -- new MaxOnesProblemBinaryBitArraySolutionVnsSupport instance with the same properties
         """
         return self.__copy__()
         

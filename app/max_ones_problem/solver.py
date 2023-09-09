@@ -31,10 +31,10 @@ from app.max_ones_problem.command_line import default_parameters_cl
 from app.max_ones_problem.command_line import parse_arguments
 
 from app.max_ones_problem.max_ones_problem import MaxOnesProblem
-from app.max_ones_problem.max_ones_problem_binary_bit_array_solution import MaxOneProblemBinaryBitArraySolution
-from app.max_ones_problem.max_ones_problem_binary_bit_array_solution_vns_support import MaxOneProblemBinaryBitArraySolutionVnsSupport
-from app.max_ones_problem.max_ones_problem_binary_int_solution import MaxOneProblemBinaryIntSolution
-from app.max_ones_problem.max_ones_problem_binary_int_solution_vns_support import MaxOneProblemBinaryIntSolutionVnsSupport
+from app.max_ones_problem.max_ones_problem_binary_bit_array_solution import MaxOnesProblemBinaryBitArraySolution
+from app.max_ones_problem.max_ones_problem_binary_bit_array_solution_vns_support import MaxOnesProblemBinaryBitArraySolutionVnsSupport
+from app.max_ones_problem.max_ones_problem_binary_int_solution import MaxOnesProblemBinaryIntSolution
+from app.max_ones_problem.max_ones_problem_binary_int_solution_vns_support import MaxOnesProblemBinaryIntSolutionVnsSupport
 
 """ 
 Solver.
@@ -138,11 +138,11 @@ def main():
             initial_solution = None
             vns_support = None
             if solution_type=='BitArray':
-                initial_solution = MaxOneProblemBinaryBitArraySolution()
-                vns_support = MaxOneProblemBinaryBitArraySolutionVnsSupport()
+                initial_solution = MaxOnesProblemBinaryBitArraySolution()
+                vns_support = MaxOnesProblemBinaryBitArraySolutionVnsSupport()
             elif solution_type=='int':
-                initial_solution = MaxOneProblemBinaryIntSolution()
-                vns_support = MaxOneProblemBinaryIntSolutionVnsSupport()
+                initial_solution = MaxOnesProblemBinaryIntSolution()
+                vns_support = MaxOnesProblemBinaryIntSolutionVnsSupport()
             else:
                 raise ValueError("Invalid solution/representation type is chosen.")
             initial_solution.evaluation_cache_cs.is_caching = evaluation_cache_is_used
