@@ -1,3 +1,7 @@
+""" 
+The :mod:`~uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support` module describes the class :class:`~uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support.ProblemSolutionVnsSupport`.
+"""
+
 from pathlib import Path
 directory = Path(__file__).resolve()
 import sys
