@@ -40,10 +40,10 @@ class MaxOnesProblem(TargetProblem):
         return ''
 
 
-class MaxOnesProblemIntSolution(TargetSolution):
+class MaxOnesProblemBinaryIntSolution(TargetSolution):
     
     def __init__(self)->None:
-        super().__init__("MaxOnesProblemIntSolution", fitness_value=None, objective_value=None, is_feasible=False)
+        super().__init__("MaxOnesProblemBinaryIntSolution", fitness_value=None, objective_value=None, is_feasible=False)
         self.__representation = 42
 
     def __copy__(self):
@@ -142,7 +142,7 @@ class MaxOnesProblemIntSolution(TargetSolution):
     def __format__(self, spec:str)->str:
         return ''
 
-class MaxOnesProblemIntSolutionVnsSupport(ProblemSolutionVnsSupport):
+class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport):
 
     def vns_randomize(self, k:int, problem:TargetProblem, solution:TargetSolution, solution_codes:list[str])->bool:
         """
@@ -182,9 +182,9 @@ class MaxOnesProblemIntSolutionVnsSupport(ProblemSolutionVnsSupport):
             return False 
 
 problem_to_solve:MaxOnesProblem = MaxOnesProblem(dim=10)
-initial_solution:MaxOnesProblemIntSolution = MaxOnesProblemIntSolution()
+initial_solution:MaxOnesProblemBinaryIntSolution = MaxOnesProblemBinaryIntSolution()
 initial_solution.random_init(problem_to_solve)
-vns_support:MaxOnesProblemIntSolutionVnsSupport = MaxOnesProblemIntSolutionVnsSupport()
+vns_support:MaxOnesProblemBinaryIntSolutionVnsSupport = MaxOnesProblemBinaryIntSolutionVnsSupport()
 optimizer:VnsOptimizer = VnsOptimizer(target_problem=problem_to_solve, 
         initial_solution=initial_solution, 
         problem_solution_vns_support=vns_support,

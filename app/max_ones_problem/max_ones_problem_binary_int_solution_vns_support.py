@@ -73,3 +73,51 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport):
         else:
             return False 
 
+    def string_representation(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
+        group_end:str ='}')->str:
+        """
+        String representation of the target solution instance
+
+        :param delimiter: delimiter between fields
+        :type delimiter: str
+        :param indentation: level of indentation
+        :type indentation: int, optional, default value 0
+        :param indentation_symbol: indentation symbol
+        :type indentation_symbol: str, optional, default value ''
+        :param group_start: group start string 
+        :type group_start: str, optional, default value '{'
+        :param group_end: group end string 
+        :type group_end: str, optional, default value '}'
+        :return: string representation of instance that controls output
+        :rtype: str
+        """        
+        return 'MaxOnesProblemBinaryIntSolutionVnsSupport'
+
+    def __str__(self)->str:
+        """
+        String representation of the cache control and statistics structure
+
+        :return: string representation of the cache control and statistics structure
+        :rtype: str
+        """
+        return self.string_representation('|')
+
+    def __repr__(self)->str:
+        """
+        Representation of the cache control and statistics structure
+
+        :return: string representation of cache control and statistics structure
+        :rtype: str
+        """
+        return self.string_representation('\n')
+
+
+    def __format__(self, spec:str)->str:
+        """
+        Formatted the cache control and statistics structure
+
+        :param str spec: format specification
+        :return: formatted cache control and statistics structure
+        :rtype: str
+        """
+        return self.string_representation('|')
