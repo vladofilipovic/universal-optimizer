@@ -24,8 +24,8 @@ from collections import namedtuple
 
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
-from opt.utils.files import ensure_dir 
-from opt.utils.logger import logger
+from uo.utils.files import ensure_dir 
+from uo.utils.logger import logger
 
 from opt.single_objective.trivial.max_ones_problem.command_line import default_parameters_cl
 from opt.single_objective.trivial.max_ones_problem.command_line import parse_arguments

@@ -21,7 +21,7 @@ from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.target_solution import ObjectiveFitnessFeasibility
 from uo.target_solution.target_solution import TargetSolution
 
-from opt.utils.logger import logger
+from uo.utils.logger import logger
 
 class MaxOnesProblemBinaryIntSolution(TargetSolution):
     
