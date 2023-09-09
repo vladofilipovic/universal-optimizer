@@ -1,3 +1,7 @@
+""" 
+The :mod:`~uo.algorithm.algorithm` module describes the class :class:`~uo.algorithm.Algorithm`.
+"""
+
 from pathlib import Path
 directory = Path(__file__).resolve()
 import sys
@@ -153,7 +157,7 @@ class Algorithm(metaclass=ABCMeta):
         """
         Property getter for the output control of the executing algorithm
         
-        :return: Output control of the executing algorithm
+        :return: output control of the executing algorithm
         :rtype: `OutputControl`
         """
         return self.__output_control

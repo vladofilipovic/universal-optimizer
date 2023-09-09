@@ -22,7 +22,8 @@ class MaxOnesProblem(TargetProblem):
     
     def __init__(self, file_path:str=None, dim:int=None)->None:
         """
-        Create new MaxOnesProblem instance
+        Create new `MaxOnesProblem` instance
+
         :param str file_path: path of the file with data for the parget problem instance 
         :param int dim: dimension of the problem
         """
@@ -31,23 +32,28 @@ class MaxOnesProblem(TargetProblem):
 
     def __copy__(self):
         """
-        Internal copy of the MaxOnesProblem problem
-        :return: MaxOnesProblem -- new MaxOnesProblem instance with the same properties
+        Internal copy of the `MaxOnesProblem` problem
+
+        :return: new `MaxOnesProblem` instance with the same properties
+        :rtype: `MaxOnesProblem`
         """
         pr = deepcopy(self)
         return pr
 
     def copy(self):
         """
-        Copy the MaxOnesProblem problem
-        :return: MaxOnesProblem -- new MaxOnesProblem instance with the same properties
+        Copy the `MaxOnesProblem` problem
+
+        :return: new `MaxOnesProblem` instance with the same properties
+        :rtype: MaxOnesProblem
         """
         return self.__copy__()
 
     def load_from_file(self, data_format:str='txt')->None:
         """
         Read target problem data from file
-        :param data_format: str -- data format of the file
+
+        :param str data_format: data format of the file
         """
         logger.debug("Load parameters: file path={}, data format representation={}".format(self.file_path, 
                 data_format))
@@ -64,13 +70,20 @@ class MaxOnesProblem(TargetProblem):
     def string_representation(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
         """
-        String representation of the target solution instance
-        :param delimiter: str -- delimiter between fields
-        :param indentation:int -- level of indentation
-        :param indentation_symbol:str -- indentation symbol
-        :param group_start -- group start string 
-        :param group_end -- group end string 
-        :return: str -- string representation of target solution instance
+        String representation of the `MaxOneProblem` instance
+
+        :param delimiter: delimiter between fields
+        :type delimiter: str
+        :param indentation: level of indentation
+        :type indentation: int, optional, default value 0
+        :param indentation_symbol: indentation symbol
+        :type indentation_symbol: str, optional, default value ''
+        :param group_start: group start string 
+        :type group_start: str, optional, default value '{'
+        :param group_end: group end string 
+        :type group_end: str, optional, default value '}'
+        :return: string representation of instance that controls output
+        :rtype: str
         """          
         s = delimiter
         for i in range(0, indentation):
@@ -85,24 +98,26 @@ class MaxOnesProblem(TargetProblem):
 
     def __str__(self)->str:
         """
-        String representation of the target problem instance
-        :return: str -- string representation of the target problem instance
+        String representation of the max ones problem structure
+
+        :return: string representation of the max ones problem structure
+        :rtype: str
         """
         return self.string_representation('|', 0, '', '{', '}')
 
 
     def __repr__(self)->str:
         """
-        Representation of the target problem instance
-        :return: str -- string representation of the problem instance
+        Representation of the max ones problem instance
+        :return: str -- string representation of the max ones problem instance
         """
         return self.string_representation('\n', 0, '   ', '{', '}')
 
     def __format__(self, spec:str)->str:
         """
-        Formatted the target problem instance
+        Formatted the max ones problem instance
         :param spec: str -- format specification
-        :return: str -- formatted target problem instance
+        :return: str -- formatted max ones problem instance
         """
         return self.string_representation('|')
 

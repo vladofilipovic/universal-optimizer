@@ -1,3 +1,7 @@
+""" 
+The :mod:`~uo.target_solution.target_solution` module describes the class :class:`~uo.target_solution.TargetSolution`.
+"""
+
 from pathlib import Path
 directory = Path(__file__).resolve()
 import sys
@@ -149,6 +153,16 @@ class TargetSolution(metaclass=ABCMeta):
         raise NotImplementedError
 
     @abstractmethod
+    def native_representation_from_solution_code(self, representation_str:str):
+        """
+        Obtain native representation from solution code of the `Solution` instance
+
+        :param str representation_str: solution's representation as string (e.g. solution code)
+        :return: solution's native representation 
+        """
+        raise NotImplementedError
+
+    @abstractmethod
     def calculate_objective_fitness_feasibility(self, problem:TargetProblem)->ObjectiveFitnessFeasibility:
         """
         Fitness calculation of the target solution
@@ -208,28 +222,6 @@ class TargetSolution(metaclass=ABCMeta):
         self.objective_value = solution.objective_value;
         self.fitness_value = solution.fitness_value;
         self.is_feasible = solution.is_feasible;
-
-    @abstractmethod
-    def best_1_change_full(self, problem:TargetProblem)->bool:
-        """
-        Change the best one within solution, with "best improvement" approach 
-
-        :param TargetProblem problem: problem that is solved
-        :return: if the best one is changed, or not
-        :rtype: bool
-        """        
-        raise NotImplementedError
-
-    @abstractmethod
-    def best_1_change_first(self, problem:TargetProblem)->bool:
-        """
-        Change the best one within solution, with "first improvement" approach 
-
-        :param TargetProblem problem: problem that is solved
-        :return: if the best one is changed, or not
-        :rtype: bool
-        """        
-        raise NotImplementedError
 
     @abstractmethod
     def solution_code_distance(solution_code_1:str, solution_code_2:str)->float:

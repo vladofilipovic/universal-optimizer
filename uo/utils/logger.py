@@ -1,3 +1,7 @@
+""" 
+The :mod:`~uo.utils.logger` module contains utility functions that deals logs.
+"""
+
 from pathlib import Path
 directory = Path(__file__).resolve()
 import sys

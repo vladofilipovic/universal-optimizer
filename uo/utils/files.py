@@ -1,3 +1,7 @@
+""" 
+The :mod:`~uo.utils.files` module contains utility functions that deals with files.
+"""
+
 from pathlib import Path
 directory = Path(__file__).resolve()
 import sys

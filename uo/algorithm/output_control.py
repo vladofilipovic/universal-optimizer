@@ -1,3 +1,7 @@
+""" 
+The :mod:`~uo.algorithm.output_control` module describes the class :class:`~uo.algorithm.OutputControl`.
+"""
+
 from pathlib import Path
 directory = Path(__file__).resolve()
 import sys
@@ -26,7 +30,7 @@ class OutputControl:
         """
         Property getter for determining if write to output 
 
-        :return: if write_to_output, or not 
+        :return: if write to output during algorithm execution, or not 
         :rtype: bool
         """
         return self.__write_to_output

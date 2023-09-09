@@ -144,15 +144,7 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution):
 
 class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport):
 
-    def vns_randomize(self, k:int, problem:TargetProblem, solution:TargetSolution, solution_codes:list[str])->bool:
-        """
-        Random VNS shaking of k parts such that new solution code does not differ more than k from all solution codes 
-        inside shakingPoints 
-        :param problem:TargetProblem -- problem that is solved
-        :param k:int -- parameter for VNS
-        :param solution_codes:list[str] -- solution codes that should be randomized
-        :return: bool -- if randomization is successful 
-        """    
+    def randomize(self, k:int, problem:TargetProblem, solution:TargetSolution, solution_codes:list[str])->bool:
         tries:int = 0
         limit:int = 10000
         while tries < limit:

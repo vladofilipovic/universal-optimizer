@@ -8,7 +8,7 @@ from opt.single_objective.trivial.max_ones_problem.max_ones_problem import MaxOn
 from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution import MaxOnesProblemBinaryIntSolution
 from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution_vns_support import MaxOnesProblemBinaryIntSolutionVnsSupport
 
-problem_to_solve:MaxOnesProblem = MaxOnesProblem(dim=10)
+problem_to_solve:MaxOnesProblem = MaxOnesProblem(dim=30)
 initial_solution:MaxOnesProblemBinaryIntSolution = MaxOnesProblemBinaryIntSolution()
 initial_solution.random_init(problem_to_solve)
 vns_support:MaxOnesProblemBinaryIntSolutionVnsSupport = MaxOnesProblemBinaryIntSolutionVnsSupport()

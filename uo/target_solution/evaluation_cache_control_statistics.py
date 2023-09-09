@@ -1,3 +1,7 @@
+""" 
+The :mod:`~uo.target_solution.evaluation_cache_control_statistics` module describes the class :class:`~uo.target_solution.EvaluationCacheControlStatistics`.
+"""
+
 from pathlib import Path
 directory = Path(__file__).resolve()
 import sys
@@ -10,17 +14,37 @@ class EvaluationCacheControlStatistics:
     
     def __init__(self)->None:
         """
-        Create new EvaluationCacheControlStatistics instance
+        Create new `EvaluationCacheControlStatistics` instance
         """
         self.__is_caching:bool = False
         self.__cache:dict[str] = {}
         self.__cache_hit_count:int = 0
         self.__cache_request_count:int = 0
 
+    def __copy__(self):
+        """
+        Internal copy of the `EvaluationCacheControlStatistics` instance
+
+        :return: new `EvaluationCacheControlStatistics` instance with the same properties
+        :rtype: `EvaluationCacheControlStatistics`
+        """
+        pr = deepcopy(self)
+        return pr
+
+    def copy(self):
+        """
+        Copy the `EvaluationCacheControlStatistics` instance
+
+        :return: new `EvaluationCacheControlStatistics` instance with the same properties
+        :rtype: `EvaluationCacheControlStatistics`
+        """
+        return self.__copy__()
+
     @property
     def is_caching(self)->bool:
         """
         Property getter for is_caching 
+
         :return: if caching is used during evaluation, or not 
         :rtype: bool
         """
@@ -89,7 +113,7 @@ class EvaluationCacheControlStatistics:
     def string_representation(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
         """
-        String representation of the target solution instance
+        String representation of the `EvaluationCacheControlStatistics` instance
 
         :param delimiter: delimiter between fields
         :type delimiter: str
@@ -121,3 +145,29 @@ class EvaluationCacheControlStatistics:
             s += indentation_symbol  
         s += group_end 
         return s
+
+    def __str__(self)->str:
+        """
+        String representation of the `EvaluationCacheControlStatistics` instance
+
+        :return: string representation of the `EvaluationCacheControlStatistics` instance
+        :rtype: str
+        """
+        return self.string_representation('|', 0, '', '{', '}')
+
+
+    def __repr__(self)->str:
+        """
+        Representation of the `EvaluationCacheControlStatistics` instance
+        :return: str -- string representation of the `EvaluationCacheControlStatistics` instance
+        """
+        return self.string_representation('\n', 0, '   ', '{', '}')
+
+    def __format__(self, spec:str)->str:
+        """
+        Formatted the `EvaluationCacheControlStatistics` instance
+        :param spec: str -- format specification
+        :return: str -- formatted `EvaluationCacheControlStatistics` instance
+        """
+        return self.string_representation('|')
+

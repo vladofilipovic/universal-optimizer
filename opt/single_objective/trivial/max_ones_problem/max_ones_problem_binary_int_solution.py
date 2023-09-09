@@ -26,33 +26,74 @@ from uo.utils.logger import logger
 class MaxOnesProblemBinaryIntSolution(TargetSolution):
     
     def __init__(self)->None:
+        """
+        Create new `MaxOnesProblemBinaryIntSolution` instance
+        """
         super().__init__("MaxOnesProblemBinaryIntSolution", fitness_value=None, objective_value=None, is_feasible=False)
 
     def __copy__(self):
+        """
+        Internal copy of the `MaxOnesProblemBinaryIntSolution`
+
+        :return: new `MaxOnesProblemBinaryIntSolution` instance with the same properties
+        :rtype: MaxOnesProblemBinaryIntSolution
+        """
         sol = deepcopy(self)
         return sol
 
     def copy(self):
+        """
+        Copy the `MaxOnesProblemBinaryIntSolution`
+        
+        :return: new `MaxOnesProblemBinaryIntSolution` instance with the same properties
+        :rtype: `MaxOnesProblemBinaryIntSolution`
+        """
         return self.__copy__()
         
     def copy_to(self, destination)->None:
+        """
+        Copy the `MaxOnesProblemBinaryIntSolution` to the already existing destination `MaxOnesProblemBinaryIntSolution`
+
+        :param `MaxOnesProblemBinaryIntSolution` destination: destination `MaxOnesProblemBinaryIntSolution`
+        """
         destination = self.__copy__()
 
     @property
     def representation(self)->int:
-            return self.__representation
+        """
+        Property getter for the target solution representation
+
+        :return: the target solution instance representation
+        :rtype: int
+        """
+        return self.__representation
 
     @representation.setter
     def representation(self, value:int)->None:
+        """
+        Property setter for representation of the solution
+
+        :param int value: representation of the solution
+        """
         self.__representation = value
 
-    def make_to_be_feasible(self, problem:TargetProblem):
+    def __make_to_be_feasible_helper__(self, problem:TargetProblem):
+        """
+        Helper function that modifies representation to be feasible
+
+        :param `TargetProblem` problem: problem which is solved by solution
+        """
         mask:int = ~0
         mask <<= 32-problem.dimension
         mask = ~mask 
         self.__representation &= mask
 
     def random_init(self, problem:TargetProblem)->None:
+        """
+        Random initialization of the solution
+
+        :param `TargetProblem` problem: problem which is solved by solution
+        """
         if problem.dimension is None:
             raise ValueError("Problem dimension should not be None!")
         if problem.dimension <= 0:
@@ -60,65 +101,63 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution):
         if problem.dimension >= 32:
             raise ValueError("Problem dimension should be less than 32!")
         self.representation = randint(0, 2^problem.dimension-1)
-        self.make_to_be_feasible(problem)
+        self.__make_to_be_feasible_helper__(problem)
 
     def solution_code(self)->str:
+        """
+        Solution code of the target solution
+
+        :return: solution code
+        :rtype: str 
+        """
         return bin(self.__representation)
 
     def calculate_objective_fitness_feasibility(self, problem:TargetProblem)->ObjectiveFitnessFeasibility:
+        """
+        Fitness calculation of the max ones binary int solution
+
+        :param TargetProblem problem: problem that is solved
+        :return: objective value, fitness value and feasibility of the solution instance  
+        :rtype: `ObjectiveFitnessFeasibility`
+        """
         ones_count = self.representation.bit_count()
         return ObjectiveFitnessFeasibility(ones_count, ones_count, True)
 
+    def native_representation_from_solution_code(self, representation_str:str)->int:
+        """
+        Obtain `int` representation from string representation of the integer binary solution of the Max Ones problem 
+
+        :param str representation_str: solution's representation as string
+        :return: solution's representation as int
+        :rtype: int
+        """
+        ret:int = int(representation_str, 2)
+
     def solution_code_distance(solution_code_1:str, solution_code_2:str)->float:
-        rep_1:int = int(solution_code_1, 2)
-        rep_2:int = int(solution_code_2, 2)
+        rep_1:int = self.native_representation_from_solution_code(solution_code_1)
+        rep_2:int = self.native_representation_from_solution_code(solution_code_2)
         result = (rep_1 ^ rep_2).count(True)
         return result 
 
-    def best_1_change_full(self, problem:TargetProblem)->bool:
-        best_ind:int = None
-        best_fv:float = self.fitness_value
-        for i in range(0, problem.dimension):
-            mask:int = 1 << i
-            mask = ~mask
-            self.representation ^= mask 
-            new_fv = self.calculate_objective_fitness_feasibility(problem).fitness_value
-            if new_fv > best_fv:
-                best_ind = i
-                best_fv = new_fv
-            self.representation ^= mask 
-        if best_ind is not None:
-            mask:int = 1 << best_ind
-            mask = ~mask
-            self.representation ^= mask
-            self.evaluate(problem)
-            if self.fitness_value != best_fv:
-                raise Exception('Fitness calculation within best_1_change_full function is not correct.')
-            return True
-        return False
-
-    def best_1_change_first(self, problem:TargetProblem)->bool:
-        best_ind:int = None
-        best_fv:float = self.fitness_value
-        for i in range(0, problem.dimension):
-            mask:int = 1 << i
-            mask = ~mask
-            self.representation ^= mask 
-            new_fv = self.calculate_objective_fitness_feasibility(problem).fitness_value
-            if new_fv > best_fv:
-                best_ind = i
-                best_fv = new_fv
-                mask:int = 1 << best_ind
-                mask = ~mask
-                self.representation ^= mask
-                self.evaluate(problem)
-                if self.fitness_value != best_fv:
-                    raise Exception('Fitness calculation within best_1_change_first function is not correct.')
-                return True
-        return False
 
     def string_representation(self, delimiter:str='\n', indentation:int=0, indentation_symbol:str='   ', 
             group_start:str='{', group_end:str='}',)->str:
+        """
+        String representation of the solution instance
+
+        :param delimiter: delimiter between fields
+        :type delimiter: str
+        :param indentation: level of indentation
+        :type indentation: int, optional, default value 0
+        :param indentation_symbol: indentation symbol
+        :type indentation_symbol: str, optional, default value ''
+        :param group_start: group start string 
+        :type group_start: str, optional, default value '{'
+        :param group_end: group end string 
+        :type group_end: str, optional, default value '}'
+        :return: string representation of instance that controls output
+        :rtype: str
+        """        
         s = delimiter
         for i in range(0, indentation):
             s += indentation_symbol  
@@ -136,10 +175,29 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution):
         return s
 
     def __str__(self)->str:
+        """
+        String representation of the solution instance
+
+        :return: string representation of the solution instance
+        :rtype: str
+        """
         return self.string_representation('\n', 0, '   ', '{', '}')
 
     def __repr__(self)->str:
+        """
+        Representation of the solution instance
+
+        :return: string representation of the solution instance
+        :rtype: str
+        """
         return self.string_representation('\n', 0, '   ', '{', '}')
 
     def __format__(self, spec:str)->str:
+        """
+        Formatted the solution instance
+
+        :param str spec: format specification
+        :return: formatted solution instance
+        :rtype: str
+        """
         return self.string_representation('\n', 0, '   ', '{', '}')
