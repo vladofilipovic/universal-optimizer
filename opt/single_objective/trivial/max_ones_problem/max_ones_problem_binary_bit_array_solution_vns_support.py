@@ -31,28 +31,81 @@ class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport):
     
     def __init__(self)->None:
         """
-        Create new MaxOnesProblemBinaryBitArraySolutionVnsSupport instance
+        Create new `MaxOnesProblemBinaryBitArraySolutionVnsSupport` instance
         """
         return
 
     def __copy__(self):
         """
-        Internal copy of the MaxOnesProblemBinaryBitArraySolutionVnsSupport
-        :return: MaxOnesProblemBinaryBitArraySolutionVnsSupport -- new MaxOnesProblemBinaryBitArraySolutionVnsSupport instance with the same properties
+        Internal copy of the `MaxOnesProblemBinaryBitArraySolutionVnsSupport`
+
+        :return: new `MaxOnesProblemBinaryBitArraySolutionVnsSupport` instance with the same properties
+        :rtype: `MaxOnesProblemBinaryBitArraySolutionVnsSupport`
         """
         sol = deepcopy(self)
         return sol
 
     def copy(self):
         """
-        Copy the MaxOnesProblemBinaryBitArraySolutionVnsSupport
-        :return: MaxOnesProblemBinaryBitArraySolutionVnsSupport -- new MaxOnesProblemBinaryBitArraySolutionVnsSupport instance with the same properties
+        Copy the `MaxOnesProblemBinaryBitArraySolutionVnsSupport` instance
+
+        :return: new `MaxOnesProblemBinaryBitArraySolutionVnsSupport` instance with the same properties
+        :rtype: `MaxOnesProblemBinaryBitArraySolutionVnsSupport`
         """
         return self.__copy__()
-        
-    def vns_randomize(self, k:int, problem:TargetProblem, solution:TargetSolution, solution_codes:list[str])->bool:
+
+    def change_bit_find_best_helper(self, problem:MaxOnesProblem, solution:TargetSolution)->bool:
         """
-        Random VNS shaking of k parts such that new solution code does not differ more than k from all solution codes 
+        Improving the best solution by inverting one bit of the representation, e.g. with "best improvement" approach 
+
+        :param `MaxOnesProblem` problem: problem that is solved
+        :param `TargetSolution` solution: solution that is potentially improved
+        :return: if the best one is changed, or not
+        :rtype: bool
+        """        
+        best_ind:int = None
+        best_fv:float = solution.fitness_value
+        for i in range(0, len(solution.representation)):
+            solution.representation.invert(i) 
+            new_fv = solution.calculate_objective_fitness_feasibility(problem).fitness_value
+            if new_fv > best_fv:
+                best_ind = i
+                best_fv = new_fv
+            solution.representation.invert(i)
+        if best_ind is not None:
+            solution.representation.invert(best_ind)
+            solution.evaluate(problem)
+            if solution.fitness_value != best_fv:
+                raise ValueError('Fitness calculation within function `change_bit_find_best_helper` is not correct.')
+            return True
+        return False
+
+    def change_bit_find_better_helper(self, problem:MaxOnesProblem, problem:TargetProblem)->bool:
+        """
+        Improving the best solution by inverting one bit of the representation, e.g. with "first improvement" approach 
+
+        :param `MaxOnesProblem` problem: problem that is solved
+        :param `TargetSolution` solution: solution that is potentially improved
+        :return: if the best one is changed, or not
+        :rtype: bool
+        """        
+        best_ind:int = None
+        best_fv:float = solution.fitness_value
+        for i in range(0, len(solution.representation)):
+            solution.representation.invert(i) 
+            new_fv = solution.calculate_objective_fitness_feasibility(problem).fitness_value
+            if new_fv > best_fv:
+                best_ind = i
+                best_fv = new_fv
+                solution.evaluate(problem)
+                if solution.fitness_value != new_fv:
+                    raise Exception('Fitness calculation within best_1_change_first function is not correct.')
+                return True
+        return False
+
+    def randomize(self, k:int, problem:TargetProblem, solution:TargetSolution, solution_codes:list[str])->bool:
+        """
+        Random shaking of k parts such that new solution code does not differ more than k from all solution codes 
         inside shakingPoints 
 
         :param int k: int parameter for VNS

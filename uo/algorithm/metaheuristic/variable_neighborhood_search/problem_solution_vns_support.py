@@ -13,7 +13,7 @@ from uo.target_solution.target_solution import TargetSolution
 class ProblemSolutionVnsSupport(metaclass=ABCMeta):
     
     @abstractmethod
-    def vns_randomize(k:int, problem:TargetProblem, solution:TargetSolution, solution_codes:list[str])->bool:
+    def randomize(self, k:int, problem:TargetProblem, solution:TargetSolution, solution_codes:list[str])->bool:
         """
         Random VNS shaking of several parts such that new solution code does not differ more than supplied from all 
         solution codes inside collection
@@ -25,5 +25,30 @@ class ProblemSolutionVnsSupport(metaclass=ABCMeta):
         :return: if randomization is successful
         :rtype: bool
         """        
-        raise NotImplemented
+        raise NotImplementedError
 
+    @abstractmethod
+    def local_search_best_improvement(self, k:int, problem:TargetProblem, solution:TargetSolution)->TargetSolution:
+        """
+        Executes best improvement variant of the local search procedure 
+        
+        :param int k: int parameter for VNS
+        :param `TargetProblem` problem: problem that is solved
+        :param `TargetSolution` solution: solution used for the problem that is solved
+        :return: result of the local search procedure 
+        :rtype: TargetSolution
+        """
+        raise NotImplementedError
+
+    @abstractmethod
+    def local_search_first_improvement(self, k:int, problem:TargetProblem, solution:TargetSolution)->TargetSolution:
+        """
+        Executes best improvement variant of the local search procedure 
+        
+        :param int k: int parameter for VNS
+        :param `TargetProblem` problem: problem that is solved
+        :param `TargetSolution` solution: solution used for the problem that is solved
+        :return: result of the local search procedure 
+        :rtype: TargetSolution
+        """
+        raise NotImplementedError

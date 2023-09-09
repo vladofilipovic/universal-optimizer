@@ -27,7 +27,7 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution):
     
     def __init__(self)->None:
         """
-        Create new MaxOnesProblemBinaryBitArraySolution instance
+        Create new `MaxOnesProblemBinaryBitArraySolution` instance
         """
         super().__init__("MaxOnesProblemBinaryBitArraySolution", fitness_value=None, objective_value=None, is_feasible=False)
         self.__representation:BitArray = BitArray()
@@ -126,52 +126,6 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution):
         rep_2:BitArray = self.__representation_string_to_bit_array__(solution_code_2)
         result = (rep_1 ^ rep_2).count(True)
         return result 
-
-    def best_1_change_full(self, problem:TargetProblem)->bool:
-        """
-        Change the best one within solution, by trying "best improvement" approach 
-
-        :param TargetProblem problem: problem that is solved
-        :return: bool -- if the best one is changed, or not
-        """        
-        best_ind:int = None
-        best_fv:float = self.fitness_value
-        for i in range(0, len(self.representation)):
-            self.representation.invert(i) 
-            new_fv = self.calculate_objective_fitness_feasibility(problem).fitness_value
-            if new_fv > best_fv:
-                best_ind = i
-                best_fv = new_fv
-            self.representation.invert(i)
-        if best_ind is not None:
-            self.representation.invert(best_ind)
-            self.evaluate(problem)
-            if self.fitness_value != best_fv:
-                raise Exception('Fitness calculation within best_1_change_full function is not correct.')
-            return True
-        return False
-
-    def best_1_change_first(self, problem:TargetProblem)->bool:
-        """
-        Change the best one within solution, by trying "first improvement" approach 
-
-        :param TargetProblem problem: problem that is solved
-        :return: bool -- if the best one is changed, or not
-        """        
-        best_ind:int = None
-        best_fv:float = self.fitness_value
-        for i in range(0, len(self.representation)):
-            self.representation.invert(i) 
-            new_fv = self.calculate_objective_fitness_feasibility(problem).fitness_value
-            if new_fv > best_fv:
-                best_ind = i
-                best_fv = new_fv
-                self.evaluate(problem)
-                if self.fitness_value != best_fv:
-                    raise Exception('Fitness calculation within best_1_change_first function is not correct.')
-                return True
-        return False
-
 
     def string_representation(self, delimiter:str='\n', indentation:int=0, indentation_symbol:str='   ', 
             group_start:str='{', group_end:str='}',)->str:

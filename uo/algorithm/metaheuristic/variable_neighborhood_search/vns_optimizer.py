@@ -170,7 +170,7 @@ class VnsOptimizer(Metaheuristic, Generic[S_co]):
         #logger.debug('Current: {}'.format(self.current_solution))
         #logger.debug('Best: {}'.format(self.current_solution))
         shaking_points:list[str] = self.__select_shaking_points__()
-        if not self.__problem_solution_vns_support.vns_randomize(self.__k_current, self.target_problem, 
+        if not self.__problem_solution_vns_support.randomize(self.__k_current, self.target_problem, 
                 self.current_solution, shaking_points):
             return False
         if self.__k_current in self.__shaking_counts:

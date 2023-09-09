@@ -11,7 +11,7 @@ class SolutionCodeDistanceCacheControlStatistics:
 
     def __init__(self)->None:
         """
-        Create new SolutionCodeDistanceCacheControlStatistics instance
+        Create new `SolutionCodeDistanceCacheControlStatistics` instance
         """
         self.__is_caching:bool = False
         self.__cache:dict[dict[str]] = {}
