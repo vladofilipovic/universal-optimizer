@@ -1,3 +1,0 @@
-# VNS started at: 2023-07-10 14:01:40.828858
-# Execution parameters: {'algorithm': 'vns', 'optimization_type': 'maximization', 'writeToOutputFile': True, 'outputFilePath': 'optimization-problem-solving/optimization_problem_solving/max_ones_problem/outputs/dimension_77.csv', 'inputFilePath': 'optimization-problem-solving/optimization_problem_solving/max_ones_problem/inputs/dimension_77.txt', 'inputFormat': 'txt', 'maxNumberIterations': 20, 'maxTimeForExecutionSeconds': 0, 'randomSeed': 0, 'evaluationCacheIsUsed': False, 'calculationSolutionDistanceCacheIsUsed': False, 'keepAllSolutionCodes': False, 'kMin': 1, 'kMax': 3, 'maxLocalOptima': 7, 'localSearchType': 'local_search_best_improvement'}
-# RandomSeed is not predefined. Generated seed value:  3987925991083506188
