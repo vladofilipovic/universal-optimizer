@@ -23,11 +23,11 @@ from opt.single_objective.trivial.max_ones_problem.max_ones_problem import MaxOn
 from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution import MaxOnesProblemBinaryIntSolution
 from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution_vns_support import MaxOnesProblemBinaryIntSolutionVnsSupport
 
-class TestMaxOnesProblemBinaryIntSolutionVnsExecution(unittest.TestCase):
+class TestMaxOnesProblemBinaryIntSolutionVnsLsfiExecution(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
-        print("setUpClass TestMaxOnesProblemBinaryIntSolutionVnsExecution\n")
+        print("setUpClass TestMaxOnesProblemBinaryIntSolutionVnsLsfiExecution\n")
 
     def setUp(self):
         self.problem_to_solve:MaxOnesProblem = MaxOnesProblem(dim=22)
@@ -44,7 +44,7 @@ class TestMaxOnesProblemBinaryIntSolutionVnsExecution(unittest.TestCase):
                 k_min=1, 
                 k_max=3, 
                 max_local_optima=10, 
-                local_search_type='local_search_best_improvement')
+                local_search_type='local_search_first_improvement')
         self.optimizer.solution_code_distance_cache_cs.is_caching = False
         self.optimizer.output_control.write_to_output_file = False
         self.optimizer.optimize()
@@ -62,7 +62,7 @@ class TestMaxOnesProblemBinaryIntSolutionVnsExecution(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        print("\ntearDownClass TestMaxOnesProblemBinaryIntSolutionVnsExecution")
+        print("\ntearDownClass TestMaxOnesProblemBinaryIntSolutionVnsLsfiExecution")
     
 if __name__ == '__main__':
     unittest.main()

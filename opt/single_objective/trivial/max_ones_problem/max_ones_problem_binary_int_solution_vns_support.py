@@ -124,7 +124,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
             optimizer.evaluation += 1
             solution.evaluate(problem)
             if solution.fitness_value != best_fv:
-                raise Exception('Fitness calculation within best_1_change_full function is not correct.')
+                raise Exception('Fitness calculation within `local_search_best_improvement` function is not correct.')
         return solution
 
     def local_search_first_improvement(self, k:int, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryIntSolution, 
@@ -147,16 +147,16 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
         best_fv:float = solution.fitness_value
         for i in range(0, problem.dimension):
             mask:int = 1 << i
-            self.representation ^= mask 
+            solution.representation ^= mask 
             optimizer.evaluation += 1
-            new_fv = self.calculate_objective_fitness_feasibility(problem).fitness_value
+            new_fv = solution.calculate_objective_fitness_feasibility(problem).fitness_value
             if new_fv > best_fv:
                 optimizer.evaluation += 1
-                self.evaluate(problem)
-                if self.fitness_value != new_fv:
-                    raise Exception('Fitness calculation within `change_bit_find_better_helper` function is not correct.')
-                return True
-            self.representation ^= mask
+                solution.evaluate(problem)
+                if solution.fitness_value != new_fv:
+                    raise Exception('Fitness calculation within `local_search_first_improvement` function is not correct.')
+                return solution
+            solution.representation ^= mask
         return solution
 
     def string_representation(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
