@@ -116,6 +116,7 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
         :rtype: int
         """
         ret:int = int(representation_str, 2)
+        return ret
 
     def solution_code_distance(solution_code_1:str, solution_code_2:str)->float:
         rep_1:int = self.native_representation_from_solution_code(solution_code_1)
