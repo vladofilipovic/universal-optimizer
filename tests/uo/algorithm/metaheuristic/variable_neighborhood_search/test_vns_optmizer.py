@@ -23,6 +23,10 @@ class TestVnSOptimizerProperties(unittest.TestCase):
 
     def setUp(self):
         self.evaluations_max = 42
+        self.seconds_max = 42
+        self.random_seed = 42
+        self.k_min = 3
+        self.k_max = 42
 
         self.problem = mock.MagicMock()
         type(self.problem).name = mock.PropertyMock(return_value='some_problem')
@@ -30,10 +34,19 @@ class TestVnSOptimizerProperties(unittest.TestCase):
         type(self.problem).file_path = mock.PropertyMock(return_value='some file path')
         type(self.problem).dimension = mock.PropertyMock(return_value=42)
 
-        self.vns_optimizer = VnsOptimizer(evaluations_max=self.evaluations_max, seconds_max=42, random_seed=42, 
-                keep_all_solution_codes=True, target_problem=self.problem, initial_solution=None, 
-                problem_solution_vns_support=None, k_min=3, k_max=42, max_local_optima=42, 
-                local_search_type='first_improvement')
+        self.vns_optimizer = VnsOptimizer(
+                evaluations_max=self.evaluations_max, 
+                seconds_max=self.seconds_max, 
+                random_seed=self.random_seed, 
+                k_min=self.k_min, 
+                k_max=self.k_max, 
+                max_local_optima=42, 
+                keep_all_solution_codes=True, 
+                target_problem=self.problem, 
+                initial_solution=None, 
+                problem_solution_vns_support=None, 
+                local_search_type='first_improvement'
+        )
         return
     
     def test_name_should_be_vns(self):
@@ -41,6 +54,18 @@ class TestVnSOptimizerProperties(unittest.TestCase):
 
     def test_evaluation_max_should_be_equal_as_in_constructor(self):
         self.assertEqual(self.vns_optimizer.evaluations_max, self.evaluations_max)
+
+    def test_random_seed_should_be_equal_as_in_constructor(self):
+        self.assertEqual(self.vns_optimizer.random_seed, self.random_seed)
+
+    def test_seconds_max_should_be_equal_as_in_constructor(self):
+        self.assertEqual(self.vns_optimizer.seconds_max, self.seconds_max)
+
+    def test_k_min_should_be_equal_as_in_constructor(self):
+        self.assertEqual(self.vns_optimizer.k_min, self.k_min)
+
+    def test_k_max_should_be_equal_as_in_constructor(self):
+        self.assertEqual(self.vns_optimizer.k_max, self.k_max)
 
     def test_problem_name_should_be_equal_as_in_constructor(self):
         self.assertEqual(self.vns_optimizer.target_problem.name, self.problem.name)

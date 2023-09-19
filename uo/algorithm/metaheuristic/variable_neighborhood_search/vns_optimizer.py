@@ -50,21 +50,31 @@ class VnsOptimizer(Metaheuristic):
         :type local_search_type: str, possible values: 'local_search_best_improvement', 'local_search_first_improvement' 
         """
         super().__init__('vns', evaluations_max, seconds_max, random_seed, keep_all_solution_codes, target_problem)
-        self.__current_solution:TargetSolution = initial_solution
-        self.__problem_solution_vns_support:ProblemSolutionVnsSupport = problem_solution_vns_support
+        if initial_solution is not None:
+            self.__current_solution:TargetSolution = initial_solution.copy()
+        else:
+            self.__current_solution:TargetSolution = None
+        if problem_solution_vns_support is not None:
+            self.__problem_solution_vns_support:ProblemSolutionVnsSupport = problem_solution_vns_support.copy()
+            self.__implemented_local_searches:Dict[str,function] = {
+                'local_search_best_improvement':  self.__problem_solution_vns_support.local_search_best_improvement,
+                'local_search_first_improvement':  self.__problem_solution_vns_support.local_search_first_improvement,
+            }
+            self.__local_search_type:str = local_search_type
+            if( self.__local_search_type not in self.__implemented_local_searches):
+                raise ValueError( 'Value \'{} \' for VNS local_search_type is not supported'.format(
+                        self.__local_search_type))
+            self.__ls_method = self.__implemented_local_searches[self.__local_search_type]
+            self.__shaking_method = self.__problem_solution_vns_support.shaking
+        else:
+            self.__problem_solution_vns_support:ProblemSolutionVnsSupport = None
+            self.__implemented_local_searches:Dict[str,function] = None
+            self.__local_search_type:str = None
+            self.__ls_method = None
+            self.__shaking_method = None
         self.__k_min:int = k_min
         self.__k_max:int = k_max
         self.__max_local_optima:int = max_local_optima
-        self.__implemented_local_searches:Dict[str,function] = {
-            'local_search_best_improvement':  self.__problem_solution_vns_support.local_search_best_improvement,
-            'local_search_first_improvement':  self.__problem_solution_vns_support.local_search_first_improvement,
-        }
-        self.__local_search_type:str = local_search_type
-        if( self.__local_search_type not in self.__implemented_local_searches):
-            raise ValueError( 'Value \'{} \' for VNS local_search_type is not supported'.format(
-                    self.__local_search_type))
-        self.__ls_method = self.__implemented_local_searches[self.__local_search_type]
-        self.__shaking_method = self.__problem_solution_vns_support.shaking
         # current value of the vns parameter k
         self.__k_current:int = None
         # values of the local optima foreach element calculated 

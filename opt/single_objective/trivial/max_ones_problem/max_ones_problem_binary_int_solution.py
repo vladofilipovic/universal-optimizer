@@ -25,11 +25,14 @@ from uo.utils.logger import logger
 
 class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
     
-    def __init__(self)->None:
+    def __init__(self, random_seed:int=None)->None:
         """
         Create new `MaxOnesProblemBinaryIntSolution` instance
+
+        :param int random_seed: random seed for initialization, default value `Null`
         """
-        super().__init__("MaxOnesProblemBinaryIntSolution", fitness_value=None, objective_value=None, is_feasible=False)
+        super().__init__("MaxOnesProblemBinaryIntSolution", random_seed, fitness_value=None, objective_value=None, 
+                is_feasible=False)
 
     def __copy__(self):
         """

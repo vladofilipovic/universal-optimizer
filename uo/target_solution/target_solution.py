@@ -30,11 +30,12 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
     evaluation_cache_cs:EvaluationCacheControlStatistics = EvaluationCacheControlStatistics()
     
     @abstractmethod
-    def __init__(self, name:str, fitness_value:float|list[float]|tuple[float], 
+    def __init__(self, name:str, random_seed:int, fitness_value:float|list[float]|tuple[float], 
             objective_value:float|list[float]|tuple[float], is_feasible:bool)->None:
         """
         Create new TargetSolution instance
         :param str name: name of the target solution
+        :param int random_seed: random seed for initialization
         :param fitness_value: fitness value of the target solution
         :type fitness_value: float|list[float]|tuple(float) 
         :param objective_value: objective value of the target solution
@@ -42,6 +43,10 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         :param bool is_feasible: if the target solution is feasible, or not
         """
         self.__name:str = name
+        if random_seed is not None and isinstance(random_seed, int) and random_seed != 0:
+            self.__random_seed:int = random_seed
+        else:
+            self.__random_seed:int = randrange(sys.maxsize)
         self.__fitness_value:float|list[float] = fitness_value
         self.__objective_value:float|list[float] = objective_value
         self.__is_feasible:bool = is_feasible
@@ -169,6 +174,15 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         :type value: R_co
         """
         self.__representation = value
+
+    @abstractmethod
+    def random_init(self, problem:TargetProblem)->None:
+        """
+        Random initialization of the solution
+
+        :param `TargetProblem` problem: problem which is solved by solution
+        """
+        raise NotImplementedError
 
     @abstractmethod
     def solution_code(self)->str:

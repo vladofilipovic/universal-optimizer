@@ -33,7 +33,10 @@ class Algorithm(metaclass=ABCMeta):
         self.__name:str = name
         self.__evaluations_max:int = evaluations_max
         self.__seconds_max:int = seconds_max
-        self.__target_problem:TargetProblem = target_problem
+        if isinstance(target_problem, TargetProblem):
+            self.__target_problem:TargetProblem = target_problem.copy()
+        else:
+            self.__target_problem:TargetProblem = target_problem
         self.__evaluation:int = 0
         self.__execution_started:datetime = None
         self.__execution_ended:datetime = None
