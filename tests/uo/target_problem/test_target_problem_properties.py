@@ -42,11 +42,11 @@ class TargetProblemVoid(TargetProblem):
         return ''
     
 
-class TestTargetProblem(unittest.TestCase):
+class TestTargetProblemProperties(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
-        print("setUpClass TestTargetProblem\n")
+        print("setUpClass TestTargetProblemProperties\n")
 
     def setUp(self):
         self.problem_name = 'some problem'
@@ -79,7 +79,7 @@ class TestTargetProblem(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        print("\ntearDownClass TestTargetProblem")
+        print("\ntearDownClass TestTargetProblemProperties")
     
 if __name__ == '__main__':
     unittest.main()

@@ -69,7 +69,7 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
         """
         mask:int = ~0
         mask <<= 32-problem.dimension
-        mask = ~mask 
+        mask = (mask % 0x100000000) >> (32-problem.dimension) 
         self.representation &= mask
 
     def random_init(self, problem:TargetProblem)->None:
@@ -94,7 +94,7 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
         :return: solution code
         :rtype: str 
         """
-        return bin(self.__representation)
+        return bin(self.representation)
 
     def calculate_objective_fitness_feasibility(self, problem:TargetProblem)->ObjectiveFitnessFeasibility:
         """

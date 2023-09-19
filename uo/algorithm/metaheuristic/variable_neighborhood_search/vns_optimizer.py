@@ -51,25 +51,33 @@ class VnsOptimizer(Metaheuristic):
         """
         super().__init__('vns', evaluations_max, seconds_max, random_seed, keep_all_solution_codes, target_problem)
         if initial_solution is not None:
-            self.__current_solution:TargetSolution = initial_solution.copy()
+            if isinstance(initial_solution, TargetSolution):
+                self.__current_solution:TargetSolution = initial_solution.copy()
+            else:
+                self.__current_solution:TargetSolution = initial_solution
         else:
             self.__current_solution:TargetSolution = None
+        self.__local_search_type:str = local_search_type
         if problem_solution_vns_support is not None:
-            self.__problem_solution_vns_support:ProblemSolutionVnsSupport = problem_solution_vns_support.copy()
-            self.__implemented_local_searches:Dict[str,function] = {
-                'local_search_best_improvement':  self.__problem_solution_vns_support.local_search_best_improvement,
-                'local_search_first_improvement':  self.__problem_solution_vns_support.local_search_first_improvement,
-            }
-            self.__local_search_type:str = local_search_type
-            if( self.__local_search_type not in self.__implemented_local_searches):
-                raise ValueError( 'Value \'{} \' for VNS local_search_type is not supported'.format(
-                        self.__local_search_type))
-            self.__ls_method = self.__implemented_local_searches[self.__local_search_type]
-            self.__shaking_method = self.__problem_solution_vns_support.shaking
+            if isinstance(problem_solution_vns_support, ProblemSolutionVnsSupport):
+                self.__problem_solution_vns_support:ProblemSolutionVnsSupport = problem_solution_vns_support.copy()
+                self.__implemented_local_searches:Dict[str,function] = {
+                    'local_search_best_improvement':  self.__problem_solution_vns_support.local_search_best_improvement,
+                    'local_search_first_improvement':  self.__problem_solution_vns_support.local_search_first_improvement,
+                }
+                if( self.__local_search_type not in self.__implemented_local_searches):
+                    raise ValueError( 'Value \'{} \' for VNS local_search_type is not supported'.format(
+                            self.__local_search_type))
+                self.__ls_method = self.__implemented_local_searches[self.__local_search_type]
+                self.__shaking_method = self.__problem_solution_vns_support.shaking
+            else:
+                self.__problem_solution_vns_support:ProblemSolutionVnsSupport = problem_solution_vns_support
+                self.__implemented_local_searches:Dict[str,function] = None
+                self.__ls_method = None
+                self.__shaking_method = None
         else:
             self.__problem_solution_vns_support:ProblemSolutionVnsSupport = None
             self.__implemented_local_searches:Dict[str,function] = None
-            self.__local_search_type:str = None
             self.__ls_method = None
             self.__shaking_method = None
         self.__k_min:int = k_min

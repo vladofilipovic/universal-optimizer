@@ -70,7 +70,7 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution):
         # make solution feasible 
         mask:int = ~0
         mask <<= 32-problem.dimension
-        mask = ~mask 
+        mask = (mask % 0x100000000) >> (32-problem.dimension) 
         self.__representation &= mask
 
     def solution_code(self)->str:

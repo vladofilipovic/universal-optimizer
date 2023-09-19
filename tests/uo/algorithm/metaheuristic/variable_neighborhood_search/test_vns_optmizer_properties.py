@@ -15,11 +15,11 @@ import unittest.mock as mock
 
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer 
 
-class TestVnsOptimizer(unittest.TestCase):
+class TestVnsOptimizerProperties(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
-        print("setUpClass TestVnsOptimizer\n")
+        print("setUpClass TestVnsOptimizerProperties\n")
 
     def setUp(self):
         self.evaluations_max = 42
@@ -84,7 +84,7 @@ class TestVnsOptimizer(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        print("\ntearDownClass TestVnsOptimizer")
+        print("\ntearDownClass TestVnsOptimizerProperties")
     
 if __name__ == '__main__':
     unittest.main()

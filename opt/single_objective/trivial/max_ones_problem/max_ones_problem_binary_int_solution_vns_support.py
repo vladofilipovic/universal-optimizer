@@ -52,7 +52,8 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
         """        
         return self.__copy__()
         
-    def shaking(self, k:int, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryIntSolution, optimizer:Algorithm)->bool:
+    def shaking(self, k:int, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryIntSolution, 
+            optimizer:Algorithm)->bool:
         """
         Random VNS shaking of k parts such that new solution code does not differ more than k from all solution codes 
         inside shakingPoints 
@@ -64,6 +65,8 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
         :return: if shaking is successful
         :rtype: bool
         """    
+        if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+            return False
         tries:int = 0
         limit:int = 10000
         while tries < limit:
@@ -99,6 +102,8 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
         :return: result of the local search procedure 
         :rtype: MaxOnesProblemBinaryIntSolution
         """
+        if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+            return solution
         if k<1:
             return solution
         # ls_bi for k==1
@@ -134,6 +139,8 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
         :return: result of the local search procedure 
         :rtype: MaxOnesProblemBinaryIntSolution
         """
+        if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+            return solution
         if k<1:
             return solution
         # ls_fi for k==1
