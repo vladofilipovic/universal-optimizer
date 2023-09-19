@@ -35,6 +35,12 @@ class TestEvaluationCacheControlStatisticsProperties(unittest.TestCase):
         self.eccs.is_caching = False
         self.assertFalse(self.eccs.is_caching)
 
+    def test_cache_hit_count_should_be_zero_after_construction(self):
+        self.assertEqual(self.eccs.cache_hit_count, 0)
+
+    def test_cache_request_count_should_be_zero_after_construction(self):
+        self.assertEqual(self.eccs.cache_request_count, 0)
+
     def tearDown(self):
         return
 

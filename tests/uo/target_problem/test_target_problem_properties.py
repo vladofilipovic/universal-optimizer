@@ -74,6 +74,10 @@ class TestTargetProblemProperties(unittest.TestCase):
     def test_file_path_should_be_equal_as_in_constructor(self):
         self.assertEqual(self.problem.file_path, self.file_path)
 
+    def test_dimension_should_be_equal_as_value_set_by_property_setter(self):
+        self.problem.dimension = 11
+        self.assertEqual(self.problem.dimension, 11)
+
     def tearDown(self):
         return
 

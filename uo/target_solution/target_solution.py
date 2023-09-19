@@ -220,13 +220,6 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         """
         raise NotImplementedError
 
-    @abstractmethod
-    def random_init(self)->None:
-        """
-        Random initialization of the target solution
-        """
-        raise NotImplementedError
-
     @staticmethod
     def calculate_objective_fitness_feasibility_try_consult_cache(target_solution, target_problem:TargetProblem):
         """
