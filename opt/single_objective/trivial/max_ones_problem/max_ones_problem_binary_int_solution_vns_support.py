@@ -1,7 +1,9 @@
 """ 
 .. _py_max_ones_problem_int_solution_vns_support:
 
-The :mod:`~opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution_vns_support` contains class :class:`~opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution_vns_support.MaxOnesProblemBinaryIntSolutionVnsSupport`, that represents solution of the :ref:`Problem_Max_Ones`, where `int` representation of the problem has been used.
+The :mod:`~opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution_vns_support` contains 
+class :class:`~opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution_vns_support.MaxOnesProblemBinaryIntSolutionVnsSupport`, 
+that represents solution of the :ref:`Problem_Max_Ones`, where `int` representation of the problem has been used.
 """
 
 import sys
@@ -73,7 +75,6 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
             positions:list[int] = []
             for i in range(0,k):
                 positions.append(choice(range(problem.dimension)))
-            new_representation:int = solution.representation
             mask:int = 0
             for p in positions:
                 mask |= 1 << p

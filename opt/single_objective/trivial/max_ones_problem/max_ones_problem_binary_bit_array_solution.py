@@ -29,8 +29,8 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution[BitArray]):
         """
         Create new `MaxOnesProblemBinaryBitArraySolution` instance
         """
-        super().__init__("MaxOnesProblemBinaryBitArraySolution", fitness_value=None, objective_value=None, is_feasible=False)
-        self.__representation:BitArray = BitArray()
+        super().__init__("MaxOnesProblemBinaryBitArraySolution", fitness_value=None, objective_value=None, 
+                is_feasible=False)
 
     def __copy__(self):
         """
@@ -58,25 +58,6 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution[BitArray]):
         :param `MaxOnesProblemBinaryBitArraySolution` destination: destination `MaxOnesProblemBinaryBitArraySolution`
         """
         destination = self.__copy__()
-
-    @property
-    def representation(self)->BitArray:
-        """
-        Property getter for the target solution representation
-
-        :return: the target solution instance representation
-        :rtype: `bitstring.BitArray`
-        """
-        return self.__representation
-
-    @representation.setter
-    def representation(self, value:BitArray)->None:
-        """
-        Property setter for representation of the solution
-
-        :param `BitArray` value: representation of the solution
-        """
-        self.__representation = value
 
     def random_init(self, problem:TargetProblem)->None:
         """
