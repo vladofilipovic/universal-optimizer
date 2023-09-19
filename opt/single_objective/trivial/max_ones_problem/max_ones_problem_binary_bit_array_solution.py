@@ -23,7 +23,7 @@ from uo.target_solution.target_solution import TargetSolution
 
 from uo.utils.logger import logger
 
-class MaxOnesProblemBinaryBitArraySolution(TargetSolution):
+class MaxOnesProblemBinaryBitArraySolution(TargetSolution[BitArray]):
     
     def __init__(self)->None:
         """

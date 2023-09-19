@@ -10,48 +10,59 @@ sys.path.append(directory.parent.parent)
 sys.path.append(directory.parent.parent.parent)
 
 from abc import ABCMeta, abstractmethod
+from typing import TypeVar, Generic
+from typing import Generic
 
 from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.target_solution import TargetSolution
+from uo.algorithm.algorithm import Algorithm
 
-class ProblemSolutionVnsSupport(metaclass=ABCMeta):
+R_co = TypeVar("R_co", covariant=True) 
+
+class ProblemSolutionVnsSupport(Generic[R_co], metaclass=ABCMeta):
     
     @abstractmethod
-    def randomize(self, k:int, problem:TargetProblem, solution:TargetSolution, solution_codes:list[str])->bool:
+    def shaking(self, k:int, problem:TargetProblem, solution:TargetSolution[R_co], optimizer:Algorithm,
+            solution_representations:list[R_co])->bool:
         """
         Random VNS shaking of several parts such that new solution code does not differ more than supplied from all 
         solution codes inside collection
 
         :param int k: int parameter for VNS
         :param `TargetProblem` problem: problem that is solved
-        :param `TargetSolution` solution: solution used for the problem that is solved
-        :param `list[str]` solution_codes: solution codes that should be randomized
-        :return: if randomization is successful
+        :param `TargetSolution[R_co]` solution: solution used for the problem that is solved
+        :param `Algorithm` optimizer: optimizer that is executed
+        :param `list[R_co]` solution_representations: solution representations that should be shaken
+        :return: if shaking is successful
         :rtype: bool
         """        
         raise NotImplementedError
 
     @abstractmethod
-    def local_search_best_improvement(self, k:int, problem:TargetProblem, solution:TargetSolution)->TargetSolution:
+    def local_search_best_improvement(self, k:int, problem:TargetProblem, solution:TargetSolution[R_co], 
+            optimizer:Algorithm)->TargetSolution:
         """
         Executes "best improvement" variant of the local search procedure 
         
         :param int k: int parameter for VNS
         :param `TargetProblem` problem: problem that is solved
         :param `TargetSolution` solution: solution used for the problem that is solved
+        :param `Algorithm` optimizer: optimizer that is executed
         :return: result of the local search procedure 
         :rtype: TargetSolution
         """
         raise NotImplementedError
 
     @abstractmethod
-    def local_search_first_improvement(self, k:int, problem:TargetProblem, solution:TargetSolution)->TargetSolution:
+    def local_search_first_improvement(self, k:int, problem:TargetProblem, solution:TargetSolution[R_co], 
+            optimizer:Algorithm)->TargetSolution:
         """
         Executes "first improvement" variant of the local search procedure 
         
         :param int k: int parameter for VNS
         :param `TargetProblem` problem: problem that is solved
         :param `TargetSolution` solution: solution used for the problem that is solved
+        :param `Algorithm` optimizer: optimizer that is executed
         :return: result of the local search procedure 
         :rtype: TargetSolution
         """

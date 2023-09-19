@@ -23,16 +23,14 @@ from uo.target_solution.target_solution import TargetSolution
 from uo.algorithm.metaheuristic.metaheuristic import Metaheuristic
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
 
-S_co = TypeVar("S_co", covariant=True, bound=TargetSolution) 
-
-class VnsOptimizer(Metaheuristic, Generic[S_co]):
+class VnsOptimizer(Metaheuristic):
     """
     Instance of the class :class:`~uo.algorithm.metaheuristic.variable_neighborhood_search.VnsOptimizer` encapsulate 
     :ref:`Algorithm_Variable_Neighborhood_Search` optimization algorithm.
     """
     
     def __init__(self, evaluations_max:int, seconds_max:int, random_seed:int, keep_all_solution_codes:bool, 
-            target_problem:TargetProblem, initial_solution:S_co, problem_solution_vns_support:ProblemSolutionVnsSupport, 
+            target_problem:TargetProblem, initial_solution:TargetSolution, problem_solution_vns_support:ProblemSolutionVnsSupport, 
             k_min:int, k_max:int, max_local_optima:int, local_search_type:str)->None:
         """
         Create new instance of class :class:`~uo.algorithm.metaheuristic.variable_neighborhood_search.VnsOptimizer`. 
@@ -43,7 +41,7 @@ class VnsOptimizer(Metaheuristic, Generic[S_co]):
         :param int random_seed: random seed for metaheuristic execution
         :param bool keep_all_solution_codes: if all solution codes will be remembered
         :param TargetProblem target_problem: problem to be solved
-        :param S_co initial_solution: initial solution of the problem that is optimized by VNS 
+        :param TargetSolution initial_solution: initial solution of the problem that is optimized by VNS 
         :param ProblemSolutionVnsSupport problem_solution_vns_support: placeholder for additional methods for VNS execution, which depend of precise solution type 
         :param int k_min: `k_min` parameter for VNS
         :param int k_max: `k_max` parameter for VNS
@@ -52,14 +50,26 @@ class VnsOptimizer(Metaheuristic, Generic[S_co]):
         :type local_search_type: str, possible values: 'local_search_best_improvement', 'local_search_first_improvement' 
         """
         super().__init__('vns', evaluations_max, seconds_max, random_seed, keep_all_solution_codes, target_problem)
-        self.__current_solution:S_co = initial_solution
+        self.__current_solution:TargetSolution = initial_solution
         self.__problem_solution_vns_support:ProblemSolutionVnsSupport = problem_solution_vns_support
         self.__k_min:int = k_min
         self.__k_max:int = k_max
         self.__max_local_optima:int = max_local_optima
-        self.__local_search_type:str = local_search_type        
+        self.__implemented_local_searches:Dict[str,function] = {
+            'local_search_best_improvement':  self.__problem_solution_vns_support.local_search_best_improvement,
+            'local_search_first_improvement':  self.__problem_solution_vns_support.local_search_first_improvement,
+        }
+        self.__local_search_type:str = local_search_type
+        if( self.__local_search_type not in self.__implemented_local_searches):
+            raise ValueError( 'Value \'{} \' for VNS local_search_type is not supported'.format(
+                    self.__local_search_type))
+        self.__ls_method = self.__implemented_local_searches[self.__local_search_type]
+        self.__shaking_method = self.__problem_solution_vns_support.shaking
+        # current value of the vns parameter k
         self.__k_current:int = None
-        self.__local_optima:Dict[str, float] = {}
+        # values of the local optima foreach element calculated 
+        self.__local_optima:Dict[int|BitArray, float] = {}
+        # number of shakings for each vns parameter
         self.__shaking_counts:Dict[int,int] = {}
 
     def __copy__(self):
@@ -82,12 +92,12 @@ class VnsOptimizer(Metaheuristic, Generic[S_co]):
         return self.__copy__()
 
     @property
-    def current_solution(self)->S_co:
+    def current_solution(self)->TargetSolution:
         """
         Property getter for the current solution used during VNS execution
 
         :return: instance of the :class:`uo.target_solution.TargetSolution` class subtype -- current solution of the problem 
-        :rtype: :class:`S_co`        
+        :rtype: :class:`TargetSolution`        
         """
         return self.__current_solution
 
@@ -98,12 +108,12 @@ class VnsOptimizer(Metaheuristic, Generic[S_co]):
         pass 
 
     @current_solution.setter
-    def current_solution(self, value:S_co)->None:
+    def current_solution(self, value:TargetSolution)->None:
         """
         Property setter for for the current solution used during VNS execution
 
         :param value: the current solution
-        :type value: :class:`S_co`
+        :type value: :class:`TargetSolution`
         """
         self.__current_solution = value
 
@@ -135,15 +145,6 @@ class VnsOptimizer(Metaheuristic, Generic[S_co]):
         self.current_solution.evaluate(self.target_problem);
         self.copy_to_best_solution(self.current_solution);
 
-    def __select_shaking_points__(self)->list[str]:
-        """
-        Selecting shaking point for the VNS algorithm
-        
-        :return:  list with solution codes that represents start of the shaking 
-        :rtype: list[str]
-        """
-        return [self.current_solution.solution_code()]
-
     def __add_local_optima__(self, current_solution:TargetSolution)->bool:
         """
         Add solution to the local optima structure 
@@ -153,72 +154,45 @@ class VnsOptimizer(Metaheuristic, Generic[S_co]):
         :return:  if adding is successful e.g. current_solution is new element in the structure
         :rtype: bool
         """       
-        if current_solution.solution_code() in self.__local_optima:
+        if current_solution.representation in self.__local_optima:
             return False
         if len(self.__local_optima) >= self.__max_local_optima:
             # removing random, just taking care not to remove the best ones
             while True:
                 code = random.choice(self.__local_optima.keys())
-                if code != self.best_solution.solution_code():
+                if code != self.best_solution.representation:
                     del self.__local_optima[code]
                     break
-        self.__local_optima[current_solution.solution_code()]=current_solution.fitness_value
+        self.__local_optima[current_solution.representation]=current_solution.fitness_value
         return True
-
-    def __shaking_ls__(self)->bool:
-        """
-        Shaking and local search phase of the VNS algorithm
-
-        :return: if result obtain by shaking is better than initial
-        :rtype: bool
-        """
-        #logger.debug('__shaking_ls__ - start')
-        #logger.debug('Current: {}'.format(self.current_solution))
-        #logger.debug('Best: {}'.format(self.current_solution))
-        shaking_points:list[str] = self.__select_shaking_points__()
-        if not self.__problem_solution_vns_support.randomize(self.__k_current, self.target_problem, 
-                self.current_solution, shaking_points):
-            return False
-        if self.__k_current in self.__shaking_counts:
-            self.__shaking_counts[self.__k_current] += 1
-        else:
-            self.__shaking_counts[self.__k_current] = 1
-        self.iteration += 1
-        self.evaluation += 1
-        self.current_solution.evaluate(self.target_problem)
-        if self.__local_search_type == 'local_search_best_improvement':
-            self.current_solution = self.__problem_solution_vns_support.local_search_best_improvement(self.__k_current,
-            self.target_problem, self.current_solution)
-        elif self.__local_search_type == 'local_search_first_improvement':
-            self.current_solution = self.local_search_first_improvement(self.current_solution)
-        else:
-            raise ValueError( 'Value \'{} \' for VNS local_search_type is not supported'.format(
-                    self.__local_search_type))
-        if self.keep_all_solution_codes:
-            self.all_solution_codes.add(self.current_solution)
-        new_is_better = self.is_first_solution_better(self.current_solution, self.best_solution)
-        if new_is_better is None:
-            if self.current_solution.solution_code() == self.best_solution.solution_code():
-                return False
-            else:
-                logger.debug("Same solution quality, generating random true with probability 0.5");
-                return random() < 0.5
-        #logger.debug('__shaking_ls__ - end')
-        #logger.debug('Current: {}'.format(self.current_solution))
-        #logger.debug('Best: {}'.format(self.current_solution))
-        return new_is_better
 
     def main_loop_iteration(self)->None:
         """
         One iteration within main loop of the VNS algorithm
         """
-        while self.__shaking_ls__():
-            self.copy_to_best_solution(self.current_solution)
-            self.__k_current = self.k_min
-        if self.__k_current < self.k_max:
-            self.__k_current += 1
-        else:
-            self.__k_current = self.k_min
+        if not self.__shaking_method(self.__k_current, self.target_problem, self.current_solution, self):
+            return False
+        self.iteration += 1
+        while self.__k_current <= self.__k_max:
+            self.evaluation += 1
+            self.current_solution.evaluate(self.target_problem)
+            self.current_solution = self.__ls_method(self.__k_current, self.target_problem, self.current_solution, self)
+            # update auxiliary structure that keeps all solution codes
+            if self.keep_all_solution_codes:
+                self.all_solution_codes.add(self.current_solution)
+            new_is_better = self.is_first_solution_better(self.current_solution, self.best_solution)
+            make_move:bool = new_is_better
+            if new_is_better is None:
+                if self.current_solution.representation == self.best_solution.representation:
+                    make_move = False
+                else:
+                    logger.debug("Same solution quality, generating random true with probability 0.5");
+                    make_move = random() < 0.5
+            if make_move:
+                self.copy_to_best_solution(self.current_solution)
+                self.__k_current = self.k_min
+            else:
+                self.__k_current += 1
 
     def string_representation(self, delimiter:str, indentation:int=0, indentation_symbol:str='',group_start:str ='{', 
         group_end:str ='}')->str:
@@ -265,7 +239,6 @@ class VnsOptimizer(Metaheuristic, Generic[S_co]):
             s += indentation_symbol  
         s += group_end 
         return s
-
 
     def __str__(self)->str:
         """

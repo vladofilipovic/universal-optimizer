@@ -10,6 +10,8 @@ sys.path.append(directory.parent)
 from copy import deepcopy
 from collections import namedtuple
 from abc import ABCMeta, abstractmethod
+from typing import TypeVar, Generic
+from typing import Generic
 
 from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.evaluation_cache_control_statistics import EvaluationCacheControlStatistics
@@ -18,7 +20,9 @@ ObjectiveFitnessFeasibility = namedtuple('ObjectiveFitnessFeasibility', ['object
                 'fitness_value', 
                 'is_feasible'])
 
-class TargetSolution(metaclass=ABCMeta):
+R_co = TypeVar("R_co", covariant=True) 
+
+class TargetSolution(Generic[R_co], metaclass=ABCMeta):
     
     """
     Cache that is used during evaluation for previously obtained solutions
@@ -26,18 +30,22 @@ class TargetSolution(metaclass=ABCMeta):
     evaluation_cache_cs:EvaluationCacheControlStatistics = EvaluationCacheControlStatistics()
     
     @abstractmethod
-    def __init__(self, name:str, fitness_value:float, objective_value:float, is_feasible:bool)->None:
+    def __init__(self, name:str, fitness_value:float|list[float]|tuple[float], 
+            objective_value:float|list[float]|tuple[float], is_feasible:bool)->None:
         """
         Create new TargetSolution instance
         :param str name: name of the target solution
-        :param float fitness_value: fitness value of the target solution
-        :param float objective_value: objective value of the target solution
+        :param fitness_value: fitness value of the target solution
+        :type fitness_value: float|list[float]|tuple(float) 
+        :param objective_value: objective value of the target solution
+        :type objective_value: float|list[float]|tuple(float) 
         :param bool is_feasible: if the target solution is feasible, or not
         """
-        self.__name = name
-        self.__fitness_value = fitness_value
-        self.__objective_value = objective_value
-        self.__is_feasible = is_feasible
+        self.__name:str = name
+        self.__fitness_value:float|list[float] = fitness_value
+        self.__objective_value:float|list[float] = objective_value
+        self.__is_feasible:bool = is_feasible
+        self.__representation:R_co = None
 
     @abstractmethod
     def __copy__(self):
@@ -142,6 +150,26 @@ class TargetSolution(metaclass=ABCMeta):
         """
         self.__is_feasible = value
 
+    @property
+    def representation(self)->R_co:
+        """
+        Property getter for representation of the target solution
+
+        :return: representation of the target solution instance 
+        :rtype: R_co
+        """
+        return self.__representation
+
+    @representation.setter
+    def representation(self, value:R_co)->None:
+        """
+        Property setter for representation of the target solution
+
+        :param value: value to be set for the representation of the solution
+        :type value: R_co
+        """
+        self.__representation = value
+
     @abstractmethod
     def solution_code(self)->str:
         """
@@ -153,12 +181,13 @@ class TargetSolution(metaclass=ABCMeta):
         raise NotImplementedError
 
     @abstractmethod
-    def native_representation_from_solution_code(self, representation_str:str):
+    def native_representation_from_solution_code(self, representation_str:str)->R_co:
         """
         Obtain native representation from solution code of the `Solution` instance
 
         :param str representation_str: solution's representation as string (e.g. solution code)
         :return: solution's native representation 
+        :rtype: R_co
         """
         raise NotImplementedError
 
@@ -193,7 +222,7 @@ class TargetSolution(metaclass=ABCMeta):
         eccs = target_solution.evaluation_cache_cs 
         eccs.increment_cache_request_count()
         if eccs.is_caching:
-            code = target_solution.solution_code()
+            code = target_solution.representation
             if code in eccs.cache:
                 eccs.increment_cache_hit_count()
                 return eccs.cache[code]
@@ -270,6 +299,9 @@ class TargetSolution(metaclass=ABCMeta):
         for i in range(0, indentation):
             s += indentation_symbol     
         s += 'solution_code=' + self.solution_code() + delimiter
+        for i in range(0, indentation):
+            s += indentation_symbol     
+        s += 'representation=' + self.representation + delimiter
         for i in range(0, indentation):
             s += indentation_symbol     
         s += 'evaluation_cache_cs(static)=' + self.evaluation_cache_cs.string_representation(

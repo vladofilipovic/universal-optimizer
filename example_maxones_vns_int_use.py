@@ -15,8 +15,8 @@ vns_support:MaxOnesProblemBinaryIntSolutionVnsSupport = MaxOnesProblemBinaryIntS
 optimizer:VnsOptimizer = VnsOptimizer(target_problem=problem_to_solve, 
         initial_solution=initial_solution, 
         problem_solution_vns_support=vns_support,
-        evaluations_max=0, 
-        seconds_max=3, 
+        evaluations_max=500, 
+        seconds_max=0, 
         random_seed=None, 
         keep_all_solution_codes=False, 
         k_min=1, 
@@ -26,7 +26,7 @@ optimizer:VnsOptimizer = VnsOptimizer(target_problem=problem_to_solve,
 optimizer.solution_code_distance_cache_cs.is_caching = False
 optimizer.output_control.write_to_output_file = False
 optimizer.optimize()
-print('Best solution: {}'.format(optimizer.best_solution.solution_code()))            
+print('Best solution: {}'.format(optimizer.best_solution.representation))            
 print('Best solution fitness: {}'.format(optimizer.best_solution.fitness_value))
 print('Number of iterations: {}'.format(optimizer.iteration))            
 

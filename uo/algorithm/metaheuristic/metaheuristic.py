@@ -13,6 +13,8 @@ from random import randrange
 from copy import deepcopy
 from datetime import datetime
 from abc import ABCMeta, abstractmethod
+from typing import TypeVar, Generic
+from typing import Generic
 
 from uo.utils.logger import logger
 from uo.algorithm.algorithm import Algorithm

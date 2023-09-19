@@ -138,10 +138,10 @@ def main():
             initial_solution = None
             vns_support = None
             if solution_type=='BitArray':
-                initial_solution = MaxOnesProblemBinaryBitArraySolution()
+                initial_solution = MaxOnesProblemBinaryBitArraySolution[BitArray]()
                 vns_support = MaxOnesProblemBinaryBitArraySolutionVnsSupport()
             elif solution_type=='int':
-                initial_solution = MaxOnesProblemBinaryIntSolution()
+                initial_solution = MaxOnesProblemBinaryIntSolution[int]()
                 vns_support = MaxOnesProblemBinaryIntSolutionVnsSupport()
             else:
                 raise ValueError("Invalid solution/representation type is chosen.")

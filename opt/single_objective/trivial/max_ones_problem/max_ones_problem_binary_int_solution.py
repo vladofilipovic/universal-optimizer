@@ -23,7 +23,7 @@ from uo.target_solution.target_solution import TargetSolution
 
 from uo.utils.logger import logger
 
-class MaxOnesProblemBinaryIntSolution(TargetSolution):
+class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
     
     def __init__(self)->None:
         """
@@ -58,25 +58,6 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution):
         """
         destination = self.__copy__()
 
-    @property
-    def representation(self)->int:
-        """
-        Property getter for the target solution representation
-
-        :return: the target solution instance representation
-        :rtype: int
-        """
-        return self.__representation
-
-    @representation.setter
-    def representation(self, value:int)->None:
-        """
-        Property setter for representation of the solution
-
-        :param int value: representation of the solution
-        """
-        self.__representation = value
-
     def __make_to_be_feasible_helper__(self, problem:TargetProblem):
         """
         Helper function that modifies representation to be feasible
@@ -86,7 +67,7 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution):
         mask:int = ~0
         mask <<= 32-problem.dimension
         mask = ~mask 
-        self.__representation &= mask
+        self.representation &= mask
 
     def random_init(self, problem:TargetProblem)->None:
         """

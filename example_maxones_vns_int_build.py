@@ -5,8 +5,8 @@ from random import choice
 from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.target_solution import ObjectiveFitnessFeasibility
 from uo.target_solution.target_solution import TargetSolution
+from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
 class MaxOnesProblem(TargetProblem):
 
@@ -91,7 +91,6 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution):
         best_fv:float = self.fitness_value
         for i in range(0, problem.dimension):
             mask:int = 1 << i
-            mask = ~mask
             self.representation ^= mask 
             new_fv = self.calculate_objective_fitness_feasibility(problem).fitness_value
             if new_fv > best_fv:
@@ -100,7 +99,6 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution):
             self.representation ^= mask 
         if best_ind is not None:
             mask:int = 1 << best_ind
-            mask = ~mask
             self.representation ^= mask
             self.evaluate(problem)
             if self.fitness_value != best_fv:
@@ -113,19 +111,17 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution):
         best_fv:float = self.fitness_value
         for i in range(0, problem.dimension):
             mask:int = 1 << i
-            mask = ~mask
             self.representation ^= mask 
             new_fv = self.calculate_objective_fitness_feasibility(problem).fitness_value
             if new_fv > best_fv:
                 best_ind = i
                 best_fv = new_fv
                 mask:int = 1 << best_ind
-                mask = ~mask
-                self.representation ^= mask
                 self.evaluate(problem)
                 if self.fitness_value != best_fv:
                     raise Exception('Fitness calculation within best_1_change_first function is not correct.')
                 return True
+            self.representation ^= mask
         return False
 
 
@@ -144,34 +140,59 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution):
 
 class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport):
 
-    def randomize(self, k:int, problem:TargetProblem, solution:TargetSolution, solution_codes:list[str])->bool:
+    def shaking(self, k:int, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryIntSolution, optimizer:Algorithm)->bool:
         tries:int = 0
         limit:int = 10000
         while tries < limit:
             positions:list[int] = []
             for i in range(0,k):
-                positions.append(choice(range(k)))
+                positions.append(choice(range(problem.dimension)))
             new_representation:int = solution.representation
             mask:int = 0
             for p in positions:
                 mask |= 1 << p
-            mask = ~mask
             solution.representation ^= mask
             all_ok:bool = True
-            for sc in solution_codes:
-                sc_representation = int(sc,2)
-                if sc_representation != 0:
-                    comp_result:int = (sc_representation ^ new_representation).bit_count()
-                    if comp_result > k:
-                        all_ok = False
+            if solution.representation.bit_count() > problem.dimension:
+                all_ok = False
             if all_ok:
                 break
         if tries < limit:
-            solution.representation = new_representation
+            optimizer.evaluation += 1
             solution.evaluate(problem)
             return True
         else:
             return False 
+            
+    def __change_bit_find_best_helper__(self, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryIntSolution, 
+            optimizer: Algorithm)->bool:
+        best_ind:int = None
+        best_fv:float = solution.fitness_value
+        for i in range(0, problem.dimension):
+            mask:int = 1 << i
+            solution.representation ^= mask 
+            optimizer.evaluation +=1 
+            new_fv = solution.calculate_objective_fitness_feasibility(problem).fitness_value
+            if new_fv > best_fv:
+                best_ind = i
+                best_fv = new_fv
+            solution.representation ^= mask 
+        if best_ind is not None:
+            mask:int = 1 << best_ind
+            solution.representation ^= mask
+            optimizer.evaluation += 1
+            solution.evaluate(problem)
+            if solution.fitness_value != best_fv:
+                raise Exception('Fitness calculation within best_1_change_full function is not correct.')
+            return True
+        return False
+
+    def local_search_best_improvement(self, k:int, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryIntSolution, 
+            optimizer: Algorithm)->MaxOnesProblemBinaryIntSolution:
+        while True:
+            if not self.__change_bit_find_best_helper__(problem, solution, optimizer):
+                break
+        return solution
 
 problem_to_solve:MaxOnesProblem = MaxOnesProblem(dim=10)
 initial_solution:MaxOnesProblemBinaryIntSolution = MaxOnesProblemBinaryIntSolution()
@@ -191,6 +212,6 @@ optimizer:VnsOptimizer = VnsOptimizer(target_problem=problem_to_solve,
 optimizer.solution_code_distance_cache_cs.is_caching = False
 optimizer.output_control.write_to_output_file = False
 optimizer.optimize()
-print('Best solution: {}'.format(optimizer.best_solution.solution_code()))            
+print('Best solution: {}'.format(optimizer.best_solution.representation))            
 print('Best solution fitness: {}'.format(optimizer.best_solution.fitness_value()))
 print('Number of iterations: {}'.format(optimizer.iteration))            
