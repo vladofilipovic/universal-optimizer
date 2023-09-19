@@ -13,7 +13,34 @@ sys.path.append(directory.parent.parent.parent.parent.parent.parent.parent.paren
 import unittest   
 import unittest.mock as mock
 
+from copy import deepcopy
+
 from uo.target_problem.target_problem import TargetProblem 
+
+class TargetProblemVoid(TargetProblem):
+    
+    def __init__(self, name:str, is_minimization:bool, file_path:str, dimension:int=None)->None:
+        super().__init__(name, is_minimization, file_path, dimension)
+
+    def __copy__(self):
+        pr = deepcopy(self)
+        return pr
+
+    def copy(self):
+        return self.__copy__()
+
+    def load_from_file(data_representation: str)->None:
+        return
+
+    def __str__(self)->str:
+        return ''
+
+    def __repr__(self)->str:
+        return ''
+
+    def __format__(self, spec:str)->str:
+        return ''
+    
 
 class TestTargetProblem(unittest.TestCase):
     
@@ -27,7 +54,7 @@ class TestTargetProblem(unittest.TestCase):
         self.dimension = 42
         self.file_path = 'some file path'
 
-        self.problem = TargetProblem(
+        self.problem = TargetProblemVoid(
                 name=self.problem_name,
                 is_minimization = self.to_minimize,
                 dimension=self.dimension,
