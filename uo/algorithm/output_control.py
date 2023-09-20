@@ -43,7 +43,7 @@ class OutputControl:
         :return: output file to which algorithm will write
         :rtype: File
         """
-        return self.__write_to_output
+        return self.__output_file
 
     @output_file.setter
     def output_file(self, value)->None:
