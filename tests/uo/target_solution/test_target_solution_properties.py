@@ -69,13 +69,7 @@ class TestTargetSolutionProperties(unittest.TestCase):
     def setUpClass(cls):
         print("setUpClass TestTargetSolutionProperties\n")
 
-    def setUp(self):
-        self.problem = mock.MagicMock()
-        type(self.problem).name = mock.PropertyMock(return_value='some_problem')
-        type(self.problem).is_minimization = mock.PropertyMock(return_value=True)
-        type(self.problem).file_path = mock.PropertyMock(return_value='some file path')
-        type(self.problem).dimension = mock.PropertyMock(return_value=42)
-        
+    def setUp(self):       
         self.solution_name = "void solution"
         self.random_seed = 42
         self.fitness_value = 42.0
@@ -140,6 +134,12 @@ class TestTargetSolutionProperties(unittest.TestCase):
         val:int = -7
         self.solution.representation =  val
         self.assertEqual(self.solution.representation, val)
+
+    def test_evaluation_cache_cs_hit_count_should_be_zero_after_constructor(self):
+        self.assertEqual(self.solution.evaluation_cache_cs.cache_hit_count, 0)
+
+    def test_evaluation_cache_cs__request_count_should_be_zero_after_constructor(self):
+        self.assertEqual(self.solution.evaluation_cache_cs.cache_request_count, 0)
 
     def tearDown(self):
         return

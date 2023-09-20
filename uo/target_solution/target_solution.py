@@ -31,7 +31,6 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
     """
     Cache that is used during evaluation for previously obtained solutions
     """
-    evaluation_cache_cs:EvaluationCacheControlStatistics = EvaluationCacheControlStatistics()
     
     @abstractmethod
     def __init__(self, name:str, random_seed:int, fitness_value:float|list[float]|tuple[float], 
@@ -55,6 +54,8 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         self.__objective_value:float|list[float] = objective_value
         self.__is_feasible:bool = is_feasible
         self.__representation:R_co = None
+        self.__evaluation_cache_cs:EvaluationCacheControlStatistics = EvaluationCacheControlStatistics()
+
 
     @abstractmethod
     def __copy__(self):
@@ -178,6 +179,16 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         :type value: R_co
         """
         self.__representation = value
+
+    @property
+    def evaluation_cache_cs(self)->EvaluationCacheControlStatistics:
+        """
+        Property getter for controlling and status of caching during evaluation
+
+        :return: Control and status of caching during evaluation
+        :rtype: EvaluationCacheControlStatistics
+        """
+        return self.__evaluation_cache_cs
 
     @abstractmethod
     def random_init(self, problem:TargetProblem)->None:
