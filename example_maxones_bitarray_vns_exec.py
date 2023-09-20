@@ -23,7 +23,7 @@ optimizer:VnsOptimizer = VnsOptimizer(target_problem=problem_to_solve,
         k_max=3, 
         max_local_optima=10, 
         local_search_type='local_search_best_improvement')
-optimizer.solution_code_distance_cache_cs.is_caching = False
+optimizer.representation_distance_cache_cs.is_caching = False
 optimizer.output_control.write_to_output_file = False
 optimizer.optimize()
 print('Best solution representation: {}'.format(optimizer.best_solution.representation.tobytes()))            

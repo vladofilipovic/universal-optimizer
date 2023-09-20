@@ -105,7 +105,7 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution[BitArray]):
         ret:BitArray = BitArray(bin=representation_str)
         return ret
 
-    def solution_code_distance(solution_code_1:str, solution_code_2:str)->float:
+    def representation_distance(solution_code_1:str, solution_code_2:str)->float:
         """
         Calculating distance between two solutions determined by its code
 
@@ -146,7 +146,7 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution[BitArray]):
         s += delimiter
         for i in range(0, indentation):
             s += indentation_symbol  
-        s += 'representation=' + str(self.__representation)
+        s += 'solution_code=' + str(self.solution_code())
         s += delimiter
         for i in range(0, indentation):
             s += indentation_symbol  

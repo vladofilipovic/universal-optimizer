@@ -22,6 +22,8 @@ from random import seed
 from datetime import datetime
 from collections import namedtuple
 
+from bitstring import BitArray
+
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
 from uo.utils.files import ensure_dir 
@@ -138,10 +140,10 @@ def main():
             initial_solution = None
             vns_support = None
             if solution_type=='BitArray':
-                initial_solution = MaxOnesProblemBinaryBitArraySolution[BitArray]()
+                initial_solution = MaxOnesProblemBinaryBitArraySolution()
                 vns_support = MaxOnesProblemBinaryBitArraySolutionVnsSupport()
             elif solution_type=='int':
-                initial_solution = MaxOnesProblemBinaryIntSolution[int]()
+                initial_solution = MaxOnesProblemBinaryIntSolution()
                 vns_support = MaxOnesProblemBinaryIntSolutionVnsSupport()
             else:
                 raise ValueError("Invalid solution/representation type is chosen.")
@@ -157,7 +159,7 @@ def main():
                     local_search_type=local_search_type)
             #logger.debug('Optimizer: {}'.format(optimizer))
             optimizer.optimize()
-            optimizer.solution_code_distance_cache_cs.is_caching = calculation_solution_distance_cache_is_used
+            optimizer.representation_distance_cache_cs.is_caching = calculation_solution_distance_cache_is_used
             optimizer.output_control.write_to_output_file = write_to_output_file
             optimizer.output_control.output_file = output_file
             logger.info('Best solution: {}'.format(optimizer.best_solution))            

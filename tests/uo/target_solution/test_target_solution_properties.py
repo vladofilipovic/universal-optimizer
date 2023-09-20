@@ -50,7 +50,7 @@ class TargetSolutionVoid(TargetSolution[int]):
     def calculate_objective_fitness_feasibility(self, problem:TargetProblem)->ObjectiveFitnessFeasibility:
         return ObjectiveFitnessFeasibility(42, 42, True)
 
-    def solution_code_distance(solution_code_1:str, solution_code_2:str)->float:
+    def representation_distance(solution_code_1:str, solution_code_2:str)->float:
         return 42.0
 
     def __str__(self)->str:
