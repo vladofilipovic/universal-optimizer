@@ -15,7 +15,8 @@ sys.path.append(directory.parent.parent.parent.parent.parent)
 from copy import deepcopy
 from random import choice
 from random import random
-from bitstring import BitArray
+
+from bitstring import Bits, BitArray, BitStream, pack
 
 from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.target_solution import ObjectiveFitnessFeasibility
@@ -25,12 +26,12 @@ from uo.utils.logger import logger
 
 class MaxOnesProblemBinaryBitArraySolution(TargetSolution[BitArray]):
     
-    def __init__(self)->None:
+    def __init__(self, random_seed:int=None)->None:
         """
         Create new `MaxOnesProblemBinaryBitArraySolution` instance
         """
-        super().__init__("MaxOnesProblemBinaryBitArraySolution", fitness_value=None, objective_value=None, 
-                is_feasible=False)
+        super().__init__("MaxOnesProblemBinaryBitArraySolution", random_seed, fitness_value=None, 
+                objective_value=None, is_feasible=False)
 
     def __copy__(self):
         """
@@ -40,6 +41,7 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution[BitArray]):
         :rtype: MaxOnesProblemBinaryBitArraySolution
         """
         sol = deepcopy(self)
+        sol.representation = deepcopy(self.representation)
         return sol
 
     def copy(self):
@@ -70,8 +72,6 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution[BitArray]):
         for i in range(problem.dimension):
             if random() > 0.5:
                 self.representation[i] = True
-            else:
-                self.representation[i] = False
 
     def solution_code(self)->str:
         """
@@ -80,13 +80,8 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution[BitArray]):
         :return: solution code
         :rtype: str 
         """
-        s:str = ''
-        for bit in self.representation:
-            if bit:
-                s += '1'
-            else:
-                s += '0'
-        return s
+        repr:BitArray = BitArray(self.representation.tobytes())
+        return str(repr)
 
     def calculate_objective_fitness_feasibility(self, problem:TargetProblem)->ObjectiveFitnessFeasibility:
         """
@@ -96,10 +91,7 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution[BitArray]):
         :return: objective value, fitness value and feasibility of the solution instance  
         :rtype: `ObjectiveFitnessFeasibility`
         """
-        ones_count = 0
-        for i in range(problem.dimension):
-            if self.representation[i]:
-                ones_count += 1
+        ones_count = self.representation.count(True)
         return ObjectiveFitnessFeasibility(ones_count, ones_count, True)
 
     def native_representation_from_solution_code(self, representation_str:str)->BitArray:

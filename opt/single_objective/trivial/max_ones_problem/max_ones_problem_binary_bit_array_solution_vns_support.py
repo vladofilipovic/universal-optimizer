@@ -19,7 +19,8 @@ sys.path.append(directory.parent.parent.parent.parent.parent)
 from copy import deepcopy
 from random import choice
 from random import random
-from bitstring import BitArray
+
+from bitstring import Bits, BitArray, BitStream, pack
 
 from uo.utils.logger import logger
 from uo.target_solution.target_solution import ObjectiveFitnessFeasibility
@@ -77,7 +78,10 @@ class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[B
             positions:list[int] = []
             for i in range(0,k):
                 positions.append(choice(range(problem.dimension)))
-            solution.representation.invert(positions)
+            repr:BitArray = BitArray(solution.representation.tobytes())
+            for pos in positions:
+                repr[pos] = not repr[pos]
+            solution.representation = repr
             all_ok:bool = True
             if solution.representation.count(value=1) > problem.dimension:
                 all_ok = False

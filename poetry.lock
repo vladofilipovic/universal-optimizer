@@ -135,13 +135,13 @@ files = [
 
 [[package]]
 name = "bitstring"
-version = "4.1.1"
+version = "4.1.2"
 description = "Simple construction, analysis and modification of binary data."
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "bitstring-4.1.1-py3-none-any.whl", hash = "sha256:13a07c63a2901a5572638d4917a2e7ea539df6bfe49aeb1c56949117fda943fa"},
-    {file = "bitstring-4.1.1.tar.gz", hash = "sha256:a9c97fdf9fe38f27ea0ac2b4cf2a3f5bce5ccc23b863082582b9f48b22274528"},
+    {file = "bitstring-4.1.2-py3-none-any.whl", hash = "sha256:bc0dbdb282099d5c6fbf995cd7261449ddeb7bbf042996e503471a35eb2efaa3"},
+    {file = "bitstring-4.1.2.tar.gz", hash = "sha256:c22283d60fd3e1a8f386ccd4f1915d7fe13481d6349db39711421e24d4a9cccf"},
 ]
 
 [package.dependencies]

@@ -201,7 +201,7 @@ class VnsOptimizer(Metaheuristic):
             new_is_better = self.is_first_solution_better(self.current_solution, self.best_solution)
             make_move:bool = new_is_better
             if new_is_better is None:
-                if self.current_solution.representation == self.best_solution.representation:
+                if self.current_solution.representation.tobytes() == self.best_solution.representation.tobytes():
                     make_move = False
                 else:
                     logger.debug("Same solution quality, generating random true with probability 0.5");

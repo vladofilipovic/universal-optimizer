@@ -13,6 +13,8 @@
         "quickstart",
         "rtype",
         "scdc",
+        "tobitarray",
+        "tobytes",
         "toctree",
         "viewcode"
     ],

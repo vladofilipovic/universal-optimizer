@@ -193,7 +193,7 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
                 0 or self.elapsed_seconds() < self.seconds_max):
             self.main_loop_iteration()
             logger.debug('Iteration:{}, Evaluations:{}, Bit code:{}'.format(self.iteration, self.evaluation,
-                str(self.best_solution.representation)))
+                str(self.best_solution.representation.tobytes())))
 
     def optimize(self)->None:
         """
