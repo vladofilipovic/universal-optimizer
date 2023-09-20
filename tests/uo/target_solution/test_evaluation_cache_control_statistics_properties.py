@@ -26,7 +26,7 @@ class TestEvaluationCacheControlStatisticsProperties(unittest.TestCase):
     def setUp(self):
         self.eccs = EvaluationCacheControlStatistics()
         return
-    
+
     def test_is_caching_should_be_true_as_it_is_set(self):
         self.eccs.is_caching = True
         self.assertTrue(self.eccs.is_caching)
