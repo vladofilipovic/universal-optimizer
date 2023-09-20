@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>uo.algorithm.metaheuristic.variable_neighborhood_search package &mdash; Optimization Algorithms Library 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=01f34227"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="uo.target_problem package" href="uo.target_problem.html" />
+    <link rel="prev" title="uo.algorithm.metaheuristic.genetic_algorithm package" href="uo.algorithm.metaheuristic.genetic_algorithm.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Optimization Algorithms Library
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Tutorials and How-To Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how_to_guides.html">How-to Guides</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">In-depth Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="implemented_algorithms.html">Implemented algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="problems_to_be_solved.html">Problems to be solved</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Program code</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Library</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="uo.html">uo package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="uo.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="uo.algorithm.html">uo.algorithm package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.target_problem.html">uo.target_problem package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.target_solution.html">uo.target_solution package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.utils.html">uo.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="uo.html#module-uo">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html#optimization">Optimization</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Changelog and Contribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribution.html">How to Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribution.html#contributors">Contributors</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Optimization Algorithms Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">Library</a></li>
+          <li class="breadcrumb-item"><a href="uo.html">uo package</a></li>
+          <li class="breadcrumb-item"><a href="uo.algorithm.html">uo.algorithm package</a></li>
+          <li class="breadcrumb-item"><a href="uo.algorithm.metaheuristic.html">uo.algorithm.metaheuristic package</a></li>
+      <li class="breadcrumb-item active">uo.algorithm.metaheuristic.variable_neighborhood_search package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/uo.algorithm.metaheuristic.variable_neighborhood_search.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="uo-algorithm-metaheuristic-variable-neighborhood-search-package">
+<h1>uo.algorithm.metaheuristic.variable_neighborhood_search package<a class="headerlink" href="#uo-algorithm-metaheuristic-variable-neighborhood-search-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support">
+<span id="uo-algorithm-metaheuristic-variable-neighborhood-search-problem-solution-vns-support-module"></span><h2>uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support module<a class="headerlink" href="#module-uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support" title="Link to this heading"></a></h2>
+<p>The <a class="reference internal" href="#module-uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support" title="uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support"><code class="xref py py-mod docutils literal notranslate"><span class="pre">problem_solution_vns_support</span></code></a> module describes the class <a class="reference internal" href="#uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support.ProblemSolutionVnsSupport" title="uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support.ProblemSolutionVnsSupport"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProblemSolutionVnsSupport</span></code></a>.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support.ProblemSolutionVnsSupport">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support.</span></span><span class="sig-name descname"><span class="pre">ProblemSolutionVnsSupport</span></span><a class="headerlink" href="#uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support.ProblemSolutionVnsSupport" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generic" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">R_co</span></code>]</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support.ProblemSolutionVnsSupport.local_search_best_improvement">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">local_search_best_improvement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">problem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.target_problem.html#uo.target_problem.target_problem.TargetProblem" title="uo.target_problem.target_problem.TargetProblem"><span class="pre">TargetProblem</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">solution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution" title="uo.target_solution.target_solution.TargetSolution"><span class="pre">TargetSolution</span></a><span class="p"><span class="pre">[</span></span><span class="pre">R_co</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimizer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.algorithm.html#uo.algorithm.algorithm.Algorithm" title="uo.algorithm.algorithm.Algorithm"><span class="pre">Algorithm</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution" title="uo.target_solution.target_solution.TargetSolution"><span class="pre">TargetSolution</span></a></span></span><a class="headerlink" href="#uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support.ProblemSolutionVnsSupport.local_search_best_improvement" title="Link to this definition"></a></dt>
+<dd><p>Executes “best improvement” variant of the local search procedure</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – int parameter for VNS</p></li>
+<li><p><strong>problem</strong> (<a class="reference internal" href="uo.target_problem.html#uo.target_problem.target_problem.TargetProblem" title="uo.target_problem.target_problem.TargetProblem"><em>TargetProblem</em></a>) – problem that is solved</p></li>
+<li><p><strong>solution</strong> (<a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution" title="uo.target_solution.target_solution.TargetSolution"><em>TargetSolution</em></a>) – solution used for the problem that is solved</p></li>
+<li><p><strong>optimizer</strong> (<a class="reference internal" href="uo.algorithm.html#uo.algorithm.algorithm.Algorithm" title="uo.algorithm.algorithm.Algorithm"><em>Algorithm</em></a>) – optimizer that is executed</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>result of the local search procedure</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution" title="uo.target_solution.target_solution.TargetSolution">TargetSolution</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support.ProblemSolutionVnsSupport.local_search_first_improvement">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">local_search_first_improvement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">problem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.target_problem.html#uo.target_problem.target_problem.TargetProblem" title="uo.target_problem.target_problem.TargetProblem"><span class="pre">TargetProblem</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">solution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution" title="uo.target_solution.target_solution.TargetSolution"><span class="pre">TargetSolution</span></a><span class="p"><span class="pre">[</span></span><span class="pre">R_co</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimizer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.algorithm.html#uo.algorithm.algorithm.Algorithm" title="uo.algorithm.algorithm.Algorithm"><span class="pre">Algorithm</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution" title="uo.target_solution.target_solution.TargetSolution"><span class="pre">TargetSolution</span></a></span></span><a class="headerlink" href="#uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support.ProblemSolutionVnsSupport.local_search_first_improvement" title="Link to this definition"></a></dt>
+<dd><p>Executes “first improvement” variant of the local search procedure</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – int parameter for VNS</p></li>
+<li><p><strong>problem</strong> (<a class="reference internal" href="uo.target_problem.html#uo.target_problem.target_problem.TargetProblem" title="uo.target_problem.target_problem.TargetProblem"><em>TargetProblem</em></a>) – problem that is solved</p></li>
+<li><p><strong>solution</strong> (<a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution" title="uo.target_solution.target_solution.TargetSolution"><em>TargetSolution</em></a>) – solution used for the problem that is solved</p></li>
+<li><p><strong>optimizer</strong> (<a class="reference internal" href="uo.algorithm.html#uo.algorithm.algorithm.Algorithm" title="uo.algorithm.algorithm.Algorithm"><em>Algorithm</em></a>) – optimizer that is executed</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>result of the local search procedure</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution" title="uo.target_solution.target_solution.TargetSolution">TargetSolution</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support.ProblemSolutionVnsSupport.shaking">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shaking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">problem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.target_problem.html#uo.target_problem.target_problem.TargetProblem" title="uo.target_problem.target_problem.TargetProblem"><span class="pre">TargetProblem</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">solution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution" title="uo.target_solution.target_solution.TargetSolution"><span class="pre">TargetSolution</span></a><span class="p"><span class="pre">[</span></span><span class="pre">R_co</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimizer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.algorithm.html#uo.algorithm.algorithm.Algorithm" title="uo.algorithm.algorithm.Algorithm"><span class="pre">Algorithm</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">solution_representations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><span class="pre">R_co</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support.ProblemSolutionVnsSupport.shaking" title="Link to this definition"></a></dt>
+<dd><p>Random VNS shaking of several parts such that new solution code does not differ more than supplied from all
+solution codes inside collection</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – int parameter for VNS</p></li>
+<li><p><strong>problem</strong> (<a class="reference internal" href="uo.target_problem.html#uo.target_problem.target_problem.TargetProblem" title="uo.target_problem.target_problem.TargetProblem"><em>TargetProblem</em></a>) – problem that is solved</p></li>
+<li><p><strong>solution</strong> (<a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution" title="uo.target_solution.target_solution.TargetSolution"><em>TargetSolution</em></a><em>[</em><em>R_co</em><em>]</em>) – solution used for the problem that is solved</p></li>
+<li><p><strong>optimizer</strong> (<a class="reference internal" href="uo.algorithm.html#uo.algorithm.algorithm.Algorithm" title="uo.algorithm.algorithm.Algorithm"><em>Algorithm</em></a>) – optimizer that is executed</p></li>
+<li><p><strong>solution_representations</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><em>R_co</em><em>]</em>) – solution representations that should be shaken</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>if shaking is successful</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer">
+<span id="uo-algorithm-metaheuristic-variable-neighborhood-search-vns-optimizer-module"></span><h2>uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer module<a class="headerlink" href="#module-uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer" title="Link to this heading"></a></h2>
+<p id="py-vns-optimizer">The <a class="reference internal" href="#module-uo.algorithm.metaheuristic.variable_neighborhood_search" title="uo.algorithm.metaheuristic.variable_neighborhood_search"><code class="xref py py-mod docutils literal notranslate"><span class="pre">variable_neighborhood_search</span></code></a> contains class <code class="xref py py-class docutils literal notranslate"><span class="pre">VnsOptimizer</span></code>, that represents implements algorithm <a class="reference internal" href="implemented_algorithms_vns.html#algorithm-variable-neighborhood-search"><span class="std std-ref">VNS</span></a>.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer.VnsOptimizer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer.</span></span><span class="sig-name descname"><span class="pre">VnsOptimizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evaluations_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">seconds_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_all_solution_codes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_problem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.target_problem.html#uo.target_problem.target_problem.TargetProblem" title="uo.target_problem.target_problem.TargetProblem"><span class="pre">TargetProblem</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_solution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution" title="uo.target_solution.target_solution.TargetSolution"><span class="pre">TargetSolution</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">problem_solution_vns_support</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support.ProblemSolutionVnsSupport" title="uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support.ProblemSolutionVnsSupport"><span class="pre">ProblemSolutionVnsSupport</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_local_optima</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_search_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer.VnsOptimizer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="uo.algorithm.metaheuristic.html#uo.algorithm.metaheuristic.metaheuristic.Metaheuristic" title="uo.algorithm.metaheuristic.metaheuristic.Metaheuristic"><code class="xref py py-class docutils literal notranslate"><span class="pre">Metaheuristic</span></code></a></p>
+<p>Instance of the class <code class="xref py py-class docutils literal notranslate"><span class="pre">VnsOptimizer</span></code> encapsulate
+<a class="reference internal" href="implemented_algorithms_vns.html#algorithm-variable-neighborhood-search"><span class="std std-ref">Variable Neighborhood Search</span></a> optimization algorithm.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer.VnsOptimizer.copy">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer.VnsOptimizer.copy" title="Link to this definition"></a></dt>
+<dd><p>Copy the current instance of class <code class="xref py py-class docutils literal notranslate"><span class="pre">VnsOptimizer</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>new instance of class <code class="xref py py-class docutils literal notranslate"><span class="pre">VnsOptimizer</span></code> with the same properties</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">uo.algorithm.metaheuristic.variable_neighborhood_search.VnsOptimizer</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer.VnsOptimizer.current_solution">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">current_solution</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution" title="uo.target_solution.target_solution.TargetSolution"><span class="pre">TargetSolution</span></a></em><a class="headerlink" href="#uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer.VnsOptimizer.current_solution" title="Link to this definition"></a></dt>
+<dd><p>Property getter for the current solution used during VNS execution</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>instance of the <code class="xref py py-class docutils literal notranslate"><span class="pre">uo.target_solution.TargetSolution</span></code> class subtype – current solution of the problem</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">TargetSolution</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer.VnsOptimizer.init">
+<span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer.VnsOptimizer.init" title="Link to this definition"></a></dt>
+<dd><p>Initialization of the VNS algorithm</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer.VnsOptimizer.k_max">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">k_max</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></em><a class="headerlink" href="#uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer.VnsOptimizer.k_max" title="Link to this definition"></a></dt>
+<dd><p>Property getter for the <cite>k_max</cite> parameter for VNS</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>k_max parameter for VNS</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer.VnsOptimizer.k_min">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">k_min</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></em><a class="headerlink" href="#uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer.VnsOptimizer.k_min" title="Link to this definition"></a></dt>
+<dd><p>Property getter for the <cite>k_min</cite> parameter for VNS</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><cite>k_min</cite> parameter for VNS</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer.VnsOptimizer.main_loop_iteration">
+<span class="sig-name descname"><span class="pre">main_loop_iteration</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer.VnsOptimizer.main_loop_iteration" title="Link to this definition"></a></dt>
+<dd><p>One iteration within main loop of the VNS algorithm</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer.VnsOptimizer.string_representation">
+<span class="sig-name descname"><span class="pre">string_representation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">indentation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indentation_symbol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'{'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'}'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer.VnsOptimizer.string_representation" title="Link to this definition"></a></dt>
+<dd><p>String representation of the <cite>VnsOptimizer</cite> instance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – delimiter between fields</p></li>
+<li><p><strong>indentation</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em><em>, </em><em>default value 0</em>) – level of indentation</p></li>
+<li><p><strong>indentation_symbol</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em><em>, </em><em>default value ''</em>) – indentation symbol</p></li>
+<li><p><strong>group_start</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em><em>, </em><em>default value '{'</em>) – group start string</p></li>
+<li><p><strong>group_end</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em><em>, </em><em>default value '}'</em>) – group end string</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>string representation of instance that controls output</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer.VnsOptimizer.write_to_output">
+<span class="sig-name descname"><span class="pre">write_to_output</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer.VnsOptimizer.write_to_output" title="Link to this definition"></a></dt>
+<dd><p>Write data to output file, if allowed</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer.random">
+<span class="sig-prename descclassname"><span class="pre">uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer.</span></span><span class="sig-name descname"><span class="pre">random</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">x</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">interval</span> <span class="pre">[0,</span> <span class="pre">1).</span></span></span><a class="headerlink" href="#uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer.random" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-uo.algorithm.metaheuristic.variable_neighborhood_search">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-uo.algorithm.metaheuristic.variable_neighborhood_search" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="uo.algorithm.metaheuristic.genetic_algorithm.html" class="btn btn-neutral float-left" title="uo.algorithm.metaheuristic.genetic_algorithm package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="uo.target_problem.html" class="btn btn-neutral float-right" title="uo.target_problem package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Vladimir Filipovic.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

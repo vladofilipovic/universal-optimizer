@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>uo.algorithm.metaheuristic package &mdash; Optimization Algorithms Library 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=01f34227"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="uo.algorithm.metaheuristic.electro_magnetism_like_metaheusristic package" href="uo.algorithm.metaheuristic.electro_magnetism_like_metaheusristic.html" />
+    <link rel="prev" title="uo.algorithm.exact package" href="uo.algorithm.exact.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Optimization Algorithms Library
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Tutorials and How-To Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how_to_guides.html">How-to Guides</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">In-depth Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="implemented_algorithms.html">Implemented algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="problems_to_be_solved.html">Problems to be solved</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Program code</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Library</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="uo.html">uo package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="uo.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="uo.algorithm.html">uo.algorithm package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.target_problem.html">uo.target_problem package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.target_solution.html">uo.target_solution package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.utils.html">uo.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="uo.html#module-uo">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html#optimization">Optimization</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Changelog and Contribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribution.html">How to Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribution.html#contributors">Contributors</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Optimization Algorithms Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">Library</a></li>
+          <li class="breadcrumb-item"><a href="uo.html">uo package</a></li>
+          <li class="breadcrumb-item"><a href="uo.algorithm.html">uo.algorithm package</a></li>
+      <li class="breadcrumb-item active">uo.algorithm.metaheuristic package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/uo.algorithm.metaheuristic.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="uo-algorithm-metaheuristic-package">
+<h1>uo.algorithm.metaheuristic package<a class="headerlink" href="#uo-algorithm-metaheuristic-package" title="Link to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="uo.algorithm.metaheuristic.electro_magnetism_like_metaheusristic.html">uo.algorithm.metaheuristic.electro_magnetism_like_metaheusristic package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="uo.algorithm.metaheuristic.electro_magnetism_like_metaheusristic.html#module-uo.algorithm.metaheuristic.electro_magnetism_like_metaheusristic">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="uo.algorithm.metaheuristic.genetic_algorithm.html">uo.algorithm.metaheuristic.genetic_algorithm package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="uo.algorithm.metaheuristic.genetic_algorithm.html#module-uo.algorithm.metaheuristic.genetic_algorithm">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="uo.algorithm.metaheuristic.variable_neighborhood_search.html">uo.algorithm.metaheuristic.variable_neighborhood_search package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="uo.algorithm.metaheuristic.variable_neighborhood_search.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uo.algorithm.metaheuristic.variable_neighborhood_search.html#module-uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support">uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="uo.algorithm.metaheuristic.variable_neighborhood_search.html#uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support.ProblemSolutionVnsSupport"><code class="docutils literal notranslate"><span class="pre">ProblemSolutionVnsSupport</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="uo.algorithm.metaheuristic.variable_neighborhood_search.html#uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support.ProblemSolutionVnsSupport.local_search_best_improvement"><code class="docutils literal notranslate"><span class="pre">ProblemSolutionVnsSupport.local_search_best_improvement()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.algorithm.metaheuristic.variable_neighborhood_search.html#uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support.ProblemSolutionVnsSupport.local_search_first_improvement"><code class="docutils literal notranslate"><span class="pre">ProblemSolutionVnsSupport.local_search_first_improvement()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.algorithm.metaheuristic.variable_neighborhood_search.html#uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support.ProblemSolutionVnsSupport.shaking"><code class="docutils literal notranslate"><span class="pre">ProblemSolutionVnsSupport.shaking()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="uo.algorithm.metaheuristic.variable_neighborhood_search.html#module-uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer">uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="uo.algorithm.metaheuristic.variable_neighborhood_search.html#uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer.VnsOptimizer"><code class="docutils literal notranslate"><span class="pre">VnsOptimizer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="uo.algorithm.metaheuristic.variable_neighborhood_search.html#uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer.VnsOptimizer.copy"><code class="docutils literal notranslate"><span class="pre">VnsOptimizer.copy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.algorithm.metaheuristic.variable_neighborhood_search.html#uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer.VnsOptimizer.current_solution"><code class="docutils literal notranslate"><span class="pre">VnsOptimizer.current_solution</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.algorithm.metaheuristic.variable_neighborhood_search.html#uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer.VnsOptimizer.init"><code class="docutils literal notranslate"><span class="pre">VnsOptimizer.init()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.algorithm.metaheuristic.variable_neighborhood_search.html#uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer.VnsOptimizer.k_max"><code class="docutils literal notranslate"><span class="pre">VnsOptimizer.k_max</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.algorithm.metaheuristic.variable_neighborhood_search.html#uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer.VnsOptimizer.k_min"><code class="docutils literal notranslate"><span class="pre">VnsOptimizer.k_min</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.algorithm.metaheuristic.variable_neighborhood_search.html#uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer.VnsOptimizer.main_loop_iteration"><code class="docutils literal notranslate"><span class="pre">VnsOptimizer.main_loop_iteration()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.algorithm.metaheuristic.variable_neighborhood_search.html#uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer.VnsOptimizer.string_representation"><code class="docutils literal notranslate"><span class="pre">VnsOptimizer.string_representation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.algorithm.metaheuristic.variable_neighborhood_search.html#uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer.VnsOptimizer.write_to_output"><code class="docutils literal notranslate"><span class="pre">VnsOptimizer.write_to_output()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="uo.algorithm.metaheuristic.variable_neighborhood_search.html#uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer.random"><code class="docutils literal notranslate"><span class="pre">random()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="uo.algorithm.metaheuristic.variable_neighborhood_search.html#module-uo.algorithm.metaheuristic.variable_neighborhood_search">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-uo.algorithm.metaheuristic.metaheuristic">
+<span id="uo-algorithm-metaheuristic-metaheuristic-module"></span><h2>uo.algorithm.metaheuristic.metaheuristic module<a class="headerlink" href="#module-uo.algorithm.metaheuristic.metaheuristic" title="Link to this heading"></a></h2>
+<p>The <a class="reference internal" href="#module-uo.algorithm.metaheuristic.metaheuristic" title="uo.algorithm.metaheuristic.metaheuristic"><code class="xref py py-mod docutils literal notranslate"><span class="pre">metaheuristic</span></code></a> module describes the class <a class="reference internal" href="#uo.algorithm.metaheuristic.metaheuristic.Metaheuristic" title="uo.algorithm.metaheuristic.metaheuristic.Metaheuristic"><code class="xref py py-class docutils literal notranslate"><span class="pre">Metaheuristic</span></code></a>.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.metaheuristic.Metaheuristic">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">uo.algorithm.metaheuristic.metaheuristic.</span></span><span class="sig-name descname"><span class="pre">Metaheuristic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">evaluations_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">seconds_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_all_solution_codes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_problem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.target_problem.html#uo.target_problem.target_problem.TargetProblem" title="uo.target_problem.target_problem.TargetProblem"><span class="pre">TargetProblem</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#uo.algorithm.metaheuristic.metaheuristic.Metaheuristic" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="uo.algorithm.html#uo.algorithm.algorithm.Algorithm" title="uo.algorithm.algorithm.Algorithm"><code class="xref py py-class docutils literal notranslate"><span class="pre">Algorithm</span></code></a></p>
+<p>This class represent metaheuristic</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.metaheuristic.Metaheuristic.all_solution_codes">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">all_solution_codes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.11)"><span class="pre">set</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#uo.algorithm.metaheuristic.metaheuristic.Metaheuristic.all_solution_codes" title="Link to this definition"></a></dt>
+<dd><p>Property getter for the all solution codes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>all solution codes</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.11)">set</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.metaheuristic.Metaheuristic.best_solution">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">best_solution</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution" title="uo.target_solution.target_solution.TargetSolution"><span class="pre">TargetSolution</span></a></em><a class="headerlink" href="#uo.algorithm.metaheuristic.metaheuristic.Metaheuristic.best_solution" title="Link to this definition"></a></dt>
+<dd><p>Property getter for the best solution obtained during metaheuristic execution</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>best solution so far</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution" title="uo.target_solution.target_solution.TargetSolution">TargetSolution</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.metaheuristic.Metaheuristic.calculate_solution_code_distance_try_consult_cache">
+<span class="sig-name descname"><span class="pre">calculate_solution_code_distance_try_consult_cache</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">code_y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#uo.algorithm.metaheuristic.metaheuristic.Metaheuristic.calculate_solution_code_distance_try_consult_cache" title="Link to this definition"></a></dt>
+<dd><p>Calculate distance between two solution codes with optional cache consultation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>code_x</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – first solution code</p></li>
+<li><p><strong>code_y</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – second solution code</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>distance between solution codes</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.metaheuristic.Metaheuristic.copy">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.algorithm.metaheuristic.metaheuristic.Metaheuristic.copy" title="Link to this definition"></a></dt>
+<dd><p>Copy the current metaheuristic</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>new <cite>Metaheuristic</cite> instance with the same properties</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><cite>Metaheuristic</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.metaheuristic.Metaheuristic.copy_to_best_solution">
+<span class="sig-name descname"><span class="pre">copy_to_best_solution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">solution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution" title="uo.target_solution.target_solution.TargetSolution"><span class="pre">TargetSolution</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#uo.algorithm.metaheuristic.metaheuristic.Metaheuristic.copy_to_best_solution" title="Link to this definition"></a></dt>
+<dd><p>Copies function argument to become the best solution within metaheuristic instance and update info about time
+and iteration when the best solution is updated</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>solution</strong> (<a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution" title="uo.target_solution.target_solution.TargetSolution"><em>TargetSolution</em></a>) – solution that is source for coping operation</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.metaheuristic.Metaheuristic.elapsed_seconds">
+<span class="sig-name descname"><span class="pre">elapsed_seconds</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#uo.algorithm.metaheuristic.metaheuristic.Metaheuristic.elapsed_seconds" title="Link to this definition"></a></dt>
+<dd><p>Calculate time elapsed during execution of the metaheuristic algorithm</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>elapsed time (in seconds)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.metaheuristic.Metaheuristic.init">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#uo.algorithm.metaheuristic.metaheuristic.Metaheuristic.init" title="Link to this definition"></a></dt>
+<dd><p>Initialization of the metaheuristic algorithm</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.metaheuristic.Metaheuristic.is_first_solution_better">
+<span class="sig-name descname"><span class="pre">is_first_solution_better</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sol1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution" title="uo.target_solution.target_solution.TargetSolution"><span class="pre">TargetSolution</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">sol2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution" title="uo.target_solution.target_solution.TargetSolution"><span class="pre">TargetSolution</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#uo.algorithm.metaheuristic.metaheuristic.Metaheuristic.is_first_solution_better" title="Link to this definition"></a></dt>
+<dd><p>Checks if first solution is better than the second one</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sol1</strong> (<a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution" title="uo.target_solution.target_solution.TargetSolution"><em>TargetSolution</em></a>) – first solution</p></li>
+<li><p><strong>sol2</strong> (<a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution" title="uo.target_solution.target_solution.TargetSolution"><em>TargetSolution</em></a>) – second solution</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><cite>True</cite> if first solution is better, <cite>False</cite> if first solution is worse, <cite>None</cite> if fitnesses of both
+solutions are equal</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.metaheuristic.Metaheuristic.iteration">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">iteration</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></em><a class="headerlink" href="#uo.algorithm.metaheuristic.metaheuristic.Metaheuristic.iteration" title="Link to this definition"></a></dt>
+<dd><p>Property getter for the iteration of metaheuristic execution</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>iteration</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.metaheuristic.Metaheuristic.keep_all_solution_codes">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">keep_all_solution_codes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></em><a class="headerlink" href="#uo.algorithm.metaheuristic.metaheuristic.Metaheuristic.keep_all_solution_codes" title="Link to this definition"></a></dt>
+<dd><p>Property getter for decision should be kept all solution codes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>decision should be kept all solution codes</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.metaheuristic.Metaheuristic.main_loop">
+<span class="sig-name descname"><span class="pre">main_loop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#uo.algorithm.metaheuristic.metaheuristic.Metaheuristic.main_loop" title="Link to this definition"></a></dt>
+<dd><p>Main loop of the metaheuristic algorithm</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.metaheuristic.Metaheuristic.main_loop_iteration">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">main_loop_iteration</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#uo.algorithm.metaheuristic.metaheuristic.Metaheuristic.main_loop_iteration" title="Link to this definition"></a></dt>
+<dd><p>One iteration within main loop of the metaheuristic algorithm</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.metaheuristic.Metaheuristic.optimize">
+<span class="sig-name descname"><span class="pre">optimize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#uo.algorithm.metaheuristic.metaheuristic.Metaheuristic.optimize" title="Link to this definition"></a></dt>
+<dd><p>Executing optimization by the metaheuristic algorithm</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.metaheuristic.Metaheuristic.random_seed">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">random_seed</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></em><a class="headerlink" href="#uo.algorithm.metaheuristic.metaheuristic.Metaheuristic.random_seed" title="Link to this definition"></a></dt>
+<dd><p>Property getter for the random seed used during metaheuristic execution</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>random seed</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.metaheuristic.Metaheuristic.solution_code_distance_cache_cs">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">solution_code_distance_cache_cs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics.SolutionCodeDistanceCacheControlStatistics" title="uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics.SolutionCodeDistanceCacheControlStatistics"><span class="pre">SolutionCodeDistanceCacheControlStatistics</span></a></em><a class="headerlink" href="#uo.algorithm.metaheuristic.metaheuristic.Metaheuristic.solution_code_distance_cache_cs" title="Link to this definition"></a></dt>
+<dd><p>Property getter for the control and statistics of cashing for solution code distance calculation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Control and statistics of cashing for solution code distance calculation</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><cite>SolutionCodeDistanceCacheControlStatistics</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.metaheuristic.Metaheuristic.string_representation">
+<span class="sig-name descname"><span class="pre">string_representation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">indentation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indentation_symbol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'{'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'}'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#uo.algorithm.metaheuristic.metaheuristic.Metaheuristic.string_representation" title="Link to this definition"></a></dt>
+<dd><p>String representation of the Metaheuristic instance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – delimiter between fields</p></li>
+<li><p><strong>indentation</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em><em>, </em><em>default value 0</em>) – level of indentation</p></li>
+<li><p><strong>indentation_symbol</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em><em>, </em><em>default value ''</em>) – indentation symbol</p></li>
+<li><p><strong>group_start</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em><em>, </em><em>default value '{'</em>) – group start string</p></li>
+<li><p><strong>group_end</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em><em>, </em><em>default value '}'</em>) – group end string</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>string representation of instance that controls output</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.metaheuristic.Metaheuristic.write_to_output">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">write_to_output</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.algorithm.metaheuristic.metaheuristic.Metaheuristic.write_to_output" title="Link to this definition"></a></dt>
+<dd><p>Write data to output file, if allowed</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.metaheuristic.random">
+<span class="sig-prename descclassname"><span class="pre">uo.algorithm.metaheuristic.metaheuristic.</span></span><span class="sig-name descname"><span class="pre">random</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">x</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">interval</span> <span class="pre">[0,</span> <span class="pre">1).</span></span></span><a class="headerlink" href="#uo.algorithm.metaheuristic.metaheuristic.random" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics">
+<span id="uo-algorithm-metaheuristic-solution-code-distance-cache-control-statistics-module"></span><h2>uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics module<a class="headerlink" href="#module-uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics" title="Link to this heading"></a></h2>
+<p>The <a class="reference internal" href="#module-uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics" title="uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">solution_code_distance_cache_control_statistics</span></code></a> module describes the class <a class="reference internal" href="#uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics.SolutionCodeDistanceCacheControlStatistics" title="uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics.SolutionCodeDistanceCacheControlStatistics"><code class="xref py py-class docutils literal notranslate"><span class="pre">SolutionCodeDistanceCacheControlStatistics</span></code></a>.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics.SolutionCodeDistanceCacheControlStatistics">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics.</span></span><span class="sig-name descname"><span class="pre">SolutionCodeDistanceCacheControlStatistics</span></span><a class="headerlink" href="#uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics.SolutionCodeDistanceCacheControlStatistics" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Class that represents control statistics for solution code distance cache.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics.SolutionCodeDistanceCacheControlStatistics.cache">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cache</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics.SolutionCodeDistanceCacheControlStatistics.cache" title="Link to this definition"></a></dt>
+<dd><p>Property getter for cache</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>cache that is used during calculation for previously obtained solution code distances</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)">dict</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)">dict</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics.SolutionCodeDistanceCacheControlStatistics.cache_hit_count">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cache_hit_count</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></em><a class="headerlink" href="#uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics.SolutionCodeDistanceCacheControlStatistics.cache_hit_count" title="Link to this definition"></a></dt>
+<dd><p>Property getter for cache_hit_count</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>number of cache hits during calculation of the solution code distances</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics.SolutionCodeDistanceCacheControlStatistics.cache_request_count">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cache_request_count</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></em><a class="headerlink" href="#uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics.SolutionCodeDistanceCacheControlStatistics.cache_request_count" title="Link to this definition"></a></dt>
+<dd><p>Property getter for cache_request_count</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>overall number of calculation of the solution code distances</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics.SolutionCodeDistanceCacheControlStatistics.increment_cache_hit_count">
+<span class="sig-name descname"><span class="pre">increment_cache_hit_count</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics.SolutionCodeDistanceCacheControlStatistics.increment_cache_hit_count" title="Link to this definition"></a></dt>
+<dd><p>Increments number of cache hits during calculation of the solution code distances</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics.SolutionCodeDistanceCacheControlStatistics.increment_cache_request_count">
+<span class="sig-name descname"><span class="pre">increment_cache_request_count</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics.SolutionCodeDistanceCacheControlStatistics.increment_cache_request_count" title="Link to this definition"></a></dt>
+<dd><p>Increments overall number of calculation of the solution code distances</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics.SolutionCodeDistanceCacheControlStatistics.is_caching">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_caching</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></em><a class="headerlink" href="#uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics.SolutionCodeDistanceCacheControlStatistics.is_caching" title="Link to this definition"></a></dt>
+<dd><p>Property getter for is_caching</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>if caching is used during calculation of the solution code distances, or not</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics.SolutionCodeDistanceCacheControlStatistics.string_representation">
+<span class="sig-name descname"><span class="pre">string_representation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">indentation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indentation_symbol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'{'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'}'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics.SolutionCodeDistanceCacheControlStatistics.string_representation" title="Link to this definition"></a></dt>
+<dd><p>String representation of solution distance calculation cache control statistic</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – delimiter between fields</p></li>
+<li><p><strong>indentation</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em><em>, </em><em>default value 0</em>) – level of indentation</p></li>
+<li><p><strong>indentation_symbol</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em><em>, </em><em>default value ''</em>) – indentation symbol</p></li>
+<li><p><strong>group_start</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em><em>, </em><em>default value '{'</em>) – group start string</p></li>
+<li><p><strong>group_end</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em><em>, </em><em>default value '}'</em>) – group end string</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>string representation of instance that controls output</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-uo.algorithm.metaheuristic">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-uo.algorithm.metaheuristic" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="uo.algorithm.exact.html" class="btn btn-neutral float-left" title="uo.algorithm.exact package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="uo.algorithm.metaheuristic.electro_magnetism_like_metaheusristic.html" class="btn btn-neutral float-right" title="uo.algorithm.metaheuristic.electro_magnetism_like_metaheusristic package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Vladimir Filipovic.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
