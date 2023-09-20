@@ -1,3 +1,3 @@
-# Contributiong Guide
+# Contributing Guide
 
-Datailed infromations about this issue are given in the (following document)[]
+Detailed information about contributing are given in the [library official documentation](https://vladofilipovic.github.io/universal-optimizer/html/contribution.html).
