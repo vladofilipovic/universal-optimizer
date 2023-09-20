@@ -27,7 +27,7 @@ How-to Guides
     4. Install project's packets and documentation builder packets with `poetry` 
 
     .. code-block::
-        :caption: Install dependencies (and docs dependencies) with `poetry`
+        :caption: Install dependencies (and documentation dependencies) with `poetry`
 
             > poetry install --with docs
 
@@ -38,14 +38,14 @@ How-to Guides
     .. code-block::
         :caption: Execute illustrative example
 
-            > python example_vns_maxones_int_uo
+            > python example_vns_maxones_int_vns_exec
 
     - Execute *enhanced* illustrative example (executes VNS on Max-Ones problem with binary representation within `int`, uses classes from both `uo` and `app`) 
 
     .. code-block::
         :caption: Execute illustrative example
 
-            > python example_vns_maxones_int_app
+            > python example_vns_maxones_int_vns_exec_build
 
 - **Running of all the unit tests within developed applications**
 
@@ -63,30 +63,30 @@ How-to Guides
     .. code-block::
         :caption: Build documentation sources
 
-            > sphinx-apidoc -o docs/source/ uo
-            > sphinx-apidoc -o docs/source/ opt
+            > sphinx-apidoc -o documentation/source/ uo
+            > sphinx-apidoc -o documentation/source/ opt
 
 
-    2. Change current directory to `/docs` 
+    2. Change current directory to `/documentation` 
 
     .. code-block::
         :caption: Change directory
 
-            > cd docs
+            > cd documentation
 
     3. Clean previously builded HTML documentation 
 
     .. code-block::
         :caption: Clean HTML documentation 
 
-            /docs> ./make clean html
+            /documentation> ./make clean html
 
-    4. Build HTML documentation from `/docs/source` directory. Created documentation is within `/docs/build/html` directory. 
+    4. Build HTML documentation from `/documentation/source` directory. Created documentation is within `/documentation/build/html` directory. 
 
     .. code-block::
-        :caption: Clean HTML documentation 
+        :caption: Build HTML documentation 
 
-            /docs> ./make html
+            /documentation> ./make html
 
 
 

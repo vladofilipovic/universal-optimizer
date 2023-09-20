@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Variable Neighborhood Search &mdash; Optimization Algorithms Library 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=01f34227"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Problems to be solved" href="problems_to_be_solved.html" />
+    <link rel="prev" title="Implemented metaheuristic algorithms" href="implemented_algorithms_metaheuristic.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Optimization Algorithms Library
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Tutorials and How-To Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how_to_guides.html">How-to Guides</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">In-depth Information</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="implemented_algorithms.html">Implemented algorithms</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="implemented_algorithms_exact.html">Implemented exact algorithms</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="implemented_algorithms_metaheuristic.html">Implemented metaheuristic algorithms</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Variable Neighborhood Search</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#basic-information">Basic information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#structure-of-the-algorithm">Structure of the algorithm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implementation-notes">Implementation notes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="problems_to_be_solved.html">Problems to be solved</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Program code</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html#optimization">Optimization</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Changelog and Contribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribution.html">How to Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribution.html#contributors">Contributors</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Optimization Algorithms Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="implemented_algorithms.html">Implemented algorithms</a></li>
+          <li class="breadcrumb-item"><a href="implemented_algorithms_metaheuristic.html">Implemented metaheuristic algorithms</a></li>
+      <li class="breadcrumb-item active">Variable Neighborhood Search</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/implemented_algorithms_vns.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="variable-neighborhood-search">
+<span id="algorithm-variable-neighborhood-search"></span><h1>Variable Neighborhood Search<a class="headerlink" href="#variable-neighborhood-search" title="Link to this heading"></a></h1>
+<section id="basic-information">
+<h2>Basic information<a class="headerlink" href="#basic-information" title="Link to this heading"></a></h2>
+<p>Variable Neighborhood Search (denoted as VNS) is proposed by Mladenović and Hansen <a class="reference internal" href="#mlahan1997" id="id1"><span>[MlaHan1997]</span></a> is a metaheuristic method for solving a set of combinatorial optimization and global optimization problems. It explores distant <em>neighborhoods</em> of the current incumbent solution, and moves from there to a new one if and only if an improvement was made. The local search method is applied repeatedly to get from solutions in the neighborhood to local optima.</p>
+<p>VNS systematically changes the neighborhood in two phases: firstly, descent to find a local optimum and finally, a perturbation phase to get out of the corresponding valley.</p>
+<p>Applications are rapidly increasing in number and pertain to many fields: location theory, cluster analysis, scheduling, vehicle routing, network design, lot-sizing, artificial intelligence, engineering, pooling problems, biology, phylogeny, reliability, geometry, telecommunication design, etc.</p>
+<p>There are several books important for understanding VNS, like Handbook of Metaheuristics <a class="reference internal" href="#genpot2010" id="id2"><span>[GenPot2010]</span></a> , Handbook of Metaheuristics <a class="reference internal" href="#glokoc2003" id="id3"><span>[GloKoc2003]</span></a> and Search methodologies <a class="reference internal" href="#burken2005" id="id4"><span>[BurKen2005]</span></a>.</p>
+</section>
+<section id="structure-of-the-algorithm">
+<h2>Structure of the algorithm<a class="headerlink" href="#structure-of-the-algorithm" title="Link to this heading"></a></h2>
+<p>According to autors, VNS systematically performs the procedure of neighborhood change, both in descent to local minima and in escape from the valleys which contain them.</p>
+<p>VNS is built upon the following perceptions:</p>
+<ol class="arabic simple">
+<li><p>A local minimum with respect to one neighborhood structure is not necessarily a local minimum for another neighborhood structure.</p></li>
+<li><p>A global minimum is a local minimum with respect to all possible neighborhood structures.</p></li>
+<li><p>For many problems, local minima with respect to one or several neighborhoods are relatively close to each other.</p></li>
+</ol>
+<p>The main steps in VNS are:</p>
+<ul class="simple">
+<li><p><strong>Local search</strong>: it is performed through choosing an initial solution <em>x</em>, discovering a direction of descent from <em>x</em>, within a given neighborhood  <em>k</em>, and proceeding to the minimum of <em>f(x)</em> within that neighborhood in the same direction. If there is no direction of descent, the heuristic stops; otherwise, it is iterated. Usually the highest direction of descent, also related to as best improvement, is used.</p></li>
+<li><p><strong>Shaking</strong>:  typically, it involves the random extraction of a feasible solution within current neighborhood <em>k</em>.</p></li>
+<li><p><strong>Neighborhood change</strong>: it compares the new value <em>f(x’)</em> with the incumbent value <em>f(x)</em> obtained in the neighborhood <em>k</em>. If an improvement is obtained, <em>k</em> is returned to its initial value and the new incumbent updated. Otherwise, the next neighborhood is considered.</p></li>
+</ul>
+<p>In-depth structure of the VNS and its various variants is given in following <a class="reference external" href="https://www.cs.uleth.ca/~benkoczi/OR/read/vns-tutorial.pdf">document</a>.</p>
+</section>
+<section id="implementation-notes">
+<h2>Implementation notes<a class="headerlink" href="#implementation-notes" title="Link to this heading"></a></h2>
+<p>Implementation of that optimization method is given within the class <a class="reference internal" href="uo.algorithm.metaheuristic.variable_neighborhood_search.html#py-vns-optimizer"><span class="std std-ref">VnsOptimizer</span></a>.</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<div role="list" class="citation-list">
+<div class="citation" id="mlahan1997" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">MlaHan1997</a><span class="fn-bracket">]</span></span>
+<p>Mladenović, N.; Hansen P. (1997). “Variable neighborhood search”. Computers and Operations Research. 24 (11): 1097–1100. CiteSeerX 10.1.1.800.1797. doi:10.1016/s0305-0548(97)00031-2.</p>
+</div>
+<div class="citation" id="genpot2010" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">GenPot2010</a><span class="fn-bracket">]</span></span>
+<p>Gendreau, M.; Potvin, J-Y. (2010). “Handbook of Metaheuristics”. Springer.</p>
+</div>
+<div class="citation" id="glokoc2003" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">GloKoc2003</a><span class="fn-bracket">]</span></span>
+<p>Glover, F.; Kochenberger, G.A. (2003). “Handbook of Metaheuristics”. Kluwer Academic Publishers.</p>
+</div>
+<div class="citation" id="burken2005" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">BurKen2005</a><span class="fn-bracket">]</span></span>
+<p>Burke, EK.; Kendall, G. (2005). Burke, Edmund K; Kendall, Graham (eds.). Search methodologies. Introductory tutorials in optimization and decision support techniques. Springer. doi:10.1007/978-1-4614-6940-7. ISBN 978-1-4614-6939-1.</p>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="implemented_algorithms_metaheuristic.html" class="btn btn-neutral float-left" title="Implemented metaheuristic algorithms" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="problems_to_be_solved.html" class="btn btn-neutral float-right" title="Problems to be solved" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Vladimir Filipovic.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -23,6 +23,7 @@ from bitstring import BitArray
 
 from uo.utils.logger import logger
 from uo.target_solution.target_solution import ObjectiveFitnessFeasibility
+from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
 
 from opt.single_objective.trivial.max_ones_problem.max_ones_problem import MaxOnesProblem
