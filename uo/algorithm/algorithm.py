@@ -35,10 +35,6 @@ class Algorithm(metaclass=ABCMeta):
         self.__name:str = name
         self.__evaluations_max:int = evaluations_max
         self.__seconds_max:int = seconds_max
-        if isinstance(output_control, OutputControl):
-            self.__output_control:OutputControl = output_control.copy()
-        else:
-            self.__output_control:OutputControl = output_control
         self.__output_control:OutputControl = output_control
         if isinstance(target_problem, TargetProblem):
             self.__target_problem:TargetProblem = target_problem.copy()

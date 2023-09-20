@@ -20,6 +20,7 @@ from typing import Generic
 from uo.utils.logger import logger
 from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.target_solution import TargetSolution
+from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.metaheuristic import Metaheuristic
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
 
@@ -122,19 +123,6 @@ class VnsOptimizer(Metaheuristic):
         :rtype: :class:`TargetSolution`        
         """
         return self.__current_solution
-
-    def write_to_output(self):
-        """
-        Write data to output file, if allowed        
-        """
-        if self.output_control.write_to_output:
-            if self.output_control.report_on_algorithm:
-                fields:str = self.output_control.fields
-                if fields == '':
-                    fields = 'iteration,evaluation,best_solution.solution_code(),best_solution.fitness_value,best_solution.objective_value'
-        return
-
-
 
     @current_solution.setter
     def current_solution(self, value:TargetSolution)->None:

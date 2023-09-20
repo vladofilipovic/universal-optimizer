@@ -12,15 +12,22 @@ from random import random
 from random import randrange
 from copy import deepcopy
 from datetime import datetime
+from io import TextIOWrapper 
+
+from bitstring import BitArray
+
 from abc import ABCMeta, abstractmethod
 from typing import TypeVar, Generic
 from typing import Generic
 
+
 from uo.utils.logger import logger
-from uo.algorithm.algorithm import Algorithm
-from uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics import SolutionCodeDistanceCacheControlStatistics
+
 from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.target_solution import TargetSolution
+from uo.algorithm.output_control import OutputControl
+from uo.algorithm.algorithm import Algorithm
+from uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics import SolutionCodeDistanceCacheControlStatistics
 
 class Metaheuristic(Algorithm, metaclass=ABCMeta):
     """
@@ -200,10 +207,33 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         """
         Executing optimization by the metaheuristic algorithm
         """
-        self.execution_started = datetime.now();
-        self.init();
-        self.main_loop();
-        self.execution_ended = datetime.now();
+        self.execution_started = datetime.now()
+        self.init()
+        if self.output_control.write_to_output:
+            if self.output_control.report_on_algorithm or self.output_control.report_on_iteration or self.output_control.report_on_step:
+                fields:str = self.output_control.fields
+                if fields == '':
+                    fields = 'iteration,evaluation,best_solution.representation,best_solution.fitness_value,best_solution.objective_value'
+                fields_desc:str =  fields.replace(',', '\t').replace('()', '').replace(' ', '').replace('.', '__')
+                output:TextIOWrapper = self.output_control.output_file
+                output.write(fields_desc)
+                output.write('\r\n')
+        self.main_loop()
+        self.execution_ended = datetime.now()
+        if self.output_control.report_on_algorithm:
+                fields:str = self.output_control.fields
+                if fields == '':
+                    fields = 'iteration,evaluation,best_solution.representation,best_solution.fitness_value,best_solution.objective_value'
+                fields_def:list[str] = fields.split(',') 
+                for f_def in fields_def:
+                    data = eval("self."+f_def)
+                    if isinstance(data, BitArray):
+                        s_data = data.tobytes()
+                        s_data = str(s_data)
+                    else:
+                        s_data = str(data)
+                    output.write( s_data + '\t')
+                output.write('\r\n')
 
     def is_first_solution_better(self, sol1:TargetSolution, sol2:TargetSolution)->bool:
         """
@@ -282,13 +312,6 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         else:
             dist = TargetSolution.representation_distance(code_x, code_y)
             return dist
-
-    @abstractmethod
-    def write_to_output(self):
-        """
-        Write data to output file, if allowed        
-        """
-        raise NotImplementedError
 
     def string_representation(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
             group_end:str ='}')->str:

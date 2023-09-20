@@ -106,7 +106,6 @@ def main():
                     fields='',
                     moments=''
             )
-            optimizer.output_control.output_file = output_file
         else:
             output_control:OutputControl = OutputControl(write_to_output=False)
         # input file setup
