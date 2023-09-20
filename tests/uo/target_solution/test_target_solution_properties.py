@@ -54,14 +54,13 @@ class TargetSolutionVoid(TargetSolution[int]):
         return 42.0
 
     def __str__(self)->str:
-        return ''
+        return super().__str__()
 
     def __repr__(self)->str:
-        return ''
+        return super().__repr__()
 
     def __format__(self, spec:str)->str:
-        return ''
-    
+        return super().__format__()    
 
 class TestTargetSolutionProperties(unittest.TestCase):
     
