@@ -244,7 +244,7 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         eccs = target_solution.evaluation_cache_cs 
         eccs.increment_cache_request_count()
         if eccs.is_caching:
-            code = target_solution.representation
+            code = target_solution.solution_code()
             if code in eccs.cache:
                 eccs.increment_cache_hit_count()
                 return eccs.cache[code]
@@ -275,7 +275,7 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         self.is_feasible = solution.is_feasible;
 
     @abstractmethod
-    def solution_code_distance(solution_code_1:str, solution_code_2:str)->float:
+    def representation_distance(solution_code_1:str, solution_code_2:str)->float:
         """
         Calculate distance between two solutions determined by its code
 
@@ -321,9 +321,6 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         for i in range(0, indentation):
             s += indentation_symbol     
         s += 'solution_code=' + self.solution_code() + delimiter
-        for i in range(0, indentation):
-            s += indentation_symbol     
-        s += 'representation=' + self.representation + delimiter
         for i in range(0, indentation):
             s += indentation_symbol     
         s += 'evaluation_cache_cs(static)=' + self.evaluation_cache_cs.string_representation(

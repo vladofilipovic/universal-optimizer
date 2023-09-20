@@ -17,11 +17,13 @@ from copy import deepcopy
 from random import randint
 from random import choice
 
+from bitstring import Bits, BitArray, BitStream, pack
+
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
 from opt.single_objective.trivial.max_ones_problem.max_ones_problem import MaxOnesProblem
-from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution import MaxOnesProblemBinaryIntSolution
-from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution_vns_support import MaxOnesProblemBinaryIntSolutionVnsSupport
+from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution import MaxOnesProblemBinaryBitArraySolution
+from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution_vns_support import MaxOnesProblemBinaryBitArraySolutionVnsSupport
 
 class TestMaxOnesProblemBinaryIntSolutionVnsLsbiExecution(unittest.TestCase):
     
@@ -30,16 +32,16 @@ class TestMaxOnesProblemBinaryIntSolutionVnsLsbiExecution(unittest.TestCase):
         print("setUpClass TestMaxOnesProblemBinaryIntSolutionVnsLsbiExecution\n")
 
     def setUp(self):
-        self.problem_to_solve:MaxOnesProblem = MaxOnesProblem(dim=22)
-        self.initial_solution:MaxOnesProblemBinaryIntSolution = MaxOnesProblemBinaryIntSolution()
+        self.problem_to_solve:MaxOnesProblem = MaxOnesProblem(dim=24)
+        self.initial_solution:MaxOnesProblemBinaryBitArraySolution = MaxOnesProblemBinaryBitArraySolution()
         self.initial_solution.random_init(self.problem_to_solve)
-        self.vns_support:MaxOnesProblemBinaryIntSolutionVnsSupport = MaxOnesProblemBinaryIntSolutionVnsSupport()
+        self.vns_support:MaxOnesProblemBinaryBitArraySolutionVnsSupport = MaxOnesProblemBinaryBitArraySolutionVnsSupport()
         self.optimizer:VnsOptimizer = VnsOptimizer(target_problem=self.problem_to_solve, 
                 initial_solution=self.initial_solution, 
                 problem_solution_vns_support=self.vns_support,
                 evaluations_max=500, 
                 seconds_max=0, 
-                random_seed=42, 
+                random_seed=None, 
                 keep_all_solution_codes=False, 
                 k_min=1, 
                 k_max=3, 
@@ -51,11 +53,14 @@ class TestMaxOnesProblemBinaryIntSolutionVnsLsbiExecution(unittest.TestCase):
         return
     
     def test_best_solution_after_optimization_should_be_all_optimal(self):
-        result = int('0b1111111111111111111111', base=0)
-        self.assertEqual(self.optimizer.best_solution.representation, result)
+        result:str = '0xffffff'
+        self.assertEqual(self.optimizer.best_solution.solution_code(), result)
 
     def test_best_solution_after_optimization_should_have_optimal_fitness(self):
         self.assertEqual(self.optimizer.best_solution.fitness_value, self.problem_to_solve.dimension)
+
+    def test_best_solution_after_optimization_should_have_optimal_objective_value(self):
+        self.assertEqual(self.optimizer.best_solution.objective_value, self.problem_to_solve.dimension)
 
     def tearDown(self):
         return

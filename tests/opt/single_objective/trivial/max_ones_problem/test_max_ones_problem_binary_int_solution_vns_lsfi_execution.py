@@ -45,7 +45,7 @@ class TestMaxOnesProblemBinaryIntSolutionVnsLsfiExecution(unittest.TestCase):
                 k_max=3, 
                 max_local_optima=10, 
                 local_search_type='local_search_first_improvement')
-        self.optimizer.solution_code_distance_cache_cs.is_caching = False
+        self.optimizer.representation_distance_cache_cs.is_caching = False
         self.optimizer.output_control.write_to_output_file = False
         self.optimizer.optimize()
         return

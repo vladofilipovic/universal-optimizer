@@ -51,7 +51,7 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         self.__best_solution:TargetSolution = None
         self.__keep_all_solution_codes:bool = keep_all_solution_codes
         self.__all_solution_codes:set[str] = set()
-        self.__solution_code_distance_cache_cs:SolutionCodeDistanceCacheControlStatistics = SolutionCodeDistanceCacheControlStatistics()
+        self.__representation_distance_cache_cs:SolutionCodeDistanceCacheControlStatistics = SolutionCodeDistanceCacheControlStatistics()
 
     @abstractmethod
     def __copy__(self):
@@ -143,23 +143,23 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         self.__all_solution_codes = value
 
     @property
-    def solution_code_distance_cache_cs(self)->SolutionCodeDistanceCacheControlStatistics:
+    def representation_distance_cache_cs(self)->SolutionCodeDistanceCacheControlStatistics:
         """
         Property getter for the control and statistics of cashing for solution code distance calculation
         
         :return: Control and statistics of cashing for solution code distance calculation
         :rtype: `SolutionCodeDistanceCacheControlStatistics`
         """
-        return self.__solution_code_distance_cache_cs
+        return self.__representation_distance_cache_cs
 
-    @solution_code_distance_cache_cs.setter
-    def solution_code_distance_cache_cs(self, value:SolutionCodeDistanceCacheControlStatistics)->None:
+    @representation_distance_cache_cs.setter
+    def representation_distance_cache_cs(self, value:SolutionCodeDistanceCacheControlStatistics)->None:
         """
         Property setter for the control and statistics of cashing for solution code distance calculation
         
         :param int value: `SolutionCodeDistanceCacheControlStatistics`
         """
-        self.__solution_code_distance_cache_cs = value
+        self.__representation_distance_cache_cs = value
 
     @abstractmethod
     def init(self)->None:
@@ -192,8 +192,8 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         while (self.evaluations_max == 0 or self.evaluation < self.evaluations_max) and (self.seconds_max == 
                 0 or self.elapsed_seconds() < self.seconds_max):
             self.main_loop_iteration()
-            logger.debug('Iteration:{}, Evaluations:{}, Bit code:{}'.format(self.iteration, self.evaluation,
-                str(self.best_solution.representation)))
+            logger.debug('Iteration:{}, Evaluations:{}, Solution code:{}'.format(self.iteration, self.evaluation,
+                str(self.best_solution.solution_code())))
 
     def optimize(self)->None:
         """
@@ -256,7 +256,7 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         self.__second_when_best_obtained = (datetime.now() - self.execution_started).total_seconds()
         self.__iteration_best_found = self.iteration
 
-    def calculate_solution_code_distance_try_consult_cache(self, code_x:str, code_y:str)->float:
+    def calculate_representation_distance_try_consult_cache(self, code_x:str, code_y:str)->float:
         """
         Calculate distance between two solution codes with optional cache consultation
         
@@ -267,19 +267,19 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         """
         if code_x == code_y:
             return 0;
-        scdc = self.__solution_code_distance_cache_cs 
+        scdc = self.__representation_distance_cache_cs 
         scdc.requests_count += 1
         if scdc.is_caching: 
             if code_x in scdc.cache and code_y in scdc.cache[code_x]:
                 scdc.hit_count += 1
                 return scdc.cache[code_x][code_y]
-            dist = TargetSolution.solution_code_distance(code_x, code_y)
+            dist = TargetSolution.representation_distance(code_x, code_y)
             if code_x not in scdc.cache:
                 scdc.cache[code_x] = {};
             scdc.cache[code_x][code_y] = dist;
             return dist;
         else:
-            dist = TargetSolution.solution_code_distance(code_x, code_y)
+            dist = TargetSolution.representation_distance(code_x, code_y)
             return dist
 
     @abstractmethod
@@ -332,7 +332,7 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
             for i in range(0, indentation):
                 s += indentation_symbol  
             s += '__best_solution=None' + delimiter
-        s += '__solution_code_distance_cache_cs(static)=' + self.__solution_code_distance_cache_cs.string_representation(
+        s += '__representation_distance_cache_cs(static)=' + self.__representation_distance_cache_cs.string_representation(
                 delimiter, indentation + 1, indentation_symbol, '{', '}') + delimiter
         if self.execution_ended is not None and self.execution_started is not None:
             for i in range(0, indentation):
