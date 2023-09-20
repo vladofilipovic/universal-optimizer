@@ -21,18 +21,25 @@ class Algorithm(metaclass=ABCMeta):
     """
 
     @abstractmethod
-    def __init__(self, name:str, evaluations_max:int, seconds_max:int, target_problem:TargetProblem)->None:
+    def __init__(self, name:str, evaluations_max:int, seconds_max:int, output_control:OutputControl,  
+            target_problem:TargetProblem)->None:
         """
         Create new Algorithm instance
 
         :param str name: name of the algorithm
         :param int evaluations_max: maximum number of evaluations for algorithm execution
         :param int seconds_max: maximum number of seconds for algorithm execution
-        :param TargetProblem target_problem: problem to be solved
+        :param `OutputControl` output_control: structure that controls output
+        :param `TargetProblem` target_problem: problem to be solved
         """
         self.__name:str = name
         self.__evaluations_max:int = evaluations_max
         self.__seconds_max:int = seconds_max
+        if isinstance(output_control, OutputControl):
+            self.__output_control:OutputControl = output_control.copy()
+        else:
+            self.__output_control:OutputControl = output_control
+        self.__output_control:OutputControl = output_control
         if isinstance(target_problem, TargetProblem):
             self.__target_problem:TargetProblem = target_problem.copy()
         else:
@@ -40,7 +47,6 @@ class Algorithm(metaclass=ABCMeta):
         self.__evaluation:int = 0
         self.__execution_started:datetime = None
         self.__execution_ended:datetime = None
-        self.__output_control:OutputControl = OutputControl()
 
     @abstractmethod
     def __copy__(self):
@@ -59,7 +65,7 @@ class Algorithm(metaclass=ABCMeta):
         Copy the current algorithm
 
         :return:  new `Algorithm` instance with the same properties
-        :rtype: :class:`optimization_algorithms.algorithm.Algorithm`
+        :rtype: :class:`uo.algorithm.Algorithm`
         """
         return self.__copy__()
 

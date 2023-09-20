@@ -20,8 +20,9 @@ from uo.algorithm.output_control import OutputControl
 from uo.algorithm.algorithm import Algorithm
 
 class AlgorithmVoid(Algorithm):
-    def __init__(self, name:str, evaluations_max:int, seconds_max:int, target_problem:TargetProblem)->None:
-        super().__init__(name, evaluations_max, seconds_max, target_problem)
+    def __init__(self, name:str, evaluations_max:int, seconds_max:int, output_control:OutputControl,
+            target_problem:TargetProblem)->None:
+        super().__init__(name, evaluations_max, seconds_max, output_control, target_problem)
 
     def __copy__(self):
         return super().__copy__()
@@ -65,7 +66,7 @@ class TestAlgorithmProperties(unittest.TestCase):
         type(self.problem).write_to_output = mock.PropertyMock(return_value=self.oc_write_to_output)
         type(self.problem).output_file = mock.PropertyMock(return_value=self.oc_output_file)
 
-        self.algorithm = AlgorithmVoid(
+        self.algorithm = AlgorithmVoid(output_control=OutputControl(False),
                 name=self.name,
                 evaluations_max=self.evaluations_max,
                 seconds_max=self.seconds_max,

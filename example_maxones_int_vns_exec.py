@@ -12,7 +12,8 @@ problem_to_solve:MaxOnesProblem = MaxOnesProblem(dim=22)
 initial_solution:MaxOnesProblemBinaryIntSolution = MaxOnesProblemBinaryIntSolution()
 initial_solution.random_init(problem_to_solve)
 vns_support:MaxOnesProblemBinaryIntSolutionVnsSupport = MaxOnesProblemBinaryIntSolutionVnsSupport()
-optimizer:VnsOptimizer = VnsOptimizer(target_problem=problem_to_solve, 
+optimizer:VnsOptimizer = VnsOptimizer(output_control=OutputControl(write_to_output=false),
+        target_problem=problem_to_solve, 
         initial_solution=initial_solution, 
         problem_solution_vns_support=vns_support,
         evaluations_max=500, 

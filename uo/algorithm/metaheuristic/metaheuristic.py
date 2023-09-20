@@ -29,7 +29,7 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
 
     @abstractmethod
     def __init__(self, name:str, evaluations_max:int, seconds_max:int, random_seed:int, 
-            keep_all_solution_codes:bool, target_problem:TargetProblem)->None:
+            keep_all_solution_codes:bool, output_control:OutputControl, target_problem:TargetProblem)->None:
         """
         Create new Metaheuristic instance
 
@@ -38,9 +38,10 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         :param int seconds_max: maximum number of seconds for algorithm execution
         :param int random_seed: random seed for metaheuristic execution
         :param bool keep_all_solution_codes: if all solution codes will be remembered        
-        :param TargetProblem target_problem: problem to be solved
+        :param `OutputControl` output_control: structure that controls output
+        :param `TargetProblem` target_problem: problem to be solved
         """
-        super().__init__(name, evaluations_max, seconds_max, target_problem)
+        super().__init__(name, evaluations_max, seconds_max, output_control, target_problem)
         if random_seed is not None and isinstance(random_seed, int) and random_seed != 0:
             self.__random_seed:int = random_seed
         else:

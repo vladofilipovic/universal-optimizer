@@ -34,7 +34,8 @@ class TestMaxOnesProblemBinaryIntSolutionVnsLsfiExecution(unittest.TestCase):
         self.initial_solution:MaxOnesProblemBinaryIntSolution = MaxOnesProblemBinaryIntSolution()
         self.initial_solution.random_init(self.problem_to_solve)
         self.vns_support:MaxOnesProblemBinaryIntSolutionVnsSupport = MaxOnesProblemBinaryIntSolutionVnsSupport()
-        self.optimizer:VnsOptimizer = VnsOptimizer(target_problem=self.problem_to_solve, 
+        self.optimizer:VnsOptimizer = VnsOptimizer(output_control=OutputControl(False),
+                target_problem=self.problem_to_solve, 
                 initial_solution=self.initial_solution, 
                 problem_solution_vns_support=self.vns_support,
                 evaluations_max=500, 

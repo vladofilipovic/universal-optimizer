@@ -30,7 +30,8 @@ class VnsOptimizer(Metaheuristic):
     """
     
     def __init__(self, evaluations_max:int, seconds_max:int, random_seed:int, keep_all_solution_codes:bool, 
-            target_problem:TargetProblem, initial_solution:TargetSolution, problem_solution_vns_support:ProblemSolutionVnsSupport, 
+            output_control:OutputControl, target_problem:TargetProblem, initial_solution:TargetSolution, 
+            problem_solution_vns_support:ProblemSolutionVnsSupport, 
             k_min:int, k_max:int, max_local_optima:int, local_search_type:str)->None:
         """
         Create new instance of class :class:`~uo.algorithm.metaheuristic.variable_neighborhood_search.VnsOptimizer`. 
@@ -40,16 +41,19 @@ class VnsOptimizer(Metaheuristic):
         :param int seconds_max: maximum number of seconds for algorithm execution
         :param int random_seed: random seed for metaheuristic execution
         :param bool keep_all_solution_codes: if all solution codes will be remembered
-        :param TargetProblem target_problem: problem to be solved
-        :param TargetSolution initial_solution: initial solution of the problem that is optimized by VNS 
-        :param ProblemSolutionVnsSupport problem_solution_vns_support: placeholder for additional methods for VNS execution, which depend of precise solution type 
+        :param `OutputControl` output_control: structure that controls output
+        :param `TargetProblem` target_problem: problem to be solved
+        :param `TargetSolution` initial_solution: initial solution of the problem that is optimized by VNS 
+        :param `ProblemSolutionVnsSupport` problem_solution_vns_support: placeholder for additional methods for VNS 
+        execution, which depend of precise solution type 
         :param int k_min: `k_min` parameter for VNS
         :param int k_max: `k_max` parameter for VNS
         :param int max_local_optima: max_local_optima parameter for VNS
         :param local_search_type: type of the local search
         :type local_search_type: str, possible values: 'local_search_best_improvement', 'local_search_first_improvement' 
         """
-        super().__init__('vns', evaluations_max, seconds_max, random_seed, keep_all_solution_codes, target_problem)
+        super().__init__('vns', evaluations_max, seconds_max, random_seed, keep_all_solution_codes, output_control,
+                target_problem)
         if initial_solution is not None:
             if isinstance(initial_solution, TargetSolution):
                 self.__current_solution:TargetSolution = initial_solution.copy()
@@ -123,7 +127,14 @@ class VnsOptimizer(Metaheuristic):
         """
         Write data to output file, if allowed        
         """
-        pass 
+        if self.output_control.write_to_output:
+            if self.output_control.report_on_algorithm:
+                fields:str = self.output_control.fields
+                if fields == '':
+                    fields = 'iteration,evaluation,best_solution.solution_code(),best_solution.fitness_value,best_solution.objective_value'
+        return
+
+
 
     @current_solution.setter
     def current_solution(self, value:TargetSolution)->None:
