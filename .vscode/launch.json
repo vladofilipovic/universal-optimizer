@@ -21,7 +21,7 @@
                 "--outputMoments", "after_algorithm, after_iteration",
                 "--inputFilePath", "opt/single_objective/trivial/max_ones_problem/inputs/dimension_77.txt", 
                 "--inputFormat", "txt",
-                "--maxNumberIterations", "500",  
+                "--maxNumberEvaluations", "5000",  
                 "--maxTimeForExecutionSeconds", "0",
                 "--randomSeed", "0", 
                 "--evaluationCacheIsUsed", "False", 
