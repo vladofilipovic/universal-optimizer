@@ -54,15 +54,15 @@ def parse_arguments():
         parser_vns.add_argument('--outputFilePath', type=str, default='output/out.txt', 
                 help=("File path of the output file. " 
                 "File path '' means that it is within 'outputs' folder."))
-        parser_vns.add_argument('--outputFields', type=str, default='iteration, evaluation', 
+        parser_vns.add_argument('--outputFields', type=str, 
+                default='iteration, evaluation, self.best_solution.string_representation()', 
                 help=("Comma-separated list of fields whose values will be outputted during algorithm execution. " 
                 "Fields 'iteration, evaluation' means that current iterations and current evaluation will be outputted."))
-        parser_vns.add_argument('--outputMoments', type=str, default='after_algorithm', 
-                choices=['before_algorithm', 'after_algorithm', 
-                                'before_iteration', 'after_iteration',
-                                'before_evaluation', 'after_evaluation',
-                                'before_step_in_iteration', 'after_step_in_iteration'],
+        parser_vns.add_argument('--outputMoments', type=str, default='after_algorithm, after_iteration', 
                 help=("Comma-separated list of moments when values will be outputted during algorithm execution. " 
+                "List contains of following elements: 'before_algorithm', 'after_algorithm', 'before_iteration', "
+                "'after_iteration', 'before_evaluation', 'after_evaluation', 'before_step_in_iteration', "
+                "'after_step_in_iteration'"
                 "Moments 'after_algorithm' means that result will be outputted after algorithm."))
         parser_vns.add_argument('--inputFilePath', type=str, default='inputs/max_ones_problem/dim_25.txt', 
                 help='Input file path for the instance of the problem. ')
