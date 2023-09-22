@@ -76,6 +76,10 @@ def main():
             write_to_output_file:bool = bool(parameters['writeToOutputFile'])
         # output file setup
         if write_to_output_file:
+            if parameters['outputFileNameAppendTimeStamp'] is None:
+                should_add_timestamp_to_file_name:bool = False
+            else:
+                should_add_timestamp_to_file_name:bool = bool(parameters['outputFileNameAppendTimeStamp'])
             if parameters['outputFilePath'] is not None and  parameters['outputFilePath'] != '':
                 output_file_path_parts:list[str] = parameters['outputFilePath'].split('/')
             else:
@@ -92,9 +96,14 @@ def main():
             dt = datetime.now()
             output_file_path_parts.pop()
             output_file_dir:str =  '/'.join(output_file_path_parts)
-            output_file_path_parts.append( output_file_name +  '-maxones-' + parameters['solutionType'] + '-' + 
-                    parameters['algorithm'] + '-' + parameters['optimization_type'][0:3] + '-' + 
-                    dt.strftime("%Y-%m-%d-%H-%M-%S.%f") + '.' + output_file_ext)
+            if should_add_timestamp_to_file_name:
+                output_file_path_parts.append( output_file_name +  '-maxones-' + parameters['solutionType'] + '-' + 
+                        parameters['algorithm'] + '-' + parameters['optimization_type'][0:3] + '-' + 
+                        dt.strftime("%Y-%m-%d-%H-%M-%S.%f") + '.' + output_file_ext)
+            else:
+                output_file_path_parts.append( output_file_name +  '-maxones-' + parameters['solutionType'] + '-' + 
+                        parameters['algorithm'] + '-' + parameters['optimization_type'][0:3] + 
+                        '.' + output_file_ext)
             output_file_path:str = '/'.join(output_file_path_parts)
             logger.debug("Output file path: {}".format(output_file_path))
             ensure_dir(output_file_dir)

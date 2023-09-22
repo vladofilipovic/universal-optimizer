@@ -16,6 +16,7 @@
                 "maximization",
                 "--writeToOutputFile", "True",
                 "--outputFilePath", "opt/single_objective/trivial/max_ones_problem/outputs/dimension_77.csv",
+                "--outputFileNameAppendTimeStamp", "True",
                 "--outputFields", "iteration, evaluation, best_solution.string_representation()",
                 "--outputMoments", "after_algorithm, after_iteration",
                 "--inputFilePath", "opt/single_objective/trivial/max_ones_problem/inputs/dimension_77.txt", 
