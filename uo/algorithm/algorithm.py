@@ -176,6 +176,60 @@ class Algorithm(metaclass=ABCMeta):
         """
         self.__output_control = value
 
+    def write_output_headers_if_needed(self):
+        """
+        Write headers(with field names) to output file, if necessary 
+        """            
+        if self.output_control.write_to_output:
+            output:TextIOWrapper = self.output_control.output_file
+            f_hs:list[str] = self.output_control.fields_headings
+            for f_h in f_hs:
+                output.write(f_h)
+                output.write('\t')
+            output.write('\n')
+
+    def write_output_values_if_needed(self, step_name:str, step_name_value:str):
+        """
+        Write data(with field values) to output file, if necessary 
+
+        :param str step_name: name of the step when data should be written to output - have to be one of the following values: 'after_algorithm', 'before_algorithm', 'after_iteration', 'before_iteration', 'after_evaluation', 'before_evaluation', 'after_step_in_iteration', 'before_step_in_iteration'
+        :param str step_name_value: what should be written to the output instead of step_name
+        """            
+        if self.output_control.write_to_output:
+            output:TextIOWrapper = self.output_control.output_file
+            should_write:bool = False
+            if step_name == 'after_algorithm':
+                should_write = True
+            elif step_name == 'before_algorithm':
+                should_write = self.output_control.write_before_algorithm
+            elif step_name == 'after_iteration':
+                should_write = self.output_control.write_after_iteration
+            elif step_name == 'before_iteration':
+                should_write = self.output_control.write_before_iteration
+            elif step_name == 'after_evaluation':
+                should_write = self.output_control.write_after_evaluation
+            elif step_name == 'before_evaluation':
+                should_write = self.output_control.write_before_evaluation
+            elif step_name == 'after_step_in_iteration':
+                should_write = self.output_control.write_after_step_in_iteration
+            elif step_name == 'before_step_in_iteration':
+                should_write = self.output_control.write_before_step_in_iteration
+            else:
+                raise ValueError("Supplied step name '" + step_name + "' is not valid.")
+            if should_write:
+                fields_def:list[str] = self.output_control.fields_definitions 
+                for f_def in fields_def:
+                    if f_def != "":
+                        try:
+                            data = eval(f_def)
+                            s_data:str = str(data)
+                            if s_data == "step_name":
+                                s_data = step_name_value
+                        except:
+                            s_data:str = 'XXX'
+                        output.write( s_data + '\t')
+                output.write('\n')
+
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
@@ -256,49 +310,3 @@ class Algorithm(metaclass=ABCMeta):
         :rtype: str
         """
         return self.string_rep('|')
-
-    def write_output_headers_if_needed(self):
-        if self.output_control.write_to_output:
-            output:TextIOWrapper = self.output_control.output_file
-            f_hs:list[str] = self.output_control.fields_headings
-            for f_h in f_hs:
-                output.write(f_h)
-                output.write('\t')
-            output.write('\n')
-
-    def write_output_values_if_needed(self, step_name:str, step_name_value:str):
-        if self.output_control.write_to_output:
-            output:TextIOWrapper = self.output_control.output_file
-            should_write:bool = False
-            if step_name == 'after_algorithm':
-                should_write = True
-            elif step_name == 'before_algorithm':
-                should_write = self.output_control.write_before_algorithm
-            elif step_name == 'after_iteration':
-                should_write = self.output_control.write_after_iteration
-            elif step_name == 'before_iteration':
-                should_write = self.output_control.write_before_iteration
-            elif step_name == 'after_evaluation':
-                should_write = self.output_control.write_after_evaluation
-            elif step_name == 'before_evaluation':
-                should_write = self.output_control.write_before_evaluation
-            elif step_name == 'after_step_in_iteration':
-                should_write = self.output_control.write_after_step_in_iteration
-            elif step_name == 'before_step_in_iteration':
-                should_write = self.output_control.write_before_step_in_iteration
-            else:
-                raise ValueError("Supplied step name '" + step_name + "' is not valid.")
-            if should_write:
-                fields_def:list[str] = self.output_control.fields_definitions 
-                for f_def in fields_def:
-                    if f_def != "":
-                        try:
-                            data = eval(f_def)
-                            s_data:str = str(data)
-                            if s_data == "step_name":
-                                s_data = step_name_value
-                        except:
-                            s_data:str = 'XXX'
-                        output.write( s_data + '\t')
-                output.write('\n')
-

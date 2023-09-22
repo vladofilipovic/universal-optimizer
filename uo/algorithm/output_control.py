@@ -17,8 +17,8 @@ class OutputControl:
     """
 
     def __init__(self, write_to_output:bool=False, output_file:TextIOWrapper=None, 
-            fields:str='iteration, evaluation, "step_name", best_solution.representation, best_solution.fitness_value, '
-                'best_solution.objective_value, best_solution.is_feasible', 
+            fields:str='iteration, evaluation, "step_name", best_solution.string_representation(), '
+                'best_solution.fitness_value, best_solution.objective_value, best_solution.is_feasible', 
             moments:str='after_algorithm') -> None:
         """
         Creates new :class:`uo.algorithm.OutputControl` instance
@@ -29,8 +29,9 @@ class OutputControl:
         :param str fields: comma-separated list of fields for output - basically fields of the optimizer object 
         (e.g. `best_solution.fitness_value`, `iteration`, `evaluation`, `seconds_max` etc.) and last word in specific 
         field should he header od the csv column
-        :param str moments: comma-separated list of moments for output - contains `on-algorithm`, `on-iteration`,
-        `on-step` 
+        :param str moments: comma-separated list of moments for output - contains following elements:
+        `before_algorithm`, `after_algorithm`, `before_iteration`, `after_iteration`, 
+        `before_evaluation`, `after_evaluation`, `before_step_in_iteration`, `after_step_in_iteration`
         """
         self.__write_to_output:bool = write_to_output
         self.__output_file:TextIOWrapper = output_file
@@ -60,6 +61,13 @@ class OutputControl:
         self.__determine_moments_helper__(moments)
 
     def __determine_fields_helper__(self, fields:str):
+        """
+        Helper function that determines fields header list anf field definition lists of the control instance
+
+        :param str fields: comma-separated list of fields for output - basically fields of the optimizer object 
+        (e.g. `best_solution.fitness_value`, `iteration`, `evaluation`, `seconds_max` etc.) and last word in specific 
+        field should he header od the csv column
+        """
         fields_head:list[str] = fields.replace('.','_').replace(' ', '').replace('()','').split(',')
         for f_h in fields_head:
             if f_h != '':
@@ -74,6 +82,13 @@ class OutputControl:
                     self.fields_definitions.append(f_def)
 
     def __determine_moments_helper__(self, moments:str):
+        """
+        Helper function that determines moments when value of fields will be written to output
+
+        :param str moments: comma-separated list of moments for output - contains following elements:
+        `before_algorithm`, `after_algorithm`, `before_iteration`, `after_iteration`, 
+        `before_evaluation`, `after_evaluation`, `before_step_in_iteration`, `after_step_in_iteration`
+        """
         self.__write_after_algorithm = True
         if 'before_algorithm' in moments:
             self.__write_before_algorithm = True
