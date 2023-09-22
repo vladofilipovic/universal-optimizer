@@ -19,24 +19,26 @@ from random import choice
 
 from bitstring import Bits, BitArray, BitStream, pack
 
+from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
 from opt.single_objective.trivial.max_ones_problem.max_ones_problem import MaxOnesProblem
 from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution import MaxOnesProblemBinaryBitArraySolution
 from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution_vns_support import MaxOnesProblemBinaryBitArraySolutionVnsSupport
 
-class TestMaxOnesProblemBinaryIntSolutionVnsLsbiExecution(unittest.TestCase):
+class TestIntegrationMaxOnesProblemBinaryIntSolutionVnsLsbi(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
-        print("setUpClass TestMaxOnesProblemBinaryIntSolutionVnsLsbiExecution\n")
+        print("setUpClass TestIntegrationMaxOnesProblemBinaryIntSolutionVnsLsbi\n")
 
     def setUp(self):
+        self.output_control = OutputControl(False)
         self.problem_to_solve:MaxOnesProblem = MaxOnesProblem(dim=24)
         self.initial_solution:MaxOnesProblemBinaryBitArraySolution = MaxOnesProblemBinaryBitArraySolution()
         self.initial_solution.random_init(self.problem_to_solve)
         self.vns_support:MaxOnesProblemBinaryBitArraySolutionVnsSupport = MaxOnesProblemBinaryBitArraySolutionVnsSupport()
-        self.optimizer:VnsOptimizer = VnsOptimizer(output_control=OutputControl(False),
+        self.optimizer:VnsOptimizer = VnsOptimizer(output_control=self.output_control,
                 target_problem=self.problem_to_solve, 
                 initial_solution=self.initial_solution, 
                 problem_solution_vns_support=self.vns_support,
@@ -68,7 +70,7 @@ class TestMaxOnesProblemBinaryIntSolutionVnsLsbiExecution(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        print("\ntearDownClass TestMaxOnesProblemBinaryIntSolutionVnsLsbiExecution")
+        print("\ntearDownClass TestIntegrationMaxOnesProblemBinaryIntSolutionVnsLsbi")
     
 if __name__ == '__main__':
     unittest.main()

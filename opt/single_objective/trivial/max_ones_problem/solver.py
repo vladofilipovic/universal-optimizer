@@ -104,8 +104,7 @@ def main():
             output_control:OutputControl = OutputControl(write_to_output=True,
                     output_file=output_file,
                     fields='',
-                    moments=''
-            )
+                    moments='')
         else:
             output_control:OutputControl = OutputControl(write_to_output=False)
         # input file setup

@@ -50,6 +50,12 @@ class TestAlgorithmProperties(unittest.TestCase):
         self.evaluations_max = 42
         self.seconds_max = 42
 
+        self.oc_write_to_output = True
+        self.oc_output_file = "some file path..."
+        self.output_control = mock.MagicMock()
+        type(self.output_control).write_to_output = self.oc_write_to_output
+        type(self.output_control).output_file = self.oc_output_file
+
         self.pr_name = 'some_problem'
         self.pr_is_minimization = True
         self.pr_file_path = 'some problem file path'
@@ -60,13 +66,7 @@ class TestAlgorithmProperties(unittest.TestCase):
         type(self.problem).file_path = mock.PropertyMock(return_value=self.pr_file_path)
         type(self.problem).dimension = mock.PropertyMock(return_value=self.pr_dimension)
 
-        self.oc_write_to_output = True
-        self.oc_output_file = "some file path..."
-        self.output_control = mock.MagicMock()
-        type(self.problem).write_to_output = mock.PropertyMock(return_value=self.oc_write_to_output)
-        type(self.problem).output_file = mock.PropertyMock(return_value=self.oc_output_file)
-
-        self.algorithm = AlgorithmVoid(output_control=OutputControl(False),
+        self.algorithm = AlgorithmVoid(output_control=self.output_control,
                 name=self.name,
                 evaluations_max=self.evaluations_max,
                 seconds_max=self.seconds_max,

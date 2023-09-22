@@ -1,5 +1,0 @@
-# RandomSeed is not predefined. Generated seed value:  6488530398923051855
-# VNS started at: 2023-09-20 20:53:05.284577
-# Execution parameters: {'algorithm': 'vns', 'optimization_type': 'maximization', 'writeToOutputFile': True, 'outputFilePath': 'opt/single_objective/trivial/max_ones_problem/outputs/dimension_77.csv', 'inputFilePath': 'opt/single_objective/trivial/max_ones_problem/inputs/dimension_77.txt', 'inputFormat': 'txt', 'maxNumberIterations': 20, 'maxTimeForExecutionSeconds': 0, 'randomSeed': 0, 'evaluationCacheIsUsed': False, 'calculationSolutionDistanceCacheIsUsed': False, 'keepAllSolutionCodes': False, 'kMin': 1, 'kMax': 3, 'maxLocalOptima': 7, 'localSearchType': 'local_search_best_improvement', 'solutionType': 'BitArray'}
-iteration	evaluation	best_solution__representation	best_solution__fitness_value	best_solution__objective_value
-1	87	b'\xd3\x80{\t\xce\xcd\xdbf\xfe\x90'	43	43	

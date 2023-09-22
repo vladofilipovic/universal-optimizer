@@ -210,30 +210,27 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         self.execution_started = datetime.now()
         self.init()
         if self.output_control.write_to_output:
-            if self.output_control.report_on_algorithm or self.output_control.report_on_iteration or self.output_control.report_on_step:
-                fields:str = self.output_control.fields
-                if fields == '':
-                    fields = 'iteration,evaluation,best_solution.representation,best_solution.fitness_value,best_solution.objective_value'
-                fields_desc:str =  fields.replace(',', '\t').replace('()', '').replace(' ', '').replace('.', '__')
-                output:TextIOWrapper = self.output_control.output_file
-                output.write(fields_desc)
-                output.write('\r\n')
+            output:TextIOWrapper = self.output_control.output_file
+            f_hs:list[str] = self.output_control.fields_headings
+            for f_h in f_hs:
+                output.write(f_h)
+                output.write('\t')
+            output.write('\n')
         self.main_loop()
         self.execution_ended = datetime.now()
-        if self.output_control.report_on_algorithm:
-                fields:str = self.output_control.fields
-                if fields == '':
-                    fields = 'iteration,evaluation,best_solution.representation,best_solution.fitness_value,best_solution.objective_value'
-                fields_def:list[str] = fields.split(',') 
+        if self.output_control.write_to_output:
+            if self.output_control.write_after_algorithm:
+                fields_def:list[str] = self.output_control.fields_definitions 
                 for f_def in fields_def:
-                    data = eval("self."+f_def)
-                    if isinstance(data, BitArray):
-                        s_data = data.tobytes()
-                        s_data = str(s_data)
-                    else:
-                        s_data = str(data)
-                    output.write( s_data + '\t')
-                output.write('\r\n')
+                    if f_def != "":
+                        data = eval(f_def)
+                        if isinstance(data, BitArray):
+                            s_data:str = data.tobytes()
+                            s_data = str(s_data)
+                        else:
+                            s_data:str = str(data)
+                        output.write( s_data + '\t')
+                output.write('\n')
 
     def is_first_solution_better(self, sol1:TargetSolution, sol2:TargetSolution)->bool:
         """
