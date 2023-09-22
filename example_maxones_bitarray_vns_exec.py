@@ -27,7 +27,7 @@ optimizer:VnsOptimizer = VnsOptimizer(output_control=OutputControl(write_to_outp
 optimizer.representation_distance_cache_cs.is_caching = False
 optimizer.optimize()
 print('Best solution representation: {}'.format(optimizer.best_solution.representation.tobytes()))            
-print('Best solution code: {}'.format(optimizer.best_solution.solution_code()))            
+print('Best solution code: {}'.format(optimizer.best_solution.string_representation()))            
 print('Best solution fitness: {}'.format(optimizer.best_solution.fitness_value))
 print('Number of iterations: {}'.format(optimizer.iteration))            
 print('Number of evaluations: {}'.format(optimizer.evaluation))            

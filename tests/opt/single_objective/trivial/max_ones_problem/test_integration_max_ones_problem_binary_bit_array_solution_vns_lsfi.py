@@ -56,8 +56,11 @@ class TestIntegrationMaxOnesProblemBinaryIntSolutionVnsLsbi(unittest.TestCase):
         return
     
     def test_best_solution_after_optimization_should_be_all_optimal(self):
-        result:str = '0xffffff'
-        self.assertEqual(self.optimizer.best_solution.solution_code(), result)
+        result:str = '111111111111111111111111'
+        self.assertEqual(self.optimizer.best_solution.string_representation(), result)
+
+    def test_best_solution_after_optimization_should_be_optimal_2(self):
+        self.assertEqual(len(self.optimizer.best_solution.string_representation()), self.problem_to_solve.dimension)
 
     def test_best_solution_after_optimization_should_have_optimal_fitness(self):
         self.assertEqual(self.optimizer.best_solution.fitness_value, self.problem_to_solve.dimension)

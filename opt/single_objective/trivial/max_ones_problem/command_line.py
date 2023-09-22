@@ -20,6 +20,8 @@ default_parameters_cl = {
         'optimization_type': 'maximization', 
         'writeToOutputFile': True,
         'outputFilePath':'opt/single_objective/trivial/max_ones_problem/outputs/dimension_77.csv', 
+        'outputFields': "iteration, evaluation",
+        'outputMoments': "after_algorithm, after_evaluation",
         'inputFilePath': 'opt/single_objective/trivial/max_ones_problem/inputs/dimension_77.txt', 
         'inputFormat': 'txt', 
         'maxNumberIterations': 20, 
@@ -52,6 +54,16 @@ def parse_arguments():
         parser_vns.add_argument('--outputFilePath', type=str, default='output/out.txt', 
                 help=("File path of the output file. " 
                 "File path '' means that it is within 'outputs' folder."))
+        parser_vns.add_argument('--outputFields', type=str, default='iteration, evaluation', 
+                help=("Comma-separated list of fields whose values will be outputted during algorithm execution. " 
+                "Fields 'iteration, evaluation' means that current iterations and current evaluation will be outputted."))
+        parser_vns.add_argument('--outputMoments', type=str, default='after_algorithm', 
+                choices=['before_algorithm', 'after_algorithm', 
+                                'before_iteration', 'after_iteration',
+                                'before_evaluation', 'after_evaluation',
+                                'before_step_in_iteration', 'after_step_in_iteration'],
+                help=("Comma-separated list of moments when values will be outputted during algorithm execution. " 
+                "Moments 'after_algorithm' means that result will be outputted after algorithm."))
         parser_vns.add_argument('--inputFilePath', type=str, default='inputs/max_ones_problem/dim_25.txt', 
                 help='Input file path for the instance of the problem. ')
         parser_vns.add_argument('--inputFormat', type=str, choices=['txt', 'idle'], default = 'txt',

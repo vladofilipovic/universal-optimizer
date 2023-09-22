@@ -72,6 +72,15 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
         mask = (mask % 0x100000000) >> (32-problem.dimension) 
         self.representation &= mask
 
+    def string_representation(self)->str:
+        """
+        String representation of the target solution
+
+        :return: solution representation as string
+        :rtype: str 
+        """
+        return bin(self.representation)
+
     def random_init(self, problem:TargetProblem)->None:
         """
         Random initialization of the solution
@@ -87,15 +96,6 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
         self.representation = randint(0, 2^problem.dimension-1)
         self.__make_to_be_feasible_helper__(problem)
 
-    def solution_code(self)->str:
-        """
-        Solution code of the target solution
-
-        :return: solution code
-        :rtype: str 
-        """
-        return bin(self.representation)
-
     def calculate_objective_fitness_feasibility(self, problem:TargetProblem)->ObjectiveFitnessFeasibility:
         """
         Fitness calculation of the max ones binary int solution
@@ -107,7 +107,7 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
         ones_count = self.representation.bit_count()
         return ObjectiveFitnessFeasibility(ones_count, ones_count, True)
 
-    def native_representation_from_solution_code(self, representation_str:str)->int:
+    def native_representation(self, representation_str:str)->int:
         """
         Obtain `int` representation from string representation of the integer binary solution of the Max Ones problem 
 
@@ -119,13 +119,13 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
         return ret
 
     def representation_distance(solution_code_1:str, solution_code_2:str)->float:
-        rep_1:int = self.native_representation_from_solution_code(solution_code_1)
-        rep_2:int = self.native_representation_from_solution_code(solution_code_2)
+        rep_1:int = self.native_representation(solution_code_1)
+        rep_2:int = self.native_representation(solution_code_2)
         result = (rep_1 ^ rep_2).count(True)
         return result 
 
 
-    def string_representation(self, delimiter:str='\n', indentation:int=0, indentation_symbol:str='   ', 
+    def string_rep(self, delimiter:str='\n', indentation:int=0, indentation_symbol:str='   ', 
             group_start:str='{', group_end:str='}',)->str:
         """
         String representation of the solution instance
@@ -147,12 +147,12 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
         for i in range(0, indentation):
             s += indentation_symbol  
         s += group_start
-        s += super().string_representation(delimiter, indentation, indentation_symbol, '', '')
+        s += super().string_rep(delimiter, indentation, indentation_symbol, '', '')
         s += delimiter
         s += delimiter
         for i in range(0, indentation):
             s += indentation_symbol  
-        s += 'representation=' + bin(self.__representation)
+        s += 'string_representation()=' + self.string_representation()
         s += delimiter
         for i in range(0, indentation):
             s += indentation_symbol  
@@ -166,7 +166,7 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
         :return: string representation of the solution instance
         :rtype: str
         """
-        return self.string_representation('\n', 0, '   ', '{', '}')
+        return self.string_rep('\n', 0, '   ', '{', '}')
 
     def __repr__(self)->str:
         """
@@ -175,7 +175,7 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
         :return: string representation of the solution instance
         :rtype: str
         """
-        return self.string_representation('\n', 0, '   ', '{', '}')
+        return self.string_rep('\n', 0, '   ', '{', '}')
 
     def __format__(self, spec:str)->str:
         """
@@ -185,4 +185,4 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
         :return: formatted solution instance
         :rtype: str
         """
-        return self.string_representation('\n', 0, '   ', '{', '}')
+        return self.string_rep('\n', 0, '   ', '{', '}')

@@ -89,7 +89,10 @@ class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[B
                 break
         if tries < limit:
             optimizer.evaluation += 1
+            optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             solution.evaluate(problem)
+            optimizer.write_output_values_if_needed("after_evaluation", "a_e")
+            optimizer.write_output_values_if_needed("after_step_in_iteration", "shaking")
             return True
         else:
             return False 
@@ -116,7 +119,9 @@ class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[B
         for i in range(0, len(solution.representation)):
             solution.representation.invert(i) 
             optimizer.evaluation += 1
+            optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             new_fv = solution.calculate_objective_fitness_feasibility(problem).fitness_value
+            optimizer.write_output_values_if_needed("after_evaluation", "a_e")
             if new_fv > best_fv:
                 best_ind = i
                 best_fv = new_fv
@@ -124,7 +129,9 @@ class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[B
         if best_ind is not None:
             solution.representation.invert(best_ind)
             optimizer.evaluation += 1
+            optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             solution.evaluate(problem)
+            optimizer.write_output_values_if_needed("after_evaluation", "a_e")
             if solution.fitness_value != best_fv:
                 raise ValueError('Fitness calculation within function `local_search_best_improvement` is not correct.')
             return solution
@@ -151,17 +158,21 @@ class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[B
         for i in range(0, len(solution.representation)):
             solution.representation.invert(i) 
             optimizer.evaluation += 1
+            optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             new_fv = solution.calculate_objective_fitness_feasibility(problem).fitness_value
+            optimizer.write_output_values_if_needed("after_evaluation", "a_e")
             if new_fv > best_fv:
                 optimizer.evaluation += 1 
+                optimizer.write_output_values_if_needed("before_evaluation", "b_e")
                 solution.evaluate(problem)
+                optimizer.write_output_values_if_needed("after_evaluation", "a_e")
                 if solution.fitness_value != new_fv:
                     raise Exception('Fitness calculation within `local_search_first_improvement` function is not correct.')
                 return solution
             solution.representation.invert(i)
         return solution
 
-    def string_representation(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
+    def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
         """
         String representation of the vns support structure
@@ -188,7 +199,7 @@ class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[B
         :return: string representation of the vns support instance
         :rtype: str
         """
-        return self.string_representation('|')
+        return self.string_rep('|')
 
     def __repr__(self)->str:
         """
@@ -197,7 +208,7 @@ class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[B
         :return: string representation of the vns support instance
         :rtype: str
         """
-        return self.string_representation('\n')
+        return self.string_rep('\n')
 
 
     def __format__(self, spec:str)->str:
@@ -208,6 +219,6 @@ class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[B
         :return: formatted vns support instance
         :rtype: str
         """
-        return self.string_representation('|')
+        return self.string_rep('|')
 
 

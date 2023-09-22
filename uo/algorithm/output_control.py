@@ -16,8 +16,10 @@ class OutputControl:
     :class:`uo.algorithm.Algorithm` instance will be written 
     """
 
-    def __init__(self, write_to_output:bool=False, output_file:TextIOWrapper=None, fields:str='', 
-            moments:str='') -> None:
+    def __init__(self, write_to_output:bool=False, output_file:TextIOWrapper=None, 
+            fields:str='iteration, evaluation, "step_name", best_solution.representation, best_solution.fitness_value, '
+                'best_solution.objective_value, best_solution.is_feasible', 
+            moments:str='after_algorithm') -> None:
         """
         Creates new :class:`uo.algorithm.OutputControl` instance
 
@@ -35,14 +37,14 @@ class OutputControl:
         self.__fields_headings:list[str] = ['iteration',
                 'evaluation',
                 'step_name',
-                'best_solution_representation',
+                'best_solution_string_representation',
                 'best_solution_fitness_value',
                 'best_solution_objective_value',
                 'best_solution_is_feasible']
         self.__fields_definitions:list[str] = ['self.iteration',
                 'self.evaluation',
                 '"step_name"',
-                'self.best_solution.representation',
+                'self.best_solution.string_representation()',
                 'self.best_solution.fitness_value',
                 'self.best_solution.objective_value',
                 'self.best_solution.is_feasible']
@@ -58,12 +60,12 @@ class OutputControl:
         self.__determine_moments_helper__(moments)
 
     def __determine_fields_helper__(self, fields:str):
-        fields_head:list[str] = fields.replace('.','_').replace(' ', '').split(',')
+        fields_head:list[str] = fields.replace('.','_').replace(' ', '').replace('()','').split(',')
         for f_h in fields_head:
             if f_h != '':
                 if f_h not in self.fields_headings:
                     self.fields_headings.append(f_h)
-        fields_def:list[str] = fields.split(',') 
+        fields_def:list[str] = fields.replace(' ', '').split(',') 
         for f_def in fields_def:
             if f_def != '':
                 if f_def[0] != "'" and f_def[0] != '"':
@@ -279,7 +281,7 @@ class OutputControl:
         """
         return self.__write_after_step_in_iteration
 
-    def string_representation(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
+    def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
         """
         String representation of the target solution instance
@@ -328,7 +330,7 @@ class OutputControl:
         :return: string representation of the cache control and statistics structure
         :rtype: str
         """
-        return self.string_representation('|')
+        return self.string_rep('|')
 
     def __repr__(self)->str:
         """
@@ -337,7 +339,7 @@ class OutputControl:
         :return: string representation of cache control and statistics structure
         :rtype: str
         """
-        return self.string_representation('\n')
+        return self.string_rep('\n')
 
 
     def __format__(self, spec:str)->str:
@@ -348,6 +350,5 @@ class OutputControl:
         :return: formatted cache control and statistics structure
         :rtype: str
         """
-        return self.string_representation('|')
-
+        return self.string_rep('|')
 

@@ -23,6 +23,9 @@ class TestVnsOptimizerProperties(unittest.TestCase):
         print("setUpClass TestVnsOptimizerProperties\n")
 
     def setUp(self):
+        self.output_control = mock.MagicMock()
+        type(self.output_control).write_to_output = False
+
         self.evaluations_max = 42
         self.seconds_max = 42
         self.random_seed = 42
@@ -34,9 +37,6 @@ class TestVnsOptimizerProperties(unittest.TestCase):
         type(self.problem).is_minimization = mock.PropertyMock(return_value=True)
         type(self.problem).file_path = mock.PropertyMock(return_value='some file path')
         type(self.problem).dimension = mock.PropertyMock(return_value=42)
-
-        self.output_control = mock.MagicMock()
-        type(self.output_control).write_to_output = False
 
         self.vns_optimizer = VnsOptimizer(
                 output_control=self.output_control,

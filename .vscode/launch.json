@@ -16,6 +16,8 @@
                 "maximization",
                 "--writeToOutputFile", "True",
                 "--outputFilePath", "opt/single_objective/trivial/max_ones_problem/outputs/dimension_25.txt",
+                "--outputFields", "iteration, evaluation",
+                "--outputMoments", "after_algorithm, after_evaluation, before_step_in_iteration",
                 "--inputFilePath", "opt/single_objective/trivial/max_ones_problem/inputs/dimension_25.txt", 
                 "--inputFormat", "txt",
                 "--maxNumberIterations", "500",  

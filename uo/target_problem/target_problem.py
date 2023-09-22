@@ -105,7 +105,7 @@ class TargetProblem(metaclass=ABCMeta):
         """
         raise NotImplementedError
 
-    def string_representation(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', group_end:str ='}')->str:
+    def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', group_end:str ='}')->str:
         """
         String representation of the target problem instance
 
@@ -151,7 +151,7 @@ class TargetProblem(metaclass=ABCMeta):
         :return: string representation of the target problem instance
         :rtype: str
         """
-        return self.string_representation('|')
+        return self.string_rep('|')
 
     @abstractmethod
     def __repr__(self)->str:
@@ -161,7 +161,7 @@ class TargetProblem(metaclass=ABCMeta):
         :return: string representation of the problem instance
         :rtype: str
         """
-        return self.string_representation('\n')
+        return self.string_rep('\n')
 
     @abstractmethod
     def __format__(self, spec:str)->str:
@@ -172,5 +172,5 @@ class TargetProblem(metaclass=ABCMeta):
         :return: formatted target problem instance
         :rtype: str
         """
-        return self.string_representation('|')
+        return self.string_rep('|')
 

@@ -199,9 +199,11 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         """
         while (self.evaluations_max == 0 or self.evaluation < self.evaluations_max) and (self.seconds_max == 
                 0 or self.elapsed_seconds() < self.seconds_max):
+            self.write_output_values_if_needed("before_iteration", "b_i")
             self.main_loop_iteration()
-            logger.debug('Iteration:{}, Evaluations:{}, Solution code:{}'.format(self.iteration, self.evaluation,
-                str(self.best_solution.solution_code())))
+            self.write_output_values_if_needed("after_iteration", "a_i")
+            logger.debug('Iteration:{}, Evaluations:{}, Solution:{}'.format(self.iteration, self.evaluation,
+                self.best_solution.string_representation()))
 
     def optimize(self)->None:
         """
@@ -209,28 +211,11 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         """
         self.execution_started = datetime.now()
         self.init()
-        if self.output_control.write_to_output:
-            output:TextIOWrapper = self.output_control.output_file
-            f_hs:list[str] = self.output_control.fields_headings
-            for f_h in f_hs:
-                output.write(f_h)
-                output.write('\t')
-            output.write('\n')
+        self.write_output_headers_if_needed()
+        self.write_output_values_if_needed("before_algorithm", "b_a")
         self.main_loop()
         self.execution_ended = datetime.now()
-        if self.output_control.write_to_output:
-            if self.output_control.write_after_algorithm:
-                fields_def:list[str] = self.output_control.fields_definitions 
-                for f_def in fields_def:
-                    if f_def != "":
-                        data = eval(f_def)
-                        if isinstance(data, BitArray):
-                            s_data:str = data.tobytes()
-                            s_data = str(s_data)
-                        else:
-                            s_data:str = str(data)
-                        output.write( s_data + '\t')
-                output.write('\n')
+        self.write_output_values_if_needed("after_algorithm", "a_a")
 
     def is_first_solution_better(self, sol1:TargetSolution, sol2:TargetSolution)->bool:
         """
@@ -310,7 +295,7 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
             dist = TargetSolution.representation_distance(code_x, code_y)
             return dist
 
-    def string_representation(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
+    def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
             group_end:str ='}')->str:
         """
         String representation of the Metaheuristic instance
@@ -332,7 +317,7 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         for i in range(0, indentation):
             s += indentation_symbol  
         s += group_start
-        s = super().string_representation(delimiter, indentation, indentation_symbol, '', '')
+        s = super().string_rep(delimiter, indentation, indentation_symbol, '', '')
         s += delimiter
         for i in range(0, indentation):
             s += indentation_symbol  
@@ -347,13 +332,13 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
             s += indentation_symbol  
         s += '__second_when_best_obtained=' + str(self.__second_when_best_obtained) + delimiter
         if self.__best_solution is not None:
-            s += '__best_solution=' + self.__best_solution.string_representation(delimiter, indentation + 1,
+            s += '__best_solution=' + self.__best_solution.string_rep(delimiter, indentation + 1,
                     indentation_symbol, group_start, group_end) + delimiter
         else:
             for i in range(0, indentation):
                 s += indentation_symbol  
             s += '__best_solution=None' + delimiter
-        s += '__representation_distance_cache_cs(static)=' + self.__representation_distance_cache_cs.string_representation(
+        s += '__representation_distance_cache_cs(static)=' + self.__representation_distance_cache_cs.string_rep(
                 delimiter, indentation + 1, indentation_symbol, '{', '}') + delimiter
         if self.execution_ended is not None and self.execution_started is not None:
             for i in range(0, indentation):
@@ -375,7 +360,7 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         :return: string representation of the `Metaheuristic` instance
         :rtype: str
         """
-        s = self.string_representation('|')
+        s = self.string_rep('|')
         return s
 
     @abstractmethod
@@ -386,7 +371,7 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         :return: string representation of the `Metaheuristic` instance
         :rtype: str
         """
-        s = self.string_representation('\n')
+        s = self.string_rep('\n')
         s += '__all_solution_codes=' + str(self.__all_solution_codes) 
         return s
 
@@ -399,4 +384,4 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         :return: formatted `Metaheuristic` instance
         :rtype: str
         """
-        return self.string_representation('|')
+        return self.string_rep('|')

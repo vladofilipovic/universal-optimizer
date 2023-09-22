@@ -187,20 +187,27 @@ class VnsOptimizer(Metaheuristic):
         """
         One iteration within main loop of the VNS algorithm
         """
+        self.write_output_values_if_needed("before_step_in_iteration", "shaking")
         if not self.__shaking_method(self.__k_current, self.target_problem, self.current_solution, self):
+            self.write_output_values_if_needed("after_step_in_iteration", "shaking")
             return False
+        self.write_output_values_if_needed("after_step_in_iteration", "shaking")
         self.iteration += 1
         while self.__k_current <= self.__k_max:
             self.evaluation += 1
+            self.write_output_values_if_needed("before_evaluation", "b_e")
             self.current_solution.evaluate(self.target_problem)
+            self.write_output_values_if_needed("after_evaluation", "a_e")
+            self.write_output_values_if_needed("before_step_in_iteration", "ls")
             self.current_solution = self.__ls_method(self.__k_current, self.target_problem, self.current_solution, self)
+            self.write_output_values_if_needed("after_step_in_iteration", "ls")
             # update auxiliary structure that keeps all solution codes
             if self.keep_all_solution_codes:
                 self.all_solution_codes.add(self.current_solution)
             new_is_better = self.is_first_solution_better(self.current_solution, self.best_solution)
             make_move:bool = new_is_better
             if new_is_better is None:
-                if self.current_solution.solution_code() == self.best_solution.solution_code():
+                if  self.current_solution.string_representation() == self.best_solution.string_representation():
                     make_move = False
                 else:
                     logger.debug("Same solution quality, generating random true with probability 0.5");
@@ -211,7 +218,7 @@ class VnsOptimizer(Metaheuristic):
             else:
                 self.__k_current += 1
 
-    def string_representation(self, delimiter:str, indentation:int=0, indentation_symbol:str='',group_start:str ='{', 
+    def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='',group_start:str ='{', 
         group_end:str ='}')->str:
         """
         String representation of the `VnsOptimizer` instance
@@ -233,9 +240,9 @@ class VnsOptimizer(Metaheuristic):
         for i in range(0, indentation):
             s += indentation_symbol  
         s += group_start
-        s = super().string_representation(delimiter, indentation, indentation_symbol, '', '')
+        s = super().string_rep(delimiter, indentation, indentation_symbol, '', '')
         s += delimiter
-        s += 'current_solution=' + self.current_solution.string_representation(delimiter, indentation + 1, 
+        s += 'current_solution=' + self.current_solution.string_rep(delimiter, indentation + 1, 
                 indentation_symbol, group_start, group_end) + delimiter 
         for i in range(0, indentation):
             s += indentation_symbol  
@@ -244,7 +251,7 @@ class VnsOptimizer(Metaheuristic):
             s += indentation_symbol  
         s += 'k_max=' + str(self.k_max) + delimiter
         s += delimiter
-        s += '__problem_solution_vns_support=' + self.__problem_solution_vns_support.string_representation(delimiter, 
+        s += '__problem_solution_vns_support=' + self.__problem_solution_vns_support.string_rep(delimiter, 
                 indentation + 1, indentation_symbol, group_start, group_end) + delimiter 
         for i in range(0, indentation):
             s += indentation_symbol  
@@ -264,7 +271,7 @@ class VnsOptimizer(Metaheuristic):
         :return: string representation of the `VnsOptimizer` instance
         :rtype: str
         """
-        s = self.string_representation('|')
+        s = self.string_rep('|')
         return s;
 
     def __repr__(self)->str:
@@ -274,7 +281,7 @@ class VnsOptimizer(Metaheuristic):
         :return: string representation of the `VnsOptimizer` instance
         :rtype: str
         """
-        s = self.string_representation('\n')
+        s = self.string_rep('\n')
         return s
 
     def __format__(self, spec:str)->str:
@@ -285,4 +292,4 @@ class VnsOptimizer(Metaheuristic):
         :return: formatted `VnsOptimizer` instance
         :rtype: str
         """
-        return self.string_representation('\n',0,'   ','{', '}')
+        return self.string_rep('\n',0,'   ','{', '}')

@@ -101,10 +101,12 @@ def main():
             output_file = open(output_file_path, "w", encoding="utf-8")
         # output control setup
         if write_to_output_file:    
+            output_fields:str = parameters['outputFields']
+            output_moments:str = parameters['outputMoments']
             output_control:OutputControl = OutputControl(write_to_output=True,
                     output_file=output_file,
-                    fields='',
-                    moments='')
+                    fields=output_fields,
+                    moments=output_moments)
         else:
             output_control:OutputControl = OutputControl(write_to_output=False)
         # input file setup
