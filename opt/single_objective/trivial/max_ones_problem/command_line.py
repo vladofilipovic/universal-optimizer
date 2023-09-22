@@ -20,6 +20,7 @@ default_parameters_cl = {
         'optimization_type': 'maximization', 
         'writeToOutputFile': True,
         'outputFilePath':'opt/single_objective/trivial/max_ones_problem/outputs/dimension_77.csv', 
+        'outputFileNameAppendTimeStamp': False,
         'outputFields': "iteration, evaluation",
         'outputMoments': "after_algorithm, after_evaluation",
         'inputFilePath': 'opt/single_objective/trivial/max_ones_problem/inputs/dimension_77.txt', 
@@ -54,6 +55,8 @@ def parse_arguments():
         parser_vns.add_argument('--outputFilePath', type=str, default='output/out.txt', 
                 help=("File path of the output file. " 
                 "File path '' means that it is within 'outputs' folder."))
+        parser_vns.add_argument('--outputFileNameAppendTimeStamp', type=bool, default=False, 
+                help=("Should timestamp be automatically added to the name of the output file.") )        
         parser_vns.add_argument('--outputFields', type=str, 
                 default='iteration, evaluation, self.best_solution.string_representation()', 
                 help=("Comma-separated list of fields whose values will be outputted during algorithm execution. " 
