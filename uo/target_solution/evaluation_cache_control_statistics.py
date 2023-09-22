@@ -110,7 +110,7 @@ class EvaluationCacheControlStatistics:
         """
         self.__cache_request_count += 1
 
-    def string_representation(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
+    def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
         """
         String representation of the `EvaluationCacheControlStatistics` instance
@@ -153,7 +153,7 @@ class EvaluationCacheControlStatistics:
         :return: string representation of the `EvaluationCacheControlStatistics` instance
         :rtype: str
         """
-        return self.string_representation('|', 0, '', '{', '}')
+        return self.string_rep('|', 0, '', '{', '}')
 
 
     def __repr__(self)->str:
@@ -161,7 +161,7 @@ class EvaluationCacheControlStatistics:
         Representation of the `EvaluationCacheControlStatistics` instance
         :return: str -- string representation of the `EvaluationCacheControlStatistics` instance
         """
-        return self.string_representation('\n', 0, '   ', '{', '}')
+        return self.string_rep('\n', 0, '   ', '{', '}')
 
     def __format__(self, spec:str)->str:
         """
@@ -169,5 +169,5 @@ class EvaluationCacheControlStatistics:
         :param spec: str -- format specification
         :return: str -- formatted `EvaluationCacheControlStatistics` instance
         """
-        return self.string_representation('|')
+        return self.string_rep('|')
 

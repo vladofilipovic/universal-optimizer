@@ -20,6 +20,7 @@ from typing import Generic
 from uo.utils.logger import logger
 from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.target_solution import TargetSolution
+from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.metaheuristic import Metaheuristic
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
 
@@ -30,7 +31,8 @@ class VnsOptimizer(Metaheuristic):
     """
     
     def __init__(self, evaluations_max:int, seconds_max:int, random_seed:int, keep_all_solution_codes:bool, 
-            target_problem:TargetProblem, initial_solution:TargetSolution, problem_solution_vns_support:ProblemSolutionVnsSupport, 
+            output_control:OutputControl, target_problem:TargetProblem, initial_solution:TargetSolution, 
+            problem_solution_vns_support:ProblemSolutionVnsSupport, 
             k_min:int, k_max:int, max_local_optima:int, local_search_type:str)->None:
         """
         Create new instance of class :class:`~uo.algorithm.metaheuristic.variable_neighborhood_search.VnsOptimizer`. 
@@ -40,16 +42,19 @@ class VnsOptimizer(Metaheuristic):
         :param int seconds_max: maximum number of seconds for algorithm execution
         :param int random_seed: random seed for metaheuristic execution
         :param bool keep_all_solution_codes: if all solution codes will be remembered
-        :param TargetProblem target_problem: problem to be solved
-        :param TargetSolution initial_solution: initial solution of the problem that is optimized by VNS 
-        :param ProblemSolutionVnsSupport problem_solution_vns_support: placeholder for additional methods for VNS execution, which depend of precise solution type 
+        :param `OutputControl` output_control: structure that controls output
+        :param `TargetProblem` target_problem: problem to be solved
+        :param `TargetSolution` initial_solution: initial solution of the problem that is optimized by VNS 
+        :param `ProblemSolutionVnsSupport` problem_solution_vns_support: placeholder for additional methods for VNS 
+        execution, which depend of precise solution type 
         :param int k_min: `k_min` parameter for VNS
         :param int k_max: `k_max` parameter for VNS
         :param int max_local_optima: max_local_optima parameter for VNS
         :param local_search_type: type of the local search
         :type local_search_type: str, possible values: 'local_search_best_improvement', 'local_search_first_improvement' 
         """
-        super().__init__('vns', evaluations_max, seconds_max, random_seed, keep_all_solution_codes, target_problem)
+        super().__init__('vns', evaluations_max, seconds_max, random_seed, keep_all_solution_codes, output_control,
+                target_problem)
         if initial_solution is not None:
             if isinstance(initial_solution, TargetSolution):
                 self.__current_solution:TargetSolution = initial_solution.copy()
@@ -119,12 +124,6 @@ class VnsOptimizer(Metaheuristic):
         """
         return self.__current_solution
 
-    def write_to_output(self):
-        """
-        Write data to output file, if allowed        
-        """
-        pass 
-
     @current_solution.setter
     def current_solution(self, value:TargetSolution)->None:
         """
@@ -188,20 +187,27 @@ class VnsOptimizer(Metaheuristic):
         """
         One iteration within main loop of the VNS algorithm
         """
+        self.write_output_values_if_needed("before_step_in_iteration", "shaking")
         if not self.__shaking_method(self.__k_current, self.target_problem, self.current_solution, self):
+            self.write_output_values_if_needed("after_step_in_iteration", "shaking")
             return False
+        self.write_output_values_if_needed("after_step_in_iteration", "shaking")
         self.iteration += 1
         while self.__k_current <= self.__k_max:
             self.evaluation += 1
+            self.write_output_values_if_needed("before_evaluation", "b_e")
             self.current_solution.evaluate(self.target_problem)
+            self.write_output_values_if_needed("after_evaluation", "a_e")
+            self.write_output_values_if_needed("before_step_in_iteration", "ls")
             self.current_solution = self.__ls_method(self.__k_current, self.target_problem, self.current_solution, self)
+            self.write_output_values_if_needed("after_step_in_iteration", "ls")
             # update auxiliary structure that keeps all solution codes
             if self.keep_all_solution_codes:
                 self.all_solution_codes.add(self.current_solution)
             new_is_better = self.is_first_solution_better(self.current_solution, self.best_solution)
             make_move:bool = new_is_better
             if new_is_better is None:
-                if self.current_solution.solution_code() == self.best_solution.solution_code():
+                if  self.current_solution.string_representation() == self.best_solution.string_representation():
                     make_move = False
                 else:
                     logger.debug("Same solution quality, generating random true with probability 0.5");
@@ -212,7 +218,7 @@ class VnsOptimizer(Metaheuristic):
             else:
                 self.__k_current += 1
 
-    def string_representation(self, delimiter:str, indentation:int=0, indentation_symbol:str='',group_start:str ='{', 
+    def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='',group_start:str ='{', 
         group_end:str ='}')->str:
         """
         String representation of the `VnsOptimizer` instance
@@ -234,9 +240,9 @@ class VnsOptimizer(Metaheuristic):
         for i in range(0, indentation):
             s += indentation_symbol  
         s += group_start
-        s = super().string_representation(delimiter, indentation, indentation_symbol, '', '')
+        s = super().string_rep(delimiter, indentation, indentation_symbol, '', '')
         s += delimiter
-        s += 'current_solution=' + self.current_solution.string_representation(delimiter, indentation + 1, 
+        s += 'current_solution=' + self.current_solution.string_rep(delimiter, indentation + 1, 
                 indentation_symbol, group_start, group_end) + delimiter 
         for i in range(0, indentation):
             s += indentation_symbol  
@@ -245,7 +251,7 @@ class VnsOptimizer(Metaheuristic):
             s += indentation_symbol  
         s += 'k_max=' + str(self.k_max) + delimiter
         s += delimiter
-        s += '__problem_solution_vns_support=' + self.__problem_solution_vns_support.string_representation(delimiter, 
+        s += '__problem_solution_vns_support=' + self.__problem_solution_vns_support.string_rep(delimiter, 
                 indentation + 1, indentation_symbol, group_start, group_end) + delimiter 
         for i in range(0, indentation):
             s += indentation_symbol  
@@ -265,7 +271,7 @@ class VnsOptimizer(Metaheuristic):
         :return: string representation of the `VnsOptimizer` instance
         :rtype: str
         """
-        s = self.string_representation('|')
+        s = self.string_rep('|')
         return s;
 
     def __repr__(self)->str:
@@ -275,7 +281,7 @@ class VnsOptimizer(Metaheuristic):
         :return: string representation of the `VnsOptimizer` instance
         :rtype: str
         """
-        s = self.string_representation('\n')
+        s = self.string_rep('\n')
         return s
 
     def __format__(self, spec:str)->str:
@@ -286,4 +292,4 @@ class VnsOptimizer(Metaheuristic):
         :return: formatted `VnsOptimizer` instance
         :rtype: str
         """
-        return self.string_representation('\n',0,'   ','{', '}')
+        return self.string_rep('\n',0,'   ','{', '}')

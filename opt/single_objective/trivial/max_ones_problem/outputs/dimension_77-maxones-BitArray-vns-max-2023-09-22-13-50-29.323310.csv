@@ -1,0 +1,5 @@
+# RandomSeed is not predefined. Generated seed value:  4754818818446567158
+# VNS started at: 2023-09-22 13:50:29.325323
+# Execution parameters: {'algorithm': 'vns', 'optimization_type': 'maximization', 'writeToOutputFile': True, 'outputFilePath': 'opt/single_objective/trivial/max_ones_problem/outputs/dimension_77.csv', 'outputFields': 'iteration, evaluation', 'outputMoments': 'after_algorithm', 'inputFilePath': 'opt/single_objective/trivial/max_ones_problem/inputs/dimension_77.txt', 'inputFormat': 'txt', 'maxNumberIterations': 20, 'maxTimeForExecutionSeconds': 0, 'randomSeed': 0, 'evaluationCacheIsUsed': False, 'calculationSolutionDistanceCacheIsUsed': False, 'keepAllSolutionCodes': False, 'kMin': 1, 'kMax': 3, 'maxLocalOptima': 7, 'localSearchType': 'local_search_best_improvement', 'solutionType': 'BitArray'}
+iteration	evaluation	step_name	best_solution_string_representation	best_solution_fitness_value	best_solution_objective_value	best_solution_is_feasible	
+1	86	a_a	11111111000010010100101001111100001101000001100001000000100001111010001111000000	34	34	True	

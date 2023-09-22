@@ -67,7 +67,7 @@ class MaxOnesProblem(TargetProblem):
         else:
             raise ValueError('Value for data format \'{} \' is not supported'.format(data_format))
 
-    def string_representation(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
+    def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
         """
         String representation of the `MaxOneProblem` instance
@@ -89,7 +89,7 @@ class MaxOnesProblem(TargetProblem):
         for i in range(0, indentation):
             s += indentation_symbol  
         s += group_start
-        s+= super().string_representation(delimiter, indentation, indentation_symbol, '', '')
+        s+= super().string_rep(delimiter, indentation, indentation_symbol, '', '')
         s+= delimiter
         for i in range(0, indentation):
             s += indentation_symbol  
@@ -103,7 +103,7 @@ class MaxOnesProblem(TargetProblem):
         :return: string representation of the max ones problem structure
         :rtype: str
         """
-        return self.string_representation('|', 0, '', '{', '}')
+        return self.string_rep('|', 0, '', '{', '}')
 
 
     def __repr__(self)->str:
@@ -111,7 +111,7 @@ class MaxOnesProblem(TargetProblem):
         Representation of the max ones problem instance
         :return: str -- string representation of the max ones problem instance
         """
-        return self.string_representation('\n', 0, '   ', '{', '}')
+        return self.string_rep('\n', 0, '   ', '{', '}')
 
     def __format__(self, spec:str)->str:
         """
@@ -119,6 +119,6 @@ class MaxOnesProblem(TargetProblem):
         :param spec: str -- format specification
         :return: str -- formatted max ones problem instance
         """
-        return self.string_representation('|')
+        return self.string_rep('|')
 
 

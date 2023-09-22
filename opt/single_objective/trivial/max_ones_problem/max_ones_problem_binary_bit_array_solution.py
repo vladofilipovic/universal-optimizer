@@ -40,8 +40,8 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution[BitArray]):
         :return: new `MaxOnesProblemBinaryBitArraySolution` instance with the same properties
         :rtype: MaxOnesProblemBinaryBitArraySolution
         """
-        sol = deepcopy(self)
-        sol.representation = deepcopy(self.representation)
+        sol = super().__copy__()
+        sol.representation = BitArray(bin=self.representation.bin)
         return sol
 
     def copy(self):
@@ -61,6 +61,16 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution[BitArray]):
         """
         destination = self.__copy__()
 
+    def string_representation(self)->str:
+        """
+        Solution code of the target solution
+
+        :return: solution code
+        :rtype: str 
+        """
+        return self.representation.bin
+
+
     def random_init(self, problem:TargetProblem)->None:
         """
         Random initialization of the solution
@@ -73,16 +83,6 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution[BitArray]):
             if random() > 0.5:
                 self.representation[i] = True
 
-    def solution_code(self)->str:
-        """
-        Solution code of the target solution
-
-        :return: solution code
-        :rtype: str 
-        """
-        repr:BitArray = BitArray(self.representation.tobytes())
-        return str(repr)
-
     def calculate_objective_fitness_feasibility(self, problem:TargetProblem)->ObjectiveFitnessFeasibility:
         """
         Fitness calculation of the max ones binary BitArray solution
@@ -94,7 +94,7 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution[BitArray]):
         ones_count = self.representation.count(True)
         return ObjectiveFitnessFeasibility(ones_count, ones_count, True)
 
-    def native_representation_from_solution_code(self, representation_str:str)->BitArray:
+    def native_representation(self, representation_str:str)->BitArray:
         """
         Obtain `BitArray` representation from string representation of the BitArray binary solution of the Max Ones problem 
 
@@ -114,12 +114,12 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution[BitArray]):
         :return: distance between two solutions represented by its code
         :rtype: float
         """
-        rep_1:BitArray = self.native_representation_from_solution_code(solution_code_1)
-        rep_2:BitArray = self.native_representation_from_solution_code(solution_code_2)
+        rep_1:BitArray = self.native_representation(solution_code_1)
+        rep_2:BitArray = self.native_representation(solution_code_2)
         result = (rep_1 ^ rep_2).count(True)
         return result 
 
-    def string_representation(self, delimiter:str='\n', indentation:int=0, indentation_symbol:str='   ', 
+    def string_rep(self, delimiter:str='\n', indentation:int=0, indentation_symbol:str='   ', 
             group_start:str='{', group_end:str='}',)->str:
         """
         String representation of the solution instance
@@ -141,12 +141,12 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution[BitArray]):
         for i in range(0, indentation):
             s += indentation_symbol  
         s += group_start
-        s += super().string_representation(delimiter, indentation, indentation_symbol, '', '')
+        s += super().string_rep(delimiter, indentation, indentation_symbol, '', '')
         s += delimiter
         s += delimiter
         for i in range(0, indentation):
             s += indentation_symbol  
-        s += 'solution_code=' + str(self.solution_code())
+        s += 'string_representation()=' + str(self.string_representation())
         s += delimiter
         for i in range(0, indentation):
             s += indentation_symbol  
@@ -160,7 +160,7 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution[BitArray]):
         :return: string representation of the solution instance
         :rtype: str
         """
-        return self.string_representation('\n', 0, '   ', '{', '}')
+        return self.string_rep('\n', 0, '   ', '{', '}')
 
     def __repr__(self)->str:
         """
@@ -169,7 +169,7 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution[BitArray]):
         :return: string representation of the solution instance
         :rtype: str
         """
-        return self.string_representation('\n', 0, '   ', '{', '}')
+        return self.string_rep('\n', 0, '   ', '{', '}')
 
     def __format__(self, spec:str)->str:
         """
@@ -179,5 +179,5 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution[BitArray]):
         :return: formatted solution instance
         :rtype: str
         """
-        return self.string_representation('\n', 0, '   ', '{', '}')
+        return self.string_rep('\n', 0, '   ', '{', '}')
 

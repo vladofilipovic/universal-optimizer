@@ -86,7 +86,7 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         :param destination: destination target solution
         :type destination: :class:`uo.target_solution.TargetSolution`
         """
-        destination =  copy(self)
+        destination = copy(self)
 
     @property
     def name(self)->str:
@@ -191,6 +191,16 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         return self.__evaluation_cache_cs
 
     @abstractmethod
+    def string_representation(self)->str:
+        """
+        String representation of the target solution
+
+        :return: string representation of the solution 
+        :rtype: str
+        """
+        raise NotImplementedError
+
+    @abstractmethod
     def random_init(self, problem:TargetProblem)->None:
         """
         Random initialization of the solution
@@ -200,17 +210,7 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         raise NotImplementedError
 
     @abstractmethod
-    def solution_code(self)->str:
-        """
-        Solution code of the target solution
-
-        :return: solution code 
-        :rtype: str
-        """
-        raise NotImplementedError
-
-    @abstractmethod
-    def native_representation_from_solution_code(self, representation_str:str)->R_co:
+    def native_representation(self, representation_str:str)->R_co:
         """
         Obtain native representation from solution code of the `Solution` instance
 
@@ -244,7 +244,7 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         eccs = target_solution.evaluation_cache_cs 
         eccs.increment_cache_request_count()
         if eccs.is_caching:
-            code = target_solution.solution_code()
+            code = target_solution.string_representation()
             if code in eccs.cache:
                 eccs.increment_cache_hit_count()
                 return eccs.cache[code]
@@ -284,7 +284,7 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         """
         raise NotImplementedError
 
-    def string_representation(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
+    def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
         """
         String representation of the target solution instance
@@ -320,10 +320,10 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         s += 'is_feasible=' + str(self.is_feasible) + delimiter
         for i in range(0, indentation):
             s += indentation_symbol     
-        s += 'solution_code=' + self.solution_code() + delimiter
+        s += 'string_representation()=' + self.string_representation() + delimiter
         for i in range(0, indentation):
             s += indentation_symbol     
-        s += 'evaluation_cache_cs(static)=' + self.evaluation_cache_cs.string_representation(
+        s += 'evaluation_cache_cs=' + self.evaluation_cache_cs.string_rep(
                 delimiter, indentation+1, indentation_symbol, '{', '}')  
         for i in range(0, indentation):
             s += indentation_symbol  
@@ -338,7 +338,7 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         :return: string representation of the target solution instance
         :rtype: str
         """
-        return self.string_representation('|')
+        return self.string_repr('|')
 
     @abstractmethod
     def __repr__(self)->str:
@@ -348,7 +348,7 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         :return: string representation of the target solution instance
         :rtype: str
         """
-        return self.string_representation('\n')
+        return self.string_rep('\n')
 
     @abstractmethod
     def __format__(self, spec:str)->str:
@@ -359,5 +359,5 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         :return: formatted target solution instance
         :rtype: str
         """
-        return self.string_representation('|')
+        return self.string_rep('|')
 

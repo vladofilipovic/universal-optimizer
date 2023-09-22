@@ -93,7 +93,7 @@ class SolutionCodeDistanceCacheControlStatistics:
         """
         self.__cache_request_count += 1
 
-    def string_representation(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
+    def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
         """
         String representation of solution distance calculation cache control statistic 
@@ -136,7 +136,7 @@ class SolutionCodeDistanceCacheControlStatistics:
         :return: string representation of the cache control and statistics structure
         :rtype: str
         """
-        return self.string_representation('|')
+        return self.string_rep('|')
 
     def __repr__(self)->str:
         """
@@ -145,7 +145,7 @@ class SolutionCodeDistanceCacheControlStatistics:
         :return: string representation of cache control and statistics structure
         :rtype: str
         """
-        return self.string_representation('\n')
+        return self.string_rep('\n')
 
 
     def __format__(self, spec:str)->str:
@@ -156,6 +156,6 @@ class SolutionCodeDistanceCacheControlStatistics:
         :return: formatted cache control and statistics structure
         :rtype: str
         """
-        return self.string_representation('|')
+        return self.string_rep('|')
 
 

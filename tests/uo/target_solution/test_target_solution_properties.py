@@ -36,15 +36,14 @@ class TargetSolutionVoid(TargetSolution[int]):
     def copy_to(self, destination)->None:
         destination =  copy(self)
 
+    def string_representation(self)->str:
+        return "42"
 
     def random_init(self, problem:TargetProblem)->None:
         self.representation = 42
         return
 
-    def solution_code(self)->str:
-        return "solution code: 42"
-
-    def native_representation_from_solution_code(self, representation_str:str)->int:
+    def native_representation(self, representation_str:str)->int:
         return 42
 
     def calculate_objective_fitness_feasibility(self, problem:TargetProblem)->ObjectiveFitnessFeasibility:
@@ -54,14 +53,13 @@ class TargetSolutionVoid(TargetSolution[int]):
         return 42.0
 
     def __str__(self)->str:
-        return ''
+        return super().__str__()
 
     def __repr__(self)->str:
-        return ''
+        return super().__repr__()
 
     def __format__(self, spec:str)->str:
-        return ''
-    
+        return super().__format__()    
 
 class TestTargetSolutionProperties(unittest.TestCase):
     

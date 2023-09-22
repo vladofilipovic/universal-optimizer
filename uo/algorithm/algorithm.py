@@ -21,18 +21,21 @@ class Algorithm(metaclass=ABCMeta):
     """
 
     @abstractmethod
-    def __init__(self, name:str, evaluations_max:int, seconds_max:int, target_problem:TargetProblem)->None:
+    def __init__(self, name:str, evaluations_max:int, seconds_max:int, output_control:OutputControl,  
+            target_problem:TargetProblem)->None:
         """
         Create new Algorithm instance
 
         :param str name: name of the algorithm
         :param int evaluations_max: maximum number of evaluations for algorithm execution
         :param int seconds_max: maximum number of seconds for algorithm execution
-        :param TargetProblem target_problem: problem to be solved
+        :param `OutputControl` output_control: structure that controls output
+        :param `TargetProblem` target_problem: problem to be solved
         """
         self.__name:str = name
         self.__evaluations_max:int = evaluations_max
         self.__seconds_max:int = seconds_max
+        self.__output_control:OutputControl = output_control
         if isinstance(target_problem, TargetProblem):
             self.__target_problem:TargetProblem = target_problem.copy()
         else:
@@ -40,7 +43,6 @@ class Algorithm(metaclass=ABCMeta):
         self.__evaluation:int = 0
         self.__execution_started:datetime = None
         self.__execution_ended:datetime = None
-        self.__output_control:OutputControl = OutputControl()
 
     @abstractmethod
     def __copy__(self):
@@ -59,7 +61,7 @@ class Algorithm(metaclass=ABCMeta):
         Copy the current algorithm
 
         :return:  new `Algorithm` instance with the same properties
-        :rtype: :class:`optimization_algorithms.algorithm.Algorithm`
+        :rtype: :class:`uo.algorithm.Algorithm`
         """
         return self.__copy__()
 
@@ -175,7 +177,7 @@ class Algorithm(metaclass=ABCMeta):
         self.__output_control = value
 
 
-    def string_representation(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
+    def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
         """
         String representation of the 'Algorithm' instance
@@ -205,11 +207,11 @@ class Algorithm(metaclass=ABCMeta):
         s += 'evaluations_max=' + str(self.evaluations_max) + delimiter
         for i in range(0, indentation):
             s += indentation_symbol  
-        s += 'target_problem=' + self.target_problem.string_representation(delimiter, indentation + 1, 
+        s += 'target_problem=' + self.target_problem.string_rep(delimiter, indentation + 1, 
                 indentation_symbol, '{', '}')  + delimiter 
         for i in range(0, indentation):
             s += indentation_symbol  
-        s += '__output_control=' + self.__output_control.string_representation(
+        s += '__output_control=' + self.__output_control.string_rep(
                 delimiter, indentation + 1, indentation_symbol, '{', '}') + delimiter
         s += '__evaluation=' + str(self.__evaluation) + delimiter
         for i in range(0, indentation):
@@ -232,7 +234,7 @@ class Algorithm(metaclass=ABCMeta):
         :return: string representation of the 'Algorithm' instance
         :rtype: str
         """
-        return self.string_representation('|')
+        return self.string_rep('|')
 
     @abstractmethod
     def __repr__(self)->str:
@@ -242,7 +244,7 @@ class Algorithm(metaclass=ABCMeta):
         :return: string representation of the 'Algorithm' instance
         :rtype: str
         """
-        return self.string_representation('\n')
+        return self.string_rep('\n')
 
     @abstractmethod
     def __format__(self, spec:str)->str:
@@ -253,4 +255,50 @@ class Algorithm(metaclass=ABCMeta):
         :return: formatted 'Algorithm' instance
         :rtype: str
         """
-        return self.string_representation('|')
+        return self.string_rep('|')
+
+    def write_output_headers_if_needed(self):
+        if self.output_control.write_to_output:
+            output:TextIOWrapper = self.output_control.output_file
+            f_hs:list[str] = self.output_control.fields_headings
+            for f_h in f_hs:
+                output.write(f_h)
+                output.write('\t')
+            output.write('\n')
+
+    def write_output_values_if_needed(self, step_name:str, step_name_value:str):
+        if self.output_control.write_to_output:
+            output:TextIOWrapper = self.output_control.output_file
+            should_write:bool = False
+            if step_name == 'after_algorithm':
+                should_write = True
+            elif step_name == 'before_algorithm':
+                should_write = self.output_control.write_before_algorithm
+            elif step_name == 'after_iteration':
+                should_write = self.output_control.write_after_iteration
+            elif step_name == 'before_iteration':
+                should_write = self.output_control.write_before_iteration
+            elif step_name == 'after_evaluation':
+                should_write = self.output_control.write_after_evaluation
+            elif step_name == 'before_evaluation':
+                should_write = self.output_control.write_before_evaluation
+            elif step_name == 'after_step_in_iteration':
+                should_write = self.output_control.write_after_step_in_iteration
+            elif step_name == 'before_step_in_iteration':
+                should_write = self.output_control.write_before_step_in_iteration
+            else:
+                raise ValueError("Supplied step name '" + step_name + "' is not valid.")
+            if should_write:
+                fields_def:list[str] = self.output_control.fields_definitions 
+                for f_def in fields_def:
+                    if f_def != "":
+                        try:
+                            data = eval(f_def)
+                            s_data:str = str(data)
+                            if s_data == "step_name":
+                                s_data = step_name_value
+                        except:
+                            s_data:str = 'XXX'
+                        output.write( s_data + '\t')
+                output.write('\n')
+

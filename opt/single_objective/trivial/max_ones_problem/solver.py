@@ -24,6 +24,7 @@ from collections import namedtuple
 
 from bitstring import BitArray
 
+from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
 from uo.utils.files import ensure_dir 
@@ -68,34 +69,46 @@ def main():
             is_minimization:bool = False
         else:
             raise ValueError("Either minimization or maximization should be selected.")
-        # output setup
+        # write to output file setup
         if parameters['writeToOutputFile'] is None:
             write_to_output_file:bool = False
         else:
             write_to_output_file:bool = bool(parameters['writeToOutputFile'])
-        if parameters['outputFilePath'] is not None and  parameters['outputFilePath'] != '':
-            output_file_path_parts:list[str] = parameters['outputFilePath'].split('/')
+        # output file setup
+        if write_to_output_file:
+            if parameters['outputFilePath'] is not None and  parameters['outputFilePath'] != '':
+                output_file_path_parts:list[str] = parameters['outputFilePath'].split('/')
+            else:
+                output_file_path_parts:list[str] = ['outputs', 'out']
+            output_file_name_ext:str = output_file_path_parts[-1]
+            output_file_name_parts:list[str] = output_file_name_ext.split('.')
+            if len(output_file_name_parts) > 1:
+                output_file_ext:str = output_file_name_parts[-1]
+                output_file_name_parts.pop()
+                output_file_name = '.'.join(output_file_name_parts)
+            else:
+                output_file_ext = 'txt'
+                output_file_name = output_file_name_parts[0]
+            dt = datetime.now()
+            output_file_path_parts.pop()
+            output_file_dir:str =  '/'.join(output_file_path_parts)
+            output_file_path_parts.append( output_file_name +  '-maxones-' + parameters['solutionType'] + '-' + 
+                    parameters['algorithm'] + '-' + parameters['optimization_type'][0:3] + '-' + 
+                    dt.strftime("%Y-%m-%d-%H-%M-%S.%f") + '.' + output_file_ext)
+            output_file_path:str = '/'.join(output_file_path_parts)
+            logger.debug("Output file path: {}".format(output_file_path))
+            ensure_dir(output_file_dir)
+            output_file = open(output_file_path, "w", encoding="utf-8")
+        # output control setup
+        if write_to_output_file:    
+            output_fields:str = parameters['outputFields']
+            output_moments:str = parameters['outputMoments']
+            output_control:OutputControl = OutputControl(write_to_output=True,
+                    output_file=output_file,
+                    fields=output_fields,
+                    moments=output_moments)
         else:
-            output_file_path_parts:list[str] = ['outputs', 'out']
-        output_file_name_ext:str = output_file_path_parts[-1]
-        output_file_name_parts:list[str] = output_file_name_ext.split('.')
-        if len(output_file_name_parts) > 1:
-            output_file_ext:str = output_file_name_parts[-1]
-            output_file_name_parts.pop()
-            output_file_name = '.'.join(output_file_name_parts)
-        else:
-            output_file_ext = 'txt'
-            output_file_name = output_file_name_parts[0]
-        dt = datetime.now()
-        output_file_path_parts.pop()
-        output_file_dir:str =  '/'.join(output_file_path_parts)
-        output_file_path_parts.append( output_file_name +  '-maxones-' + parameters['solutionType'] + '-' + 
-                parameters['algorithm'] + '-' + parameters['optimization_type'][0:3] + '-' + 
-                dt.strftime("%Y-%m-%d-%H-%M-%S.%f") + '.' + output_file_ext)
-        output_file_path:str = '/'.join(output_file_path_parts)
-        logger.debug("Output file path: {}".format(output_file_path))
-        ensure_dir(output_file_dir)
-        output_file = open(output_file_path, "w", encoding="utf-8")
+            output_control:OutputControl = OutputControl(write_to_output=False)
         # input file setup
         input_file_path:str = parameters['inputFilePath']
         input_format:str = parameters['inputFormat']
@@ -153,15 +166,13 @@ def main():
             # optimizer used for solving
             optimizer = VnsOptimizer(evaluations_max=max_number_iterations, 
                     seconds_max=max_time_for_execution_in_seconds, random_seed=r_seed, 
-                    keep_all_solution_codes=keep_all_solution_codes, target_problem=problem, 
-                    initial_solution=initial_solution, problem_solution_vns_support=vns_support,
+                    keep_all_solution_codes=keep_all_solution_codes, output_control=output_control, 
+                    target_problem=problem, initial_solution=initial_solution, problem_solution_vns_support=vns_support,
                     k_min=k_min, k_max=k_max, max_local_optima=max_local_optima, 
                     local_search_type=local_search_type)
             #logger.debug('Optimizer: {}'.format(optimizer))
-            optimizer.optimize()
             optimizer.representation_distance_cache_cs.is_caching = calculation_solution_distance_cache_is_used
-            optimizer.output_control.write_to_output_file = write_to_output_file
-            optimizer.output_control.output_file = output_file
+            optimizer.optimize()
             logger.info('Best solution: {}'.format(optimizer.best_solution))            
             logger.debug('Optimizer: {}'.format(optimizer))
             logger.debug('VNS ended.')

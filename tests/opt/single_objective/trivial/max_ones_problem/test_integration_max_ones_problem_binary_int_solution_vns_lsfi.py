@@ -17,24 +17,27 @@ from copy import deepcopy
 from random import randint
 from random import choice
 
+from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
 from opt.single_objective.trivial.max_ones_problem.max_ones_problem import MaxOnesProblem
 from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution import MaxOnesProblemBinaryIntSolution
 from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution_vns_support import MaxOnesProblemBinaryIntSolutionVnsSupport
 
-class TestMaxOnesProblemBinaryIntSolutionVnsLsbiExecution(unittest.TestCase):
+class TestIntegrationMaxOnesProblemBinaryIntSolutionVnsLsfi(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
-        print("setUpClass TestMaxOnesProblemBinaryIntSolutionVnsLsbiExecution\n")
+        print("setUpClass TestIntegrationMaxOnesProblemBinaryIntSolutionVnsLsfi\n")
 
     def setUp(self):
+        self.output_control = OutputControl(False)
         self.problem_to_solve:MaxOnesProblem = MaxOnesProblem(dim=22)
         self.initial_solution:MaxOnesProblemBinaryIntSolution = MaxOnesProblemBinaryIntSolution()
         self.initial_solution.random_init(self.problem_to_solve)
         self.vns_support:MaxOnesProblemBinaryIntSolutionVnsSupport = MaxOnesProblemBinaryIntSolutionVnsSupport()
-        self.optimizer:VnsOptimizer = VnsOptimizer(target_problem=self.problem_to_solve, 
+        self.optimizer:VnsOptimizer = VnsOptimizer(output_control=self.output_control,
+                target_problem=self.problem_to_solve, 
                 initial_solution=self.initial_solution, 
                 problem_solution_vns_support=self.vns_support,
                 evaluations_max=500, 
@@ -44,7 +47,7 @@ class TestMaxOnesProblemBinaryIntSolutionVnsLsbiExecution(unittest.TestCase):
                 k_min=1, 
                 k_max=3, 
                 max_local_optima=10, 
-                local_search_type='local_search_best_improvement')
+                local_search_type='local_search_first_improvement')
         self.optimizer.representation_distance_cache_cs.is_caching = False
         self.optimizer.output_control.write_to_output_file = False
         self.optimizer.optimize()
@@ -62,7 +65,7 @@ class TestMaxOnesProblemBinaryIntSolutionVnsLsbiExecution(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        print("\ntearDownClass TestMaxOnesProblemBinaryIntSolutionVnsLsbiExecution")
+        print("\ntearDownClass TestIntegrationMaxOnesProblemBinaryIntSolutionVnsLsfi")
     
 if __name__ == '__main__':
     unittest.main()

@@ -13,6 +13,7 @@ sys.path.append(directory.parent.parent.parent.parent.parent.parent.parent.paren
 import unittest   
 import unittest.mock as mock
 
+from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer 
 
 class TestVnsOptimizerProperties(unittest.TestCase):
@@ -22,6 +23,9 @@ class TestVnsOptimizerProperties(unittest.TestCase):
         print("setUpClass TestVnsOptimizerProperties\n")
 
     def setUp(self):
+        self.output_control = mock.MagicMock()
+        type(self.output_control).write_to_output = False
+
         self.evaluations_max = 42
         self.seconds_max = 42
         self.random_seed = 42
@@ -35,6 +39,7 @@ class TestVnsOptimizerProperties(unittest.TestCase):
         type(self.problem).dimension = mock.PropertyMock(return_value=42)
 
         self.vns_optimizer = VnsOptimizer(
+                output_control=self.output_control,
                 evaluations_max=self.evaluations_max, 
                 seconds_max=self.seconds_max, 
                 random_seed=self.random_seed, 

@@ -28,7 +28,7 @@ class MaxOnesProblem(TargetProblem):
     def load_from_file(self, data_format:str='txt')->None:
         return
 
-    def string_representation(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
+    def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
         return ''
 
@@ -73,24 +73,24 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
         self.representation = randint(0, 2^problem.dimension-1)
         self.__make_to_be_feasible_helper__(problem)
 
-    def solution_code(self)->str:
+    def string_rep(self)->str:
         return bin(self.representation)
 
     def calculate_objective_fitness_feasibility(self, problem:TargetProblem)->ObjectiveFitnessFeasibility:
         ones_count = self.representation.bit_count()
         return ObjectiveFitnessFeasibility(ones_count, ones_count, True)
 
-    def native_representation_from_solution_code(self, representation_str:str)->int:
+    def native_representation(self, representation_str:str)->int:
         ret:int = int(representation_str, 2)
         return ret
 
     def representation_distance(solution_code_1:str, solution_code_2:str)->float:
-        rep_1:int = self.native_representation_from_solution_code(solution_code_1)
-        rep_2:int = self.native_representation_from_solution_code(solution_code_2)
+        rep_1:int = self.native_representation(solution_code_1)
+        rep_2:int = self.native_representation(solution_code_2)
         result = (rep_1 ^ rep_2).count(True)
         return result 
 
-    def string_representation(self, delimiter:str='\n', indentation:int=0, indentation_symbol:str='   ', 
+    def string_rep(self, delimiter:str='\n', indentation:int=0, indentation_symbol:str='   ', 
             group_start:str='{', group_end:str='}',)->str:
         return ''
 
@@ -191,25 +191,26 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
             solution.representation ^= mask
         return solution
 
-    def string_representation(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
+    def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
         return 'MaxOnesProblemBinaryIntSolutionVnsSupport'
 
     def __str__(self)->str:
-        return self.string_representation('|')
+        return self.string_rep('|')
 
     def __repr__(self)->str:
-        return self.string_representation('\n')
+        return self.string_rep('\n')
 
 
     def __format__(self, spec:str)->str:
-        return self.string_representation('|')
+        return self.string_rep('|')
 
 problem_to_solve:MaxOnesProblem = MaxOnesProblem(dim=22)
 initial_solution:MaxOnesProblemBinaryIntSolution = MaxOnesProblemBinaryIntSolution()
 initial_solution.random_init(problem_to_solve)
 vns_support:MaxOnesProblemBinaryIntSolutionVnsSupport = MaxOnesProblemBinaryIntSolutionVnsSupport()
-optimizer:VnsOptimizer = VnsOptimizer(target_problem=problem_to_solve, 
+optimizer:VnsOptimizer = VnsOptimizer(output_control=OutputControl(write_to_output=false),
+        target_problem=problem_to_solve, 
         initial_solution=initial_solution, 
         problem_solution_vns_support=vns_support,
         evaluations_max=500, 
@@ -221,10 +222,9 @@ optimizer:VnsOptimizer = VnsOptimizer(target_problem=problem_to_solve,
         max_local_optima=10, 
         local_search_type='local_search_first_improvement')
 optimizer.representation_distance_cache_cs.is_caching = False
-optimizer.output_control.write_to_output_file = False
 optimizer.optimize()
 print('Best solution representation: {}'.format(optimizer.best_solution.representation))            
-print('Best solution code: {}'.format(optimizer.best_solution.solution_code()))            
+print('Best solution code: {}'.format(optimizer.best_solution.string_representation()))            
 print('Best solution fitness: {}'.format(optimizer.best_solution.fitness_value))
 print('Number of iterations: {}'.format(optimizer.iteration))            
 print('Number of evaluations: {}'.format(optimizer.evaluation))            
