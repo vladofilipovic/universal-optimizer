@@ -21,11 +21,11 @@ default_parameters_cl = {
         'writeToOutputFile': True,
         'outputFilePath':'opt/single_objective/trivial/max_ones_problem/outputs/dimension_77.csv', 
         'outputFileNameAppendTimeStamp': False,
-        'outputFields': "iteration, evaluation",
+        'outputFields': "iteration, evaluation, best_solution.fitness_value, best_solution.string_representation()",
         'outputMoments': "after_algorithm, after_evaluation",
         'inputFilePath': 'opt/single_objective/trivial/max_ones_problem/inputs/dimension_77.txt', 
         'inputFormat': 'txt', 
-        'maxNumberIterations': 20, 
+        'maxNumberEvaluations': 1000, 
         'maxTimeForExecutionSeconds': 0, 
         'randomSeed': 0,
         'evaluationCacheIsUsed': False,
@@ -71,9 +71,9 @@ def parse_arguments():
                 help='Input file path for the instance of the problem. ')
         parser_vns.add_argument('--inputFormat', type=str, choices=['txt', 'idle'], default = 'txt',
                 help='Input file format. ')    
-        parser_vns.add_argument('--maxNumberIterations', type=int, default=0, 
-                help=("Maximum numbers of iterations during VNS execution. " 
-                "Value 0 means that there is no limit on number of iterations.") )        
+        parser_vns.add_argument('--maxNumberEvaluations', type=int, default=0, 
+                help=("Maximum numbers of evaluations during VNS execution. " 
+                "Value 0 means that there is no limit on number of evaluations.") )        
         parser_vns.add_argument('--maxTimeForExecutionSeconds', type=int, default=10, 
                 help=("Maximum time for execution (in seconds).\n " 
                 "Value 0 means that there is no limit on execution time.") )    

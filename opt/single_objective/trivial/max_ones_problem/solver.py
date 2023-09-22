@@ -122,7 +122,7 @@ def main():
         input_file_path:str = parameters['inputFilePath']
         input_format:str = parameters['inputFormat']
         # finishing criteria setup
-        max_number_iterations:int = parameters['maxNumberIterations']
+        max_number_evaluations:int = parameters['maxNumberEvaluations']
         max_time_for_execution_in_seconds = parameters['maxTimeForExecutionSeconds']
         # random seed setup
         if( int(parameters['randomSeed']) > 0 ):
@@ -173,7 +173,7 @@ def main():
             initial_solution.random_init(problem=problem)
             #logger.debug('Initial solution: {}'.format(initial_solution))
             # optimizer used for solving
-            optimizer = VnsOptimizer(evaluations_max=max_number_iterations, 
+            optimizer = VnsOptimizer(evaluations_max=max_number_evaluations, 
                     seconds_max=max_time_for_execution_in_seconds, random_seed=r_seed, 
                     keep_all_solution_codes=keep_all_solution_codes, output_control=output_control, 
                     target_problem=problem, initial_solution=initial_solution, problem_solution_vns_support=vns_support,
