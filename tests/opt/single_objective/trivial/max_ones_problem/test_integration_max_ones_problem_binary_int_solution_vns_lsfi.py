@@ -40,7 +40,7 @@ class TestIntegrationMaxOnesProblemBinaryIntSolutionVnsLsfi(unittest.TestCase):
                 target_problem=self.problem_to_solve, 
                 initial_solution=self.initial_solution, 
                 problem_solution_vns_support=self.vns_support,
-                evaluations_max=500, 
+                evaluations_max=5000, 
                 seconds_max=0, 
                 random_seed=42, 
                 keep_all_solution_codes=False,

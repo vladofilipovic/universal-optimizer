@@ -121,7 +121,7 @@ class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[B
         best_triplet:ObjectiveFitnessFeasibility =  ObjectiveFitnessFeasibility(solution.objective_value,
                 solution.fitness_value, solution.is_feasible)
         # initialize indexes
-        indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k,len(solution.representation))
+        indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k, problem.dimension)
         in_loop:boolean = indexes.reset()
         while in_loop:
             # collect positions for inversion from indexes
@@ -166,9 +166,9 @@ class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[B
             return solution
         best_fv:float = solution.fitness_value
         # initialize indexes
-        indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k,len(solution.representation))
+        indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k, problem.dimension)
         in_loop:boolean = indexes.reset()
-        while not in_loop:
+        while in_loop:
             # collect positions for inversion from indexes
             positions:list[int] = indexes.current_state()
             # invert and compare, switch and exit if new is better

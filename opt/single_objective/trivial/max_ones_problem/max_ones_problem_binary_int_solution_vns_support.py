@@ -20,6 +20,8 @@ from random import choice
 from random import randint
 
 from uo.utils.logger import logger
+from uo.utils.complex_counter_uniform_distinct import ComplexCounterUniformAscending
+
 from uo.target_solution.target_solution import ObjectiveFitnessFeasibility
 from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
@@ -115,7 +117,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
         best_triplet:ObjectiveFitnessFeasibility =  ObjectiveFitnessFeasibility(solution.objective_value,
                 solution.fitness_value, solution.is_feasible)
         # initialize indexes
-        indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k,len(solution.representation))
+        indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k,problem.dimension)
         in_loop:boolean = indexes.reset()
         while in_loop:
             # collect positions for inversion from indexes
@@ -163,7 +165,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
             return solution
         best_fv:float = solution.fitness_value
         # initialize indexes
-        indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k,len(solution.representation))
+        indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k,problem.dimension)
         in_loop:boolean = indexes.reset()
         while in_loop:
             # collect positions for inversion from indexes
