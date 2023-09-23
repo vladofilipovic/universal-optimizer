@@ -86,6 +86,8 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
                 break
         if tries < limit:
             optimizer.evaluation += 1
+            if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+                return solution
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             solution.evaluate(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
@@ -110,28 +112,28 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
         if k<1:
             return solution
         # ls_bi for k==1
-        best_ind:int = None
-        best_fv:float = solution.fitness_value
+        best_rep:int = None
+        best_triplet:ObjectiveFitnessFeasibility =  ObjectiveFitnessFeasibility(solution.objective_value,
+                solution.fitness_value, solution.is_feasible)
         for i in range(0, problem.dimension):
             mask:int = 1 << i
             solution.representation ^= mask 
             optimizer.evaluation += 1
+            if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+                return solution
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             new_triplet = solution.calculate_objective_fitness_feasibility(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
-            if new_triplet.fitness_value > best_fv:
-                best_ind = i
-                best_fv = new_triplet.fitness_value
+            if new_triplet.fitness_value > best_triplet.fitness_value:
+                best_triplet = new_triplet
+                best_rep = solution.representation
             solution.representation ^= mask 
-        if best_ind is not None:
-            mask:int = 1 << best_ind
-            solution.representation ^= mask
-            optimizer.evaluation += 1
-            optimizer.write_output_values_if_needed("before_evaluation", "b_e")
-            solution.evaluate(problem)
-            optimizer.write_output_values_if_needed("after_evaluation", "a_e")
-            if solution.fitness_value != best_fv:
-                raise Exception('Fitness calculation within `local_search_best_improvement` function is not correct.')
+        if best_rep is not None:
+            solution.representation = best_rep
+            solution.objective_value = best_triplet.objective_value
+            solution.fitness_value = best_triplet.fitness_value
+            solution.is_feasible = best_triplet.is_feasible
+            return solution
         return solution
 
     def local_search_first_improvement(self, k:int, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryIntSolution, 
@@ -156,6 +158,8 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
             mask:int = 1 << i
             solution.representation ^= mask 
             optimizer.evaluation += 1
+            if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+                return solution
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             new_triplet = solution.calculate_objective_fitness_feasibility(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
