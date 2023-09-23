@@ -115,11 +115,13 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
         for i in range(0, problem.dimension):
             mask:int = 1 << i
             solution.representation ^= mask 
-            optimizer.evaluation +=1 
-            new_fv = solution.calculate_objective_fitness_feasibility(problem).fitness_value
-            if new_fv > best_fv:
+            optimizer.evaluation += 1
+            optimizer.write_output_values_if_needed("before_evaluation", "b_e")
+            new_triplet = solution.calculate_objective_fitness_feasibility(problem)
+            optimizer.write_output_values_if_needed("after_evaluation", "a_e")
+            if new_triplet.fitness_value > best_fv:
                 best_ind = i
-                best_fv = new_fv
+                best_fv = new_triplet.fitness_value
             solution.representation ^= mask 
         if best_ind is not None:
             mask:int = 1 << best_ind
@@ -155,15 +157,12 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
             solution.representation ^= mask 
             optimizer.evaluation += 1
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
-            new_fv = solution.calculate_objective_fitness_feasibility(problem).fitness_value
+            new_triplet = solution.calculate_objective_fitness_feasibility(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
-            if new_fv > best_fv:
-                optimizer.evaluation += 1
-                optimizer.write_output_values_if_needed("before_evaluation", "b_e")
-                solution.evaluate(problem)
-                optimizer.write_output_values_if_needed("after_evaluation", "a_e")
-                if solution.fitness_value != new_fv:
-                    raise Exception('Fitness calculation within `local_search_first_improvement` function is not correct.')
+            if new_triplet.fitness_value > best_fv:
+                solution.fitness_value = new_triplet.fitness_value
+                solution.objective_value = new_triplet.objective_value
+                solution.is_feasible = new_triplet.is_feasible
                 return solution
             solution.representation ^= mask
         return solution

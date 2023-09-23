@@ -46,7 +46,8 @@ class TargetSolutionVoid(TargetSolution[int]):
     def native_representation(self, representation_str:str)->int:
         return 42
 
-    def calculate_objective_fitness_feasibility(self, problem:TargetProblem)->ObjectiveFitnessFeasibility:
+    def calculate_objective_fitness_feasibility_directly(self, representation:int, 
+            problem:TargetProblem)->ObjectiveFitnessFeasibility:
         return ObjectiveFitnessFeasibility(42, 42, True)
 
     def representation_distance(solution_code_1:str, solution_code_2:str)->float:

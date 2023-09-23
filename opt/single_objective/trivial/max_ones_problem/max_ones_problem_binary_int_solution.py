@@ -96,15 +96,17 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
         self.representation = randint(0, 2^problem.dimension-1)
         self.__make_to_be_feasible_helper__(problem)
 
-    def calculate_objective_fitness_feasibility(self, problem:TargetProblem)->ObjectiveFitnessFeasibility:
+    def calculate_objective_fitness_feasibility_directly(self, representation:int, 
+            problem:TargetProblem)->ObjectiveFitnessFeasibility:
         """
         Fitness calculation of the max ones binary int solution
 
+        :param int representation: native representation of the solution whose fitness, objective and feasibility is calculated
         :param TargetProblem problem: problem that is solved
         :return: objective value, fitness value and feasibility of the solution instance  
         :rtype: `ObjectiveFitnessFeasibility`
         """
-        ones_count = self.representation.bit_count()
+        ones_count = representation.bit_count()
         return ObjectiveFitnessFeasibility(ones_count, ones_count, True)
 
     def native_representation(self, representation_str:str)->int:
