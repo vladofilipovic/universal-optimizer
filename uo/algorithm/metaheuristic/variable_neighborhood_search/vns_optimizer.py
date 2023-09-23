@@ -30,8 +30,14 @@ class VnsOptimizer(Metaheuristic):
     :ref:`Algorithm_Variable_Neighborhood_Search` optimization algorithm.
     """
     
-    def __init__(self, evaluations_max:int, seconds_max:int, random_seed:int, keep_all_solution_codes:bool, 
-            output_control:OutputControl, target_problem:TargetProblem, initial_solution:TargetSolution, 
+    def __init__(self, evaluations_max:int, 
+            seconds_max:int, 
+            random_seed:int, 
+            keep_all_solution_codes:bool, 
+            distance_calculation_cache_is_used:bool,
+            output_control:OutputControl, 
+            target_problem:TargetProblem, 
+            initial_solution:TargetSolution, 
             problem_solution_vns_support:ProblemSolutionVnsSupport, 
             k_min:int, k_max:int, max_local_optima:int, local_search_type:str)->None:
         """
@@ -42,6 +48,7 @@ class VnsOptimizer(Metaheuristic):
         :param int seconds_max: maximum number of seconds for algorithm execution
         :param int random_seed: random seed for metaheuristic execution
         :param bool keep_all_solution_codes: if all solution codes will be remembered
+        :param bool distance_calculation_cache_is_used: if cache is used for distance calculation between solutions        
         :param `OutputControl` output_control: structure that controls output
         :param `TargetProblem` target_problem: problem to be solved
         :param `TargetSolution` initial_solution: initial solution of the problem that is optimized by VNS 
@@ -53,8 +60,14 @@ class VnsOptimizer(Metaheuristic):
         :param local_search_type: type of the local search
         :type local_search_type: str, possible values: 'local_search_best_improvement', 'local_search_first_improvement' 
         """
-        super().__init__('vns', evaluations_max, seconds_max, random_seed, keep_all_solution_codes, output_control,
-                target_problem)
+        super().__init__( name='vns', 
+                evaluations_max=evaluations_max, 
+                seconds_max=seconds_max, 
+                random_seed=random_seed, 
+                keep_all_solution_codes=keep_all_solution_codes,
+                distance_calculation_cache_is_used=distance_calculation_cache_is_used, 
+                output_control=output_control, 
+                target_problem=target_problem)
         if initial_solution is not None:
             if isinstance(initial_solution, TargetSolution):
                 self.__current_solution:TargetSolution = initial_solution.copy()
@@ -92,8 +105,6 @@ class VnsOptimizer(Metaheuristic):
         self.__k_current:int = None
         # values of the local optima foreach element calculated 
         self.__local_optima:Dict[int|BitArray, float] = {}
-        # number of shakings for each vns parameter
-        self.__shaking_counts:Dict[int,int] = {}
 
     def __copy__(self):
         """
@@ -199,7 +210,7 @@ class VnsOptimizer(Metaheuristic):
             self.write_output_values_if_needed("after_step_in_iteration", "ls")
             # update auxiliary structure that keeps all solution codes
             if self.keep_all_solution_codes:
-                self.all_solution_codes.add(self.current_solution)
+                self.all_solution_codes.add(self.current_solution.string_representation())
             new_is_better = self.is_first_solution_better(self.current_solution, self.best_solution)
             make_move:bool = new_is_better
             if new_is_better is None:

@@ -1,5 +1,5 @@
 """ 
-The :mod:`~uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics` module describes the class :class:`~uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics.SolutionCodeDistanceCacheControlStatistics`.
+The :mod:`~uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics` module describes the class :class:`~uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics.DistanceCalculationCacheControlStatistics`.
 """
 
 
@@ -9,16 +9,18 @@ import sys
 sys.path.append(directory.parent)
 sys.path.append(directory.parent.parent)
 
-class SolutionCodeDistanceCacheControlStatistics:
+class DistanceCalculationCacheControlStatistics:
     """
-    Class that represents control statistics for solution code distance cache.
+    Class that represents control statistics for solution code distance calculation cache.
     """
 
-    def __init__(self)->None:
+    def __init__(self, is_caching)->None:
         """
-        Create new `SolutionCodeDistanceCacheControlStatistics` instance
+        Create new `DistanceCalculationCacheControlStatistics` instance
+        
+        :param is_caching: is cashing enabled during calculation of distances among solution representations
         """
-        self.__is_caching:bool = False
+        self.__is_caching:bool = is_caching
         self.__cache:dict[dict[str]] = {}
         self.__cache_hit_count:int = 0
         self.__cache_request_count:int = 0

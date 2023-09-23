@@ -83,15 +83,17 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution[BitArray]):
             if random() > 0.5:
                 self.representation[i] = True
 
-    def calculate_objective_fitness_feasibility(self, problem:TargetProblem)->ObjectiveFitnessFeasibility:
+    def calculate_objective_fitness_feasibility_directly(self, representation:BitArray, 
+            problem:TargetProblem)->ObjectiveFitnessFeasibility:
         """
         Fitness calculation of the max ones binary BitArray solution
 
+        :param BitArray representation: native representation of solution whose fitness is calculated
         :param TargetProblem problem: problem that is solved
         :return: objective value, fitness value and feasibility of the solution instance  
         :rtype: `ObjectiveFitnessFeasibility`
         """
-        ones_count = self.representation.count(True)
+        ones_count = representation.count(True)
         return ObjectiveFitnessFeasibility(ones_count, ones_count, True)
 
     def native_representation(self, representation_str:str)->BitArray:

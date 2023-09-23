@@ -86,6 +86,8 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
                 break
         if tries < limit:
             optimizer.evaluation += 1
+            if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+                return solution
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             solution.evaluate(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
@@ -107,44 +109,32 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
         """
         if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
             return solution
-        if k < 1 or k > problem.dimension:
+        if k<1:
             return solution
-        if k==1:
-            best_ind:int = None
-            best_fv:float = solution.fitness_value
-            for i in range(0, problem.dimension):
-                mask:int = 1 << i
-                solution.representation ^= mask 
-                optimizer.evaluation +=1 
-                new_fv = solution.calculate_objective_fitness_feasibility(problem).fitness_value
-                if new_fv > best_fv:
-                    best_ind = i
-                    best_fv = new_fv
-                solution.representation ^= mask 
-            if best_ind is not None:
-                mask:int = 1 << best_ind
-                solution.representation ^= mask
-                optimizer.evaluation += 1
-                optimizer.write_output_values_if_needed("before_evaluation", "b_e")
-                solution.evaluate(problem)
-                optimizer.write_output_values_if_needed("after_evaluation", "a_e")
-                if solution.fitness_value != best_fv:
-                    raise Exception('Fitness calculation within `local_search_best_improvement` function is not correct.')
+        # ls_bi for k==1
+        best_rep:int = None
+        best_triplet:ObjectiveFitnessFeasibility =  ObjectiveFitnessFeasibility(solution.objective_value,
+                solution.fitness_value, solution.is_feasible)
+        for i in range(0, problem.dimension):
+            mask:int = 1 << i
+            solution.representation ^= mask 
+            optimizer.evaluation += 1
+            if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+                return solution
+            optimizer.write_output_values_if_needed("before_evaluation", "b_e")
+            new_triplet = solution.calculate_objective_fitness_feasibility(problem)
+            optimizer.write_output_values_if_needed("after_evaluation", "a_e")
+            if new_triplet.fitness_value > best_triplet.fitness_value:
+                best_triplet = new_triplet
+                best_rep = solution.representation
+            solution.representation ^= mask 
+        if best_rep is not None:
+            solution.representation = best_rep
+            solution.objective_value = best_triplet.objective_value
+            solution.fitness_value = best_triplet.fitness_value
+            solution.is_feasible = best_triplet.is_feasible
             return solution
-        else:
-            best_ind:int = None
-            best_fv:float = solution.fitness_value
-            # initialize indexes
-            indexes:list[int] = [0] * k
-            for i in range(indexes):
-                indexes[i] = i
-            is_over:boolean = False
-            while not is_over:
-                # collect positions for inversion from indexes
-                # invert and compare, switch of new is better
-                # increment indexes and set is_over on True when indexes are exhausted
-                is_over = True
-            return solution
+        return solution
 
     def local_search_first_improvement(self, k:int, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryIntSolution, 
             optimizer: Algorithm)->MaxOnesProblemBinaryIntSolution:
@@ -160,40 +150,26 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
         """
         if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
             return solution
-        if k < 1 or k > problem.dimension:
+        if k<1:
             return solution
-        if k==1:
-            best_fv:float = solution.fitness_value
-            for i in range(0, problem.dimension):
-                mask:int = 1 << i
-                solution.representation ^= mask 
-                optimizer.evaluation += 1
-                optimizer.write_output_values_if_needed("before_evaluation", "b_e")
-                new_fv = solution.calculate_objective_fitness_feasibility(problem).fitness_value
-                optimizer.write_output_values_if_needed("after_evaluation", "a_e")
-                if new_fv > best_fv:
-                    optimizer.evaluation += 1
-                    optimizer.write_output_values_if_needed("before_evaluation", "b_e")
-                    solution.evaluate(problem)
-                    optimizer.write_output_values_if_needed("after_evaluation", "a_e")
-                    if solution.fitness_value != new_fv:
-                        raise Exception('Fitness calculation within `local_search_first_improvement` function is not correct.')
-                    return solution
-                solution.representation ^= mask
-            return solution
-        else:
-            best_fv:float = solution.fitness_value
-            # initialize indexes
-            indexes:list[int] = [0] * k
-            for i in range(indexes):
-                indexes[i] = i
-            is_over:boolean = False
-            while not is_over:
-                # collect positions for inversion from indexes
-                # invert and compare, switch and exit if new is better
-                # increment indexes and set is_over on True when indexes are exhausted
-                is_over = True
-            return solution
+        # ls_fi for k==1
+        best_fv:float = solution.fitness_value
+        for i in range(0, problem.dimension):
+            mask:int = 1 << i
+            solution.representation ^= mask 
+            optimizer.evaluation += 1
+            if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+                return solution
+            optimizer.write_output_values_if_needed("before_evaluation", "b_e")
+            new_triplet = solution.calculate_objective_fitness_feasibility(problem)
+            optimizer.write_output_values_if_needed("after_evaluation", "a_e")
+            if new_triplet.fitness_value > best_fv:
+                solution.fitness_value = new_triplet.fitness_value
+                solution.objective_value = new_triplet.objective_value
+                solution.is_feasible = new_triplet.is_feasible
+                return solution
+            solution.representation ^= mask
+        return solution
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:

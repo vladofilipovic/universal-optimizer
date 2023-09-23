@@ -174,13 +174,19 @@ def main():
             #logger.debug('Initial solution: {}'.format(initial_solution))
             # optimizer used for solving
             optimizer = VnsOptimizer(evaluations_max=max_number_evaluations, 
-                    seconds_max=max_time_for_execution_in_seconds, random_seed=r_seed, 
-                    keep_all_solution_codes=keep_all_solution_codes, output_control=output_control, 
-                    target_problem=problem, initial_solution=initial_solution, problem_solution_vns_support=vns_support,
-                    k_min=k_min, k_max=k_max, max_local_optima=max_local_optima, 
+                    seconds_max=max_time_for_execution_in_seconds, 
+                    random_seed=r_seed, 
+                    keep_all_solution_codes=keep_all_solution_codes, 
+                    distance_calculation_cache_is_used=calculation_solution_distance_cache_is_used,
+                    output_control=output_control, 
+                    target_problem=problem, 
+                    initial_solution=initial_solution, 
+                    problem_solution_vns_support=vns_support,
+                    k_min=k_min, 
+                    k_max=k_max, 
+                    max_local_optima=max_local_optima, 
                     local_search_type=local_search_type)
             #logger.debug('Optimizer: {}'.format(optimizer))
-            optimizer.representation_distance_cache_cs.is_caching = calculation_solution_distance_cache_is_used
             optimizer.optimize()
             logger.info('Best solution: {}'.format(optimizer.best_solution))            
             logger.debug('Optimizer: {}'.format(optimizer))
