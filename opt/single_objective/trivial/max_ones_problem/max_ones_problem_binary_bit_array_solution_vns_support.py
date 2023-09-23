@@ -147,7 +147,7 @@ class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[B
             while not is_over:
                 # collect positions for inversion from indexes
                 # invert and compare, switch of new is better
-                # increment indexes
+                # increment indexes and set is_over on True when indexes are exhausted
                 is_over = True
             return solution
 
@@ -194,8 +194,23 @@ class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[B
             is_over:boolean = False
             while not is_over:
                 # collect positions for inversion from indexes
+                positions:list[int] = []
+                for ind in indexes:
+                    positions.append(ind)
                 # invert and compare, switch and exit if new is better
-                # increment indexes
+                solution.representation.invert(positions) 
+                optimizer.write_output_values_if_needed("before_evaluation", "b_e")
+                new_fv = solution.calculate_objective_fitness_feasibility(problem).fitness_value
+                optimizer.write_output_values_if_needed("after_evaluation", "a_e")
+                if new_fv > best_fv:
+                    optimizer.write_output_values_if_needed("before_evaluation", "b_e")
+                    solution.evaluate(problem)
+                    optimizer.write_output_values_if_needed("after_evaluation", "a_e")
+                    if solution.fitness_value != new_fv:
+                        raise Exception('Fitness calculation within `local_search_first_improvement` function is not correct.')
+                    return solution
+                solution.representation.invert(positions)
+                # increment indexes and set is_over on True when indexes are exhausted
                 is_over = True
             return solution
 

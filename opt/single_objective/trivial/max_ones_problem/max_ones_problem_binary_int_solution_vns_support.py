@@ -142,7 +142,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
             while not is_over:
                 # collect positions for inversion from indexes
                 # invert and compare, switch of new is better
-                # increment indexes
+                # increment indexes and set is_over on True when indexes are exhausted
                 is_over = True
             return solution
 
@@ -191,7 +191,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
             while not is_over:
                 # collect positions for inversion from indexes
                 # invert and compare, switch and exit if new is better
-                # increment indexes
+                # increment indexes and set is_over on True when indexes are exhausted
                 is_over = True
             return solution
 
