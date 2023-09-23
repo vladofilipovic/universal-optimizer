@@ -20,11 +20,11 @@ optimizer:VnsOptimizer = VnsOptimizer(output_control=OutputControl(write_to_outp
         seconds_max=0, 
         random_seed=None, 
         keep_all_solution_codes=False, 
+        distance_calculation_cache_is_used=False,
         k_min=1, 
         k_max=3, 
         max_local_optima=10, 
         local_search_type='local_search_best_improvement')
-optimizer.representation_distance_cache_cs.is_caching = False
 optimizer.optimize()
 print('Best solution representation: {}'.format(optimizer.best_solution.representation))            
 print('Best solution code: {}'.format(optimizer.best_solution.string_representation()))            

@@ -27,7 +27,7 @@ from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.target_solution import TargetSolution
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.algorithm import Algorithm
-from uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics import RepresentationDistanceCalculationCacheControlStatistics
+from uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics import DistanceCalculationCacheControlStatistics
 
 class Metaheuristic(Algorithm, metaclass=ABCMeta):
     """
@@ -36,7 +36,10 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
 
     @abstractmethod
     def __init__(self, name:str, evaluations_max:int, seconds_max:int, random_seed:int, 
-            keep_all_solution_codes:bool, output_control:OutputControl, target_problem:TargetProblem)->None:
+            keep_all_solution_codes:bool,
+            distance_calculation_cache_is_used:bool,
+            output_control:OutputControl, 
+            target_problem:TargetProblem)->None:
         """
         Create new Metaheuristic instance
 
@@ -45,10 +48,15 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         :param int seconds_max: maximum number of seconds for algorithm execution
         :param int random_seed: random seed for metaheuristic execution
         :param bool keep_all_solution_codes: if all solution codes will be remembered        
+        :param bool distance_calculation_cache_is_used: if cache is used for distance calculation between solutions        
         :param `OutputControl` output_control: structure that controls output
         :param `TargetProblem` target_problem: problem to be solved
         """
-        super().__init__(name, evaluations_max, seconds_max, output_control, target_problem)
+        super().__init__(name=name, 
+                evaluations_max=evaluations_max, 
+                seconds_max=seconds_max, 
+                output_control=output_control, 
+                target_problem=target_problem)
         if random_seed is not None and isinstance(random_seed, int) and random_seed != 0:
             self.__random_seed:int = random_seed
         else:
@@ -58,10 +66,12 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         self.__second_when_best_obtained:float = 0.0
         self.__best_solution:TargetSolution = None
         self.__keep_all_solution_codes:bool = keep_all_solution_codes
-        self.__all_solution_codes:set[str] = set()
+        #class/static variable all_solution_codes
+        if not hasattr(Metaheuristic, 'all_solution_codes'):
+            Metaheuristic.all_solution_codes:set[str] = set()
         #class/static variable representation_distance_cache_cs
         if not hasattr(Metaheuristic, 'representation_distance_cache_cs'):
-            Metaheuristic.representation_distance_cache_cs:RepresentationDistanceCalculationCacheControlStatistics = RepresentationDistanceCalculationCacheControlStatistics()
+            Metaheuristic.representation_distance_cache_cs:DistanceCalculationCacheControlStatistics = DistanceCalculationCacheControlStatistics(distance_calculation_cache_is_used)
 
     @abstractmethod
     def __copy__(self):
@@ -132,25 +142,6 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         :rtype: bool
         """
         return self.__keep_all_solution_codes
-
-    @property
-    def all_solution_codes(self)->set[str]:
-        """
-        Property getter for the all solution codes
-        
-        :return: all solution codes
-        :rtype: set[str]
-        """
-        return self.__all_solution_codes
-
-    @all_solution_codes.setter
-    def all_solution_codes(self, value:set[str])->None:
-        """
-        Property setter the all solution codes
-
-        :param value:set[str] -- all solution codes
-        """
-        self.__all_solution_codes = value
 
     @abstractmethod
     def init(self)->None:
@@ -327,9 +318,10 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
             for i in range(0, indentation):
                 s += indentation_symbol  
             s += 'execution time=' + str( (self.execution_ended - self.execution_started).total_seconds() ) + delimiter
-        for i in range(0, indentation):
-            s += indentation_symbol  
-        s += 'total local optima found=' + str(len(self.__all_solution_codes)) + delimiter
+        if self.keep_all_solution_codes:
+            for i in range(0, indentation):
+                s += indentation_symbol  
+            s += 'all solution codes=' + str(len(Metaheuristic.all_solution_codes)) + delimiter
         for i in range(0, indentation):
             s += indentation_symbol  
         s += group_end 
@@ -355,7 +347,8 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         :rtype: str
         """
         s = self.string_rep('\n')
-        s += '__all_solution_codes=' + str(self.__all_solution_codes) 
+        if self.keep_all_solution_codes:
+            s += 'all_solution_codes=' + str(self.all_solution_codes) 
         return s
 
     @abstractmethod
