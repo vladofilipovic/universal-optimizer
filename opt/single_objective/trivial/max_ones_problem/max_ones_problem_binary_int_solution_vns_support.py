@@ -20,6 +20,8 @@ from random import choice
 from random import randint
 
 from uo.utils.logger import logger
+from uo.utils.complex_counter_uniform_distinct import ComplexCounterUniformAscending
+
 from uo.target_solution.target_solution import ObjectiveFitnessFeasibility
 from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
@@ -109,14 +111,21 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
         """
         if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
             return solution
-        if k<1:
+        if k < 1 or k > problem.dimension:
             return solution
-        # ls_bi for k==1
         best_rep:int = None
         best_triplet:ObjectiveFitnessFeasibility =  ObjectiveFitnessFeasibility(solution.objective_value,
                 solution.fitness_value, solution.is_feasible)
-        for i in range(0, problem.dimension):
-            mask:int = 1 << i
+        # initialize indexes
+        indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k,problem.dimension)
+        in_loop:boolean = indexes.reset()
+        while in_loop:
+            # collect positions for inversion from indexes
+            positions:list[int] = indexes.current_state()
+            # invert and compare, switch of new is better
+            mask:int = 0
+            for i in positions:
+                mask |= 1 << i
             solution.representation ^= mask 
             optimizer.evaluation += 1
             if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
@@ -128,6 +137,8 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
                 best_triplet = new_triplet
                 best_rep = solution.representation
             solution.representation ^= mask 
+            # increment indexes and set in_loop accordingly
+            in_loop = indexes.progress()
         if best_rep is not None:
             solution.representation = best_rep
             solution.objective_value = best_triplet.objective_value
@@ -150,12 +161,19 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
         """
         if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
             return solution
-        if k<1:
+        if k < 1 or k > problem.dimension:
             return solution
-        # ls_fi for k==1
         best_fv:float = solution.fitness_value
-        for i in range(0, problem.dimension):
-            mask:int = 1 << i
+        # initialize indexes
+        indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k,problem.dimension)
+        in_loop:boolean = indexes.reset()
+        while in_loop:
+            # collect positions for inversion from indexes
+            positions:list[int] = indexes.current_state()
+            # invert and compare, switch and exit if new is better
+            mask:int = 0
+            for i in positions:
+                mask |= 1 << i
             solution.representation ^= mask 
             optimizer.evaluation += 1
             if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
@@ -169,6 +187,8 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
                 solution.is_feasible = new_triplet.is_feasible
                 return solution
             solution.representation ^= mask
+            # increment indexes and set in_loop accordingly
+            in_loop = indexes.progress()
         return solution
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 

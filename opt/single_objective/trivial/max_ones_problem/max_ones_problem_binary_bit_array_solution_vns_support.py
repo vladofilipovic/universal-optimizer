@@ -23,6 +23,8 @@ from random import random
 from bitstring import Bits, BitArray, BitStream, pack
 
 from uo.utils.logger import logger
+from uo.utils.complex_counter_uniform_distinct import ComplexCounterUniformAscending
+
 from uo.target_solution.target_solution import ObjectiveFitnessFeasibility
 from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
@@ -113,14 +115,19 @@ class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[B
         """
         if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
             return solution
-        if k<1:
+        if k < 1 or k > problem.dimension:
             return solution
-        # ls_bi for k==1
         best_rep:BitArray = None
         best_triplet:ObjectiveFitnessFeasibility =  ObjectiveFitnessFeasibility(solution.objective_value,
                 solution.fitness_value, solution.is_feasible)
-        for i in range(0, len(solution.representation)):
-            solution.representation.invert(i) 
+        # initialize indexes
+        indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k, problem.dimension)
+        in_loop:boolean = indexes.reset()
+        while in_loop:
+            # collect positions for inversion from indexes
+            positions:list[int] = indexes.current_state()
+            # invert and compare, switch of new is better
+            solution.representation.invert(positions) 
             optimizer.evaluation += 1
             if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
                 return solution
@@ -130,7 +137,9 @@ class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[B
             if new_triplet.fitness_value > best_triplet.fitness_value:
                 best_triplet = new_triplet
                 best_rep = BitArray(bin=solution.representation.bin)
-            solution.representation.invert(i)
+            solution.representation.invert(positions)
+            # increment indexes and set in_loop according to the state
+            in_loop = indexes.progress()
         if best_rep is not None:
             solution.representation = best_rep
             solution.objective_value = best_triplet.objective_value
@@ -153,12 +162,17 @@ class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[B
         """
         if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
             return solution
-        if k<1:
+        if k < 1 or k > problem.dimension:
             return solution
-        # ls_fi for k==1
         best_fv:float = solution.fitness_value
-        for i in range(0, len(solution.representation)):
-            solution.representation.invert(i) 
+        # initialize indexes
+        indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k, problem.dimension)
+        in_loop:boolean = indexes.reset()
+        while in_loop:
+            # collect positions for inversion from indexes
+            positions:list[int] = indexes.current_state()
+            # invert and compare, switch and exit if new is better
+            solution.representation.invert(positions) 
             optimizer.evaluation += 1
             if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
                 return solution
@@ -170,7 +184,9 @@ class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[B
                 solution.fitness_value = new_triplet.fitness_value
                 solution.is_feasible = new_triplet.is_feasible
                 return solution
-            solution.representation.invert(i)
+            solution.representation.invert(positions)
+            # increment indexes and set in_loop accordingly
+            in_loop = indexes.progress()
         return solution
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
