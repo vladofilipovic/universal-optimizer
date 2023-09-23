@@ -111,31 +111,45 @@ class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[B
         """
         if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
             return solution
-        if k<1:
+        if k < 1 or k > problem.dimension:
             return solution
-        # ls_bi for k==1
-        best_ind:int = None
-        best_fv:float = solution.fitness_value
-        for i in range(0, len(solution.representation)):
-            solution.representation.invert(i) 
-            optimizer.evaluation += 1
-            optimizer.write_output_values_if_needed("before_evaluation", "b_e")
-            new_fv = solution.calculate_objective_fitness_feasibility(problem).fitness_value
-            optimizer.write_output_values_if_needed("after_evaluation", "a_e")
-            if new_fv > best_fv:
-                best_ind = i
-                best_fv = new_fv
-            solution.representation.invert(i)
-        if best_ind is not None:
-            solution.representation.invert(best_ind)
-            optimizer.evaluation += 1
-            optimizer.write_output_values_if_needed("before_evaluation", "b_e")
-            solution.evaluate(problem)
-            optimizer.write_output_values_if_needed("after_evaluation", "a_e")
-            if solution.fitness_value != best_fv:
-                raise ValueError('Fitness calculation within function `local_search_best_improvement` is not correct.')
+        if k==1:
+            best_ind:int = None
+            best_fv:float = solution.fitness_value
+            for i in range(0, len(solution.representation)):
+                solution.representation.invert(i) 
+                optimizer.evaluation += 1
+                optimizer.write_output_values_if_needed("before_evaluation", "b_e")
+                new_fv = solution.calculate_objective_fitness_feasibility(problem).fitness_value
+                optimizer.write_output_values_if_needed("after_evaluation", "a_e")
+                if new_fv > best_fv:
+                    best_ind = i
+                    best_fv = new_fv
+                solution.representation.invert(i)
+            if best_ind is not None:
+                solution.representation.invert(best_ind)
+                optimizer.evaluation += 1
+                optimizer.write_output_values_if_needed("before_evaluation", "b_e")
+                solution.evaluate(problem)
+                optimizer.write_output_values_if_needed("after_evaluation", "a_e")
+                if solution.fitness_value != best_fv:
+                    raise ValueError('Fitness calculation within function `local_search_best_improvement` is not correct.')
+                return solution
             return solution
-        return solution
+        else:
+            best_ind:int = None
+            best_fv:float = solution.fitness_value
+            # initialize indexes
+            indexes:list[int] = [0] * k
+            for i in range(indexes):
+                indexes[i] = i
+            is_over:boolean = False
+            while not is_over:
+                # collect positions for inversion from indexes
+                # invert and compare, switch of new is better
+                # increment indexes
+                is_over = True
+            return solution
 
     def local_search_first_improvement(self, k:int, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryBitArraySolution, 
             optimizer: Algorithm)->MaxOnesProblemBinaryBitArraySolution:
@@ -151,26 +165,39 @@ class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[B
         """
         if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
             return solution
-        if k<1:
+        if k < 1 or k > problem.dimension:
             return solution
-        # ls_fi for k==1
-        best_fv:float = solution.fitness_value
-        for i in range(0, len(solution.representation)):
-            solution.representation.invert(i) 
-            optimizer.evaluation += 1
-            optimizer.write_output_values_if_needed("before_evaluation", "b_e")
-            new_fv = solution.calculate_objective_fitness_feasibility(problem).fitness_value
-            optimizer.write_output_values_if_needed("after_evaluation", "a_e")
-            if new_fv > best_fv:
-                optimizer.evaluation += 1 
+        if k==1:
+            best_fv:float = solution.fitness_value
+            for i in range(0, len(solution.representation)):
+                solution.representation.invert(i) 
+                optimizer.evaluation += 1
                 optimizer.write_output_values_if_needed("before_evaluation", "b_e")
-                solution.evaluate(problem)
+                new_fv = solution.calculate_objective_fitness_feasibility(problem).fitness_value
                 optimizer.write_output_values_if_needed("after_evaluation", "a_e")
-                if solution.fitness_value != new_fv:
-                    raise Exception('Fitness calculation within `local_search_first_improvement` function is not correct.')
+                if new_fv > best_fv:
+                    optimizer.evaluation += 1 
+                    optimizer.write_output_values_if_needed("before_evaluation", "b_e")
+                    solution.evaluate(problem)
+                    optimizer.write_output_values_if_needed("after_evaluation", "a_e")
+                    if solution.fitness_value != new_fv:
+                        raise Exception('Fitness calculation within `local_search_first_improvement` function is not correct.')
+                    return solution
+                solution.representation.invert(i)
                 return solution
-            solution.representation.invert(i)
-        return solution
+        else:
+            best_fv:float = solution.fitness_value
+            # initialize indexes
+            indexes:list[int] = [0] * k
+            for i in range(indexes):
+                indexes[i] = i
+            is_over:boolean = False
+            while not is_over:
+                # collect positions for inversion from indexes
+                # invert and compare, switch and exit if new is better
+                # increment indexes
+                is_over = True
+            return solution
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
