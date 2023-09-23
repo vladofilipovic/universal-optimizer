@@ -46,6 +46,7 @@ class TestIntegrationMaxOnesProblemBinaryIntSolutionVnsLsbi(unittest.TestCase):
                 seconds_max=0, 
                 random_seed=None, 
                 keep_all_solution_codes=False, 
+                distance_calculation_cache_is_used=False,
                 k_min=1, 
                 k_max=3, 
                 max_local_optima=10, 

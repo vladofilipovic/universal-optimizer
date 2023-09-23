@@ -28,10 +28,6 @@ R_co = TypeVar("R_co", covariant=True)
 
 class TargetSolution(Generic[R_co], metaclass=ABCMeta):
     
-    """
-    Cache that is used during evaluation for previously obtained solutions
-    """
-    
     @abstractmethod
     def __init__(self, name:str, random_seed:int, fitness_value:float|list[float]|tuple[float], 
             objective_value:float|list[float]|tuple[float], is_feasible:bool)->None:
@@ -54,9 +50,9 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         self.__objective_value:float|list[float] = objective_value
         self.__is_feasible:bool = is_feasible
         self.__representation:R_co = None
-        self.__evaluation_cache_cs:EvaluationCacheControlStatistics = EvaluationCacheControlStatistics()
-
-
+        #class/static variable evaluation_cache_cs
+        if not hasattr(TargetSolution, 'evaluation_cache_cs'):
+            TargetSolution.evaluation_cache_cs:EvaluationCacheControlStatistics = EvaluationCacheControlStatistics()  
     @abstractmethod
     def __copy__(self):
         """
@@ -180,16 +176,6 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         """
         self.__representation = value
 
-    @property
-    def evaluation_cache_cs(self)->EvaluationCacheControlStatistics:
-        """
-        Property getter for controlling and status of caching during evaluation
-
-        :return: Control and status of caching during evaluation
-        :rtype: EvaluationCacheControlStatistics
-        """
-        return self.__evaluation_cache_cs
-
     @abstractmethod
     def string_representation(self)->str:
         """
@@ -221,47 +207,41 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         raise NotImplementedError
 
     @abstractmethod
-    def calculate_objective_fitness_feasibility(self, problem:TargetProblem)->ObjectiveFitnessFeasibility:
+    def calculate_objective_fitness_feasibility_directly(self, representation:R_co, 
+            problem:TargetProblem) -> ObjectiveFitnessFeasibility:
         """
         Fitness calculation of the target solution
 
+        :param R_co representation: native representation of the solution for which objective value, fitness and feasibility are calculated
         :param TargetProblem problem: problem that is solved
         :return: objective value, fitness value and feasibility of the solution instance 
         :rtype: `ObjectiveFitnessFeasibility`
         """
         raise NotImplementedError
 
-    @staticmethod
-    def calculate_objective_fitness_feasibility_try_consult_cache(target_solution, target_problem:TargetProblem):
+    def calculate_objective_fitness_feasibility(self, target_problem:TargetProblem) -> ObjectiveFitnessFeasibility:
         """
-        Calculate fitness of the argument with optional cache consultation
+        Calculate fitness, objective and feasibility of the solution, with optional cache consultation
 
-        :param TargetSolution target_solution: target solution whose fitness should be 
         :param TargetProblem target_problem: problem that is solved
-        :return: solution with calculated objection value, fitness value and feasibility
-        :rtype: :class:`uo.target_solution.TargetSolution`
+        :return: objective value, fitness value and feasibility of the solution instance 
+        :rtype: `ObjectiveFitnessFeasibility`
         """
-        eccs = target_solution.evaluation_cache_cs 
-        eccs.increment_cache_request_count()
+        eccs = TargetSolution.evaluation_cache_cs 
         if eccs.is_caching:
-            code = target_solution.string_representation()
+            eccs.increment_cache_request_count()
+            code = self.string_representation()
             if code in eccs.cache:
                 eccs.increment_cache_hit_count()
                 return eccs.cache[code]
-            triplet:ObjectiveFitnessFeasibility = target_solution.calculate_objective_fitness_feasibility(
-                    target_problem)
-            target_solution.objective_value = triplet.objective_value
-            target_solution.fitness_value = triplet.fitness_value
-            target_solution.is_feasible = triplet.is_feasible
-            eccs.cache[code] = target_solution
-            return target_solution
+            triplet:ObjectiveFitnessFeasibility = self.calculate_objective_fitness_feasibility_directly(
+                    self.representation, target_problem)
+            eccs.cache[code] = triplet
+            return triplet
         else:
-            triplet:ObjectiveFitnessFeasibility = target_solution.calculate_objective_fitness_feasibility(
-                    target_problem)
-            target_solution.objective_value = triplet.objective_value
-            target_solution.fitness_value = triplet.fitness_value
-            target_solution.is_feasible = triplet.is_feasible
-            return target_solution
+            triplet:ObjectiveFitnessFeasibility = self.calculate_objective_fitness_feasibility_directly(
+                    self.representation, target_problem)
+            return triplet
 
     def evaluate(self, target_problem:TargetProblem)->None:
         """
@@ -269,18 +249,18 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
 
         :param TargetProblem target_problem: problem that is solved
         """        
-        solution = TargetSolution.calculate_objective_fitness_feasibility_try_consult_cache(self, target_problem)
-        self.objective_value = solution.objective_value;
-        self.fitness_value = solution.fitness_value;
-        self.is_feasible = solution.is_feasible;
+        triplet:ObjectiveFitnessFeasibility = self.calculate_objective_fitness_feasibility(target_problem)
+        self.objective_value = triplet.objective_value;
+        self.fitness_value = triplet.fitness_value;
+        self.is_feasible = triplet.is_feasible;
 
     @abstractmethod
-    def representation_distance(solution_code_1:str, solution_code_2:str)->float:
+    def representation_distance(representation_1:R_co, representation_2:R_co)->float:
         """
-        Calculate distance between two solutions determined by its code
+        Calculate distance between two solutions determined by its native representations
 
-        :param str solution_code_1: solution code for the first solution
-        :param str solution_code_2: solution code for the second solution
+        :param R_co representation_1: native representation for the first solution
+        :param R_co representation_2: native representation for the second solution
         """
         raise NotImplementedError
 

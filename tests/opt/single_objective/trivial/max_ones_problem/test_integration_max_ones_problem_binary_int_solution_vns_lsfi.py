@@ -43,13 +43,12 @@ class TestIntegrationMaxOnesProblemBinaryIntSolutionVnsLsfi(unittest.TestCase):
                 evaluations_max=500, 
                 seconds_max=0, 
                 random_seed=42, 
-                keep_all_solution_codes=False, 
+                keep_all_solution_codes=False,
+                distance_calculation_cache_is_used=False, 
                 k_min=1, 
                 k_max=3, 
                 max_local_optima=10, 
                 local_search_type='local_search_first_improvement')
-        self.optimizer.representation_distance_cache_cs.is_caching = False
-        self.optimizer.output_control.write_to_output_file = False
         self.optimizer.optimize()
         return
     

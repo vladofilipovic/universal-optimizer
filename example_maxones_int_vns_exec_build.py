@@ -76,8 +76,8 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
     def string_rep(self)->str:
         return bin(self.representation)
 
-    def calculate_objective_fitness_feasibility(self, problem:TargetProblem)->ObjectiveFitnessFeasibility:
-        ones_count = self.representation.bit_count()
+    def calculate_objective_fitness_feasibility_directly(representation:int, problem:TargetProblem)->ObjectiveFitnessFeasibility:
+        ones_count = representation.bit_count()
         return ObjectiveFitnessFeasibility(ones_count, ones_count, True)
 
     def native_representation(self, representation_str:str)->int:
@@ -155,10 +155,10 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
             mask:int = 1 << i
             solution.representation ^= mask 
             optimizer.evaluation +=1 
-            new_fv = solution.calculate_objective_fitness_feasibility(problem).fitness_value
-            if new_fv > best_fv:
+            new_triplet:ObjectiveFitnessFeasibility = solution.calculate_objective_fitness_feasibility(problem)
+            if new_triplet.fitness_value > best_fv:
                 best_ind = i
-                best_fv = new_fv
+                best_fv = new_triplet.fitness_value
             solution.representation ^= mask 
         if best_ind is not None:
             mask:int = 1 << best_ind
@@ -181,12 +181,11 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
             mask:int = 1 << i
             solution.representation ^= mask 
             optimizer.evaluation += 1
-            new_fv = solution.calculate_objective_fitness_feasibility(problem).fitness_value
-            if new_fv > best_fv:
-                optimizer.evaluation += 1
-                solution.evaluate(problem)
-                if solution.fitness_value != new_fv:
-                    raise Exception('Fitness calculation within `local_search_first_improvement` function is not correct.')
+            new_triplet:ObjectiveFitnessFeasibility = solution.calculate_objective_fitness_feasibility(problem)
+            if new_triplet.fitness_value > best_fv:
+                solution.objective_value = new_triplet.objective_value
+                solution.fitness_value = new_triplet.fitness_value
+                solution.is_feasible = new_triplet.is_feasible
                 return solution
             solution.representation ^= mask
         return solution
@@ -217,11 +216,11 @@ optimizer:VnsOptimizer = VnsOptimizer(output_control=OutputControl(write_to_outp
         seconds_max=10, 
         random_seed=None, 
         keep_all_solution_codes=False, 
+        distance_calculation_cache_is_used=False,
         k_min=1, 
         k_max=3, 
         max_local_optima=10, 
         local_search_type='local_search_first_improvement')
-optimizer.representation_distance_cache_cs.is_caching = False
 optimizer.optimize()
 print('Best solution representation: {}'.format(optimizer.best_solution.representation))            
 print('Best solution code: {}'.format(optimizer.best_solution.string_representation()))            
