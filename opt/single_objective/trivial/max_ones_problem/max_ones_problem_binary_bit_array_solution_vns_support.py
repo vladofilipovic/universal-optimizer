@@ -23,6 +23,8 @@ from random import random
 from bitstring import Bits, BitArray, BitStream, pack
 
 from uo.utils.logger import logger
+from uo.utils.complex_counter_uniform_distinct import ComplexCounterUniformAscending
+
 from uo.target_solution.target_solution import ObjectiveFitnessFeasibility
 from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
@@ -115,44 +117,36 @@ class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[B
             return solution
         if k < 1 or k > problem.dimension:
             return solution
-        if k==1:
-            best_rep:BitArray = None
-            best_triplet:ObjectiveFitnessFeasibility =  ObjectiveFitnessFeasibility(solution.objective_value,
-                    solution.fitness_value, solution.is_feasible)
-            for i in range(0, len(solution.representation)):
-                solution.representation.invert(i) 
-                optimizer.evaluation += 1
-                if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
-                    return solution
-                optimizer.write_output_values_if_needed("before_evaluation", "b_e")
-                new_triplet:ObjectiveFitnessFeasibility = solution.calculate_objective_fitness_feasibility(problem)
-                optimizer.write_output_values_if_needed("after_evaluation", "a_e")
-                if new_triplet.fitness_value > best_triplet.fitness_value:
-                    best_triplet = new_triplet
-                    best_rep = BitArray(bin=solution.representation.bin)
-                solution.representation.invert(i)
-            if best_rep is not None:
-                solution.representation = best_rep
-                solution.objective_value = best_triplet.objective_value
-                solution.fitness_value = best_triplet.fitness_value
-                solution.is_feasible = best_triplet.is_feasible
+        best_rep:BitArray = None
+        best_triplet:ObjectiveFitnessFeasibility =  ObjectiveFitnessFeasibility(solution.objective_value,
+                solution.fitness_value, solution.is_feasible)
+        # initialize indexes
+        indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k,len(solution.representation))
+        in_loop:boolean = indexes.reset()
+        while in_loop:
+            # collect positions for inversion from indexes
+            positions:list[int] = indexes.current_state()
+            # invert and compare, switch of new is better
+            solution.representation.invert(positions) 
+            optimizer.evaluation += 1
+            if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
                 return solution
+            optimizer.write_output_values_if_needed("before_evaluation", "b_e")
+            new_triplet:ObjectiveFitnessFeasibility = solution.calculate_objective_fitness_feasibility(problem)
+            optimizer.write_output_values_if_needed("after_evaluation", "a_e")
+            if new_triplet.fitness_value > best_triplet.fitness_value:
+                best_triplet = new_triplet
+                best_rep = BitArray(bin=solution.representation.bin)
+            solution.representation.invert(positions)
+            # increment indexes and set in_loop according to the state
+            in_loop = indexes.progress()
+        if best_rep is not None:
+            solution.representation = best_rep
+            solution.objective_value = best_triplet.objective_value
+            solution.fitness_value = best_triplet.fitness_value
+            solution.is_feasible = best_triplet.is_feasible
             return solution
-        else:
-            best_ind:int = None
-            best_fv:float = solution.fitness_value
-            # initialize indexes
-            indexes:list[int] = []
-            for i in range(1,k):
-                indexes.append(i)
-            is_over:boolean = False
-            while not is_over:
-                # collect positions for inversion from indexes
-                # invert and compare, switch of new is better
-                # increment indexes and set is_over on True when indexes are exhausted
-                is_over = True
-            return solution
-
+        return solution
 
     def local_search_first_improvement(self, k:int, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryBitArraySolution, 
             optimizer: Algorithm)->MaxOnesProblemBinaryBitArraySolution:
@@ -170,36 +164,30 @@ class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[B
             return solution
         if k < 1 or k > problem.dimension:
             return solution
-        if k==1:
-            best_fv:float = solution.fitness_value
-            for i in range(0, len(solution.representation)):
-                solution.representation.invert(i) 
-                optimizer.evaluation += 1
-                if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
-                    return solution
-                optimizer.write_output_values_if_needed("before_evaluation", "b_e")
-                new_triplet:ObjectiveFitnessFeasibility = solution.calculate_objective_fitness_feasibility(problem)
-                optimizer.write_output_values_if_needed("after_evaluation", "a_e")
-                if new_triplet.fitness_value > best_fv:
-                    solution.objective_value = new_triplet.objective_value
-                    solution.fitness_value = new_triplet.fitness_value
-                    solution.is_feasible = new_triplet.is_feasible
-                    return solution
-                solution.representation.invert(i)
-            return solution
-        else:
-            best_fv:float = solution.fitness_value
-            # initialize indexes
-            indexes:list[int] = []
-            for i in range(1,k):
-                indexes.append(i)
-            is_over:boolean = False
-            while not is_over:
-                # collect positions for inversion from indexes
-                # invert and compare, switch and exit if new is better
-                # increment indexes and set is_over on True when indexes are exhausted
-                is_over = True
-            return solution
+        best_fv:float = solution.fitness_value
+        # initialize indexes
+        indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k,len(solution.representation))
+        in_loop:boolean = indexes.reset()
+        while not in_loop:
+            # collect positions for inversion from indexes
+            positions:list[int] = indexes.current_state()
+            # invert and compare, switch and exit if new is better
+            solution.representation.invert(positions) 
+            optimizer.evaluation += 1
+            if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+                return solution
+            optimizer.write_output_values_if_needed("before_evaluation", "b_e")
+            new_triplet:ObjectiveFitnessFeasibility = solution.calculate_objective_fitness_feasibility(problem)
+            optimizer.write_output_values_if_needed("after_evaluation", "a_e")
+            if new_triplet.fitness_value > best_fv:
+                solution.objective_value = new_triplet.objective_value
+                solution.fitness_value = new_triplet.fitness_value
+                solution.is_feasible = new_triplet.is_feasible
+                return solution
+            solution.representation.invert(positions)
+            # increment indexes and set in_loop accordingly
+            in_loop = indexes.progress()
+        return solution
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
