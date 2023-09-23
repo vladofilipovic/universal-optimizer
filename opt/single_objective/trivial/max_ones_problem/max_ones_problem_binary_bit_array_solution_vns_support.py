@@ -113,31 +113,46 @@ class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[B
         """
         if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
             return solution
-        if k<1:
+        if k < 1 or k > problem.dimension:
             return solution
-        # ls_bi for k==1
-        best_rep:BitArray = None
-        best_triplet:ObjectiveFitnessFeasibility =  ObjectiveFitnessFeasibility(solution.objective_value,
-                solution.fitness_value, solution.is_feasible)
-        for i in range(0, len(solution.representation)):
-            solution.representation.invert(i) 
-            optimizer.evaluation += 1
-            if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+        if k==1:
+            best_rep:BitArray = None
+            best_triplet:ObjectiveFitnessFeasibility =  ObjectiveFitnessFeasibility(solution.objective_value,
+                    solution.fitness_value, solution.is_feasible)
+            for i in range(0, len(solution.representation)):
+                solution.representation.invert(i) 
+                optimizer.evaluation += 1
+                if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+                    return solution
+                optimizer.write_output_values_if_needed("before_evaluation", "b_e")
+                new_triplet:ObjectiveFitnessFeasibility = solution.calculate_objective_fitness_feasibility(problem)
+                optimizer.write_output_values_if_needed("after_evaluation", "a_e")
+                if new_triplet.fitness_value > best_triplet.fitness_value:
+                    best_triplet = new_triplet
+                    best_rep = BitArray(bin=solution.representation.bin)
+                solution.representation.invert(i)
+            if best_rep is not None:
+                solution.representation = best_rep
+                solution.objective_value = best_triplet.objective_value
+                solution.fitness_value = best_triplet.fitness_value
+                solution.is_feasible = best_triplet.is_feasible
                 return solution
-            optimizer.write_output_values_if_needed("before_evaluation", "b_e")
-            new_triplet:ObjectiveFitnessFeasibility = solution.calculate_objective_fitness_feasibility(problem)
-            optimizer.write_output_values_if_needed("after_evaluation", "a_e")
-            if new_triplet.fitness_value > best_triplet.fitness_value:
-                best_triplet = new_triplet
-                best_rep = BitArray(bin=solution.representation.bin)
-            solution.representation.invert(i)
-        if best_rep is not None:
-            solution.representation = best_rep
-            solution.objective_value = best_triplet.objective_value
-            solution.fitness_value = best_triplet.fitness_value
-            solution.is_feasible = best_triplet.is_feasible
             return solution
-        return solution
+        else:
+            best_ind:int = None
+            best_fv:float = solution.fitness_value
+            # initialize indexes
+            indexes:list[int] = []
+            for i in range(1,k):
+                indexes.append(i)
+            is_over:boolean = False
+            while not is_over:
+                # collect positions for inversion from indexes
+                # invert and compare, switch of new is better
+                # increment indexes and set is_over on True when indexes are exhausted
+                is_over = True
+            return solution
+
 
     def local_search_first_improvement(self, k:int, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryBitArraySolution, 
             optimizer: Algorithm)->MaxOnesProblemBinaryBitArraySolution:
@@ -153,25 +168,38 @@ class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[B
         """
         if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
             return solution
-        if k<1:
+        if k < 1 or k > problem.dimension:
             return solution
-        # ls_fi for k==1
-        best_fv:float = solution.fitness_value
-        for i in range(0, len(solution.representation)):
-            solution.representation.invert(i) 
-            optimizer.evaluation += 1
-            if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
-                return solution
-            optimizer.write_output_values_if_needed("before_evaluation", "b_e")
-            new_triplet:ObjectiveFitnessFeasibility = solution.calculate_objective_fitness_feasibility(problem)
-            optimizer.write_output_values_if_needed("after_evaluation", "a_e")
-            if new_triplet.fitness_value > best_fv:
-                solution.objective_value = new_triplet.objective_value
-                solution.fitness_value = new_triplet.fitness_value
-                solution.is_feasible = new_triplet.is_feasible
-                return solution
-            solution.representation.invert(i)
-        return solution
+        if k==1:
+            best_fv:float = solution.fitness_value
+            for i in range(0, len(solution.representation)):
+                solution.representation.invert(i) 
+                optimizer.evaluation += 1
+                if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+                    return solution
+                optimizer.write_output_values_if_needed("before_evaluation", "b_e")
+                new_triplet:ObjectiveFitnessFeasibility = solution.calculate_objective_fitness_feasibility(problem)
+                optimizer.write_output_values_if_needed("after_evaluation", "a_e")
+                if new_triplet.fitness_value > best_fv:
+                    solution.objective_value = new_triplet.objective_value
+                    solution.fitness_value = new_triplet.fitness_value
+                    solution.is_feasible = new_triplet.is_feasible
+                    return solution
+                solution.representation.invert(i)
+            return solution
+        else:
+            best_fv:float = solution.fitness_value
+            # initialize indexes
+            indexes:list[int] = []
+            for i in range(1,k):
+                indexes.append(i)
+            is_over:boolean = False
+            while not is_over:
+                # collect positions for inversion from indexes
+                # invert and compare, switch and exit if new is better
+                # increment indexes and set is_over on True when indexes are exhausted
+                is_over = True
+            return solution
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:

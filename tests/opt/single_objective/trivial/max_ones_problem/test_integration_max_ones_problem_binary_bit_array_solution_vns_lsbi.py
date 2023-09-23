@@ -51,8 +51,6 @@ class TestIntegrationMaxOnesProblemBinaryIntSolutionVnsLsbi(unittest.TestCase):
                 k_max=3, 
                 max_local_optima=10, 
                 local_search_type='local_search_best_improvement')
-        self.optimizer.representation_distance_cache_cs.is_caching = False
-        self.optimizer.output_control.write_to_output_file = False
         self.optimizer.optimize()
         return
     
