@@ -30,6 +30,8 @@ class AlgorithmVoid(Algorithm):
     def copy(self):
         return self.__copy__()
 
+    def init(self):
+        return
     def __str__(self)->str:
         return super().__str__()
 
@@ -38,6 +40,7 @@ class AlgorithmVoid(Algorithm):
 
     def __format__(self, spec:str)->str:
         return super().__format__()
+
 
 class TestAlgorithmProperties(unittest.TestCase):
     

@@ -41,7 +41,10 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution[BitArray]):
         :rtype: MaxOnesProblemBinaryBitArraySolution
         """
         sol = super().__copy__()
-        sol.representation = BitArray(bin=self.representation.bin)
+        if self.representation is not None:
+            sol.representation = BitArray(bin=self.representation.bin)
+        else:
+            sol.representation = None
         return sol
 
     def copy(self):

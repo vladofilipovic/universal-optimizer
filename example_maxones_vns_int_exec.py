@@ -11,12 +11,12 @@ from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_s
 
 def main():
         problem_to_solve:MaxOnesProblem = MaxOnesProblem(dim=24)
-        solution_type:str = "MaxOnesProblemBinaryIntSolution"
+        solution:MaxOnesProblemBinaryIntSolution = MaxOnesProblemBinaryIntSolution()
         vns_support:MaxOnesProblemBinaryIntSolutionVnsSupport = MaxOnesProblemBinaryIntSolutionVnsSupport()
         output_control:OutputControl = OutputControl(write_to_output=False)
         optimizer:VnsOptimizer = VnsOptimizer(output_control=output_control,
                 target_problem=problem_to_solve, 
-                solution_type=solution_type,
+                initial_solution=solution,
                 problem_solution_vns_support=vns_support,
                 evaluations_max=500, 
                 seconds_max=0, 

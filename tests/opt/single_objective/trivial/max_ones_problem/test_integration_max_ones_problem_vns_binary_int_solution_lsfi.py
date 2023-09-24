@@ -33,9 +33,12 @@ class TestIntegrationMaxOnesProblemVnsBinaryIntSolutionLsfi(unittest.TestCase):
     def setUp(self):
         self.output_control = OutputControl(False)
         self.problem_to_solve:MaxOnesProblem = MaxOnesProblem(dim=22)
+        self.solution:MaxOnesProblemBinaryIntSolution = MaxOnesProblemBinaryIntSolution()
         self.vns_support:MaxOnesProblemBinaryIntSolutionVnsSupport = MaxOnesProblemBinaryIntSolutionVnsSupport()
-        self.optimizer:VnsOptimizer = VnsOptimizer(output_control=self.output_control,
+        self.optimizer:VnsOptimizer = VnsOptimizer(
+                output_control=self.output_control,
                 target_problem=self.problem_to_solve, 
+                initial_solution=self.solution,
                 problem_solution_vns_support=self.vns_support,
                 evaluations_max=5000, 
                 seconds_max=0, 

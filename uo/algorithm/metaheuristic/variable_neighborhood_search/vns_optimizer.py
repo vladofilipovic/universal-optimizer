@@ -12,8 +12,12 @@ sys.path.append(directory.parent.parent)
 sys.path.append(directory.parent.parent.parent)
 
 from copy import deepcopy
+
 from random import choice
 from random import random
+
+from bitstring import Bits, BitArray, BitStream, pack
+
 from typing import TypeVar, Generic
 from typing import Generic
 
@@ -23,11 +27,6 @@ from uo.target_solution.target_solution import TargetSolution
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.metaheuristic import Metaheuristic
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
-
-# ALL SOLUTION TYPES SHOULD BE LISTED HERE
-from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution import MaxOnesProblemBinaryBitArraySolution
-from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution import MaxOnesProblemBinaryIntSolution
-
 
 class VnsOptimizer(Metaheuristic):
     """
@@ -42,7 +41,7 @@ class VnsOptimizer(Metaheuristic):
             distance_calculation_cache_is_used:bool,
             output_control:OutputControl, 
             target_problem:TargetProblem, 
-            solution_type:str,
+            initial_solution:TargetSolution,
             problem_solution_vns_support:ProblemSolutionVnsSupport, 
             k_min:int, k_max:int, max_local_optima:int, local_search_type:str)->None:
         """
@@ -56,7 +55,7 @@ class VnsOptimizer(Metaheuristic):
         :param bool distance_calculation_cache_is_used: if cache is used for distance calculation between solutions        
         :param `OutputControl` output_control: structure that controls output
         :param `TargetProblem` target_problem: problem to be solved
-        :param str solution_type: solution type as string
+        :param `TargetSolution` initial_solution: initial solution of the problem 
         :param `ProblemSolutionVnsSupport` problem_solution_vns_support: placeholder for additional methods, specific for VNS 
         execution, which depend of precise solution type 
         :param int k_min: `k_min` parameter for VNS
@@ -74,7 +73,13 @@ class VnsOptimizer(Metaheuristic):
                 output_control=output_control, 
                 target_problem=target_problem)
         self.__local_search_type:str = local_search_type
-        self.__current_solution:TargetSolution = eval(solution_type + '(self.target_problem)')
+        if initial_solution is not None: 
+            if isinstance(initial_solution, TargetSolution):
+                self.__current_solution:TargetSolution = initial_solution.copy()
+            else:
+                self.__current_solution = initial_solution
+        else:
+            self.__current_solution =  None
         if problem_solution_vns_support is not None:
             if isinstance(problem_solution_vns_support, ProblemSolutionVnsSupport):
                 self.__problem_solution_vns_support:ProblemSolutionVnsSupport = problem_solution_vns_support.copy()

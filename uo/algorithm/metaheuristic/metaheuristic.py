@@ -236,13 +236,8 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         for i in range(0, indentation):
             s += indentation_symbol  
         s += '__second_when_best_obtained=' + str(self.__second_when_best_obtained) + delimiter
-        if self.__best_solution is not None:
-            s += '__best_solution=' + self.__best_solution.string_rep(delimiter, indentation + 1,
-                    indentation_symbol, group_start, group_end) + delimiter
-        else:
-            for i in range(0, indentation):
-                s += indentation_symbol  
-            s += '__best_solution=None' + delimiter
+        for i in range(0, indentation):
+            s += indentation_symbol  
         s += '__representation_distance_cache_cs(static)=' + Metaheuristic.representation_distance_cache_cs.string_rep(
                 delimiter, indentation + 1, indentation_symbol, '{', '}') + delimiter
         if self.execution_ended is not None and self.execution_started is not None:

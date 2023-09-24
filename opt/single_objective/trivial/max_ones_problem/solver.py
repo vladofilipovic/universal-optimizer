@@ -143,6 +143,7 @@ def main():
         calculation_solution_distance_cache_is_used = parameters['calculationSolutionDistanceCacheIsUsed']
         # bookkeeping setup
         keep_all_solution_codes:bool = parameters['keepAllSolutionCodes']
+        # select among algorithm types
         if parameters['algorithm'] == 'vns':
             logger.debug('VNS started.') 
             start_time = datetime.now()
@@ -157,26 +158,30 @@ def main():
             # problem to be solved
             problem = MaxOnesProblem(input_file_path)
             problem.load_from_file(input_format)
-            # initial solution for solving
+            # initial solution and vns support
             solution_type:str = parameters['solutionType']
             vns_support = None
             if solution_type=='BitArray':
+                solution:MaxOnesProblemBinaryBitArraySolution = MaxOnesProblemBinaryBitArraySolution(r_seed)
+                solution.is_caching = evaluation_cache_is_used
                 vns_support = MaxOnesProblemBinaryBitArraySolutionVnsSupport()
             elif solution_type=='int':
+                solution:MaxOnesProblemBinaryIntSolution = MaxOnesProblemBinaryIntSolution(r_seed)
+                solution.is_caching = evaluation_cache_is_used
                 vns_support = MaxOnesProblemBinaryIntSolutionVnsSupport()
             else:
                 raise ValueError("Invalid solution/representation type is chosen.")
-            Solution.evaluation_cache_cs.is_caching = evaluation_cache_is_used
-            # optimizer used for solving
-            optimizer = VnsOptimizer(evaluations_max=max_number_evaluations, 
+            # optimizer based on VNS
+            optimizer = VnsOptimizer(
+                    output_control=output_control, 
+                    target_problem=problem,
+                    initial_solution=solution, 
+                    problem_solution_vns_support=vns_support,
+                    evaluations_max=max_number_evaluations, 
                     seconds_max=max_time_for_execution_in_seconds, 
                     random_seed=r_seed, 
                     keep_all_solution_codes=keep_all_solution_codes, 
                     distance_calculation_cache_is_used=calculation_solution_distance_cache_is_used,
-                    output_control=output_control, 
-                    target_problem=problem,
-                    solution_type=solution_type, 
-                    problem_solution_vns_support=vns_support,
                     k_min=k_min, 
                     k_max=k_max, 
                     max_local_optima=max_local_optima, 

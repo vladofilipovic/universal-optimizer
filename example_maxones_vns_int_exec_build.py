@@ -77,7 +77,8 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
     def string_rep(self)->str:
         return bin(self.representation)
 
-    def calculate_objective_fitness_feasibility_directly(representation:int, problem:TargetProblem)->ObjectiveFitnessFeasibility:
+    def calculate_objective_fitness_feasibility_directly(self, representation:int, 
+            problem:TargetProblem)->ObjectiveFitnessFeasibility:
         ones_count = representation.bit_count()
         return ObjectiveFitnessFeasibility(ones_count, ones_count, True)
 
@@ -90,6 +91,9 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
         rep_2:int = self.native_representation(solution_code_2)
         result = (rep_1 ^ rep_2).count(True)
         return result 
+
+    def string_representation(self)->str:
+        return bin(self.representation)
 
     def string_rep(self, delimiter:str='\n', indentation:int=0, indentation_symbol:str='   ', 
             group_start:str='{', group_end:str='}',)->str:
@@ -207,12 +211,12 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
 
 def main():
     problem_to_solve:MaxOnesProblem = MaxOnesProblem(dim=24)
-    solution_type:str = "MaxOnesProblemBinaryIntSolution"
+    solution:MaxOnesProblemBinaryIntSolution = MaxOnesProblemBinaryIntSolution()
     vns_support:MaxOnesProblemBinaryIntSolutionVnsSupport = MaxOnesProblemBinaryIntSolutionVnsSupport()
     output_control:OutputControl = OutputControl(write_to_output=False)
     optimizer:VnsOptimizer = VnsOptimizer(output_control=output_control,
             target_problem=problem_to_solve, 
-            solution_type=solution_type,
+            initial_solution=solution,
             problem_solution_vns_support=vns_support,
             evaluations_max=500, 
             seconds_max=10, 
