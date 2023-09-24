@@ -26,6 +26,7 @@ from bitstring import BitArray
 
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
+from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizer
 
 from uo.utils.files import ensure_dir 
 from uo.utils.logger import logger
@@ -34,10 +35,15 @@ from opt.single_objective.trivial.max_ones_problem.command_line import default_p
 from opt.single_objective.trivial.max_ones_problem.command_line import parse_arguments
 
 from opt.single_objective.trivial.max_ones_problem.max_ones_problem import MaxOnesProblem
+
 from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution import MaxOnesProblemBinaryBitArraySolution
 from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution_vns_support import MaxOnesProblemBinaryBitArraySolutionVnsSupport
+from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution_te_support import MaxOnesProblemBinaryBitArraySolutionTeSupport
+
 from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution import MaxOnesProblemBinaryIntSolution
 from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution_vns_support import MaxOnesProblemBinaryIntSolutionVnsSupport
+
+
 
 """ 
 Solver.
@@ -143,9 +149,12 @@ def main():
         calculation_solution_distance_cache_is_used = parameters['calculationSolutionDistanceCacheIsUsed']
         # bookkeeping setup
         keep_all_solution_codes:bool = parameters['keepAllSolutionCodes']
+        # problem to be solved
+        problem = MaxOnesProblem(input_file_path)
+        problem.load_from_file(input_format)
         # select among algorithm types
-        if parameters['algorithm'] == 'vns':
-            logger.debug('VNS started.') 
+        if parameters['algorithm'] == 'variable_neighborhood_search':
+            logger.debug('Variable neighborhood search started.') 
             start_time = datetime.now()
             if write_to_output_file:
                 output_file.write("# VNS started at: %s\n" % str(start_time))
@@ -155,9 +164,6 @@ def main():
             k_max:int = parameters['kMax']
             max_local_optima = parameters['maxLocalOptima']
             local_search_type = parameters['localSearchType']
-            # problem to be solved
-            problem = MaxOnesProblem(input_file_path)
-            problem.load_from_file(input_format)
             # initial solution and vns support
             solution_type:str = parameters['solutionType']
             vns_support = None
@@ -188,9 +194,35 @@ def main():
                     local_search_type=local_search_type)
             #logger.debug('Optimizer: ' + str(optimizer))
             optimizer.optimize()
-            logger.info('Best solution: ' + str(optimizer.best_solution))            
-            logger.debug('Optimizer: ' + str(optimizer))
+            logger.debug('Variable neighborhood search finished.') 
+            logger.info('Best solution: ' + str(optimizer.best_solution.string_representation()))            
             logger.debug('VNS ended.')
+        elif parameters['algorithm'] == 'total_enumeration':
+            logger.debug('Total enumeration started.') 
+            start_time = datetime.now()
+            if write_to_output_file:
+                output_file.write("# TE started at: %s\n" % str(start_time))
+                output_file.write('# Execution parameters: {}\n'.format(parameters))
+            # initial solution and te support
+            solution_type:str = parameters['solutionType']
+            te_support = None
+            if solution_type=='BitArray':
+                solution:MaxOnesProblemBinaryBitArraySolution = MaxOnesProblemBinaryBitArraySolution(r_seed)
+                solution.is_caching = evaluation_cache_is_used
+                te_support = MaxOnesProblemBinaryBitArraySolutionTeSupport()
+            else:
+                raise ValueError("Invalid solution/representation type is chosen.")
+            # optimizer based on TE
+            optimizer = TeOptimizer(
+                    output_control=output_control, 
+                    target_problem=problem,
+                    initial_solution=solution, 
+                    problem_solution_te_support=te_support
+            )
+            #logger.debug('Optimizer: ' + str(optimizer))
+            optimizer.optimize()
+            logger.info('Best solution: ' + str(optimizer.best_solution.string_representation()))                        
+            logger.debug('Total enumeration finished.') 
         elif parameters['algorithm'] == 'idle':
             logger.debug('Idle execution started.')    
             logger.debug('Idle execution ended.')    

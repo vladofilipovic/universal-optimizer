@@ -29,19 +29,18 @@ from uo.algorithm.output_control import OutputControl
 from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.exact.total_enumeration.problem_solution_te_support import ProblemSolutionTeSupport
 
-class TotalEnumeration(Algorithm):
+class TeOptimizer(Algorithm):
     """
     This class represent total enumeration algorithm
     """
 
-    def __init__(self, name:str, evaluations_max:int, seconds_max:int, random_seed:int, 
-            keep_all_solution_codes:bool,
-            distance_calculation_cache_is_used:bool,
+    def __init__(self,   
             output_control:OutputControl, 
             target_problem:TargetProblem,
+            initial_solution:TargetSolution,
             problem_solution_te_support:ProblemSolutionTeSupport)->None:
         """
-        Create new TotalEnumeration instance
+        Create new TeOptimizer instance
 
         :param int evaluations_max: maximum number of evaluations for algorithm execution
         :param int seconds_max: maximum number of seconds for algorithm execution
@@ -50,8 +49,8 @@ class TotalEnumeration(Algorithm):
         :param `ProblemSolutionTeSupport` problem_solution_te_support: placeholder for additional methods, specific for TE 
         """
         super().__init__(name='total_enumerations', 
-                evaluations_max=evaluations_max, 
-                seconds_max=seconds_max, 
+                evaluations_max=None, 
+                seconds_max=None, 
                 output_control=output_control, 
                 target_problem=target_problem)
         if problem_solution_te_support is not None:
