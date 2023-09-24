@@ -73,15 +73,14 @@ class ComplexCounterBitArrayFull:
         """
         if self.__counters.all(True):
             return False
-        ind_not_max:int = self.__number_of_counters-1
-        for i in range(ind_not_max, -1, -1):
-            if self.__counters[i] == False:
-                ind_not_max = i
-                break
-        self.__counters[ind_not_max] += True
-        for i in range(ind_not_max+1, self.__number_of_counters):
-            self.__counters[i]=False
+        ind_not_max:int = self.__counters.find('0b0')[0]
+        self.__counters[ind_not_max] = True
+        self.__counters.set(False, range(0,ind_not_max))
         return True
+
+    def can_progress(self)->bool:
+        return not self.__counters.all(True)
+
 
 # testing the developed class
 def main():

@@ -55,8 +55,8 @@ class MaxOnesProblem(TargetProblem):
 
         :param str data_format: data format of the file
         """
-        logger.debug("Load parameters: file path={}, data format representation={}".format(self.file_path, 
-                data_format))
+        logger.debug("Load parameters: file path=" + str(self.file_path) 
+                +  ", data format representation=" + data_format)
         if data_format=='txt':
                 input_file = open(self.file_path, 'r')
                 text_line = input_file.readline().strip()

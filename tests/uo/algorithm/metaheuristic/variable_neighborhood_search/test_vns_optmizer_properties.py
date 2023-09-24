@@ -48,7 +48,6 @@ class TestVnsOptimizerProperties(unittest.TestCase):
                 keep_all_solution_codes=True, 
                 distance_calculation_cache_is_used=False,
                 target_problem=self.problem, 
-                initial_solution=None, 
                 problem_solution_vns_support=None, 
                 local_search_type='first_improvement'
         )

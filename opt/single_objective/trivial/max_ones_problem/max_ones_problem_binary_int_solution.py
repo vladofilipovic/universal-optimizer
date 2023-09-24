@@ -81,7 +81,7 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
         """
         return bin(self.representation)
 
-    def random_init(self, problem:TargetProblem)->None:
+    def init_random(self, problem:TargetProblem)->None:
         """
         Random initialization of the solution
 

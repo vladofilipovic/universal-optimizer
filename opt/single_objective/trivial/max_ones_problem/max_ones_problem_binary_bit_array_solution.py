@@ -70,14 +70,13 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution[BitArray]):
         """
         return self.representation.bin
 
-
-    def random_init(self, problem:TargetProblem)->None:
+    def init_random(self, problem:TargetProblem)->None:
         """
         Random initialization of the solution
 
         :param `TargetProblem` problem: problem which is solved by solution
         """
-        #logger.debug( "\nSolution: {}".format(self))
+        #logger.debug('Solution: ' + str(self))
         self.representation = BitArray(problem.dimension)
         for i in range(problem.dimension):
             if random() > 0.5:
