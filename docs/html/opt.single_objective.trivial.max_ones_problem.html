@@ -233,6 +233,31 @@ ones problem.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution.MaxOnesProblemBinaryBitArraySolution.init_from">
+<span class="sig-name descname"><span class="pre">init_from</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">representation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BitArray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">problem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.target_problem.html#uo.target_problem.target_problem.TargetProblem" title="uo.target_problem.target_problem.TargetProblem"><span class="pre">TargetProblem</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution.MaxOnesProblemBinaryBitArraySolution.init_from" title="Link to this definition"></a></dt>
+<dd><p>Initialization of the solution, by setting its native representation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>representation</strong> (<em>BitArray</em>) – representation that will be ste to solution</p></li>
+<li><p><strong>problem</strong> (<a class="reference internal" href="uo.target_problem.html#uo.target_problem.target_problem.TargetProblem" title="uo.target_problem.target_problem.TargetProblem"><em>TargetProblem</em></a>) – problem which is solved by solution</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution.MaxOnesProblemBinaryBitArraySolution.init_random">
+<span class="sig-name descname"><span class="pre">init_random</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">problem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.target_problem.html#uo.target_problem.target_problem.TargetProblem" title="uo.target_problem.target_problem.TargetProblem"><span class="pre">TargetProblem</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution.MaxOnesProblemBinaryBitArraySolution.init_random" title="Link to this definition"></a></dt>
+<dd><p>Random initialization of the solution</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>problem</strong> (<a class="reference internal" href="uo.target_problem.html#uo.target_problem.target_problem.TargetProblem" title="uo.target_problem.target_problem.TargetProblem"><em>TargetProblem</em></a>) – problem which is solved by solution</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution.MaxOnesProblemBinaryBitArraySolution.native_representation">
 <span class="sig-name descname"><span class="pre">native_representation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">representation_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">BitArray</span></span></span><a class="headerlink" href="#opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution.MaxOnesProblemBinaryBitArraySolution.native_representation" title="Link to this definition"></a></dt>
 <dd><p>Obtain <cite>BitArray</cite> representation from string representation of the BitArray binary solution of the Max Ones problem</p>
@@ -245,17 +270,6 @@ ones problem.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><cite>BitArray</cite></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution.MaxOnesProblemBinaryBitArraySolution.random_init">
-<span class="sig-name descname"><span class="pre">random_init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">problem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.target_problem.html#uo.target_problem.target_problem.TargetProblem" title="uo.target_problem.target_problem.TargetProblem"><span class="pre">TargetProblem</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution.MaxOnesProblemBinaryBitArraySolution.random_init" title="Link to this definition"></a></dt>
-<dd><p>Random initialization of the solution</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>problem</strong> (<a class="reference internal" href="uo.target_problem.html#uo.target_problem.target_problem.TargetProblem" title="uo.target_problem.target_problem.TargetProblem"><em>TargetProblem</em></a>) – problem which is solved by solution</p>
 </dd>
 </dl>
 </dd></dl>
@@ -500,6 +514,31 @@ inside shakingPoints</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution.MaxOnesProblemBinaryIntSolution.init_from">
+<span class="sig-name descname"><span class="pre">init_from</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">representation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">problem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.target_problem.html#uo.target_problem.target_problem.TargetProblem" title="uo.target_problem.target_problem.TargetProblem"><span class="pre">TargetProblem</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution.MaxOnesProblemBinaryIntSolution.init_from" title="Link to this definition"></a></dt>
+<dd><p>Initialization of the solution, by setting its native representation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>representation</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – representation that will be ste to solution</p></li>
+<li><p><strong>problem</strong> (<a class="reference internal" href="uo.target_problem.html#uo.target_problem.target_problem.TargetProblem" title="uo.target_problem.target_problem.TargetProblem"><em>TargetProblem</em></a>) – problem which is solved by solution</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution.MaxOnesProblemBinaryIntSolution.init_random">
+<span class="sig-name descname"><span class="pre">init_random</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">problem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.target_problem.html#uo.target_problem.target_problem.TargetProblem" title="uo.target_problem.target_problem.TargetProblem"><span class="pre">TargetProblem</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution.MaxOnesProblemBinaryIntSolution.init_random" title="Link to this definition"></a></dt>
+<dd><p>Random initialization of the solution</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>problem</strong> (<a class="reference internal" href="uo.target_problem.html#uo.target_problem.target_problem.TargetProblem" title="uo.target_problem.target_problem.TargetProblem"><em>TargetProblem</em></a>) – problem which is solved by solution</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution.MaxOnesProblemBinaryIntSolution.native_representation">
 <span class="sig-name descname"><span class="pre">native_representation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">representation_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution.MaxOnesProblemBinaryIntSolution.native_representation" title="Link to this definition"></a></dt>
 <dd><p>Obtain <cite>int</cite> representation from string representation of the integer binary solution of the Max Ones problem</p>
@@ -512,17 +551,6 @@ inside shakingPoints</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution.MaxOnesProblemBinaryIntSolution.random_init">
-<span class="sig-name descname"><span class="pre">random_init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">problem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.target_problem.html#uo.target_problem.target_problem.TargetProblem" title="uo.target_problem.target_problem.TargetProblem"><span class="pre">TargetProblem</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution.MaxOnesProblemBinaryIntSolution.random_init" title="Link to this definition"></a></dt>
-<dd><p>Random initialization of the solution</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>problem</strong> (<a class="reference internal" href="uo.target_problem.html#uo.target_problem.target_problem.TargetProblem" title="uo.target_problem.target_problem.TargetProblem"><em>TargetProblem</em></a>) – problem which is solved by solution</p>
 </dd>
 </dl>
 </dd></dl>
