@@ -20,9 +20,9 @@ from uo.algorithm.output_control import OutputControl
 from uo.algorithm.algorithm import Algorithm
 
 class AlgorithmVoid(Algorithm):
-    def __init__(self, name:str, evaluations_max:int, seconds_max:int, output_control:OutputControl,
+    def __init__(self, name:str, output_control:OutputControl,
             target_problem:TargetProblem)->None:
-        super().__init__(name, evaluations_max, seconds_max, output_control, target_problem)
+        super().__init__(name, output_control, target_problem)
 
     def __copy__(self):
         return super().__copy__()
@@ -30,6 +30,8 @@ class AlgorithmVoid(Algorithm):
     def copy(self):
         return self.__copy__()
 
+    def init(self):
+        return
     def __str__(self)->str:
         return super().__str__()
 
@@ -38,6 +40,7 @@ class AlgorithmVoid(Algorithm):
 
     def __format__(self, spec:str)->str:
         return super().__format__()
+
 
 class TestAlgorithmProperties(unittest.TestCase):
     
@@ -68,20 +71,12 @@ class TestAlgorithmProperties(unittest.TestCase):
 
         self.algorithm = AlgorithmVoid(output_control=self.output_control,
                 name=self.name,
-                evaluations_max=self.evaluations_max,
-                seconds_max=self.seconds_max,
                 target_problem=self.problem 
         )
         return
 
     def test_name_should_be_as_it_is_in_constructor(self):
         self.assertEqual(self.algorithm.name, self.name)
-
-    def test_evaluations_max_should_be_as_it_is_in_constructor(self):
-        self.assertEqual(self.algorithm.evaluations_max, self.evaluations_max)
-
-    def test_seconds_max_should_be_as_it_is_in_constructor(self):
-        self.assertEqual(self.algorithm.seconds_max, self.seconds_max)
 
     def test_problem_name_should_be_same_that_it_is_in_constructor(self):
         self.assertEqual(self.algorithm.target_problem.name, self.pr_name)

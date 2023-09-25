@@ -12,8 +12,12 @@ sys.path.append(directory.parent.parent)
 sys.path.append(directory.parent.parent.parent)
 
 from copy import deepcopy
+
 from random import choice
 from random import random
+
+from bitstring import Bits, BitArray, BitStream, pack
+
 from typing import TypeVar, Generic
 from typing import Generic
 
@@ -37,7 +41,7 @@ class VnsOptimizer(Metaheuristic):
             distance_calculation_cache_is_used:bool,
             output_control:OutputControl, 
             target_problem:TargetProblem, 
-            initial_solution:TargetSolution, 
+            initial_solution:TargetSolution,
             problem_solution_vns_support:ProblemSolutionVnsSupport, 
             k_min:int, k_max:int, max_local_optima:int, local_search_type:str)->None:
         """
@@ -51,8 +55,8 @@ class VnsOptimizer(Metaheuristic):
         :param bool distance_calculation_cache_is_used: if cache is used for distance calculation between solutions        
         :param `OutputControl` output_control: structure that controls output
         :param `TargetProblem` target_problem: problem to be solved
-        :param `TargetSolution` initial_solution: initial solution of the problem that is optimized by VNS 
-        :param `ProblemSolutionVnsSupport` problem_solution_vns_support: placeholder for additional methods for VNS 
+        :param `TargetSolution` initial_solution: initial solution of the problem 
+        :param `ProblemSolutionVnsSupport` problem_solution_vns_support: placeholder for additional methods, specific for VNS 
         execution, which depend of precise solution type 
         :param int k_min: `k_min` parameter for VNS
         :param int k_max: `k_max` parameter for VNS
@@ -68,14 +72,14 @@ class VnsOptimizer(Metaheuristic):
                 distance_calculation_cache_is_used=distance_calculation_cache_is_used, 
                 output_control=output_control, 
                 target_problem=target_problem)
-        if initial_solution is not None:
+        self.__local_search_type:str = local_search_type
+        if initial_solution is not None: 
             if isinstance(initial_solution, TargetSolution):
                 self.__current_solution:TargetSolution = initial_solution.copy()
             else:
-                self.__current_solution:TargetSolution = initial_solution
+                self.__current_solution = initial_solution
         else:
-            self.__current_solution:TargetSolution = None
-        self.__local_search_type:str = local_search_type
+            self.__current_solution =  None
         if problem_solution_vns_support is not None:
             if isinstance(problem_solution_vns_support, ProblemSolutionVnsSupport):
                 self.__problem_solution_vns_support:ProblemSolutionVnsSupport = problem_solution_vns_support.copy()
@@ -170,8 +174,9 @@ class VnsOptimizer(Metaheuristic):
         Initialization of the VNS algorithm
         """
         self.__k_current = self.k_min
-        self.current_solution.evaluate(self.target_problem);
-        self.copy_to_best_solution(self.current_solution);
+        self.current_solution.init_random(self.target_problem)
+        self.current_solution.evaluate(self.target_problem)
+        self.copy_to_best_solution(self.current_solution)
 
     def __add_local_optima__(self, current_solution:TargetSolution)->bool:
         """
@@ -193,7 +198,7 @@ class VnsOptimizer(Metaheuristic):
                     break
         self.__local_optima[current_solution.representation]=current_solution.fitness_value
         return True
-
+    
     def main_loop_iteration(self)->None:
         """
         One iteration within main loop of the VNS algorithm
@@ -211,13 +216,13 @@ class VnsOptimizer(Metaheuristic):
             # update auxiliary structure that keeps all solution codes
             if self.keep_all_solution_codes:
                 self.all_solution_codes.add(self.current_solution.string_representation())
-            new_is_better = self.is_first_solution_better(self.current_solution, self.best_solution)
+            new_is_better:bool = self.is_first_solution_better(self.current_solution, self.best_solution)
             make_move:bool = new_is_better
             if new_is_better is None:
                 if  self.current_solution.string_representation() == self.best_solution.string_representation():
                     make_move = False
                 else:
-                    logger.debug("Same solution quality, generating random true with probability 0.5");
+                    logger.debug('VnsOptimizer::main_loop_iteration: Same solution quality, generating random true with probability 0.5');
                     make_move = random() < 0.5
             if make_move:
                 self.copy_to_best_solution(self.current_solution)

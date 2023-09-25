@@ -6,6 +6,7 @@ from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.target_solution import ObjectiveFitnessFeasibility
 from uo.target_solution.target_solution import TargetSolution
 from uo.algorithm.algorithm import Algorithm
+from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
 
@@ -63,7 +64,7 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
         mask = (mask % 0x100000000) >> (32-problem.dimension) 
         self.representation &= mask
 
-    def random_init(self, problem:TargetProblem)->None:
+    def init_random(self, problem:TargetProblem)->None:
         if problem.dimension is None:
             raise ValueError("Problem dimension should not be None!")
         if problem.dimension <= 0:
@@ -73,10 +74,14 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
         self.representation = randint(0, 2^problem.dimension-1)
         self.__make_to_be_feasible_helper__(problem)
 
+    def init_from(self, representation:int, problem:TargetProblem)->None:
+        self.representation = representation
+
     def string_rep(self)->str:
         return bin(self.representation)
 
-    def calculate_objective_fitness_feasibility_directly(representation:int, problem:TargetProblem)->ObjectiveFitnessFeasibility:
+    def calculate_objective_fitness_feasibility_directly(self, representation:int, 
+            problem:TargetProblem)->ObjectiveFitnessFeasibility:
         ones_count = representation.bit_count()
         return ObjectiveFitnessFeasibility(ones_count, ones_count, True)
 
@@ -89,6 +94,9 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
         rep_2:int = self.native_representation(solution_code_2)
         result = (rep_1 ^ rep_2).count(True)
         return result 
+
+    def string_representation(self)->str:
+        return bin(self.representation)
 
     def string_rep(self, delimiter:str='\n', indentation:int=0, indentation_symbol:str='   ', 
             group_start:str='{', group_end:str='}',)->str:
@@ -204,26 +212,30 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
     def __format__(self, spec:str)->str:
         return self.string_rep('|')
 
-problem_to_solve:MaxOnesProblem = MaxOnesProblem(dim=22)
-initial_solution:MaxOnesProblemBinaryIntSolution = MaxOnesProblemBinaryIntSolution()
-initial_solution.random_init(problem_to_solve)
-vns_support:MaxOnesProblemBinaryIntSolutionVnsSupport = MaxOnesProblemBinaryIntSolutionVnsSupport()
-optimizer:VnsOptimizer = VnsOptimizer(output_control=OutputControl(write_to_output=false),
-        target_problem=problem_to_solve, 
-        initial_solution=initial_solution, 
-        problem_solution_vns_support=vns_support,
-        evaluations_max=500, 
-        seconds_max=10, 
-        random_seed=None, 
-        keep_all_solution_codes=False, 
-        distance_calculation_cache_is_used=False,
-        k_min=1, 
-        k_max=3, 
-        max_local_optima=10, 
-        local_search_type='local_search_first_improvement')
-optimizer.optimize()
-print('Best solution representation: {}'.format(optimizer.best_solution.representation))            
-print('Best solution code: {}'.format(optimizer.best_solution.string_representation()))            
-print('Best solution fitness: {}'.format(optimizer.best_solution.fitness_value))
-print('Number of iterations: {}'.format(optimizer.iteration))            
-print('Number of evaluations: {}'.format(optimizer.evaluation))            
+def main():
+    problem_to_solve:MaxOnesProblem = MaxOnesProblem(dim=24)
+    solution:MaxOnesProblemBinaryIntSolution = MaxOnesProblemBinaryIntSolution()
+    vns_support:MaxOnesProblemBinaryIntSolutionVnsSupport = MaxOnesProblemBinaryIntSolutionVnsSupport()
+    output_control:OutputControl = OutputControl(write_to_output=False)
+    optimizer:VnsOptimizer = VnsOptimizer(output_control=output_control,
+            target_problem=problem_to_solve, 
+            initial_solution=solution,
+            problem_solution_vns_support=vns_support,
+            evaluations_max=500, 
+            seconds_max=10, 
+            random_seed=None, 
+            keep_all_solution_codes=False, 
+            distance_calculation_cache_is_used=False,
+            k_min=1, 
+            k_max=3, 
+            max_local_optima=10, 
+            local_search_type='local_search_first_improvement')
+    optimizer.optimize()
+    print('Best solution representation: {}'.format(optimizer.best_solution.representation))            
+    print('Best solution code: {}'.format(optimizer.best_solution.string_representation()))            
+    print('Best solution fitness: {}'.format(optimizer.best_solution.fitness_value))
+    print('Number of iterations: {}'.format(optimizer.iteration))            
+    print('Number of evaluations: {}'.format(optimizer.evaluation))            
+
+if __name__ == '__main__':
+        main()

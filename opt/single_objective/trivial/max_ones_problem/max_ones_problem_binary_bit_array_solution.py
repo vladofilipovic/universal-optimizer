@@ -41,7 +41,10 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution[BitArray]):
         :rtype: MaxOnesProblemBinaryBitArraySolution
         """
         sol = super().__copy__()
-        sol.representation = BitArray(bin=self.representation.bin)
+        if self.representation is not None:
+            sol.representation = BitArray(bin=self.representation.bin)
+        else:
+            sol.representation = None
         return sol
 
     def copy(self):
@@ -70,18 +73,26 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution[BitArray]):
         """
         return self.representation.bin
 
-
-    def random_init(self, problem:TargetProblem)->None:
+    def init_random(self, problem:TargetProblem)->None:
         """
         Random initialization of the solution
 
         :param `TargetProblem` problem: problem which is solved by solution
         """
-        #logger.debug( "\nSolution: {}".format(self))
+        #logger.debug('Solution: ' + str(self))
         self.representation = BitArray(problem.dimension)
         for i in range(problem.dimension):
             if random() > 0.5:
                 self.representation[i] = True
+
+    def init_from(self, representation:BitArray, problem:TargetProblem)->None:
+        """
+        Initialization of the solution, by setting its native representation 
+
+        :param BitArray representation: representation that will be ste to solution
+        :param `TargetProblem` problem: problem which is solved by solution
+        """
+        self.representation = BitArray(bin=representation.bin)
 
     def calculate_objective_fitness_feasibility_directly(self, representation:BitArray, 
             problem:TargetProblem)->ObjectiveFitnessFeasibility:

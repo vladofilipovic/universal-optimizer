@@ -81,7 +81,7 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
         """
         return bin(self.representation)
 
-    def random_init(self, problem:TargetProblem)->None:
+    def init_random(self, problem:TargetProblem)->None:
         """
         Random initialization of the solution
 
@@ -95,6 +95,15 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
             raise ValueError("Problem dimension should be less than 32!")
         self.representation = randint(0, 2^problem.dimension-1)
         self.__make_to_be_feasible_helper__(problem)
+
+    def init_from(self, representation:int, problem:TargetProblem)->None:
+        """
+        Initialization of the solution, by setting its native representation 
+
+        :param int representation: representation that will be ste to solution
+        :param `TargetProblem` problem: problem which is solved by solution
+        """
+        self.representation = representation
 
     def calculate_objective_fitness_feasibility_directly(self, representation:int, 
             problem:TargetProblem)->ObjectiveFitnessFeasibility:

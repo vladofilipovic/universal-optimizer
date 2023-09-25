@@ -187,7 +187,7 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         raise NotImplementedError
 
     @abstractmethod
-    def random_init(self, problem:TargetProblem)->None:
+    def init_random(self, problem:TargetProblem)->None:
         """
         Random initialization of the solution
 
@@ -216,6 +216,25 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         :param TargetProblem problem: problem that is solved
         :return: objective value, fitness value and feasibility of the solution instance 
         :rtype: `ObjectiveFitnessFeasibility`
+        """
+        raise NotImplementedError
+
+    @abstractmethod
+    def init_random(self, problem:TargetProblem)->None:
+        """
+        Random initialization of the solution
+
+        :param `TargetProblem` problem: problem which is solved by solution
+        """
+        raise NotImplementedError
+
+    @abstractmethod
+    def init_from(self, representation:R_co, problem:TargetProblem)->None:
+        """
+        Initialization of the solution, by setting its native representation 
+
+        :param R_co representation: representation that will be ste to solution
+        :param `TargetProblem` problem: problem which is solved by solution
         """
         raise NotImplementedError
 

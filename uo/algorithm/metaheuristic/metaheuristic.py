@@ -35,11 +35,16 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
     """
 
     @abstractmethod
-    def __init__(self, name:str, evaluations_max:int, seconds_max:int, random_seed:int, 
+    def __init__(self, 
+            name:str, 
+            evaluations_max:int, 
+            seconds_max:int, 
+            random_seed:int, 
             keep_all_solution_codes:bool,
             distance_calculation_cache_is_used:bool,
             output_control:OutputControl, 
-            target_problem:TargetProblem)->None:
+            target_problem:TargetProblem
+    )->None:
         """
         Create new Metaheuristic instance
 
@@ -53,18 +58,14 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         :param `TargetProblem` target_problem: problem to be solved
         """
         super().__init__(name=name, 
-                evaluations_max=evaluations_max, 
-                seconds_max=seconds_max, 
                 output_control=output_control, 
                 target_problem=target_problem)
         if random_seed is not None and isinstance(random_seed, int) and random_seed != 0:
             self.__random_seed:int = random_seed
         else:
             self.__random_seed:int = randrange(sys.maxsize)
-        self.__iteration:int = 0
-        self.__iteration_best_found:int = 0
-        self.__second_when_best_obtained:float = 0.0
-        self.__best_solution:TargetSolution = None
+        self.__evaluations_max:int = evaluations_max
+        self.__seconds_max:int = seconds_max
         self.__keep_all_solution_codes:bool = keep_all_solution_codes
         #class/static variable all_solution_codes
         if not hasattr(Metaheuristic, 'all_solution_codes'):
@@ -105,33 +106,24 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         return self.__random_seed
 
     @property
-    def iteration(self)->int:
+    def evaluations_max(self)->int:
         """
-        Property getter for the iteration of metaheuristic execution
+        Property getter for the maximum number of evaluations for algorithm execution
         
-        :return: iteration
+        :return: maximum number of evaluations 
         :rtype: int
         """
-        return self.__iteration
-
-    @iteration.setter
-    def iteration(self, value:int)->None:
-        """
-        Property setter the iteration of metaheuristic execution
-        
-        :param int value: iteration
-        """
-        self.__iteration = value
+        return self.__evaluations_max
 
     @property
-    def best_solution(self)->TargetSolution:
+    def seconds_max(self)->int:
         """
-        Property getter for the best solution obtained during metaheuristic execution
+        Property getter for the maximum number of seconds for algorithm execution
         
-        :return: best solution so far 
-        :rtype: TargetSolution
+        :return: maximum number of seconds 
+        :rtype: int
         """
-        return self.__best_solution
+        return self.__seconds_max
 
     @property
     def keep_all_solution_codes(self)->bool:
@@ -142,13 +134,6 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         :rtype: bool
         """
         return self.__keep_all_solution_codes
-
-    @abstractmethod
-    def init(self)->None:
-        """
-        Initialization of the metaheuristic algorithm
-        """
-        raise NotImplementedError
 
     @abstractmethod
     def main_loop_iteration(self)->None:
@@ -176,8 +161,9 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
             self.write_output_values_if_needed("before_iteration", "b_i")
             self.main_loop_iteration()
             self.write_output_values_if_needed("after_iteration", "a_i")
-            logger.debug('Iteration:{}, Evaluations:{}, Solution:{}'.format(self.iteration, self.evaluation,
-                self.best_solution.string_representation()))
+            logger.debug('Iteration: ' + str(self.iteration) 
+                    + ', Evaluations: ' + str(self.evaluation) 
+                    + ', Solution: ' + str(self.best_solution.string_representation()))
 
     def optimize(self)->None:
         """
@@ -190,58 +176,6 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         self.main_loop()
         self.execution_ended = datetime.now()
         self.write_output_values_if_needed("after_algorithm", "a_a")
-
-    def is_first_solution_better(self, sol1:TargetSolution, sol2:TargetSolution)->bool:
-        """
-        Checks if first solution is better than the second one
-
-        :param TargetSolution sol1: first solution
-        :param TargetSolution sol2: second solution
-        :return: `True` if first solution is better, `False` if first solution is worse, `None` if fitnesses of both 
-                solutions are equal
-        :rtype: bool
-        """
-        if self.target_problem is None:
-            raise ValueError('Target problem have to be defined within metaheuristic.')
-        if self.target_problem.is_minimization is None:
-            raise ValueError('Information if minimization or maximization is set within metaheuristic target problem'
-                    'have to be defined.')
-        is_minimization:bool = self.target_problem.is_minimization
-        if sol1 is None:
-            fit1:float = None
-        else:
-            fit1:float = sol1.calculate_objective_fitness_feasibility(self.target_problem).fitness_value;
-        if sol2 is None:
-            fit2:float = None
-        else:
-            fit2:float = sol2.calculate_objective_fitness_feasibility(self.target_problem).fitness_value;
-        # with fitness is better than without fitness
-        if fit1 is None:
-            if fit2 is not None:
-                return False
-            else:
-                return None
-        elif fit2 is None:
-            return True
-        # if better, return true
-        if (is_minimization and fit1 < fit2) or (not is_minimization and fit1 > fit2):
-            return True
-        # if same fitness, return None
-        if fit1 == fit2:
-            return None
-        # otherwise, return false
-        return False
-
-    def copy_to_best_solution(self, solution:TargetSolution)->None:
-        """
-        Copies function argument to become the best solution within metaheuristic instance and update info about time 
-        and iteration when the best solution is updated 
-
-        :param TargetSolution solution: solution that is source for coping operation
-        """
-        self.__best_solution = solution.copy()
-        self.__second_when_best_obtained = (datetime.now() - self.execution_started).total_seconds()
-        self.__iteration_best_found = self.iteration
 
     def calculate_representation_distance(self, code_x:str, code_y:str)->float:
         """
@@ -298,6 +232,12 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         s += 'random_seed=' + str(self.random_seed) + delimiter
         for i in range(0, indentation):
             s += indentation_symbol  
+        s += 'evaluations_max=' + str(self.evaluations_max) + delimiter
+        for i in range(0, indentation):
+            s += indentation_symbol  
+        s += 'seconds_max=' + str(self.seconds_max) + delimiter
+        for i in range(0, indentation):
+            s += indentation_symbol  
         s += '__iteration=' + str(self.__iteration) + delimiter
         for i in range(0, indentation):
             s += indentation_symbol  
@@ -305,13 +245,8 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         for i in range(0, indentation):
             s += indentation_symbol  
         s += '__second_when_best_obtained=' + str(self.__second_when_best_obtained) + delimiter
-        if self.__best_solution is not None:
-            s += '__best_solution=' + self.__best_solution.string_rep(delimiter, indentation + 1,
-                    indentation_symbol, group_start, group_end) + delimiter
-        else:
-            for i in range(0, indentation):
-                s += indentation_symbol  
-            s += '__best_solution=None' + delimiter
+        for i in range(0, indentation):
+            s += indentation_symbol  
         s += '__representation_distance_cache_cs(static)=' + Metaheuristic.representation_distance_cache_cs.string_rep(
                 delimiter, indentation + 1, indentation_symbol, '{', '}') + delimiter
         if self.execution_ended is not None and self.execution_started is not None:

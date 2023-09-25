@@ -39,9 +39,12 @@ class TargetSolutionVoid(TargetSolution[int]):
     def string_representation(self)->str:
         return "42"
 
-    def random_init(self, problem:TargetProblem)->None:
+    def init_random(self, problem:TargetProblem)->None:
         self.representation = 42
         return
+
+    def init_from(self, representation:int, problem:TargetProblem)->None:
+        self.representation = 42
 
     def native_representation(self, representation_str:str)->int:
         return 42

@@ -26,6 +26,7 @@ from bitstring import BitArray
 
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
+from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizer
 
 from uo.utils.files import ensure_dir 
 from uo.utils.logger import logger
@@ -34,10 +35,15 @@ from opt.single_objective.trivial.max_ones_problem.command_line import default_p
 from opt.single_objective.trivial.max_ones_problem.command_line import parse_arguments
 
 from opt.single_objective.trivial.max_ones_problem.max_ones_problem import MaxOnesProblem
+
 from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution import MaxOnesProblemBinaryBitArraySolution
 from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution_vns_support import MaxOnesProblemBinaryBitArraySolutionVnsSupport
+from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution_te_support import MaxOnesProblemBinaryBitArraySolutionTeSupport
+
 from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution import MaxOnesProblemBinaryIntSolution
 from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution_vns_support import MaxOnesProblemBinaryIntSolutionVnsSupport
+
+
 
 """ 
 Solver.
@@ -61,7 +67,7 @@ def main():
             logger.debug('key:{} value:{}'.format(key, val))
             if key is not None and val is not None:
                 parameters[key] = val
-        logger.debug('Execution parameters: {}'.format(parameters))
+        logger.debug('Execution parameters: '+ str(parameters))
         # set optimization type (minimization or maximization)
         if parameters['optimization_type'] == 'minimization':
             is_minimization:bool = True
@@ -97,15 +103,15 @@ def main():
             output_file_path_parts.pop()
             output_file_dir:str =  '/'.join(output_file_path_parts)
             if should_add_timestamp_to_file_name:
-                output_file_path_parts.append( output_file_name +  '-maxones-' + parameters['solutionType'] + '-' + 
-                        parameters['algorithm'] + '-' + parameters['optimization_type'][0:3] + '-' + 
-                        dt.strftime("%Y-%m-%d-%H-%M-%S.%f") + '.' + output_file_ext)
+                output_file_path_parts.append( output_file_name +  '-maxones-'  + parameters['algorithm'] + '-' + 
+                        parameters['solutionType'] + '-' + parameters['optimization_type'][0:3] + 
+                        '-' + dt.strftime("%Y-%m-%d-%H-%M-%S.%f") + '.' + output_file_ext)
             else:
-                output_file_path_parts.append( output_file_name +  '-maxones-' + parameters['solutionType'] + '-' + 
-                        parameters['algorithm'] + '-' + parameters['optimization_type'][0:3] + 
+                output_file_path_parts.append( output_file_name +  '-maxones-' +  parameters['algorithm'] + '-' + 
+                        parameters['solutionType']  + '-' + parameters['optimization_type'][0:3] + 
                         '.' + output_file_ext)
             output_file_path:str = '/'.join(output_file_path_parts)
-            logger.debug("Output file path: {}".format(output_file_path))
+            logger.debug('Output file path: ' + str(output_file_path))
             ensure_dir(output_file_dir)
             output_file = open(output_file_path, "w", encoding="utf-8")
         # output control setup
@@ -127,13 +133,13 @@ def main():
         # random seed setup
         if( int(parameters['randomSeed']) > 0 ):
             r_seed:int = int(parameters['randomSeed'])
-            logger.info("RandomSeed is predefined. Predefined seed value:  %d" % r_seed)
+            logger.info('RandomSeed is predefined. Predefined seed value:  %d' % r_seed)
             if write_to_output_file:
-                output_file.write("# RandomSeed is predefined. Predefined seed value:  %d\n" % r_seed)
+                output_file.write('# RandomSeed is predefined. Predefined seed value:  %d\n' % r_seed)
             random.seed(r_seed)
         else:
             r_seed = randrange(sys.maxsize)
-            logger.info("RandomSeed is not predefined. Generated seed value:  %d" % r_seed)
+            logger.info('RandomSeed is not predefined. Generated seed value:  %d' % r_seed)
             if write_to_output_file:
                 output_file.write("# RandomSeed is not predefined. Generated seed value:  %d\n" % r_seed)
             seed(r_seed)
@@ -143,8 +149,12 @@ def main():
         calculation_solution_distance_cache_is_used = parameters['calculationSolutionDistanceCacheIsUsed']
         # bookkeeping setup
         keep_all_solution_codes:bool = parameters['keepAllSolutionCodes']
-        if parameters['algorithm'] == 'vns':
-            logger.debug('VNS started.') 
+        # problem to be solved
+        problem = MaxOnesProblem(input_file_path)
+        problem.load_from_file(input_format)
+        # select among algorithm types
+        if parameters['algorithm'] == 'variable_neighborhood_search':
+            logger.debug('Variable neighborhood search started.') 
             start_time = datetime.now()
             if write_to_output_file:
                 output_file.write("# VNS started at: %s\n" % str(start_time))
@@ -154,48 +164,70 @@ def main():
             k_max:int = parameters['kMax']
             max_local_optima = parameters['maxLocalOptima']
             local_search_type = parameters['localSearchType']
-            # problem to be solved
-            problem = MaxOnesProblem(input_file_path)
-            problem.load_from_file(input_format)
-            # initial solution for solving
+            # initial solution and vns support
             solution_type:str = parameters['solutionType']
-            initial_solution = None
             vns_support = None
             if solution_type=='BitArray':
-                initial_solution = MaxOnesProblemBinaryBitArraySolution()
+                solution:MaxOnesProblemBinaryBitArraySolution = MaxOnesProblemBinaryBitArraySolution(r_seed)
+                solution.is_caching = evaluation_cache_is_used
                 vns_support = MaxOnesProblemBinaryBitArraySolutionVnsSupport()
             elif solution_type=='int':
-                initial_solution = MaxOnesProblemBinaryIntSolution()
+                solution:MaxOnesProblemBinaryIntSolution = MaxOnesProblemBinaryIntSolution(r_seed)
+                solution.is_caching = evaluation_cache_is_used
                 vns_support = MaxOnesProblemBinaryIntSolutionVnsSupport()
             else:
                 raise ValueError("Invalid solution/representation type is chosen.")
-            initial_solution.evaluation_cache_cs.is_caching = evaluation_cache_is_used
-            initial_solution.random_init(problem=problem)
-            #logger.debug('Initial solution: {}'.format(initial_solution))
-            # optimizer used for solving
-            optimizer = VnsOptimizer(evaluations_max=max_number_evaluations, 
+            # optimizer based on VNS
+            optimizer = VnsOptimizer(
+                    output_control=output_control, 
+                    target_problem=problem,
+                    initial_solution=solution, 
+                    problem_solution_vns_support=vns_support,
+                    evaluations_max=max_number_evaluations, 
                     seconds_max=max_time_for_execution_in_seconds, 
                     random_seed=r_seed, 
                     keep_all_solution_codes=keep_all_solution_codes, 
                     distance_calculation_cache_is_used=calculation_solution_distance_cache_is_used,
-                    output_control=output_control, 
-                    target_problem=problem, 
-                    initial_solution=initial_solution, 
-                    problem_solution_vns_support=vns_support,
                     k_min=k_min, 
                     k_max=k_max, 
                     max_local_optima=max_local_optima, 
                     local_search_type=local_search_type)
-            #logger.debug('Optimizer: {}'.format(optimizer))
+            #logger.debug('Optimizer: ' + str(optimizer))
             optimizer.optimize()
-            logger.info('Best solution: {}'.format(optimizer.best_solution))            
-            logger.debug('Optimizer: {}'.format(optimizer))
+            logger.debug('Variable neighborhood search finished.') 
+            logger.info('Best solution: ' + str(optimizer.best_solution.string_representation()))            
             logger.debug('VNS ended.')
+        elif parameters['algorithm'] == 'total_enumeration':
+            logger.debug('Total enumeration started.') 
+            start_time = datetime.now()
+            if write_to_output_file:
+                output_file.write("# TE started at: %s\n" % str(start_time))
+                output_file.write('# Execution parameters: {}\n'.format(parameters))
+            # initial solution and te support
+            solution_type:str = parameters['solutionType']
+            te_support = None
+            if solution_type=='BitArray':
+                solution:MaxOnesProblemBinaryBitArraySolution = MaxOnesProblemBinaryBitArraySolution(r_seed)
+                solution.is_caching = evaluation_cache_is_used
+                te_support = MaxOnesProblemBinaryBitArraySolutionTeSupport()
+            else:
+                raise ValueError("Invalid solution/representation type is chosen.")
+            # optimizer based on TE
+            optimizer = TeOptimizer(
+                    output_control=output_control, 
+                    target_problem=problem,
+                    initial_solution=solution, 
+                    problem_solution_te_support=te_support
+            )
+            #logger.debug('Optimizer: ' + str(optimizer))
+            optimizer.optimize()
+            logger.info('Best solution: ' + str(optimizer.best_solution.string_representation()))                        
+            logger.debug('Total enumeration finished.') 
         elif parameters['algorithm'] == 'idle':
             logger.debug('Idle execution started.')    
             logger.debug('Idle execution ended.')    
         else:
-            raise ValueError("Invalid optimization algorithm is chosen.")
+            raise ValueError('Invalid optimization algorithm is chosen.')
         logger.debug('Solver ended.')    
         return
     except Exception as exp:

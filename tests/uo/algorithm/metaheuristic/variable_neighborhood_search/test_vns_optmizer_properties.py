@@ -38,7 +38,11 @@ class TestVnsOptimizerProperties(unittest.TestCase):
         type(self.problem).file_path = mock.PropertyMock(return_value='some file path')
         type(self.problem).dimension = mock.PropertyMock(return_value=42)
 
-        self.vns_optimizer = VnsOptimizer(output_control=self.output_control,
+        self.vns_optimizer = VnsOptimizer(
+                output_control=self.output_control,
+                target_problem=self.problem, 
+                initial_solution=None,
+                problem_solution_vns_support=None, 
                 evaluations_max=self.evaluations_max, 
                 seconds_max=self.seconds_max, 
                 random_seed=self.random_seed, 
@@ -47,9 +51,6 @@ class TestVnsOptimizerProperties(unittest.TestCase):
                 max_local_optima=42, 
                 keep_all_solution_codes=True, 
                 distance_calculation_cache_is_used=False,
-                target_problem=self.problem, 
-                initial_solution=None, 
-                problem_solution_vns_support=None, 
                 local_search_type='first_improvement'
         )
         return
