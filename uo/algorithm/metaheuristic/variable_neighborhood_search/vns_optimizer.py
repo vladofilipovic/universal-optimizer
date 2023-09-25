@@ -175,8 +175,8 @@ class VnsOptimizer(Metaheuristic):
         """
         self.__k_current = self.k_min
         self.current_solution.init_random(self.target_problem)
-        self.current_solution.evaluate(self.target_problem);
-        self.copy_to_best_solution(self.current_solution);
+        self.current_solution.evaluate(self.target_problem)
+        self.copy_to_best_solution(self.current_solution)
 
     def __add_local_optima__(self, current_solution:TargetSolution)->bool:
         """

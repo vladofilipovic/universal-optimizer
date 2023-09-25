@@ -228,6 +228,7 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         """
         raise NotImplementedError
 
+    @abstractmethod
     def init_from(self, representation:R_co, problem:TargetProblem)->None:
         """
         Initialization of the solution, by setting its native representation 
@@ -235,7 +236,7 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         :param R_co representation: representation that will be ste to solution
         :param `TargetProblem` problem: problem which is solved by solution
         """
-        self.representation = representation
+        raise NotImplementedError
 
     def calculate_objective_fitness_feasibility(self, target_problem:TargetProblem) -> ObjectiveFitnessFeasibility:
         """

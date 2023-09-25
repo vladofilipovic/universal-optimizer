@@ -49,10 +49,9 @@ class TeOptimizer(Algorithm):
         :param `ProblemSolutionTeSupport` problem_solution_te_support: placeholder for additional methods, specific for TE 
         """
         super().__init__(name='total_enumerations', 
-                evaluations_max=None, 
-                seconds_max=None, 
                 output_control=output_control, 
                 target_problem=target_problem)
+        # total enumeration support
         if problem_solution_te_support is not None:
             if isinstance(problem_solution_te_support, ProblemSolutionTeSupport):
                 self.__problem_solution_te_support:ProblemSolutionTeSupport = problem_solution_te_support.copy()
@@ -70,7 +69,7 @@ class TeOptimizer(Algorithm):
             self.__progress_method = None
             self.__can_progress_method = None
         # current solution
-        self.__current_solution = None
+        self.__current_solution = initial_solution
 
     def __copy__(self):
         """
@@ -121,12 +120,19 @@ class TeOptimizer(Algorithm):
         self.copy_to_best_solution(self.current_solution);
 
     def optimize(self):
+        self.execution_started = datetime.now()
         self.init()
-        while self.__can_progress_method(self.target_problem,self.current_solution, self):
+        self.write_output_headers_if_needed()
+        self.write_output_values_if_needed("before_algorithm", "b_a")
+        while True:
+            self.__progress_method(self.target_problem, self.current_solution, self)
             new_is_better:bool = self.is_first_solution_better(self.current_solution, self.best_solution)
             if new_is_better:
                 self.copy_to_best_solution(self.current_solution)
-            self.__progress_method(self.target_problem,self.current_solution, self)
+            if not self.__can_progress_method(self.target_problem,self.current_solution, self):
+                break
+        self.execution_ended = datetime.now()
+        self.write_output_values_if_needed("after_algorithm", "a_a")
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:

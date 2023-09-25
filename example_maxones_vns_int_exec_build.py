@@ -74,6 +74,9 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
         self.representation = randint(0, 2^problem.dimension-1)
         self.__make_to_be_feasible_helper__(problem)
 
+    def init_from(self, representation:int, problem:TargetProblem)->None:
+        self.representation = representation
+
     def string_rep(self)->str:
         return bin(self.representation)
 

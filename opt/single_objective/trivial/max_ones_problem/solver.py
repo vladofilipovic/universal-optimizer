@@ -103,12 +103,12 @@ def main():
             output_file_path_parts.pop()
             output_file_dir:str =  '/'.join(output_file_path_parts)
             if should_add_timestamp_to_file_name:
-                output_file_path_parts.append( output_file_name +  '-maxones-' + parameters['solutionType'] + '-' + 
-                        parameters['algorithm'] + '-' + parameters['optimization_type'][0:3] + '-' + 
-                        dt.strftime("%Y-%m-%d-%H-%M-%S.%f") + '.' + output_file_ext)
+                output_file_path_parts.append( output_file_name +  '-maxones-'  + parameters['algorithm'] + '-' + 
+                        parameters['solutionType'] + '-' + parameters['optimization_type'][0:3] + 
+                        '-' + dt.strftime("%Y-%m-%d-%H-%M-%S.%f") + '.' + output_file_ext)
             else:
-                output_file_path_parts.append( output_file_name +  '-maxones-' + parameters['solutionType'] + '-' + 
-                        parameters['algorithm'] + '-' + parameters['optimization_type'][0:3] + 
+                output_file_path_parts.append( output_file_name +  '-maxones-' +  parameters['algorithm'] + '-' + 
+                        parameters['solutionType']  + '-' + parameters['optimization_type'][0:3] + 
                         '.' + output_file_ext)
             output_file_path:str = '/'.join(output_file_path_parts)
             logger.debug('Output file path: ' + str(output_file_path))

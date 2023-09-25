@@ -2,6 +2,8 @@
 The :mod:`~uo.target_solution.evaluation_cache_control_statistics` module describes the class :class:`~uo.target_solution.EvaluationCacheControlStatistics`.
 """
 
+from typing import Optional
+
 from pathlib import Path
 directory = Path(__file__).resolve()
 import sys
@@ -12,11 +14,12 @@ class EvaluationCacheControlStatistics:
     Class that represents control statistics for evaluation caching.
     """
     
-    def __init__(self)->None:
+    def __init__(self, is_caching:Optional[bool]=False)->None:
         """
         Create new `EvaluationCacheControlStatistics` instance
+        :param Optional[bool] is_caching: determine if caching is activated
         """
-        self.__is_caching:bool = False
+        self.__is_caching:bool = is_caching
         self.__cache:dict[str] = {}
         self.__cache_hit_count:int = 0
         self.__cache_request_count:int = 0

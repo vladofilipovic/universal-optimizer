@@ -23,8 +23,7 @@ class Algorithm(metaclass=ABCMeta):
     """
 
     @abstractmethod
-    def __init__(self, name:str, evaluations_max:int, seconds_max:int, output_control:OutputControl,  
-            target_problem:TargetProblem)->None:
+    def __init__(self, name:str, output_control:OutputControl,  target_problem:TargetProblem)->None:
         """
         Create new Algorithm instance
 
@@ -35,8 +34,6 @@ class Algorithm(metaclass=ABCMeta):
         :param `TargetProblem` target_problem: problem to be solved
         """
         self.__name:str = name
-        self.__evaluations_max:int = evaluations_max
-        self.__seconds_max:int = seconds_max
         self.__output_control:OutputControl = output_control
         if isinstance(target_problem, TargetProblem):
             self.__target_problem:TargetProblem = target_problem.copy()
@@ -46,6 +43,9 @@ class Algorithm(metaclass=ABCMeta):
         self.__evaluation:int = 0
         self.__execution_started:datetime = None
         self.__execution_ended:datetime = None
+        self.__iteration:int = 0
+        self.__iteration_best_found:int = 0
+        self.__second_when_best_obtained:float = 0.0
 
     @abstractmethod
     def __copy__(self):
@@ -77,26 +77,6 @@ class Algorithm(metaclass=ABCMeta):
         :rtype: str
         """
         return self.__name
-
-    @property
-    def evaluations_max(self)->int:
-        """
-        Property getter for the maximum number of evaluations for algorithm execution
-        
-        :return: maximum number of evaluations 
-        :rtype: int
-        """
-        return self.__evaluations_max
-
-    @property
-    def seconds_max(self)->int:
-        """
-        Property getter for the maximum number of seconds for algorithm execution
-        
-        :return: maximum number of seconds 
-        :rtype: int
-        """
-        return self.__seconds_max
 
     @property
     def target_problem(self)->TargetProblem:
@@ -188,6 +168,25 @@ class Algorithm(metaclass=ABCMeta):
         :rtype: TargetSolution
         """
         return self.__best_solution
+
+    @property
+    def iteration(self)->int:
+        """
+        Property getter for the iteration of metaheuristic execution
+        
+        :return: iteration
+        :rtype: int
+        """
+        return self.__iteration
+
+    @iteration.setter
+    def iteration(self, value:int)->None:
+        """
+        Property setter the iteration of metaheuristic execution
+        
+        :param int value: iteration
+        """
+        self.__iteration = value
 
     @abstractmethod
     def init(self)->None:
@@ -327,9 +326,6 @@ class Algorithm(metaclass=ABCMeta):
         for i in range(0, indentation):
             s += indentation_symbol  
         s += 'name=' + self.name + delimiter
-        for i in range(0, indentation):
-            s += indentation_symbol  
-        s += 'evaluations_max=' + str(self.evaluations_max) + delimiter
         for i in range(0, indentation):
             s += indentation_symbol  
         s += 'target_problem=' + self.target_problem.string_rep(delimiter, indentation + 1, 

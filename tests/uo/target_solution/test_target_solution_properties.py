@@ -43,6 +43,9 @@ class TargetSolutionVoid(TargetSolution[int]):
         self.representation = 42
         return
 
+    def init_from(self, representation:int, problem:TargetProblem)->None:
+        self.representation = 42
+
     def native_representation(self, representation_str:str)->int:
         return 42
 

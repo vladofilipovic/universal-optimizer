@@ -35,11 +35,16 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
     """
 
     @abstractmethod
-    def __init__(self, name:str, evaluations_max:int, seconds_max:int, random_seed:int, 
+    def __init__(self, 
+            name:str, 
+            evaluations_max:int, 
+            seconds_max:int, 
+            random_seed:int, 
             keep_all_solution_codes:bool,
             distance_calculation_cache_is_used:bool,
             output_control:OutputControl, 
-            target_problem:TargetProblem)->None:
+            target_problem:TargetProblem
+    )->None:
         """
         Create new Metaheuristic instance
 
@@ -53,17 +58,14 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         :param `TargetProblem` target_problem: problem to be solved
         """
         super().__init__(name=name, 
-                evaluations_max=evaluations_max, 
-                seconds_max=seconds_max, 
                 output_control=output_control, 
                 target_problem=target_problem)
         if random_seed is not None and isinstance(random_seed, int) and random_seed != 0:
             self.__random_seed:int = random_seed
         else:
             self.__random_seed:int = randrange(sys.maxsize)
-        self.__iteration:int = 0
-        self.__iteration_best_found:int = 0
-        self.__second_when_best_obtained:float = 0.0
+        self.__evaluations_max:int = evaluations_max
+        self.__seconds_max:int = seconds_max
         self.__keep_all_solution_codes:bool = keep_all_solution_codes
         #class/static variable all_solution_codes
         if not hasattr(Metaheuristic, 'all_solution_codes'):
@@ -104,23 +106,24 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         return self.__random_seed
 
     @property
-    def iteration(self)->int:
+    def evaluations_max(self)->int:
         """
-        Property getter for the iteration of metaheuristic execution
+        Property getter for the maximum number of evaluations for algorithm execution
         
-        :return: iteration
+        :return: maximum number of evaluations 
         :rtype: int
         """
-        return self.__iteration
+        return self.__evaluations_max
 
-    @iteration.setter
-    def iteration(self, value:int)->None:
+    @property
+    def seconds_max(self)->int:
         """
-        Property setter the iteration of metaheuristic execution
+        Property getter for the maximum number of seconds for algorithm execution
         
-        :param int value: iteration
+        :return: maximum number of seconds 
+        :rtype: int
         """
-        self.__iteration = value
+        return self.__seconds_max
 
     @property
     def keep_all_solution_codes(self)->bool:
@@ -227,6 +230,12 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         for i in range(0, indentation):
             s += indentation_symbol  
         s += 'random_seed=' + str(self.random_seed) + delimiter
+        for i in range(0, indentation):
+            s += indentation_symbol  
+        s += 'evaluations_max=' + str(self.evaluations_max) + delimiter
+        for i in range(0, indentation):
+            s += indentation_symbol  
+        s += 'seconds_max=' + str(self.seconds_max) + delimiter
         for i in range(0, indentation):
             s += indentation_symbol  
         s += '__iteration=' + str(self.__iteration) + delimiter
