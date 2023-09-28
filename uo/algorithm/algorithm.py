@@ -254,10 +254,14 @@ class Algorithm(metaclass=ABCMeta):
         if self.output_control.write_to_output:
             output:TextIOWrapper = self.output_control.output_file
             f_hs:list[str] = self.output_control.fields_headings
+            line:str = ''
             for f_h in f_hs:
                 output.write(f_h)
+                line += f_h
                 output.write('\t')
+                line += '\t'
             output.write('\n')
+            logger.info(line)
 
     def write_output_values_if_needed(self, step_name:str, step_name_value:str):
         """
@@ -288,6 +292,7 @@ class Algorithm(metaclass=ABCMeta):
             else:
                 raise ValueError("Supplied step name '" + step_name + "' is not valid.")
             if should_write:
+                line:str = ''
                 fields_def:list[str] = self.output_control.fields_definitions 
                 for f_def in fields_def:
                     if f_def != "":
@@ -299,7 +304,9 @@ class Algorithm(metaclass=ABCMeta):
                         except:
                             s_data:str = 'XXX'
                         output.write( s_data + '\t')
+                        line += s_data + '\t'
                 output.write('\n')
+                logger.info(line)
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
