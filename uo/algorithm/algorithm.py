@@ -23,7 +23,7 @@ class Algorithm(metaclass=ABCMeta):
     """
 
     @abstractmethod
-    def __init__(self, name:str, output_control:OutputControl,  target_problem:TargetProblem)->None:
+    def __init__(self, name:str, output_control:OutputControl, target_problem:TargetProblem)->None:
         """
         Create new Algorithm instance
 

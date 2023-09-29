@@ -43,6 +43,7 @@ class TestIntegrationMaxOnesProblemVnsBinaryIntSolutionLsbi(unittest.TestCase):
                 target_problem=self.problem_to_solve, 
                 problem_solution_vns_support=self.vns_support,
                 evaluations_max=500, 
+                iterations_max=0,
                 seconds_max=0, 
                 random_seed=None, 
                 keep_all_solution_codes=False, 
