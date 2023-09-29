@@ -43,8 +43,6 @@ from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_a
 from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution import MaxOnesProblemBinaryIntSolution
 from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution_vns_support import MaxOnesProblemBinaryIntSolutionVnsSupport
 
-
-
 """ 
 Solver.
 
@@ -129,6 +127,7 @@ def main():
         input_format:str = parameters['inputFormat']
         # finishing criteria setup
         max_number_evaluations:int = parameters['maxNumberEvaluations']
+        max_number_iterations:int = parameters['maxNumberIterations']
         max_time_for_execution_in_seconds = parameters['maxTimeForExecutionSeconds']
         # random seed setup
         if( int(parameters['randomSeed']) > 0 ):
@@ -184,6 +183,7 @@ def main():
                     initial_solution=solution, 
                     problem_solution_vns_support=vns_support,
                     evaluations_max=max_number_evaluations, 
+                    iterations_max = max_number_iterations,
                     seconds_max=max_time_for_execution_in_seconds, 
                     random_seed=r_seed, 
                     keep_all_solution_codes=keep_all_solution_codes, 

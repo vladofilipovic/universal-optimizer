@@ -19,6 +19,7 @@ def main():
                 initial_solution=solution,
                 problem_solution_vns_support=vns_support,
                 evaluations_max=500, 
+                iterations_max=0,
                 seconds_max=0, 
                 random_seed=None, 
                 keep_all_solution_codes=False,

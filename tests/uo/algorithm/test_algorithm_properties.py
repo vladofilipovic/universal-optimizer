@@ -41,7 +41,6 @@ class AlgorithmVoid(Algorithm):
     def __format__(self, spec:str)->str:
         return super().__format__()
 
-
 class TestAlgorithmProperties(unittest.TestCase):
     
     @classmethod

@@ -35,6 +35,7 @@ class VnsOptimizer(Metaheuristic):
     """
     
     def __init__(self, evaluations_max:int, 
+            iterations_max:int,
             seconds_max:int, 
             random_seed:int, 
             keep_all_solution_codes:bool, 
@@ -49,6 +50,7 @@ class VnsOptimizer(Metaheuristic):
         That instance implements :ref:`VNS<Algorithm_Variable_Neighborhood_Search>` algorithm. 
 
         :param int evaluations_max: maximum number of evaluations for algorithm execution
+        :param int iterations_max: maximum number of iterations for algorithm execution
         :param int seconds_max: maximum number of seconds for algorithm execution
         :param int random_seed: random seed for metaheuristic execution
         :param bool keep_all_solution_codes: if all solution codes will be remembered
@@ -66,6 +68,7 @@ class VnsOptimizer(Metaheuristic):
         """
         super().__init__( name='vns', 
                 evaluations_max=evaluations_max, 
+                iterations_max=iterations_max,
                 seconds_max=seconds_max, 
                 random_seed=random_seed, 
                 keep_all_solution_codes=keep_all_solution_codes,

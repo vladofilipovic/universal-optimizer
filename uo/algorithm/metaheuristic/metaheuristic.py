@@ -38,6 +38,7 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
     def __init__(self, 
             name:str, 
             evaluations_max:int, 
+            iterations_max:int,
             seconds_max:int, 
             random_seed:int, 
             keep_all_solution_codes:bool,
@@ -50,6 +51,7 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
 
         :param str name: name of the metaheuristic
         :param int evaluations_max: maximum number of evaluations for algorithm execution
+        :param int iterations_max: maximum number of iterations for algorithm execution
         :param int seconds_max: maximum number of seconds for algorithm execution
         :param int random_seed: random seed for metaheuristic execution
         :param bool keep_all_solution_codes: if all solution codes will be remembered        
@@ -65,6 +67,7 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         else:
             self.__random_seed:int = randrange(sys.maxsize)
         self.__evaluations_max:int = evaluations_max
+        self.__iterations_max:int = iterations_max
         self.__seconds_max:int = seconds_max
         self.__keep_all_solution_codes:bool = keep_all_solution_codes
         #class/static variable all_solution_codes
@@ -116,6 +119,16 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         return self.__evaluations_max
 
     @property
+    def iterations_max(self)->int:
+        """
+        Property getter for the maximum number of iterations for algorithm execution
+        
+        :return: maximum number of iterations 
+        :rtype: int
+        """
+        return self.__iterations_max
+
+    @property
     def seconds_max(self)->int:
         """
         Property getter for the maximum number of seconds for algorithm execution
@@ -156,8 +169,9 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         """
         Main loop of the metaheuristic algorithm
         """
-        while (self.evaluations_max == 0 or self.evaluation < self.evaluations_max) and (self.seconds_max == 
-                0 or self.elapsed_seconds() < self.seconds_max):
+        while (self.evaluations_max == 0 or self.evaluation < self.evaluations_max) and (self.iterations_max == 
+                0 or self.iteration < self.iterations_max) and (self.seconds_max == 0 or self.elapsed_seconds() 
+                < self.seconds_max):
             self.write_output_values_if_needed("before_iteration", "b_i")
             self.main_loop_iteration()
             self.write_output_values_if_needed("after_iteration", "a_i")
@@ -233,6 +247,9 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         for i in range(0, indentation):
             s += indentation_symbol  
         s += 'evaluations_max=' + str(self.evaluations_max) + delimiter
+        for i in range(0, indentation):
+            s += indentation_symbol  
+        s += 'iterations_max=' + str(self.iterations_max) + delimiter
         for i in range(0, indentation):
             s += indentation_symbol  
         s += 'seconds_max=' + str(self.seconds_max) + delimiter

@@ -25,7 +25,8 @@ default_parameters_cl = {
         'outputMoments': "after_algorithm, after_evaluation",
         'inputFilePath': 'opt/single_objective/trivial/max_ones_problem/inputs/dimension_77.txt', 
         'inputFormat': 'txt', 
-        'maxNumberEvaluations': 1000, 
+        'maxNumberEvaluations': 3000, 
+        'maxNumberIterations': 0, 
         'maxTimeForExecutionSeconds': 0, 
         'randomSeed': 0,
         'evaluationCacheIsUsed': False,
@@ -74,6 +75,9 @@ def parse_arguments():
         parser_vns.add_argument('--maxNumberEvaluations', type=int, default=0, 
                 help=("Maximum numbers of evaluations during VNS execution. " 
                 "Value 0 means that there is no limit on number of evaluations.") )        
+        parser_vns.add_argument('--maxNumberIterations', type=int, default=0, 
+                help=("Maximum numbers of iterations during VNS execution. " 
+                "Value 0 means that there is no limit on number of iterations.") )        
         parser_vns.add_argument('--maxTimeForExecutionSeconds', type=int, default=10, 
                 help=("Maximum time for execution (in seconds).\n " 
                 "Value 0 means that there is no limit on execution time.") )    
