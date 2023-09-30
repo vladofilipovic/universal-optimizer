@@ -20,6 +20,7 @@ from bitstring import Bits, BitArray, BitStream, pack
 
 from typing import TypeVar, Generic
 from typing import Generic
+from typing import NamedTuple
 
 from uo.utils.logger import logger
 from uo.target_problem.target_problem import TargetProblem
@@ -27,6 +28,26 @@ from uo.target_solution.target_solution import TargetSolution
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.metaheuristic import Metaheuristic
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
+
+"""
+Named tuple that represents parameters for construction of the `VnsOptimizer` instance.
+"""
+VnsOptimizerConstructionParameters = NamedTuple('VnsOptimizerConstructionParameters', 
+            [('evaluations_max',int), 
+            ('iterations_max',int), 
+            ('seconds_max',int),
+            ('random_seed',int),
+            ('keep_all_solution_codes',bool),
+            ('distance_calculation_cache_is_used',bool),
+            ('output_control',OutputControl),
+            ('target_problem',TargetProblem),
+            ('initial_solution',TargetSolution),
+            ('problem_solution_vns_support',ProblemSolutionVnsSupport),
+            ('k_min',int),
+            ('k_max',int),
+            ('max_local_optima',int),
+            ('local_search_type',str)]
+        )
 
 class VnsOptimizer(Metaheuristic):
     """
@@ -44,7 +65,10 @@ class VnsOptimizer(Metaheuristic):
             target_problem:TargetProblem, 
             initial_solution:TargetSolution,
             problem_solution_vns_support:ProblemSolutionVnsSupport, 
-            k_min:int, k_max:int, max_local_optima:int, local_search_type:str)->None:
+            k_min:int, 
+            k_max:int, 
+            max_local_optima:int, 
+            local_search_type:str)->None:
         """
         Create new instance of class :class:`~uo.algorithm.metaheuristic.variable_neighborhood_search.VnsOptimizer`. 
         That instance implements :ref:`VNS<Algorithm_Variable_Neighborhood_Search>` algorithm. 
@@ -112,6 +136,23 @@ class VnsOptimizer(Metaheuristic):
         self.__k_current:int = None
         # values of the local optima foreach element calculated 
         self.__local_optima:Dict[int|BitArray, float] = {}
+
+    @classmethod
+    def from_construction_tuple(cls, construction_tuple:VnsOptimizerConstructionParameters):
+        return cls(construction_tuple.evaluations_max, 
+            construction_tuple.iterations_max,
+            construction_tuple.seconds_max, 
+            construction_tuple.random_seed, 
+            construction_tuple.keep_all_solution_codes, 
+            construction_tuple.distance_calculation_cache_is_used,
+            construction_tuple.output_control, 
+            construction_tuple.target_problem, 
+            construction_tuple.initial_solution,
+            construction_tuple.problem_solution_vns_support, 
+            construction_tuple.k_min, 
+            construction_tuple.k_max, 
+            construction_tuple.max_local_optima, 
+            construction_tuple.local_search_type)
 
     def __copy__(self):
         """

@@ -20,7 +20,6 @@ sys.path.append(directory.parent.parent.parent)
 from random import randrange
 from random import seed
 from datetime import datetime
-from collections import namedtuple
 
 from bitstring import BitArray
 

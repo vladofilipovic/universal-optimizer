@@ -11,18 +11,18 @@ from copy import deepcopy
 from random import randrange
 from random import choice
 
-from collections import namedtuple
-
 from abc import ABCMeta, abstractmethod
+from typing import NamedTuple
 from typing import TypeVar, Generic
 from typing import Generic
 
 from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.evaluation_cache_control_statistics import EvaluationCacheControlStatistics
 
-ObjectiveFitnessFeasibility = namedtuple('ObjectiveFitnessFeasibility', ['objective_value', 
-                'fitness_value', 
-                'is_feasible'])
+ObjectiveFitnessFeasibility = NamedTuple('ObjectiveFitnessFeasibility', [('objective_value',float|list[float]), 
+            ('fitness_value',float|list[float]), 
+            ('is_feasible',bool)]
+        )
 
 R_co = TypeVar("R_co", covariant=True) 
 
