@@ -5,8 +5,11 @@ from random import choice
 from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.target_solution import ObjectiveFitnessFeasibility
 from uo.target_solution.target_solution import TargetSolution
+
 from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.output_control import OutputControl
+
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer_constructor_parameters import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
 
@@ -213,24 +216,26 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
         return self.string_rep('|')
 
 def main():
+    output_control:OutputControl = OutputControl(write_to_output=False)
     problem_to_solve:MaxOnesProblem = MaxOnesProblem(dim=24)
     solution:MaxOnesProblemBinaryIntSolution = MaxOnesProblemBinaryIntSolution()
     vns_support:MaxOnesProblemBinaryIntSolutionVnsSupport = MaxOnesProblemBinaryIntSolutionVnsSupport()
-    output_control:OutputControl = OutputControl(write_to_output=False)
-    optimizer:VnsOptimizer = VnsOptimizer(output_control=output_control,
-            target_problem=problem_to_solve, 
-            initial_solution=solution,
-            problem_solution_vns_support=vns_support,
-            evaluations_max=500, 
-            iterations_max=0,
-            seconds_max=10, 
-            random_seed=None, 
-            keep_all_solution_codes=False, 
-            distance_calculation_cache_is_used=False,
-            k_min=1, 
-            k_max=3, 
-            max_local_optima=10, 
-            local_search_type='local_search_first_improvement')
+    vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
+    vns_construction_params.output_control = output_control
+    vns_construction_params.target_problem = problem_to_solve
+    vns_construction_params.initial_solution = solution
+    vns_construction_params.problem_solution_vns_support = vns_support
+    vns_construction_params.evaluations_max = 500
+    vns_construction_params.iterations_max = 0
+    vns_construction_params.seconds_max= 10
+    vns_construction_params.random_seed = 43434343
+    vns_construction_params.keep_all_solution_codes = False
+    vns_construction_params.distance_calculation_cache_is_used = False
+    vns_construction_params.k_min = 1
+    vns_construction_params.k_max = 3
+    vns_construction_params.max_local_optima = 10
+    vns_construction_params.local_search_type = 'local_search_first_improvement'
+    optimizer:VnsOptimizer = VnsOptimizer.from_construction_tuple(vns_construction_params)
     optimizer.optimize()
     print('Best solution representation: {}'.format(optimizer.best_solution.representation))            
     print('Best solution code: {}'.format(optimizer.best_solution.string_representation()))            

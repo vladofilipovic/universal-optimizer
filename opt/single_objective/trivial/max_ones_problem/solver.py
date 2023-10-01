@@ -24,7 +24,9 @@ from datetime import datetime
 from bitstring import BitArray
 
 from uo.algorithm.output_control import OutputControl
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer_constructor_parameters import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
+from uo.algorithm.exact.total_enumeration.te_optimizer_constructor_parameters import TeOptimizerConstructionParameters
 from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizer
 
 from uo.utils.files import ensure_dir 
@@ -175,22 +177,24 @@ def main():
                 vns_support = MaxOnesProblemBinaryIntSolutionVnsSupport()
             else:
                 raise ValueError("Invalid solution/representation type is chosen.")
+            # optimizer construction parameters
+            vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
+            vns_construction_params.output_control = output_control
+            vns_construction_params.target_problem = problem
+            vns_construction_params.initial_solution = solution
+            vns_construction_params.problem_solution_vns_support = vns_support
+            vns_construction_params.evaluations_max = max_number_evaluations
+            vns_construction_params.iterations_max = max_number_iterations
+            vns_construction_params.seconds_max= max_time_for_execution_in_seconds
+            vns_construction_params.random_seed = r_seed
+            vns_construction_params.keep_all_solution_codes = keep_all_solution_codes
+            vns_construction_params.distance_calculation_cache_is_used = calculation_solution_distance_cache_is_used
+            vns_construction_params.k_min = k_min
+            vns_construction_params.k_max = k_max
+            vns_construction_params.max_local_optima = max_local_optima
+            vns_construction_params.local_search_type = local_search_type
             # optimizer based on VNS
-            optimizer = VnsOptimizer(
-                    output_control=output_control, 
-                    target_problem=problem,
-                    initial_solution=solution, 
-                    problem_solution_vns_support=vns_support,
-                    evaluations_max=max_number_evaluations, 
-                    iterations_max = max_number_iterations,
-                    seconds_max=max_time_for_execution_in_seconds, 
-                    random_seed=r_seed, 
-                    keep_all_solution_codes=keep_all_solution_codes, 
-                    distance_calculation_cache_is_used=calculation_solution_distance_cache_is_used,
-                    k_min=k_min, 
-                    k_max=k_max, 
-                    max_local_optima=max_local_optima, 
-                    local_search_type=local_search_type)
+            optimizer:VnsOptimizer = VnsOptimizer.from_construction_tuple(vns_construction_params)
             #logger.debug('Optimizer: ' + str(optimizer))
             optimizer.optimize()
             logger.debug('Variable neighborhood search finished.') 

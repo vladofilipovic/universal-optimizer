@@ -25,16 +25,16 @@ class VnsOptimizerConstructionParameters:
     """
     Instance of the class :class:`~uo.algorithm.metaheuristic.variable_neighborhood_search_constructor_parameters.VnsOptimizerConstructionParameters` represents constructor parameters for VNS algorithm.
     """
+    output_control:OutputControl = None
+    target_problem:TargetProblem = None
+    initial_solution:TargetSolution = None
+    problem_solution_vns_support:ProblemSolutionVnsSupport = None
     evaluations_max:int = None 
     iterations_max:int = None 
     seconds_max:int = None
     random_seed:int = None
     keep_all_solution_codes:bool = None
     distance_calculation_cache_is_used:bool = None
-    output_control:OutputControl = None
-    target_problem:TargetProblem = None
-    initial_solution:TargetSolution = None
-    problem_solution_vns_support:ProblemSolutionVnsSupport = None
     k_min:int = None
     k_max:int = None
     max_local_optima:int = None

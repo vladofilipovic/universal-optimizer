@@ -15,7 +15,6 @@ def main():
         problem_to_solve:MaxOnesProblem = MaxOnesProblem(dim=24)
         solution:MaxOnesProblemBinaryBitArraySolution = MaxOnesProblemBinaryBitArraySolution()
         vns_support:MaxOnesProblemBinaryBitArraySolutionVnsSupport = MaxOnesProblemBinaryBitArraySolutionVnsSupport()
-        constructor_params:VnsOptimizerConstructionParameters = ()
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
         vns_construction_params.output_control = output_control
         vns_construction_params.target_problem = problem_to_solve
@@ -26,6 +25,7 @@ def main():
         vns_construction_params.seconds_max= 0
         vns_construction_params.random_seed = 43434343
         vns_construction_params.keep_all_solution_codes = False
+        vns_construction_params.distance_calculation_cache_is_used = False
         vns_construction_params.k_min = 1
         vns_construction_params.k_max = 3
         vns_construction_params.max_local_optima = 10
