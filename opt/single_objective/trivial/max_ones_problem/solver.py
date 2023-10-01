@@ -198,12 +198,6 @@ def main():
             #logger.debug('Optimizer: ' + str(optimizer))
             optimizer.optimize()
             logger.debug('Variable neighborhood search finished.') 
-            logger.info('Best solution code: {}'.format(optimizer.best_solution.string_representation()))            
-            logger.info('Best solution objective: {}'.format(optimizer.best_solution.objective_value))
-            logger.info('Best solution fitness: {}'.format(optimizer.best_solution.fitness_value))
-            logger.info('Number of iterations: {}'.format(optimizer.iteration))            
-            logger.info('Number of evaluations: {}'.format(optimizer.evaluation))            
-            logger.debug('VNS ended.')
         elif parameters['algorithm'] == 'total_enumeration':
             logger.debug('Total enumeration started.') 
             start_time = datetime.now()
@@ -230,16 +224,16 @@ def main():
             #logger.debug('Optimizer: ' + str(optimizer))
             optimizer.optimize()
             logger.debug('Total enumeration finished.') 
-            logger.info('Best solution code: {}'.format(optimizer.best_solution.string_representation()))            
-            logger.info('Best solution objective: {}'.format(optimizer.best_solution.objective_value))
-            logger.info('Best solution fitness: {}'.format(optimizer.best_solution.fitness_value))
-            logger.info('Number of iterations: {}'.format(optimizer.iteration))            
-            logger.info('Number of evaluations: {}'.format(optimizer.evaluation))            
         elif parameters['algorithm'] == 'idle':
             logger.debug('Idle execution started.')    
             logger.debug('Idle execution ended.')    
         else:
             raise ValueError('Invalid optimization algorithm is chosen.')
+        logger.info('Best solution code: {}'.format(optimizer.best_solution.string_representation()))            
+        logger.info('Best solution objective: {}, fitness: {}'.format(optimizer.best_solution.objective_value,
+                optimizer.best_solution.fitness_value))
+        logger.info('Number of iterations: {}, evaluations: {}'.format(optimizer.iteration, optimizer.evaluation))  
+        logger.info('Execution: {} - {}'.format(optimizer.execution_started, optimizer.execution_ended))          
         logger.debug('Solver ended.')    
         return
     except Exception as exp:

@@ -73,7 +73,10 @@ class MaxOnesProblemBinaryBitArraySolutionTeSupport(ProblemSolutionTeSupport[Bit
         self.__bit_array_counter = ComplexCounterBitArrayFull(problem.dimension)
         self.__bit_array_counter.reset()
         solution.init_from(self.__bit_array_counter.current_state(), problem)
+        optimizer.write_output_values_if_needed("before_evaluation", "b_e")
+        optimizer.evaluation += 1
         solution.evaluate(problem)
+        optimizer.write_output_values_if_needed("after_evaluation", "a_e")
 
     def progress(self, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryBitArraySolution, 
             optimizer:Algorithm)->None:
@@ -87,7 +90,10 @@ class MaxOnesProblemBinaryBitArraySolutionTeSupport(ProblemSolutionTeSupport[Bit
         """        
         self.__bit_array_counter.progress()
         solution.init_from( self.__bit_array_counter.current_state(), problem)
+        optimizer.write_output_values_if_needed("before_evaluation", "b_e")
+        optimizer.evaluation += 1
         solution.evaluate(problem)
+        optimizer.write_output_values_if_needed("after_evaluation", "a_e")
 
     def can_progress(self, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryBitArraySolution, 
             optimizer:Algorithm)->bool:

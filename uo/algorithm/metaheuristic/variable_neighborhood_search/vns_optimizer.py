@@ -30,10 +30,10 @@ from uo.target_solution.target_solution import TargetSolution
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer_constructor_parameters import VnsOptimizerConstructionParameters
 
 from uo.algorithm.output_control import OutputControl
-from uo.algorithm.metaheuristic.metaheuristic import Metaheuristic
+from uo.algorithm.metaheuristic.single_solution_metaheuristic import SingleSolutionMetaheuristic
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
 
-class VnsOptimizer(Metaheuristic):
+class VnsOptimizer(SingleSolutionMetaheuristic):
     """
     Instance of the class :class:`~uo.algorithm.metaheuristic.variable_neighborhood_search.VnsOptimizer` encapsulate 
     :ref:`Algorithm_Variable_Neighborhood_Search` optimization algorithm.
@@ -82,15 +82,9 @@ class VnsOptimizer(Metaheuristic):
                 keep_all_solution_codes=keep_all_solution_codes,
                 distance_calculation_cache_is_used=distance_calculation_cache_is_used, 
                 output_control=output_control, 
-                target_problem=target_problem)
+                target_problem=target_problem,
+                initial_solution=initial_solution)
         self.__local_search_type:str = local_search_type
-        if initial_solution is not None: 
-            if isinstance(initial_solution, TargetSolution):
-                self.__current_solution:TargetSolution = initial_solution.copy()
-            else:
-                self.__current_solution = initial_solution
-        else:
-            self.__current_solution =  None
         if problem_solution_vns_support is not None:
             if isinstance(problem_solution_vns_support, ProblemSolutionVnsSupport):
                 self.__problem_solution_vns_support:ProblemSolutionVnsSupport = problem_solution_vns_support.copy()
@@ -161,26 +155,6 @@ class VnsOptimizer(Metaheuristic):
         :rtype: :class:`uo.algorithm.metaheuristic.variable_neighborhood_search.VnsOptimizer`        
         """
         return self.__copy__()
-
-    @property
-    def current_solution(self)->TargetSolution:
-        """
-        Property getter for the current solution used during VNS execution
-
-        :return: instance of the :class:`uo.target_solution.TargetSolution` class subtype -- current solution of the problem 
-        :rtype: :class:`TargetSolution`        
-        """
-        return self.__current_solution
-
-    @current_solution.setter
-    def current_solution(self, value:TargetSolution)->None:
-        """
-        Property setter for for the current solution used during VNS execution
-
-        :param value: the current solution
-        :type value: :class:`TargetSolution`
-        """
-        self.__current_solution = value
 
     @property
     def k_min(self)->int:

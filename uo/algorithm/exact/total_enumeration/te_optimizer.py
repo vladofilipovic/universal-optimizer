@@ -150,6 +150,7 @@ class TeOptimizer(Algorithm):
         """
         self.__reset_method(self.target_problem,self.current_solution, self)
         self.write_output_values_if_needed("before_evaluation", "b_e")
+        self.evaluation += 1
         self.current_solution.evaluate(self.target_problem);
         self.write_output_values_if_needed("after_evaluation", "a_e")
         self.copy_to_best_solution(self.current_solution);
