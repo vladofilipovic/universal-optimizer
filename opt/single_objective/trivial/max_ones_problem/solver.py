@@ -215,13 +215,14 @@ def main():
                 te_support = MaxOnesProblemBinaryBitArraySolutionTeSupport()
             else:
                 raise ValueError("Invalid solution/representation type is chosen.")
+            # optimizer construction parameters
+            te_construction_params:TeOptimizerConstructionParameters = TeOptimizerConstructionParameters()
+            te_construction_params.output_control = output_control
+            te_construction_params.target_problem = problem
+            te_construction_params.initial_solution = solution
+            te_construction_params.problem_solution_te_support = te_support
             # optimizer based on TE
-            optimizer = TeOptimizer(
-                    output_control=output_control, 
-                    target_problem=problem,
-                    initial_solution=solution, 
-                    problem_solution_te_support=te_support
-            )
+            optimizer = TeOptimizer.from_construction_tuple(te_construction_params)
             #logger.debug('Optimizer: ' + str(optimizer))
             optimizer.optimize()
             logger.info('Best solution: ' + str(optimizer.best_solution.string_representation()))                        
