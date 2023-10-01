@@ -23,31 +23,15 @@ from typing import Generic
 from typing import NamedTuple
 
 from uo.utils.logger import logger
+
 from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.target_solution import TargetSolution
+
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer_constructor_parameters import VnsOptimizerConstructionParameters
+
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.metaheuristic import Metaheuristic
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
-
-"""
-Named tuple that represents parameters for construction of the `VnsOptimizer` instance.
-"""
-VnsOptimizerConstructionParameters = NamedTuple('VnsOptimizerConstructionParameters', 
-            [('evaluations_max',int), 
-            ('iterations_max',int), 
-            ('seconds_max',int),
-            ('random_seed',int),
-            ('keep_all_solution_codes',bool),
-            ('distance_calculation_cache_is_used',bool),
-            ('output_control',OutputControl),
-            ('target_problem',TargetProblem),
-            ('initial_solution',TargetSolution),
-            ('problem_solution_vns_support',ProblemSolutionVnsSupport),
-            ('k_min',int),
-            ('k_max',int),
-            ('max_local_optima',int),
-            ('local_search_type',str)]
-        )
 
 class VnsOptimizer(Metaheuristic):
     """
@@ -139,6 +123,11 @@ class VnsOptimizer(Metaheuristic):
 
     @classmethod
     def from_construction_tuple(cls, construction_tuple:VnsOptimizerConstructionParameters):
+        """
+        Additional constructor, that creates new instance of class :class:`~uo.algorithm.metaheuristic.variable_neighborhood_search.VnsOptimizer`. 
+
+        :param `VnsOptimizerConstructionParameters` construction_tuple: tuple with all constructor parameters
+        """
         return cls(construction_tuple.evaluations_max, 
             construction_tuple.iterations_max,
             construction_tuple.seconds_max, 
