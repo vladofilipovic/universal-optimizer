@@ -25,20 +25,11 @@ from uo.utils.logger import logger
 
 from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.target_solution import TargetSolution
+
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.exact.total_enumeration.problem_solution_te_support import ProblemSolutionTeSupport
-
-"""
-Named tuple that represents parameters for construction of the `TeOptimizer` instance.
-"""
-TeOptimizerConstructionParameters = NamedTuple('TeOptimizerConstructionParameters', 
-            [('output_control',OutputControl),
-            ('target_problem',TargetProblem),
-            ('initial_solution',TargetSolution),
-            ('problem_solution_te_support',ProblemSolutionTeSupport)]
-        )
-
+from uo.algorithm.exact.total_enumeration.te_optimizer_constructor_parameters import TeOptimizerConstructionParameters
 
 class TeOptimizer(Algorithm):
     """
@@ -80,6 +71,7 @@ class TeOptimizer(Algorithm):
             self.__can_progress_method = None
         # current solution
         self.__current_solution = initial_solution
+        self.__iteration = None
 
     @classmethod
     def from_construction_tuple(cls, construction_tuple:TeOptimizerConstructionParameters):
@@ -125,32 +117,60 @@ class TeOptimizer(Algorithm):
     @current_solution.setter
     def current_solution(self, value:TargetSolution)->None:
         """
-        Property setter for for the current solution used during VNS execution
+        Property setter for the current solution used during VNS execution
 
         :param value: the current solution
         :type value: :class:`TargetSolution`
         """
         self.__current_solution = value
 
+    @property
+    def iteration(self)->int:
+        """
+        Property getter for the current iteration during TE execution
+
+        :return: current iteration number 
+        :rtype: int       
+        """
+        return self.__iteration
+
+    @iteration.setter
+    def iteration(self, value:int)->None:
+        """
+        Property setter for the current iteration during TE execution
+
+        :param value: the current iteration
+        :type value: int
+        """
+        self.__iteration = value
 
     def init(self):
         """
         Initialization of the total enumeration algorithm
         """
         self.__reset_method(self.target_problem,self.current_solution, self)
+        self.write_output_values_if_needed("before_evaluation", "b_e")
         self.current_solution.evaluate(self.target_problem);
+        self.write_output_values_if_needed("after_evaluation", "a_e")
         self.copy_to_best_solution(self.current_solution);
+        self.iteration = 1
 
     def optimize(self):
         self.execution_started = datetime.now()
         self.init()
+        logger.debug('Overall number of evaluations: {}'.format(
+            self.__problem_solution_te_support.overall_number_of_evaluations(self.target_problem, 
+            self.current_solution, self)))
         self.write_output_headers_if_needed()
         self.write_output_values_if_needed("before_algorithm", "b_a")
         while True:
+            self.write_output_values_if_needed("before_iteration", "b_i")
+            self.iteration += 1
             self.__progress_method(self.target_problem, self.current_solution, self)
             new_is_better:bool = self.is_first_solution_better(self.current_solution, self.best_solution)
             if new_is_better:
                 self.copy_to_best_solution(self.current_solution)
+            self.write_output_values_if_needed("after_iteration", "a_i")
             if not self.__can_progress_method(self.target_problem,self.current_solution, self):
                 break
         self.execution_ended = datetime.now()

@@ -75,7 +75,8 @@ class MaxOnesProblemBinaryBitArraySolutionTeSupport(ProblemSolutionTeSupport[Bit
         solution.init_from(self.__bit_array_counter.current_state(), problem)
         solution.evaluate(problem)
 
-    def progress(self, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryBitArraySolution, optimizer:Algorithm)->None:
+    def progress(self, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryBitArraySolution, 
+            optimizer:Algorithm)->None:
         """
         Progress internal counter of the total enumerator, so next configuration will be taken into consideration. 
         Internal state of the solution will be set to reflect progress operation.  
@@ -88,7 +89,8 @@ class MaxOnesProblemBinaryBitArraySolutionTeSupport(ProblemSolutionTeSupport[Bit
         solution.init_from( self.__bit_array_counter.current_state(), problem)
         solution.evaluate(problem)
 
-    def can_progress(self, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryBitArraySolution, optimizer:Algorithm)->bool:
+    def can_progress(self, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryBitArraySolution, 
+            optimizer:Algorithm)->bool:
         """
         Check if total enumeration process is not at end.  
 
@@ -99,6 +101,19 @@ class MaxOnesProblemBinaryBitArraySolutionTeSupport(ProblemSolutionTeSupport[Bit
         :rtype: bool
         """        
         return self.__bit_array_counter.can_progress()
+
+    def overall_number_of_evaluations(self, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryBitArraySolution, 
+            optimizer:Algorithm)->int:
+        """
+        Returns overall number of evaluations required for finishing total enumeration process.  
+
+        :param `TargetProblem` problem: problem that is solved
+        :param `TargetSolution[R_co]` solution: solution used for the problem that is solved
+        :param `Algorithm` optimizer: optimizer that is executed
+        :return: overall number of evaluations required for finishing total enumeration process
+        :rtype: int
+        """        
+        return pow(2, problem.dimension)
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
