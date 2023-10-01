@@ -239,6 +239,7 @@ def main():
     optimizer.optimize()
     print('Best solution representation: {}'.format(optimizer.best_solution.representation))            
     print('Best solution code: {}'.format(optimizer.best_solution.string_representation()))            
+    print('Best solution objective:  {}'.format(optimizer.best_solution.objective_value))
     print('Best solution fitness: {}'.format(optimizer.best_solution.fitness_value))
     print('Number of iterations: {}'.format(optimizer.iteration))            
     print('Number of evaluations: {}'.format(optimizer.evaluation))            

@@ -32,11 +32,12 @@ def main():
         vns_construction_params.local_search_type = 'local_search_best_improvement'
         optimizer:VnsOptimizer = VnsOptimizer.from_construction_tuple(vns_construction_params)
         optimizer.optimize()
-        print('Best solution representation: ' + str(optimizer.best_solution.representation.bin))            
-        print('Best solution code: ' + str(optimizer.best_solution.string_representation()))            
-        print('Best solution fitness: ' + str(optimizer.best_solution.fitness_value))
-        print('Number of iterations: ' + str(optimizer.iteration))            
-        print('Number of evaluations: ' + str(optimizer.evaluation))            
+        print('Best solution representation: {}'.format(optimizer.best_solution.representation.bin))            
+        print('Best solution code: {}'.format(optimizer.best_solution.string_representation()))            
+        print('Best solution objective: {}'.format(optimizer.best_solution.objective_value))
+        print('Best solution fitness: {}'.format(optimizer.best_solution.fitness_value))
+        print('Number of iterations: {}'.format(optimizer.iteration))            
+        print('Number of evaluations: {}'.format(optimizer.evaluation))            
 
 if __name__ == '__main__':
         main()
