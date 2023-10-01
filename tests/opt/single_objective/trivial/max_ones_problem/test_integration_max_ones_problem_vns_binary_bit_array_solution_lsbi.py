@@ -27,11 +27,11 @@ from opt.single_objective.trivial.max_ones_problem.max_ones_problem import MaxOn
 from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution import MaxOnesProblemBinaryBitArraySolution
 from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution_vns_support import MaxOnesProblemBinaryBitArraySolutionVnsSupport
 
-class TestIntegrationMaxOnesProblemVnsBinaryIntSolutionLsbi(unittest.TestCase):
+class TestIntegrationMaxOnesProblemVnsBinaryBitArraySolutionLsbi(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
-        print("setUpClass TestIntegrationMaxOnesProblemVnsBinaryIntSolutionLsbi\n")
+        print("setUpClass TestIntegrationMaxOnesProblemVnsBinaryBitArraySolutionLsbi\n")
 
     def setUp(self):
         self.output_control = OutputControl(False)
@@ -75,7 +75,7 @@ class TestIntegrationMaxOnesProblemVnsBinaryIntSolutionLsbi(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        print("\ntearDownClass TestIntegrationMaxOnesProblemVnsBinaryIntSolutionLsbi")
+        print("\ntearDownClass TestIntegrationMaxOnesProblemVnsBinaryBitArraySolutionLsbi")
     
 if __name__ == '__main__':
     unittest.main()

@@ -58,3 +58,15 @@ class ProblemSolutionTeSupport(Generic[R_co], metaclass=ABCMeta):
         """        
         raise NotImplementedError
 
+    @abstractmethod
+    def overall_number_of_evaluations(self, problem:TargetProblem, solution:TargetSolution[R_co], optimizer:Algorithm)->int:
+        """
+        Returns overall number of evaluations required for finishing total enumeration process.  
+
+        :param `TargetProblem` problem: problem that is solved
+        :param `TargetSolution[R_co]` solution: solution used for the problem that is solved
+        :param `Algorithm` optimizer: optimizer that is executed
+        :return: overall number of evaluations required for finishing total enumeration process
+        :rtype: int
+        """        
+        raise NotImplementedError
