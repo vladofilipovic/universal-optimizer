@@ -19,7 +19,7 @@ from bitstring import BitArray
 
 from typing import TypeVar, Generic
 from typing import Generic
-
+from typing import NamedTuple
 
 from uo.utils.logger import logger
 
@@ -28,6 +28,17 @@ from uo.target_solution.target_solution import TargetSolution
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.exact.total_enumeration.problem_solution_te_support import ProblemSolutionTeSupport
+
+"""
+Named tuple that represents parameters for construction of the `TeOptimizer` instance.
+"""
+TeOptimizerConstructionParameters = NamedTuple('TeOptimizerConstructionParameters', 
+            [('output_control',OutputControl),
+            ('target_problem',TargetProblem),
+            ('initial_solution',TargetSolution),
+            ('problem_solution_te_support',ProblemSolutionTeSupport)]
+        )
+
 
 class TeOptimizer(Algorithm):
     """
@@ -42,10 +53,9 @@ class TeOptimizer(Algorithm):
         """
         Create new TeOptimizer instance
 
-        :param int evaluations_max: maximum number of evaluations for algorithm execution
-        :param int seconds_max: maximum number of seconds for algorithm execution
         :param `OutputControl` output_control: structure that controls output
         :param `TargetProblem` target_problem: problem to be solved
+        :param `TargetSolution` initial_solution: solution from which algorithm started
         :param `ProblemSolutionTeSupport` problem_solution_te_support: placeholder for additional methods, specific for TE 
         """
         super().__init__(name='total_enumerations', 
@@ -70,6 +80,18 @@ class TeOptimizer(Algorithm):
             self.__can_progress_method = None
         # current solution
         self.__current_solution = initial_solution
+
+    @classmethod
+    def from_construction_tuple(cls, construction_tuple:TeOptimizerConstructionParameters):
+        """
+        Additional constructor, that creates new instance of class :class:`~uo.algorithm.exact.te_optimizer.TeOptimizer`. 
+
+        :param `TeOptimizerConstructionParameters` construction_tuple: tuple with all constructor parameters
+        """
+        return cls(construction_tuple.output_control, 
+            construction_tuple.target_problem, 
+            construction_tuple.initial_solution,
+            construction_tuple.problem_solution_te_support)
 
     def __copy__(self):
         """
