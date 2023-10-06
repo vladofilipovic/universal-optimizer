@@ -27,10 +27,10 @@ from uo.utils.logger import logger
 from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.target_solution import TargetSolution
 
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer_constructor_parameters import VnsOptimizerConstructionParameters
-
 from uo.algorithm.output_control import OutputControl
+from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.single_solution_metaheuristic import SingleSolutionMetaheuristic
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer_constructor_parameters import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
 
 class VnsOptimizer(SingleSolutionMetaheuristic):
@@ -39,9 +39,8 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
     :ref:`Algorithm_Variable_Neighborhood_Search` optimization algorithm.
     """
     
-    def __init__(self, evaluations_max:int, 
-            iterations_max:int,
-            seconds_max:int, 
+    def __init__(self, 
+            finish_control:FinishControl, 
             random_seed:int, 
             keep_all_solution_codes:bool, 
             distance_calculation_cache_is_used:bool,
@@ -57,9 +56,7 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         Create new instance of class :class:`~uo.algorithm.metaheuristic.variable_neighborhood_search.VnsOptimizer`. 
         That instance implements :ref:`VNS<Algorithm_Variable_Neighborhood_Search>` algorithm. 
 
-        :param int evaluations_max: maximum number of evaluations for algorithm execution
-        :param int iterations_max: maximum number of iterations for algorithm execution
-        :param int seconds_max: maximum number of seconds for algorithm execution
+        :param `FinishControl` finish_control: structure that control finish criteria for metaheuristic execution
         :param int random_seed: random seed for metaheuristic execution
         :param bool keep_all_solution_codes: if all solution codes will be remembered
         :param bool distance_calculation_cache_is_used: if cache is used for distance calculation between solutions        
@@ -75,9 +72,7 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         :type local_search_type: str, possible values: 'local_search_best_improvement', 'local_search_first_improvement' 
         """
         super().__init__( name='vns', 
-                evaluations_max=evaluations_max, 
-                iterations_max=iterations_max,
-                seconds_max=seconds_max, 
+                finish_control=finish_control, 
                 random_seed=random_seed, 
                 keep_all_solution_codes=keep_all_solution_codes,
                 distance_calculation_cache_is_used=distance_calculation_cache_is_used, 
@@ -122,9 +117,8 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
 
         :param `VnsOptimizerConstructionParameters` construction_tuple: tuple with all constructor parameters
         """
-        return cls(construction_tuple.evaluations_max, 
-            construction_tuple.iterations_max,
-            construction_tuple.seconds_max, 
+        return cls( 
+            construction_tuple.finish_control,
             construction_tuple.random_seed, 
             construction_tuple.keep_all_solution_codes, 
             construction_tuple.distance_calculation_cache_is_used,

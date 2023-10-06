@@ -61,7 +61,7 @@ class TestVnsOptimizerProperties(unittest.TestCase):
         self.assertEqual(self.vns_optimizer.name, 'vns')
 
     def test_evaluations_max_should_be_equal_as_in_constructor(self):
-        self.assertEqual(self.vns_optimizer.evaluations_max, self.evaluations_max)
+        self.assertEqual(self.vns_optimizer.finish_control.evaluations_max, self.evaluations_max)
 
     def test_iterations_max_should_be_equal_as_in_constructor(self):
         self.assertEqual(self.vns_optimizer.iterations_max, self.iterations_max)

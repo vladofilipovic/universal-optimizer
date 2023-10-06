@@ -72,7 +72,8 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
             Metaheuristic.all_solution_codes:set[str] = set()
         #class/static variable representation_distance_cache_cs
         if not hasattr(Metaheuristic, 'representation_distance_cache_cs'):
-            Metaheuristic.representation_distance_cache_cs:DistanceCalculationCacheControlStatistics = DistanceCalculationCacheControlStatistics(distance_calculation_cache_is_used)
+            Metaheuristic.representation_distance_cache_cs:DistanceCalculationCacheControlStatistics = \
+                    DistanceCalculationCacheControlStatistics(distance_calculation_cache_is_used)
 
     @abstractmethod
     def __copy__(self):
@@ -146,9 +147,9 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         """
         Main loop of the metaheuristic algorithm
         """
-        while (not self.finish_control.check_evaluations() or self.evaluation < self.finish_control.evaluations_max) \
-        and ( not self.finish_control.check_iterations() or self.iteration < self.finish_control.iterations_max) \
-        and (not self.finish_control.check_seconds() or self.elapsed_seconds() < self.finish_control.seconds_max):
+        while (not self.finish_control.check_evaluations or self.evaluation < self.finish_control.evaluations_max) \
+                and ( not self.finish_control.check_iterations or self.iteration < self.finish_control.iterations_max) \
+                and (not self.finish_control.check_seconds or self.elapsed_seconds() < self.finish_control.seconds_max):
             self.write_output_values_if_needed("before_iteration", "b_i")
             self.main_loop_iteration()
             self.write_output_values_if_needed("after_iteration", "a_i")

@@ -128,7 +128,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
         
     def shaking(self, k:int, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryIntSolution, 
             optimizer:Algorithm)->bool:
-        if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+        if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
             return False
         tries:int = 0
         limit:int = 10000
@@ -155,7 +155,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
 
     def local_search_best_improvement(self, k:int, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryIntSolution, 
             optimizer: Algorithm)->MaxOnesProblemBinaryIntSolution:
-        if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+        if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
             return solution
         if k<1:
             return solution
@@ -182,7 +182,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
 
     def local_search_first_improvement(self, k:int, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryIntSolution, 
             optimizer: Algorithm)->MaxOnesProblemBinaryIntSolution:
-        if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+        if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
             return solution
         if k<1:
             return solution

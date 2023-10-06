@@ -69,7 +69,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
         :return: if shaking is successful
         :rtype: bool
         """    
-        if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+        if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
             return False
         tries:int = 0
         limit:int = 10000
@@ -88,7 +88,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
                 break
         if tries < limit:
             optimizer.evaluation += 1
-            if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+            if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
                 return solution
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             solution.evaluate(problem)
@@ -109,7 +109,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
         :return: result of the local search procedure 
         :rtype: MaxOnesProblemBinaryIntSolution
         """
-        if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+        if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
             return solution
         if k < 1 or k > problem.dimension:
             return solution
@@ -128,7 +128,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
                 mask |= 1 << i
             solution.representation ^= mask 
             optimizer.evaluation += 1
-            if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+            if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
                 return solution
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             new_triplet = solution.calculate_objective_fitness_feasibility(problem)
@@ -159,7 +159,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
         :return: result of the local search procedure 
         :rtype: MaxOnesProblemBinaryIntSolution
         """
-        if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+        if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
             return solution
         if k < 1 or k > problem.dimension:
             return solution
@@ -176,7 +176,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
                 mask |= 1 << i
             solution.representation ^= mask 
             optimizer.evaluation += 1
-            if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+            if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
                 return solution
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             new_triplet = solution.calculate_objective_fitness_feasibility(problem)
