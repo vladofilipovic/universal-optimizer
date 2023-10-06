@@ -155,7 +155,9 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
             self.write_output_values_if_needed("after_iteration", "a_i")
             logger.debug('Iteration: ' + str(self.iteration) 
                     + ', Evaluations: ' + str(self.evaluation) 
-                    + ', Solution: ' + str(self.best_solution.string_representation()))
+                    + ', Best solution objective: ' + str(self.best_solution.objective_value) 
+                    + ', Best solution fitness: ' + str(self.best_solution.fitness_value) 
+                    + ', Best solution: ' + str(self.best_solution.string_representation()))
 
     def optimize(self)->None:
         """
