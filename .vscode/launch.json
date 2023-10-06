@@ -21,6 +21,7 @@
                 "--outputMoments", "after_algorithm, after_iteration",
                 "--inputFilePath", "opt/single_objective/trivial/max_ones_problem/inputs/dimension_5.txt", 
                 "--inputFormat", "txt",
+                "--finishCriteria", "evaluations & seconds",
                 "--maxNumberEvaluations", "3000",  
                 "--maxNumberIterations", "0",  
                 "--maxTimeForExecutionSeconds", "0",

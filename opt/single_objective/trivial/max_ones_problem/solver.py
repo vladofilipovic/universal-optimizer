@@ -164,6 +164,7 @@ def main():
             k_max:int = parameters['kMax']
             max_local_optima = parameters['maxLocalOptima']
             local_search_type = parameters['localSearchType']
+            #finish criteria
             # initial solution and vns support
             solution_type:str = parameters['solutionType']
             vns_support = None
