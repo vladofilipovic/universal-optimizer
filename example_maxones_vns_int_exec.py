@@ -3,6 +3,7 @@ from random import randint
 from random import choice
 
 from uo.algorithm.output_control import OutputControl
+from uo.algorithm.metaheuristic.finish_control import FinishControl
 
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer_constructor_parameters import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
@@ -14,6 +15,8 @@ from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_s
 def main():
         problem_to_solve:MaxOnesProblem = MaxOnesProblem(dim=24)
         solution:MaxOnesProblemBinaryIntSolution = MaxOnesProblemBinaryIntSolution()
+        finish:FinishControl = FinishControl( criteria='evaluations & seconds', 
+                evaluations_max=500, seconds_max=10)
         vns_support:MaxOnesProblemBinaryIntSolutionVnsSupport = MaxOnesProblemBinaryIntSolutionVnsSupport()
         output_control:OutputControl = OutputControl(write_to_output=False)
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
@@ -21,9 +24,7 @@ def main():
         vns_construction_params.target_problem = problem_to_solve
         vns_construction_params.initial_solution = solution
         vns_construction_params.problem_solution_vns_support = vns_support
-        vns_construction_params.evaluations_max = 500
-        vns_construction_params.iterations_max = 0
-        vns_construction_params.seconds_max= 0
+        vns_construction_params.finish_control = finish
         vns_construction_params.random_seed = 43434343
         vns_construction_params.keep_all_solution_codes = False
         vns_construction_params.distance_calculation_cache_is_used = False

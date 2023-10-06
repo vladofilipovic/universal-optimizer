@@ -56,7 +56,7 @@ class FinishControl:
             elif c == 'iterations':
                 if self.__iterations_max > 0:
                     self.__check_iterations = True
-            elif m == 'seconds':
+            elif c == 'seconds':
                 if self.__seconds_max > 0:
                     self.__check_seconds = True
             else:
