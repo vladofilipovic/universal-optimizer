@@ -27,6 +27,8 @@ from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.target_solution import TargetSolution
 
 from uo.algorithm.output_control import OutputControl
+
+from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.metaheuristic import Metaheuristic
 from uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics import DistanceCalculationCacheControlStatistics
 
@@ -38,9 +40,7 @@ class SingleSolutionMetaheuristic(Metaheuristic, metaclass=ABCMeta):
     @abstractmethod
     def __init__(self, 
             name:str, 
-            evaluations_max:int, 
-            iterations_max:int,
-            seconds_max:int, 
+            finish_control:FinishControl,
             random_seed:int, 
             keep_all_solution_codes:bool,
             distance_calculation_cache_is_used:bool,
@@ -52,9 +52,7 @@ class SingleSolutionMetaheuristic(Metaheuristic, metaclass=ABCMeta):
         Create new SingleSolutionMetaheuristic instance
 
         :param str name: name of the metaheuristic
-        :param int evaluations_max: maximum number of evaluations for algorithm execution
-        :param int iterations_max: maximum number of iterations for algorithm execution
-        :param int seconds_max: maximum number of seconds for algorithm execution
+        :param `FinishControl` finish_control: structure that control finish criteria for metaheuristic execution
         :param int random_seed: random seed for metaheuristic execution
         :param bool keep_all_solution_codes: if all solution codes will be remembered        
         :param bool distance_calculation_cache_is_used: if cache is used for distance calculation between solutions        
@@ -63,9 +61,7 @@ class SingleSolutionMetaheuristic(Metaheuristic, metaclass=ABCMeta):
         :param `TargetSolution` initial_solution: initial solution of the problem
         """
         super().__init__(name=name, 
-                evaluations_max=evaluations_max,
-                iterations_max=iterations_max,
-                seconds_max=seconds_max,
+                finish_control=finish_control,
                 random_seed=random_seed,
                 keep_all_solution_codes=keep_all_solution_codes,
                 distance_calculation_cache_is_used=distance_calculation_cache_is_used,
