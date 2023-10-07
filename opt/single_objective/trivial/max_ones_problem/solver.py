@@ -24,6 +24,8 @@ from datetime import datetime
 from bitstring import BitArray
 
 from uo.algorithm.output_control import OutputControl
+from uo.algorithm.metaheuristic.finish_control import FinishControl
+
 from uo.algorithm.exact.total_enumeration.te_optimizer_constructor_parameters import TeOptimizerConstructionParameters
 from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizer
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer_constructor_parameters import VnsOptimizerConstructionParameters
@@ -126,10 +128,6 @@ def main():
         # input file setup
         input_file_path:str = parameters['inputFilePath']
         input_format:str = parameters['inputFormat']
-        # finishing criteria setup
-        max_number_evaluations:int = parameters['maxNumberEvaluations']
-        max_number_iterations:int = parameters['maxNumberIterations']
-        max_time_for_execution_in_seconds = parameters['maxTimeForExecutionSeconds']
         # random seed setup
         if( int(parameters['randomSeed']) > 0 ):
             r_seed:int = int(parameters['randomSeed'])
@@ -143,6 +141,16 @@ def main():
             if write_to_output_file:
                 output_file.write("# RandomSeed is not predefined. Generated seed value:  %d\n" % r_seed)
             seed(r_seed)
+        # finishing criteria setup
+        finish_criteria:string = parameters['finishCriteria']
+        max_number_evaluations:int = parameters['finishEvaluationsMax']
+        max_number_iterations:int = parameters['finishIterationsMax']
+        max_time_for_execution_in_seconds = parameters['finishSecondsMax']
+        finish_control:FinishControl = FinishControl(
+                criteria=finish_criteria,
+                evaluations_max=max_number_evaluations,
+                iterations_max=max_number_iterations,
+                seconds_max=max_time_for_execution_in_seconds)
         # evaluation cache setup
         evaluation_cache_is_used:bool = parameters['evaluationCacheIsUsed']
         # calculation distances cache setup
@@ -164,7 +172,6 @@ def main():
             k_max:int = parameters['kMax']
             max_local_optima = parameters['maxLocalOptima']
             local_search_type = parameters['localSearchType']
-            #finish criteria
             # initial solution and vns support
             solution_type:str = parameters['solutionType']
             vns_support = None
@@ -184,9 +191,7 @@ def main():
             vns_construction_params.target_problem = problem
             vns_construction_params.initial_solution = solution
             vns_construction_params.problem_solution_vns_support = vns_support
-            vns_construction_params.evaluations_max = max_number_evaluations
-            vns_construction_params.iterations_max = max_number_iterations
-            vns_construction_params.seconds_max= max_time_for_execution_in_seconds
+            vns_construction_params.finish_control = finish_control
             vns_construction_params.random_seed = r_seed
             vns_construction_params.keep_all_solution_codes = keep_all_solution_codes
             vns_construction_params.distance_calculation_cache_is_used = calculation_solution_distance_cache_is_used

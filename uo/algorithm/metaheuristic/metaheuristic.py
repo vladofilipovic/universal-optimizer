@@ -147,9 +147,7 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         """
         Main loop of the metaheuristic algorithm
         """
-        while (not self.finish_control.check_evaluations or self.evaluation < self.finish_control.evaluations_max) \
-                and ( not self.finish_control.check_iterations or self.iteration < self.finish_control.iterations_max) \
-                and (not self.finish_control.check_seconds or self.elapsed_seconds() < self.finish_control.seconds_max):
+        while (not self.finish_control.is_finished(self.evaluation, self.iteration, self.elapsed_seconds())):
             self.write_output_values_if_needed("before_iteration", "b_i")
             self.main_loop_iteration()
             self.write_output_values_if_needed("after_iteration", "a_i")

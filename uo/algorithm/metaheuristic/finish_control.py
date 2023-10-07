@@ -27,7 +27,7 @@ class FinishControl:
         (currently finish criteria contains strings `evaluations_max`, `iterations_max`, `seconds_max`) 
         :param int evaluations_max: maximum number of evaluations for metaheuristic execution
         :param int iterations_max: maximum number of iterations for metaheuristic execution
-        :param int seconds_max: maximum number of seconds for metaheuristic execution
+        :param float seconds_max: maximum number of seconds for metaheuristic execution
         """
         self.__implemented_criteria:list[str] = ['evaluations_max',
                 'iterations_max',
@@ -147,6 +147,20 @@ class FinishControl:
         :rtype: bool
         """
         return self.__check_seconds
+
+    def is_finished(self, evaluation:int, iteration:int, elapsed_seconds:float):
+        """
+        Check if execution of metaheuristic is finished, according to specified criteria
+
+        :param int evaluation: number of evaluations for metaheuristic execution
+        :param int iteration: number of iterations for metaheuristic execution
+        :param float elapsed_seconds: elapsed time (in seconds) for metaheuristic execution
+        :return: if execution is finished
+        :rtype: bool
+        """
+        return (self.check_evaluations and evaluation >= self.evaluations_max) \
+                or (self.check_iterations and iteration >= self.iterations_max) \
+                or (self.check_seconds and elapsed_seconds >= self.seconds_max)
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
