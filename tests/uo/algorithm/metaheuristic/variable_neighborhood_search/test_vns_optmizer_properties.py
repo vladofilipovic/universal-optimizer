@@ -26,27 +26,30 @@ class TestVnsOptimizerProperties(unittest.TestCase):
         self.output_control = mock.MagicMock()
         type(self.output_control).write_to_output = False
 
-        self.evaluations_max = 42
-        self.iterations_max = 42
-        self.seconds_max = 42
-        self.random_seed = 42
-        self.k_min = 3
-        self.k_max = 42
-
         self.problem = mock.MagicMock()
         type(self.problem).name = mock.PropertyMock(return_value='some_problem')
         type(self.problem).is_minimization = mock.PropertyMock(return_value=True)
         type(self.problem).file_path = mock.PropertyMock(return_value='some file path')
         type(self.problem).dimension = mock.PropertyMock(return_value=42)
 
+        self.evaluations_max = 42
+        self.iterations_max = 42
+        self.seconds_max = 42
+        self.finish_control = mock.MagicMock()
+        type(self.finish_control).evaluations_max= mock.PropertyMock(return_value=self.evaluations_max)
+        type(self.finish_control).iterations_max= mock.PropertyMock(return_value=self.iterations_max)
+        type(self.finish_control).seconds_max= mock.PropertyMock(return_value=self.seconds_max)
+        
+        self.random_seed = 42
+        self.k_min = 3
+        self.k_max = 42
+
         self.vns_optimizer = VnsOptimizer(
                 output_control=self.output_control,
                 target_problem=self.problem, 
                 initial_solution=None,
                 problem_solution_vns_support=None, 
-                evaluations_max=self.evaluations_max,
-                iterations_max=self.iterations_max, 
-                seconds_max=self.seconds_max, 
+                finish_control=self.finish_control,
                 random_seed=self.random_seed, 
                 k_min=self.k_min, 
                 k_max=self.k_max, 
@@ -64,13 +67,13 @@ class TestVnsOptimizerProperties(unittest.TestCase):
         self.assertEqual(self.vns_optimizer.finish_control.evaluations_max, self.evaluations_max)
 
     def test_iterations_max_should_be_equal_as_in_constructor(self):
-        self.assertEqual(self.vns_optimizer.iterations_max, self.iterations_max)
+        self.assertEqual(self.vns_optimizer.finish_control.iterations_max, self.iterations_max)
 
     def test_random_seed_should_be_equal_as_in_constructor(self):
         self.assertEqual(self.vns_optimizer.random_seed, self.random_seed)
 
     def test_seconds_max_should_be_equal_as_in_constructor(self):
-        self.assertEqual(self.vns_optimizer.seconds_max, self.seconds_max)
+        self.assertEqual(self.vns_optimizer.finish_control.seconds_max, self.seconds_max)
 
     def test_k_min_should_be_equal_as_in_constructor(self):
         self.assertEqual(self.vns_optimizer.k_min, self.k_min)

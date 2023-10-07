@@ -18,6 +18,8 @@ from random import randint
 from random import choice
 
 from uo.algorithm.output_control import OutputControl
+from uo.algorithm.metaheuristic.finish_control import FinishControl
+
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer_constructor_parameters import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
@@ -35,15 +37,14 @@ class TestIntegrationMaxOnesProblemVnsBinaryIntSolutionLsbi(unittest.TestCase):
         self.output_control = OutputControl(False)
         self.problem_to_solve:MaxOnesProblem = MaxOnesProblem(dim=22)
         self.solution:MaxOnesProblemBinaryIntSolution = MaxOnesProblemBinaryIntSolution()
+        self.finish_control:FinishControl = FinishControl(criteria='evaluations', evaluations_max=500)
         self.vns_support:MaxOnesProblemBinaryIntSolutionVnsSupport = MaxOnesProblemBinaryIntSolutionVnsSupport()
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
         vns_construction_params.output_control = self.output_control
         vns_construction_params.target_problem = self.problem_to_solve
         vns_construction_params.initial_solution = self.solution
         vns_construction_params.problem_solution_vns_support = self.vns_support
-        vns_construction_params.evaluations_max = 500
-        vns_construction_params.iterations_max = 0
-        vns_construction_params.seconds_max= 0
+        vns_construction_params.finish_control = self.finish_control
         vns_construction_params.random_seed = 43434343
         vns_construction_params.keep_all_solution_codes = False
         vns_construction_params.distance_calculation_cache_is_used = False
