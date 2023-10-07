@@ -31,8 +31,9 @@ default_parameters_cl = {
         'finishSecondsMax': 0, 
         'randomSeed': 0,
         'evaluationCacheIsUsed': False,
-        'calculationSolutionDistanceCacheIsUsed': False,
-        'keepAllSolutionCodes': False,
+        'additionalStatisticsKeep': '',
+        'additionalStatisticsDistanceCalculationCacheIsUsed': False,
+        'additionalStatisticsKeepAllSolutionCodes': False,
         'kMin': 1,
         'kMax': 3,
         'maxLocalOptima':7,
@@ -91,9 +92,13 @@ def parse_arguments():
                 "Value 0 means that random seed will be obtained from system timer.") )        
         parser_vns.add_argument('--evaluationCacheIsUsed', type=bool, default=False, 
                 help=("Should caching be used during evaluation.") )        
-        parser_vns.add_argument('--calculationSolutionDistanceCacheIsUsed', type=bool, default=False, 
+        parser_vns.add_argument('--additionalStatisticsKeep', type=str, 
+                default='', 
+                help=("Comma-separated list of statistical data will be calculated and keep during solving. " 
+                "Currently, data within list can be: 'all_solution_code', 'distance_among_solutions'."))
+        parser_vns.add_argument('--additionalStatisticsDistanceCalculationCacheIsUsed', type=bool, default=False, 
                 help=("Should caching be used during distance calculations for solution individual.") )        
-        parser_vns.add_argument('--keepAllSolutionCodes', type=bool, default=False, 
+        parser_vns.add_argument('--additionalStatisticsKeepAllSolutionCodes', type=bool, default=False, 
                 help=("Should all solution codes be keep during metaheuristic execution.") )        
         parser_vns.add_argument('--kMin', type=int, default=1, 
                 help=("VNS parameter k min.") )    

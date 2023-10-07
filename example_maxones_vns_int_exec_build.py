@@ -9,10 +9,13 @@ from uo.target_solution.target_solution import TargetSolution
 from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
+from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer_constructor_parameters import VnsOptimizerConstructionParameters
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer_constructor_parameters import \
+        VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
-from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
+from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import \
+        ProblemSolutionVnsSupport
 
 class MaxOnesProblem(TargetProblem):
 
@@ -222,6 +225,7 @@ def main():
     solution:MaxOnesProblemBinaryIntSolution = MaxOnesProblemBinaryIntSolution()
     finish:FinishControl = FinishControl( criteria='evaluations & seconds', 
             evaluations_max=500, seconds_max=10)
+    additional_stat:AdditionalStatisticsControl = AdditionalStatisticsControl(keep='')
     vns_support:MaxOnesProblemBinaryIntSolutionVnsSupport = MaxOnesProblemBinaryIntSolutionVnsSupport()
     vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
     vns_construction_params.output_control = output_control
@@ -230,8 +234,7 @@ def main():
     vns_construction_params.problem_solution_vns_support = vns_support
     vns_construction_params.finish_control = finish
     vns_construction_params.random_seed = 43434343
-    vns_construction_params.keep_all_solution_codes = False
-    vns_construction_params.distance_calculation_cache_is_used = False
+    vns_construction_params.additional_statistics_control = additional_stat
     vns_construction_params.k_min = 1
     vns_construction_params.k_max = 3
     vns_construction_params.max_local_optima = 10

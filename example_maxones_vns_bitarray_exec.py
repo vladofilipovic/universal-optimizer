@@ -20,7 +20,7 @@ def main():
         output_control:OutputControl = OutputControl(write_to_output=False)
         problem_to_solve:MaxOnesProblem = MaxOnesProblem(dim=24)
         solution:MaxOnesProblemBinaryBitArraySolution = MaxOnesProblemBinaryBitArraySolution()
-        finish:FinishControl = FinishControl(criteria='evaluations', evaluations_max=500)
+        finish:FinishControl = FinishControl(criteria='evaluations', evaluations_max=5000)
         additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(keep='')
         vns_support:MaxOnesProblemBinaryBitArraySolutionVnsSupport = MaxOnesProblemBinaryBitArraySolutionVnsSupport()
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()

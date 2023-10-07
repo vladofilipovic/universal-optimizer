@@ -215,13 +215,10 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         s += 'random_seed=' + str(self.random_seed) + delimiter
         for i in range(0, indentation):
             s += indentation_symbol  
-        s += 'evaluations_max=' + str(self.evaluations_max) + delimiter
+        s += 'finish_control=' + str(self.finish_control) + delimiter
         for i in range(0, indentation):
             s += indentation_symbol  
-        s += 'iterations_max=' + str(self.iterations_max) + delimiter
-        for i in range(0, indentation):
-            s += indentation_symbol  
-        s += 'seconds_max=' + str(self.seconds_max) + delimiter
+        s += 'additional_statistics_control=' + str(self.additional_statistics_control) + delimiter
         for i in range(0, indentation):
             s += indentation_symbol  
         s += '__iteration=' + str(self.__iteration) + delimiter
