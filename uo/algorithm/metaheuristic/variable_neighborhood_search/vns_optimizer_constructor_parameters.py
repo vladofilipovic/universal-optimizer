@@ -17,9 +17,13 @@ from uo.utils.logger import logger
 
 from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.target_solution import TargetSolution
+
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
-from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
+from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
+
+from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import \
+        ProblemSolutionVnsSupport
 
 @dataclass
 class VnsOptimizerConstructionParameters:
@@ -32,8 +36,7 @@ class VnsOptimizerConstructionParameters:
     initial_solution:TargetSolution = None
     problem_solution_vns_support:ProblemSolutionVnsSupport = None
     random_seed:int = None
-    keep_all_solution_codes:bool = None
-    distance_calculation_cache_is_used:bool = None
+    additional_statistics_control:AdditionalStatisticsControl = None
     k_min:int = None
     k_max:int = None
     max_local_optima:int = None

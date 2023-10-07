@@ -30,7 +30,7 @@ from uo.algorithm.output_control import OutputControl
 from uo.algorithm.algorithm import Algorithm
 
 from uo.algorithm.metaheuristic.finish_control import FinishControl
-from uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics import DistanceCalculationCacheControlStatistics
+from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
 class Metaheuristic(Algorithm, metaclass=ABCMeta):
     """
@@ -42,8 +42,7 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
             name:str, 
             finish_control:FinishControl,
             random_seed:int, 
-            keep_all_solution_codes:bool,
-            distance_calculation_cache_is_used:bool,
+            additional_statistics_control:AdditionalStatisticsControl,
             output_control:OutputControl, 
             target_problem:TargetProblem
     )->None:
@@ -53,8 +52,8 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         :param str name: name of the metaheuristic
         :param `FinishControl` finish_control: structure that control finish criteria for metaheuristic execution
         :param int random_seed: random seed for metaheuristic execution
-        :param bool keep_all_solution_codes: if all solution codes will be remembered        
-        :param bool distance_calculation_cache_is_used: if cache is used for distance calculation between solutions        
+        :param `AdditionalStatisticsControl` additional_statistics_control: structure that controls additional 
+        statistic to be kept during metaheuristic evaluation        
         :param `OutputControl` output_control: structure that controls output
         :param `TargetProblem` target_problem: problem to be solved
         """
@@ -66,14 +65,7 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
             self.__random_seed:int = random_seed
         else:
             self.__random_seed:int = randrange(sys.maxsize)
-        self.__keep_all_solution_codes:bool = keep_all_solution_codes
-        #class/static variable all_solution_codes
-        if not hasattr(Metaheuristic, 'all_solution_codes'):
-            Metaheuristic.all_solution_codes:set[str] = set()
-        #class/static variable representation_distance_cache_cs
-        if not hasattr(Metaheuristic, 'representation_distance_cache_cs'):
-            Metaheuristic.representation_distance_cache_cs:DistanceCalculationCacheControlStatistics = \
-                    DistanceCalculationCacheControlStatistics(distance_calculation_cache_is_used)
+        self.__additional_statistics_control:bool = additional_statistics_control
 
     @abstractmethod
     def __copy__(self):
@@ -115,16 +107,6 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         :rtype: int
         """
         return self.__random_seed
-
-    @property
-    def keep_all_solution_codes(self)->bool:
-        """
-        Property getter for decision should be kept all solution codes
-        
-        :return: decision should be kept all solution codes
-        :rtype: bool
-        """
-        return self.__keep_all_solution_codes
 
     @abstractmethod
     def main_loop_iteration(self)->None:
@@ -240,18 +222,10 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         for i in range(0, indentation):
             s += indentation_symbol  
         s += '__second_when_best_obtained=' + str(self.__second_when_best_obtained) + delimiter
-        for i in range(0, indentation):
-            s += indentation_symbol  
-        s += '__representation_distance_cache_cs(static)=' + Metaheuristic.representation_distance_cache_cs.string_rep(
-                delimiter, indentation + 1, indentation_symbol, '{', '}') + delimiter
         if self.execution_ended is not None and self.execution_started is not None:
             for i in range(0, indentation):
                 s += indentation_symbol  
             s += 'execution time=' + str( (self.execution_ended - self.execution_started).total_seconds() ) + delimiter
-        if self.keep_all_solution_codes:
-            for i in range(0, indentation):
-                s += indentation_symbol  
-            s += 'all solution codes=' + str(len(Metaheuristic.all_solution_codes)) + delimiter
         for i in range(0, indentation):
             s += indentation_symbol  
         s += group_end 
@@ -277,8 +251,6 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         :rtype: str
         """
         s = self.string_rep('\n')
-        if self.keep_all_solution_codes:
-            s += 'all_solution_codes=' + str(self.all_solution_codes) 
         return s
 
     @abstractmethod

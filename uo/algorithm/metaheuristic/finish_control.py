@@ -21,7 +21,7 @@ class FinishControl:
             seconds_max:float = 0  
         ) -> None:
         """
-        Creates new :class:`uo.algorithm.FinishControl` instance
+        Creates new :class:`uo.algorithm.metaheuristic.FinishControl` instance
 
         :param str criteria: list of finish criteria, separated with sign `&` 
         (currently finish criteria contains strings `evaluations_max`, `iterations_max`, `seconds_max`) 
@@ -35,9 +35,6 @@ class FinishControl:
         self.__evaluations_max = evaluations_max
         self.__iterations_max = iterations_max
         self.__seconds_max = seconds_max
-        self.__check_evaluations = False
-        self.__check_iterations = False
-        self.__check_seconds = False
         self.__determine_criteria_helper__(criteria)
 
     def __determine_criteria_helper__(self, criteria:str):
@@ -47,9 +44,14 @@ class FinishControl:
         :param str criteria: list of finish criteria, separated with sign `&` 
         (currently finish criteria contains strings `evaluations`, `iterations`, `seconds`) 
         """
+        self.__check_evaluations = False
+        self.__check_iterations = False
+        self.__check_seconds = False
         crit:list[str] = criteria.split('&')
         for cr in crit: 
             c:str = cr.strip()
+            if c=='':
+                continue
             if c == 'evaluations':
                 if self.__evaluations_max > 0:
                     self.__check_evaluations = True
@@ -60,7 +62,7 @@ class FinishControl:
                 if self.__seconds_max > 0:
                     self.__check_seconds = True
             else:
-                raise ValueError("Invalid value for criteria {}. Should be one of:{}.".format( c, 
+                raise ValueError("Invalid value for criteria '{}'. Should be one of:{}.".format( c, 
                     "evaluations, iterations, seconds"))
 
     @property

@@ -29,9 +29,13 @@ from uo.target_solution.target_solution import TargetSolution
 
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
+from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
+
 from uo.algorithm.metaheuristic.single_solution_metaheuristic import SingleSolutionMetaheuristic
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer_constructor_parameters import VnsOptimizerConstructionParameters
-from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer_constructor_parameters import \
+        VnsOptimizerConstructionParameters
+from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import \
+        ProblemSolutionVnsSupport
 
 class VnsOptimizer(SingleSolutionMetaheuristic):
     """
@@ -42,8 +46,7 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
     def __init__(self, 
             finish_control:FinishControl, 
             random_seed:int, 
-            keep_all_solution_codes:bool, 
-            distance_calculation_cache_is_used:bool,
+            additional_statistics_control:AdditionalStatisticsControl,
             output_control:OutputControl, 
             target_problem:TargetProblem, 
             initial_solution:TargetSolution,
@@ -58,8 +61,8 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
 
         :param `FinishControl` finish_control: structure that control finish criteria for metaheuristic execution
         :param int random_seed: random seed for metaheuristic execution
-        :param bool keep_all_solution_codes: if all solution codes will be remembered
-        :param bool distance_calculation_cache_is_used: if cache is used for distance calculation between solutions        
+        :param `AdditionalStatisticsControl` additional_statistics_control: structure that controls additional 
+        statistics obtained during population-based metaheuristic execution        
         :param `OutputControl` output_control: structure that controls output
         :param `TargetProblem` target_problem: problem to be solved
         :param `TargetSolution` initial_solution: initial solution of the problem 
@@ -74,8 +77,7 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         super().__init__( name='vns', 
                 finish_control=finish_control, 
                 random_seed=random_seed, 
-                keep_all_solution_codes=keep_all_solution_codes,
-                distance_calculation_cache_is_used=distance_calculation_cache_is_used, 
+                additional_statistics_control=additional_statistics_control, 
                 output_control=output_control, 
                 target_problem=target_problem,
                 initial_solution=initial_solution)
