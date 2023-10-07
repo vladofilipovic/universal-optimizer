@@ -106,8 +106,6 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         self.__k_max:int = k_max
         # current value of the vns parameter k
         self.__k_current:int = None
-        # values of the local optima foreach element calculated 
-        self.__local_optima:Dict[int|BitArray, float] = {}
 
     @classmethod
     def from_construction_tuple(cls, construction_tuple:VnsOptimizerConstructionParameters):
@@ -175,27 +173,6 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         self.current_solution.init_random(self.target_problem)
         self.current_solution.evaluate(self.target_problem)
         self.copy_to_best_solution(self.current_solution)
-
-    def __add_local_optima__(self, current_solution:TargetSolution)->bool:
-        """
-        Add solution to the local optima structure 
-
-        :param current_solution: solution to be added to local optima structure
-        :type current_solution: :class:`optimization_algorithms.target_solution.TargetSolution`
-        :return:  if adding is successful e.g. current_solution is new element in the structure
-        :rtype: bool
-        """       
-        if current_solution.representation in self.__local_optima:
-            return False
-        if len(self.__local_optima) >= self.__max_local_optima:
-            # removing random, just taking care not to remove the best ones
-            while True:
-                code = random.choice(self.__local_optima.keys())
-                if code != self.best_solution.representation:
-                    del self.__local_optima[code]
-                    break
-        self.__local_optima[current_solution.representation]=current_solution.fitness_value
-        return True
     
     def main_loop_iteration(self)->None:
         """
@@ -212,7 +189,7 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
             self.current_solution = self.__ls_method(self.__k_current, self.target_problem, self.current_solution, self)
             self.write_output_values_if_needed("after_step_in_iteration", "ls")
             # update auxiliary structure that keeps all solution codes
-            self.additional_statistics_control.keep_all_solution_codes_if_necessary(
+            self.additional_statistics_control.add_to_all_solution_codes_if_necessary(
                     self.current_solution.string_representation())
             new_is_better:bool = self.is_first_solution_better(self.current_solution, self.best_solution)
             make_move:bool = new_is_better

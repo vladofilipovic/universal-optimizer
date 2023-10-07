@@ -158,7 +158,7 @@ def main():
                 parameters['solutionDistanceCalculationCacheIsUsed']
         # additional statistic control setup
         additional_statistics_keep:str =  parameters['additionalStatisticsKeep']
-        max_local_optima = parameters['maxLocalOptima']
+        max_local_optima = parameters['additionalStatisticsMaxLocalOptima']
         additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(
                 keep=additional_statistics_keep, 
                 max_local_optima=max_local_optima)

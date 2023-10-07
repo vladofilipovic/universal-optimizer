@@ -42,7 +42,7 @@ class AdditionalStatisticsControl:
         kep:list[str] = keep.split('&')
         for ke in kep: 
             k:str = ke.strip()
-            if k=='':
+            if k=='' or k=='None':
                 continue
             if k == 'all_solution_code':
                 self.__keep_all_solution_codes = True
@@ -55,6 +55,11 @@ class AdditionalStatisticsControl:
             #class/static variable all_solution_codes
             if not hasattr(AdditionalStatisticsControl, 'all_solution_codes'):
                 AdditionalStatisticsControl.all_solution_codes:set[str] = set()
+        if self.keep_more_local_optima:
+            # values of the local optima foreach element calculated 
+            if not hasattr(AdditionalStatisticsControl, 'all_solution_codes'):                
+                AdditionalStatisticsControl.more_local_optima:Dict[str, float] = {}
+
 
     @property
     def max_local_optima(self)->int:
@@ -109,7 +114,7 @@ class AdditionalStatisticsControl:
         """
         return self.__keep_more_local_optima
 
-    def keep_all_solution_codes_if_necessary(self, representation:str)->None:
+    def add_to_all_solution_codes_if_necessary(self, representation:str)->None:
         """
         Filling all solution code, if necessary 
 
@@ -119,6 +124,30 @@ class AdditionalStatisticsControl:
         """        
         if self.keep_all_solution_codes:
             AdditionalStatisticsControl.all_solution_codes.add(representation)
+
+    def add_to_more_local_optima_if_necessary(self, solution_to_add_rep:str, solution_to_add_fitness, 
+            best_solution_rep:str)->bool:
+        """
+        Add solution to the local optima structure 
+
+        :param str solution_to_add_rep: string representation of the solution to be added to local optima structure
+        :param float solution_to_add_fitness: fitness value of the solution to be added to local optima structure
+        :param str best_solution_rep: string representation of the best solution so far
+        :return:  if adding is successful e.g. current_solution is new element in the structure
+        :rtype: bool
+        """       
+        if solution_to_add_rep in AdditionalStatisticsControl.more_local_optima:
+            return False
+        if len(AdditionalStatisticsControl.more_local_optima) >= self.__max_local_optima:
+            # removing random, just taking care not to remove the best ones
+            while True:
+                code:str = random.choice(AdditionalStatisticsControl.more_local_optima.keys())
+                if code != best_solution_rep:
+                    del AdditionalStatisticsControl.more_local_optima[code]
+                    break
+        AdditionalStatisticsControl.more_local_optima[solution_to_add_rep]=solution_to_add_fitness
+        return True
+
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:

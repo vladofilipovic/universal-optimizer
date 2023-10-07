@@ -28,7 +28,7 @@
                 "--randomSeed", "0", 
                 "--solutionEvaluationCacheIsUsed", "False", 
                 "--solutionDistanceCalculationCacheIsUsed", "False", 
-                "--additionalStatisticsKeep", "",
+                "--additionalStatisticsKeep", "None",
                 "--additionalStatisticsMaxLocalOptima", "5",
                 "--kMin", "1",
                 "--kMax", "3", 
