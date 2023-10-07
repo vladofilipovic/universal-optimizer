@@ -18,6 +18,7 @@ from typing import Generic
 
 from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.evaluation_cache_control_statistics import EvaluationCacheControlStatistics
+from uo.target_solution.distance_calculation_cache_control_statistics import DistanceCalculationCacheControlStatistics
 
 QualityOfSolution = NamedTuple('QualityOfSolution', [('objective_value',float|list[float]), 
             ('fitness_value',float|list[float]), 
@@ -29,8 +30,15 @@ R_co = TypeVar("R_co", covariant=True)
 class TargetSolution(Generic[R_co], metaclass=ABCMeta):
     
     @abstractmethod
-    def __init__(self, name:str, random_seed:int, fitness_value:float|list[float]|tuple[float], 
-            objective_value:float|list[float]|tuple[float], is_feasible:bool)->None:
+    def __init__(self, 
+            name:str, 
+            random_seed:int, 
+            fitness_value:float|list[float]|tuple[float], 
+            objective_value:float|list[float]|tuple[float], 
+            is_feasible:bool,
+            evaluation_cache_is_used: bool,
+            distance_calculation_cache_is_used:bool
+    )->None:
         """
         Create new TargetSolution instance
         :param str name: name of the target solution
@@ -39,7 +47,9 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         :type fitness_value: float|list[float]|tuple(float) 
         :param objective_value: objective value of the target solution
         :type objective_value: float|list[float]|tuple(float) 
-        :param bool is_feasible: if the target solution is feasible, or not
+        :param bool evaluation_cache_is_used: should cache be used during evaluation of the solution
+        :param bool distance_calculation_cache_is_used: should cache be used during calculation of the distance between
+        two solutions
         """
         self.__name:str = name
         if random_seed is not None and isinstance(random_seed, int) and random_seed != 0:
@@ -50,9 +60,17 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         self.__objective_value:float|list[float] = objective_value
         self.__is_feasible:bool = is_feasible
         self.__representation:R_co = None
+        self.__evaluation_cache_is_used = evaluation_cache_is_used
         #class/static variable evaluation_cache_cs
         if not hasattr(TargetSolution, 'evaluation_cache_cs'):
-            TargetSolution.evaluation_cache_cs:EvaluationCacheControlStatistics = EvaluationCacheControlStatistics()  
+            TargetSolution.evaluation_cache_cs:EvaluationCacheControlStatistics = EvaluationCacheControlStatistics(
+                self.__evaluation_cache_is_used)  
+        self.__distance_calculation_cache_is_used = distance_calculation_cache_is_used
+        #class/static variable representation_distance_cache_cs
+        if not hasattr(TargetSolution, 'representation_distance_cache_cs'):
+            TargetSolution.representation_distance_cache_cs: DistanceCalculationCacheControlStatistics[R_co] = \
+                    DistanceCalculationCacheControlStatistics[R_co](self.__distance_calculation_cache_is_used)
+
     @abstractmethod
     def __copy__(self):
         """
@@ -207,19 +225,6 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         raise NotImplementedError
 
     @abstractmethod
-    def calculate_objective_fitness_feasibility_directly(self, representation:R_co, 
-            problem:TargetProblem) -> QualityOfSolution:
-        """
-        Fitness calculation of the target solution
-
-        :param R_co representation: native representation of the solution for which objective value, fitness and feasibility are calculated
-        :param TargetProblem problem: problem that is solved
-        :return: objective value, fitness value and feasibility of the solution instance 
-        :rtype: `QualityOfSolution`
-        """
-        raise NotImplementedError
-
-    @abstractmethod
     def init_random(self, problem:TargetProblem)->None:
         """
         Random initialization of the solution
@@ -238,7 +243,20 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         """
         raise NotImplementedError
 
-    def calculate_objective_fitness_feasibility(self, target_problem:TargetProblem) -> QualityOfSolution:
+    @abstractmethod
+    def calculate_quality_directly(self, representation:R_co, problem:TargetProblem) -> QualityOfSolution:
+        """
+        Fitness calculation of the target solution
+
+        :param R_co representation: native representation of the solution for which objective value, fitness and 
+        feasibility are calculated
+        :param TargetProblem problem: problem that is solved
+        :return: objective value, fitness value and feasibility of the solution instance 
+        :rtype: `QualityOfSolution`
+        """
+        raise NotImplementedError
+
+    def calculate_quality(self, target_problem:TargetProblem) -> QualityOfSolution:
         """
         Calculate fitness, objective and feasibility of the solution, with optional cache consultation
 
@@ -246,19 +264,19 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         :return: objective value, fitness value and feasibility of the solution instance 
         :rtype: `QualityOfSolution`
         """
-        eccs = TargetSolution.evaluation_cache_cs 
+        eccs:EvaluationCacheControlStatistics = TargetSolution.evaluation_cache_cs 
         if eccs.is_caching:
             eccs.increment_cache_request_count()
             code = self.string_representation()
             if code in eccs.cache:
                 eccs.increment_cache_hit_count()
                 return eccs.cache[code]
-            triplet:QualityOfSolution = self.calculate_objective_fitness_feasibility_directly(
+            triplet:QualityOfSolution = self.calculate_quality_directly(
                     self.representation, target_problem)
             eccs.cache[code] = triplet
             return triplet
         else:
-            triplet:QualityOfSolution = self.calculate_objective_fitness_feasibility_directly(
+            triplet:QualityOfSolution = self.calculate_quality_directly(
                     self.representation, target_problem)
             return triplet
 
@@ -268,20 +286,45 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
 
         :param TargetProblem target_problem: problem that is solved
         """        
-        triplet:QualityOfSolution = self.calculate_objective_fitness_feasibility(target_problem)
+        triplet:QualityOfSolution = self.calculate_quality(target_problem)
         self.objective_value = triplet.objective_value;
         self.fitness_value = triplet.fitness_value;
         self.is_feasible = triplet.is_feasible;
 
     @abstractmethod
-    def representation_distance(representation_1:R_co, representation_2:R_co)->float:
+    def representation_distance_directly(self, representation_1:R_co, representation_2:R_co)->float:
         """
-        Calculate distance between two solutions determined by its native representations
+        Directly calculate distance between two solutions determined by its native representations
 
-        :param R_co representation_1: native representation for the first solution
-        :param R_co representation_2: native representation for the second solution
+        :param `R_co` representation_1: native representation for the first solution
+        :param `R_co` representation_2: native representation for the second solution
+        :return: distance 
+        :rtype: float
         """
         raise NotImplementedError
+
+    def representation_distance(self, representation_1:R_co, representation_2:R_co)->float:
+        """
+        Calculate distance between two native representations, with optional cache consultation
+
+        :param `R_co` representation_1: native representation for the first solution
+        :param `R_co` representation_2: native representation for the second solution
+        :return: distance 
+        :rtype: float
+        """
+        rdcs:DistanceCalculationCacheControlStatistics[R_co] = TargetSolution.representation_distance_cache_cs
+        if rdcs.is_caching:
+            rdcs.increment_cache_request_count()
+            code:(R_co,R_co) = (representation_1, representation_2)
+            if code in rdcs.cache:
+                eccs.increment_cache_hit_count()
+                return eccs.cache[code]
+            ret:float = self.representation_distance_directly(representation_1, representation_2)
+            eccs.cache[code] = ret
+            return ret
+        else:
+            ret:float = self.representation_distance_directly(representation_1, representation_2)
+            return ret
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
@@ -324,6 +367,10 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
             s += indentation_symbol     
         s += 'evaluation_cache_cs=' + self.evaluation_cache_cs.string_rep(
                 delimiter, indentation+1, indentation_symbol, '{', '}')  
+        for i in range(0, indentation):
+            s += indentation_symbol  
+        s += '__representation_distance_cache_cs(static)=' + TargetSolution.representation_distance_cache_cs.string_rep(
+                delimiter, indentation + 1, indentation_symbol, '{', '}') + delimiter
         for i in range(0, indentation):
             s += indentation_symbol  
         s += group_end 

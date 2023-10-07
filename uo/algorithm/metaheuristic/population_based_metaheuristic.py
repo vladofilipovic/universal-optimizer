@@ -27,10 +27,10 @@ from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.target_solution import TargetSolution
 
 from uo.algorithm.output_control import OutputControl
-
 from uo.algorithm.metaheuristic.finish_control import FinishControl
+from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
+
 from uo.algorithm.metaheuristic.metaheuristic import Metaheuristic
-from uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics import DistanceCalculationCacheControlStatistics
 
 class PopulationBasedMetaheuristic(Metaheuristic, metaclass=ABCMeta):
     """
@@ -42,8 +42,7 @@ class PopulationBasedMetaheuristic(Metaheuristic, metaclass=ABCMeta):
             name:str, 
             finish_control:FinishControl,
             random_seed:int, 
-            keep_all_solution_codes:bool,
-            distance_calculation_cache_is_used:bool,
+            additional_statistics_control:AdditionalStatisticsControl,
             output_control:OutputControl, 
             target_problem:TargetProblem,
             initial_solutions:list[TargetSolution]
@@ -54,8 +53,8 @@ class PopulationBasedMetaheuristic(Metaheuristic, metaclass=ABCMeta):
         :param str name: name of the metaheuristic
         :param `FinishControl` finish_control: structure that control finish criteria for metaheuristic execution
         :param int random_seed: random seed for metaheuristic execution
-        :param bool keep_all_solution_codes: if all solution codes will be remembered        
-        :param bool distance_calculation_cache_is_used: if cache is used for distance calculation between solutions        
+        :param `AdditionalStatisticsControl` additional_statistics_control: structure that controls additional 
+        statistics obtained during population-based metaheuristic execution        
         :param `OutputControl` output_control: structure that controls output
         :param `TargetProblem` target_problem: problem to be solved
         :param `list[TargetSolution]` initial_solutions: population with initial solutions of the problem
@@ -63,8 +62,7 @@ class PopulationBasedMetaheuristic(Metaheuristic, metaclass=ABCMeta):
         super().__init__(name=name, 
                 finish_control=finish_control,
                 random_seed=random_seed,
-                keep_all_solution_codes=keep_all_solution_codes,
-                distance_calculation_cache_is_used=distance_calculation_cache_is_used,
+                additional_statistics_control=additional_statistics_control,
                 output_control=output_control, 
                 target_problem=target_problem)
         if initial_solutions is not None: 
@@ -168,8 +166,6 @@ class PopulationBasedMetaheuristic(Metaheuristic, metaclass=ABCMeta):
         :rtype: str
         """
         s = self.string_rep('\n')
-        if self.keep_all_solution_codes:
-            s += 'all_solution_codes=' + str(self.all_solution_codes) 
         return s
 
     @abstractmethod

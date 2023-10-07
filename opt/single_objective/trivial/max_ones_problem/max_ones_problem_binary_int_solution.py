@@ -25,14 +25,16 @@ from uo.utils.logger import logger
 
 class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
     
-    def __init__(self, random_seed:int=None)->None:
+    def __init__(self, random_seed:int=None, evaluation_cache_is_used:bool=False, 
+            distance_calculation_cache_is_used:bool=False)->None:
         """
         Create new `MaxOnesProblemBinaryIntSolution` instance
 
         :param int random_seed: random seed for initialization, default value `Null`
         """
-        super().__init__("MaxOnesProblemBinaryIntSolution", random_seed, fitness_value=None, objective_value=None, 
-                is_feasible=False)
+        super().__init__("MaxOnesProblemBinaryIntSolution", random_seed=random_seed, fitness_value=None, objective_value=None, 
+                is_feasible=False, evaluation_cache_is_used=evaluation_cache_is_used, 
+                distance_calculation_cache_is_used=distance_calculation_cache_is_used)
 
     def __copy__(self):
         """
@@ -105,7 +107,7 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
         """
         self.representation = representation
 
-    def calculate_objective_fitness_feasibility_directly(self, representation:int, 
+    def calculate_quality_directly(self, representation:int, 
             problem:TargetProblem)->QualityOfSolution:
         """
         Fitness calculation of the max ones binary int solution
@@ -129,7 +131,7 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
         ret:int = int(representation_str, 2)
         return ret
 
-    def representation_distance(solution_code_1:str, solution_code_2:str)->float:
+    def representation_distance_directly(solution_code_1:str, solution_code_2:str)->float:
         rep_1:int = self.native_representation(solution_code_1)
         rep_2:int = self.native_representation(solution_code_2)
         result = (rep_1 ^ rep_2).count(True)

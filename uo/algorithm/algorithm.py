@@ -214,11 +214,11 @@ class Algorithm(metaclass=ABCMeta):
         if sol1 is None:
             fit1:float = None
         else:
-            fit1:float = sol1.calculate_objective_fitness_feasibility(self.target_problem).fitness_value;
+            fit1:float = sol1.calculate_quality(self.target_problem).fitness_value;
         if sol2 is None:
             fit2:float = None
         else:
-            fit2:float = sol2.calculate_objective_fitness_feasibility(self.target_problem).fitness_value;
+            fit2:float = sol2.calculate_quality(self.target_problem).fitness_value;
         # with fitness is better than without fitness
         if fit1 is None:
             if fit2 is not None:

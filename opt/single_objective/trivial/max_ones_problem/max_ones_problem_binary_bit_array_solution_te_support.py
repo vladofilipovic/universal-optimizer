@@ -113,8 +113,8 @@ class MaxOnesProblemBinaryBitArraySolutionTeSupport(ProblemSolutionTeSupport[Bit
         """
         Returns overall number of evaluations required for finishing total enumeration process.  
 
-        :param `TargetProblem` problem: problem that is solved
-        :param `TargetSolution[R_co]` solution: solution used for the problem that is solved
+        :param `MaxOnesProblem` problem: problem that is solved
+        :param `MaxOnesProblemBinaryBitArraySolution` solution: solution used for the problem that is solved
         :param `Algorithm` optimizer: optimizer that is executed
         :return: overall number of evaluations required for finishing total enumeration process
         :rtype: int

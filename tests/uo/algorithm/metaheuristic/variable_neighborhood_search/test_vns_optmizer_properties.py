@@ -53,9 +53,7 @@ class TestVnsOptimizerProperties(unittest.TestCase):
                 random_seed=self.random_seed, 
                 k_min=self.k_min, 
                 k_max=self.k_max, 
-                max_local_optima=42, 
-                keep_all_solution_codes=True, 
-                distance_calculation_cache_is_used=False,
+                additional_statistics_control=None,
                 local_search_type='first_improvement'
         )
         return

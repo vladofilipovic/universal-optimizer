@@ -25,6 +25,7 @@ from bitstring import BitArray
 
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
+from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
 from uo.algorithm.exact.total_enumeration.te_optimizer_constructor_parameters import TeOptimizerConstructionParameters
 from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizer
@@ -151,12 +152,16 @@ def main():
                 evaluations_max=max_number_evaluations,
                 iterations_max=max_number_iterations,
                 seconds_max=max_time_for_execution_in_seconds)
-        # evaluation cache setup
-        evaluation_cache_is_used:bool = parameters['evaluationCacheIsUsed']
-        # calculation distances cache setup
-        calculation_solution_distance_cache_is_used = parameters['calculationSolutionDistanceCacheIsUsed']
-        # bookkeeping setup
-        keep_all_solution_codes:bool = parameters['keepAllSolutionCodes']
+        # solution evaluations and calculations cache setup
+        evaluation_cache_is_used:bool = parameters['solutionEvaluationCacheIsUsed']
+        calculation_solution_distance_cache_is_used:bool = \
+                parameters['solutionDistanceCalculationCacheIsUsed']
+        # additional statistic control setup
+        additional_statistics_keep:str =  parameters['additionalStatisticsKeep']
+        max_local_optima = parameters['additionalStatisticsMaxLocalOptima']
+        additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(
+                keep=additional_statistics_keep, 
+                max_local_optima=max_local_optima)
         # problem to be solved
         problem = MaxOnesProblem(input_file_path)
         problem.load_from_file(input_format)
@@ -170,7 +175,6 @@ def main():
             # parameters for VNS process setup
             k_min:int = parameters['kMin']
             k_max:int = parameters['kMax']
-            max_local_optima = parameters['maxLocalOptima']
             local_search_type = parameters['localSearchType']
             # initial solution and vns support
             solution_type:str = parameters['solutionType']
@@ -193,8 +197,7 @@ def main():
             vns_construction_params.problem_solution_vns_support = vns_support
             vns_construction_params.finish_control = finish_control
             vns_construction_params.random_seed = r_seed
-            vns_construction_params.keep_all_solution_codes = keep_all_solution_codes
-            vns_construction_params.distance_calculation_cache_is_used = calculation_solution_distance_cache_is_used
+            vns_construction_params.additional_statistics_control = additional_statistics_control
             vns_construction_params.k_min = k_min
             vns_construction_params.k_max = k_max
             vns_construction_params.max_local_optima = max_local_optima

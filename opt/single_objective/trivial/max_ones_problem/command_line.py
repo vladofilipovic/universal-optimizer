@@ -30,12 +30,12 @@ default_parameters_cl = {
         'finishIterationsMax': 0, 
         'finishSecondsMax': 0, 
         'randomSeed': 0,
-        'evaluationCacheIsUsed': False,
-        'calculationSolutionDistanceCacheIsUsed': False,
-        'keepAllSolutionCodes': False,
+        'solutionEvaluationCacheIsUsed': False,
+        'solutionDistanceCalculationCacheIsUsed': False,
+        'additionalStatisticsKeep': 'None',
+        'additionalStatisticsMaxLocalOptima':7,
         'kMin': 1,
         'kMax': 3,
-        'maxLocalOptima':7,
         'localSearchType': 'local_search_best_improvement',
         'solutionType': 'BitArray'
 }
@@ -89,18 +89,20 @@ def parse_arguments():
         parser_vns.add_argument('--randomSeed', type=int, default=0, 
                 help=("Random seed for the VNS execution. " 
                 "Value 0 means that random seed will be obtained from system timer.") )        
-        parser_vns.add_argument('--evaluationCacheIsUsed', type=bool, default=False, 
+        parser_vns.add_argument('--solutionEvaluationCacheIsUsed', type=bool, default=False, 
                 help=("Should caching be used during evaluation.") )        
-        parser_vns.add_argument('--calculationSolutionDistanceCacheIsUsed', type=bool, default=False, 
+        parser_vns.add_argument('--solutionDistanceCalculationCacheIsUsed', type=bool, default=False, 
                 help=("Should caching be used during distance calculations for solution individual.") )        
-        parser_vns.add_argument('--keepAllSolutionCodes', type=bool, default=False, 
-                help=("Should all solution codes be keep during metaheuristic execution.") )        
+        parser_vns.add_argument('--additionalStatisticsKeep', type=str, 
+                default='None', 
+                help=("Comma-separated list of statistical data will be calculated and keep during solving. " 
+                "Currently, data within list can be: 'all_solution_code', 'distance_among_solutions'."))
+        parser_vns.add_argument('--additionalStatisticsMaxLocalOptima', type=int, default=3, 
+                help=("Parameter maximum number of local optima kept during execution.") )    
         parser_vns.add_argument('--kMin', type=int, default=1, 
                 help=("VNS parameter k min.") )    
         parser_vns.add_argument('--kMax', type=int, default=3, 
                 help=("VNS parameter k max.") )    
-        parser_vns.add_argument('--maxLocalOptima', type=int, default=3, 
-                help=("VNS parameter maximum number of local optima kept during execution.") )    
         parser_vns.add_argument('--localSearchType', type=str, 
                 choices=['local_search_best_improvement', 'local_search_first_improvement'],  
                 default='local_search_best_improvement', 

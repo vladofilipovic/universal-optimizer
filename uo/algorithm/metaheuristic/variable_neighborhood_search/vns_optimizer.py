@@ -29,9 +29,13 @@ from uo.target_solution.target_solution import TargetSolution
 
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
+from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
+
 from uo.algorithm.metaheuristic.single_solution_metaheuristic import SingleSolutionMetaheuristic
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer_constructor_parameters import VnsOptimizerConstructionParameters
-from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer_constructor_parameters import \
+        VnsOptimizerConstructionParameters
+from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import \
+        ProblemSolutionVnsSupport
 
 class VnsOptimizer(SingleSolutionMetaheuristic):
     """
@@ -42,15 +46,13 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
     def __init__(self, 
             finish_control:FinishControl, 
             random_seed:int, 
-            keep_all_solution_codes:bool, 
-            distance_calculation_cache_is_used:bool,
+            additional_statistics_control:AdditionalStatisticsControl,
             output_control:OutputControl, 
             target_problem:TargetProblem, 
             initial_solution:TargetSolution,
             problem_solution_vns_support:ProblemSolutionVnsSupport, 
             k_min:int, 
             k_max:int, 
-            max_local_optima:int, 
             local_search_type:str)->None:
         """
         Create new instance of class :class:`~uo.algorithm.metaheuristic.variable_neighborhood_search.VnsOptimizer`. 
@@ -58,8 +60,8 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
 
         :param `FinishControl` finish_control: structure that control finish criteria for metaheuristic execution
         :param int random_seed: random seed for metaheuristic execution
-        :param bool keep_all_solution_codes: if all solution codes will be remembered
-        :param bool distance_calculation_cache_is_used: if cache is used for distance calculation between solutions        
+        :param `AdditionalStatisticsControl` additional_statistics_control: structure that controls additional 
+        statistics obtained during population-based metaheuristic execution        
         :param `OutputControl` output_control: structure that controls output
         :param `TargetProblem` target_problem: problem to be solved
         :param `TargetSolution` initial_solution: initial solution of the problem 
@@ -67,15 +69,13 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         execution, which depend of precise solution type 
         :param int k_min: `k_min` parameter for VNS
         :param int k_max: `k_max` parameter for VNS
-        :param int max_local_optima: max_local_optima parameter for VNS
         :param local_search_type: type of the local search
         :type local_search_type: str, possible values: 'local_search_best_improvement', 'local_search_first_improvement' 
         """
         super().__init__( name='vns', 
                 finish_control=finish_control, 
                 random_seed=random_seed, 
-                keep_all_solution_codes=keep_all_solution_codes,
-                distance_calculation_cache_is_used=distance_calculation_cache_is_used, 
+                additional_statistics_control=additional_statistics_control, 
                 output_control=output_control, 
                 target_problem=target_problem,
                 initial_solution=initial_solution)
@@ -104,11 +104,8 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
             self.__shaking_method = None
         self.__k_min:int = k_min
         self.__k_max:int = k_max
-        self.__max_local_optima:int = max_local_optima
         # current value of the vns parameter k
         self.__k_current:int = None
-        # values of the local optima foreach element calculated 
-        self.__local_optima:Dict[int|BitArray, float] = {}
 
     @classmethod
     def from_construction_tuple(cls, construction_tuple:VnsOptimizerConstructionParameters):
@@ -120,15 +117,13 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         return cls( 
             construction_tuple.finish_control,
             construction_tuple.random_seed, 
-            construction_tuple.keep_all_solution_codes, 
-            construction_tuple.distance_calculation_cache_is_used,
+            construction_tuple.additional_statistics_control,
             construction_tuple.output_control, 
             construction_tuple.target_problem, 
             construction_tuple.initial_solution,
             construction_tuple.problem_solution_vns_support, 
             construction_tuple.k_min, 
             construction_tuple.k_max, 
-            construction_tuple.max_local_optima, 
             construction_tuple.local_search_type)
 
     def __copy__(self):
@@ -178,27 +173,6 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         self.current_solution.init_random(self.target_problem)
         self.current_solution.evaluate(self.target_problem)
         self.copy_to_best_solution(self.current_solution)
-
-    def __add_local_optima__(self, current_solution:TargetSolution)->bool:
-        """
-        Add solution to the local optima structure 
-
-        :param current_solution: solution to be added to local optima structure
-        :type current_solution: :class:`optimization_algorithms.target_solution.TargetSolution`
-        :return:  if adding is successful e.g. current_solution is new element in the structure
-        :rtype: bool
-        """       
-        if current_solution.representation in self.__local_optima:
-            return False
-        if len(self.__local_optima) >= self.__max_local_optima:
-            # removing random, just taking care not to remove the best ones
-            while True:
-                code = random.choice(self.__local_optima.keys())
-                if code != self.best_solution.representation:
-                    del self.__local_optima[code]
-                    break
-        self.__local_optima[current_solution.representation]=current_solution.fitness_value
-        return True
     
     def main_loop_iteration(self)->None:
         """
@@ -215,8 +189,8 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
             self.current_solution = self.__ls_method(self.__k_current, self.target_problem, self.current_solution, self)
             self.write_output_values_if_needed("after_step_in_iteration", "ls")
             # update auxiliary structure that keeps all solution codes
-            if self.keep_all_solution_codes:
-                self.all_solution_codes.add(self.current_solution.string_representation())
+            self.additional_statistics_control.add_to_all_solution_codes_if_necessary(
+                    self.current_solution.string_representation())
             new_is_better:bool = self.is_first_solution_better(self.current_solution, self.best_solution)
             make_move:bool = new_is_better
             if new_is_better is None:

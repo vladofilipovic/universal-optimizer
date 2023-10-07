@@ -50,14 +50,6 @@ class OutputControl:
                 'self.best_solution.objective_value',
                 'self.best_solution.is_feasible']
         self.__determine_fields_helper__(fields)
-        self.__write_before_algorithm:bool = False
-        self.__write_after_algorithm:bool = False
-        self.__write_before_iteration:bool = False
-        self.__write_after_iteration:bool = False
-        self.__write_before_evaluation:bool = False
-        self.__write_after_evaluation:bool = False
-        self.__write_before_step_in_iteration:bool = False
-        self.__write_after_step_in_iteration:bool = False
         self.__determine_moments_helper__(moments)
 
     def __determine_fields_helper__(self, fields:str):
@@ -89,10 +81,19 @@ class OutputControl:
         `before_algorithm`, `after_algorithm`, `before_iteration`, `after_iteration`, 
         `before_evaluation`, `after_evaluation`, `before_step_in_iteration`, `after_step_in_iteration`
         """
+        self.__write_before_algorithm:bool = False
+        self.__write_before_iteration:bool = False
+        self.__write_after_iteration:bool = False
+        self.__write_before_evaluation:bool = False
+        self.__write_after_evaluation:bool = False
+        self.__write_before_step_in_iteration:bool = False
+        self.__write_after_step_in_iteration:bool = False
         self.__write_after_algorithm = True
         mom:list[str] = moments.split(',')
         for mo in mom: 
             m:str = mo.strip()
+            if m=='':
+                continue
             if m == 'before_algorithm':
                 self.__write_before_algorithm = True
             elif m == 'after_algorithm':
