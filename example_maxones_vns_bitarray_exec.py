@@ -29,6 +29,7 @@ def main():
         vns_construction_params.initial_solution = solution
         vns_construction_params.finish_control = finish
         vns_construction_params.problem_solution_vns_support = vns_support
+        vns_construction_params.additional_statistics_control = additional_statistics_control
         vns_construction_params.random_seed = 43434343
         vns_construction_params.k_min = 1
         vns_construction_params.k_max = 3

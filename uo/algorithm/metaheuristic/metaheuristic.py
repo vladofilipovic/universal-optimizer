@@ -65,7 +65,7 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
             self.__random_seed:int = random_seed
         else:
             self.__random_seed:int = randrange(sys.maxsize)
-        self.__additional_statistics_control:bool = additional_statistics_control
+        self.__additional_statistics_control:AdditionalStatisticsControl = additional_statistics_control
 
     @abstractmethod
     def __copy__(self):
@@ -107,6 +107,15 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         :rtype: int
         """
         return self.__random_seed
+    @property
+    def additional_statistics_control(self)->AdditionalStatisticsControl:
+        """
+        Property getter for the structure that controls keeping of the statistic during metaheuristic execution
+        
+        :return: structure that controls that controls keeping of the statistic during metaheuristic execution 
+        :rtype: `AdditionalStatisticsControl`
+        """
+        return self.__additional_statistics_control
 
     @abstractmethod
     def main_loop_iteration(self)->None:

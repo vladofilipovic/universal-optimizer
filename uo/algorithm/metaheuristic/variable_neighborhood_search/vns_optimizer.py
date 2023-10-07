@@ -122,8 +122,7 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         return cls( 
             construction_tuple.finish_control,
             construction_tuple.random_seed, 
-            construction_tuple.keep_all_solution_codes, 
-            construction_tuple.distance_calculation_cache_is_used,
+            construction_tuple.additional_statistics_control,
             construction_tuple.output_control, 
             construction_tuple.target_problem, 
             construction_tuple.initial_solution,
@@ -217,8 +216,8 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
             self.current_solution = self.__ls_method(self.__k_current, self.target_problem, self.current_solution, self)
             self.write_output_values_if_needed("after_step_in_iteration", "ls")
             # update auxiliary structure that keeps all solution codes
-            if self.keep_all_solution_codes:
-                self.all_solution_codes.add(self.current_solution.string_representation())
+            self.additional_statistics_control.keep_all_solution_codes_if_necessary(
+                    self.current_solution.string_representation())
             new_is_better:bool = self.is_first_solution_better(self.current_solution, self.best_solution)
             make_move:bool = new_is_better
             if new_is_better is None:

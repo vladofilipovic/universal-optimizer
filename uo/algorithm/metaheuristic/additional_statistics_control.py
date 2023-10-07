@@ -118,6 +118,17 @@ class AdditionalStatisticsControl:
         """
         return self.__keep_distance_among_solutions
 
+    def keep_all_solution_codes_if_necessary(self, representation:str)->None:
+        """
+        Filling all solution code, if necessary 
+
+        :param representation: solution representation to be inserted into all solution code
+        :type representation: str
+        :rtype: None
+        """        
+        if self.keep_all_solution_codes:
+            AdditionalStatisticsControl.all_solution_codes.add(representation)
+
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
         """
