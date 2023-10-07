@@ -53,7 +53,6 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
             problem_solution_vns_support:ProblemSolutionVnsSupport, 
             k_min:int, 
             k_max:int, 
-            max_local_optima:int, 
             local_search_type:str)->None:
         """
         Create new instance of class :class:`~uo.algorithm.metaheuristic.variable_neighborhood_search.VnsOptimizer`. 
@@ -70,7 +69,6 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         execution, which depend of precise solution type 
         :param int k_min: `k_min` parameter for VNS
         :param int k_max: `k_max` parameter for VNS
-        :param int max_local_optima: max_local_optima parameter for VNS
         :param local_search_type: type of the local search
         :type local_search_type: str, possible values: 'local_search_best_improvement', 'local_search_first_improvement' 
         """
@@ -106,7 +104,6 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
             self.__shaking_method = None
         self.__k_min:int = k_min
         self.__k_max:int = k_max
-        self.__max_local_optima:int = max_local_optima
         # current value of the vns parameter k
         self.__k_current:int = None
         # values of the local optima foreach element calculated 
@@ -129,7 +126,6 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
             construction_tuple.problem_solution_vns_support, 
             construction_tuple.k_min, 
             construction_tuple.k_max, 
-            construction_tuple.max_local_optima, 
             construction_tuple.local_search_type)
 
     def __copy__(self):

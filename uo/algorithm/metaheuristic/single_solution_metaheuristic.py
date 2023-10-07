@@ -31,8 +31,6 @@ from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
 from uo.algorithm.metaheuristic.metaheuristic import Metaheuristic
-from uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics import \
-        DistanceCalculationCacheControlStatistics
 
 class SingleSolutionMetaheuristic(Metaheuristic, metaclass=ABCMeta):
     """

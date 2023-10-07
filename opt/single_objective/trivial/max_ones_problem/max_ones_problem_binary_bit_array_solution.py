@@ -26,12 +26,14 @@ from uo.utils.logger import logger
 
 class MaxOnesProblemBinaryBitArraySolution(TargetSolution[BitArray]):
     
-    def __init__(self, random_seed:int=None)->None:
+    def __init__(self, random_seed:int=None, evaluation_cache_is_used:bool=False, 
+            distance_calculation_cache_is_used:bool=False)->None:
         """
         Create new `MaxOnesProblemBinaryBitArraySolution` instance
         """
-        super().__init__("MaxOnesProblemBinaryBitArraySolution", random_seed, fitness_value=None, 
-                objective_value=None, is_feasible=False)
+        super().__init__("MaxOnesProblemBinaryBitArraySolution", random_seed=random_seed, fitness_value=None, 
+                objective_value=None, is_feasible=False, evaluation_cache_is_used=evaluation_cache_is_used,
+                distance_calculation_cache_is_used=distance_calculation_cache_is_used)
 
     def __copy__(self):
         """
@@ -94,7 +96,7 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution[BitArray]):
         """
         self.representation = BitArray(bin=representation.bin)
 
-    def calculate_objective_fitness_feasibility_directly(self, representation:BitArray, 
+    def calculate_quality_directly(self, representation:BitArray, 
             problem:TargetProblem)->QualityOfSolution:
         """
         Fitness calculation of the max ones binary BitArray solution
@@ -118,7 +120,7 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution[BitArray]):
         ret:BitArray = BitArray(bin=representation_str)
         return ret
 
-    def representation_distance(solution_code_1:str, solution_code_2:str)->float:
+    def representation_distance_directly(solution_code_1:str, solution_code_2:str)->float:
         """
         Calculating distance between two solutions determined by its code
 

@@ -160,32 +160,6 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         self.execution_ended = datetime.now()
         self.write_output_values_if_needed("after_algorithm", "a_a")
 
-    def calculate_representation_distance(self, code_x:str, code_y:str)->float:
-        """
-        Calculate distance between two solution codes with optional cache consultation
-        
-        :param str code_x: first solution code 
-        :param str code_y: second solution code 
-        :return: distance between solution codes 
-        :rtype: float
-        """
-        if code_x == code_y:
-            return 0;
-        scdc = self.__representation_distance_cache_cs 
-        scdc.requests_count += 1
-        if scdc.is_caching: 
-            if code_x in scdc.cache and code_y in scdc.cache[code_x]:
-                scdc.hit_count += 1
-                return scdc.cache[code_x][code_y]
-            dist = TargetSolution.representation_distance(code_x, code_y)
-            if code_x not in scdc.cache:
-                scdc.cache[code_x] = {};
-            scdc.cache[code_x][code_y] = dist;
-            return dist;
-        else:
-            dist = TargetSolution.representation_distance(code_x, code_y)
-            return dist
-
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
             group_end:str ='}')->str:
         """

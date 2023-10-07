@@ -48,12 +48,11 @@ class MaxOnesProblem(TargetProblem):
     def __format__(self, spec:str)->str:
         return ''
 
-
 class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
     
     def __init__(self, random_seed:int=None)->None:
         super().__init__("MaxOnesProblemBinaryIntSolution", random_seed, fitness_value=None, objective_value=None, 
-                is_feasible=False)
+                is_feasible=False, evaluation_cache_is_used=False, distance_calculation_cache_is_used=False)
 
     def __copy__(self):
         sol = deepcopy(self)
@@ -87,7 +86,7 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
     def string_rep(self)->str:
         return bin(self.representation)
 
-    def calculate_objective_fitness_feasibility_directly(self, representation:int, 
+    def calculate_quality_directly(self, representation:int, 
             problem:TargetProblem)->QualityOfSolution:
         ones_count = representation.bit_count()
         return QualityOfSolution(ones_count, ones_count, True)
@@ -96,7 +95,7 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
         ret:int = int(representation_str, 2)
         return ret
 
-    def representation_distance(solution_code_1:str, solution_code_2:str)->float:
+    def representation_distance_directly(solution_code_1:str, solution_code_2:str)->float:
         rep_1:int = self.native_representation(solution_code_1)
         rep_2:int = self.native_representation(solution_code_2)
         result = (rep_1 ^ rep_2).count(True)
@@ -170,7 +169,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
             mask:int = 1 << i
             solution.representation ^= mask 
             optimizer.evaluation +=1 
-            new_triplet:QualityOfSolution = solution.calculate_objective_fitness_feasibility(problem)
+            new_triplet:QualityOfSolution = solution.calculate_quality(problem)
             if new_triplet.fitness_value > best_fv:
                 best_ind = i
                 best_fv = new_triplet.fitness_value
@@ -196,7 +195,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
             mask:int = 1 << i
             solution.representation ^= mask 
             optimizer.evaluation += 1
-            new_triplet:QualityOfSolution = solution.calculate_objective_fitness_feasibility(problem)
+            new_triplet:QualityOfSolution = solution.calculate_quality(problem)
             if new_triplet.fitness_value > best_fv:
                 solution.objective_value = new_triplet.objective_value
                 solution.fitness_value = new_triplet.fitness_value
@@ -237,7 +236,6 @@ def main():
     vns_construction_params.additional_statistics_control = additional_stat
     vns_construction_params.k_min = 1
     vns_construction_params.k_max = 3
-    vns_construction_params.max_local_optima = 10
     vns_construction_params.local_search_type = 'local_search_first_improvement'
     optimizer:VnsOptimizer = VnsOptimizer.from_construction_tuple(vns_construction_params)
     optimizer.optimize()

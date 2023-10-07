@@ -152,15 +152,16 @@ def main():
                 evaluations_max=max_number_evaluations,
                 iterations_max=max_number_iterations,
                 seconds_max=max_time_for_execution_in_seconds)
-        # evaluation cache setup
-        evaluation_cache_is_used:bool = parameters['evaluationCacheIsUsed']
+        # solution evaluations and calculations cache setup
+        evaluation_cache_is_used:bool = parameters['solutionEvaluationCacheIsUsed']
+        calculation_solution_distance_cache_is_used:bool = \
+                parameters['solutionDistanceCalculationCacheIsUsed']
         # additional statistic control setup
         additional_statistics_keep:str =  parameters['additionalStatisticsKeep']
-        calculation_solution_distance_cache_is_used:bool = \
-                parameters['additionalStatisticsDistanceCalculationCacheIsUsed']
+        max_local_optima = parameters['maxLocalOptima']
         additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(
                 keep=additional_statistics_keep, 
-                use_cache_for_distance_calculation=calculation_solution_distance_cache_is_used)
+                max_local_optima=max_local_optima)
         # problem to be solved
         problem = MaxOnesProblem(input_file_path)
         problem.load_from_file(input_format)
@@ -174,7 +175,6 @@ def main():
             # parameters for VNS process setup
             k_min:int = parameters['kMin']
             k_max:int = parameters['kMax']
-            max_local_optima = parameters['maxLocalOptima']
             local_search_type = parameters['localSearchType']
             # initial solution and vns support
             solution_type:str = parameters['solutionType']

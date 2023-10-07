@@ -26,13 +26,12 @@
                 "--finishIterationsMax", "0",  
                 "--finishSecondsMax", "0",
                 "--randomSeed", "0", 
-                "--evaluationCacheIsUsed", "False", 
+                "--solutionEvaluationCacheIsUsed", "False", 
+                "--solutionDistanceCalculationCacheIsUsed", "False", 
                 "--additionalStatisticsKeep", "",
-                "--additionalStatisticsDistanceCalculationCacheIsUsed", "False", 
-                "--additionalStatisticsKeepAllSolutionCodes", "False",
+                "--additionalStatisticsMaxLocalOptima", "5",
                 "--kMin", "1",
                 "--kMax", "3", 
-                "--maxLocalOptima", "5", 
                 "--localSearchType", "local_search_best_improvement",
                 "--solutionType", "BitArray"
                 ]        

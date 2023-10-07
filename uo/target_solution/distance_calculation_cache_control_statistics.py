@@ -1,7 +1,6 @@
 """ 
-The :mod:`~uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics` module describes the class :class:`~uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics.DistanceCalculationCacheControlStatistics`.
+The :mod:`~uo.target_solution.solution_code_distance_cache_control_statistics` module describes the class :class:`~uo.target_solution.distance_calculation_cache_control_statistics.DistanceCalculationCacheControlStatistics`.
 """
-
 
 from pathlib import Path
 directory = Path(__file__).resolve()
@@ -9,7 +8,15 @@ import sys
 sys.path.append(directory.parent)
 sys.path.append(directory.parent.parent)
 
-class DistanceCalculationCacheControlStatistics:
+
+from abc import ABCMeta, abstractmethod
+from typing import NamedTuple
+from typing import TypeVar, Generic
+from typing import Generic
+
+E_co = TypeVar("E_co", covariant=True) 
+
+class DistanceCalculationCacheControlStatistics(Generic[E_co]):
     """
     Class that represents control statistics for solution code distance calculation cache.
     """
@@ -21,7 +28,7 @@ class DistanceCalculationCacheControlStatistics:
         :param is_caching: is cashing enabled during calculation of distances among solution representations
         """
         self.__is_caching:bool = is_caching
-        self.__cache:dict[dict[str]] = {}
+        self.__cache:dict[(E_co,E_co)] = {}
         self.__cache_hit_count:int = 0
         self.__cache_request_count:int = 0
 
@@ -45,21 +52,21 @@ class DistanceCalculationCacheControlStatistics:
         self.__is_caching = value
 
     @property
-    def cache(self)->dict[dict[str]]:
+    def cache(self)->dict[(E_co,E_co)]:
         """
         Property getter for cache 
 
         :return:  cache that is used during calculation for previously obtained solution code distances
-        :rtype: dict[dict[str]]
+        :rtype: dict[(E_co,E_co)]
         """
         return self.__cache
 
     @cache.setter
-    def cache(self, value:dict[dict[str]])->None:
+    def cache(self, value:dict[(E_co,E_co)])->None:
         """
         Property setter for cache
 
-        :param dict[dict[str]] value: value that is set for `cache`
+        :param dict[(E_co,E_co)] value: value that is set for `cache`
         """
         self.__cache = value
 

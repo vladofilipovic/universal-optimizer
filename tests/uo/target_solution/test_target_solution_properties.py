@@ -23,8 +23,11 @@ from uo.target_solution.target_solution import TargetSolution
 class TargetSolutionVoid(TargetSolution[int]):
     
     def __init__(self, name:str, random_seed:int, fitness_value:float|list[float]|tuple[float], 
-            objective_value:float|list[float]|tuple[float], is_feasible:bool)->None:
-        super().__init__(name, random_seed, fitness_value, objective_value, is_feasible)
+            objective_value:float|list[float]|tuple[float], is_feasible:bool, evaluation_cache_is_used:bool=False, 
+            distance_calculation_cache_is_used:bool=False)->None:
+        super().__init__(name, random_seed=random_seed, fitness_value=fitness_value, objective_value=objective_value, 
+                is_feasible=is_feasible, evaluation_cache_is_used=evaluation_cache_is_used,
+                distance_calculation_cache_is_used=distance_calculation_cache_is_used)
 
     def __copy__(self):
         pr = deepcopy(self)
@@ -49,11 +52,11 @@ class TargetSolutionVoid(TargetSolution[int]):
     def native_representation(self, representation_str:str)->int:
         return 42
 
-    def calculate_objective_fitness_feasibility_directly(self, representation:int, 
+    def calculate_quality_directly(self, representation:int, 
             problem:TargetProblem)->QualityOfSolution:
         return QualityOfSolution(42, 42, True)
 
-    def representation_distance(solution_code_1:str, solution_code_2:str)->float:
+    def representation_distance_directly(solution_code_1:str, solution_code_2:str)->float:
         return 42.0
 
     def __str__(self)->str:

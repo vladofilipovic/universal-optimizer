@@ -7,9 +7,6 @@ directory = Path(__file__).resolve()
 import sys
 sys.path.append(directory.parent)
 
-from uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics import \
-        DistanceCalculationCacheControlStatistics
-
 class AdditionalStatisticsControl:
 
     """
@@ -19,18 +16,18 @@ class AdditionalStatisticsControl:
 
     def __init__(self, 
             keep:str='', 
-            use_cache_for_distance_calculation:bool = False,
+            max_local_optima:int = 10,
         ) -> None:
         """
         Creates new :class:`uo.algorithm.metaheuristic.AdditionalStatisticsControl` instance
 
         :param str keep: list of comma-separated strings that describes what to be kept during metaheuristic execution 
-        (currently it contains strings `all_solution_code`, `distance_among_solutions`) 
-        :param bool use_cache_for_distance_calculation: should cache be used for calculating distances among solutions
+        (currently it contains strings `all_solution_code`, `more_local_optima`) 
+        :param int max_local_optima: number of local optima to be kept
         """
         self.__can_be_kept:list[str] = ['all_solution_code',
-                'distance_among_solutions']
-        self.__use_cache_for_distance_calculation = use_cache_for_distance_calculation
+                'more_local_optima']
+        self.__max_local_optima:int = max_local_optima
         self.__determine_keep_helper__(keep)
 
     def __determine_keep_helper__(self, keep:str):
@@ -38,10 +35,10 @@ class AdditionalStatisticsControl:
         Helper function that determines which criteria should be checked during
 
         :param str keep: comma-separated list of values that should be kept 
-        (currently keep contains strings `all_solution_code`, `distance_among_solutions`) 
+        (currently keep contains strings `all_solution_code`, `more_local_optima`) 
         """
         self.__keep_all_solution_codes = False
-        self.__keep_distance_among_solutions = False
+        self.__keep_more_local_optima = False
         kep:list[str] = keep.split('&')
         for ke in kep: 
             k:str = ke.strip()
@@ -49,31 +46,25 @@ class AdditionalStatisticsControl:
                 continue
             if k == 'all_solution_code':
                 self.__keep_all_solution_codes = True
-            elif k == 'distance_among_solutions':
-                self.__keep_distance_among_solutions = True
+            elif k == 'more_local_optima':
+                self.__keep_more_local_optima = True
             else:
                 raise ValueError("Invalid value for keep '{}'. Should be one of:{}.".format( k, 
-                    "all_solution_code, distance_among_solutions"))
+                    "all_solution_code, more_local_optima"))
         if self.__keep_all_solution_codes:
             #class/static variable all_solution_codes
             if not hasattr(AdditionalStatisticsControl, 'all_solution_codes'):
                 AdditionalStatisticsControl.all_solution_codes:set[str] = set()
-        if self.__keep_distance_among_solutions:
-            #class/static variable representation_distance_cache_cs
-            if not hasattr(AdditionalStatisticsControl, 'representation_distance_cache_cs'):
-                AdditionalStatisticsControl.representation_distance_cache_cs: \
-                        DistanceCalculationCacheControlStatistics = DistanceCalculationCacheControlStatistics(
-                        self.__use_cache_for_distance_calculation)
 
     @property
-    def use_cache_for_distance_calculation(self)->bool:
+    def max_local_optima(self)->int:
         """
-        Property getter for using cache during distance calculation 
+        Property getter for maximum number of local optima that will be kept
 
-        :return: if cache is used during distance calculation 
-        :rtype: bool
+        :return: maximum number of local optima that will be kept
+        :rtype: int
         """
-        return self.__use_cache_for_distance_calculation
+        return self.__max_local_optima
 
     @property
     def keep(self)->str:
@@ -86,8 +77,8 @@ class AdditionalStatisticsControl:
         ret:str = ''
         if self.__keep_all_solution_codes:
             ret += 'all_solution_code, '
-        if self.__keep_distance_among_solutions:
-            ret += 'distance_among_solutions, '
+        if self.__keep_more_local_optima:
+            ret += 'more_local_optima, '
         ret = ret[0:-2]
         return ret
 
@@ -109,14 +100,14 @@ class AdditionalStatisticsControl:
         return self.__keep_all_solution_codes
 
     @property
-    def keep_distance_among_solutions(self)->bool:
+    def keep_more_local_optima(self)->bool:
         """
-        Property getter for decision if distance among solutions to be calculated and kept
+        Property getter for decision if more local optima should be kept
 
-        :return: if distance among solutions to be calculated and kept
+        :return: if more local optima should be kept
         :rtype: bool
         """
-        return self.__keep_distance_among_solutions
+        return self.__keep_more_local_optima
 
     def keep_all_solution_codes_if_necessary(self, representation:str)->None:
         """
@@ -163,12 +154,6 @@ class AdditionalStatisticsControl:
             for i in range(0, indentation):
                 s += indentation_symbol  
             s += 'all solution codes=' + str(len(AdditionalStatisticsControl.all_solution_codes)) + delimiter
-        if self.keep_distance_among_solutions and self.use_cache_for_distance_calculation:
-            for i in range(0, indentation):
-                s += indentation_symbol  
-            s += '__representation_distance_cache_cs(static)=' + AdditionalStatisticsControl. \
-                    representation_distance_cache_cs.string_rep(
-                    delimiter, indentation + 1, indentation_symbol, '{', '}') + delimiter
         for i in range(0, indentation):
             s += indentation_symbol  
         s += group_end 

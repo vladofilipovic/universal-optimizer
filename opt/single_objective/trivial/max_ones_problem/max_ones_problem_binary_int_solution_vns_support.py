@@ -131,7 +131,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
             if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
                 return solution
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
-            new_triplet = solution.calculate_objective_fitness_feasibility(problem)
+            new_triplet = solution.calculate_quality(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
             if new_triplet.fitness_value > best_triplet.fitness_value:
                 best_triplet = new_triplet
@@ -179,7 +179,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
             if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
                 return solution
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
-            new_triplet = solution.calculate_objective_fitness_feasibility(problem)
+            new_triplet = solution.calculate_quality(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
             if new_triplet.fitness_value > best_fv:
                 solution.fitness_value = new_triplet.fitness_value
