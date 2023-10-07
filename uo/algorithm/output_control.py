@@ -90,34 +90,29 @@ class OutputControl:
         `before_evaluation`, `after_evaluation`, `before_step_in_iteration`, `after_step_in_iteration`
         """
         self.__write_after_algorithm = True
-        if 'before_algorithm' in moments:
-            self.__write_before_algorithm = True
-        else:
-            self.__write_before_algorithm = False
-        if 'before_iteration' in moments:
-            self.__write_before_iteration = True
-        else:
-            self.__write_before_iteration = False
-        if 'after_iteration' in moments:
-            self.__write_after_iteration = True
-        else:
-            self.__write_after_iteration = False
-        if 'before_evaluation' in moments:
-            self.__write_before_evaluation = True
-        else:
-            self.__write_before_evaluation = False
-        if 'after_evaluation' in moments:
-            self.__write_after_evaluation = True
-        else:
-            self.__write_after_evaluation = False
-        if 'before_step_in_iteration' in moments:
-            self.__write_before_step_in_iteration = True
-        else:
-            self.__write_before_step_in_iteration = False
-        if 'after_step_in_iteration' in moments:
-            self.__write_after_step_in_iteration = True
-        else:
-            self.__write_after_step_in_iteration = False
+        mom:list[str] = moments.split(',')
+        for mo in mom: 
+            m:str = mo.strip()
+            if m == 'before_algorithm':
+                self.__write_before_algorithm = True
+            elif m == 'after_algorithm':
+                self.__write_after_algorithm = True
+            elif m == 'before_iteration':
+                self.__write_before_iteration = True
+            elif m == 'after_iteration':
+                self.__write_after_iteration = True
+            elif m == 'before_evaluation':
+                self.__write_before_evaluation = True
+            elif m == 'after_evaluation':
+                self.__write_after_evaluation = True
+            elif m == 'before_step_in_iteration':
+                self.__write_before_step_in_iteration = True
+            elif m == 'after_step_in_iteration':
+                self.__write_after_step_in_iteration = True
+            else:
+                raise ValueError("Invalid value for moment {}. Should be one of:{}.".format( m, 
+                    "before_algorithm, after_algorithm, before_iteration, after_iteration," + 
+                    "before_evaluation`, after_evaluation, before_step_in_iteration, after_step_in_iteration"))
 
     @property
     def write_to_output(self)->bool:

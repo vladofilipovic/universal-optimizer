@@ -25,9 +25,10 @@ default_parameters_cl = {
         'outputMoments': "after_algorithm, after_evaluation",
         'inputFilePath': 'opt/single_objective/trivial/max_ones_problem/inputs/dimension_77.txt', 
         'inputFormat': 'txt', 
-        'maxNumberEvaluations': 3000, 
-        'maxNumberIterations': 0, 
-        'maxTimeForExecutionSeconds': 0, 
+        'finishCriteria':'evaluations & seconds',
+        'finishEvaluationsMax': 3000, 
+        'finishIterationsMax': 0, 
+        'finishSecondsMax': 0, 
         'randomSeed': 0,
         'evaluationCacheIsUsed': False,
         'calculationSolutionDistanceCacheIsUsed': False,
@@ -72,13 +73,17 @@ def parse_arguments():
                 help='Input file path for the instance of the problem. ')
         parser_vns.add_argument('--inputFormat', type=str, choices=['txt', 'idle'], default = 'txt',
                 help='Input file format. ')    
-        parser_vns.add_argument('--maxNumberEvaluations', type=int, default=0, 
+        parser_vns.add_argument('--finishCriteria', type=str, 
+                default='evaluations & seconds', 
+                help=("Finish criteria - list of fields separated by '&'. " 
+                "Currently, fields can be: 'evaluations', 'iterations', 'seconds'."))
+        parser_vns.add_argument('--finishEvaluationsMax', type=int, default=0, 
                 help=("Maximum numbers of evaluations during VNS execution. " 
                 "Value 0 means that there is no limit on number of evaluations.") )        
-        parser_vns.add_argument('--maxNumberIterations', type=int, default=0, 
+        parser_vns.add_argument('--finishIterationsMax', type=int, default=0, 
                 help=("Maximum numbers of iterations during VNS execution. " 
                 "Value 0 means that there is no limit on number of iterations.") )        
-        parser_vns.add_argument('--maxTimeForExecutionSeconds', type=int, default=10, 
+        parser_vns.add_argument('--finishSecondsMax', type=int, default=0, 
                 help=("Maximum time for execution (in seconds).\n " 
                 "Value 0 means that there is no limit on execution time.") )    
         parser_vns.add_argument('--randomSeed', type=int, default=0, 

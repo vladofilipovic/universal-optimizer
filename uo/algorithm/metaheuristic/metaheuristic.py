@@ -25,8 +25,11 @@ from uo.utils.logger import logger
 
 from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.target_solution import TargetSolution
+
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.algorithm import Algorithm
+
+from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.solution_code_distance_cache_control_statistics import DistanceCalculationCacheControlStatistics
 
 class Metaheuristic(Algorithm, metaclass=ABCMeta):
@@ -37,9 +40,7 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
     @abstractmethod
     def __init__(self, 
             name:str, 
-            evaluations_max:int, 
-            iterations_max:int,
-            seconds_max:int, 
+            finish_control:FinishControl,
             random_seed:int, 
             keep_all_solution_codes:bool,
             distance_calculation_cache_is_used:bool,
@@ -50,9 +51,7 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         Create new Metaheuristic instance
 
         :param str name: name of the metaheuristic
-        :param int evaluations_max: maximum number of evaluations for algorithm execution
-        :param int iterations_max: maximum number of iterations for algorithm execution
-        :param int seconds_max: maximum number of seconds for algorithm execution
+        :param `FinishControl` finish_control: structure that control finish criteria for metaheuristic execution
         :param int random_seed: random seed for metaheuristic execution
         :param bool keep_all_solution_codes: if all solution codes will be remembered        
         :param bool distance_calculation_cache_is_used: if cache is used for distance calculation between solutions        
@@ -62,20 +61,19 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         super().__init__(name=name, 
                 output_control=output_control, 
                 target_problem=target_problem)
+        self.__finish_control = finish_control
         if random_seed is not None and isinstance(random_seed, int) and random_seed != 0:
             self.__random_seed:int = random_seed
         else:
             self.__random_seed:int = randrange(sys.maxsize)
-        self.__evaluations_max:int = evaluations_max
-        self.__iterations_max:int = iterations_max
-        self.__seconds_max:int = seconds_max
         self.__keep_all_solution_codes:bool = keep_all_solution_codes
         #class/static variable all_solution_codes
         if not hasattr(Metaheuristic, 'all_solution_codes'):
             Metaheuristic.all_solution_codes:set[str] = set()
         #class/static variable representation_distance_cache_cs
         if not hasattr(Metaheuristic, 'representation_distance_cache_cs'):
-            Metaheuristic.representation_distance_cache_cs:DistanceCalculationCacheControlStatistics = DistanceCalculationCacheControlStatistics(distance_calculation_cache_is_used)
+            Metaheuristic.representation_distance_cache_cs:DistanceCalculationCacheControlStatistics = \
+                    DistanceCalculationCacheControlStatistics(distance_calculation_cache_is_used)
 
     @abstractmethod
     def __copy__(self):
@@ -99,6 +97,16 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         return self.__copy__()
 
     @property
+    def finish_control(self)->FinishControl:
+        """
+        Property getter for the structure that controls finish criteria for metaheuristic execution
+        
+        :return: structure that controls finish criteria for metaheuristic execution 
+        :rtype: `FinishControl`
+        """
+        return self.__finish_control
+
+    @property
     def random_seed(self)->int:
         """
         Property getter for the random seed used during metaheuristic execution
@@ -107,36 +115,6 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         :rtype: int
         """
         return self.__random_seed
-
-    @property
-    def evaluations_max(self)->int:
-        """
-        Property getter for the maximum number of evaluations for algorithm execution
-        
-        :return: maximum number of evaluations 
-        :rtype: int
-        """
-        return self.__evaluations_max
-
-    @property
-    def iterations_max(self)->int:
-        """
-        Property getter for the maximum number of iterations for algorithm execution
-        
-        :return: maximum number of iterations 
-        :rtype: int
-        """
-        return self.__iterations_max
-
-    @property
-    def seconds_max(self)->int:
-        """
-        Property getter for the maximum number of seconds for algorithm execution
-        
-        :return: maximum number of seconds 
-        :rtype: int
-        """
-        return self.__seconds_max
 
     @property
     def keep_all_solution_codes(self)->bool:
@@ -169,15 +147,15 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         """
         Main loop of the metaheuristic algorithm
         """
-        while (self.evaluations_max == 0 or self.evaluation < self.evaluations_max) and (self.iterations_max == 
-                0 or self.iteration < self.iterations_max) and (self.seconds_max == 0 or self.elapsed_seconds() 
-                < self.seconds_max):
+        while (not self.finish_control.is_finished(self.evaluation, self.iteration, self.elapsed_seconds())):
             self.write_output_values_if_needed("before_iteration", "b_i")
             self.main_loop_iteration()
             self.write_output_values_if_needed("after_iteration", "a_i")
             logger.debug('Iteration: ' + str(self.iteration) 
                     + ', Evaluations: ' + str(self.evaluation) 
-                    + ', Solution: ' + str(self.best_solution.string_representation()))
+                    + ', Best solution objective: ' + str(self.best_solution.objective_value) 
+                    + ', Best solution fitness: ' + str(self.best_solution.fitness_value) 
+                    + ', Best solution: ' + str(self.best_solution.string_representation()))
 
     def optimize(self)->None:
         """

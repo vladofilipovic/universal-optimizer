@@ -16,7 +16,7 @@ import unittest.mock as mock
 from copy import deepcopy
 
 from uo.target_problem.target_problem import TargetProblem 
-from uo.target_solution.target_solution import ObjectiveFitnessFeasibility
+from uo.target_solution.target_solution import QualityOfSolution
 from uo.target_solution.target_solution import TargetSolution 
 
 
@@ -50,8 +50,8 @@ class TargetSolutionVoid(TargetSolution[int]):
         return 42
 
     def calculate_objective_fitness_feasibility_directly(self, representation:int, 
-            problem:TargetProblem)->ObjectiveFitnessFeasibility:
-        return ObjectiveFitnessFeasibility(42, 42, True)
+            problem:TargetProblem)->QualityOfSolution:
+        return QualityOfSolution(42, 42, True)
 
     def representation_distance(solution_code_1:str, solution_code_2:str)->float:
         return 42.0

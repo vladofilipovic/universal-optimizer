@@ -22,7 +22,7 @@ from random import randint
 from uo.utils.logger import logger
 from uo.utils.complex_counter_uniform_distinct import ComplexCounterUniformAscending
 
-from uo.target_solution.target_solution import ObjectiveFitnessFeasibility
+from uo.target_solution.target_solution import QualityOfSolution
 from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
 
@@ -69,7 +69,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
         :return: if shaking is successful
         :rtype: bool
         """    
-        if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+        if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
             return False
         tries:int = 0
         limit:int = 10000
@@ -88,7 +88,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
                 break
         if tries < limit:
             optimizer.evaluation += 1
-            if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+            if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
                 return solution
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             solution.evaluate(problem)
@@ -109,12 +109,12 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
         :return: result of the local search procedure 
         :rtype: MaxOnesProblemBinaryIntSolution
         """
-        if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+        if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
             return solution
         if k < 1 or k > problem.dimension:
             return solution
         best_rep:int = None
-        best_triplet:ObjectiveFitnessFeasibility =  ObjectiveFitnessFeasibility(solution.objective_value,
+        best_triplet:QualityOfSolution =  QualityOfSolution(solution.objective_value,
                 solution.fitness_value, solution.is_feasible)
         # initialize indexes
         indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k,problem.dimension)
@@ -128,7 +128,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
                 mask |= 1 << i
             solution.representation ^= mask 
             optimizer.evaluation += 1
-            if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+            if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
                 return solution
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             new_triplet = solution.calculate_objective_fitness_feasibility(problem)
@@ -159,7 +159,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
         :return: result of the local search procedure 
         :rtype: MaxOnesProblemBinaryIntSolution
         """
-        if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+        if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
             return solution
         if k < 1 or k > problem.dimension:
             return solution
@@ -176,7 +176,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
                 mask |= 1 << i
             solution.representation ^= mask 
             optimizer.evaluation += 1
-            if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+            if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
                 return solution
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             new_triplet = solution.calculate_objective_fitness_feasibility(problem)

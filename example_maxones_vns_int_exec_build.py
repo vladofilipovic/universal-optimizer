@@ -3,11 +3,12 @@ from random import randint
 from random import choice
 
 from uo.target_problem.target_problem import TargetProblem
-from uo.target_solution.target_solution import ObjectiveFitnessFeasibility
+from uo.target_solution.target_solution import QualityOfSolution
 from uo.target_solution.target_solution import TargetSolution
 
 from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.output_control import OutputControl
+from uo.algorithm.metaheuristic.finish_control import FinishControl
 
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer_constructor_parameters import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
@@ -84,9 +85,9 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
         return bin(self.representation)
 
     def calculate_objective_fitness_feasibility_directly(self, representation:int, 
-            problem:TargetProblem)->ObjectiveFitnessFeasibility:
+            problem:TargetProblem)->QualityOfSolution:
         ones_count = representation.bit_count()
-        return ObjectiveFitnessFeasibility(ones_count, ones_count, True)
+        return QualityOfSolution(ones_count, ones_count, True)
 
     def native_representation(self, representation_str:str)->int:
         ret:int = int(representation_str, 2)
@@ -128,7 +129,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
         
     def shaking(self, k:int, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryIntSolution, 
             optimizer:Algorithm)->bool:
-        if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+        if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
             return False
         tries:int = 0
         limit:int = 10000
@@ -155,7 +156,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
 
     def local_search_best_improvement(self, k:int, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryIntSolution, 
             optimizer: Algorithm)->MaxOnesProblemBinaryIntSolution:
-        if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+        if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
             return solution
         if k<1:
             return solution
@@ -166,7 +167,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
             mask:int = 1 << i
             solution.representation ^= mask 
             optimizer.evaluation +=1 
-            new_triplet:ObjectiveFitnessFeasibility = solution.calculate_objective_fitness_feasibility(problem)
+            new_triplet:QualityOfSolution = solution.calculate_objective_fitness_feasibility(problem)
             if new_triplet.fitness_value > best_fv:
                 best_ind = i
                 best_fv = new_triplet.fitness_value
@@ -182,7 +183,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
 
     def local_search_first_improvement(self, k:int, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryIntSolution, 
             optimizer: Algorithm)->MaxOnesProblemBinaryIntSolution:
-        if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+        if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
             return solution
         if k<1:
             return solution
@@ -192,7 +193,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
             mask:int = 1 << i
             solution.representation ^= mask 
             optimizer.evaluation += 1
-            new_triplet:ObjectiveFitnessFeasibility = solution.calculate_objective_fitness_feasibility(problem)
+            new_triplet:QualityOfSolution = solution.calculate_objective_fitness_feasibility(problem)
             if new_triplet.fitness_value > best_fv:
                 solution.objective_value = new_triplet.objective_value
                 solution.fitness_value = new_triplet.fitness_value
@@ -219,15 +220,15 @@ def main():
     output_control:OutputControl = OutputControl(write_to_output=False)
     problem_to_solve:MaxOnesProblem = MaxOnesProblem(dim=24)
     solution:MaxOnesProblemBinaryIntSolution = MaxOnesProblemBinaryIntSolution()
+    finish:FinishControl = FinishControl( criteria='evaluations & seconds', 
+            evaluations_max=500, seconds_max=10)
     vns_support:MaxOnesProblemBinaryIntSolutionVnsSupport = MaxOnesProblemBinaryIntSolutionVnsSupport()
     vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
     vns_construction_params.output_control = output_control
     vns_construction_params.target_problem = problem_to_solve
     vns_construction_params.initial_solution = solution
     vns_construction_params.problem_solution_vns_support = vns_support
-    vns_construction_params.evaluations_max = 500
-    vns_construction_params.iterations_max = 0
-    vns_construction_params.seconds_max= 10
+    vns_construction_params.finish_control = finish
     vns_construction_params.random_seed = 43434343
     vns_construction_params.keep_all_solution_codes = False
     vns_construction_params.distance_calculation_cache_is_used = False

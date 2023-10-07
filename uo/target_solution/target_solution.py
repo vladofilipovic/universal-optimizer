@@ -19,7 +19,7 @@ from typing import Generic
 from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.evaluation_cache_control_statistics import EvaluationCacheControlStatistics
 
-ObjectiveFitnessFeasibility = NamedTuple('ObjectiveFitnessFeasibility', [('objective_value',float|list[float]), 
+QualityOfSolution = NamedTuple('QualityOfSolution', [('objective_value',float|list[float]), 
             ('fitness_value',float|list[float]), 
             ('is_feasible',bool)]
         )
@@ -208,14 +208,14 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
 
     @abstractmethod
     def calculate_objective_fitness_feasibility_directly(self, representation:R_co, 
-            problem:TargetProblem) -> ObjectiveFitnessFeasibility:
+            problem:TargetProblem) -> QualityOfSolution:
         """
         Fitness calculation of the target solution
 
         :param R_co representation: native representation of the solution for which objective value, fitness and feasibility are calculated
         :param TargetProblem problem: problem that is solved
         :return: objective value, fitness value and feasibility of the solution instance 
-        :rtype: `ObjectiveFitnessFeasibility`
+        :rtype: `QualityOfSolution`
         """
         raise NotImplementedError
 
@@ -238,13 +238,13 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         """
         raise NotImplementedError
 
-    def calculate_objective_fitness_feasibility(self, target_problem:TargetProblem) -> ObjectiveFitnessFeasibility:
+    def calculate_objective_fitness_feasibility(self, target_problem:TargetProblem) -> QualityOfSolution:
         """
         Calculate fitness, objective and feasibility of the solution, with optional cache consultation
 
         :param TargetProblem target_problem: problem that is solved
         :return: objective value, fitness value and feasibility of the solution instance 
-        :rtype: `ObjectiveFitnessFeasibility`
+        :rtype: `QualityOfSolution`
         """
         eccs = TargetSolution.evaluation_cache_cs 
         if eccs.is_caching:
@@ -253,12 +253,12 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
             if code in eccs.cache:
                 eccs.increment_cache_hit_count()
                 return eccs.cache[code]
-            triplet:ObjectiveFitnessFeasibility = self.calculate_objective_fitness_feasibility_directly(
+            triplet:QualityOfSolution = self.calculate_objective_fitness_feasibility_directly(
                     self.representation, target_problem)
             eccs.cache[code] = triplet
             return triplet
         else:
-            triplet:ObjectiveFitnessFeasibility = self.calculate_objective_fitness_feasibility_directly(
+            triplet:QualityOfSolution = self.calculate_objective_fitness_feasibility_directly(
                     self.representation, target_problem)
             return triplet
 
@@ -268,7 +268,7 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
 
         :param TargetProblem target_problem: problem that is solved
         """        
-        triplet:ObjectiveFitnessFeasibility = self.calculate_objective_fitness_feasibility(target_problem)
+        triplet:QualityOfSolution = self.calculate_objective_fitness_feasibility(target_problem)
         self.objective_value = triplet.objective_value;
         self.fitness_value = triplet.fitness_value;
         self.is_feasible = triplet.is_feasible;

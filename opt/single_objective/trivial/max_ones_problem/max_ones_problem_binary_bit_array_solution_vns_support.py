@@ -25,7 +25,7 @@ from bitstring import Bits, BitArray, BitStream, pack
 from uo.utils.logger import logger
 from uo.utils.complex_counter_uniform_distinct import ComplexCounterUniformAscending
 
-from uo.target_solution.target_solution import ObjectiveFitnessFeasibility
+from uo.target_solution.target_solution import QualityOfSolution
 from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
 
@@ -72,7 +72,8 @@ class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[B
         :return: if randomization is successful
         :rtype: bool
         """    
-        if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+        if optimizer.finish_control.evaluations_max > 0 \
+                and optimizer.evaluation > optimizer.finish_control.evaluations_max:
             return False
         tries:int = 0
         limit:int = 10000
@@ -91,7 +92,7 @@ class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[B
                 break
         if tries < limit:
             optimizer.evaluation += 1
-            if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+            if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
                 return False
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             solution.evaluate(problem)
@@ -113,12 +114,12 @@ class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[B
         :return: result of the local search procedure 
         :rtype: MaxOnesProblemBinaryBitArraySolution
         """
-        if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+        if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
             return solution
         if k < 1 or k > problem.dimension:
             return solution
         best_rep:BitArray = None
-        best_triplet:ObjectiveFitnessFeasibility =  ObjectiveFitnessFeasibility(solution.objective_value,
+        best_triplet:QualityOfSolution =  QualityOfSolution(solution.objective_value,
                 solution.fitness_value, solution.is_feasible)
         # initialize indexes
         indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k, problem.dimension)
@@ -129,10 +130,10 @@ class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[B
             # invert and compare, switch of new is better
             solution.representation.invert(positions) 
             optimizer.evaluation += 1
-            if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+            if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
                 return solution
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
-            new_triplet:ObjectiveFitnessFeasibility = solution.calculate_objective_fitness_feasibility(problem)
+            new_triplet:QualityOfSolution = solution.calculate_objective_fitness_feasibility(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
             if new_triplet.fitness_value > best_triplet.fitness_value:
                 best_triplet = new_triplet
@@ -160,7 +161,7 @@ class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[B
         :return: result of the local search procedure 
         :rtype: MaxOnesProblemBinaryBitArraySolution
         """
-        if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+        if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
             return solution
         if k < 1 or k > problem.dimension:
             return solution
@@ -174,10 +175,10 @@ class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[B
             # invert and compare, switch and exit if new is better
             solution.representation.invert(positions) 
             optimizer.evaluation += 1
-            if optimizer.evaluations_max > 0 and optimizer.evaluation > optimizer.evaluations_max:
+            if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
                 return solution
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
-            new_triplet:ObjectiveFitnessFeasibility = solution.calculate_objective_fitness_feasibility(problem)
+            new_triplet:QualityOfSolution = solution.calculate_objective_fitness_feasibility(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
             if new_triplet.fitness_value > best_fv:
                 solution.objective_value = new_triplet.objective_value
