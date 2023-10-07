@@ -1,5 +1,5 @@
 """ 
-The :mod:`~uo.target_solution.solution_code_distance_cache_control_statistics` module describes the class :class:`~uo.target_solution.distance_calculation_cache_control_statistics.DistanceCalculationCacheControlStatistics`.
+The :mod:`~uo.target_solution.distance_calculation_cache_control_statistics` module describes the class :class:`~uo.target_solution.distance_calculation_cache_control_statistics.DistanceCalculationCacheControlStatistics`.
 """
 
 from pathlib import Path
