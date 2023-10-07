@@ -22,7 +22,7 @@ from random import randint
 from uo.utils.logger import logger
 from uo.utils.complex_counter_uniform_distinct import ComplexCounterUniformAscending
 
-from uo.target_solution.target_solution import ObjectiveFitnessFeasibility
+from uo.target_solution.target_solution import QualityOfSolution
 from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
 
@@ -114,7 +114,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
         if k < 1 or k > problem.dimension:
             return solution
         best_rep:int = None
-        best_triplet:ObjectiveFitnessFeasibility =  ObjectiveFitnessFeasibility(solution.objective_value,
+        best_triplet:QualityOfSolution =  QualityOfSolution(solution.objective_value,
                 solution.fitness_value, solution.is_feasible)
         # initialize indexes
         indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k,problem.dimension)

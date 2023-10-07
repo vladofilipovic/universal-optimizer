@@ -19,7 +19,7 @@ from random import random
 from bitstring import Bits, BitArray, BitStream, pack
 
 from uo.target_problem.target_problem import TargetProblem
-from uo.target_solution.target_solution import ObjectiveFitnessFeasibility
+from uo.target_solution.target_solution import QualityOfSolution
 from uo.target_solution.target_solution import TargetSolution
 
 from uo.utils.logger import logger
@@ -95,17 +95,17 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution[BitArray]):
         self.representation = BitArray(bin=representation.bin)
 
     def calculate_objective_fitness_feasibility_directly(self, representation:BitArray, 
-            problem:TargetProblem)->ObjectiveFitnessFeasibility:
+            problem:TargetProblem)->QualityOfSolution:
         """
         Fitness calculation of the max ones binary BitArray solution
 
         :param BitArray representation: native representation of solution whose fitness is calculated
         :param TargetProblem problem: problem that is solved
         :return: objective value, fitness value and feasibility of the solution instance  
-        :rtype: `ObjectiveFitnessFeasibility`
+        :rtype: `QualityOfSolution`
         """
         ones_count = representation.count(True)
-        return ObjectiveFitnessFeasibility(ones_count, ones_count, True)
+        return QualityOfSolution(ones_count, ones_count, True)
 
     def native_representation(self, representation_str:str)->BitArray:
         """

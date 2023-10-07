@@ -3,7 +3,7 @@ from random import randint
 from random import choice
 
 from uo.target_problem.target_problem import TargetProblem
-from uo.target_solution.target_solution import ObjectiveFitnessFeasibility
+from uo.target_solution.target_solution import QualityOfSolution
 from uo.target_solution.target_solution import TargetSolution
 
 from uo.algorithm.algorithm import Algorithm
@@ -85,9 +85,9 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
         return bin(self.representation)
 
     def calculate_objective_fitness_feasibility_directly(self, representation:int, 
-            problem:TargetProblem)->ObjectiveFitnessFeasibility:
+            problem:TargetProblem)->QualityOfSolution:
         ones_count = representation.bit_count()
-        return ObjectiveFitnessFeasibility(ones_count, ones_count, True)
+        return QualityOfSolution(ones_count, ones_count, True)
 
     def native_representation(self, representation_str:str)->int:
         ret:int = int(representation_str, 2)
@@ -167,7 +167,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
             mask:int = 1 << i
             solution.representation ^= mask 
             optimizer.evaluation +=1 
-            new_triplet:ObjectiveFitnessFeasibility = solution.calculate_objective_fitness_feasibility(problem)
+            new_triplet:QualityOfSolution = solution.calculate_objective_fitness_feasibility(problem)
             if new_triplet.fitness_value > best_fv:
                 best_ind = i
                 best_fv = new_triplet.fitness_value
@@ -193,7 +193,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
             mask:int = 1 << i
             solution.representation ^= mask 
             optimizer.evaluation += 1
-            new_triplet:ObjectiveFitnessFeasibility = solution.calculate_objective_fitness_feasibility(problem)
+            new_triplet:QualityOfSolution = solution.calculate_objective_fitness_feasibility(problem)
             if new_triplet.fitness_value > best_fv:
                 solution.objective_value = new_triplet.objective_value
                 solution.fitness_value = new_triplet.fitness_value

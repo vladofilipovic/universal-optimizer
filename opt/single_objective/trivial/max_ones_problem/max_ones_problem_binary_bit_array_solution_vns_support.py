@@ -25,7 +25,7 @@ from bitstring import Bits, BitArray, BitStream, pack
 from uo.utils.logger import logger
 from uo.utils.complex_counter_uniform_distinct import ComplexCounterUniformAscending
 
-from uo.target_solution.target_solution import ObjectiveFitnessFeasibility
+from uo.target_solution.target_solution import QualityOfSolution
 from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
 
@@ -119,7 +119,7 @@ class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[B
         if k < 1 or k > problem.dimension:
             return solution
         best_rep:BitArray = None
-        best_triplet:ObjectiveFitnessFeasibility =  ObjectiveFitnessFeasibility(solution.objective_value,
+        best_triplet:QualityOfSolution =  QualityOfSolution(solution.objective_value,
                 solution.fitness_value, solution.is_feasible)
         # initialize indexes
         indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k, problem.dimension)
@@ -133,7 +133,7 @@ class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[B
             if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
                 return solution
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
-            new_triplet:ObjectiveFitnessFeasibility = solution.calculate_objective_fitness_feasibility(problem)
+            new_triplet:QualityOfSolution = solution.calculate_objective_fitness_feasibility(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
             if new_triplet.fitness_value > best_triplet.fitness_value:
                 best_triplet = new_triplet
@@ -178,7 +178,7 @@ class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[B
             if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
                 return solution
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
-            new_triplet:ObjectiveFitnessFeasibility = solution.calculate_objective_fitness_feasibility(problem)
+            new_triplet:QualityOfSolution = solution.calculate_objective_fitness_feasibility(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
             if new_triplet.fitness_value > best_fv:
                 solution.objective_value = new_triplet.objective_value

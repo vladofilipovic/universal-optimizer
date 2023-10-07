@@ -18,7 +18,7 @@ from random import choice
 from random import randint
 
 from uo.target_problem.target_problem import TargetProblem
-from uo.target_solution.target_solution import ObjectiveFitnessFeasibility
+from uo.target_solution.target_solution import QualityOfSolution
 from uo.target_solution.target_solution import TargetSolution
 
 from uo.utils.logger import logger
@@ -106,17 +106,17 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
         self.representation = representation
 
     def calculate_objective_fitness_feasibility_directly(self, representation:int, 
-            problem:TargetProblem)->ObjectiveFitnessFeasibility:
+            problem:TargetProblem)->QualityOfSolution:
         """
         Fitness calculation of the max ones binary int solution
 
         :param int representation: native representation of the solution whose fitness, objective and feasibility is calculated
         :param TargetProblem problem: problem that is solved
         :return: objective value, fitness value and feasibility of the solution instance  
-        :rtype: `ObjectiveFitnessFeasibility`
+        :rtype: `QualityOfSolution`
         """
         ones_count = representation.bit_count()
-        return ObjectiveFitnessFeasibility(ones_count, ones_count, True)
+        return QualityOfSolution(ones_count, ones_count, True)
 
     def native_representation(self, representation_str:str)->int:
         """
