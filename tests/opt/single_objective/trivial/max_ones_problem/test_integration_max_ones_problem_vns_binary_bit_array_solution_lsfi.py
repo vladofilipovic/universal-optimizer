@@ -21,6 +21,7 @@ from bitstring import Bits, BitArray, BitStream, pack
 
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
+from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer_constructor_parameters import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
@@ -42,6 +43,7 @@ class TestIntegrationMaxOnesProblemVnsBinaryBitArraySolutionLsbi(unittest.TestCa
         self.finish_control:FinishControl = FinishControl(criteria='evaluations', evaluations_max=500)
         self.vns_support:MaxOnesProblemBinaryBitArraySolutionVnsSupport = \
                 MaxOnesProblemBinaryBitArraySolutionVnsSupport()
+        self.additional_stat = AdditionalStatisticsControl(keep='')
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
         vns_construction_params.output_control = self.output_control
         vns_construction_params.target_problem = self.problem_to_solve
@@ -49,11 +51,9 @@ class TestIntegrationMaxOnesProblemVnsBinaryBitArraySolutionLsbi(unittest.TestCa
         vns_construction_params.problem_solution_vns_support = self.vns_support
         vns_construction_params.finish_control = self.finish_control
         vns_construction_params.random_seed = 43434343
-        vns_construction_params.keep_all_solution_codes = False
-        vns_construction_params.distance_calculation_cache_is_used = False
+        vns_construction_params.additional_statistics_control = self.additional_stat
         vns_construction_params.k_min = 1
         vns_construction_params.k_max = 3
-        vns_construction_params.max_local_optima = 10
         vns_construction_params.local_search_type = 'local_search_best_improvement'
         self.optimizer:VnsOptimizer = VnsOptimizer.from_construction_tuple(vns_construction_params)
         self.optimizer.optimize()
