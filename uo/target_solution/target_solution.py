@@ -256,8 +256,7 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         """
         Fitness calculation of the target solution
 
-        :param R_co representation: native representation of the solution for which objective value, fitness and 
-        feasibility are calculated
+        :param R_co representation: native representation of the solution for which objective value, fitness and feasibility are calculated
         :param TargetProblem problem: problem that is solved
         :return: objective value, fitness value and feasibility of the solution instance 
         :rtype: `QualityOfSolution`
