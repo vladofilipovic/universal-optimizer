@@ -15,6 +15,7 @@ from abc import ABCMeta, abstractmethod
 from typing import NamedTuple
 from typing import TypeVar, Generic
 from typing import Generic
+from typing import Optional
 
 from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.evaluation_cache_control_statistics import EvaluationCacheControlStatistics
@@ -36,8 +37,10 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
             fitness_value:float|list[float]|tuple[float], 
             objective_value:float|list[float]|tuple[float], 
             is_feasible:bool,
-            evaluation_cache_is_used: bool,
-            distance_calculation_cache_is_used:bool
+            evaluation_cache_is_used:Optional[bool]=False,
+            evaluation_cache_max_size:Optional[int]=0,
+            distance_calculation_cache_is_used:Optional[bool]=False,
+            distance_calculation_cache_max_size:Optional[int]=0
     )->None:
         """
         Create new TargetSolution instance
@@ -48,8 +51,10 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         :param objective_value: objective value of the target solution
         :type objective_value: float|list[float]|tuple(float) 
         :param bool evaluation_cache_is_used: should cache be used during evaluation of the solution
+        :param int evaluation_cache_max_size: maximum size of the cache used for evaluation - 0 if size is unlimited
         :param bool distance_calculation_cache_is_used: should cache be used during calculation of the distance between
-        two solutions
+        :param int distance_calculation_cache_max_size: maximum size of the cache used for distance calculation - 0 if 
+        size is unlimited
         """
         self.__name:str = name
         if random_seed is not None and isinstance(random_seed, int) and random_seed != 0:
@@ -60,16 +65,19 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         self.__objective_value:float|list[float] = objective_value
         self.__is_feasible:bool = is_feasible
         self.__representation:R_co = None
-        self.__evaluation_cache_is_used = evaluation_cache_is_used
+        self.__evaluation_cache_is_used:bool = evaluation_cache_is_used
+        self.__evaluation_cache_max_size:int = evaluation_cache_max_size
         #class/static variable evaluation_cache_cs
         if not hasattr(TargetSolution, 'evaluation_cache_cs'):
             TargetSolution.evaluation_cache_cs:EvaluationCacheControlStatistics = EvaluationCacheControlStatistics(
-                self.__evaluation_cache_is_used)  
-        self.__distance_calculation_cache_is_used = distance_calculation_cache_is_used
+                self.__evaluation_cache_is_used, self.__evaluation_cache_max_size)  
+        self.__distance_calculation_cache_is_used:bool = distance_calculation_cache_is_used
+        self.__distance_calculation_cache_max_size:int = distance_calculation_cache_max_size
         #class/static variable representation_distance_cache_cs
         if not hasattr(TargetSolution, 'representation_distance_cache_cs'):
             TargetSolution.representation_distance_cache_cs: DistanceCalculationCacheControlStatistics[R_co] = \
-                    DistanceCalculationCacheControlStatistics[R_co](self.__distance_calculation_cache_is_used)
+                    DistanceCalculationCacheControlStatistics[R_co](self.__distance_calculation_cache_is_used,
+                    self.__distance_calculation_cache_max_size)
 
     @abstractmethod
     def __copy__(self):
@@ -267,13 +275,16 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         eccs:EvaluationCacheControlStatistics = TargetSolution.evaluation_cache_cs 
         if eccs.is_caching:
             eccs.increment_cache_request_count()
-            code = self.string_representation()
-            if code in eccs.cache:
+            rep:str = self.string_representation()
+            if rep in eccs.cache:
                 eccs.increment_cache_hit_count()
-                return eccs.cache[code]
-            triplet:QualityOfSolution = self.calculate_quality_directly(
-                    self.representation, target_problem)
-            eccs.cache[code] = triplet
+                return eccs.cache[rep]
+            triplet:QualityOfSolution = self.calculate_quality_directly(self.representation, target_problem)
+            if len(eccs.cache) >= eccs.max_cache_size:
+                # removing random
+                code:str = random.choice(eccs.cache.keys())
+                del eccs.cache[code]
+            eccs.cache[rep] = triplet
             return triplet
         else:
             triplet:QualityOfSolution = self.calculate_quality_directly(
@@ -315,12 +326,16 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         rdcs:DistanceCalculationCacheControlStatistics[R_co] = TargetSolution.representation_distance_cache_cs
         if rdcs.is_caching:
             rdcs.increment_cache_request_count()
-            code:(R_co,R_co) = (representation_1, representation_2)
-            if code in rdcs.cache:
-                eccs.increment_cache_hit_count()
-                return eccs.cache[code]
+            pair:(R_co,R_co) = (representation_1, representation_2)
+            if pair in rdcs.cache:
+                rdcs.increment_cache_hit_count()
+                return rdcs.cache[pair]
             ret:float = self.representation_distance_directly(representation_1, representation_2)
-            eccs.cache[code] = ret
+            if len(rdcs.cache) >= rdcs.max_cache_size:
+                # removing random
+                code:(R_co,R_co) = random.choice(rdcs.cache.keys())
+                del rdcs.cache[code]
+            rdcs.cache[pair] = ret
             return ret
         else:
             ret:float = self.representation_distance_directly(representation_1, representation_2)

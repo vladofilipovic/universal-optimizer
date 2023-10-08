@@ -191,6 +191,9 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
             # update auxiliary structure that keeps all solution codes
             self.additional_statistics_control.add_to_all_solution_codes_if_required(
                     self.current_solution.string_representation())
+            self.additional_statistics_control.add_to_more_local_optima_if_required(
+                    self.current_solution.string_representation(), self.current_solution.fitness_value,
+                    self.best_solution.string_representation())
             new_is_better:bool = self.is_first_solution_better(self.current_solution, self.best_solution)
             make_move:bool = new_is_better
             if new_is_better is None:

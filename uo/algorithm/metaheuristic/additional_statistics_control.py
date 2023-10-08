@@ -136,6 +136,8 @@ class AdditionalStatisticsControl:
         :return:  if adding is successful e.g. current_solution is new element in the structure
         :rtype: bool
         """       
+        if not self.keep_more_local_optima:
+            return False
         if solution_to_add_rep in AdditionalStatisticsControl.more_local_optima:
             return False
         if len(AdditionalStatisticsControl.more_local_optima) >= self.__max_local_optima:
