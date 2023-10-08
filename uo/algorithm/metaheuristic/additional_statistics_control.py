@@ -114,7 +114,7 @@ class AdditionalStatisticsControl:
         """
         return self.__keep_more_local_optima
 
-    def add_to_all_solution_codes_if_necessary(self, representation:str)->None:
+    def add_to_all_solution_codes_if_required(self, representation:str)->None:
         """
         Filling all solution code, if necessary 
 
@@ -125,7 +125,7 @@ class AdditionalStatisticsControl:
         if self.keep_all_solution_codes:
             AdditionalStatisticsControl.all_solution_codes.add(representation)
 
-    def add_to_more_local_optima_if_necessary(self, solution_to_add_rep:str, solution_to_add_fitness, 
+    def add_to_more_local_optima_if_required(self, solution_to_add_rep:str, solution_to_add_fitness, 
             best_solution_rep:str)->bool:
         """
         Add solution to the local optima structure 

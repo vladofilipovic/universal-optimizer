@@ -189,7 +189,7 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
             self.current_solution = self.__ls_method(self.__k_current, self.target_problem, self.current_solution, self)
             self.write_output_values_if_needed("after_step_in_iteration", "ls")
             # update auxiliary structure that keeps all solution codes
-            self.additional_statistics_control.add_to_all_solution_codes_if_necessary(
+            self.additional_statistics_control.add_to_all_solution_codes_if_required(
                     self.current_solution.string_representation())
             new_is_better:bool = self.is_first_solution_better(self.current_solution, self.best_solution)
             make_move:bool = new_is_better
