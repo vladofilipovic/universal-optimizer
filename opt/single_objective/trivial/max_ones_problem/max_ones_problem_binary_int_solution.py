@@ -25,16 +25,22 @@ from uo.utils.logger import logger
 
 class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
     
-    def __init__(self, random_seed:int=None, evaluation_cache_is_used:bool=False, 
-            distance_calculation_cache_is_used:bool=False)->None:
+    def __init__(self,random_seed:int=None, 
+            evaluation_cache_is_used:bool=False, 
+            evaluation_cache_max_size:int=0,
+            distance_calculation_cache_is_used:bool=False,
+            distance_calculation_cache_max_size:int=0)->None:
         """
         Create new `MaxOnesProblemBinaryIntSolution` instance
 
         :param int random_seed: random seed for initialization, default value `Null`
         """
-        super().__init__("MaxOnesProblemBinaryIntSolution", random_seed=random_seed, fitness_value=None, objective_value=None, 
-                is_feasible=False, evaluation_cache_is_used=evaluation_cache_is_used, 
-                distance_calculation_cache_is_used=distance_calculation_cache_is_used)
+        super().__init__("MaxOnesProblemBinaryIntSolution", random_seed=random_seed, fitness_value=None, 
+                objective_value=None, is_feasible=False, 
+                evaluation_cache_is_used=evaluation_cache_is_used,
+                evaluation_cache_max_size=evaluation_cache_max_size, 
+                distance_calculation_cache_is_used=distance_calculation_cache_is_used,
+                distance_calculation_cache_max_size=distance_calculation_cache_max_size)
 
     def __copy__(self):
         """

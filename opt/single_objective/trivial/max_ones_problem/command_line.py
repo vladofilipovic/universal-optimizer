@@ -26,12 +26,14 @@ default_parameters_cl = {
         'inputFilePath': 'opt/single_objective/trivial/max_ones_problem/inputs/dimension_77.txt', 
         'inputFormat': 'txt', 
         'finishCriteria':'evaluations & seconds',
-        'finishEvaluationsMax': 3000, 
+        'finishEvaluationsMax': 300, 
         'finishIterationsMax': 0, 
         'finishSecondsMax': 0, 
         'randomSeed': 0,
         'solutionEvaluationCacheIsUsed': False,
+        'solutionEvaluationCacheMaxSize': 0,
         'solutionDistanceCalculationCacheIsUsed': False,
+        'solutionDistanceCalculationCacheMaxSize': 0,
         'additionalStatisticsKeep': 'None',
         'additionalStatisticsMaxLocalOptima':7,
         'kMin': 1,
@@ -91,8 +93,14 @@ def parse_arguments():
                 "Value 0 means that random seed will be obtained from system timer.") )        
         parser_vns.add_argument('--solutionEvaluationCacheIsUsed', type=bool, default=False, 
                 help=("Should caching be used during evaluation.") )        
+        parser_vns.add_argument('--solutionEvaluationCacheMaxSize', type=int, default=0, 
+                help=("Maximum cache size for cache used in solutions evaluation. " 
+                "Value 0 means that there is no limit on cache size.") )        
         parser_vns.add_argument('--solutionDistanceCalculationCacheIsUsed', type=bool, default=False, 
                 help=("Should caching be used during distance calculations for solution individual.") )        
+        parser_vns.add_argument('--solutionDistanceCalculationCacheMaxSize', type=int, default=0, 
+                help=("Maximum cache size for cache used in distance calculations between two solutions. " 
+                "Value 0 means that there is no limit on cache size.") )        
         parser_vns.add_argument('--additionalStatisticsKeep', type=str, 
                 default='None', 
                 help=("Comma-separated list of statistical data will be calculated and keep during solving. " 

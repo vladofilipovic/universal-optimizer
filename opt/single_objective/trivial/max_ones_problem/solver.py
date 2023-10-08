@@ -154,8 +154,9 @@ def main():
                 seconds_max=max_time_for_execution_in_seconds)
         # solution evaluations and calculations cache setup
         evaluation_cache_is_used:bool = parameters['solutionEvaluationCacheIsUsed']
-        calculation_solution_distance_cache_is_used:bool = \
-                parameters['solutionDistanceCalculationCacheIsUsed']
+        evaluation_cache_max_size:int = parameters['solutionEvaluationCacheMaxSize']
+        calculation_solution_distance_cache_is_used:bool = parameters['solutionDistanceCalculationCacheIsUsed']
+        calculation_solution_distance_cache_max_size:int = parameters['solutionDistanceCalculationCacheMaxSize']
         # additional statistic control setup
         additional_statistics_keep:str =  parameters['additionalStatisticsKeep']
         max_local_optima = parameters['additionalStatisticsMaxLocalOptima']
@@ -180,12 +181,11 @@ def main():
             solution_type:str = parameters['solutionType']
             vns_support = None
             if solution_type=='BitArray':
-                solution:MaxOnesProblemBinaryBitArraySolution = MaxOnesProblemBinaryBitArraySolution(r_seed)
-                solution.is_caching = evaluation_cache_is_used
+                solution:MaxOnesProblemBinaryBitArraySolution = MaxOnesProblemBinaryBitArraySolution(
+                    random_seed=r_seed)
                 vns_support = MaxOnesProblemBinaryBitArraySolutionVnsSupport()
             elif solution_type=='int':
                 solution:MaxOnesProblemBinaryIntSolution = MaxOnesProblemBinaryIntSolution(r_seed)
-                solution.is_caching = evaluation_cache_is_used
                 vns_support = MaxOnesProblemBinaryIntSolutionVnsSupport()
             else:
                 raise ValueError("Invalid solution/representation type is chosen.")

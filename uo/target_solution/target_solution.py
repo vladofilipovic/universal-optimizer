@@ -37,10 +37,10 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
             fitness_value:float|list[float]|tuple[float], 
             objective_value:float|list[float]|tuple[float], 
             is_feasible:bool,
-            evaluation_cache_is_used:Optional[bool]=False,
-            evaluation_cache_max_size:Optional[int]=0,
-            distance_calculation_cache_is_used:Optional[bool]=False,
-            distance_calculation_cache_max_size:Optional[int]=0
+            evaluation_cache_is_used:bool,
+            evaluation_cache_max_size:int,
+            distance_calculation_cache_is_used:bool,
+            distance_calculation_cache_max_size:int
     )->None:
         """
         Create new TargetSolution instance

@@ -23,11 +23,17 @@ from uo.target_solution.target_solution import TargetSolution
 class TargetSolutionVoid(TargetSolution[int]):
     
     def __init__(self, name:str, random_seed:int, fitness_value:float|list[float]|tuple[float], 
-            objective_value:float|list[float]|tuple[float], is_feasible:bool, evaluation_cache_is_used:bool=False, 
-            distance_calculation_cache_is_used:bool=False)->None:
+            objective_value:float|list[float]|tuple[float], is_feasible:bool, 
+            evaluation_cache_is_used:bool=False, 
+            evaluation_cache_max_size:int=0,
+            distance_calculation_cache_is_used:bool=False,
+            distance_calculation_cache_max_size:int=0)->None:
         super().__init__(name, random_seed=random_seed, fitness_value=fitness_value, objective_value=objective_value, 
-                is_feasible=is_feasible, evaluation_cache_is_used=evaluation_cache_is_used,
-                distance_calculation_cache_is_used=distance_calculation_cache_is_used)
+                is_feasible=is_feasible, 
+                evaluation_cache_is_used=evaluation_cache_is_used,
+                evaluation_cache_max_size=evaluation_cache_max_size,
+                distance_calculation_cache_is_used=distance_calculation_cache_is_used,
+                distance_calculation_cache_max_size=distance_calculation_cache_is_used)
 
     def __copy__(self):
         pr = deepcopy(self)
