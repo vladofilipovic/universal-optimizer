@@ -205,18 +205,18 @@ class FinishControl:
 
     def __str__(self)->str:
         """
-        String representation of the cache control and statistics structure
+        String representation of the finish control 
 
-        :return: string representation of the cache control and statistics structure
+        :return: string representation of the finish control 
         :rtype: str
         """
         return self.string_rep('|')
 
     def __repr__(self)->str:
         """
-        Representation of the cache control and statistics structure
+        Representation of the finish control 
 
-        :return: string representation of cache control and statistics structure
+        :return: string representation of finish control 
         :rtype: str
         """
         return self.string_rep('\n')
@@ -224,10 +224,10 @@ class FinishControl:
 
     def __format__(self, spec:str)->str:
         """
-        Formatted the cache control and statistics structure
+        Formatted the finish control 
 
         :param str spec: format specification
-        :return: formatted cache control and statistics structure
+        :return: formatted finish control structure
         :rtype: str
         """
         return self.string_rep('|')

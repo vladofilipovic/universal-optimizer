@@ -13,6 +13,7 @@ from abc import ABCMeta, abstractmethod
 from typing import NamedTuple
 from typing import TypeVar, Generic
 from typing import Generic
+from typing import Optional
 
 E_co = TypeVar("E_co", covariant=True) 
 
@@ -21,13 +22,15 @@ class DistanceCalculationCacheControlStatistics(Generic[E_co]):
     Class that represents control statistics for solution code distance calculation cache.
     """
 
-    def __init__(self, is_caching)->None:
+    def __init__(self, is_caching:bool, max_cache_size:Optional[int]=0)->None:
         """
         Create new `DistanceCalculationCacheControlStatistics` instance
         
-        :param is_caching: is cashing enabled during calculation of distances among solution representations
+        :param bool is_caching: is cashing enabled during calculation of distances among solution representations
+        :param Optional[int] max_cache_size: maximum size of the cache - if 0 cache is with unlimited size
         """
         self.__is_caching:bool = is_caching
+        self.__max_cache_size:int = max_cache_size
         self.__cache:dict[(E_co,E_co)] = {}
         self.__cache_hit_count:int = 0
         self.__cache_request_count:int = 0
@@ -35,7 +38,7 @@ class DistanceCalculationCacheControlStatistics(Generic[E_co]):
     @property
     def is_caching(self)->bool:
         """
-        Property getter for is_caching 
+        Property getter for `is_caching` 
 
         :return: if caching is used during calculation of the solution code distances, or not 
         :rtype: bool
@@ -45,11 +48,21 @@ class DistanceCalculationCacheControlStatistics(Generic[E_co]):
     @is_caching.setter
     def is_caching(self, value:bool)->None:
         """
-        Property setter for is_caching
+        Property setter for `is_caching`
         
         :param bool value: value that is set for `is_caching`
         """
         self.__is_caching = value
+
+    @property
+    def max_cache_size(self)->int:
+        """
+        Property getter for `max_cache_size` 
+
+        :return: maximum size of the cache - if 0 cache is with unlimited size 
+        :rtype: int
+        """
+        return self.__max_cache_size
 
     @property
     def cache(self)->dict[(E_co,E_co)]:

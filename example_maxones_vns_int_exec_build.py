@@ -52,7 +52,8 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
     
     def __init__(self, random_seed:int=None)->None:
         super().__init__("MaxOnesProblemBinaryIntSolution", random_seed, fitness_value=None, objective_value=None, 
-                is_feasible=False, evaluation_cache_is_used=False, distance_calculation_cache_is_used=False)
+                is_feasible=False, evaluation_cache_is_used=False, evaluation_cache_max_size=0, 
+                distance_calculation_cache_is_used=False, distance_calculation_cache_max_size=0)
 
     def __copy__(self):
         sol = deepcopy(self)

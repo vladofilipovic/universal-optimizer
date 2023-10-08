@@ -27,9 +27,9 @@ from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.target_solution import TargetSolution
 
 from uo.algorithm.output_control import OutputControl
-from uo.algorithm.algorithm import Algorithm
-
 from uo.algorithm.metaheuristic.finish_control import FinishControl
+
+from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
 class Metaheuristic(Algorithm, metaclass=ABCMeta):

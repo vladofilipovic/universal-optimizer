@@ -14,12 +14,14 @@ class EvaluationCacheControlStatistics:
     Class that represents control statistics for evaluation caching.
     """
     
-    def __init__(self, is_caching:Optional[bool]=False)->None:
+    def __init__(self, is_caching:Optional[bool]=False, max_cache_size:Optional[int]=0)->None:
         """
         Create new `EvaluationCacheControlStatistics` instance
         :param Optional[bool] is_caching: determine if caching is activated
+        :param Optional[int] max_cache_size: maximum size of the cache - if 0 cache is with unlimited size
         """
         self.__is_caching:bool = is_caching
+        self.__max_cache_size:int = max_cache_size
         self.__cache:dict[str] = {}
         self.__cache_hit_count:int = 0
         self.__cache_request_count:int = 0
@@ -61,6 +63,16 @@ class EvaluationCacheControlStatistics:
         :param bool value: value for determining if caching is activated
         """
         self.__is_caching = value
+
+    @property
+    def max_cache_size(self)->int:
+        """
+        Property getter for `max_cache_size` 
+
+        :return: maximum size of the cache - if 0 cache is with unlimited size 
+        :rtype: int
+        """
+        return self.__max_cache_size
 
     @property
     def cache(self)->dict[str]:
