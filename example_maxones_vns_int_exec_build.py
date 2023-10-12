@@ -48,7 +48,7 @@ class MaxOnesProblem(TargetProblem):
     def __format__(self, spec:str)->str:
         return ''
 
-class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
+class MaxOnesProblemBinaryIntSolution(TargetSolution[int,str]):
     
     def __init__(self, random_seed:int=None)->None:
         super().__init__("MaxOnesProblemBinaryIntSolution", random_seed, fitness_value=None, objective_value=None, 
@@ -84,7 +84,7 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
     def init_from(self, representation:int, problem:TargetProblem)->None:
         self.representation = representation
 
-    def string_rep(self)->str:
+    def argument(self)->str:
         return bin(self.representation)
 
     def calculate_quality_directly(self, representation:int, 
@@ -118,7 +118,7 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
     def __format__(self, spec:str)->str:
         return ''
 
-class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
+class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,str]):
     
     def __init__(self)->None:
         return

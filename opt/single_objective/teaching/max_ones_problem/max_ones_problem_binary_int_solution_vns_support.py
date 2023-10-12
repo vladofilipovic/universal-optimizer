@@ -29,7 +29,7 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vn
 from opt.single_objective.teaching.max_ones_problem.max_ones_problem import MaxOnesProblem
 from opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_int_solution import MaxOnesProblemBinaryIntSolution
 
-class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
+class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,str]):
     
     def __init__(self)->None:
         """

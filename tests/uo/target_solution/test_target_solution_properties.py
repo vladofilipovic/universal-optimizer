@@ -20,7 +20,7 @@ from uo.target_solution.target_solution import QualityOfSolution
 from uo.target_solution.target_solution import TargetSolution 
 
 
-class TargetSolutionVoid(TargetSolution[int]):
+class TargetSolutionVoid(TargetSolution[int, str]):
     
     def __init__(self, name:str, random_seed:int, fitness_value:float|list[float]|tuple[float], 
             objective_value:float|list[float]|tuple[float], is_feasible:bool, 
@@ -45,7 +45,7 @@ class TargetSolutionVoid(TargetSolution[int]):
     def copy_to(self, destination)->None:
         destination =  copy(self)
 
-    def string_representation(self)->str:
+    def argument(self)->str:
         return "42"
 
     def init_random(self, problem:TargetProblem)->None:

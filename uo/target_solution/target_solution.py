@@ -27,8 +27,9 @@ QualityOfSolution = NamedTuple('QualityOfSolution', [('objective_value',float|li
         )
 
 R_co = TypeVar("R_co", covariant=True) 
+A_co = TypeVar("A_co", covariant=True)
 
-class TargetSolution(Generic[R_co], metaclass=ABCMeta):
+class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
     
     @abstractmethod
     def __init__(self, 
@@ -203,6 +204,15 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         self.__representation = value
 
     @abstractmethod
+    def argument(self)->A_co:
+        """
+        Argument of the target solution
+
+        :return: argument of the solution 
+        :rtype: A_co
+        """
+        raise NotImplementedError
+
     def string_representation(self)->str:
         """
         String representation of the target solution
@@ -210,7 +220,7 @@ class TargetSolution(Generic[R_co], metaclass=ABCMeta):
         :return: string representation of the solution 
         :rtype: str
         """
-        raise NotImplementedError
+        return str(self.argument())
 
     @abstractmethod
     def init_random(self, problem:TargetProblem)->None:

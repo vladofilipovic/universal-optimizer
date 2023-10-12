@@ -24,7 +24,7 @@ from uo.target_solution.target_solution import TargetSolution
 
 from uo.utils.logger import logger
 
-class MaxOnesProblemBinaryBitArraySolution(TargetSolution[BitArray]):
+class MaxOnesProblemBinaryBitArraySolution(TargetSolution[BitArray,str]):
     
     def __init__(self, random_seed:int=None, 
             evaluation_cache_is_used:bool=False, 
@@ -71,7 +71,7 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution[BitArray]):
         """
         destination = self.__copy__()
 
-    def string_representation(self)->str:
+    def argument(self)->str:
         """
         Solution code of the target solution
 

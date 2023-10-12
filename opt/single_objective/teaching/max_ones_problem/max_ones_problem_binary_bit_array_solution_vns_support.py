@@ -32,7 +32,7 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vn
 from opt.single_objective.teaching.max_ones_problem.max_ones_problem import MaxOnesProblem
 from opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_bit_array_solution import MaxOnesProblemBinaryBitArraySolution
 
-class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[BitArray]):
+class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[BitArray,str]):
     
     def __init__(self)->None:
         """
