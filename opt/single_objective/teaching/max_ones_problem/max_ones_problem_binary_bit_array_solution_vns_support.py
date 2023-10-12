@@ -1,23 +1,26 @@
 """ 
-.. _py_max_ones_problem_int_solution_vns_support:
+..  _py_max_ones_problem_bit_array_solution_vns_support:
 
-The :mod:`~opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution_vns_support` contains 
-class :class:`~opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution_vns_support.MaxOnesProblemBinaryIntSolutionVnsSupport`, 
-that represents solution of the :ref:`Problem_Max_Ones`, where `int` representation of the problem has been used.
+The :mod:`~opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_bit_array_solution_vns_support` 
+contains class :class:`~opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_bit_array_solution_vns_support.MaxOnesProblemBinaryBitArraySolutionVnsSupport`, 
+that represents supporting parts of the `VNS` algorithm, where solution of the :ref:`Problem_Max_Ones` have `BitArray` 
+representation.
 """
 
 import sys
 from pathlib import Path
 directory = Path(__file__).resolve()
+sys.path.append(directory)
 sys.path.append(directory.parent)
-sys.path.append(directory.parent.parent)
 sys.path.append(directory.parent.parent.parent)
 sys.path.append(directory.parent.parent.parent.parent)
 sys.path.append(directory.parent.parent.parent.parent.parent)
 
 from copy import deepcopy
 from random import choice
-from random import randint
+from random import random
+
+from bitstring import Bits, BitArray, BitStream, pack
 
 from uo.utils.logger import logger
 from uo.utils.complex_counter_uniform_distinct import ComplexCounterUniformAscending
@@ -26,50 +29,51 @@ from uo.target_solution.target_solution import QualityOfSolution
 from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
 
-from opt.single_objective.trivial.max_ones_problem.max_ones_problem import MaxOnesProblem
-from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution import MaxOnesProblemBinaryIntSolution
+from opt.single_objective.teaching.max_ones_problem.max_ones_problem import MaxOnesProblem
+from opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_bit_array_solution import MaxOnesProblemBinaryBitArraySolution
 
-class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
+class MaxOnesProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[BitArray]):
     
     def __init__(self)->None:
         """
-        Create new `MaxOnesProblemBinaryIntSolutionVnsSupport` instance
+        Create new `MaxOnesProblemBinaryBitArraySolutionVnsSupport` instance
         """
         return
 
     def __copy__(self):
         """
-        Internal copy of the `MaxOnesProblemBinaryIntSolutionVnsSupport`
+        Internal copy of the `MaxOnesProblemBinaryBitArraySolutionVnsSupport`
 
-        :return: new `MaxOnesProblemBinaryIntSolutionVnsSupport` instance with the same properties
-        :rtype: MaxOnesProblemBinaryIntSolutionVnsSupport
+        :return: new `MaxOnesProblemBinaryBitArraySolutionVnsSupport` instance with the same properties
+        :rtype: `MaxOnesProblemBinaryBitArraySolutionVnsSupport`
         """
-        sup = deepcopy(self)
-        return sup
+        sol = deepcopy(self)
+        return sol
 
     def copy(self):
         """
-        Copy the `MaxOnesProblemBinaryIntSolutionVnsSupport`
-        
-        :return: new `MaxOnesProblemBinaryIntSolutionVnsSupport` instance with the same properties
-        :rtype: `MaxOnesProblemBinaryIntSolutionVnsSupport`
-        """        
+        Copy the `MaxOnesProblemBinaryBitArraySolutionVnsSupport` instance
+
+        :return: new `MaxOnesProblemBinaryBitArraySolutionVnsSupport` instance with the same properties
+        :rtype: `MaxOnesProblemBinaryBitArraySolutionVnsSupport`
+        """
         return self.__copy__()
-        
-    def shaking(self, k:int, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryIntSolution, 
+
+    def shaking(self, k:int, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryBitArraySolution, 
             optimizer:Algorithm)->bool:
         """
-        Random VNS shaking of k parts such that new solution code does not differ more than k from all solution codes 
+        Random shaking of k parts such that new solution code does not differ more than k from all solution codes 
         inside shakingPoints 
 
         :param int k: int parameter for VNS
         :param `MaxOnesProblem` problem: problem that is solved
-        :param `MaxOnesProblemBinaryIntSolution` solution: solution used for the problem that is solved
+        :param `MaxOnesProblemBinaryBitArraySolution` solution: solution used for the problem that is solved
         :param `Algorithm` optimizer: optimizer that is executed
-        :return: if shaking is successful
+        :return: if randomization is successful
         :rtype: bool
         """    
-        if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
+        if optimizer.finish_control.evaluations_max > 0 \
+                and optimizer.evaluation > optimizer.finish_control.evaluations_max:
             return False
         tries:int = 0
         limit:int = 10000
@@ -77,67 +81,65 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
             positions:list[int] = []
             for i in range(0,k):
                 positions.append(choice(range(problem.dimension)))
-            mask:int = 0
-            for p in positions:
-                mask |= 1 << p
-            solution.representation ^= mask
+            repr:BitArray = BitArray(solution.representation.tobytes())
+            for pos in positions:
+                repr[pos] = not repr[pos]
+            solution.representation = repr
             all_ok:bool = True
-            if solution.representation.bit_count() > problem.dimension:
+            if solution.representation.count(value=1) > problem.dimension:
                 all_ok = False
             if all_ok:
                 break
         if tries < limit:
             optimizer.evaluation += 1
             if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
-                return solution
+                return False
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             solution.evaluate(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
+            optimizer.write_output_values_if_needed("after_step_in_iteration", "shaking")
             return True
         else:
             return False 
 
-    def local_search_best_improvement(self, k:int, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryIntSolution, 
-            optimizer: Algorithm)->MaxOnesProblemBinaryIntSolution:
+    def local_search_best_improvement(self, k:int, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryBitArraySolution, 
+            optimizer: Algorithm)->MaxOnesProblemBinaryBitArraySolution:
         """
         Executes "best improvement" variant of the local search procedure 
         
         :param int k: int parameter for VNS
         :param `MaxOnesProblem` problem: problem that is solved
-        :param `MaxOnesProblemBinaryIntSolution` solution: solution used for the problem that is solved
+        :param `MaxOnesProblemBinaryBitArraySolution` solution: solution used for the problem that is solved
         :param `Algorithm` optimizer: optimizer that is executed
         :return: result of the local search procedure 
-        :rtype: MaxOnesProblemBinaryIntSolution
+        :rtype: MaxOnesProblemBinaryBitArraySolution
         """
         if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
             return solution
         if k < 1 or k > problem.dimension:
             return solution
-        best_rep:int = None
+        best_rep:BitArray = None
         best_triplet:QualityOfSolution =  QualityOfSolution(solution.objective_value,
                 solution.fitness_value, solution.is_feasible)
         # initialize indexes
-        indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k,problem.dimension)
+        indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k, problem.dimension)
         in_loop:boolean = indexes.reset()
         while in_loop:
             # collect positions for inversion from indexes
             positions:list[int] = indexes.current_state()
             # invert and compare, switch of new is better
-            mask:int = 0
-            for i in positions:
-                mask |= 1 << i
-            solution.representation ^= mask 
+            solution.representation.invert(positions) 
             optimizer.evaluation += 1
             if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
                 return solution
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
-            new_triplet = solution.calculate_quality(problem)
+            new_triplet:QualityOfSolution = solution.calculate_quality(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
             if new_triplet.fitness_value > best_triplet.fitness_value:
                 best_triplet = new_triplet
-                best_rep = solution.representation
-            solution.representation ^= mask 
-            # increment indexes and set in_loop accordingly
+                best_rep = BitArray(bin=solution.representation.bin)
+            solution.representation.invert(positions)
+            # increment indexes and set in_loop according to the state
             in_loop = indexes.progress()
         if best_rep is not None:
             solution.representation = best_rep
@@ -147,17 +149,17 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
             return solution
         return solution
 
-    def local_search_first_improvement(self, k:int, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryIntSolution, 
-            optimizer: Algorithm)->MaxOnesProblemBinaryIntSolution:
+    def local_search_first_improvement(self, k:int, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryBitArraySolution, 
+            optimizer: Algorithm)->MaxOnesProblemBinaryBitArraySolution:
         """
         Executes "first improvement" variant of the local search procedure 
         
         :param int k: int parameter for VNS
         :param `MaxOnesProblem` problem: problem that is solved
-        :param `MaxOnesProblemBinaryIntSolution` solution: solution used for the problem that is solved
+        :param `MaxOnesProblemBinaryBitArraySolution` solution: solution used for the problem that is solved
         :param `Algorithm` optimizer: optimizer that is executed
         :return: result of the local search procedure 
-        :rtype: MaxOnesProblemBinaryIntSolution
+        :rtype: MaxOnesProblemBinaryBitArraySolution
         """
         if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
             return solution
@@ -165,28 +167,25 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
             return solution
         best_fv:float = solution.fitness_value
         # initialize indexes
-        indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k,problem.dimension)
+        indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k, problem.dimension)
         in_loop:boolean = indexes.reset()
         while in_loop:
             # collect positions for inversion from indexes
             positions:list[int] = indexes.current_state()
             # invert and compare, switch and exit if new is better
-            mask:int = 0
-            for i in positions:
-                mask |= 1 << i
-            solution.representation ^= mask 
+            solution.representation.invert(positions) 
             optimizer.evaluation += 1
             if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
                 return solution
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
-            new_triplet = solution.calculate_quality(problem)
+            new_triplet:QualityOfSolution = solution.calculate_quality(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
             if new_triplet.fitness_value > best_fv:
-                solution.fitness_value = new_triplet.fitness_value
                 solution.objective_value = new_triplet.objective_value
+                solution.fitness_value = new_triplet.fitness_value
                 solution.is_feasible = new_triplet.is_feasible
                 return solution
-            solution.representation ^= mask
+            solution.representation.invert(positions)
             # increment indexes and set in_loop accordingly
             in_loop = indexes.progress()
         return solution
@@ -194,7 +193,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
         """
-        String representation of the vns support instance
+        String representation of the vns support structure
 
         :param delimiter: delimiter between fields
         :type delimiter: str
@@ -209,7 +208,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
         :return: string representation of vns support instance
         :rtype: str
         """        
-        return 'MaxOnesProblemBinaryIntSolutionVnsSupport'
+        return 'MaxOnesProblemBinaryBitArraySolutionVnsSupport'
 
     def __str__(self)->str:
         """
@@ -239,3 +238,5 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int]):
         :rtype: str
         """
         return self.string_rep('|')
+
+

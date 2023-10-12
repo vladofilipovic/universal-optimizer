@@ -24,21 +24,21 @@ from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalS
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer_constructor_parameters import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
-from opt.single_objective.trivial.max_ones_problem.max_ones_problem import MaxOnesProblem
-from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution import MaxOnesProblemBinaryIntSolution
-from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_int_solution_vns_support import MaxOnesProblemBinaryIntSolutionVnsSupport
+from opt.single_objective.teaching.max_ones_problem.max_ones_problem import MaxOnesProblem
+from opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_int_solution import MaxOnesProblemBinaryIntSolution
+from opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_int_solution_vns_support import MaxOnesProblemBinaryIntSolutionVnsSupport
 
-class TestIntegrationMaxOnesProblemVnsBinaryIntSolutionLsfi(unittest.TestCase):
+class TestIntegrationMaxOnesProblemVnsBinaryIntSolutionLsbi(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
-        print("setUpClass TestIntegrationMaxOnesProblemVnsBinaryIntSolutionLsfi\n")
+        print("setUpClass TestIntegrationMaxOnesProblemVnsBinaryIntSolutionLsbi\n")
 
     def setUp(self):
         self.output_control = OutputControl(False)
         self.problem_to_solve:MaxOnesProblem = MaxOnesProblem(dim=22)
         self.solution:MaxOnesProblemBinaryIntSolution = MaxOnesProblemBinaryIntSolution()
-        self.finish_control:FinishControl = FinishControl(criteria='evaluations', evaluations_max=5000)
+        self.finish_control:FinishControl = FinishControl(criteria='evaluations', evaluations_max=500)
         self.vns_support:MaxOnesProblemBinaryIntSolutionVnsSupport = MaxOnesProblemBinaryIntSolutionVnsSupport()
         self.additional_stat = AdditionalStatisticsControl(keep='')
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
@@ -51,7 +51,7 @@ class TestIntegrationMaxOnesProblemVnsBinaryIntSolutionLsfi(unittest.TestCase):
         vns_construction_params.additional_statistics_control = self.additional_stat
         vns_construction_params.k_min = 1
         vns_construction_params.k_max = 3
-        vns_construction_params.local_search_type = 'local_search_first_improvement'
+        vns_construction_params.local_search_type = 'local_search_best_improvement'
         self.optimizer:VnsOptimizer = VnsOptimizer.from_construction_tuple(vns_construction_params)
         self.optimizer.optimize()
         return
@@ -68,7 +68,7 @@ class TestIntegrationMaxOnesProblemVnsBinaryIntSolutionLsfi(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        print("\ntearDownClass TestIntegrationMaxOnesProblemVnsBinaryIntSolutionLsfi")
+        print("\ntearDownClass TestIntegrationMaxOnesProblemVnsBinaryIntSolutionLsbi")
     
 if __name__ == '__main__':
     unittest.main()

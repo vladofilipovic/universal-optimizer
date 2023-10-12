@@ -1,5 +1,5 @@
 """ 
-The :mod:`~opt.single_objective.trivial.max_ones_problem.command_line` module is used for obtaining execution parameters for execution of the optimizers for max ones problem.
+The :mod:`~opt.single_objective.teaching.max_ones_problem.command_line` module is used for obtaining execution parameters for execution of the optimizers for max ones problem.
 """
 import sys
 from pathlib import Path

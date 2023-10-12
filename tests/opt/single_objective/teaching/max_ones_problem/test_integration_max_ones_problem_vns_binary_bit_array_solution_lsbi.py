@@ -26,9 +26,9 @@ from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalS
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer_constructor_parameters import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
-from opt.single_objective.trivial.max_ones_problem.max_ones_problem import MaxOnesProblem
-from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution import MaxOnesProblemBinaryBitArraySolution
-from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution_vns_support import MaxOnesProblemBinaryBitArraySolutionVnsSupport
+from opt.single_objective.teaching.max_ones_problem.max_ones_problem import MaxOnesProblem
+from opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_bit_array_solution import MaxOnesProblemBinaryBitArraySolution
+from opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_bit_array_solution_vns_support import MaxOnesProblemBinaryBitArraySolutionVnsSupport
 
 class TestIntegrationMaxOnesProblemVnsBinaryBitArraySolutionLsbi(unittest.TestCase):
     
@@ -41,9 +41,9 @@ class TestIntegrationMaxOnesProblemVnsBinaryBitArraySolutionLsbi(unittest.TestCa
         self.problem_to_solve:MaxOnesProblem = MaxOnesProblem(dim=24)
         self.solution:MaxOnesProblemBinaryBitArraySolution = MaxOnesProblemBinaryBitArraySolution(random_seed=43434343)
         self.finish_control:FinishControl = FinishControl(criteria='evaluations', evaluations_max=500)
+        self.additional_stat = AdditionalStatisticsControl(keep='')
         self.vns_support:MaxOnesProblemBinaryBitArraySolutionVnsSupport = \
                 MaxOnesProblemBinaryBitArraySolutionVnsSupport()
-        self.additional_stat = AdditionalStatisticsControl(keep='')
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
         vns_construction_params.output_control = self.output_control
         vns_construction_params.target_problem = self.problem_to_solve
@@ -59,7 +59,7 @@ class TestIntegrationMaxOnesProblemVnsBinaryBitArraySolutionLsbi(unittest.TestCa
         self.optimizer.optimize()
         return
     
-    def test_best_solution_after_optimization_should_be_all_optimal(self):
+    def test_best_solution_after_optimization_should_be_optimal(self):
         result:str = '111111111111111111111111'
         self.assertEqual(self.optimizer.best_solution.string_representation(), result)
 

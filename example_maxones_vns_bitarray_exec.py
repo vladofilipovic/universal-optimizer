@@ -10,10 +10,10 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer_const
                 VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
-from opt.single_objective.trivial.max_ones_problem.max_ones_problem import MaxOnesProblem
-from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution import \
+from opt.single_objective.teaching.max_ones_problem.max_ones_problem import MaxOnesProblem
+from opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_bit_array_solution import \
                 MaxOnesProblemBinaryBitArraySolution
-from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution_vns_support import \
+from opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_bit_array_solution_vns_support import \
                 MaxOnesProblemBinaryBitArraySolutionVnsSupport
 
 def main():

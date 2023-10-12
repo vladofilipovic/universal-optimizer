@@ -1,8 +1,8 @@
 """ 
 ..  _py_max_ones_problem_bit_array_solution_te_support:
 
-The :mod:`~opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution_te_support` 
-contains class :class:`~opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution_te_support.MaxOnesProblemBinaryBitArraySolutionTeSupport`, 
+The :mod:`~opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_bit_array_solution_te_support` 
+contains class :class:`~opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_bit_array_solution_te_support.MaxOnesProblemBinaryBitArraySolutionTeSupport`, 
 that represents supporting parts of the `Total enumeration` algorithm, where solution of the :ref:`Problem_Max_Ones` have `BitArray` 
 representation.
 """
@@ -31,8 +31,8 @@ from uo.target_solution.target_solution import QualityOfSolution
 from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.exact.total_enumeration.problem_solution_te_support import ProblemSolutionTeSupport
 
-from opt.single_objective.trivial.max_ones_problem.max_ones_problem import MaxOnesProblem
-from opt.single_objective.trivial.max_ones_problem.max_ones_problem_binary_bit_array_solution import MaxOnesProblemBinaryBitArraySolution
+from opt.single_objective.teaching.max_ones_problem.max_ones_problem import MaxOnesProblem
+from opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_bit_array_solution import MaxOnesProblemBinaryBitArraySolution
 
 class MaxOnesProblemBinaryBitArraySolutionTeSupport(ProblemSolutionTeSupport[BitArray]):
     

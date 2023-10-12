@@ -9,7 +9,7 @@ Subpackages
 
    opt.single_objective.combinatorial
    opt.single_objective.global
-   opt.single_objective.trivial
+   opt.single_objective.teaching
 
 Module contents
 ---------------
