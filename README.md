@@ -4,11 +4,11 @@ Library `Universal optimizer` contains various optimization methods. Library is 
 
 ---
 
-[Documentation - Library](https://vladofilipovic.github.io/universal-optimizer/html)
+[Documentation - Library](https://vladofilipovic.github.io/universal-optimizer/)
 
 ---
 
-[Documentation - Implemented methods](https://vladofilipovic.github.io/universal-optimizer/html/implemented_algorithms.html)
+[Documentation - Implemented methods](https://vladofilipovic.github.io/universal-optimizer/implemented_algorithms.html)
 
 ---
 This software is published under [Apache License 2.0](LICENSE)
