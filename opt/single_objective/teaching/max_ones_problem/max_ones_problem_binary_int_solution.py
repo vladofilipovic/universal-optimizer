@@ -23,7 +23,7 @@ from uo.target_solution.target_solution import TargetSolution
 
 from uo.utils.logger import logger
 
-class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
+class MaxOnesProblemBinaryIntSolution(TargetSolution[int,str]):
     
     def __init__(self,random_seed:int=None, 
             evaluation_cache_is_used:bool=False, 
@@ -80,7 +80,7 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int]):
         mask = (mask % 0x100000000) >> (32-problem.dimension) 
         self.representation &= mask
 
-    def string_representation(self)->str:
+    def argument(self)->str:
         """
         String representation of the target solution
 

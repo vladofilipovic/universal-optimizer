@@ -34,7 +34,7 @@ from uo.algorithm.exact.total_enumeration.problem_solution_te_support import Pro
 from opt.single_objective.teaching.max_ones_problem.max_ones_problem import MaxOnesProblem
 from opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_bit_array_solution import MaxOnesProblemBinaryBitArraySolution
 
-class MaxOnesProblemBinaryBitArraySolutionTeSupport(ProblemSolutionTeSupport[BitArray]):
+class MaxOnesProblemBinaryBitArraySolutionTeSupport(ProblemSolutionTeSupport[BitArray,str]):
     
     def __init__(self)->None:
         """
