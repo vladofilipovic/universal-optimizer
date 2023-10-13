@@ -24,6 +24,34 @@ class Function1VariableMaximization(TargetProblem):
         self.__domain_up:float = None
         self.__number_of_intervals:int = None
 
+    @classmethod
+    def from_string(cls, construction_string:str):
+        return cls( 
+            construction_tuple.finish_control,
+            construction_tuple.random_seed, 
+            construction_tuple.additional_statistics_control,
+            construction_tuple.output_control, 
+            construction_tuple.target_problem, 
+            construction_tuple.initial_solution,
+            construction_tuple.problem_solution_vns_support, 
+            construction_tuple.k_min, 
+            construction_tuple.k_max, 
+            construction_tuple.local_search_type)
+
+    @classmethod
+    def from_file(cls, file_path:str):
+        return cls( 
+            construction_tuple.finish_control,
+            construction_tuple.random_seed, 
+            construction_tuple.additional_statistics_control,
+            construction_tuple.output_control, 
+            construction_tuple.target_problem, 
+            construction_tuple.initial_solution,
+            construction_tuple.problem_solution_vns_support, 
+            construction_tuple.k_min, 
+            construction_tuple.k_max, 
+            construction_tuple.local_search_type)
+
     def __copy__(self):
         pr = deepcopy(self)
         return pr
