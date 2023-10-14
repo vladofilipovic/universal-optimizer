@@ -13,28 +13,27 @@ sys.path.append(directory.parent.parent.parent.parent.parent.parent.parent.paren
 import unittest   
 import unittest.mock as mock
 
+from uo.target_problem.target_problem import TargetProblem
+from uo.algorithm.metaheuristic.finish_control import FinishControl
+from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
+
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.metaheuristic import Metaheuristic 
 
 class MetaheuristicVoid(Metaheuristic):
     def __init__(self, 
             name:str, 
-            evaluations_max:int, 
-            iterations_max:int,
-            seconds_max:int, 
+            finish_control:FinishControl,
             random_seed:int, 
-            keep_all_solution_codes:bool,
-            distance_calculation_cache_is_used:bool,
+            additional_statistics_control:AdditionalStatisticsControl,
             output_control:OutputControl, 
-            target_problem:TargetProblem
+            target_problem:TargetProblem   
     )->None:
         super().__init__(
                 name=name, 
-                evaluations_max=evaluations_max,
-                iterations_max=iterations_max,
-                seconds_max=seconds_max,
+                finish_control=finish_control,
                 random_seed=random_seed,
-                keep_all_solution_codes=keep_all_solution_codes,
+                additional_statistics_control=additional_statistics_control,
                 output_control=output_control, 
                 target_problem=target_problem
         )
@@ -47,6 +46,11 @@ class MetaheuristicVoid(Metaheuristic):
 
     def init(self):
         return
+    
+    def main_loop_iteration(self)->None:
+        return
+
+
     def __str__(self)->str:
         return super().__str__()
 
@@ -65,11 +69,19 @@ class TestMetaheuristicProperties(unittest.TestCase):
 
     def setUp(self):
         self.metaheuristicName = 'Name of the metaheuristic'
+
         self.evaluations_max = 42
         self.iterations_max = 42
         self.seconds_max = 42
+        self.finish_control =  mock.MagicMock()
+        type(self.finish_control).evaluations_max = self.evaluations_max
+        type(self.finish_control).iterations_max = self.iterations_max
+        type(self.finish_control).seconds_max = self.seconds_max
+
         self.random_seed = 42
 
+        self.additional_statistics_control = mock.MagicMock()
+        
         self.output_control = mock.MagicMock()
         type(self.output_control).write_to_output = False
 
@@ -80,12 +92,10 @@ class TestMetaheuristicProperties(unittest.TestCase):
         type(self.problem).dimension = mock.PropertyMock(return_value=42)
 
         self.optimizer = MetaheuristicVoid(
-                name=self.name,
-                evaluations_max=self.evaluations_max,
-                iterations_max=self.iterations_max, 
-                seconds_max=self.seconds_max, 
+                name=self.metaheuristicName,
+                finish_control=self.finish_control, 
                 random_seed=self.random_seed, 
-                keep_all_solution_codes=True, 
+                additional_statistics_control=self.additional_statistics_control, 
                 output_control=self.output_control,
                 target_problem=self.problem
         )
@@ -95,28 +105,28 @@ class TestMetaheuristicProperties(unittest.TestCase):
         self.assertEqual(self.optimizer.name, self.metaheuristicName)
 
     def test_evaluations_max_should_be_equal_as_in_constructor(self):
-        self.assertEqual(self.vns_optimizer.finish_control.evaluations_max, self.evaluations_max)
+        self.assertEqual(self.optimizer.finish_control.evaluations_max, self.evaluations_max)
 
     def test_iterations_max_should_be_equal_as_in_constructor(self):
-        self.assertEqual(self.vns_optimizer.iterations_max, self.iterations_max)
+        self.assertEqual(self.optimizer.finish_control.iterations_max, self.iterations_max)
 
     def test_seconds_max_should_be_equal_as_in_constructor(self):
-        self.assertEqual(self.vns_optimizer.seconds_max, self.seconds_max)
+        self.assertEqual(self.optimizer.finish_control.seconds_max, self.seconds_max)
 
     def test_random_seed_should_be_equal_as_in_constructor(self):
-        self.assertEqual(self.vns_optimizer.random_seed, self.random_seed)
+        self.assertEqual(self.optimizer.random_seed, self.random_seed)
 
     def test_problem_name_should_be_equal_as_in_constructor(self):
-        self.assertEqual(self.vns_optimizer.target_problem.name, self.problem.name)
+        self.assertEqual(self.optimizer.target_problem.name, self.problem.name)
 
     def test_problem_is_minimization_should_be_equal_as_in_constructor(self):
-        self.assertEqual(self.vns_optimizer.target_problem.is_minimization, self.problem.is_minimization)
+        self.assertEqual(self.optimizer.target_problem.is_minimization, self.problem.is_minimization)
 
     def test_problem_file_path_should_be_equal_as_in_constructor(self):
-        self.assertEqual(self.vns_optimizer.target_problem.file_path, self.problem.file_path)
+        self.assertEqual(self.optimizer.target_problem.file_path, self.problem.file_path)
 
     def test_problem_dimension_should_be_equal_as_in_constructor(self):
-        self.assertEqual(self.vns_optimizer.target_problem.dimension, self.problem.dimension)
+        self.assertEqual(self.optimizer.target_problem.dimension, self.problem.dimension)
 
     def tearDown(self):
         return

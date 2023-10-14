@@ -10,7 +10,7 @@ sys.path.append(directory.parent.parent)
 sys.path.append(directory.parent.parent.parent)
 
 from abc import ABCMeta, abstractmethod
-from typing import TypeVar, Generic
+from typing import TypeVar
 from typing import Generic
 
 from uo.target_problem.target_problem import TargetProblem

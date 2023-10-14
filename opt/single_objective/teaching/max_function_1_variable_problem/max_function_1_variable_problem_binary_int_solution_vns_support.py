@@ -23,10 +23,10 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vn
 
 from opt.single_objective.teaching.max_function_1_variable_problem.max_function_1_variable_problem import \
         MaxFunction1VariableProblem
-from opt.single_objective.teaching.max_function_1_variable_problem.max_function_1_variable_problem_int_solution import \
-        MaxFunction1VariableProblemIntSolution
+from opt.single_objective.teaching.max_function_1_variable_problem.max_function_1_variable_problem_binary_int_solution \
+        import MaxFunction1VariableProblemBinaryIntSolution
 
-class MaxFunction1VariableProblemIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,float]):
+class MaxFunction1VariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,float]):
     
     def __init__(self)->None:
         return
@@ -38,7 +38,7 @@ class MaxFunction1VariableProblemIntSolutionVnsSupport(ProblemSolutionVnsSupport
     def copy(self):
         return self.__copy__()
         
-    def shaking(self, k:int, problem:MaxFunction1VariableProblem, solution:MaxFunction1VariableProblemIntSolution, 
+    def shaking(self, k:int, problem:MaxFunction1VariableProblem, solution:MaxFunction1VariableProblemBinaryIntSolution, 
             optimizer:Algorithm)->bool:
         if optimizer.finish_control.evaluations_max > 0 and \
                 optimizer.evaluation > optimizer.finish_control.evaluations_max:
@@ -72,8 +72,8 @@ class MaxFunction1VariableProblemIntSolutionVnsSupport(ProblemSolutionVnsSupport
             return False 
 
     def local_search_best_improvement(self, k:int, problem:MaxFunction1VariableProblem, 
-            solution:MaxFunction1VariableProblemIntSolution, 
-            optimizer: Algorithm)->MaxFunction1VariableProblemIntSolution:
+            solution:MaxFunction1VariableProblemBinaryIntSolution, 
+            optimizer: Algorithm)->MaxFunction1VariableProblemBinaryIntSolution:
         representation_length:int = 32
         if optimizer.finish_control.evaluations_max > 0 and \
                 optimizer.evaluation > optimizer.finish_control.evaluations_max:
@@ -116,8 +116,8 @@ class MaxFunction1VariableProblemIntSolutionVnsSupport(ProblemSolutionVnsSupport
         return solution
 
     def local_search_first_improvement(self, k:int, problem:MaxFunction1VariableProblem, 
-            solution:MaxFunction1VariableProblemIntSolution, 
-            optimizer: Algorithm)->MaxFunction1VariableProblemIntSolution:
+            solution:MaxFunction1VariableProblemBinaryIntSolution, 
+            optimizer: Algorithm)->MaxFunction1VariableProblemBinaryIntSolution:
         representation_length:int = 32
         if optimizer.finish_control.evaluations_max > 0 and \
                 optimizer.evaluation > optimizer.finish_control.evaluations_max:
@@ -155,7 +155,7 @@ class MaxFunction1VariableProblemIntSolutionVnsSupport(ProblemSolutionVnsSupport
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
-        return 'MaxFunction1VariableProblemIntSolutionVnsSupport'
+        return 'MaxFunction1VariableProblemBinaryIntSolutionVnsSupport'
 
     def __str__(self)->str:
         return self.string_rep('|')
