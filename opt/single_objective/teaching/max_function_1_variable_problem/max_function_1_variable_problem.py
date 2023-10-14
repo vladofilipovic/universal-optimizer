@@ -16,16 +16,16 @@ from uo.utils.logger import logger
 
 from uo.target_problem.target_problem import TargetProblem
 
-Function1VariableMaximizationElements = NamedTuple('Function1VariableMaximizationElements', 
+MaxFunction1VariableProblemElements = NamedTuple('MaxFunction1VariableProblemElements', 
             [('expression',str), 
             ('domain_low',float), 
             ('domain_up',float)]
         )
 
-class Function1VariableMaximization(TargetProblem):
+class MaxFunction1VariableProblem(TargetProblem):
     
     def __init__(self, expression:str, domain_low:float, domain_up:float)->None:
-        super().__init__(name="Function1VariableMaximization", is_minimization=False)
+        super().__init__(name="MaxFunction1VariableProblem", is_minimization=False)
         self.__expression:str = expression
         self.__domain_low:float = domain_low
         self.__domain_up:float = domain_up
@@ -51,12 +51,12 @@ class Function1VariableMaximization(TargetProblem):
     @classmethod
     def from_input_file(cls, input_file_path:str, input_format:str):
         """
-        Additional constructor. Create new `Function1VariableMaximization` instance when input file and input format are specified
+        Additional constructor. Create new `MaxFunction1VariableProblem` instance when input file and input format are specified
 
         :param str input_file_path: path of the input file with problem data
         :param str input_format: format of the input
         """
-        params:Function1VariableMaximizationElements = Function1VariableMaximization.__load_from_file__(input_file_path, 
+        params:MaxFunction1VariableProblemElements = MaxFunction1VariableProblem.__load_from_file__(input_file_path, 
                 input_format)
         return cls(expression=params.expression, domain_low=params.domain_low, domain_up=params.domain_up)
 
