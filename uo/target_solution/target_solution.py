@@ -227,7 +227,8 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         """
         Random initialization of the solution
 
-        :param `TargetProblem` problem: problem which is solved by solution
+        :param problem: problem which is solved by solution
+        :type problem: `TargetProblem`
         """
         raise NotImplementedError
 
@@ -284,7 +285,7 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         eccs:EvaluationCacheControlStatistics = TargetSolution.evaluation_cache_cs 
         if eccs.is_caching:
             eccs.increment_cache_request_count()
-            rep:str = self.string_representation()
+            rep:str = self.string_representation(target_problem)
             if rep in eccs.cache:
                 eccs.increment_cache_hit_count()
                 return eccs.cache[rep]
@@ -386,7 +387,7 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         s += 'is_feasible=' + str(self.is_feasible) + delimiter
         for i in range(0, indentation):
             s += indentation_symbol     
-        s += 'string_representation()=' + self.string_representation() + delimiter
+        s += 'representation()=' + str(self.representation) + delimiter
         for i in range(0, indentation):
             s += indentation_symbol     
         s += 'evaluation_cache_cs=' + self.evaluation_cache_cs.string_rep(

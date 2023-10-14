@@ -102,7 +102,7 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int,str]):
         result = (rep_1 ^ rep_2).count(True)
         return result 
 
-    def string_representation(self)->str:
+    def argument(self, problem:TargetProblem)->str:
         return bin(self.representation)
 
     def string_rep(self, delimiter:str='\n', indentation:int=0, indentation_symbol:str='   ', 
@@ -241,7 +241,7 @@ def main():
     optimizer:VnsOptimizer = VnsOptimizer.from_construction_tuple(vns_construction_params)
     optimizer.optimize()
     print('Best solution representation: {}'.format(optimizer.best_solution.representation))            
-    print('Best solution code: {}'.format(optimizer.best_solution.string_representation()))            
+    print('Best solution code: {}'.format(optimizer.best_solution.string_representation(problem=problem_to_solve)))            
     print('Best solution objective:  {}'.format(optimizer.best_solution.objective_value))
     print('Best solution fitness: {}'.format(optimizer.best_solution.fitness_value))
     print('Number of iterations: {}'.format(optimizer.iteration))            

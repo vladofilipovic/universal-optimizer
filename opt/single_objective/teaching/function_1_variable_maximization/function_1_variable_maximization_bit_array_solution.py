@@ -1,21 +1,18 @@
-""" 
-.. _py_max_ones_problem_int_solution:
-
-The :mod:`~opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_int_solution` contains class :class:`~opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_int_solution.MaxOnesProblemBinaryIntSolution`, that represents solution of the :ref:`Problem_Max_Ones`, where `int` representation of the problem has been used.
-"""
 
 import sys
 from pathlib import Path
 directory = Path(__file__).resolve()
+sys.path.append(directory)
 sys.path.append(directory.parent)
-sys.path.append(directory.parent.parent)
 sys.path.append(directory.parent.parent.parent)
 sys.path.append(directory.parent.parent.parent.parent)
 sys.path.append(directory.parent.parent.parent.parent.parent)
 
 from copy import deepcopy
 from random import choice
-from random import randint
+from random import random
+
+from bitstring import Bits, BitArray, BitStream, pack
 
 from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.target_solution import QualityOfSolution
@@ -23,71 +20,38 @@ from uo.target_solution.target_solution import TargetSolution
 
 from uo.utils.logger import logger
 
-class MaxOnesProblemBinaryIntSolution(TargetSolution[int,str]):
+class Function1VariableMaximizationBitArraySolution(TargetSolution[BitArray,float]):
     
-    def __init__(self,random_seed:int=None, 
+    def __init__(self, domain_from:float, domain_to:float, number_of_intervals:int, random_seed:int=None, 
             evaluation_cache_is_used:bool=False, 
             evaluation_cache_max_size:int=0,
             distance_calculation_cache_is_used:bool=False,
             distance_calculation_cache_max_size:int=0)->None:
-        """
-        Create new `MaxOnesProblemBinaryIntSolution` instance
-
-        :param int random_seed: random seed for initialization, default value `Null`
-        """
-        super().__init__("MaxOnesProblemBinaryIntSolution", random_seed=random_seed, fitness_value=None, 
-                objective_value=None, is_feasible=False, 
-                evaluation_cache_is_used=evaluation_cache_is_used,
-                evaluation_cache_max_size=evaluation_cache_max_size, 
+        super().__init__("Function1VariableMaximizationBitArraySolution", random_seed=random_seed, fitness_value=None, 
+                objective_value=None, is_feasible=False, evaluation_cache_is_used=evaluation_cache_is_used,
+                evaluation_cache_max_size=evaluation_cache_max_size,
                 distance_calculation_cache_is_used=distance_calculation_cache_is_used,
                 distance_calculation_cache_max_size=distance_calculation_cache_max_size)
+        self.__domain_from:float = domain_from
+        self.__domain_to:float = domain_to
+        self.__number_of_intervals:int = number_of_intervals
 
     def __copy__(self):
-        """
-        Internal copy of the `MaxOnesProblemBinaryIntSolution`
-
-        :return: new `MaxOnesProblemBinaryIntSolution` instance with the same properties
-        :rtype: MaxOnesProblemBinaryIntSolution
-        """
-        sol = deepcopy(self)
+        sol = super().__copy__()
+        if self.representation is not None:
+            sol.representation = BitArray(bin=self.representation.bin)
+        else:
+            sol.representation = None
         return sol
 
     def copy(self):
-        """
-        Copy the `MaxOnesProblemBinaryIntSolution`
-        
-        :return: new `MaxOnesProblemBinaryIntSolution` instance with the same properties
-        :rtype: `MaxOnesProblemBinaryIntSolution`
-        """
         return self.__copy__()
         
     def copy_to(self, destination)->None:
-        """
-        Copy the `MaxOnesProblemBinaryIntSolution` to the already existing destination `MaxOnesProblemBinaryIntSolution`
-
-        :param `MaxOnesProblemBinaryIntSolution` destination: destination `MaxOnesProblemBinaryIntSolution`
-        """
         destination = self.__copy__()
 
-    def __make_to_be_feasible_helper__(self, problem:TargetProblem):
-        """
-        Helper function that modifies representation to be feasible
-
-        :param `TargetProblem` problem: problem which is solved by solution
-        """
-        mask:int = ~0
-        mask <<= 32-problem.dimension
-        mask = (mask % 0x100000000) >> (32-problem.dimension) 
-        self.representation &= mask
-
-    def argument(self)->str:
-        """
-        Argument of the target solution for specific problem
-
-        :return: solution representation as string
-        :rtype: str 
-        """
-        return bin(self.representation)
+    def argument(self)->float:
+        return self.representation.bin
 
     def init_random(self, problem:TargetProblem)->None:
         """
@@ -95,54 +59,58 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int,str]):
 
         :param `TargetProblem` problem: problem which is solved by solution
         """
-        if problem.dimension is None:
-            raise ValueError("Problem dimension should not be None!")
-        if problem.dimension <= 0:
-            raise ValueError("Problem dimension should be positive!")
-        if problem.dimension >= 32:
-            raise ValueError("Problem dimension should be less than 32!")
-        self.representation = randint(0, 2^problem.dimension-1)
-        self.__make_to_be_feasible_helper__(problem)
+        #logger.debug('Solution: ' + str(self))
+        self.representation = BitArray(problem.dimension)
+        for i in range(problem.dimension):
+            if random() > 0.5:
+                self.representation[i] = True
 
-    def init_from(self, representation:int, problem:TargetProblem)->None:
+    def init_from(self, representation:BitArray, problem:TargetProblem)->None:
         """
         Initialization of the solution, by setting its native representation 
 
-        :param int representation: representation that will be ste to solution
+        :param BitArray representation: representation that will be ste to solution
         :param `TargetProblem` problem: problem which is solved by solution
         """
-        self.representation = representation
+        self.representation = BitArray(bin=representation.bin)
 
-    def calculate_quality_directly(self, representation:int, 
+    def calculate_quality_directly(self, representation:BitArray, 
             problem:TargetProblem)->QualityOfSolution:
         """
-        Fitness calculation of the max ones binary int solution
+        Fitness calculation of the max ones binary BitArray solution
 
-        :param int representation: native representation of the solution whose fitness, objective and feasibility is calculated
+        :param BitArray representation: native representation of solution whose fitness is calculated
         :param TargetProblem problem: problem that is solved
         :return: objective value, fitness value and feasibility of the solution instance  
         :rtype: `QualityOfSolution`
         """
-        ones_count = representation.bit_count()
+        ones_count = representation.count(True)
         return QualityOfSolution(ones_count, ones_count, True)
 
-    def native_representation(self, representation_str:str)->int:
+    def native_representation(self, representation_str:str)->BitArray:
         """
-        Obtain `int` representation from string representation of the integer binary solution of the Max Ones problem 
+        Obtain `BitArray` representation from string representation of the BitArray binary solution of the Max Ones problem 
 
         :param str representation_str: solution's representation as string
-        :return: solution's representation as int
-        :rtype: int
+        :return: solution's representation as BitArray
+        :rtype: `BitArray`
         """
-        ret:int = int(representation_str, 2)
+        ret:BitArray = BitArray(bin=representation_str)
         return ret
 
     def representation_distance_directly(solution_code_1:str, solution_code_2:str)->float:
-        rep_1:int = self.native_representation(solution_code_1)
-        rep_2:int = self.native_representation(solution_code_2)
+        """
+        Calculating distance between two solutions determined by its code
+
+        :param str solution_code_1: solution code for the first solution
+        :param str solution_code_2: solution code for the second solution
+        :return: distance between two solutions represented by its code
+        :rtype: float
+        """
+        rep_1:BitArray = self.native_representation(solution_code_1)
+        rep_2:BitArray = self.native_representation(solution_code_2)
         result = (rep_1 ^ rep_2).count(True)
         return result 
-
 
     def string_rep(self, delimiter:str='\n', indentation:int=0, indentation_symbol:str='   ', 
             group_start:str='{', group_end:str='}',)->str:
@@ -171,7 +139,7 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int,str]):
         s += delimiter
         for i in range(0, indentation):
             s += indentation_symbol  
-        s += 'string_representation()=' + self.string_representation()
+        s += 'string_representation()=' + str(self.string_representation())
         s += delimiter
         for i in range(0, indentation):
             s += indentation_symbol  
@@ -205,3 +173,4 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int,str]):
         :rtype: str
         """
         return self.string_rep('\n', 0, '   ', '{', '}')
+
