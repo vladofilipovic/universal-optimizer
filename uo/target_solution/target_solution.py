@@ -139,8 +139,6 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         :param value: value of the `fitness` to be set
         :type value: float
         """
-        if value < 0:
-            raise ValueError("Fitness value less than 0 is not possible.")
         self.__fitness_value = value
 
     @property
@@ -289,7 +287,7 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         eccs:EvaluationCacheControlStatistics = TargetSolution.evaluation_cache_cs 
         if eccs.is_caching:
             eccs.increment_cache_request_count()
-            rep:str = self.string_representation(target_problem)
+            rep:str = self.string_representation()
             if rep in eccs.cache:
                 eccs.increment_cache_hit_count()
                 return eccs.cache[rep]

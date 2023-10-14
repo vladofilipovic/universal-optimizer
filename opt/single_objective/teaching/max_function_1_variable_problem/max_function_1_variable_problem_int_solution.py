@@ -55,13 +55,25 @@ class MaxFunction1VariableProblemIntSolution(TargetSolution[int,float]):
     def domain_from(self)->float:
         return self.__domain_from    
 
+    @domain_from.setter
+    def domain_from(self, value:float)->None:
+        self.__domain_from = value
+
     @property
     def domain_to(self)->float:
         return self.__domain_to    
 
+    @domain_to.setter
+    def domain_to(self, value:float)->None:
+        self.__domain_to = value
+
     @property
     def number_of_intervals(self)->int:
         return self.__number_of_intervals    
+
+    @number_of_intervals.setter
+    def number_of_intervals(self, value:int)->None:
+        self.__number_of_intervals= value
 
     def __make_to_be_feasible_helper__(self, problem:MaxFunction1VariableProblem):
         if self.representation > self.number_of_intervals:

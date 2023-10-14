@@ -45,16 +45,17 @@ class MaxFunction1VariableProblemIntSolutionVnsSupport(ProblemSolutionVnsSupport
             return False
         tries:int = 0
         limit:int = 10000
+        representation_length:int = 32
         while tries < limit:
             positions:list[int] = []
             for i in range(0,k):
-                positions.append(choice(range(problem.dimension)))
+                positions.append(choice(range(representation_length)))
             mask:int = 0
             for p in positions:
                 mask |= 1 << p
             solution.representation ^= mask
             all_ok:bool = True
-            if solution.representation.bit_count() > problem.dimension:
+            if solution.representation.bit_count() > representation_length:
                 all_ok = False
             if all_ok:
                 break
@@ -73,16 +74,17 @@ class MaxFunction1VariableProblemIntSolutionVnsSupport(ProblemSolutionVnsSupport
     def local_search_best_improvement(self, k:int, problem:MaxFunction1VariableProblem, 
             solution:MaxFunction1VariableProblemIntSolution, 
             optimizer: Algorithm)->MaxFunction1VariableProblemIntSolution:
+        representation_length:int = 32
         if optimizer.finish_control.evaluations_max > 0 and \
                 optimizer.evaluation > optimizer.finish_control.evaluations_max:
             return solution
-        if k < 1 or k > problem.dimension:
+        if k < 1 or k > representation_length:
             return solution
         best_rep:int = None
         best_triplet:QualityOfSolution =  QualityOfSolution(solution.objective_value,
                 solution.fitness_value, solution.is_feasible)
         # initialize indexes
-        indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k,problem.dimension)
+        indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k,representation_length)
         in_loop:boolean = indexes.reset()
         while in_loop:
             # collect positions for inversion from indexes
@@ -116,14 +118,15 @@ class MaxFunction1VariableProblemIntSolutionVnsSupport(ProblemSolutionVnsSupport
     def local_search_first_improvement(self, k:int, problem:MaxFunction1VariableProblem, 
             solution:MaxFunction1VariableProblemIntSolution, 
             optimizer: Algorithm)->MaxFunction1VariableProblemIntSolution:
+        representation_length:int = 32
         if optimizer.finish_control.evaluations_max > 0 and \
                 optimizer.evaluation > optimizer.finish_control.evaluations_max:
             return solution
-        if k < 1 or k > problem.dimension:
+        if k < 1 or k > representation_length:
             return solution
         best_fv:float = solution.fitness_value
         # initialize indexes
-        indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k,problem.dimension)
+        indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k,representation_length)
         in_loop:boolean = indexes.reset()
         while in_loop:
             # collect positions for inversion from indexes

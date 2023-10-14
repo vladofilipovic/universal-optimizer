@@ -190,15 +190,15 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
             self.write_output_values_if_needed("after_step_in_iteration", "ls")
             # update auxiliary structure that keeps all solution codes
             self.additional_statistics_control.add_to_all_solution_codes_if_required(
-                    self.current_solution.string_representation(target_problem))
+                    self.current_solution.string_representation())
             self.additional_statistics_control.add_to_more_local_optima_if_required(
-                    self.current_solution.string_representation(target_problem), self.current_solution.fitness_value,
-                    self.best_solution.string_representation(target_problem))
+                    self.current_solution.string_representation(), self.current_solution.fitness_value,
+                    self.best_solution.string_representation())
             new_is_better:bool = self.is_first_solution_better(self.current_solution, self.best_solution)
             make_move:bool = new_is_better
             if new_is_better is None:
-                if  self.current_solution.string_representation(target_problem) == \
-                        self.best_solution.string_representation(target_problem):
+                if  self.current_solution.string_representation() == \
+                        self.best_solution.string_representation():
                     make_move = False
                 else:
                     logger.debug('VnsOptimizer::main_loop_iteration: Same solution quality, generating random true with probability 0.5');
