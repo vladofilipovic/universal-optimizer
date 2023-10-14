@@ -21,7 +21,7 @@ from opt.single_objective.teaching.max_function_1_variable_problem.\
 def main():
         output_control:OutputControl = OutputControl(write_to_output=False)
         problem_to_solve:MaxFunction1VariableProblem = MaxFunction1VariableProblem.from_input_file(
-                input_file_path='./opt/single_objective/teaching/max_function_1_variable_problem/inputs/17-x^2f-3t3.txt',
+                input_file_path='./opt/single_objective/teaching/max_function_1_variable_problem/inputs/7-x^2f-3t3.txt',
                 input_format='txt')
         print('Problem: {}'.format(problem_to_solve))            
         solution:MaxFunction1VariableProblemBinaryIntSolution = MaxFunction1VariableProblemBinaryIntSolution(
