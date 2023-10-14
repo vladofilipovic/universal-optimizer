@@ -19,16 +19,16 @@ from uo.target_problem.target_problem import TargetProblem
 MaxFunction1VariableProblemElements = NamedTuple('MaxFunction1VariableProblemElements', 
             [('expression',str), 
             ('domain_low',float), 
-            ('domain_up',float)]
+            ('domain_high',float)]
         )
 
 class MaxFunction1VariableProblem(TargetProblem):
     
-    def __init__(self, expression:str, domain_low:float, domain_up:float)->None:
+    def __init__(self, expression:str, domain_low:float, domain_high:float)->None:
         super().__init__(name="MaxFunction1VariableProblem", is_minimization=False)
         self.__expression:str = expression
         self.__domain_low:float = domain_low
-        self.__domain_up:float = domain_up
+        self.__domain_high:float = domain_high
 
     @classmethod
     def __load_from_file__(cls, file_path:str, data_format:str)->int:
@@ -46,7 +46,7 @@ class MaxFunction1VariableProblem(TargetProblem):
                 else:
                     raise ValueError('Invalid line \'{}\' - not enough data'.format(data))        
         else:
-            raise ValueError('Value for data format \'{} \' is not supported'.format(data_format))
+            raise ValueError('Value for data format \'{}\' is not supported'.format(data_format))
 
     @classmethod
     def from_input_file(cls, input_file_path:str, input_format:str):
@@ -58,7 +58,7 @@ class MaxFunction1VariableProblem(TargetProblem):
         """
         params:MaxFunction1VariableProblemElements = MaxFunction1VariableProblem.__load_from_file__(input_file_path, 
                 input_format)
-        return cls(expression=params.expression, domain_low=params.domain_low, domain_up=params.domain_up)
+        return cls(expression=params.expression, domain_low=params.domain_low, domain_high=params.domain_high)
 
     def __copy__(self):
         pr = deepcopy(self)
@@ -76,8 +76,8 @@ class MaxFunction1VariableProblem(TargetProblem):
         return self.__domain_low
 
     @property
-    def domain_up(self)->float:
-        return self.__domain_up
+    def domain_high(self)->float:
+        return self.__domain_high
 
     @property
     def number_of_intervals(self)->int:
@@ -101,7 +101,7 @@ class MaxFunction1VariableProblem(TargetProblem):
         s+= delimiter
         for i in range(0, indentation):
             s += indentation_symbol  
-        s+= 'domain_up=' + str(self.domain_up)
+        s+= 'domain_high=' + str(self.domain_high)
         s += group_end 
         return s
 

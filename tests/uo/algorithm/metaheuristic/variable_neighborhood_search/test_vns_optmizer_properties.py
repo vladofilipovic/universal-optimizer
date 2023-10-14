@@ -13,8 +13,9 @@ sys.path.append(directory.parent.parent.parent.parent.parent.parent.parent.paren
 import unittest   
 import unittest.mock as mock
 
-from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer 
+from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import \
+    ProblemSolutionVnsSupport
 
 class TestVnsOptimizerProperties(unittest.TestCase):
     
@@ -90,6 +91,26 @@ class TestVnsOptimizerProperties(unittest.TestCase):
 
     def test_problem_dimension_should_be_equal_as_in_constructor(self):
         self.assertEqual(self.vns_optimizer.target_problem.dimension, self.problem.dimension)
+
+    def test_create_with_invalid_local_search_type_should_raise_value_exception_with_proper_message(self):
+        with self.assertRaises(ValueError) as context:
+            vns_support = mock.MagicMock(spec=ProblemSolutionVnsSupport)
+            type(vns_support).local_search_best_improvement = mock.CallableMixin(spec=lambda x: x)
+            type(vns_support).local_search_first_improvement= mock.CallableMixin(spec=lambda x: x)
+            type(vns_support).copy = mock.CallableMixin(spec="return self")
+            vns_optimizer:VnsOptimizer = VnsOptimizer(
+                output_control=self.output_control,
+                target_problem=self.problem, 
+                initial_solution=None,
+                problem_solution_vns_support=vns_support, 
+                finish_control=self.finish_control,
+                random_seed=self.random_seed, 
+                k_min=self.k_min, 
+                k_max=self.k_max, 
+                additional_statistics_control=None,
+                local_search_type='xxx'
+            )            
+        self.assertEqual("Value 'xxx' for VNS local_search_type is not supported", context.exception.args[0])
 
     def tearDown(self):
         return

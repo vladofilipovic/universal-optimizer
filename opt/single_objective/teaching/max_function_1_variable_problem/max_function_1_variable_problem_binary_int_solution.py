@@ -22,14 +22,14 @@ from uo.utils.logger import logger
 from opt.single_objective.teaching.max_function_1_variable_problem.max_function_1_variable_problem \
         import MaxFunction1VariableProblem
 
-class MaxFunction1VariableProblemIntSolution(TargetSolution[int,float]):
+class MaxFunction1VariableProblemBinaryIntSolution(TargetSolution[int,float]):
     
     def __init__(self, domain_from:float, domain_to:float, number_of_intervals:int, random_seed:int=None, 
             evaluation_cache_is_used:bool=False, 
             evaluation_cache_max_size:int=0,
             distance_calculation_cache_is_used:bool=False,
             distance_calculation_cache_max_size:int=0)->None:
-        super().__init__("Function1VariableMaximizationBitArraySolution", random_seed=random_seed, fitness_value=None, 
+        super().__init__("MaxFunction1VariableProblemBinaryIntSolution", random_seed=random_seed, fitness_value=None, 
                 objective_value=None, is_feasible=False, evaluation_cache_is_used=evaluation_cache_is_used,
                 evaluation_cache_max_size=evaluation_cache_max_size,
                 distance_calculation_cache_is_used=distance_calculation_cache_is_used,

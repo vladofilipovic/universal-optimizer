@@ -82,13 +82,13 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         self.__local_search_type:str = local_search_type
         if problem_solution_vns_support is not None:
             if isinstance(problem_solution_vns_support, ProblemSolutionVnsSupport):
-                self.__problem_solution_vns_support:ProblemSolutionVnsSupport = problem_solution_vns_support.copy()
+                self.__problem_solution_vns_support:ProblemSolutionVnsSupport = problem_solution_vns_support
                 self.__implemented_local_searches:Dict[str,function] = {
                     'local_search_best_improvement':  self.__problem_solution_vns_support.local_search_best_improvement,
                     'local_search_first_improvement':  self.__problem_solution_vns_support.local_search_first_improvement,
                 }
                 if( self.__local_search_type not in self.__implemented_local_searches):
-                    raise ValueError( 'Value \'{} \' for VNS local_search_type is not supported'.format(
+                    raise ValueError( 'Value \'{}\' for VNS local_search_type is not supported'.format(
                             self.__local_search_type))
                 self.__ls_method = self.__implemented_local_searches[self.__local_search_type]
                 self.__shaking_method = self.__problem_solution_vns_support.shaking
