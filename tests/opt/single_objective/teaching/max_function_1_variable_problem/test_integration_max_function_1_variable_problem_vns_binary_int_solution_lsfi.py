@@ -46,7 +46,8 @@ class TestIntegrationMaxFunction1VariableProblemBinaryIntSolutionLsfi(unittest.T
                 domain_low=-3,
                 domain_high=3 )
         self.solution:MaxFunction1VariableProblemBinaryIntSolution = MaxFunction1VariableProblemBinaryIntSolution(
-                self.problem_to_solve.domain_low, self.problem_to_solve.domain_high, 6000 )
+                domain_from=self.problem_to_solve.domain_low, domain_to=self.problem_to_solve.domain_high, 
+                number_of_intervals=6000, random_seed=43434343)
         self.solution.init_random(problem=self.problem_to_solve)
         self.solution.evaluate(self.problem_to_solve)           
         self.finish_control:FinishControl = FinishControl(criteria='evaluations & seconds', evaluations_max=6000, 

@@ -25,7 +25,8 @@ def main():
                 input_format='txt')
         print('Problem: {}'.format(problem_to_solve))            
         solution:MaxFunction1VariableProblemBinaryIntSolution = MaxFunction1VariableProblemBinaryIntSolution(
-                problem_to_solve.domain_low, problem_to_solve.domain_high, 5000 )
+                domain_from=problem_to_solve.domain_low, domain_to=problem_to_solve.domain_high, 
+                number_of_intervals=6000, random_seed=43434343)
         solution.init_random(problem=problem_to_solve)
         solution.evaluate(problem_to_solve)           
         print('Solution: {}'.format(solution))
