@@ -42,7 +42,7 @@ class MaxFunction1VariableProblem(TargetProblem):
                     text_line = input_file.readline()
                 data:list[str] = text_line.split()
                 if len(data)>=3:
-                    return Function1VariableMaximizationElements(data[0], float(data[1]), float(data[2]))
+                    return MaxFunction1VariableProblemElements(data[0], float(data[1]), float(data[2]))
                 else:
                     raise ValueError('Invalid line \'{}\' - not enough data'.format(data))        
         else:

@@ -45,7 +45,7 @@ class TargetSolutionVoid(TargetSolution[int, str]):
     def copy_to(self, destination)->None:
         destination =  copy(self)
 
-    def argument(self)->str:
+    def argument(self, representation:int)->str:
         return "42"
 
     def init_random(self, problem:TargetProblem)->None:

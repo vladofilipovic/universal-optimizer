@@ -204,10 +204,12 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         self.__representation = value
 
     @abstractmethod
-    def argument(self)->A_co:
+    def argument(self, representation:R_co)->A_co:
         """
         Argument of the target solution
 
+        :param representation: internal representation of the solution
+        :type representation: R_co
         :return: argument of the solution 
         :rtype: A_co
         """
@@ -217,10 +219,12 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         """
         String representation of the target solution
 
+        :param representation: internal representation of the solution
+        :type representation: R_co
         :return: string representation of the solution 
         :rtype: str
         """
-        return str(self.argument())
+        return str(self.argument(self.representation))
 
     @abstractmethod
     def init_random(self, problem:TargetProblem)->None:

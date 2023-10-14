@@ -11,6 +11,7 @@ sys.path.append(directory.parent.parent.parent.parent.parent)
 from copy import deepcopy
 from random import choice
 from random import random
+from random import randint
 
 from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.target_solution import QualityOfSolution
@@ -66,19 +67,18 @@ class MaxFunction1VariableProblemIntSolution(TargetSolution[int,float]):
         if self.representation > self.number_of_intervals:
             self.representation = self.number_of_intervals
 
-    def argument(self)->float:
-        return self.domain_from + self.representation * (self.domain_to - self.domain_from) / self.number_of_intervals
+    def argument(self, representation:int)->float:
+        return self.domain_from + representation * (self.domain_to - self.domain_from) / self.number_of_intervals
 
-    def init_random(self, problem:TargetProblem)->None:
+    def init_random(self, problem:MaxFunction1VariableProblem)->None:
         self.representation = randint(0, self.number_of_intervals)
         self.__make_to_be_feasible_helper__(problem)
 
     def init_from(self, representation:int, problem:MaxFunction1VariableProblem)->None:
         self.representation = representation
 
-    def calculate_quality_directly(self, representation:BitArray, 
-            problem:TargetProblem)->QualityOfSolution:
-        arg:float = self.argument() 
+    def calculate_quality_directly(self, representation:int, problem:MaxFunction1VariableProblem)->QualityOfSolution:
+        arg:float = self.argument(representation) 
         res:float = eval(problem.expression, {"x":arg})
         return QualityOfSolution(res, res, True)
 

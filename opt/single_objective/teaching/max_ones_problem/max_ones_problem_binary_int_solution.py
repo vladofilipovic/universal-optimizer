@@ -80,14 +80,16 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int,str]):
         mask = (mask % 0x100000000) >> (32-problem.dimension) 
         self.representation &= mask
 
-    def argument(self)->str:
+    def argument(self, representation:int)->str:
         """
         Argument of the target solution for specific problem
 
+        :param representation: internal representation of the solution
+        :type representation: int
         :return: solution representation as string
         :rtype: str 
         """
-        return bin(self.representation)
+        return bin(representation)
 
     def init_random(self, problem:TargetProblem)->None:
         """
