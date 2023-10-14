@@ -90,7 +90,7 @@ class TargetProblem(metaclass=ABCMeta):
         s += 'name=' + self.name + delimiter
         for i in range(0, indentation):
             s += indentation_symbol  
-        s += 'is_minimization=' + str(self.is_minimization) + delimiter
+        s += 'is_minimization=' + str(self.is_minimization) 
         for i in range(0, indentation):
             s += indentation_symbol  
         s += group_end 
