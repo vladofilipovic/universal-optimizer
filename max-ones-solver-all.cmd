@@ -1,4 +1,4 @@
-cd opt/single_objective/trivial/max_ones_problem
+cd opt/single_objective/teaching/max_ones_problem
 @echo -----------
 solver.py -h
 @echo -----------

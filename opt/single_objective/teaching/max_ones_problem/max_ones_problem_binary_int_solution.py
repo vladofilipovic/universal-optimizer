@@ -80,14 +80,16 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int,str]):
         mask = (mask % 0x100000000) >> (32-problem.dimension) 
         self.representation &= mask
 
-    def argument(self)->str:
+    def argument(self, representation:int)->str:
         """
-        String representation of the target solution
+        Argument of the target solution for specific problem
 
+        :param representation: internal representation of the solution
+        :type representation: int
         :return: solution representation as string
         :rtype: str 
         """
-        return bin(self.representation)
+        return bin(representation)
 
     def init_random(self, problem:TargetProblem)->None:
         """
@@ -138,6 +140,14 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int,str]):
         return ret
 
     def representation_distance_directly(solution_code_1:str, solution_code_2:str)->float:
+        """
+        Calculating distance between two solutions determined by its code
+
+        :param str solution_code_1: solution code for the first solution
+        :param str solution_code_2: solution code for the second solution
+        :return: distance between two solutions represented by its code
+        :rtype: float
+        """
         rep_1:int = self.native_representation(solution_code_1)
         rep_2:int = self.native_representation(solution_code_2)
         result = (rep_1 ^ rep_2).count(True)

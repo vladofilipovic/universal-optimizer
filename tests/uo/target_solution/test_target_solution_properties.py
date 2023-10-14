@@ -45,7 +45,7 @@ class TargetSolutionVoid(TargetSolution[int, str]):
     def copy_to(self, destination)->None:
         destination =  copy(self)
 
-    def argument(self)->str:
+    def argument(self, representation:int)->str:
         return "42"
 
     def init_random(self, problem:TargetProblem)->None:
@@ -115,11 +115,6 @@ class TestTargetSolutionProperties(unittest.TestCase):
         val:int = 11
         self.solution.fitness_value = val
         self.assertEqual(self.solution.fitness_value, val)
-
-    def test_set_negative_fitness_value_should_raise_value_exception_with_proper_message(self):
-        with self.assertRaises(ValueError) as context:
-            self.solution.fitness_value = -11
-        self.assertEqual('Fitness value less than 0 is not possible.', context.exception.args[0])
 
     def test_objective_value_should_be_equal_as_value_set_by_property_setter(self):
         val:float = 43.1

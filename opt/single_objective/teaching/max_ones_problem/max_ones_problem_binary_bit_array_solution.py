@@ -71,14 +71,16 @@ class MaxOnesProblemBinaryBitArraySolution(TargetSolution[BitArray,str]):
         """
         destination = self.__copy__()
 
-    def argument(self)->str:
+    def argument(self, representation:BitArray)->str:
         """
-        Solution code of the target solution
+        Argument of the target solution
 
+        :param representation: internal representation of the solution
+        :type representation: `BitArray`
         :return: solution code
         :rtype: str 
         """
-        return self.representation.bin
+        return representation.bin
 
     def init_random(self, problem:TargetProblem)->None:
         """

@@ -20,15 +20,58 @@ from uo.utils.logger import logger
 
 class MaxOnesProblem(TargetProblem):
     
-    def __init__(self, file_path:str=None, dim:int=None)->None:
+    def __init__(self, dim:int=None)->None:
         """
         Create new `MaxOnesProblem` instance
 
-        :param str file_path: path of the file with data for the parget problem instance 
         :param int dim: dimension of the problem
         """
-        super().__init__(name="MaxOnesProblem", is_minimization=False, file_path=file_path, dimension=dim)
+        super().__init__(name="MaxOnesProblem", is_minimization=False)
+        self.__dimension = dim
 
+    @classmethod
+    def from_dimension(cls, dimension:int):
+        """
+        Additional constructor. Create new `MaxOnesProblem` instance when dimension is specified
+
+        :param int dimension: dimension of the problem
+        """
+        return cls(dim=dimension)
+
+    @classmethod
+    def __load_from_file__(cls, file_path:str, data_format:str)->int:
+        """
+        Static function that read problem data from file
+
+        :param str file_path: path of the file with problem data
+        :param str data_format: data format of the file
+
+        :return: all data that describe problem
+        :rtype: int
+        """
+        logger.debug("Load parameters: file path=" + str(file_path) 
+                +  ", data format representation=" + data_format)
+        if data_format=='txt':
+                input_file = open(file_path, 'r')
+                text_line = input_file.readline().strip()
+                # skip comments
+                while text_line.startswith("//") or text_line.startswith(";"):
+                    text_line = input_file.readline()
+                dimension = int( text_line.split()[0] )
+                return dimension
+        else:
+            raise ValueError('Value for data format \'{} \' is not supported'.format(data_format))
+
+    @classmethod
+    def from_input_file(cls, input_file_path:str, input_format:str):
+        """
+        Additional constructor. Create new `MaxOnesProblem` instance when input file and input format are specified
+
+        :param str input_file_path: path of the input file with problem data
+        :param str input_format: format of the input
+        """
+        dimension:int = MaxOnesProblem.__load_from_file__(input_file_path, input_format)
+        return cls(dim=dimension)
 
     def __copy__(self):
         """
@@ -49,23 +92,15 @@ class MaxOnesProblem(TargetProblem):
         """
         return self.__copy__()
 
-    def load_from_file(self, data_format:str='txt')->None:
+    @property
+    def dimension(self)->int:
         """
-        Read target problem data from file
+        Property getter for dimension of the target problem
 
-        :param str data_format: data format of the file
+        :return: dimension of the target problem instance 
+        :rtype: int
         """
-        logger.debug("Load parameters: file path=" + str(self.file_path) 
-                +  ", data format representation=" + data_format)
-        if data_format=='txt':
-                input_file = open(self.file_path, 'r')
-                text_line = input_file.readline().strip()
-                # skip comments
-                while text_line.startswith("//") or text_line.startswith(";"):
-                    text_line = input_file.readline()
-                self.dimension = int( text_line.split()[0] )
-        else:
-            raise ValueError('Value for data format \'{} \' is not supported'.format(data_format))
+        return self.__dimension
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
@@ -93,6 +128,7 @@ class MaxOnesProblem(TargetProblem):
         s+= delimiter
         for i in range(0, indentation):
             s += indentation_symbol  
+        s += 'dimension=' + str(self.dimension) + delimiter
         s += group_end 
         return s
 

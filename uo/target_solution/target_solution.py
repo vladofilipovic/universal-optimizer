@@ -139,8 +139,6 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         :param value: value of the `fitness` to be set
         :type value: float
         """
-        if value < 0:
-            raise ValueError("Fitness value less than 0 is not possible.")
         self.__fitness_value = value
 
     @property
@@ -204,10 +202,12 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         self.__representation = value
 
     @abstractmethod
-    def argument(self)->A_co:
+    def argument(self, representation:R_co)->A_co:
         """
         Argument of the target solution
 
+        :param representation: internal representation of the solution
+        :type representation: R_co
         :return: argument of the solution 
         :rtype: A_co
         """
@@ -217,17 +217,20 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         """
         String representation of the target solution
 
+        :param representation: internal representation of the solution
+        :type representation: R_co
         :return: string representation of the solution 
         :rtype: str
         """
-        return str(self.argument())
+        return str(self.argument(self.representation))
 
     @abstractmethod
     def init_random(self, problem:TargetProblem)->None:
         """
         Random initialization of the solution
 
-        :param `TargetProblem` problem: problem which is solved by solution
+        :param problem: problem which is solved by solution
+        :type problem: `TargetProblem`
         """
         raise NotImplementedError
 
@@ -386,7 +389,7 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         s += 'is_feasible=' + str(self.is_feasible) + delimiter
         for i in range(0, indentation):
             s += indentation_symbol     
-        s += 'string_representation()=' + self.string_representation() + delimiter
+        s += 'representation()=' + str(self.representation) + delimiter
         for i in range(0, indentation):
             s += indentation_symbol     
         s += 'evaluation_cache_cs=' + self.evaluation_cache_cs.string_rep(

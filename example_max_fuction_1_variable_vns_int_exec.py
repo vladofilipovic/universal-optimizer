@@ -10,17 +10,26 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer_const
                 VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
-from opt.single_objective.teaching.max_ones_problem.max_ones_problem import MaxOnesProblem
-from opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_int_solution import \
-                MaxOnesProblemBinaryIntSolution
-from opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_int_solution_vns_support import \
-                MaxOnesProblemBinaryIntSolutionVnsSupport
+from opt.single_objective.teaching.max_function_1_variable_problem.max_function_1_variable_problem import \
+                MaxFunction1VariableProblem
+from opt.single_objective.teaching.max_function_1_variable_problem.max_function_1_variable_problem_int_solution import \
+                MaxFunction1VariableProblemIntSolution
+from opt.single_objective.teaching.max_function_1_variable_problem.max_function_1_variable_problem_int_solution_vns_support \
+                import MaxFunction1VariableProblemIntSolutionVnsSupport
 
 def main():
-        problem_to_solve:MaxOnesProblem = MaxOnesProblem(dim=24)
-        solution:MaxOnesProblemBinaryIntSolution = MaxOnesProblemBinaryIntSolution()
-        finish:FinishControl = FinishControl(criteria='evaluations & seconds', evaluations_max=500, seconds_max=10)
-        vns_support:MaxOnesProblemBinaryIntSolutionVnsSupport = MaxOnesProblemBinaryIntSolutionVnsSupport()
+        output_control:OutputControl = OutputControl(write_to_output=False)
+        problem_to_solve:MaxFunction1VariableProblem = MaxFunction1VariableProblem.from_input_file(
+                input_file_path='./opt/single_objective/teaching/max_function_1_variable_problem/inputs/17-x^2f-3t3.txt',
+                input_format='txt')
+        print('Problem: {}'.format(problem_to_solve))            
+        solution:MaxFunction1VariableProblemIntSolution = MaxFunction1VariableProblemIntSolution(
+                problem_to_solve.domain_low, problem_to_solve.domain_up, 1700 )
+        solution.init_random(problem=problem_to_solve)
+        solution.evaluate(problem_to_solve)           
+        print('Solution: {}'.format(solution))
+        finish:FinishControl = FinishControl(criteria='evaluations & seconds', evaluations_max=5000, seconds_max=10)
+        vns_support:MaxFunction1VariableProblemIntSolutionVnsSupport = MaxFunction1VariableProblemIntSolutionVnsSupport()
         output_control:OutputControl = OutputControl(write_to_output=False)
         additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(keep='')
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
@@ -45,4 +54,3 @@ def main():
 
 if __name__ == '__main__':
         main()
-

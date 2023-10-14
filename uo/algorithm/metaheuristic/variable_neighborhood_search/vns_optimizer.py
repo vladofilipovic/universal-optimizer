@@ -197,7 +197,8 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
             new_is_better:bool = self.is_first_solution_better(self.current_solution, self.best_solution)
             make_move:bool = new_is_better
             if new_is_better is None:
-                if  self.current_solution.string_representation() == self.best_solution.string_representation():
+                if  self.current_solution.string_representation() == \
+                        self.best_solution.string_representation():
                     make_move = False
                 else:
                     logger.debug('VnsOptimizer::main_loop_iteration: Same solution quality, generating random true with probability 0.5');

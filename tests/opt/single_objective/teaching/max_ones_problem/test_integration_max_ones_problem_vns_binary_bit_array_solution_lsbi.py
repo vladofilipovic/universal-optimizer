@@ -38,7 +38,7 @@ class TestIntegrationMaxOnesProblemVnsBinaryBitArraySolutionLsbi(unittest.TestCa
 
     def setUp(self):
         self.output_control = OutputControl(False)
-        self.problem_to_solve:MaxOnesProblem = MaxOnesProblem(dim=24)
+        self.problem_to_solve:MaxOnesProblem = MaxOnesProblem.from_dimension(dimension=24)
         self.solution:MaxOnesProblemBinaryBitArraySolution = MaxOnesProblemBinaryBitArraySolution(random_seed=43434343)
         self.finish_control:FinishControl = FinishControl(criteria='evaluations', evaluations_max=500)
         self.additional_stat = AdditionalStatisticsControl(keep='')

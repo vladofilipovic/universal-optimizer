@@ -35,7 +35,7 @@ class TestIntegrationMaxOnesProblemTeBinaryBitArraySolution(unittest.TestCase):
 
     def setUp(self):
         self.output_control = OutputControl(False)
-        self.problem_to_solve:MaxOnesProblem = MaxOnesProblem(dim=12)
+        self.problem_to_solve:MaxOnesProblem = MaxOnesProblem.from_dimension(dimension=12)
         self.solution:MaxOnesProblemBinaryBitArraySolution = MaxOnesProblemBinaryBitArraySolution(random_seed=43434343)
         self.te_support:MaxOnesProblemBinaryBitArraySolutionTeSupport = MaxOnesProblemBinaryBitArraySolutionTeSupport()
         construction_params:TeOptimizerConstructionParameters = TeOptimizerConstructionParameters()

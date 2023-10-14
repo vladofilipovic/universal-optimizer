@@ -102,7 +102,7 @@ class MaxOnesProblemBinaryIntSolution(TargetSolution[int,str]):
         result = (rep_1 ^ rep_2).count(True)
         return result 
 
-    def string_representation(self)->str:
+    def argument(self, problem:TargetProblem)->str:
         return bin(self.representation)
 
     def string_rep(self, delimiter:str='\n', indentation:int=0, indentation_symbol:str='   ', 
@@ -221,7 +221,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,st
 
 def main():
     output_control:OutputControl = OutputControl(write_to_output=False)
-    problem_to_solve:MaxOnesProblem = MaxOnesProblem(dim=24)
+    problem_to_solve:MaxOnesProblem = MaxOnesProblem.from_dimension(dimension=24)
     solution:MaxOnesProblemBinaryIntSolution = MaxOnesProblemBinaryIntSolution()
     finish:FinishControl = FinishControl( criteria='evaluations & seconds', 
             evaluations_max=500, seconds_max=10)
