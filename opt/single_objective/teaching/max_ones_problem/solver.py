@@ -164,8 +164,7 @@ def main():
                 keep=additional_statistics_keep, 
                 max_local_optima=max_local_optima)
         # problem to be solved
-        problem = MaxOnesProblem(input_file_path)
-        problem.load_from_file(input_format)
+        problem = MaxOnesProblem.from_input_file(input_file_path=input_file_path,input_format=input_format)
         # select among algorithm types
         if parameters['algorithm'] == 'variable_neighborhood_search':
             logger.debug('Variable neighborhood search started.') 

@@ -13,7 +13,7 @@ from opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_bit_
 
 def main():
         output_control:OutputControl = OutputControl(write_to_output=False)
-        problem_to_solve:MaxOnesProblem = MaxOnesProblem(dim=10)
+        problem_to_solve:MaxOnesProblem = MaxOnesProblem.from_dimension(dimension=10)
         solution:MaxOnesProblemBinaryBitArraySolution = MaxOnesProblemBinaryBitArraySolution()
         te_support:MaxOnesProblemBinaryBitArraySolutionTeSupport = MaxOnesProblemBinaryBitArraySolutionTeSupport()
         construction_params:TeOptimizerConstructionParameters = TeOptimizerConstructionParameters()

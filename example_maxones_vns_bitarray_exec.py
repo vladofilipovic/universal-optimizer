@@ -18,7 +18,7 @@ from opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_bit_
 
 def main():
         output_control:OutputControl = OutputControl(write_to_output=False)
-        problem_to_solve:MaxOnesProblem = MaxOnesProblem(dim=24)
+        problem_to_solve:MaxOnesProblem = MaxOnesProblem.from_dimension(dimension=24)
         solution:MaxOnesProblemBinaryBitArraySolution = MaxOnesProblemBinaryBitArraySolution()
         finish:FinishControl = FinishControl(criteria='evaluations', evaluations_max=5000)
         additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(keep='')

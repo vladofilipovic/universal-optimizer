@@ -17,7 +17,7 @@ from opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_int_
                 MaxOnesProblemBinaryIntSolutionVnsSupport
 
 def main():
-        problem_to_solve:MaxOnesProblem = MaxOnesProblem(dim=24)
+        problem_to_solve:MaxOnesProblem = MaxOnesProblem.from_dimension(dimension=24)
         solution:MaxOnesProblemBinaryIntSolution = MaxOnesProblemBinaryIntSolution()
         finish:FinishControl = FinishControl(criteria='evaluations & seconds', evaluations_max=500, seconds_max=10)
         vns_support:MaxOnesProblemBinaryIntSolutionVnsSupport = MaxOnesProblemBinaryIntSolutionVnsSupport()
