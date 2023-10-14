@@ -24,11 +24,11 @@ def main():
                 input_format='txt')
         print('Problem: {}'.format(problem_to_solve))            
         solution:MaxFunction1VariableProblemIntSolution = MaxFunction1VariableProblemIntSolution(
-                problem_to_solve.domain_low, problem_to_solve.domain_up, 1000 )
+                problem_to_solve.domain_low, problem_to_solve.domain_up, 1700 )
         solution.init_random(problem=problem_to_solve)
         solution.evaluate(problem_to_solve)           
         print('Solution: {}'.format(solution))
-        finish:FinishControl = FinishControl(criteria='evaluations & seconds', evaluations_max=50000, seconds_max=10)
+        finish:FinishControl = FinishControl(criteria='evaluations & seconds', evaluations_max=5000, seconds_max=10)
         vns_support:MaxFunction1VariableProblemIntSolutionVnsSupport = MaxFunction1VariableProblemIntSolutionVnsSupport()
         output_control:OutputControl = OutputControl(write_to_output=False)
         additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(keep='')
