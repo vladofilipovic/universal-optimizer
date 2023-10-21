@@ -71,6 +71,8 @@
                 "--writeToOutputFile", "True",
                 "--outputFilePath", "opt/single_objective/teaching/max_ones_problem/outputs/dimension_10.csv",
                 "--outputFileNameAppendTimeStamp", "False",
+                "--outputFields", "",
+                "--outputMoments", "after_algorithm",
                 "--inputFilePath", "opt/single_objective/teaching/max_ones_problem/inputs/dimension_10.txt", 
                 "--inputFormat", "txt"
                 ]        

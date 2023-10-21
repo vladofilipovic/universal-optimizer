@@ -163,6 +163,16 @@ def parse_arguments():
                 "File path '' means that it is within 'outputs' folder."))
         parser_ilp.add_argument('--outputFileNameAppendTimeStamp', type=bool, default=False, 
                 help=("Should timestamp be automatically added to the name of the output file.") )        
+        parser_ilp.add_argument('--outputFields', type=str, 
+                default='iteration, evaluation, self.best_solution.argument()', 
+                help=("Comma-separated list of fields whose values will be outputted during algorithm execution. " 
+                "Fields 'iteration, evaluation' means that current iterations and current evaluation will be outputted."))
+        parser_ilp.add_argument('--outputMoments', type=str, default='after_algorithm, after_iteration', 
+                help=("Comma-separated list of moments when values will be outputted during algorithm execution. " 
+                "List contains of following elements: 'before_algorithm', 'after_algorithm', 'before_iteration', "
+                "'after_iteration', 'before_evaluation', 'after_evaluation', 'before_step_in_iteration', "
+                "'after_step_in_iteration'"
+                "Moments 'after_algorithm' means that result will be outputted after algorithm."))
         parser_ilp.add_argument('--inputFilePath', type=str, default='inputs/max_ones_problem/dim_25.txt', 
                 help='Input file path for the instance of the problem. ')
         parser_ilp.add_argument('--inputFormat', type=str, choices=['txt', 'idle'], default = 'txt',
