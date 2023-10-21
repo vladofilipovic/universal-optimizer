@@ -39,7 +39,7 @@ default_parameters_cl = {
         'kMin': 1,
         'kMax': 3,
         'localSearchType': 'local_search_best_improvement',
-        'solutionType': 'BitArray'
+        'solutionType': ''
 }
 
 
@@ -149,8 +149,35 @@ def parse_arguments():
         parser_te.add_argument('--solutionType', type=str, 
                 choices=['BitArray', 'int'],  
                 default='BitArray', 
-                help=("VNS parameter that determines solution (representation) type."))
+                help=("TE parameter that determines solution (representation) type."))
         parser_te.add_argument( "--log", default="warning", help=("Provide logging level. "
+                "Example --log debug', default='warning'") )
+
+        parser_ilp = subparsers.add_parser('integer_linear_programming', help='Execute ILP solver for max_ones_problem.')
+        parser_ilp.add_argument('optimization_type', help='Decide if minimization or maximization will be executed.'
+                , nargs='?', choices=('minimization', 'maximization'))
+        parser_ilp.add_argument('--writeToOutputFile', type=bool, default=True, 
+                help=("Should results of metaheuristic execution be written to output file.") )        
+        parser_ilp.add_argument('--outputFilePath', type=str, default='output/out.txt', 
+                help=("File path of the output file. " 
+                "File path '' means that it is within 'outputs' folder."))
+        parser_ilp.add_argument('--outputFileNameAppendTimeStamp', type=bool, default=False, 
+                help=("Should timestamp be automatically added to the name of the output file.") )        
+        parser_ilp.add_argument('--outputFields', type=str, 
+                default='iteration, evaluation, self.best_solution.argument()', 
+                help=("Comma-separated list of fields whose values will be outputted during algorithm execution. " 
+                "Fields 'iteration, evaluation' means that current iterations and current evaluation will be outputted."))
+        parser_ilp.add_argument('--outputMoments', type=str, default='after_algorithm, after_iteration', 
+                help=("Comma-separated list of moments when values will be outputted during algorithm execution. " 
+                "List contains of following elements: 'before_algorithm', 'after_algorithm', 'before_iteration', "
+                "'after_iteration', 'before_evaluation', 'after_evaluation', 'before_step_in_iteration', "
+                "'after_step_in_iteration'"
+                "Moments 'after_algorithm' means that result will be outputted after algorithm."))
+        parser_ilp.add_argument('--inputFilePath', type=str, default='inputs/max_ones_problem/dim_25.txt', 
+                help='Input file path for the instance of the problem. ')
+        parser_ilp.add_argument('--inputFormat', type=str, choices=['txt', 'idle'], default = 'txt',
+                help='Input file format. ')    
+        parser_ilp.add_argument( "--log", default="warning", help=("Provide logging level. "
                 "Example --log debug', default='warning'") )
 
         parser_idle = subparsers.add_parser('idle', help='Execute idle algorithm for max_ones_problem.')

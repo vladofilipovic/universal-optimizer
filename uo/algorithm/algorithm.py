@@ -16,8 +16,9 @@ from uo.algorithm.output_control import OutputControl
 from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.target_solution import TargetSolution
 
+from uo.algorithm.optimizer import Optimizer
     
-class Algorithm(metaclass=ABCMeta):
+class Algorithm(Optimizer, metaclass=ABCMeta):
     """
     This class describes Algorithm
     """
@@ -28,21 +29,12 @@ class Algorithm(metaclass=ABCMeta):
         Create new Algorithm instance
 
         :param str name: name of the algorithm
-        :param int evaluations_max: maximum number of evaluations for algorithm execution
-        :param int seconds_max: maximum number of seconds for algorithm execution
         :param `OutputControl` output_control: structure that controls output
         :param `TargetProblem` target_problem: problem to be solved
         """
-        self.__name:str = name
-        self.__output_control:OutputControl = output_control
-        if isinstance(target_problem, TargetProblem):
-            self.__target_problem:TargetProblem = target_problem.copy()
-        else:
-            self.__target_problem:TargetProblem = target_problem
+        super().__init__(name=name, output_control=output_control, target_problem=target_problem)
         self.__best_solution:TargetSolution = None
         self.__evaluation:int = 0
-        self.__execution_started:datetime = None
-        self.__execution_ended:datetime = None
         self.__iteration:int = 0
         self.__iteration_best_found:int = 0
         self.__second_when_best_obtained:float = 0.0
@@ -69,25 +61,6 @@ class Algorithm(metaclass=ABCMeta):
         return self.__copy__()
 
     @property
-    def name(self)->str:
-        """
-        Property getter for the name of the algorithm
-        
-        :return: name of the algorithm instance 
-        :rtype: str
-        """
-        return self.__name
-
-    @property
-    def target_problem(self)->TargetProblem:
-        """
-        Property getter for the target problem to be solved
-        
-        :return TargetProblem: target problem to be solved 
-        """
-        return self.__target_problem
-
-    @property
     def evaluation(self)->int:
         """
         Property getter for current number of evaluations during algorithm execution
@@ -103,61 +76,6 @@ class Algorithm(metaclass=ABCMeta):
         Property setter for current number of evaluations
         """
         self.__evaluation = value
-
-    @property
-    def execution_started(self)->datetime:
-        """
-        Property getter for time when execution started
-        
-        :return datetime: time when execution started 
-        """
-        return self.__execution_started
-
-    @execution_started.setter
-    def execution_started(self, value:datetime)->None:
-        """
-        Property setter for time when execution started
-
-        :param datetime value: time when execution started
-        """
-        self.__execution_started = value
-
-    @property
-    def execution_ended(self)->datetime:
-        """
-        Property getter for time when execution ended
-        
-        :return datetime: time when execution ended 
-        """
-        return self.__execution_ended
-
-    @execution_ended.setter
-    def execution_ended(self, value:datetime)->None:
-        """
-        Property setter for time when execution ended
-        
-        :param datetime value: time when execution ended
-        """
-        self.__execution_ended = value
-
-    @property
-    def output_control(self)->OutputControl:
-        """
-        Property getter for the output control of the executing algorithm
-        
-        :return: output control of the executing algorithm
-        :rtype: `OutputControl`
-        """
-        return self.__output_control
-
-    @output_control.setter
-    def output_control(self, value:OutputControl)->None:
-        """
-        Property setter for the output control of the executing algorithm
-        
-        :param int value: `OutputControl`
-        """
-        self.__output_control = value
 
     @property
     def best_solution(self)->TargetSolution:
@@ -246,67 +164,6 @@ class Algorithm(metaclass=ABCMeta):
         self.__best_solution = solution.copy()
         self.__second_when_best_obtained = (datetime.now() - self.execution_started).total_seconds()
         self.__iteration_best_found = self.iteration
-
-    def write_output_headers_if_needed(self):
-        """
-        Write headers(with field names) to output file, if necessary 
-        """            
-        if self.output_control.write_to_output:
-            output:TextIOWrapper = self.output_control.output_file
-            f_hs:list[str] = self.output_control.fields_headings
-            line:str = ''
-            for f_h in f_hs:
-                output.write(f_h)
-                line += f_h
-                output.write('\t')
-                line += '\t'
-            output.write('\n')
-            logger.info(line)
-
-    def write_output_values_if_needed(self, step_name:str, step_name_value:str):
-        """
-        Write data(with field values) to output file, if necessary 
-
-        :param str step_name: name of the step when data should be written to output - have to be one of the following values: 'after_algorithm', 'before_algorithm', 'after_iteration', 'before_iteration', 'after_evaluation', 'before_evaluation', 'after_step_in_iteration', 'before_step_in_iteration'
-        :param str step_name_value: what should be written to the output instead of step_name
-        """            
-        if self.output_control.write_to_output:
-            output:TextIOWrapper = self.output_control.output_file
-            should_write:bool = False
-            if step_name == 'after_algorithm':
-                should_write = True
-            elif step_name == 'before_algorithm':
-                should_write = self.output_control.write_before_algorithm
-            elif step_name == 'after_iteration':
-                should_write = self.output_control.write_after_iteration
-            elif step_name == 'before_iteration':
-                should_write = self.output_control.write_before_iteration
-            elif step_name == 'after_evaluation':
-                should_write = self.output_control.write_after_evaluation
-            elif step_name == 'before_evaluation':
-                should_write = self.output_control.write_before_evaluation
-            elif step_name == 'after_step_in_iteration':
-                should_write = self.output_control.write_after_step_in_iteration
-            elif step_name == 'before_step_in_iteration':
-                should_write = self.output_control.write_before_step_in_iteration
-            else:
-                raise ValueError("Supplied step name '" + step_name + "' is not valid.")
-            if should_write:
-                line:str = ''
-                fields_def:list[str] = self.output_control.fields_definitions 
-                for f_def in fields_def:
-                    if f_def != "":
-                        try:
-                            data = eval(f_def)
-                            s_data:str = str(data)
-                            if s_data == "step_name":
-                                s_data = step_name_value
-                        except:
-                            s_data:str = 'XXX'
-                        output.write( s_data + '\t')
-                        line += s_data + '\t'
-                output.write('\n')
-                logger.info(line)
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
