@@ -58,7 +58,7 @@ class MaxOnesProblemIntegerLinearProgrammingSolver(Algorithm):
         """
         Uses ILP model in order to solve MaxOnesProblem
         """
-        self.execution_started = datetime.now
+        self.execution_started = datetime.now()
         m = Model()
         l = []
         for i in range(self.target_problem.dimension):
@@ -71,7 +71,7 @@ class MaxOnesProblemIntegerLinearProgrammingSolver(Algorithm):
         else:
             m.add_objective(-(x).sum())
         m.solve()
-        self.execution_ended = datetime.now
+        self.execution_ended = datetime.now()
         logger.debug(m.solution)
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
