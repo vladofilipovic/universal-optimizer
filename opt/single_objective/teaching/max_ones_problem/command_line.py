@@ -39,7 +39,7 @@ default_parameters_cl = {
         'kMin': 1,
         'kMax': 3,
         'localSearchType': 'local_search_best_improvement',
-        'solutionType': 'BitArray'
+        'solutionType': ''
 }
 
 
