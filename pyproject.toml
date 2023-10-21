@@ -11,6 +11,8 @@ packages = [{include = "uo"},{include = "app"},]
 python = "^3.11"
 pathlib = "^1.0.1"
 bitstring = "^4.1.1"
+gurobipy = "^10.0.3"
+linopy = "^0.2.6"
 
 [tool.poetry.group.docs] 
 optional = true
