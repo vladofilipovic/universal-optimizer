@@ -23,6 +23,9 @@ from datetime import datetime
 
 from bitstring import BitArray
 
+import xarray as xr
+from linopy import Model
+
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
@@ -251,10 +254,16 @@ def main():
             logger.info('Number of iterations: {}, evaluations: {}'.format(optimizer.iteration, optimizer.evaluation))  
         elif parameters['algorithm'] == 'integer_linear_programming':
             logger.debug('ILP solving started.')   
+            start_time = datetime.now()
+            if write_to_output_file:
+                output_file.write("# ILP started at: %s\n" % str(start_time))
+                output_file.write('# Execution parameters: {}\n'.format(parameters))
             optimizer:MaxOnesProblemIntegerLinearProgrammingSolver = MaxOnesProblemIntegerLinearProgrammingSolver(
-                problem
+                output_control=output_control, 
+                problem=problem
             )
             optimizer.solve()
+            logger.debug(optimizer.model.solution.x)
             logger.debug('ILP solving ended.')    
         elif parameters['algorithm'] == 'idle':
             logger.debug('Idle execution started.')    

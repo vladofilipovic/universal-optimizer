@@ -17,14 +17,15 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer impor
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import \
         ProblemSolutionVnsSupport
 
-class MaxOnesProblem(TargetProblem):
+class MaxOnesProblem2(TargetProblem):
 
     def __init__(self, dim:int)->None:
         if dim <= 0:
             raise ValueError("Problem dimension should be positive!")
         if dim > 31:
             raise ValueError("Problem dimension should be less than 32")
-        super().__init__("MaxOnesProblem", is_minimization=False, file_path=None, dimension=dim)   
+        self.__dimension = dim
+        super().__init__("MaxOnesProblem2", is_minimization=False)   
 
     def __copy__(self):
         pr = deepcopy(self)
@@ -33,8 +34,9 @@ class MaxOnesProblem(TargetProblem):
     def copy(self):
         return self.__copy__()
 
-    def load_from_file(self, data_format:str='txt')->None:
-        return
+    @property
+    def dimension(self)->int:
+        return self.__dimension
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
@@ -130,7 +132,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,st
     def copy(self):
         return self.__copy__()
         
-    def shaking(self, k:int, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryIntSolution, 
+    def shaking(self, k:int, problem:MaxOnesProblem2, solution:MaxOnesProblemBinaryIntSolution, 
             optimizer:Algorithm)->bool:
         if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
             return False
@@ -157,7 +159,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,st
         else:
             return False 
 
-    def local_search_best_improvement(self, k:int, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryIntSolution, 
+    def local_search_best_improvement(self, k:int, problem:MaxOnesProblem2, solution:MaxOnesProblemBinaryIntSolution, 
             optimizer: Algorithm)->MaxOnesProblemBinaryIntSolution:
         if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
             return solution
@@ -184,7 +186,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,st
                 raise Exception('Fitness calculation within `local_search_best_improvement` function is not correct.')
         return solution
 
-    def local_search_first_improvement(self, k:int, problem:MaxOnesProblem, solution:MaxOnesProblemBinaryIntSolution, 
+    def local_search_first_improvement(self, k:int, problem:MaxOnesProblem2, solution:MaxOnesProblemBinaryIntSolution, 
             optimizer: Algorithm)->MaxOnesProblemBinaryIntSolution:
         if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
             return solution
@@ -221,7 +223,7 @@ class MaxOnesProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,st
 
 def main():
     output_control:OutputControl = OutputControl(write_to_output=False)
-    problem_to_solve:MaxOnesProblem = MaxOnesProblem.from_dimension(dimension=24)
+    problem_to_solve:MaxOnesProblem2 = MaxOnesProblem2(dim=24)
     solution:MaxOnesProblemBinaryIntSolution = MaxOnesProblemBinaryIntSolution()
     finish:FinishControl = FinishControl( criteria='evaluations & seconds', 
             evaluations_max=500, seconds_max=10)

@@ -14,19 +14,23 @@ from linopy import Model
 
 from uo.utils.logger import logger
 
-from uo.algorithm.algorithm import Algorithm
+from uo.algorithm.optimizer import Optimizer
+from uo.algorithm.output_control import OutputControl
 
 from opt.single_objective.teaching.max_ones_problem.max_ones_problem import MaxOnesProblem
 
-class MaxOnesProblemIntegerLinearProgrammingSolver(Algorithm):
+class MaxOnesProblemIntegerLinearProgrammingSolver(Optimizer):
 
-    def __init__(self, problem:MaxOnesProblem)->None:
+    def __init__(self, output_control:OutputControl,  problem:MaxOnesProblem)->None:
         """
-        Create new MaxOnesProblemIntegerLinearProgrammingSolver instance
+        Create new `MaxOnesProblemIntegerLinearProgrammingSolver` instance
 
-        :param MaxOnesProblem problem: problem to be solved
+        :param `OutputControls` output_control: object that control output
+        :param `MaxOnesProblem` problem: problem to be solved
         """
-        super().__init__("MaxOnesProblemIntegerLinearProgrammingSolver", output_control=None, target_problem=problem)
+        super().__init__("MaxOnesProblemIntegerLinearProgrammingSolver", output_control=output_control, 
+                target_problem=problem)
+        self.__model = Model()
 
     def __copy__(self):
         """
@@ -47,32 +51,35 @@ class MaxOnesProblemIntegerLinearProgrammingSolver(Algorithm):
         """
         return self.__copy__()
 
-    def init(self)->None:
+    @property
+    def model(self)->Model:
         """
-        Initialization of the algorithm
+        Property getter for the ILP model
+        
+        :return: model of the problem 
+        :rtype: `Model`
         """
-        return
+        return self.__model    
 
-
-    def solve(self):
+    def solve(self)->None:
         """
         Uses ILP model in order to solve MaxOnesProblem
         """
-        self.execution_started = datetime.now()
-        m = Model()
+        self.execution_started = datetime.now() 
         l = []
         for i in range(self.target_problem.dimension):
             l.append(0)
         coords = xr.DataArray(l)
-        x = m.add_variables(binary=True, coords=[coords], name='x')
-        logger.debug(m.variables)
+        x = self.model.add_variables(binary=True, coords=[coords], name='x')
+        #logger.debug(self.model.variables)
         if self.target_problem.is_minimization:
-            m.add_objective((x).sum())
+            self.model.add_objective((x).sum())
         else:
-            m.add_objective(-(x).sum())
-        m.solve()
+            self.model.add_objective(-(x).sum())
+        self.model.solve()
         self.execution_ended = datetime.now()
-        logger.debug(m.solution)
+        self.write_output_values_if_needed("after_algorithm", "a_a")
+        #logger.debug(self.model.solution.x)
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
