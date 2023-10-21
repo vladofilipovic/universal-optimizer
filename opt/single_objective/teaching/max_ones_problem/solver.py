@@ -29,7 +29,8 @@ from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalS
 
 from uo.algorithm.exact.total_enumeration.te_optimizer_constructor_parameters import TeOptimizerConstructionParameters
 from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizer
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer_constructor_parameters import VnsOptimizerConstructionParameters
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer_constructor_parameters import \
+        VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
 from uo.utils.files import ensure_dir 
@@ -40,12 +41,20 @@ from opt.single_objective.teaching.max_ones_problem.command_line import parse_ar
 
 from opt.single_objective.teaching.max_ones_problem.max_ones_problem import MaxOnesProblem
 
-from opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_bit_array_solution import MaxOnesProblemBinaryBitArraySolution
-from opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_bit_array_solution_vns_support import MaxOnesProblemBinaryBitArraySolutionVnsSupport
-from opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_bit_array_solution_te_support import MaxOnesProblemBinaryBitArraySolutionTeSupport
+from opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_int_solution import \
+        MaxOnesProblemBinaryIntSolution
+from opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_int_solution_vns_support import \
+        MaxOnesProblemBinaryIntSolutionVnsSupport
 
-from opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_int_solution import MaxOnesProblemBinaryIntSolution
-from opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_int_solution_vns_support import MaxOnesProblemBinaryIntSolutionVnsSupport
+from opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_bit_array_solution import \
+        MaxOnesProblemBinaryBitArraySolution
+from opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_bit_array_solution_vns_support import \
+        MaxOnesProblemBinaryBitArraySolutionVnsSupport
+from opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_bit_array_solution_te_support import\
+        MaxOnesProblemBinaryBitArraySolutionTeSupport
+
+from opt.single_objective.teaching.max_ones_problem.max_ones_problem_ilp_linopy import \
+    MaxOnesProblemIntegerLinearProgrammingSolver
 
 """ 
 Solver.
@@ -206,6 +215,10 @@ def main():
             #logger.debug('Optimizer: ' + str(optimizer))
             optimizer.optimize()
             logger.debug('Variable neighborhood search finished.') 
+            logger.info('Best solution code: {}'.format(optimizer.best_solution.string_representation()))            
+            logger.info('Best solution objective: {}, fitness: {}'.format(optimizer.best_solution.objective_value,
+                    optimizer.best_solution.fitness_value))
+            logger.info('Number of iterations: {}, evaluations: {}'.format(optimizer.iteration, optimizer.evaluation))  
         elif parameters['algorithm'] == 'total_enumeration':
             logger.debug('Total enumeration started.') 
             start_time = datetime.now()
@@ -228,19 +241,26 @@ def main():
             te_construction_params.initial_solution = solution
             te_construction_params.problem_solution_te_support = te_support
             # optimizer based on TE
-            optimizer = TeOptimizer.from_construction_tuple(te_construction_params)
+            optimizer:TeOptimizer = TeOptimizer.from_construction_tuple(te_construction_params)
             #logger.debug('Optimizer: ' + str(optimizer))
             optimizer.optimize()
             logger.debug('Total enumeration finished.') 
+            logger.info('Best solution code: {}'.format(optimizer.best_solution.string_representation()))            
+            logger.info('Best solution objective: {}, fitness: {}'.format(optimizer.best_solution.objective_value,
+                    optimizer.best_solution.fitness_value))
+            logger.info('Number of iterations: {}, evaluations: {}'.format(optimizer.iteration, optimizer.evaluation))  
+        elif parameters['algorithm'] == 'integer_linear_programming':
+            logger.debug('ILP solving started.')   
+            optimizer:MaxOnesProblemIntegerLinearProgrammingSolver = MaxOnesProblemIntegerLinearProgrammingSolver(
+                problem
+            )
+            optimizer.solve()
+            logger.debug('ILP solving ended.')    
         elif parameters['algorithm'] == 'idle':
             logger.debug('Idle execution started.')    
             logger.debug('Idle execution ended.')    
         else:
             raise ValueError('Invalid optimization algorithm is chosen.')
-        logger.info('Best solution code: {}'.format(optimizer.best_solution.string_representation()))            
-        logger.info('Best solution objective: {}, fitness: {}'.format(optimizer.best_solution.objective_value,
-                optimizer.best_solution.fitness_value))
-        logger.info('Number of iterations: {}, evaluations: {}'.format(optimizer.iteration, optimizer.evaluation))  
         logger.info('Execution: {} - {}'.format(optimizer.execution_started, optimizer.execution_ended))          
         logger.debug('Solver ended.')    
         return

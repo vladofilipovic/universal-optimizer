@@ -7,6 +7,7 @@
         "Filipović",
         "intersphinx",
         "levelname",
+        "linopy",
         "maxdepth",
         "maxones",
         "metaheuristic",
@@ -18,7 +19,8 @@
         "tobitarray",
         "tobytes",
         "toctree",
-        "viewcode"
+        "viewcode",
+        "xarray"
     ],
     "editor.indentSize": "tabSize",
     "editor.rulers": [

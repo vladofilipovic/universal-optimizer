@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Current File VNS",
+            "name": "Pyt: Curr File MOP VNS",
             "type": "python",
             "request": "launch",
             "program": "${file}",
@@ -39,7 +39,7 @@
                 ]        
         },
         {
-            "name": "Python: Current File TE",
+            "name": "Pyt: Curr File MOP TE",
             "type": "python",
             "request": "launch",
             "program": "${file}",
@@ -56,6 +56,23 @@
                 "--inputFilePath", "opt/single_objective/teaching/max_ones_problem/inputs/dimension_10.txt", 
                 "--inputFormat", "txt",
                 "--solutionType", "BitArray"
+                ]        
+        },
+        {
+            "name": "Pyt: Curr File MOP ILP",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "integer_linear_programming",
+                "maximization",
+                "--writeToOutputFile", "True",
+                "--outputFilePath", "opt/single_objective/teaching/max_ones_problem/outputs/dimension_10.csv",
+                "--outputFileNameAppendTimeStamp", "False",
+                "--inputFilePath", "opt/single_objective/teaching/max_ones_problem/inputs/dimension_10.txt", 
+                "--inputFormat", "txt"
                 ]        
         }
     ]
