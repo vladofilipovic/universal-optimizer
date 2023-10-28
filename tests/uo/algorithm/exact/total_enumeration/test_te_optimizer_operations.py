@@ -15,6 +15,8 @@ import unittest.mock as mock
 
 from copy import deepcopy
 
+from datetime import datetime
+
 from uo.target_problem.target_problem import TargetProblem 
 from uo.target_solution.target_solution import TargetSolution
 from uo.algorithm.exact.total_enumeration.problem_solution_te_support import ProblemSolutionTeSupport 
@@ -28,7 +30,7 @@ class TestTeOptimizerOperations(unittest.TestCase):
 
     def setUp(self):       
 
-        self.oc_write_to_output = True
+        self.oc_write_to_output = False
         self.oc_output_file = "some file path..."
         self.output_control = mock.MagicMock()
         type(self.output_control).write_to_output = self.oc_write_to_output
@@ -56,8 +58,10 @@ class TestTeOptimizerOperations(unittest.TestCase):
         type(self.solution).fitness_value=self.fitness_value,
         type(self.solution).objective_value=self.objective_value,
         type(self.solution).is_feasible= self.is_feasible
-        
+        self.solution.evaluate = mock.Mock(return_value='evaluate')
+
         self.te_support = mock.MagicMock()
+        self.te_support.reset = mock.Mock(return_value='reset')
 
         self.te_optimizer = TeOptimizer(output_control=self.output_control,
                 target_problem=self.problem,
@@ -65,8 +69,20 @@ class TestTeOptimizerOperations(unittest.TestCase):
                 problem_solution_te_support=self.te_support )
         return
     
-    def test_is_feasible_should_be_equal_as_in_constructor(self):
-        self.assertEqual(self.solution.is_feasible, self.is_feasible)
+    def test_init_method_should_evaluate_initial_solution_once(self):
+        self.te_optimizer.execution_started = datetime.now()
+        self.te_optimizer.init()
+        self.solution.evaluate.assert_called_once()
+
+    def test_init_method_should_evaluate_initial_solution_once_with_appropriate_arguments(self):
+        self.te_optimizer.execution_started = datetime.now()
+        self.te_optimizer.init()
+        self.solution.evaluate.assert_called_once_with(self.problem)
+
+    def test_init_method_should_execute_support_reset(self):
+        self.te_optimizer.execution_started = datetime.now()
+        self.te_optimizer.init()
+        self.te_support.reset.assert_called()
 
     def tearDown(self):
         return

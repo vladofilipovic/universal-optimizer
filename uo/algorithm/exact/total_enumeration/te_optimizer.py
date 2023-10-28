@@ -61,9 +61,9 @@ class TeOptimizer(Algorithm):
                 self.__can_progress_method = self.__problem_solution_te_support.can_progress
             else:
                 self.__problem_solution_te_support:ProblemSolutionTeSupport = problem_solution_te_support
-                self.__reset_method = None
-                self.__progress_method = None
-                self.__can_progress_method = None
+                self.__reset_method = problem_solution_te_support.reset
+                self.__progress_method = problem_solution_te_support.progress
+                self.__can_progress_method = problem_solution_te_support.can_progress
         else:
             self.__problem_solution_te_support:ProblemSolutionTeSupport = None
             self.__reset_method = None
