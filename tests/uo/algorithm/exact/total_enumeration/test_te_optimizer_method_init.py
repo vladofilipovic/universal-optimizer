@@ -22,11 +22,11 @@ from uo.target_solution.target_solution import TargetSolution
 from uo.algorithm.exact.total_enumeration.problem_solution_te_support import ProblemSolutionTeSupport 
 from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizer
 
-class TestTeOptimizerOperations(unittest.TestCase):
+class TestTeOptimizerMethodInit(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
-        print("setUpClass TestTeOptimizerOperations\n")
+        print("setUpClass TestTeOptimizerMethodInit\n")
 
     def setUp(self):       
 
@@ -74,22 +74,22 @@ class TestTeOptimizerOperations(unittest.TestCase):
         self.te_optimizer.init()
         self.solution.evaluate.assert_called_once()
 
-    def test_init_method_should_evaluate_initial_solution_once_with_appropriate_arguments(self):
+    def test_init_method_should_evaluate_initial_solution_once_with_supplied_problem(self):
         self.te_optimizer.execution_started = datetime.now()
         self.te_optimizer.init()
         self.solution.evaluate.assert_called_once_with(self.problem)
 
-    def test_init_method_should_execute_support_reset(self):
+    def test_init_method_should_call_support_method_reset_once(self):
         self.te_optimizer.execution_started = datetime.now()
         self.te_optimizer.init()
-        self.te_support.reset.assert_called()
+        self.te_support.reset.assert_called_once()
 
     def tearDown(self):
         return
 
     @classmethod
     def tearDownClass(cls):
-        print("\ntearDownClass TestTeOptimizerOperations")
+        print("\ntearDownClass TestTeOptimizerMethodInit")
     
 if __name__ == '__main__':
     unittest.main()
