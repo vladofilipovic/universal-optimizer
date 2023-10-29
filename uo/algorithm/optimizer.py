@@ -39,6 +39,7 @@ class Optimizer(metaclass=ABCMeta):
             self.__target_problem:TargetProblem = target_problem
         self.__execution_started:datetime = None
         self.__execution_ended:datetime = None
+        self.__best_solution:TargetSolution = None
 
     @abstractmethod
     def __copy__(self):
@@ -115,6 +116,25 @@ class Optimizer(metaclass=ABCMeta):
         :param datetime value: time when execution ended
         """
         self.__execution_ended = value
+
+    @property
+    def best_solution(self)->TargetSolution:
+        """
+        Property getter for the best solution obtained during metaheuristic execution
+        
+        :return: best solution so far 
+        :rtype: TargetSolution
+        """
+        return self.__best_solution
+
+    @best_solution.setter
+    def best_solution(self, value:TargetSolution)->None:
+        """
+        Property setter for the best solution so far
+        
+        :param TargetSolution value: best solution so far
+        """
+        self.__best_solution = value
 
     @property
     def output_control(self)->OutputControl:
@@ -196,6 +216,17 @@ class Optimizer(metaclass=ABCMeta):
                 output.write('\n')
                 logger.info(line)
 
+    def copy_to_best_solution(self, solution:TargetSolution)->None:
+        """
+        Copies function argument to become the best solution within metaheuristic instance and update info about time 
+        and iteration when the best solution is updated 
+
+        :param TargetSolution solution: solution that is source for coping operation
+        """
+        self.__best_solution = solution.copy()
+        self.__second_when_best_obtained = (datetime.now() - self.execution_started).total_seconds()
+        self.__iteration_best_found = self.iteration
+
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
         """
@@ -233,8 +264,19 @@ class Optimizer(metaclass=ABCMeta):
         s += 'execution_ended=' + str(self.execution_ended) + delimiter
         for i in range(0, indentation):
             s += indentation_symbol  
+        s += 'best_solution=' + self.best_solution.string_rep(delimiter, indentation + 1, 
+                indentation_symbol, group_start, group_end) + delimiter 
+        for i in range(0, indentation):
+            s += indentation_symbol  
         s += group_end 
         return s
+
+    @abstractmethod
+    def optimize(self)->None:
+        """
+        Method for optimization   
+        """
+        raise NotImplemented()
 
     @abstractmethod
     def __str__(self)->str:

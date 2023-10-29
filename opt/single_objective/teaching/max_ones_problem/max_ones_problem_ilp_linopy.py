@@ -6,6 +6,7 @@ sys.path.append(directory.parent)
 sys.path.append(directory.parent.parent)
 sys.path.append(directory.parent.parent.parent)
 
+from dataclasses import dataclass
 from copy import deepcopy
 from datetime import datetime
 
@@ -14,10 +15,74 @@ from linopy import Model
 
 from uo.utils.logger import logger
 
+from uo.target_problem.target_problem import TargetProblem
+from uo.target_solution.target_solution import TargetSolution
+from uo.target_solution.target_solution import QualityOfSolution
+
+
 from uo.algorithm.optimizer import Optimizer
 from uo.algorithm.output_control import OutputControl
 
 from opt.single_objective.teaching.max_ones_problem.max_ones_problem import MaxOnesProblem
+
+@dataclass
+class MaxOnesProblemIntegerLinearProgrammingSolverConstructionParameters:
+        """
+        Instance of the class :class:`MaxOnesProblemIntegerLinearProgrammingSolverConstructionParameters` represents constructor parameters for max ones problem ILP solver.
+        """
+        output_control: OutputControl = None
+        target_problem: TargetProblem = None
+
+class MaxOnesProblemIntegerLinearProgrammingSolution(TargetSolution[object, str]):
+    def __init__(self, sol:'Solution')->None:
+        super().__init__("MaxOnesProblemIntegerLinearProgrammingSolution",
+        random_seed=None, fitness_value=0, objective_value=0, is_feasible=True,
+        evaluation_cache_is_used=False, evaluation_cache_max_size=0, 
+        distance_calculation_cache_is_used=False, distance_calculation_cache_max_size=0)
+        self.__sol = sol
+
+    def string_representation(self):
+        return str(self.__sol)    
+
+    def __copy__(self):
+        pr = deepcopy(self)
+        return pr
+
+    def copy(self):
+        return self.__copy__()
+
+    def copy_to(self, destination)->None:
+        destination = copy(self)
+
+    def argument(self, representation:object)->str:
+        return str(representation)
+
+    def init_random(self, problem:TargetProblem)->None:
+        self.representation = None
+        return
+
+    def init_from(self, representation:object, problem:TargetProblem)->None:
+        self.representation = representation
+
+    def native_representation(self, representation_str:str)->object:
+        return representation_str
+
+    def calculate_quality_directly(self, representation:object, 
+            problem:TargetProblem)->QualityOfSolution:
+        return QualityOfSolution(0, 0, True)
+
+    def representation_distance_directly(solution_code_1:str, solution_code_2:str)->float:
+        return 0
+
+    def __str__(self)->str:
+        return str(self.__sol)
+
+    def __repr__(self)->str:
+        return self.__repr__()
+
+    def __format__(self, spec:str)->str:
+        return self.__format__()    
+
 
 class MaxOnesProblemIntegerLinearProgrammingSolver(Optimizer):
 
@@ -31,6 +96,18 @@ class MaxOnesProblemIntegerLinearProgrammingSolver(Optimizer):
         super().__init__("MaxOnesProblemIntegerLinearProgrammingSolver", output_control=output_control, 
                 target_problem=problem)
         self.__model = Model()
+
+    @classmethod
+    def from_construction_tuple(cls, 
+            construction_params:MaxOnesProblemIntegerLinearProgrammingSolverConstructionParameters=None):
+        """
+        Additional constructor. Create new `MaxOnesProblemIntegerLinearProgrammingSolver` instance from construction parameters
+
+        :param `MaxOnesProblemIntegerLinearProgrammingSolverConstructionParameters` construction_params: parameters for construction 
+        """
+        return cls(
+            construction_tuple.output_control, 
+            construction_tuple.target_problem)
 
     def __copy__(self):
         """
@@ -61,10 +138,12 @@ class MaxOnesProblemIntegerLinearProgrammingSolver(Optimizer):
         """
         return self.__model    
 
-    def solve(self)->None:
+    def optimize(self)->None:
         """
         Uses ILP model in order to solve MaxOnesProblem
         """
+        self.iteration = -1
+        self.evaluation = -1
         self.execution_started = datetime.now() 
         l = []
         for i in range(self.target_problem.dimension):
@@ -79,6 +158,7 @@ class MaxOnesProblemIntegerLinearProgrammingSolver(Optimizer):
         self.model.solve()
         self.execution_ended = datetime.now()
         self.write_output_values_if_needed("after_algorithm", "a_a")
+        self.best_solution = MaxOnesProblemIntegerLinearProgrammingSolution( self.model.solution.x )
         #logger.debug(self.model.solution.x)
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 

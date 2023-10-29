@@ -30,11 +30,10 @@ from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
-from uo.algorithm.exact.total_enumeration.te_optimizer_constructor_parameters import TeOptimizerConstructionParameters
-from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizer
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer_constructor_parameters import \
-        VnsOptimizerConstructionParameters
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
+from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizerConstructionParameters
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
+from opt.single_objective.teaching.max_ones_problem.max_ones_problem_ilp_linopy import \
+        MaxOnesProblemIntegerLinearProgrammingSolverConstructionParameters
 
 from uo.utils.files import ensure_dir 
 from uo.utils.logger import logger
@@ -56,8 +55,7 @@ from opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_bit_
 from opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_bit_array_solution_te_support import\
         MaxOnesProblemBinaryBitArraySolutionTeSupport
 
-from opt.single_objective.teaching.max_ones_problem.max_ones_problem_ilp_linopy import \
-    MaxOnesProblemIntegerLinearProgrammingSolver
+from opt.single_objective.teaching.max_ones_problem.max_ones_problem_solver import MaxOnesProblemSolver
 
 """ 
 Solver.
@@ -71,8 +69,8 @@ def main():
 
     Which solver will be executed depends of command-line parameter algorithm.
     """
-    logger.debug('Solver started.')    
     try:
+        logger.debug('Solver started.')    
         parameters = default_parameters_cl
         read_parameters_cl = parse_arguments()
         for param_key_value in read_parameters_cl._get_kwargs():
@@ -177,13 +175,12 @@ def main():
                 max_local_optima=max_local_optima)
         # problem to be solved
         problem = MaxOnesProblem.from_input_file(input_file_path=input_file_path,input_format=input_format)
+        start_time = datetime.now()
+        if write_to_output_file:
+            output_file.write("# {} started at: {}\n".format(parameters['algorithm'], str(start_time)) )
+            output_file.write('# Execution parameters: {}\n'.format(parameters))
         # select among algorithm types
         if parameters['algorithm'] == 'variable_neighborhood_search':
-            logger.debug('Variable neighborhood search started.') 
-            start_time = datetime.now()
-            if write_to_output_file:
-                output_file.write("# VNS started at: %s\n" % str(start_time))
-                output_file.write('# Execution parameters: {}\n'.format(parameters))
             # parameters for VNS process setup
             k_min:int = parameters['kMin']
             k_max:int = parameters['kMax']
@@ -213,21 +210,9 @@ def main():
             vns_construction_params.k_max = k_max
             vns_construction_params.max_local_optima = max_local_optima
             vns_construction_params.local_search_type = local_search_type
-            # optimizer based on VNS
-            optimizer:VnsOptimizer = VnsOptimizer.from_construction_tuple(vns_construction_params)
-            #logger.debug('Optimizer: ' + str(optimizer))
-            optimizer.optimize()
-            logger.debug('Variable neighborhood search finished.') 
-            logger.info('Best solution code: {}'.format(optimizer.best_solution.string_representation()))            
-            logger.info('Best solution objective: {}, fitness: {}'.format(optimizer.best_solution.objective_value,
-                    optimizer.best_solution.fitness_value))
-            logger.info('Number of iterations: {}, evaluations: {}'.format(optimizer.iteration, optimizer.evaluation))  
+            optimizer:MaxOneProblemSolver = MaxOnesProblemSolver.from_variable_neighborhood_search(
+                    vns_construction_params)
         elif parameters['algorithm'] == 'total_enumeration':
-            logger.debug('Total enumeration started.') 
-            start_time = datetime.now()
-            if write_to_output_file:
-                output_file.write("# TE started at: %s\n" % str(start_time))
-                output_file.write('# Execution parameters: {}\n'.format(parameters))
             # initial solution and te support
             solution_type:str = parameters['solutionType']
             te_support = None
@@ -243,34 +228,24 @@ def main():
             te_construction_params.target_problem = problem
             te_construction_params.initial_solution = solution
             te_construction_params.problem_solution_te_support = te_support
-            # optimizer based on TE
-            optimizer:TeOptimizer = TeOptimizer.from_construction_tuple(te_construction_params)
-            #logger.debug('Optimizer: ' + str(optimizer))
-            optimizer.optimize()
-            logger.debug('Total enumeration finished.') 
-            logger.info('Best solution code: {}'.format(optimizer.best_solution.string_representation()))            
-            logger.info('Best solution objective: {}, fitness: {}'.format(optimizer.best_solution.objective_value,
-                    optimizer.best_solution.fitness_value))
-            logger.info('Number of iterations: {}, evaluations: {}'.format(optimizer.iteration, optimizer.evaluation))  
+            optimizer:MaxOnesProblemSolver = MaxOnesProblemSolver.from_total_enumeration(te_construction_params)
         elif parameters['algorithm'] == 'integer_linear_programming':
-            logger.debug('ILP solving started.')   
-            start_time = datetime.now()
-            if write_to_output_file:
-                output_file.write("# ILP started at: %s\n" % str(start_time))
-                output_file.write('# Execution parameters: {}\n'.format(parameters))
-            optimizer:MaxOnesProblemIntegerLinearProgrammingSolver = MaxOnesProblemIntegerLinearProgrammingSolver(
-                output_control=output_control, 
-                problem=problem
-            )
-            optimizer.solve()
-            logger.debug(optimizer.model.solution.x)
-            logger.debug('ILP solving ended.')    
-        elif parameters['algorithm'] == 'idle':
-            logger.debug('Idle execution started.')    
-            logger.debug('Idle execution ended.')    
+            # optimizer construction parameters
+            ilp_construction_params = MaxOnesProblemIntegerLinearProgrammingSolverConstructionParameters()
+            ilp_construction_params.output_control = output_control
+            ilp_construction_params.target_problem = problem
+            optimizer:MaxOnesProblemSolver = MaxOnesProblemSolver.from_integer_linear_programming(
+                    ilp_construction_params)
         else:
             raise ValueError('Invalid optimization algorithm is chosen.')
-        logger.info('Execution: {} - {}'.format(optimizer.execution_started, optimizer.execution_ended))          
+        optimizer.opt.optimize()
+        logger.debug('Method -{}- search finished.'.format(parameters['algorithm'])) 
+        logger.info('Best solution code: {}'.format(optimizer.opt.best_solution.string_representation()))            
+        logger.info('Best solution objective: {}, fitness: {}'.format(optimizer.opt.best_solution.objective_value,
+                optimizer.opt.best_solution.fitness_value))
+        logger.info('Number of iterations: {}, evaluations: {}'.format(optimizer.opt.iteration, 
+                optimizer.opt.evaluation))  
+        logger.info('Execution: {} - {}'.format(optimizer.opt.execution_started, optimizer.opt.execution_ended))          
         logger.debug('Solver ended.')    
         return
     except Exception as exp:

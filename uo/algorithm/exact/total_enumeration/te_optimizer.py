@@ -21,6 +21,8 @@ from typing import TypeVar, Generic
 from typing import Generic
 from typing import NamedTuple
 
+from dataclasses import dataclass
+
 from uo.utils.logger import logger
 
 from uo.target_problem.target_problem import TargetProblem
@@ -29,7 +31,16 @@ from uo.target_solution.target_solution import TargetSolution
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.exact.total_enumeration.problem_solution_te_support import ProblemSolutionTeSupport
-from uo.algorithm.exact.total_enumeration.te_optimizer_constructor_parameters import TeOptimizerConstructionParameters
+
+@dataclass
+class TeOptimizerConstructionParameters:
+    """
+    Instance of the class :class:`~uo.algorithm.exact.total_enumerations.TotalEnumerationConstructorParameters` represents constructor parameters for total enumeration algorithm.
+    """
+    output_control:OutputControl = None
+    target_problem:TargetProblem = None
+    initial_solution:TargetSolution = None
+    problem_solution_te_support:ProblemSolutionTeSupport = None
 
 class TeOptimizer(Algorithm):
     """

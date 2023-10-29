@@ -42,7 +42,7 @@ class TestIntegrationMaxOnesProblemIlpLinopy(unittest.TestCase):
             output_control=self.output_control,
             problem=self.problem_to_solve
         )
-        self.optimizer.solve()
+        self.optimizer.optimize()
         return
     
     def test_best_solution_after_optimization_should_be_optimal(self):

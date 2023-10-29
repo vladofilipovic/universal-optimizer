@@ -32,6 +32,10 @@ class AlgorithmVoid(Algorithm):
 
     def init(self):
         return
+
+    def optimize(self):
+        return
+        
     def __str__(self)->str:
         return super().__str__()
 

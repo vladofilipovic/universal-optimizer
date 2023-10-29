@@ -33,7 +33,6 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
         :param `TargetProblem` target_problem: problem to be solved
         """
         super().__init__(name=name, output_control=output_control, target_problem=target_problem)
-        self.__best_solution:TargetSolution = None
         self.__evaluation:int = 0
         self.__iteration:int = 0
         self.__iteration_best_found:int = 0
@@ -76,16 +75,6 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
         Property setter for current number of evaluations
         """
         self.__evaluation = value
-
-    @property
-    def best_solution(self)->TargetSolution:
-        """
-        Property getter for the best solution obtained during metaheuristic execution
-        
-        :return: best solution so far 
-        :rtype: TargetSolution
-        """
-        return self.__best_solution
 
     @property
     def iteration(self)->int:
@@ -154,17 +143,6 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
         # otherwise, return false
         return False
 
-    def copy_to_best_solution(self, solution:TargetSolution)->None:
-        """
-        Copies function argument to become the best solution within metaheuristic instance and update info about time 
-        and iteration when the best solution is updated 
-
-        :param TargetSolution solution: solution that is source for coping operation
-        """
-        self.__best_solution = solution.copy()
-        self.__second_when_best_obtained = (datetime.now() - self.execution_started).total_seconds()
-        self.__iteration_best_found = self.iteration
-
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
         """
@@ -194,10 +172,6 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
             s += indentation_symbol  
         s += 'target_problem=' + self.target_problem.string_rep(delimiter, indentation + 1, 
                 indentation_symbol, '{', '}')  + delimiter 
-        for i in range(0, indentation):
-            s += indentation_symbol  
-        s += 'best_solution=' + self.best_solution.string_rep(delimiter, indentation + 1, 
-                indentation_symbol, group_start, group_end) + delimiter 
         for i in range(0, indentation):
             s += indentation_symbol  
         s += '__output_control=' + self.__output_control.string_rep(
