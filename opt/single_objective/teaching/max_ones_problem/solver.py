@@ -197,7 +197,7 @@ def main():
                 vns_support = MaxOnesProblemBinaryIntSolutionVnsSupport()
             else:
                 raise ValueError("Invalid solution/representation type is chosen.")
-            # optimizer construction parameters
+            # solver construction parameters
             vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
             vns_construction_params.output_control = output_control
             vns_construction_params.target_problem = problem
@@ -210,7 +210,7 @@ def main():
             vns_construction_params.k_max = k_max
             vns_construction_params.max_local_optima = max_local_optima
             vns_construction_params.local_search_type = local_search_type
-            optimizer:MaxOneProblemSolver = MaxOnesProblemSolver.from_variable_neighborhood_search(
+            solver:MaxOneProblemSolver = MaxOnesProblemSolver.from_variable_neighborhood_search(
                     vns_construction_params)
         elif parameters['algorithm'] == 'total_enumeration':
             # initial solution and te support
@@ -222,30 +222,30 @@ def main():
                 te_support = MaxOnesProblemBinaryBitArraySolutionTeSupport()
             else:
                 raise ValueError("Invalid solution/representation type is chosen.")
-            # optimizer construction parameters
+            # solver construction parameters
             te_construction_params:TeOptimizerConstructionParameters = TeOptimizerConstructionParameters()
             te_construction_params.output_control = output_control
             te_construction_params.target_problem = problem
             te_construction_params.initial_solution = solution
             te_construction_params.problem_solution_te_support = te_support
-            optimizer:MaxOnesProblemSolver = MaxOnesProblemSolver.from_total_enumeration(te_construction_params)
+            solver:MaxOnesProblemSolver = MaxOnesProblemSolver.from_total_enumeration(te_construction_params)
         elif parameters['algorithm'] == 'integer_linear_programming':
-            # optimizer construction parameters
+            # solver construction parameters
             ilp_construction_params = MaxOnesProblemIntegerLinearProgrammingSolverConstructionParameters()
             ilp_construction_params.output_control = output_control
             ilp_construction_params.target_problem = problem
-            optimizer:MaxOnesProblemSolver = MaxOnesProblemSolver.from_integer_linear_programming(
+            solver:MaxOnesProblemSolver = MaxOnesProblemSolver.from_integer_linear_programming(
                     ilp_construction_params)
         else:
             raise ValueError('Invalid optimization algorithm is chosen.')
-        optimizer.opt.optimize()
+        solver.opt.optimize()
         logger.debug('Method -{}- search finished.'.format(parameters['algorithm'])) 
-        logger.info('Best solution code: {}'.format(optimizer.opt.best_solution.string_representation()))            
-        logger.info('Best solution objective: {}, fitness: {}'.format(optimizer.opt.best_solution.objective_value,
-                optimizer.opt.best_solution.fitness_value))
-        logger.info('Number of iterations: {}, evaluations: {}'.format(optimizer.opt.iteration, 
-                optimizer.opt.evaluation))  
-        logger.info('Execution: {} - {}'.format(optimizer.opt.execution_started, optimizer.opt.execution_ended))          
+        logger.info('Best solution code: {}'.format(solver.opt.best_solution.string_representation()))            
+        logger.info('Best solution objective: {}, fitness: {}'.format(solver.opt.best_solution.objective_value,
+                solver.opt.best_solution.fitness_value))
+        logger.info('Number of iterations: {}, evaluations: {}'.format(solver.opt.iteration, 
+                solver.opt.evaluation))  
+        logger.info('Execution: {} - {}'.format(solver.opt.execution_started, solver.opt.execution_ended))          
         logger.debug('Solver ended.')    
         return
     except Exception as exp:
