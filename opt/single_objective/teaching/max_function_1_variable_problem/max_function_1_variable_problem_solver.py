@@ -1,5 +1,5 @@
 """ 
-The :mod:`opt.single_objective.teaching.max_ones_problem.solver` contains programming code that optimize :ref:`Max Ones Problem` with various optimization techniques.
+The :mod:`opt.single_objective.teaching.max_function_1_variable_problem_solver` contains programming code that optimize :ref:`Max Function 1 Variable Problem` with various optimization techniques.
 """
 import sys
 
@@ -42,29 +42,19 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer impor
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import \
     ProblemSolutionVnsSupport
 
-from opt.single_objective.teaching.max_ones_problem.max_ones_problem_ilp_linopy import \
-    MaxOnesProblemIntegerLinearProgrammingSolverConstructionParameters
-from opt.single_objective.teaching.max_ones_problem.max_ones_problem_ilp_linopy import \
-    MaxOnesProblemIntegerLinearProgrammingSolver
+from opt.single_objective.teaching.max_function_1_variable_problem.max_function_1_variable_problem import \
+        MaxFunctionOneVariableProblem
 
-from opt.single_objective.teaching.max_ones_problem.max_ones_problem import MaxOnesProblem
-
-from opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_int_solution import \
-        MaxOnesProblemBinaryIntSolution
-from opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_int_solution_vns_support import \
-        MaxOnesProblemBinaryIntSolutionVnsSupport
-
-from opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_bit_array_solution import \
-        MaxOnesProblemBinaryBitArraySolution
-from opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_bit_array_solution_vns_support import \
-        MaxOnesProblemBinaryBitArraySolutionVnsSupport
-from opt.single_objective.teaching.max_ones_problem.max_ones_problem_binary_bit_array_solution_te_support import\
-        MaxOnesProblemBinaryBitArraySolutionTeSupport
+from opt.single_objective.teaching.max_function_1_variable_problem.max_function_1_variable_problem_binary_int_solution \
+        import MaxFunctionOneVariableProblemBinaryIntSolution
+from opt.single_objective.teaching.max_function_1_variable_problem.\
+        max_function_1_variable_problem_binary_int_solution_vns_support import \
+        MaxFunctionOneVariableProblemBinaryIntSolutionVnsSupport
 
 @dataclass
-class MaxOneProblemSolverConstructionParameters:
+class MaxFunctionOneVariableProblemSolverConstructionParameters:
     """
-    Instance of the class :class:`MaxOneProblemSolverConstructionParameters` represents constructor parameters for max ones problem solver.
+    Instance of the class :class:`MaxFunctionOneVariableProblemSolverConstructionParameters` represents constructor parameters for max ones problem solver.
     """
     method: str = None
     finish_control: FinishControl = None
@@ -77,11 +67,10 @@ class MaxOneProblemSolverConstructionParameters:
     vns_k_min: int = None
     vns_k_max: int = None
     vns_local_search_type: str = None
-    te_problem_solution_support:ProblemSolutionTeSupport = None
 
-class MaxOnesProblemSolver:
+class MaxFunctionOneVariableProblemSolver:
     """
-    Instance of the class :class:`MaxOneProblemSolver` any of the developed solvers max ones problem.
+    Instance of the class :class:`MaxFunctionOneVariableProblemSolver` any of the developed solvers max ones problem.
     """
     def __init__(self, method:str=None,
             finish_control:FinishControl = None,
@@ -94,10 +83,9 @@ class MaxOnesProblemSolver:
             vns_k_min:int = None,
             vns_k_max:int = None,
             vns_local_search_type:str = None,
-            te_problem_solution_support:ProblemSolutionTeSupport = None
     )->None:
         """
-        Create new `MaxOnesProblemSolver` instance
+        Create new `MaxFunctionOneVariableProblemSolver` instance
 
         :param str method: method used for solving the Max Ones Problem 
         :param FinishControl finish_control: controls finish criteria
@@ -124,29 +112,16 @@ class MaxOnesProblemSolver:
                     k_min= vns_k_min,
                     k_max= vns_k_max,
                     local_search_type= vns_local_search_type)
-        elif method == 'total_enumeration':
-            self.__optimizer = TeOptimizer(
-                    output_control = output_control,
-                    target_problem= target_problem,
-                    initial_solution= initial_solution,
-                    problem_solution_te_support= te_problem_solution_support
-            )
-        elif method == 'integer_linear_programming':
-            self.__optimizer:Optimizer = MaxOnesProblemIntegerLinearProgrammingSolver(
-                output_control = output_control,
-                problem = target_problem
-            )
         else:
-            raise ValueError("Invalid optimization method {} - should be one of: '{}', '{}', '{}'.".format(method,
-                    'variable_neighborhood_search', 'total_enumeration', 'integer_linear_programming'))
-
+            raise ValueError("Invalid optimization method {} - should be: '{}'.".format(method,
+                    'variable_neighborhood_search'))
 
     @classmethod
-    def from_construction_tuple(cls, construction_params:MaxOneProblemSolverConstructionParameters=None):
+    def from_construction_tuple(cls, construction_params:MaxFunctionOneVariableProblemSolverConstructionParameters=None):
         """
-        Additional constructor. Create new `MaxOnesProblemSolver` instance from construction parameters
+        Additional constructor. Create new `MaxFunctionOneVariableProblemSolver` instance from construction parameters
 
-        :param `MaxOneProblemSolverConstructionParameters` construction_params: parameters for construction 
+        :param `MaxFunctionOneVariableProblemSolverConstructionParameters` construction_params: parameters for construction 
         """
         return cls(
             method = construction_params.method,
@@ -160,7 +135,6 @@ class MaxOnesProblemSolver:
             vns_k_min = construction_params.vns_k_min,
             vns_k_max = construction_params.vns_k_max,
             vns_local_search_type = construction_params.vns_local_search_type,
-            te_problem_solution_support= construction_params.te_problem_solution_support
         )
 
     @classmethod
@@ -170,7 +144,8 @@ class MaxOnesProblemSolver:
 
         :param VnsOptimizerConstructionParameters vns_construction_params: construction parameters 
         """
-        params:MaxOneProblemSolverConstructionParameters = MaxOneProblemSolverConstructionParameters()
+        params:MaxFunctionOneVariableProblemSolverConstructionParameters = \
+                MaxFunctionOneVariableProblemSolverConstructionParameters()
         params.method:str = 'variable_neighborhood_search'
         params.finish_control:FinishControl = vns_construction_params.finish_control
         params.output_control:OutputControl = vns_construction_params.output_control
@@ -184,35 +159,6 @@ class MaxOnesProblemSolver:
         params.vns_k_min:int = vns_construction_params.k_min
         params.vns_k_max:int = vns_construction_params.k_max
         params.vns_local_search_type:str = vns_construction_params.local_search_type        
-        return cls.from_construction_tuple(params)
-
-    @classmethod
-    def from_total_enumeration(cls, te_construction_params:TeOptimizerConstructionParameters=None):
-        """
-        Additional constructor. Create new `MaxOnesProblemSolver` instance when solving method is `Total Enumeration`
-
-        :param TeOptimizerConstructionParameters te_construction_params: construction parameters 
-        """
-        params:MaxOneProblemSolverConstructionParameters = MaxOneProblemSolverConstructionParameters()
-        params.method = 'total_enumeration'
-        params.output_control = te_construction_params.output_control
-        params.target_problem = te_construction_params.target_problem
-        params.initial_solution= te_construction_params.initial_solution
-        params.te_problem_solution_support= te_construction_params.problem_solution_te_support
-        return cls.from_construction_tuple(params)
-
-    @classmethod
-    def from_integer_linear_programming(cls, ilp_construction_params:\
-            MaxOnesProblemIntegerLinearProgrammingSolverConstructionParameters=None):
-        """
-        Additional constructor. Create new `MaxOnesProblemSolver` instance when solving method is `Integer Linear Programming`
-
-        :param `MaxOnesProblemIntegerLinearProgrammingSolverConstructionParameters` ilp_construction_params: construction parameters 
-        """
-        params:MaxOneProblemSolverConstructionParameters = MaxOneProblemSolverConstructionParameters()
-        params.method = 'integer_linear_programming'
-        params.output_control = ilp_construction_params.output_control
-        params.target_problem = ilp_construction_params.target_problem
         return cls.from_construction_tuple(params)
 
     @property

@@ -16,20 +16,20 @@ import unittest.mock as mock
 from copy import deepcopy
 
 from opt.single_objective.teaching.max_function_1_variable_problem.max_function_1_variable_problem import \
-        MaxFunction1VariableProblem
+        MaxFunctionOneVariableProblem
 
 
-class TestMaxFunction1VariableProblemOperations(unittest.TestCase):
+class TestMaxFunctionOneVariableProblemOperations(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
-        print("setUpClass TestMaxFunction1VariableProblemOperations\n")
+        print("setUpClass TestMaxFunctionOneVariableProblemOperations\n")
 
     def setUp(self):
         self.expression = "7-x*x"
         self.domain_low = -2
         self.domain_high = 2
-        self.problem = MaxFunction1VariableProblem(
+        self.problem = MaxFunctionOneVariableProblem(
                 expression = self.expression,
                 domain_low = self.domain_low,
                 domain_high = self.domain_high
@@ -46,7 +46,7 @@ class TestMaxFunction1VariableProblemOperations(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        print("\ntearDownClass TestMaxFunction1VariableProblemOperations")
+        print("\ntearDownClass TestMaxFunctionOneVariableProblemOperations")
     
 if __name__ == '__main__':
     unittest.main()

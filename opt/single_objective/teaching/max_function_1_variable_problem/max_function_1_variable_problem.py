@@ -16,16 +16,16 @@ from uo.utils.logger import logger
 
 from uo.target_problem.target_problem import TargetProblem
 
-MaxFunction1VariableProblemElements = NamedTuple('MaxFunction1VariableProblemElements', 
+MaxFunctionOneVariableProblemElements = NamedTuple('MaxFunctionOneVariableProblemElements', 
             [('expression',str), 
             ('domain_low',float), 
             ('domain_high',float)]
         )
 
-class MaxFunction1VariableProblem(TargetProblem):
+class MaxFunctionOneVariableProblem(TargetProblem):
     
     def __init__(self, expression:str, domain_low:float, domain_high:float)->None:
-        super().__init__(name="MaxFunction1VariableProblem", is_minimization=False)
+        super().__init__(name="MaxFunctionOneVariableProblem", is_minimization=False)
         self.__expression:str = expression
         self.__domain_low:float = domain_low
         self.__domain_high:float = domain_high
@@ -42,7 +42,7 @@ class MaxFunction1VariableProblem(TargetProblem):
                     text_line = input_file.readline()
                 data:list[str] = text_line.split()
                 if len(data)>=3:
-                    return MaxFunction1VariableProblemElements(data[0], float(data[1]), float(data[2]))
+                    return MaxFunctionOneVariableProblemElements(data[0], float(data[1]), float(data[2]))
                 else:
                     raise ValueError('Invalid line \'{}\' - not enough data'.format(data))        
         else:
@@ -51,12 +51,12 @@ class MaxFunction1VariableProblem(TargetProblem):
     @classmethod
     def from_input_file(cls, input_file_path:str, input_format:str):
         """
-        Additional constructor. Create new `MaxFunction1VariableProblem` instance when input file and input format are specified
+        Additional constructor. Create new `MaxFunctionOneVariableProblem` instance when input file and input format are specified
 
         :param str input_file_path: path of the input file with problem data
         :param str input_format: format of the input
         """
-        params:MaxFunction1VariableProblemElements = MaxFunction1VariableProblem.__load_from_file__(input_file_path, 
+        params:MaxFunctionOneVariableProblemElements = MaxFunctionOneVariableProblem.__load_from_file__(input_file_path, 
                 input_format)
         return cls(expression=params.expression, domain_low=params.domain_low, domain_high=params.domain_high)
 

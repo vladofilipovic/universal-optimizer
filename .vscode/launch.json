@@ -76,6 +76,40 @@
                 "--inputFilePath", "opt/single_objective/teaching/max_ones_problem/inputs/dimension_10.txt", 
                 "--inputFormat", "txt"
                 ]        
+        },
+        {
+            "name": "Pyt: Curr File MF1V VNS",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "variable_neighborhood_search",
+                "maximization",
+                "--writeToOutputFile", "True",
+                "--outputFilePath", "opt/single_objective/teaching/max_function_1_variable_problem/outputs/7-x^2f-3t3.csv",
+                "--outputFileNameAppendTimeStamp", "False",
+                "--outputFields", "iteration, evaluation, best_solution.argument()",
+                "--outputMoments", "after_algorithm, after_iteration",
+                "--inputFilePath", "opt/single_objective/teaching/max_function_1_variable_problem/inputs/7-x^2f-3t3.txt", 
+                "--inputFormat", "txt",
+                "--finishCriteria", "evaluations & seconds",
+                "--finishEvaluationsMax", "3000",  
+                "--finishIterationsMax", "0",  
+                "--finishSecondsMax", "0",
+                "--randomSeed", "0", 
+                "--solutionEvaluationCacheIsUsed", "False", 
+                "--solutionEvaluationCacheMaxSize", "100000",
+                "--solutionDistanceCalculationCacheIsUsed", "False", 
+                "--solutionDistanceCalculationCacheMaxSize", "300000", 
+                "--additionalStatisticsKeep", "None",
+                "--additionalStatisticsMaxLocalOptima", "5",
+                "--kMin", "1",
+                "--kMax", "3", 
+                "--localSearchType", "local_search_best_improvement",
+                "--solutionType", "int"
+                ]        
         }
     ]
 } 

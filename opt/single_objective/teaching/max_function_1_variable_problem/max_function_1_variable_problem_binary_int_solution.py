@@ -20,16 +20,16 @@ from uo.target_solution.target_solution import TargetSolution
 from uo.utils.logger import logger
 
 from opt.single_objective.teaching.max_function_1_variable_problem.max_function_1_variable_problem \
-        import MaxFunction1VariableProblem
+        import MaxFunctionOneVariableProblem
 
-class MaxFunction1VariableProblemBinaryIntSolution(TargetSolution[int,float]):
+class MaxFunctionOneVariableProblemBinaryIntSolution(TargetSolution[int,float]):
     
     def __init__(self, domain_from:float, domain_to:float, number_of_intervals:int, random_seed:int=None, 
             evaluation_cache_is_used:bool=False, 
             evaluation_cache_max_size:int=0,
             distance_calculation_cache_is_used:bool=False,
             distance_calculation_cache_max_size:int=0)->None:
-        super().__init__("MaxFunction1VariableProblemBinaryIntSolution", random_seed=random_seed, fitness_value=None, 
+        super().__init__("MaxFunctionOneVariableProblemBinaryIntSolution", random_seed=random_seed, fitness_value=None, 
                 objective_value=None, is_feasible=False, evaluation_cache_is_used=evaluation_cache_is_used,
                 evaluation_cache_max_size=evaluation_cache_max_size,
                 distance_calculation_cache_is_used=distance_calculation_cache_is_used,
@@ -75,21 +75,21 @@ class MaxFunction1VariableProblemBinaryIntSolution(TargetSolution[int,float]):
     def number_of_intervals(self, value:int)->None:
         self.__number_of_intervals= value
 
-    def __make_to_be_feasible_helper__(self, problem:MaxFunction1VariableProblem):
+    def __make_to_be_feasible_helper__(self, problem:MaxFunctionOneVariableProblem):
         if self.representation > self.number_of_intervals:
             self.representation = self.number_of_intervals
 
     def argument(self, representation:int)->float:
         return self.domain_from + representation * (self.domain_to - self.domain_from) / self.number_of_intervals
 
-    def init_random(self, problem:MaxFunction1VariableProblem)->None:
+    def init_random(self, problem:MaxFunctionOneVariableProblem)->None:
         self.representation = randint(0, self.number_of_intervals)
         self.__make_to_be_feasible_helper__(problem)
 
-    def init_from(self, representation:int, problem:MaxFunction1VariableProblem)->None:
+    def init_from(self, representation:int, problem:MaxFunctionOneVariableProblem)->None:
         self.representation = representation
 
-    def calculate_quality_directly(self, representation:int, problem:MaxFunction1VariableProblem)->QualityOfSolution:
+    def calculate_quality_directly(self, representation:int, problem:MaxFunctionOneVariableProblem)->QualityOfSolution:
         arg:float = self.argument(representation) 
         res:float = eval(problem.expression, {"x":arg})
         return QualityOfSolution(res, res, True)
