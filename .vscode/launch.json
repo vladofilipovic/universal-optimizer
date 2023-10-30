@@ -108,7 +108,8 @@
                 "--kMin", "1",
                 "--kMax", "3", 
                 "--localSearchType", "local_search_best_improvement",
-                "--solutionType", "int"
+                "--solutionType", "int",
+                "--solutionNumberOfIntervals", "2000"
                 ]        
         }
     ]
