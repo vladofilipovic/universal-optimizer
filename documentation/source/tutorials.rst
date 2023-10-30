@@ -1,7 +1,7 @@
 Tutorials
 =========
 
-- **Execution of the developed applications from provided source code**
+- **Execution of the developed applications from library source code**
 
     - Execute *stripped* illustrative example (executes VNS on Max-Ones problem with binary representation within `int`, uses classes only from`uo`) 
 

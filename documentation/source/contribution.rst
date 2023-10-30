@@ -1,7 +1,8 @@
 How to Contribute
 =================
 
-This system is developed in `Python`` programming language, using `poetry` as project&package manager, and `Sphinx` system for documentation generation.
+
+This system is developed in `Python <https://www.python.org>` programming language, using `poetry <https://python-poetry.org>` as project and package manager, `unittest <https://docs.python.org/3/library/unitest.html>`  library for unit testing and `Sphinx <https://wwww.sphinx-doc.org/en/master>` system for documentation generation. Same tool set should be use for contribution to the project.
 
 Contribution is encouraged in following four domains:
 
@@ -13,13 +14,21 @@ Contribution is encouraged in following four domains:
 
         - Class that implements exact optimization should be derived from the :class:`uo.algorithm.Algorithm` class. That class should be placed into separate directory within `/uo/algorithm/` directory.
 
-    2. All programming objects (classes, functions, etc.) should be properly documented using the system `Sphinx`, reStructuredText and doc comments within the code.
+    2. Type hints and documentation.
 
-    3. Implemented algorithm should have separate documentation web page, where that algorithm is described and documented. There should be the link from doc comments within implemented functionality toward the web page that explains algorithm.  
+        - All programming objects (classes, functions, variables, parameters, optional parametres etc.) should be `type-hinted <https://www.infoworld.com/article/3630372/get-started-with-python-type-hints.html>`
+        
+        - All programming objects (classes, functions, etc.) should be properly documented using the system `Sphinx`, reStructuredText and doc comments within the code.
 
-    4. Implemented programming code should be fully covered with unit tests.  
+        - Each of the implemented algorithm should have separate documentation web page, where that algorithm is described and documented. There should be the link from doc comments within implemented functionality toward the web page that explains algorithm and vice versa.  
+
+    3. Unit testing coverage.
     
-        - In this case, `unittest` framework  used. Test should be placed into separate directory under directory `/tests/`. 
+        - Implemented programming code should be fully covered with unit tests.  
+    
+        - Here, `unittest` framework  used. 
+        
+        - Test should be placed into separate directory under directory `/tests/uo/`. 
 
 
 2. Building application for solving optimization problems. Requirements:
