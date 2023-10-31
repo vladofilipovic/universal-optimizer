@@ -7,7 +7,7 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   opt.single_objective.teaching.max_ones_problem
+   opt.single_objective.teaching.ones_count_problem
 
 Module contents
 ---------------

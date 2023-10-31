@@ -1,0 +1,6 @@
+# RandomSeed is not predefined. Generated seed value:  8249974570768753268
+# VNS started at: 2023-10-01 12:07:57.564297
+# Execution parameters: {'algorithm': 'variable_neighborhood_search', 'optimization_type': 'maximization', 'writeToOutputFile': True, 'outputFilePath': 'opt/single_objective/trivial/ones_count_problem/outputs/dimension_25.csv', 'outputFileNameAppendTimeStamp': True, 'outputFields': 'iteration, evaluation, best_solution.string_representation()', 'outputMoments': 'after_algorithm, after_iteration', 'inputFilePath': 'opt/single_objective/trivial/ones_count_problem/inputs/dimension_25.txt', 'inputFormat': 'txt', 'maxNumberEvaluations': 3000, 'maxNumberIterations': 0, 'maxTimeForExecutionSeconds': 0, 'randomSeed': 0, 'solutionEvaluationCacheIsUsed': True, 'calculationSolutionDistanceCacheIsUsed': True, 'keepAllSolutionCodes': True, 'kMin': 1, 'kMax': 3, 'maxLocalOptima': 5, 'localSearchType': 'local_search_best_improvement', 'solutionType': 'BitArray', 'log': 'warning'}
+iteration	evaluation	step_name	best_solution_string_representation	best_solution_fitness_value	best_solution_objective_value	best_solution_is_feasible	
+1	3001	a_i	11111111111111111111111110000000	25	25	True	
+1	3001	a_a	11111111111111111111111110000000	25	25	True	

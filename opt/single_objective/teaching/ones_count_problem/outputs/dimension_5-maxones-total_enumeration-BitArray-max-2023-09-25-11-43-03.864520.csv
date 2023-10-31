@@ -1,0 +1,5 @@
+# RandomSeed is not predefined. Generated seed value:  5514616951540477966
+# TE started at: 2023-09-25 11:43:03.866520
+# Execution parameters: {'algorithm': 'total_enumeration', 'optimization_type': 'maximization', 'writeToOutputFile': True, 'outputFilePath': 'opt/single_objective/trivial/ones_count_problem/outputs/dimension_5.csv', 'outputFileNameAppendTimeStamp': True, 'outputFields': 'iteration, evaluation, best_solution.string_representation()', 'outputMoments': 'after_algorithm, after_iteration', 'inputFilePath': 'opt/single_objective/trivial/ones_count_problem/inputs/dimension_5.txt', 'inputFormat': 'txt', 'maxNumberEvaluations': 1000, 'maxTimeForExecutionSeconds': 0, 'randomSeed': 0, 'solutionEvaluationCacheIsUsed': False, 'calculationSolutionDistanceCacheIsUsed': False, 'keepAllSolutionCodes': False, 'kMin': 1, 'kMax': 3, 'maxLocalOptima': 7, 'localSearchType': 'local_search_best_improvement', 'solutionType': 'BitArray', 'log': 'warning'}
+iteration	evaluation	step_name	best_solution_string_representation	best_solution_fitness_value	best_solution_objective_value	best_solution_is_feasible	
+0	0	a_a	11111	5	5	True	
