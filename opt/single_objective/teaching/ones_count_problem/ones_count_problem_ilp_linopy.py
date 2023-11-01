@@ -110,9 +110,9 @@ class OnesCountProblemIntegerLinearProgrammingSolver(Optimizer):
         x = self.model.add_variables(binary=True, coords=[coords], name='x')
         #logger.debug(self.model.variables)
         if self.target_problem.is_minimization:
-            self.model.add_objective((x).sum())
+            self.model.add_objective((x).sum(), sense="min")
         else:
-            self.model.add_objective(-(x).sum())
+            self.model.add_objective((x).sum(),sense="max")
         self.model.solve()
         self.execution_ended = datetime.now()
         self.write_output_values_if_needed("after_algorithm", "a_a")

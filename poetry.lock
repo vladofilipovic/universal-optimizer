@@ -517,13 +517,13 @@ i18n = ["Babel (>=2.7)"]
 
 [[package]]
 name = "linopy"
-version = "0.2.6"
+version = "0.3"
 description = "Linear optimization with N-D labeled arrays in Python"
 optional = false
-python-versions = "~=3.8"
+python-versions = ">=3.9"
 files = [
-    {file = "linopy-0.2.6-py3-none-any.whl", hash = "sha256:5fa8f07e6b0db79a092f2b39e43683a4663a6c4800db71464ec592786d365c13"},
-    {file = "linopy-0.2.6.tar.gz", hash = "sha256:24e4867f3539123c74587194cd079c45f527f5fd0be1ed01f1ef1feaafcaa673"},
+    {file = "linopy-0.3-py3-none-any.whl", hash = "sha256:e5d1ebe891c7d15cbb958171b7294389917a18b5d06dba4abe94462f54dfc757"},
+    {file = "linopy-0.3.tar.gz", hash = "sha256:df7a914bfabd4cd81bef9d26d8f2d0a6327d2a0fb73709b2aec34cd2eb702f52"},
 ]
 
 [package.dependencies]
@@ -535,7 +535,7 @@ numpy = "*"
 scipy = "*"
 toolz = "*"
 tqdm = "*"
-xarray = ">=2022.9.0"
+xarray = ">=2023.1.0"
 
 [package.extras]
 dev = ["gurobipy", "highspy", "paramiko", "pre-commit", "pytest", "pytest-cov"]
@@ -1317,4 +1317,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "663e95eef4088793a2ae05bfe9d12738c1a473187983637ee39303311fe6925b"
+content-hash = "694c94d38fd20d84c2a08671ef737d0e11422483ef3bf36ee6647a7c6e3acc29"
