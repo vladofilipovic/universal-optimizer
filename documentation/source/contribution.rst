@@ -16,7 +16,7 @@ Contribution is encouraged in following four domains:
 
     2. Type hints and documentation.
 
-        - All programming objects (classes, functions, variables, parameters, optional parametres etc.) should be `type-hinted <https://www.infoworld.com/article/3630372/get-started-with-python-type-hints.html>`
+        - All programming objects (classes, functions, variables, parameters, optional parameters etc.) should be `type-hinted <https://www.infoworld.com/article/3630372/get-started-with-python-type-hints.html>`
         
         - All programming objects (classes, functions, etc.) should be properly documented using the system `Sphinx`, reStructuredText and doc comments within the code.
 
@@ -43,43 +43,42 @@ Contribution is encouraged in following four domains:
 
     1. Experiments should use only previously developed applications, not Python programming constructs. It should be invoked by batch/command file.
 
-    2. Application 
+4. Visualizing experimentally obtained data (either data about comparison, either data about algorithm execution). Requirements:
 
-4. Visualizing experimentally obtained data (either data about comparison, either data about algorithm execution). Requrements:
-
+    1. Experiments should use only previously developed applications, not Python programming constructs.
 
 Contributors
 ============
-
-Contributor List
-----------------
-
-.. [VladimirFilipovic] Vladimir Filipović - vladofilipovic@hotmail.com
-
 
 Contribution domains
 --------------------
 
 1. Contribution in the designing novel optimization methods:
 
-    1. Library structure and organization - [VladimirFilipovic]
+    1. Library structure and organization - [VladimirFilipovic]_
 
-    2. Total Enumeration exact algorithm - [VladimirFilipovic]
+    2. Total Enumeration exact algorithm (using binary string structure) - [VladimirFilipovic]_
     
-    3. Variable Neighborhood Search :ref:`Algorithm_Variable_Neighborhood_Search` metaheuristics - [VladimirFilipovic] 
+    3. Variable Neighborhood Search :ref:`Algorithm_Variable_Neighborhood_Search` metaheuristics - [VladimirFilipovic]_ 
 
 2. Contribution in solving optimization problems:
 
-    1. Max Ones Optimization Problem :ref:`Problem_Max_Ones_Optimization`:
+    1. Ones Count Optimization Problem :ref:`Problem_Ones_Count`:
 
-        - Integer Linear programming method (using `linopy` library) - [VladimirFilipovic]  
+        - Integer Linear programming method (using `linopy` library) - [VladimirFilipovic]_  
 
-        - Total Enumeration method, with solution that has binary representation (using `BitArray` object) - [VladimirFilipovic]  
+        - Total Enumeration method, with solution that has binary representation (using `BitArray` object) - [VladimirFilipovic]_  
 
-        - Variable Neighborhood Search method, with solution that has binary representation (using `BitArray` object) - [VladimirFilipovic]  
+        - Variable Neighborhood Search method, with solution that has binary representation (using `BitArray` object) - [VladimirFilipovic]_  
 
-        - Variable Neighborhood Search method, with solution that has binary representation (using `int`) - [VladimirFilipovic]  
+        - Variable Neighborhood Search method, with solution that has binary representation (using `int`) - [VladimirFilipovic]_  
 
     2. Max Function One Variable Problem:
 
-        - Total Enumeration method, with solution that has binary representation (using `int` object) - [VladimirFilipovic]  
+        - Total Enumeration method, with solution that has binary representation (using `int` object) - [VladimirFilipovic]_  
+
+Contributor List
+----------------
+
+.. [VladimirFilipovic] Vladimir Filipović, github: https://github.com/vladofilipovic, www: https://vladofilipovic.github.io e-mail: vladofilipovic@hotmail.com
+

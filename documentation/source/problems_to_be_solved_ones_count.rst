@@ -1,7 +1,7 @@
-..  _Problem_Max_Ones:
+..  _Problem_Ones_Count:
 
-Max Ones Problem
-================
+Ones Count Problem
+==================
 
 * Max Ones Problem. Problem is represented with class :ref:`OnesCountProblem<py_ones_count_problem>`.
 

@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Pyt: Curr File MOP VNS",
+            "name": "Pyt: Curr File 1CP VNS",
             "type": "python",
             "request": "launch",
             "program": "${file}",
@@ -39,7 +39,7 @@
                 ]        
         },
         {
-            "name": "Pyt: Curr File MOP TE",
+            "name": "Pyt: Curr File 1CP TE",
             "type": "python",
             "request": "launch",
             "program": "${file}",
@@ -59,7 +59,7 @@
                 ]        
         },
         {
-            "name": "Pyt: Curr File MOP ILP",
+            "name": "Pyt: Curr File 1CP ILP",
             "type": "python",
             "request": "launch",
             "program": "${file}",
@@ -78,7 +78,7 @@
                 ]        
         },
         {
-            "name": "Pyt: Curr File MF1V VNS",
+            "name": "Pyt: Curr File F1V VNS",
             "type": "python",
             "request": "launch",
             "program": "${file}",
