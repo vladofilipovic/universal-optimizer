@@ -168,22 +168,8 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="uo.algorithm.algorithm.Algorithm">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">uo.algorithm.algorithm.</span></span><span class="sig-name descname"><span class="pre">Algorithm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_control</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#uo.algorithm.output_control.OutputControl" title="uo.algorithm.output_control.OutputControl"><span class="pre">OutputControl</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_problem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.target_problem.html#uo.target_problem.target_problem.TargetProblem" title="uo.target_problem.target_problem.TargetProblem"><span class="pre">TargetProblem</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#uo.algorithm.algorithm.Algorithm" title="Link to this definition"></a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Optimizer</span></code></p>
 <p>This class describes Algorithm</p>
-<dl class="py property">
-<dt class="sig sig-object py" id="uo.algorithm.algorithm.Algorithm.best_solution">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">best_solution</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution" title="uo.target_solution.target_solution.TargetSolution"><span class="pre">TargetSolution</span></a></em><a class="headerlink" href="#uo.algorithm.algorithm.Algorithm.best_solution" title="Link to this definition"></a></dt>
-<dd><p>Property getter for the best solution obtained during metaheuristic execution</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>best solution so far</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution" title="uo.target_solution.target_solution.TargetSolution">TargetSolution</a></p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="uo.algorithm.algorithm.Algorithm.copy">
 <em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.algorithm.algorithm.Algorithm.copy" title="Link to this definition"></a></dt>
@@ -198,18 +184,6 @@
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="uo.algorithm.algorithm.Algorithm.copy_to_best_solution">
-<span class="sig-name descname"><span class="pre">copy_to_best_solution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">solution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution" title="uo.target_solution.target_solution.TargetSolution"><span class="pre">TargetSolution</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#uo.algorithm.algorithm.Algorithm.copy_to_best_solution" title="Link to this definition"></a></dt>
-<dd><p>Copies function argument to become the best solution within metaheuristic instance and update info about time
-and iteration when the best solution is updated</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>solution</strong> (<a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution" title="uo.target_solution.target_solution.TargetSolution"><em>TargetSolution</em></a>) – solution that is source for coping operation</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py property">
 <dt class="sig sig-object py" id="uo.algorithm.algorithm.Algorithm.evaluation">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">evaluation</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></em><a class="headerlink" href="#uo.algorithm.algorithm.Algorithm.evaluation" title="Link to this definition"></a></dt>
@@ -220,28 +194,6 @@ and iteration when the best solution is updated</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)">int</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="uo.algorithm.algorithm.Algorithm.execution_ended">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">execution_ended</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.12)"><span class="pre">datetime</span></a></em><a class="headerlink" href="#uo.algorithm.algorithm.Algorithm.execution_ended" title="Link to this definition"></a></dt>
-<dd><p>Property getter for time when execution ended</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return datetime<span class="colon">:</span></dt>
-<dd class="field-odd"><p>time when execution ended</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="uo.algorithm.algorithm.Algorithm.execution_started">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">execution_started</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.12)"><span class="pre">datetime</span></a></em><a class="headerlink" href="#uo.algorithm.algorithm.Algorithm.execution_started" title="Link to this definition"></a></dt>
-<dd><p>Property getter for time when execution started</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return datetime<span class="colon">:</span></dt>
-<dd class="field-odd"><p>time when execution started</p>
 </dd>
 </dl>
 </dd></dl>
@@ -287,34 +239,6 @@ solutions are equal</p>
 </dl>
 </dd></dl>
 
-<dl class="py property">
-<dt class="sig sig-object py" id="uo.algorithm.algorithm.Algorithm.name">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></em><a class="headerlink" href="#uo.algorithm.algorithm.Algorithm.name" title="Link to this definition"></a></dt>
-<dd><p>Property getter for the name of the algorithm</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>name of the algorithm instance</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="uo.algorithm.algorithm.Algorithm.output_control">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">output_control</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#uo.algorithm.output_control.OutputControl" title="uo.algorithm.output_control.OutputControl"><span class="pre">OutputControl</span></a></em><a class="headerlink" href="#uo.algorithm.algorithm.Algorithm.output_control" title="Link to this definition"></a></dt>
-<dd><p>Property getter for the output control of the executing algorithm</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>output control of the executing algorithm</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><cite>OutputControl</cite></p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="uo.algorithm.algorithm.Algorithm.string_rep">
 <span class="sig-name descname"><span class="pre">string_rep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">indentation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indentation_symbol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'{'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'}'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#uo.algorithm.algorithm.Algorithm.string_rep" title="Link to this definition"></a></dt>
@@ -338,37 +262,6 @@ solutions are equal</p>
 </dl>
 </dd></dl>
 
-<dl class="py property">
-<dt class="sig sig-object py" id="uo.algorithm.algorithm.Algorithm.target_problem">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">target_problem</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="uo.target_problem.html#uo.target_problem.target_problem.TargetProblem" title="uo.target_problem.target_problem.TargetProblem"><span class="pre">TargetProblem</span></a></em><a class="headerlink" href="#uo.algorithm.algorithm.Algorithm.target_problem" title="Link to this definition"></a></dt>
-<dd><p>Property getter for the target problem to be solved</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return TargetProblem<span class="colon">:</span></dt>
-<dd class="field-odd"><p>target problem to be solved</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="uo.algorithm.algorithm.Algorithm.write_output_headers_if_needed">
-<span class="sig-name descname"><span class="pre">write_output_headers_if_needed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.algorithm.algorithm.Algorithm.write_output_headers_if_needed" title="Link to this definition"></a></dt>
-<dd><p>Write headers(with field names) to output file, if necessary</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="uo.algorithm.algorithm.Algorithm.write_output_values_if_needed">
-<span class="sig-name descname"><span class="pre">write_output_values_if_needed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_name_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#uo.algorithm.algorithm.Algorithm.write_output_values_if_needed" title="Link to this definition"></a></dt>
-<dd><p>Write data(with field values) to output file, if necessary</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>step_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – name of the step when data should be written to output - have to be one of the following values: ‘after_algorithm’, ‘before_algorithm’, ‘after_iteration’, ‘before_iteration’, ‘after_evaluation’, ‘before_evaluation’, ‘after_step_in_iteration’, ‘before_step_in_iteration’</p></li>
-<li><p><strong>step_name_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – what should be written to the output instead of step_name</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
 </dd></dl>
 
 </section>
@@ -377,7 +270,7 @@ solutions are equal</p>
 <p>The <a class="reference internal" href="#module-uo.algorithm.output_control" title="uo.algorithm.output_control"><code class="xref py py-mod docutils literal notranslate"><span class="pre">output_control</span></code></a> module describes the class <code class="xref py py-class docutils literal notranslate"><span class="pre">OutputControl</span></code>.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="uo.algorithm.output_control.OutputControl">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">uo.algorithm.output_control.</span></span><span class="sig-name descname"><span class="pre">OutputControl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">write_to_output</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">TextIOWrapper</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'iteration,</span> <span class="pre">evaluation,</span> <span class="pre">&quot;step_name&quot;,</span> <span class="pre">best_solution.string_representation(),</span> <span class="pre">best_solution.fitness_value,</span> <span class="pre">best_solution.objective_value,</span> <span class="pre">best_solution.is_feasible'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">moments</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'after_algorithm'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#uo.algorithm.output_control.OutputControl" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">uo.algorithm.output_control.</span></span><span class="sig-name descname"><span class="pre">OutputControl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">write_to_output</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">TextIOWrapper</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'iteration,</span> <span class="pre">evaluation,</span> <span class="pre">&quot;step_name&quot;,</span> <span class="pre">best_solution.argument(),</span> <span class="pre">best_solution.fitness_value,</span> <span class="pre">best_solution.objective_value,</span> <span class="pre">best_solution.is_feasible'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">moments</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'after_algorithm'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#uo.algorithm.output_control.OutputControl" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>This class determine where the output generated during execution of the
 <code class="xref py py-class docutils literal notranslate"><span class="pre">uo.algorithm.Algorithm</span></code> instance will be written</p>

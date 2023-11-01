@@ -63,7 +63,11 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">How to Contribute</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#contributors">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#contributors">Contributors</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#contribution-domains">Contribution domains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contributor-list">Contributor List</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -92,33 +96,120 @@
              
   <section id="how-to-contribute">
 <h1>How to Contribute<a class="headerlink" href="#how-to-contribute" title="Link to this heading"></a></h1>
+<p>This system is developed in <a class="reference external" href="https://www.python.org">Python</a> programming language, using <a class="reference external" href="https://python-poetry.org">poetry</a> as project and package manager, <a class="reference external" href="https://docs.python.org/3/library/unitest.html">unittest</a>  library for unit testing and <a class="reference external" href="https://www.sphinx-doc.org/en/master">Sphinx</a> system for documentation generation. Same tool set should be use for contribution to the project.</p>
+<p>Contribution is encouraged in following four domains:</p>
 <ol class="arabic">
+<li><p>Designing novel optimization methods. Requirements:</p>
+<blockquote>
+<div><ol class="arabic">
 <li><p>Algorithms should be derived from the specified class.</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Class that implements metaheuristic optimization should be derived from the <code class="xref py py-class docutils literal notranslate"><span class="pre">uo.algorithm.metaheuristic.Metaheuristic</span></code> class, and it should be placed into separate directory within <cite>uo/algorithm/metaheuristic/</cite> directory.</p></li>
-<li><p>Class that implements exact optimization should be derived from the <code class="xref py py-class docutils literal notranslate"><span class="pre">uo.algorithm.Algorithm</span></code> class, and it should be placed into separate directory within <cite>/uo/algorithm/</cite> directory.</p></li>
+<li><p>Class that implements metaheuristic optimization should be derived either from the <code class="xref py py-class docutils literal notranslate"><span class="pre">uo.algorithm.metaheuristic.single_solution_metaheuristic.SingleSolutionMetaheuristic</span></code> class, or from the <code class="xref py py-class docutils literal notranslate"><span class="pre">uo.algorithm.metaheuristic.population_based_metaheuristic.PopulationBasedMetaheuristic</span></code>. It should be placed into separate directory within <cite>uo/algorithm/metaheuristic/</cite> directory.</p></li>
+<li><p>Class that implements exact optimization should be derived from the <code class="xref py py-class docutils literal notranslate"><span class="pre">uo.algorithm.Algorithm</span></code> class. That class should be placed into separate directory within <cite>/uo/algorithm/</cite> directory.</p></li>
 </ul>
 </div></blockquote>
 </li>
+<li><p>Type hints and documentation.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>All programming objects (classes, functions, variables, parameters, optional parameters etc.) should be <a class="reference external" href="https://www.infoworld.com/article/3630372/get-started-with-python-type-hints.html">type-hinted</a></p></li>
 <li><p>All programming objects (classes, functions, etc.) should be properly documented using the system <cite>Sphinx</cite>, reStructuredText and doc comments within the code.</p></li>
-<li><p>Implemented algorithm should have separate documentation web page, where that algorithm is described and documented. There should be the link from doc comments within implemented functionality toward the web page that explains algorithm.</p></li>
-<li><p>Implemented programming code should be covered with unit tests. Test should be placed into separate directory under directory <cite>/tests/</cite>.  In order to do so, <cite>unittest</cite> is used.</p></li>
-<li><p>Implemented algorithm should have examples of use for at least one problem. Those examples should be placed in root folder, with file name <cite>example-&lt;algorithm&gt;-&lt;problem&gt;.py</cite>.</p></li>
+<li><p>Each of the implemented algorithm should have separate documentation web page, where that algorithm is described and documented. There should be the link from doc comments within implemented functionality toward the web page that explains algorithm and vice versa.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Unit testing coverage.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Implemented programming code should be fully covered with unit tests.</p></li>
+<li><p>Here, <cite>unittest</cite> framework  used.</p></li>
+<li><p>Test should be placed into separate directory under directory <cite>/tests/uo/</cite>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+</li>
+<li><p>Building application for solving optimization problems. Requirements:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>All parameters that should be set in order to tune application should be accessible to user through command-line parameters. Command-line parameters should have sufficient and adequate help system.</p></li>
+<li><p>Implemented applications should have examples of use for every approach contained within application.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Those examples should be placed in root folder, with file name <cite>example-&lt;algorithm&gt;-&lt;problem&gt;.py</cite>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+</li>
+<li><p>Designing and executing comparison experiments, using previously builded applications. Requirements:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Experiments should use only previously developed applications, not Python programming constructs. It should be invoked by batch/command file.</p></li>
+</ol>
+</div></blockquote>
+</li>
+<li><p>Visualizing experimentally obtained data (either data about comparison, either data about algorithm execution). Requirements:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Experiments should use only previously developed applications, not Python programming constructs.</p></li>
+</ol>
+</div></blockquote>
+</li>
 </ol>
 </section>
 <section id="contributors">
 <h1>Contributors<a class="headerlink" href="#contributors" title="Link to this heading"></a></h1>
-<ul class="simple">
-<li><dl class="simple">
-<dt>Vladimir Filipović <a class="reference external" href="mailto:vladofilipovic&#37;&#52;&#48;hotmail&#46;com">vladofilipovic<span>&#64;</span>hotmail<span>&#46;</span>com</a></dt><dd><ul>
-<li><p>initial library structure</p></li>
-<li><p>initial implementation of Variable Neighborhood Search metaheuristic</p></li>
-</ul>
-</dd>
-</dl>
+<section id="contribution-domains">
+<h2>Contribution domains<a class="headerlink" href="#contribution-domains" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p>Contribution in the designing novel optimization methods:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Library structure and organization - <a class="reference internal" href="#vladimirfilipovic" id="id1"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Total Enumeration exact algorithm (using binary string structure) - <a class="reference internal" href="#vladimirfilipovic" id="id2"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Variable Neighborhood Search <a class="reference internal" href="implemented_algorithms_vns.html#algorithm-variable-neighborhood-search"><span class="std std-ref">Variable Neighborhood Search</span></a> metaheuristics - <a class="reference internal" href="#vladimirfilipovic" id="id3"><span>[VladimirFilipovic]</span></a></p></li>
+</ol>
+</div></blockquote>
 </li>
+<li><p>Contribution in solving optimization problems:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>Ones Count Optimization Problem <a class="reference internal" href="problems_to_be_solved_ones_count.html#problem-ones-count"><span class="std std-ref">Ones Count Problem</span></a>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Integer Linear programming method (using <cite>linopy</cite> library) - <a class="reference internal" href="#vladimirfilipovic" id="id4"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Total Enumeration method, with solution that has binary representation (using <cite>BitArray</cite> object) - <a class="reference internal" href="#vladimirfilipovic" id="id5"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Variable Neighborhood Search method, with solution that has binary representation (using <cite>BitArray</cite> object) - <a class="reference internal" href="#vladimirfilipovic" id="id6"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Variable Neighborhood Search method, with solution that has binary representation (using <cite>int</cite>) - <a class="reference internal" href="#vladimirfilipovic" id="id7"><span>[VladimirFilipovic]</span></a></p></li>
 </ul>
+</div></blockquote>
+</li>
+<li><p>Max Function One Variable Problem:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Total Enumeration method, with solution that has binary representation (using <cite>int</cite> object) - <a class="reference internal" href="#vladimirfilipovic" id="id8"><span>[VladimirFilipovic]</span></a></p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+</li>
+</ol>
+</section>
+<section id="contributor-list">
+<h2>Contributor List<a class="headerlink" href="#contributor-list" title="Link to this heading"></a></h2>
+<div role="list" class="citation-list">
+<div class="citation" id="vladimirfilipovic" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>VladimirFilipovic<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id2">2</a>,<a role="doc-backlink" href="#id3">3</a>,<a role="doc-backlink" href="#id4">4</a>,<a role="doc-backlink" href="#id5">5</a>,<a role="doc-backlink" href="#id6">6</a>,<a role="doc-backlink" href="#id7">7</a>,<a role="doc-backlink" href="#id8">8</a>)</span>
+<p>Vladimir Filipović, github: <a class="reference external" href="https://github.com/vladofilipovic">https://github.com/vladofilipovic</a>, www: <a class="reference external" href="https://vladofilipovic.github.io">https://vladofilipovic.github.io</a> e-mail: <a class="reference external" href="mailto:vladofilipovic&#37;&#52;&#48;hotmail&#46;com">vladofilipovic<span>&#64;</span>hotmail<span>&#46;</span>com</a></p>
+</div>
+</div>
+</section>
 </section>
 
 
