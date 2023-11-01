@@ -2,7 +2,7 @@ How to Contribute
 =================
 
 
-This system is developed in `Python <https://www.python.org>` programming language, using `poetry <https://python-poetry.org>` as project and package manager, `unittest <https://docs.python.org/3/library/unitest.html>`  library for unit testing and `Sphinx <https://wwww.sphinx-doc.org/en/master>` system for documentation generation. Same tool set should be use for contribution to the project.
+This system is developed in `Python <https://www.python.org>`_ programming language, using `poetry <https://python-poetry.org>`_ as project and package manager, `unittest <https://docs.python.org/3/library/unitest.html>`_  library for unit testing and `Sphinx <https://www.sphinx-doc.org/en/master>`_ system for documentation generation. Same tool set should be use for contribution to the project.
 
 Contribution is encouraged in following four domains:
 
@@ -16,7 +16,7 @@ Contribution is encouraged in following four domains:
 
     2. Type hints and documentation.
 
-        - All programming objects (classes, functions, variables, parameters, optional parameters etc.) should be `type-hinted <https://www.infoworld.com/article/3630372/get-started-with-python-type-hints.html>`
+        - All programming objects (classes, functions, variables, parameters, optional parameters etc.) should be `type-hinted <https://www.infoworld.com/article/3630372/get-started-with-python-type-hints.html>`_
         
         - All programming objects (classes, functions, etc.) should be properly documented using the system `Sphinx`, reStructuredText and doc comments within the code.
 
