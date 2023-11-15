@@ -21,8 +21,10 @@ from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.evaluation_cache_control_statistics import EvaluationCacheControlStatistics
 from uo.target_solution.distance_calculation_cache_control_statistics import DistanceCalculationCacheControlStatistics
 
-QualityOfSolution = NamedTuple('QualityOfSolution', [('objective_value',float|list[float]), 
-            ('fitness_value',float|list[float]), 
+QualityOfSolution = NamedTuple('QualityOfSolution', [('objective_value',float), 
+            ('objective_values',list[float]),
+            ('fitness_value',float), 
+            ('fitness_values',list[float]), 
             ('is_feasible',bool)]
         )
 
@@ -35,8 +37,10 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
     def __init__(self, 
             name:str, 
             random_seed:int, 
-            fitness_value:float|list[float]|tuple[float], 
-            objective_value:float|list[float]|tuple[float], 
+            fitness_value:float, 
+            fitness_values:float|list[float]|tuple[float], 
+            objective_value:float, 
+            objective_values:list[float]|tuple[float], 
             is_feasible:bool,
             evaluation_cache_is_used:bool,
             evaluation_cache_max_size:int,
@@ -48,9 +52,13 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         :param str name: name of the target solution
         :param int random_seed: random seed for initialization
         :param fitness_value: fitness value of the target solution
-        :type fitness_value: float|list[float]|tuple(float) 
+        :type fitness_value: float 
+        :param fitness_values: fitness values of the target solution
+        :type fitness_values: list[float]|tuple(float) 
         :param objective_value: objective value of the target solution
-        :type objective_value: float|list[float]|tuple(float) 
+        :type objective_value: float
+        :param objective_values: objective values of the target solution
+        :type objective_values: list[float]|tuple(float) 
         :param bool evaluation_cache_is_used: should cache be used during evaluation of the solution
         :param int evaluation_cache_max_size: maximum size of the cache used for evaluation - 0 if size is unlimited
         :param bool distance_calculation_cache_is_used: should cache be used during calculation of the distance between
@@ -62,8 +70,10 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
             self.__random_seed:int = random_seed
         else:
             self.__random_seed:int = randrange(sys.maxsize)
-        self.__fitness_value:float|list[float] = fitness_value
-        self.__objective_value:float|list[float] = objective_value
+        self.__fitness_value:float = fitness_value
+        self.__fitness_values:list[float]|tuple[float] = fitness_values
+        self.__objective_value:float = objective_value
+        self.__objective_values:list[float]|tuple[float] = objective_values
         self.__is_feasible:bool = is_feasible
         self.__representation:R_co = None
         self.__evaluation_cache_is_used:bool = evaluation_cache_is_used
@@ -291,17 +301,17 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
             if rep in eccs.cache:
                 eccs.increment_cache_hit_count()
                 return eccs.cache[rep]
-            triplet:QualityOfSolution = self.calculate_quality_directly(self.representation, target_problem)
+            qos:QualityOfSolution = self.calculate_quality_directly(self.representation, target_problem)
             if len(eccs.cache) >= eccs.max_cache_size:
                 # removing random
                 code:str = random.choice(eccs.cache.keys())
                 del eccs.cache[code]
-            eccs.cache[rep] = triplet
-            return triplet
+            eccs.cache[rep] = qos
+            return qos
         else:
-            triplet:QualityOfSolution = self.calculate_quality_directly(
+            qos:QualityOfSolution = self.calculate_quality_directly(
                     self.representation, target_problem)
-            return triplet
+            return qos
 
     def evaluate(self, target_problem:TargetProblem)->None:
         """
@@ -309,10 +319,10 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
 
         :param TargetProblem target_problem: problem that is solved
         """        
-        triplet:QualityOfSolution = self.calculate_quality(target_problem)
-        self.objective_value = triplet.objective_value;
-        self.fitness_value = triplet.fitness_value;
-        self.is_feasible = triplet.is_feasible;
+        qos:QualityOfSolution = self.calculate_quality(target_problem)
+        self.objective_value = qos.objective_value;
+        self.fitness_value = qos.fitness_value;
+        self.is_feasible = qos.is_feasible;
 
     @abstractmethod
     def representation_distance_directly(self, representation_1:R_co, representation_2:R_co)->float:
