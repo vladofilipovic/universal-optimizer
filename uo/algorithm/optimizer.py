@@ -40,6 +40,7 @@ class Optimizer(metaclass=ABCMeta):
         self.__execution_started:datetime = None
         self.__execution_ended:datetime = None
         self.__best_solution:TargetSolution = None
+        self.__second_when_best_obtained:float = 0.0
 
     @abstractmethod
     def __copy__(self):
@@ -225,7 +226,6 @@ class Optimizer(metaclass=ABCMeta):
         """
         self.__best_solution = solution.copy()
         self.__second_when_best_obtained = (datetime.now() - self.execution_started).total_seconds()
-        self.__iteration_best_found = self.iteration
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:

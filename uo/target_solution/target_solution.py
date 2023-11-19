@@ -82,13 +82,11 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         if not hasattr(TargetSolution, 'evaluation_cache_cs'):
             TargetSolution.evaluation_cache_cs:EvaluationCacheControlStatistics = EvaluationCacheControlStatistics(
                 self.__evaluation_cache_is_used, self.__evaluation_cache_max_size)  
-        self.__distance_calculation_cache_is_used:bool = distance_calculation_cache_is_used
-        self.__distance_calculation_cache_max_size:int = distance_calculation_cache_max_size
         #class/static variable representation_distance_cache_cs
         if not hasattr(TargetSolution, 'representation_distance_cache_cs'):
             TargetSolution.representation_distance_cache_cs: DistanceCalculationCacheControlStatistics[R_co] = \
-                    DistanceCalculationCacheControlStatistics[R_co](self.__distance_calculation_cache_is_used,
-                    self.__distance_calculation_cache_max_size)
+                    DistanceCalculationCacheControlStatistics[R_co](distance_calculation_cache_is_used,
+                    distance_calculation_cache_max_size)
 
     @abstractmethod
     def __copy__(self):

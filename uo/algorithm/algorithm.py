@@ -36,7 +36,6 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
         self.__evaluation:int = 0
         self.__iteration:int = 0
         self.__iteration_best_found:int = 0
-        self.__second_when_best_obtained:float = 0.0
 
     @abstractmethod
     def __copy__(self):
@@ -142,6 +141,16 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
             return None
         # otherwise, return false
         return False
+
+    def copy_to_best_solution(self, solution:TargetSolution)->None:
+        """
+        Copies function argument to become the best solution within metaheuristic instance and update info about time 
+        and iteration when the best solution is updated 
+
+        :param TargetSolution solution: solution that is source for coping operation
+        """
+        super().copy_to_best_solution(solution)
+        self.__iteration_best_found = self.iteration
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
