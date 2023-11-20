@@ -55,7 +55,7 @@ class AdditionalStatisticsControl:
             #class/static variable all_solution_codes
             if not hasattr(AdditionalStatisticsControl, 'all_solution_codes'):
                 AdditionalStatisticsControl.all_solution_codes:set[str] = set()
-        if self.keep_more_local_optima:
+        if self.__keep_more_local_optima:
             # values of the local optima foreach element calculated 
             if not hasattr(AdditionalStatisticsControl, 'all_solution_codes'):                
                 AdditionalStatisticsControl.more_local_optima:Dict[str, float] = {}
