@@ -169,7 +169,7 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
         :param TargetSolution solution: solution that is source for coping operation
         """
         super().copy_to_best_solution(solution)
-        self.__iteration_best_found = self.iteration
+        self.iteration_best_found = self.iteration
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
