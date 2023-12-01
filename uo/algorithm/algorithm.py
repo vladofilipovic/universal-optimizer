@@ -94,6 +94,25 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
         """
         self.__iteration = value
 
+    @property
+    def iteration_best_found(self)->int:
+        """
+        Property getter for the iteration when the best solution is found
+        
+        :return: iteration when the best solution is found
+        :rtype: int
+        """
+        return self.__iteration_best_found
+
+    @iteration_best_found.setter
+    def iteration_best_found(self, value:int)->None:
+        """
+        Property setter the iteration when the best solution is found
+        
+        :param int value: iteration when the best solution is found
+        """
+        self.__iteration_best_found = value
+
     @abstractmethod
     def init(self)->None:
         """
