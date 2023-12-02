@@ -135,26 +135,6 @@ class TeOptimizer(Algorithm):
         """
         self.__current_solution = value
 
-    @property
-    def iteration(self)->int:
-        """
-        Property getter for the current iteration during TE execution
-
-        :return: current iteration number 
-        :rtype: int       
-        """
-        return self.__iteration
-
-    @iteration.setter
-    def iteration(self, value:int)->None:
-        """
-        Property setter for the current iteration during TE execution
-
-        :param value: the current iteration
-        :type value: int
-        """
-        self.__iteration = value
-
     def init(self):
         """
         Initialization of the total enumeration algorithm

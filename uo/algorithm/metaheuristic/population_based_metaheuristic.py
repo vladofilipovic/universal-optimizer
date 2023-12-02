@@ -66,10 +66,10 @@ class PopulationBasedMetaheuristic(Metaheuristic, metaclass=ABCMeta):
                 output_control=output_control, 
                 target_problem=target_problem)
         if initial_solutions is not None: 
-            if isinstance(initial_solution, list[TargetSolution]):
-                self.__current_solutions:list[TargetSolution] = initial_solution.copy()
+            if isinstance(initial_solutions, list[TargetSolution]):
+                self.__current_solutions:list[TargetSolution] = initial_solutions.copy()
             else:
-                self.__current_solution:list[TargetSolution] = initial_solution
+                self.__current_solutions:list[TargetSolution] = initial_solutions
         else:
             self.__current_solution:list[TargetSolution] =  None
 
