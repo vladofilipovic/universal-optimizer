@@ -198,7 +198,7 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         self.write_output_values_if_needed("before_step_in_iteration", "shaking")
         if not self.__shaking_method(self.__k_current, self.target_problem, self.current_solution, self):
             self.write_output_values_if_needed("after_step_in_iteration", "shaking")
-            return False
+            return
         self.write_output_values_if_needed("after_step_in_iteration", "shaking")
         self.iteration += 1
         while self.__k_current <= self.__k_max:
