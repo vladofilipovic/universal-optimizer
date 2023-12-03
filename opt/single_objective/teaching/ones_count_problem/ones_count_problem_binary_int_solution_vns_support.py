@@ -114,8 +114,8 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
         if k < 1 or k > problem.dimension:
             return solution
         best_rep:int = None
-        best_triplet:QualityOfSolution =  QualityOfSolution(solution.objective_value,
-                solution.fitness_value, solution.is_feasible)
+        best_tuple:QualityOfSolution =  QualityOfSolution(solution.objective_value, None,
+                solution.fitness_value, None, solution.is_feasible)
         # initialize indexes
         indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k,problem.dimension)
         in_loop:boolean = indexes.reset()
@@ -133,17 +133,17 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             new_triplet = solution.calculate_quality(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
-            if new_triplet.fitness_value > best_triplet.fitness_value:
-                best_triplet = new_triplet
+            if new_triplet.fitness_value > best_tuple.fitness_value:
+                best_tuple = new_triplet
                 best_rep = solution.representation
             solution.representation ^= mask 
             # increment indexes and set in_loop accordingly
             in_loop = indexes.progress()
         if best_rep is not None:
             solution.representation = best_rep
-            solution.objective_value = best_triplet.objective_value
-            solution.fitness_value = best_triplet.fitness_value
-            solution.is_feasible = best_triplet.is_feasible
+            solution.objective_value = best_tuple.objective_value
+            solution.fitness_value = best_tuple.fitness_value
+            solution.is_feasible = best_tuple.is_feasible
             return solution
         return solution
 

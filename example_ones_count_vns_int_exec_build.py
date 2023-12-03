@@ -91,7 +91,7 @@ class OnesCountProblemBinaryIntSolution(TargetSolution[int,str]):
     def calculate_quality_directly(self, representation:int, 
             problem:TargetProblem)->QualityOfSolution:
         ones_count = representation.bit_count()
-        return QualityOfSolution(ones_count, ones_count, True)
+        return QualityOfSolution(ones_count, None, ones_count, None, True)
 
     def native_representation(self, representation_str:str)->int:
         ret:int = int(representation_str, 2)

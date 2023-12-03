@@ -36,7 +36,8 @@ class OnesCountProblemBinaryIntSolution(TargetSolution[int,str]):
         :param int random_seed: random seed for initialization, default value `Null`
         """
         super().__init__("OnesCountProblemBinaryIntSolution", random_seed=random_seed, fitness_value=None, 
-                objective_value=None, is_feasible=False, 
+                fitness_values=None,
+                objective_value=None, objective_values=None, is_feasible=False, 
                 evaluation_cache_is_used=evaluation_cache_is_used,
                 evaluation_cache_max_size=evaluation_cache_max_size, 
                 distance_calculation_cache_is_used=distance_calculation_cache_is_used,
@@ -126,7 +127,7 @@ class OnesCountProblemBinaryIntSolution(TargetSolution[int,str]):
         :rtype: `QualityOfSolution`
         """
         ones_count = representation.bit_count()
-        return QualityOfSolution(ones_count, ones_count, True)
+        return QualityOfSolution(ones_count, None, ones_count, None, True)
 
     def native_representation(self, representation_str:str)->int:
         """

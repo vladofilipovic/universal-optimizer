@@ -92,7 +92,7 @@ class FunctionOneVariableProblemBinaryIntSolution(TargetSolution[int,float]):
     def calculate_quality_directly(self, representation:int, problem:FunctionOneVariableProblem)->QualityOfSolution:
         arg:float = self.argument(representation) 
         res:float = eval(problem.expression, {"x":arg})
-        return QualityOfSolution(res, res, True)
+        return QualityOfSolution(res, None, res, None, True)
 
     def native_representation(self, representation_str:str)->int:
         ret:int = int(representation_str, 2)

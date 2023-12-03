@@ -51,7 +51,7 @@ class TargetSolutionVoidObjectStr(TargetSolution[object, str]):
 
     def calculate_quality_directly(self, representation:object, 
             problem:TargetProblem)->QualityOfSolution:
-        return QualityOfSolution(0, 0, True)
+        return QualityOfSolution(0, None, 0, None, True)
 
     def representation_distance_directly(solution_code_1:str, solution_code_2:str)->float:
         return 0

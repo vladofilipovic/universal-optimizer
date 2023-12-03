@@ -34,8 +34,8 @@ class OnesCountProblemBinaryBitArraySolution(TargetSolution[BitArray,str]):
         """
         Create new `OnesCountProblemBinaryBitArraySolution` instance
         """
-        super().__init__("OnesCountProblemBinaryBitArraySolution", random_seed=random_seed, fitness_value=None, 
-                objective_value=None, is_feasible=False, evaluation_cache_is_used=evaluation_cache_is_used,
+        super().__init__("OnesCountProblemBinaryBitArraySolution", random_seed=random_seed, fitness_value=None, fitness_values=None,
+                objective_value=None, objective_values=None, is_feasible=False, evaluation_cache_is_used=evaluation_cache_is_used,
                 evaluation_cache_max_size=evaluation_cache_max_size,
                 distance_calculation_cache_is_used=distance_calculation_cache_is_used,
                 distance_calculation_cache_max_size=distance_calculation_cache_max_size)
@@ -114,7 +114,7 @@ class OnesCountProblemBinaryBitArraySolution(TargetSolution[BitArray,str]):
         :rtype: `QualityOfSolution`
         """
         ones_count = representation.count(True)
-        return QualityOfSolution(ones_count, ones_count, True)
+        return QualityOfSolution(ones_count, None, ones_count, None, True)
 
     def native_representation(self, representation_str:str)->BitArray:
         """
