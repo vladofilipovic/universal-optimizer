@@ -72,7 +72,7 @@ class OnesCountProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport
         :return: if randomization is successful
         :rtype: bool
         """    
-        if optimizer.finish_control.evaluations_max > 0 \
+        if optimizer.finish_control.check_evaluations \
                 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
             return False
         tries:int = 0
@@ -92,7 +92,7 @@ class OnesCountProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport
                 break
         if tries < limit:
             optimizer.evaluation += 1
-            if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
+            if optimizer.finish_control.check_evaluations and optimizer.evaluation > optimizer.finish_control.evaluations_max:
                 return False
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             solution.evaluate(problem)
@@ -114,7 +114,7 @@ class OnesCountProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport
         :return: result of the local search procedure 
         :rtype: OnesCountProblemBinaryBitArraySolution
         """
-        if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
+        if optimizer.finish_control.check_evaluations and optimizer.evaluation > optimizer.finish_control.evaluations_max:
             return solution
         if k < 1 or k > problem.dimension:
             return solution
@@ -130,7 +130,7 @@ class OnesCountProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport
             # invert and compare, switch of new is better
             solution.representation.invert(positions) 
             optimizer.evaluation += 1
-            if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
+            if optimizer.finish_control.check_evaluations and optimizer.evaluation > optimizer.finish_control.evaluations_max:
                 return solution
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             new_triplet:QualityOfSolution = solution.calculate_quality(problem)
@@ -161,7 +161,7 @@ class OnesCountProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport
         :return: result of the local search procedure 
         :rtype: OnesCountProblemBinaryBitArraySolution
         """
-        if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
+        if optimizer.finish_control.check_evaluations and optimizer.evaluation > optimizer.finish_control.evaluations_max:
             return solution
         if k < 1 or k > problem.dimension:
             return solution
@@ -175,7 +175,7 @@ class OnesCountProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport
             # invert and compare, switch and exit if new is better
             solution.representation.invert(positions) 
             optimizer.evaluation += 1
-            if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
+            if optimizer.finish_control.check_evaluations and optimizer.evaluation > optimizer.finish_control.evaluations_max:
                 return solution
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             new_triplet:QualityOfSolution = solution.calculate_quality(problem)

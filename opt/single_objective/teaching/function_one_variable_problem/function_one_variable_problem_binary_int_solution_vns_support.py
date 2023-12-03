@@ -40,7 +40,7 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
         
     def shaking(self, k:int, problem:FunctionOneVariableProblem, solution:FunctionOneVariableProblemBinaryIntSolution, 
             optimizer:Algorithm)->bool:
-        if optimizer.finish_control.evaluations_max > 0 and \
+        if optimizer.finish_control.check_evaluations and \
                 optimizer.evaluation > optimizer.finish_control.evaluations_max:
             return False
         tries:int = 0
@@ -61,7 +61,7 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
                 break
         if tries < limit:
             optimizer.evaluation += 1
-            if optimizer.finish_control.evaluations_max > 0 and \
+            if optimizer.finish_control.check_evaluations and \
                     optimizer.evaluation > optimizer.finish_control.evaluations_max:
                 return False
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
@@ -75,7 +75,7 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
             solution:FunctionOneVariableProblemBinaryIntSolution, 
             optimizer: Algorithm)->FunctionOneVariableProblemBinaryIntSolution:
         representation_length:int = 32
-        if optimizer.finish_control.evaluations_max > 0 and \
+        if optimizer.finish_control.check_evaluations and \
                 optimizer.evaluation > optimizer.finish_control.evaluations_max:
             return solution
         if k < 1 or k > representation_length:
@@ -95,7 +95,7 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
                 mask |= 1 << i
             solution.representation ^= mask 
             optimizer.evaluation += 1
-            if optimizer.finish_control.evaluations_max > 0 and \
+            if optimizer.finish_control.check_evaluations and \
                     optimizer.evaluation > optimizer.finish_control.evaluations_max:
                 return solution
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
@@ -119,7 +119,7 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
             solution:FunctionOneVariableProblemBinaryIntSolution, 
             optimizer: Algorithm)->FunctionOneVariableProblemBinaryIntSolution:
         representation_length:int = 32
-        if optimizer.finish_control.evaluations_max > 0 and \
+        if optimizer.finish_control.check_evaluations and \
                 optimizer.evaluation > optimizer.finish_control.evaluations_max:
             return solution
         if k < 1 or k > representation_length:
@@ -137,7 +137,7 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
                 mask |= 1 << i
             solution.representation ^= mask 
             optimizer.evaluation += 1
-            if optimizer.finish_control.evaluations_max > 0 and \
+            if optimizer.finish_control.check_evaluations and \
                     optimizer.evaluation > optimizer.finish_control.evaluations_max:
                 return solution
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")

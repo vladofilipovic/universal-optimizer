@@ -133,7 +133,7 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
         
     def shaking(self, k:int, problem:OnesCountProblem2, solution:OnesCountProblemBinaryIntSolution, 
             optimizer:Algorithm)->bool:
-        if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
+        if optimizer.finish_control.check_evaluations and optimizer.evaluation > optimizer.finish_control.evaluations_max:
             return False
         tries:int = 0
         limit:int = 10000
@@ -160,7 +160,7 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
 
     def local_search_best_improvement(self, k:int, problem:OnesCountProblem2, solution:OnesCountProblemBinaryIntSolution, 
             optimizer: Algorithm)->OnesCountProblemBinaryIntSolution:
-        if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
+        if optimizer.finish_control.check_evaluations and optimizer.evaluation > optimizer.finish_control.evaluations_max:
             return solution
         if k<1:
             return solution
@@ -187,7 +187,7 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
 
     def local_search_first_improvement(self, k:int, problem:OnesCountProblem2, solution:OnesCountProblemBinaryIntSolution, 
             optimizer: Algorithm)->OnesCountProblemBinaryIntSolution:
-        if optimizer.finish_control.evaluations_max > 0 and optimizer.evaluation > optimizer.finish_control.evaluations_max:
+        if optimizer.finish_control.check_evaluations and optimizer.evaluation > optimizer.finish_control.evaluations_max:
             return solution
         if k<1:
             return solution
