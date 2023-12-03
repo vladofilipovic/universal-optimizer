@@ -30,7 +30,8 @@ class FunctionOneVariableProblemBinaryIntSolution(TargetSolution[int,float]):
             distance_calculation_cache_is_used:bool=False,
             distance_calculation_cache_max_size:int=0)->None:
         super().__init__("FunctionOneVariableProblemBinaryIntSolution", random_seed=random_seed, fitness_value=None, 
-                objective_value=None, is_feasible=False, evaluation_cache_is_used=evaluation_cache_is_used,
+                fitness_values=None, objective_value=None, objective_values=None,
+                is_feasible=False, evaluation_cache_is_used=evaluation_cache_is_used,
                 evaluation_cache_max_size=evaluation_cache_max_size,
                 distance_calculation_cache_is_used=distance_calculation_cache_is_used,
                 distance_calculation_cache_max_size=distance_calculation_cache_max_size)
