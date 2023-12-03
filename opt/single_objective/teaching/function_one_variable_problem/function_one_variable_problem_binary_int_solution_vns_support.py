@@ -63,7 +63,7 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
             optimizer.evaluation += 1
             if optimizer.finish_control.evaluations_max > 0 and \
                     optimizer.evaluation > optimizer.finish_control.evaluations_max:
-                return solution
+                return False
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             solution.evaluate(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
