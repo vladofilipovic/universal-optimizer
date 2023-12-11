@@ -19,6 +19,7 @@ from uo.target_problem.target_problem import TargetProblem
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.algorithm import Algorithm
 
+# should use Mock instead og this
 class AlgorithmVoid(Algorithm):
     def __init__(self, name:str, output_control:OutputControl,
             target_problem:TargetProblem)->None:

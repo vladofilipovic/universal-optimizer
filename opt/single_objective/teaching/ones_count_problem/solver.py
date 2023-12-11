@@ -3,13 +3,6 @@ The :mod:`opt.single_objective.teaching.ones_count_problem.solver` contains prog
 """
 import sys
 
-#---------- Script should be executed from repository root folder -----------------
-#import path
-#OPTIMIZATION_ALGORITHM_DIR = './optimization-algorithms/optimization_algorithms'
-#abs_path = path.Path(OPTIMIZATION_ALGORITHM_DIR).abspath()
-#sys.path.append(abs_path)
-#--------- Previous code should be commented out when pip install started to work --
-
 from pathlib import Path
 directory = Path(__file__).resolve()
 sys.path.append(directory)
