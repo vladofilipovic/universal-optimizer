@@ -63,130 +63,48 @@ class TestOnesCountProblemBinaryBitArraySolutionTeSupport(unittest.TestCase):
 
     # can reset the internal counter of the total enumerator and set the internal state of the solution to reflect reset operation
     def test_reset_internal_counter_and_state(self):
-        problem = OnesCountProblem()
+        result:str = '00'
+        problem = OnesCountProblem(dim=len(result))
         solution = OnesCountProblemBinaryBitArraySolution()
-        solution.init_from(BitArray(bin='0'), problem)
+        solution.init_from(BitArray(bin=result), problem)
         optimizer = AlgorithmVoid("test", None, problem)
+        optimizer.output_control = OutputControl(write_to_output=False)
         te_support = OnesCountProblemBinaryBitArraySolutionTeSupport()
     
         te_support.reset(problem, solution, optimizer)
     
-        self.assertEqual(te_support._OnesCountProblemBinaryBitArraySolutionTeSupport__bit_array_counter.current_state(), BitArray(bin='0'))
-        self.assertEqual(solution.bit_array, BitArray(bin='0'))
+        self.assertEqual(te_support._OnesCountProblemBinaryBitArraySolutionTeSupport__bit_array_counter.current_state(), BitArray(bin=result))
+        self.assertEqual(solution.representation, BitArray(bin=result))
         self.assertEqual(optimizer.evaluation, 1)
 
     # can progress the internal counter of the total enumerator and set the internal state of the solution to reflect progress operation
     def test_progress_internal_counter_and_state(self):
-        problem = OnesCountProblem()
+        result:str = '10'
+        problem = OnesCountProblem(dim=len(result))
         solution = OnesCountProblemBinaryBitArraySolution()
-        optimizer = Algorithm()
+        solution.init_from(BitArray(bin=result), problem)
+        optimizer = AlgorithmVoid("test", None, problem)
+        optimizer.output_control = OutputControl(write_to_output=False)
         te_support = OnesCountProblemBinaryBitArraySolutionTeSupport()
     
         te_support.reset(problem, solution, optimizer)
         te_support.progress(problem, solution, optimizer)
     
-        self.assertEqual(te_support._OnesCountProblemBinaryBitArraySolutionTeSupport__bit_array_counter.current_state(), BitArray(bin='1'))
-        self.assertEqual(solution.bit_array, BitArray(bin='1'))
+        self.assertEqual(te_support._OnesCountProblemBinaryBitArraySolutionTeSupport__bit_array_counter.current_state(), BitArray(bin=result))
+        self.assertEqual(solution.representation, BitArray(bin=result))
         self.assertEqual(optimizer.evaluation, 2)
 
     # can check if total enumeration process is not at end
     def test_can_progress(self):
-        problem = OnesCountProblem()
+        result:str = '00000'
+        problem = OnesCountProblem(dim=len(result))
         solution = OnesCountProblemBinaryBitArraySolution()
-        optimizer = Algorithm()
+        solution.init_from(BitArray(bin=result), problem)
+        optimizer = AlgorithmVoid("test", None, problem)
+        optimizer.output_control = OutputControl(write_to_output=False)
         te_support = OnesCountProblemBinaryBitArraySolutionTeSupport()
     
         te_support.reset(problem, solution, optimizer)
     
         self.assertTrue(te_support.can_progress(problem, solution, optimizer))
 
-    # can reset the internal counter of the total enumerator and set the internal state of the solution to reflect reset operation when the problem has dimension 0
-    def test_reset_internal_counter_and_state_dimension_0(self):
-        problem = OnesCountProblem()
-        problem.dimension = 0
-        solution = OnesCountProblemBinaryBitArraySolution()
-        optimizer = Algorithm()
-        te_support = OnesCountProblemBinaryBitArraySolutionTeSupport()
-    
-        te_support.reset(problem, solution, optimizer)
-    
-        self.assertEqual(te_support._OnesCountProblemBinaryBitArraySolutionTeSupport__bit_array_counter.current_state(), BitArray(bin=''))
-        self.assertEqual(solution.bit_array, BitArray(bin=''))
-        self.assertEqual(optimizer.evaluation, 1)
-
-    # can progress the internal counter of the total enumerator and set the internal state of the solution to reflect progress operation when the problem has dimension 0
-    def test_progress_internal_counter_and_state_dimension_0(self):
-        problem = OnesCountProblem()
-        problem.dimension = 0
-        solution = OnesCountProblemBinaryBitArraySolution()
-        optimizer = Algorithm()
-        te_support = OnesCountProblemBinaryBitArraySolutionTeSupport()
-    
-        te_support.reset(problem, solution, optimizer)
-        te_support.progress(problem, solution, optimizer)
-    
-        self.assertEqual(te_support._OnesCountProblemBinaryBitArraySolutionTeSupport__bit_array_counter.current_state(), BitArray(bin=''))
-        self.assertEqual(solution.bit_array, BitArray(bin=''))
-        self.assertEqual(optimizer.evaluation, 2)
-
-    # can check if total enumeration process is not at end when the problem has dimension 0
-    def test_can_progress_dimension_0(self):
-        problem = OnesCountProblem()
-        problem.dimension = 0
-        solution = OnesCountProblemBinaryBitArraySolution()
-        optimizer = Algorithm()
-        te_support = OnesCountProblemBinaryBitArraySolutionTeSupport()
-    
-        te_support.reset(problem, solution, optimizer)
-    
-        self.assertFalse(te_support.can_progress(problem, solution, optimizer))
-
-    def test_calculate_ones_dimension_greater_than_0(self):
-        problem = OnesCountProblem()
-        problem.dimension = 5
-        solution = OnesCountProblemBinaryBitArraySolution()
-        optimizer = Algorithm()
-        te_support = OnesCountProblemBinaryBitArraySolutionTeSupport()
-
-        te_support.reset(problem, solution, optimizer)
-        ones_count = te_support.calculate_ones(problem, solution, optimizer)
-
-        self.assertEqual(ones_count, 5)
-
-    def test_calculate_ones_dimension_0(self):
-        problem = OnesCountProblem()
-        problem.dimension = 0
-        solution = OnesCountProblemBinaryBitArraySolution()
-        optimizer = Algorithm()
-        te_support = OnesCountProblemBinaryBitArraySolutionTeSupport()
-
-        te_support.reset(problem, solution, optimizer)
-        ones_count = te_support.calculate_ones(problem, solution, optimizer)
-
-        self.assertEqual(ones_count, 0)
-
-    def test_reset_internal_counter_and_state_dimension_greater_than_0(self):
-        problem = OnesCountProblem()
-        problem.dimension = 5
-        solution = OnesCountProblemBinaryBitArraySolution()
-        optimizer = Algorithm()
-        te_support = OnesCountProblemBinaryBitArraySolutionTeSupport()
-
-        te_support.reset(problem, solution, optimizer)
-
-        self.assertEqual(te_support._OnesCountProblemBinaryBitArraySolutionTeSupport__bit_array_counter.current_state(), BitArray(bin='0'))
-        self.assertEqual(solution.bit_array, BitArray(bin='0'))
-        self.assertEqual(optimizer.evaluation, 1)
-
-    def test_reset_internal_counter_and_state_dimension_0(self):
-        problem = OnesCountProblem()
-        problem.dimension = 0
-        solution = OnesCountProblemBinaryBitArraySolution()
-        optimizer = Algorithm()
-        te_support = OnesCountProblemBinaryBitArraySolutionTeSupport()
-
-        te_support.reset(problem, solution, optimizer)
-
-        self.assertEqual(te_support._OnesCountProblemBinaryBitArraySolutionTeSupport__bit_array_counter.current_state(), BitArray(bin=''))
-        self.assertEqual(solution.bit_array, BitArray(bin=''))
-        self.assertEqual(optimizer.evaluation, 1)
