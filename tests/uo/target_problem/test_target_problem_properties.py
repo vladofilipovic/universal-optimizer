@@ -64,6 +64,23 @@ class TestTargetProblemProperties(unittest.TestCase):
     def test_is_minimization_should_be_equal_as_in_constructor(self):
         self.assertEqual(self.problem.is_minimization, self.to_minimize)
 
+    def test_invalid_name_problem_initialization(self):
+        invalid_name = 'invalid name'
+        problem = TargetProblemVoid(
+            name=invalid_name,
+            is_minimization=self.to_minimize,
+        )
+        self.assertEqual(problem.name, invalid_name)
+
+    # Test problem initialization with an empty name
+    def test_empty_name_problem_initialization(self):
+        empty_name = ''
+        problem = TargetProblemVoid(
+            name=empty_name,
+            is_minimization=self.to_minimize,
+        )
+        self.assertEqual(problem.name, empty_name)
+
     def tearDown(self):
         return
 
