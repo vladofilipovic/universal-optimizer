@@ -39,5 +39,9 @@
         ".",
         "-p",
         "test_*.py"
-    ]
+    ],
+    "sonarlint.connectedMode.project": {
+        "connectionId": "http-localhost-9000-",
+        "projectKey": "universal-optimizer"
+    }
 }
