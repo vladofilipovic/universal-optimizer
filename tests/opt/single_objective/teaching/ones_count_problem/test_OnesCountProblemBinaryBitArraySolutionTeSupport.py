@@ -21,6 +21,7 @@ from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.target_solution import TargetSolution
 
 from uo.algorithm.algorithm import Algorithm
+from uo.algorithm.algorithm_void import AlgorithmVoid
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
@@ -31,33 +32,6 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer impor
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem import OnesCountProblem
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_bit_array_solution import OnesCountProblemBinaryBitArraySolution
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_bit_array_solution_te_support import OnesCountProblemBinaryBitArraySolutionTeSupport
-
-# should use Mock instead of this
-class AlgorithmVoid(Algorithm):
-    def __init__(self, name:str, output_control:OutputControl,
-            target_problem:TargetProblem)->None:
-        super().__init__(name, output_control, target_problem)
-
-    def __copy__(self):
-        return super().__copy__()
-
-    def copy(self):
-        return self.__copy__()
-
-    def init(self):
-        return
-
-    def optimize(self):
-        return
-        
-    def __str__(self)->str:
-        return super().__str__()
-
-    def __repr__(self)->str:
-        return super().__repr__()
-
-    def __format__(self, spec:str)->str:
-        return super().__format__()
 
 class TestOnesCountProblemBinaryBitArraySolutionTeSupport(unittest.TestCase):
 

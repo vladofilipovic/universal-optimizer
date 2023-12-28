@@ -18,33 +18,7 @@ from copy import deepcopy
 from uo.target_problem.target_problem import TargetProblem
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.algorithm import Algorithm
-
-# should use Mock instead og this
-class AlgorithmVoid(Algorithm):
-    def __init__(self, name:str, output_control:OutputControl,
-            target_problem:TargetProblem)->None:
-        super().__init__(name, output_control, target_problem)
-
-    def __copy__(self):
-        return super().__copy__()
-
-    def copy(self):
-        return self.__copy__()
-
-    def init(self):
-        return
-
-    def optimize(self):
-        return
-        
-    def __str__(self)->str:
-        return super().__str__()
-
-    def __repr__(self)->str:
-        return super().__repr__()
-
-    def __format__(self, spec:str)->str:
-        return super().__format__()
+from uo.algorithm.algorithm_void import AlgorithmVoid
 
 class TestAlgorithmProperties(unittest.TestCase):
     
