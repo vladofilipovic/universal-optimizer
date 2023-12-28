@@ -82,16 +82,16 @@ class TargetProblem(metaclass=ABCMeta):
         :rtype: str
         """          
         s =  delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_start + delimiter
         for i in range(0, indentation):
             s += indentation_symbol  
         s += 'name=' + self.name + delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += 'is_minimization=' + str(self.is_minimization) 
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_end 
         return s
