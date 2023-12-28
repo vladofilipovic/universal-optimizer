@@ -42,14 +42,22 @@ docker exec -it jenkins-vlado bash
 
 REM 3-2. Within that shell, create `sonar-scanner` directory under `/var/jenkins_home` and make that current directory. 
 
-REM 3.3. Download SonarQube Scanner onto the container from the sonar-scanner directory with wget:
+REM 3-3. Download SonarQube Scanner onto the container from the sonar-scanner directory with wget:
 
 wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.3.0.1492-linux.zip
 
-REM 3.4. Unzip the Sonar Scanner binary:
+REM 3-4. Unzip the Sonar Scanner binary:
 unzip sonar-scanner-cli-3.3.0.1492-linux.zip
 
-REM 3.5. Update Jenkins to point to sonar-scanner binary (Manage Jenkins > Global Tool Configuration > SonarQube Scanner); you will need to uncheck “Install automatically” so you can explicitly set SONAR_RUNNER_HOME to directory with downolade sonar-scanner
+REM 3-5. Update Jenkins to point to sonar-scanner binary (Manage Jenkins > Global Tool Configuration > SonarQube Scanner); you will need to uncheck “Install automatically” so you can explicitly set SONAR_RUNNER_HOME to directory `/var/jenkins_home/sonar-scanner/sonar-scanner-3.3.0.1492-linux`
 
+REM 4. Configuring Jenkins and SonarQube - it’s time to configure them to communicate with each other.
 
+REM 4-1. Obtain host IP number e.g. `192.168.56.1`
 
+REM 4-2. In SonarQube, add webhook to point to Jenkins (Administration > Configuration > Webhooks); URL will be in the format http://<host_ip>:8080/sonarqube-webhook  (http://192.168.56.1:8080/sonarqube-webhook)
+
+REM 4-3. In SonarQube, generate an access token that will be used by Jenkins (My Account > Security > Tokens) 
+
+REM 4-4. in Jenkins, add the SonarQube Server IP address and the access token (Manage Jenkins > Configure System > SonarQube Servers); URL will be in the format http://<host_ip>:9000   (http://192.168.56.1:9000)
+ 
