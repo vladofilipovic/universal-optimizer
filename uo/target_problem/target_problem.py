@@ -85,7 +85,7 @@ class TargetProblem(metaclass=ABCMeta):
         for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_start + delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += 'name=' + self.name + delimiter
         for _ in range(0, indentation):
