@@ -99,7 +99,7 @@ class FunctionOneVariableProblemBinaryIntSolution(TargetSolution[int,float]):
         ret:int = int(representation_str, 2)
         return ret
 
-    def representation_distance_directly(solution_code_1:str, solution_code_2:str)->float:
+    def representation_distance_directly(self, solution_code_1:str, solution_code_2:str)->float:
         rep_1:int = self.native_representation(solution_code_1)
         rep_2:int = self.native_representation(solution_code_2)
         result = (rep_1 ^ rep_2).count(True)

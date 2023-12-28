@@ -53,7 +53,7 @@ class TargetSolutionVoidObjectStr(TargetSolution[object, str]):
             problem:TargetProblem)->QualityOfSolution:
         return QualityOfSolution(0, None, 0, None, True)
 
-    def representation_distance_directly(solution_code_1:str, solution_code_2:str)->float:
+    def representation_distance_directly(self, solution_code_1:str, solution_code_2:str)->float:
         return 0
 
     def string_representation(self):

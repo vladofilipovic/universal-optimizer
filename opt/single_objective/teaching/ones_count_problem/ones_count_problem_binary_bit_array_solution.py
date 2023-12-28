@@ -127,7 +127,7 @@ class OnesCountProblemBinaryBitArraySolution(TargetSolution[BitArray,str]):
         ret:BitArray = BitArray(bin=representation_str)
         return ret
 
-    def representation_distance_directly(solution_code_1:str, solution_code_2:str)->float:
+    def representation_distance_directly(self, solution_code_1:str, solution_code_2:str)->float:
         """
         Calculating distance between two solutions determined by its code
 
