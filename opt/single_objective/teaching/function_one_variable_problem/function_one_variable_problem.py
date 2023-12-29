@@ -25,6 +25,12 @@ FunctionOneVariableProblemElements = NamedTuple('FunctionOneVariableProblemEleme
 class FunctionOneVariableProblem(TargetProblem):
     
     def __init__(self, expression:str, domain_low:float, domain_high:float)->None:
+        if expression is None or expression=="":
+            raise ValueError("Expression should not be empty.")
+        if not isinstance(domain_low, int | float):
+            raise ValueError("Domain low border should be number.")
+        if not isinstance(domain_high, int | float):
+            raise ValueError("Domain high border should be number.")
         super().__init__(name="FunctionOneVariableProblem", is_minimization=False)
         self.__expression:str = expression
         self.__domain_low:float = domain_low

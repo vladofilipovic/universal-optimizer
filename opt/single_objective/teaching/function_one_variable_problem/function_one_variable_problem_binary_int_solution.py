@@ -29,6 +29,14 @@ class FunctionOneVariableProblemBinaryIntSolution(TargetSolution[int,float]):
             evaluation_cache_max_size:int=0,
             distance_calculation_cache_is_used:bool=False,
             distance_calculation_cache_max_size:int=0)->None:
+        if not isinstance(domain_from, int | float):
+            raise ValueError("Domain from should be number.")
+        if not isinstance(domain_to, int | float):
+            raise ValueError("Domain to should be number.")        
+        if domain_from >= domain_to:
+            raise ValueError("Domain from should be smaller than Domain to.")
+        if number_of_intervals <= 0 :
+            raise ValueError("Number of intervals should be positive.")
         super().__init__("FunctionOneVariableProblemBinaryIntSolution", random_seed=random_seed, fitness_value=None, 
                 fitness_values=None, objective_value=None, objective_values=None,
                 is_feasible=False, evaluation_cache_is_used=evaluation_cache_is_used,

@@ -40,6 +40,16 @@ How-to Guides
 
             > python -m unittest
 
+
+    - Execute command for obtaining coverage analysis from directory `/` 
+
+    .. code-block::
+        :caption: Obtain coverage analysis of tests within project
+
+            > python -m coverage run -m unittest
+            > python -m coverage report
+
+
 - **Building documentation for the library**
 
     1. Build documentation sources into `/docs/source` folder from `python` source files 

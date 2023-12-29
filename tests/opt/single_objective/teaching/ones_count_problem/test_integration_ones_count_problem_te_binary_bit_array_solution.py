@@ -20,7 +20,7 @@ from random import choice
 from bitstring import Bits, BitArray, BitStream, pack
 
 from uo.algorithm.output_control import OutputControl
-from uo.algorithm.exact.total_enumeration.te_optimizer_constructor_parameters import TeOptimizerConstructionParameters
+from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizerConstructionParameters
 from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizer
 
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem import OnesCountProblem

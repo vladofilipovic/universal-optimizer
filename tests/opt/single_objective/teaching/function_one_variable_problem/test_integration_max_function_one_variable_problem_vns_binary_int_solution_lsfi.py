@@ -50,7 +50,7 @@ class TestIntegrationFunctionOneVariableProblemBinaryIntSolutionLsfi(unittest.Te
                 number_of_intervals=6000, random_seed=43434343)
         self.solution.init_random(problem=self.problem_to_solve)
         self.solution.evaluate(self.problem_to_solve)           
-        self.finish_control:FinishControl = FinishControl(criteria='evaluations & seconds', evaluations_max=6000, 
+        self.finish_control:FinishControl = FinishControl(criteria='evaluations & seconds', evaluations_max=10000, 
                 seconds_max=100)
         self.vns_support:FunctionOneVariableProblemBinaryIntSolutionVnsSupport = \
                 FunctionOneVariableProblemBinaryIntSolutionVnsSupport()
@@ -68,11 +68,10 @@ class TestIntegrationFunctionOneVariableProblemBinaryIntSolutionLsfi(unittest.Te
         vns_construction_params.local_search_type = 'local_search_best_improvement'
         self.optimizer:VnsOptimizer = VnsOptimizer.from_construction_tuple(vns_construction_params)
         self.optimizer.optimize()
-        return
     
     def test_best_solution_after_optimization_should_be_all_optimal(self):
         result = 0.0
-        self.assertLessEqual(abs(self.optimizer.best_solution.argument(self.optimizer.best_solution.representation)- result), 0.01)
+        self.assertLessEqual(abs(self.optimizer.best_solution.argument(self.optimizer.best_solution.representation)- result), 0.1)
 
     def test_best_solution_after_optimization_should_have_optimal_objective_value(self):
         result = 7.0

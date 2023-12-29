@@ -139,6 +139,36 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         """
         self.__fitness_value = value
 
+    @fitness_value.setter
+    def fitness_value(self, value:float)->None:
+        """
+        Property setter for fitness value of the target solution
+
+        :param value: value of the `fitness` to be set
+        :type value: float
+        """
+        self.__fitness_value = value
+
+    @property
+    def fitness_values(self)->list[float]|tuple[float] :
+        """
+        Property getter for fitness values of the target solution
+
+        :return: fitness values of the target solution instance 
+        :rtype: list[float]|tuple[float] 
+        """
+        return self.__fitness_values
+
+    @fitness_values.setter
+    def fitness_values(self, value:list[float]|tuple[float])->None:
+        """
+        Property setter for fitness values of the target solution
+
+        :param value: values of the `fitness` to be set
+        :type value: list[float]|tuple[float]
+        """
+        self.__fitness_values = value
+
     @property
     def objective_value(self)->float:
         """
@@ -158,6 +188,26 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         :type value: float
         """
         self.__objective_value = value
+
+    @property
+    def objective_values(self)->list[float]|tuple[float] :
+        """
+        Property getter for objective values of the target solution
+
+        :return: objective values of the target solution instance 
+        :rtype: list[float]|tuple[float] 
+        """
+        return self.__objective_values
+
+    @objective_values.setter
+    def objective_values(self, value:list[float]|tuple[float])->None:
+        """
+        Property setter for objective values of the target solution
+
+        :param value: objective values to be set
+        :type value: list[float]|tuple[float]
+        """
+        self.__objective_values = value
 
     @property
     def is_feasible(self)->bool:

@@ -22,7 +22,8 @@ from uo.algorithm.output_control import OutputControl
 class TargetSolutionVoidObjectStr(TargetSolution[object, str]):
     def __init__(self, name:str)->None:
         super().__init__(name,
-        random_seed=None, fitness_value=0, objective_value=0, is_feasible=True,
+        random_seed=None, 
+        fitness_value=0, fitness_values=None, objective_value=0, objective_values= None,  is_feasible=True,
         evaluation_cache_is_used=False, evaluation_cache_max_size=0, 
         distance_calculation_cache_is_used=False, distance_calculation_cache_max_size=0)
 
