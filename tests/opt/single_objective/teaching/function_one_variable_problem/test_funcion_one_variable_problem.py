@@ -11,7 +11,7 @@ sys.path.append(directory.parent.parent.parent.parent.parent.parent.parent)
 sys.path.append(directory.parent.parent.parent.parent.parent.parent.parent.parent)
 
 import unittest
-import unittest.mock as mock
+import unittest.mock as mocker
 
 from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem import \
     FunctionOneVariableProblem

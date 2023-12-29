@@ -97,7 +97,7 @@ class OnesCountProblemBinaryIntSolution(TargetSolution[int,str]):
     def representation_distance_directly(self, solution_code_1:str, solution_code_2:str)->float:
         rep_1:int = self.native_representation(solution_code_1)
         rep_2:int = self.native_representation(solution_code_2)
-        result = (rep_1 ^ rep_2).count(True)
+        result = (rep_1 ^ rep_2).bit_count()
         return result 
 
     def argument(self, problem:TargetProblem)->str:

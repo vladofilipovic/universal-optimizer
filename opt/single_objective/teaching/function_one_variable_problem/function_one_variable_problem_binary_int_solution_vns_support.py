@@ -40,6 +40,8 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
         
     def shaking(self, k:int, problem:FunctionOneVariableProblem, solution:FunctionOneVariableProblemBinaryIntSolution, 
             optimizer:Algorithm)->bool:
+        if k <= 0:
+            return False
         if optimizer.finish_control.check_evaluations and \
                 optimizer.evaluation > optimizer.finish_control.evaluations_max:
             return False

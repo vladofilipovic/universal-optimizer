@@ -51,6 +51,8 @@ class TestFunctionOneVariableProblemBinaryIntSolution(unittest.TestCase):
         self.assertEqual(solution.number_of_intervals, solution_copy.number_of_intervals)
         self.assertEqual(solution.representation, solution_copy.representation)
 
+class TestInit(unittest.TestCase):
+
     # Calling argument() method on an instance of FunctionOneVariableProblemBinaryIntSolution with a valid representation should return the corresponding argument
     def test_argument_method(self):
         solution = FunctionOneVariableProblemBinaryIntSolution(0, 10, 5)
@@ -67,6 +69,8 @@ class TestFunctionOneVariableProblemBinaryIntSolution(unittest.TestCase):
     def test_invalid_number_of_intervals(self):
         with self.assertRaises(Exception):
             FunctionOneVariableProblemBinaryIntSolution(0, 10, -5)
+
+class TestMakeToBefeasibleHelper(unittest.TestCase):
 
     # When the representation is smaller than or equal to the number of intervals, the representation should not change.
     def test_representation_smaller_or_equal_to_intervals(self):
@@ -99,7 +103,9 @@ class TestFunctionOneVariableProblemBinaryIntSolution(unittest.TestCase):
         solution.representation = -2
         solution.__make_to_be_feasible_helper__(problem)
         self.assertEqual(solution.representation, 0)   
-    
+
+class TestCalculateQualityDirectly(unittest.TestCase):
+
     def test_valid_fitness_value(self):
         # Create a mock problem
         problem = mocker.Mock(spec=FunctionOneVariableProblem)
@@ -164,6 +170,8 @@ class TestFunctionOneVariableProblemBinaryIntSolution(unittest.TestCase):
         with self.assertRaises(SyntaxError):
             solution.calculate_quality_directly(3, problem)
 
+class TestNativeRepresentation(unittest.TestCase):
+
     # The input string is a valid binary representation, and the method returns the corresponding integer value.
     def test_valid_binary_representation(self):
         solution = FunctionOneVariableProblemBinaryIntSolution(0, 10, 5)
@@ -195,3 +203,70 @@ class TestFunctionOneVariableProblemBinaryIntSolution(unittest.TestCase):
         with self.assertRaises(ValueError) as context:
             solution.native_representation('01a01')
         self.assertEqual(str(context.exception), "invalid literal for int() with base 2: '01a01'")
+
+
+class TestRepresentationDistanceDirectly(unittest.TestCase):
+
+    # Calculate distance between two binary representations of solutions with different lengths.
+    def test_different_lengths(self):
+        solution_code_1 = "10101"
+        solution_code_2 = "110"
+        expected_result = 3
+
+        problem = FunctionOneVariableProblemBinaryIntSolution(0, 1, 10)
+        result = problem.representation_distance_directly(solution_code_1, solution_code_2)
+
+        self.assertEqual(result, expected_result)
+
+    # Calculate distance between two binary representations of solutions with same length.
+    def test_same_length(self):
+        solution_code_1 = "10101"
+        solution_code_2 = "11011"
+        expected_result = 3
+
+        problem = FunctionOneVariableProblemBinaryIntSolution(0, 1, 10)
+        result = problem.representation_distance_directly(solution_code_1, solution_code_2)
+
+        self.assertEqual(result, expected_result)
+
+    # Calculate distance between two binary representations of solutions with same binary representation.
+    def test_same_representation(self):
+        solution_code_1 = "10101"
+        solution_code_2 = "10101"
+        expected_result = 0
+
+        problem = FunctionOneVariableProblemBinaryIntSolution(0, 1, 10)
+        result = problem.representation_distance_directly(solution_code_1, solution_code_2)
+
+        self.assertEqual(result, expected_result)
+
+    # Calculate distance between two binary representations of solutions with empty string.
+    def test_empty_string(self):
+        solution_code_1 = ""
+        solution_code_2 = ""
+    
+        problem = FunctionOneVariableProblemBinaryIntSolution(0, 1, 10)
+        # Assert that a ValueError is raised when calling the representation_distance_directly method
+        with self.assertRaises(ValueError):
+            problem.representation_distance_directly(solution_code_1, solution_code_2)
+
+    # Calculate distance between two binary representations of solutions with non-binary string.
+    def test_non_binary_string(self):
+        solution_code_1 = "10101"
+        solution_code_2 = "12345"
+
+        problem = FunctionOneVariableProblemBinaryIntSolution(0, 1, 10)
+        # Assert that a ValueError is raised when calling the representation_distance_directly method
+        with self.assertRaises(ValueError):
+            problem.representation_distance_directly(solution_code_1, solution_code_2)
+
+    # Calculate distance between two binary representations of solutions with binary string of length 1.
+    def test_length_one(self):
+        solution_code_1 = "1"
+        solution_code_2 = "0"
+        expected_result = 1
+
+        problem = FunctionOneVariableProblemBinaryIntSolution(0, 1, 10)
+        result = problem.representation_distance_directly(solution_code_1, solution_code_2)
+
+        self.assertEqual(result, expected_result)

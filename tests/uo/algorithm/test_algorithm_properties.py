@@ -11,7 +11,7 @@ sys.path.append(directory.parent.parent.parent.parent.parent.parent.parent)
 sys.path.append(directory.parent.parent.parent.parent.parent.parent.parent.parent)
 
 import unittest   
-import unittest.mock as mock
+import unittest.mock as mocker
 
 from copy import deepcopy
 
@@ -33,7 +33,7 @@ class TestAlgorithmProperties(unittest.TestCase):
 
         self.oc_write_to_output = True
         self.oc_output_file = "some file path..."
-        self.output_control = mock.MagicMock()
+        self.output_control = mocker.MagicMock()
         type(self.output_control).write_to_output = self.oc_write_to_output
         type(self.output_control).output_file = self.oc_output_file
 
@@ -41,17 +41,17 @@ class TestAlgorithmProperties(unittest.TestCase):
         self.pr_is_minimization = True
         self.pr_file_path = 'some problem file path'
         self.pr_dimension = 42
-        self.problem = mock.MagicMock()
-        type(self.problem).name = mock.PropertyMock(return_value=self.pr_name)
-        type(self.problem).is_minimization = mock.PropertyMock(return_value=self.pr_is_minimization)
-        type(self.problem).file_path = mock.PropertyMock(return_value=self.pr_file_path)
-        type(self.problem).dimension = mock.PropertyMock(return_value=self.pr_dimension)
+        self.problem = mocker.MagicMock()
+        type(self.problem).name = mocker.PropertyMock(return_value=self.pr_name)
+        type(self.problem).is_minimization = mocker.PropertyMock(return_value=self.pr_is_minimization)
+        type(self.problem).file_path = mocker.PropertyMock(return_value=self.pr_file_path)
+        type(self.problem).dimension = mocker.PropertyMock(return_value=self.pr_dimension)
 
         self.algorithm = AlgorithmVoid(output_control=self.output_control,
                 name=self.name,
                 target_problem=self.problem 
         )
-        return
+
 
     def test_name_should_be_as_it_is_in_constructor(self):
         self.assertEqual(self.algorithm.name, self.name)

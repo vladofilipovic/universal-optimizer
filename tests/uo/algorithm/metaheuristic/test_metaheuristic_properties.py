@@ -11,7 +11,7 @@ sys.path.append(directory.parent.parent.parent.parent.parent.parent.parent)
 sys.path.append(directory.parent.parent.parent.parent.parent.parent.parent.parent)
 
 import unittest   
-import unittest.mock as mock
+import unittest.mock as mocker
 
 from uo.target_problem.target_problem import TargetProblem
 from uo.algorithm.metaheuristic.finish_control import FinishControl
@@ -33,23 +33,23 @@ class TestMetaheuristicProperties(unittest.TestCase):
         self.evaluations_max = 42
         self.iterations_max = 42
         self.seconds_max = 42
-        self.finish_control =  mock.MagicMock()
+        self.finish_control =  mocker.MagicMock()
         type(self.finish_control).evaluations_max = self.evaluations_max
         type(self.finish_control).iterations_max = self.iterations_max
         type(self.finish_control).seconds_max = self.seconds_max
 
         self.random_seed = 42
 
-        self.additional_statistics_control = mock.MagicMock()
+        self.additional_statistics_control = mocker.MagicMock()
         
-        self.output_control = mock.MagicMock()
+        self.output_control = mocker.MagicMock()
         type(self.output_control).write_to_output = False
 
-        self.problem = mock.MagicMock()
-        type(self.problem).name = mock.PropertyMock(return_value='some_problem')
-        type(self.problem).is_minimization = mock.PropertyMock(return_value=True)
-        type(self.problem).file_path = mock.PropertyMock(return_value='some file path')
-        type(self.problem).dimension = mock.PropertyMock(return_value=42)
+        self.problem = mocker.MagicMock()
+        type(self.problem).name = mocker.PropertyMock(return_value='some_problem')
+        type(self.problem).is_minimization = mocker.PropertyMock(return_value=True)
+        type(self.problem).file_path = mocker.PropertyMock(return_value='some file path')
+        type(self.problem).dimension = mocker.PropertyMock(return_value=42)
 
         self.optimizer = MetaheuristicVoid(
                 name=self.metaheuristicName,
@@ -59,7 +59,6 @@ class TestMetaheuristicProperties(unittest.TestCase):
                 output_control=self.output_control,
                 target_problem=self.problem
         )
-        return
     
     def test_name_should_be_equal_as_in_constructor(self):
         self.assertEqual(self.optimizer.name, self.metaheuristicName)

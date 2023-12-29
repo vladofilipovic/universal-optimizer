@@ -11,7 +11,7 @@ sys.path.append(directory.parent.parent.parent.parent.parent.parent.parent)
 sys.path.append(directory.parent.parent.parent.parent.parent.parent.parent.parent)
 
 import unittest   
-import unittest.mock as mock
+import unittest.mock as mocker
 
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer 
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import \
@@ -24,22 +24,22 @@ class TestVnsOptimizerProperties(unittest.TestCase):
         print("setUpClass TestVnsOptimizerProperties\n")
 
     def setUp(self):
-        self.output_control = mock.MagicMock()
+        self.output_control = mocker.MagicMock()
         type(self.output_control).write_to_output = False
 
-        self.problem = mock.MagicMock()
-        type(self.problem).name = mock.PropertyMock(return_value='some_problem')
-        type(self.problem).is_minimization = mock.PropertyMock(return_value=True)
-        type(self.problem).file_path = mock.PropertyMock(return_value='some file path')
-        type(self.problem).dimension = mock.PropertyMock(return_value=42)
+        self.problem = mocker.MagicMock()
+        type(self.problem).name = mocker.PropertyMock(return_value='some_problem')
+        type(self.problem).is_minimization = mocker.PropertyMock(return_value=True)
+        type(self.problem).file_path = mocker.PropertyMock(return_value='some file path')
+        type(self.problem).dimension = mocker.PropertyMock(return_value=42)
 
         self.evaluations_max = 42
         self.iterations_max = 42
         self.seconds_max = 42
-        self.finish_control = mock.MagicMock()
-        type(self.finish_control).evaluations_max= mock.PropertyMock(return_value=self.evaluations_max)
-        type(self.finish_control).iterations_max= mock.PropertyMock(return_value=self.iterations_max)
-        type(self.finish_control).seconds_max= mock.PropertyMock(return_value=self.seconds_max)
+        self.finish_control = mocker.MagicMock()
+        type(self.finish_control).evaluations_max= mocker.PropertyMock(return_value=self.evaluations_max)
+        type(self.finish_control).iterations_max= mocker.PropertyMock(return_value=self.iterations_max)
+        type(self.finish_control).seconds_max= mocker.PropertyMock(return_value=self.seconds_max)
         
         self.random_seed = 42
         self.k_min = 3
@@ -94,10 +94,10 @@ class TestVnsOptimizerProperties(unittest.TestCase):
 
     def test_create_with_invalid_local_search_type_should_raise_value_exception_with_proper_message(self):
         with self.assertRaises(ValueError) as context:
-            vns_support = mock.MagicMock(spec=ProblemSolutionVnsSupport)
-            type(vns_support).local_search_best_improvement = mock.CallableMixin(spec=lambda x: x)
-            type(vns_support).local_search_first_improvement= mock.CallableMixin(spec=lambda x: x)
-            type(vns_support).copy = mock.CallableMixin(spec="return self")
+            vns_support = mocker.MagicMock(spec=ProblemSolutionVnsSupport)
+            type(vns_support).local_search_best_improvement = mocker.CallableMixin(spec=lambda x: x)
+            type(vns_support).local_search_first_improvement= mocker.CallableMixin(spec=lambda x: x)
+            type(vns_support).copy = mocker.CallableMixin(spec="return self")
             vns_optimizer:VnsOptimizer = VnsOptimizer(
                 output_control=self.output_control,
                 target_problem=self.problem, 

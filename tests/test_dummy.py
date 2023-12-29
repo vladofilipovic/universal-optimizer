@@ -4,7 +4,7 @@ import sys
 sys.path.append(directory.parent)
 
 import unittest   
-import unittest.mock as mock
+import unittest.mock as mocker
 
 class TestDummy(unittest.TestCase):
     
@@ -15,10 +15,10 @@ class TestDummy(unittest.TestCase):
     def setUp(self):
         self.dummy_val = 42
 
-        self.dummy_obj = mock.MagicMock()
-        type(self.dummy_obj).name = mock.PropertyMock(return_value='some_problem')
-        type(self.dummy_obj).dimension = mock.PropertyMock(return_value=42)
-        return
+        self.dummy_obj = mocker.MagicMock()
+        type(self.dummy_obj).name = mocker.PropertyMock(return_value='some_problem')
+        type(self.dummy_obj).dimension = mocker.PropertyMock(return_value=42)
+
     
     def test_dummy_obj_name_should_be_some_problem(self):
         self.assertEqual(self.dummy_obj.name, 'some_problem')

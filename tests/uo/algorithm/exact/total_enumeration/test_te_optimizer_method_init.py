@@ -11,7 +11,7 @@ sys.path.append(directory.parent.parent.parent.parent.parent.parent.parent)
 sys.path.append(directory.parent.parent.parent.parent.parent.parent.parent.parent)
 
 import unittest   
-import unittest.mock as mock
+import unittest.mock as mocker
 
 from copy import deepcopy
 
@@ -32,7 +32,7 @@ class TestTeOptimizerMethodInit(unittest.TestCase):
 
         self.oc_write_to_output = False
         self.oc_output_file = "some file path..."
-        self.output_control = mock.MagicMock()
+        self.output_control = mocker.MagicMock()
         type(self.output_control).write_to_output = self.oc_write_to_output
         type(self.output_control).output_file = self.oc_output_file
 
@@ -40,11 +40,11 @@ class TestTeOptimizerMethodInit(unittest.TestCase):
         self.pr_is_minimization = True
         self.pr_file_path = 'some problem file path'
         self.pr_dimension = 42
-        self.problem = mock.MagicMock()
-        type(self.problem).name = mock.PropertyMock(return_value=self.pr_name)
-        type(self.problem).is_minimization = mock.PropertyMock(return_value=self.pr_is_minimization)
-        type(self.problem).file_path = mock.PropertyMock(return_value=self.pr_file_path)
-        type(self.problem).dimension = mock.PropertyMock(return_value=self.pr_dimension)
+        self.problem = mocker.MagicMock()
+        type(self.problem).name = mocker.PropertyMock(return_value=self.pr_name)
+        type(self.problem).is_minimization = mocker.PropertyMock(return_value=self.pr_is_minimization)
+        type(self.problem).file_path = mocker.PropertyMock(return_value=self.pr_file_path)
+        type(self.problem).dimension = mocker.PropertyMock(return_value=self.pr_dimension)
 
 
         self.solution_name = "void solution"
@@ -52,16 +52,16 @@ class TestTeOptimizerMethodInit(unittest.TestCase):
         self.fitness_value = 42.0
         self.objective_value = -42.0
         self.is_feasible = True
-        self.solution = mock.MagicMock()
+        self.solution = mocker.MagicMock()
         type(self.solution).name = self.solution_name, 
         type(self.solution).random_seed = self.random_seed,
         type(self.solution).fitness_value=self.fitness_value,
         type(self.solution).objective_value=self.objective_value,
         type(self.solution).is_feasible= self.is_feasible
-        self.solution.evaluate = mock.Mock(return_value='evaluate')
+        self.solution.evaluate = mocker.Mock(return_value='evaluate')
 
-        self.te_support = mock.MagicMock()
-        self.te_support.reset = mock.Mock(return_value='reset')
+        self.te_support = mocker.MagicMock()
+        self.te_support.reset = mocker.Mock(return_value='reset')
 
         self.te_optimizer = TeOptimizer(output_control=self.output_control,
                 target_problem=self.problem,
