@@ -39,5 +39,9 @@
         ".",
         "-p",
         "test_*.py"
-    ]
+    ],
+    "sonarlint.connectedMode.project": {
+        "connectionId": "vladofilipovic",
+        "projectKey": "vladofilipovic_universal-optimizer"
+    }
 }
