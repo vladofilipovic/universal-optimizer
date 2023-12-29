@@ -109,16 +109,6 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         """
         return self.__copy__()
 
-    @abstractmethod
-    def copy_to(self, destination)->None:
-        """
-        Copy the current target solution to the already existing destination target solution
-
-        :param destination: destination target solution
-        :type destination: :class:`uo.target_solution.TargetSolution`
-        """
-        destination = copy(self)
-
     @property
     def name(self)->str:
         """

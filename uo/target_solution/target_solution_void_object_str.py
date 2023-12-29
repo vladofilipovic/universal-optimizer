@@ -33,15 +33,12 @@ class TargetSolutionVoidObjectStr(TargetSolution[object, str]):
     def copy(self):
         return self.__copy__()
 
-    def copy_to(self, destination)->None:
-        destination = copy(self)
-
     def argument(self, representation:object)->str:
         return str(representation)
 
     def init_random(self, problem:TargetProblem)->None:
         self.representation = None
-        return
+ 
 
     def init_from(self, representation:object, problem:TargetProblem)->None:
         self.representation = representation

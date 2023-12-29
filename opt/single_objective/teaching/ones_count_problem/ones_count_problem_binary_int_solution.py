@@ -62,14 +62,6 @@ class OnesCountProblemBinaryIntSolution(TargetSolution[int,str]):
         """
         return self.__copy__()
         
-    def copy_to(self, destination)->None:
-        """
-        Copy the `OnesCountProblemBinaryIntSolution` to the already existing destination `OnesCountProblemBinaryIntSolution`
-
-        :param `OnesCountProblemBinaryIntSolution` destination: destination `OnesCountProblemBinaryIntSolution`
-        """
-        destination = self.__copy__()
-
     def __make_to_be_feasible_helper__(self, problem:TargetProblem):
         """
         Helper function that modifies representation to be feasible

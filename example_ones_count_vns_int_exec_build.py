@@ -63,9 +63,6 @@ class OnesCountProblemBinaryIntSolution(TargetSolution[int,str]):
     def copy(self):
         return self.__copy__()
         
-    def copy_to(self, destination)->None:
-        destination = self.__copy__()
-
     def __make_to_be_feasible_helper__(self, problem:TargetProblem):
         mask:int = ~0
         mask <<= 32-problem.dimension

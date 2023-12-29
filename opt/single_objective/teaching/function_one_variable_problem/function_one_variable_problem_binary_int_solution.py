@@ -49,9 +49,6 @@ class FunctionOneVariableProblemBinaryIntSolution(TargetSolution[int,float]):
     def copy(self):
         return self.__copy__()
         
-    def copy_to(self, destination)->None:
-        destination = self.__copy__()
-
     @property
     def domain_from(self)->float:
         return self.__domain_from    

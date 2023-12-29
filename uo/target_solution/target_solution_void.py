@@ -40,9 +40,6 @@ class TargetSolutionVoid(TargetSolution[int, str]):
     def copy(self):
         return self.__copy__()
 
-    def copy_to(self, destination)->None:
-        destination =  copy(self)
-
     def argument(self, representation:int)->str:
         return "42"
 

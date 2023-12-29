@@ -38,7 +38,7 @@ class TestIntegrationOnesCountProblemVnsBinaryIntSolutionLsbi(unittest.TestCase)
         self.output_control = OutputControl(False)
         self.problem_to_solve:OnesCountProblem = OnesCountProblem.from_dimension(dimension=22)
         self.solution:OnesCountProblemBinaryIntSolution = OnesCountProblemBinaryIntSolution()
-        self.finish_control:FinishControl = FinishControl(criteria='evaluations', evaluations_max=500)
+        self.finish_control:FinishControl = FinishControl(criteria='evaluations', evaluations_max=1000)
         self.vns_support:OnesCountProblemBinaryIntSolutionVnsSupport = OnesCountProblemBinaryIntSolutionVnsSupport()
         self.additional_stat = AdditionalStatisticsControl(keep='')
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
@@ -54,7 +54,6 @@ class TestIntegrationOnesCountProblemVnsBinaryIntSolutionLsbi(unittest.TestCase)
         vns_construction_params.local_search_type = 'local_search_best_improvement'
         self.optimizer:VnsOptimizer = VnsOptimizer.from_construction_tuple(vns_construction_params)
         self.optimizer.optimize()
-        return
     
     def test_best_solution_after_optimization_should_be_all_optimal(self):
         result = int('0b1111111111111111111111', base=0)

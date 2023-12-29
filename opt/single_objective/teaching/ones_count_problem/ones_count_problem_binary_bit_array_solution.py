@@ -63,14 +63,6 @@ class OnesCountProblemBinaryBitArraySolution(TargetSolution[BitArray,str]):
         """
         return self.__copy__()
         
-    def copy_to(self, destination)->None:
-        """
-        Copy the `OnesCountProblemBinaryBitArraySolution` to the already existing destination `OnesCountProblemBinaryBitArraySolution`
-
-        :param `OnesCountProblemBinaryBitArraySolution` destination: destination `OnesCountProblemBinaryBitArraySolution`
-        """
-        destination = self.__copy__()
-
     def argument(self, representation:BitArray)->str:
         """
         Argument of the target solution
