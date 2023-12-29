@@ -84,6 +84,8 @@ class FunctionOneVariableProblemBinaryIntSolution(TargetSolution[int,float]):
     def __make_to_be_feasible_helper__(self, problem:FunctionOneVariableProblem):
         if self.representation > self.number_of_intervals:
             self.representation = self.number_of_intervals
+        if self.representation < 0:
+            self.representation = 0
 
     def argument(self, representation:int)->float:
         return self.domain_from + representation * (self.domain_to - self.domain_from) / self.number_of_intervals
@@ -97,18 +99,28 @@ class FunctionOneVariableProblemBinaryIntSolution(TargetSolution[int,float]):
 
     def calculate_quality_directly(self, representation:int, problem:FunctionOneVariableProblem)->QualityOfSolution:
         arg:float = self.argument(representation) 
-        res:float = eval(problem.expression, {"x":arg})
+        res:float = eval(problem.expression, {"x":arg}) 
         return QualityOfSolution(res, None, res, None, True)
 
     def native_representation(self, representation_str:str)->int:
         ret:int = int(representation_str, 2)
         return ret
 
-    def representation_distance_directly(self, solution_code_1:str, solution_code_2:str)->float:
-        rep_1:int = self.native_representation(solution_code_1)
-        rep_2:int = self.native_representation(solution_code_2)
+    def representation_distance_directly(self, solution_code_1: str, solution_code_2: str) -> float:
+        """
+        Calculates the distance between two binary representations of solutions.
+
+        Args:
+            solution_code_1 (str): The binary representation of the first solution.
+            solution_code_2 (str): The binary representation of the second solution.
+
+        Returns:
+            float: The representation distance between the two binary solutions.
+        """
+        rep_1: int = self.native_representation(solution_code_1)
+        rep_2: int = self.native_representation(solution_code_2)
         result = (rep_1 ^ rep_2).count(True)
-        return result 
+        return result
 
     def string_rep(self, delimiter:str='\n', indentation:int=0, indentation_symbol:str='   ', 
             group_start:str='{', group_end:str='}',)->str:
