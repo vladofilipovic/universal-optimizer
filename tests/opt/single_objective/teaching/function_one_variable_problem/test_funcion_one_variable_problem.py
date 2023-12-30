@@ -9,6 +9,7 @@ from unittest.mock import patch
 from unittest.mock import mock_open
 
 from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem import FunctionOneVariableProblem
+from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem import FunctionOneVariableProblemElements
 
 class TestFunctionOneVariableProblem(unittest.TestCase):
 
@@ -96,11 +97,11 @@ class Test__LoadFromFile__(unittest.TestCase):
     # Loads a valid txt file with three data elements and returns a FunctionOneVariableProblemElements object
     def test_valid_txt_file(self):
         # Mock the open function to return a file object
-        with patch('builtins.open', mock_open(__load_from_file__='expression 1.0 2.0')) as mock_file:
+        with patch('builtins.open', mock_open(read_data='expression 1.0 2.0')) as mock_file:
             # Call the method under test
             result = FunctionOneVariableProblem.__load_from_file__('file.txt', 'txt')
 
-        mock_file.assert_called_with('file.txt')
+        mock_file.assert_called_with('file.txt', 'r')
         # Assert that the result is an instance of FunctionOneVariableProblemElements
         self.assertIsInstance(result, FunctionOneVariableProblemElements)
         # Assert that the expression, domain_low, and domain_high values are correct
