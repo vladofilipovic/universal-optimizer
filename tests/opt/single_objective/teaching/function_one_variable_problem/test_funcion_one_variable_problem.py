@@ -2,19 +2,13 @@ from pathlib import Path
 directory = Path(__file__).resolve()
 import sys
 sys.path.append(directory.parent)
-sys.path.append(directory.parent.parent)
-sys.path.append(directory.parent.parent.parent)
-sys.path.append(directory.parent.parent.parent.parent)
-sys.path.append(directory.parent.parent.parent.parent.parent)
-sys.path.append(directory.parent.parent.parent.parent.parent.parent)
-sys.path.append(directory.parent.parent.parent.parent.parent.parent.parent)
-sys.path.append(directory.parent.parent.parent.parent.parent.parent.parent.parent)
 
 import unittest
 import unittest.mock as mocker
+from unittest.mock import patch
+from unittest.mock import mock_open
 
-from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem import \
-    FunctionOneVariableProblem
+from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem import FunctionOneVariableProblem
 
 class TestFunctionOneVariableProblem(unittest.TestCase):
 
@@ -96,3 +90,68 @@ class TestFunctionOneVariableProblem(unittest.TestCase):
         with self.assertRaises(ValueError):
             FunctionOneVariableProblem("x^2", 0, "b")
 
+
+class Test__LoadFromFile__(unittest.TestCase):
+
+    # Loads a valid txt file with three data elements and returns a FunctionOneVariableProblemElements object
+    def test_valid_txt_file(self):
+        # Mock the open function to return a file object
+        with patch('builtins.open', mock_open(__load_from_file__='expression 1.0 2.0')) as mock_file:
+            # Call the method under test
+            result = FunctionOneVariableProblem.__load_from_file__('file.txt', 'txt')
+
+        mock_file.assert_called_with('file.txt')
+        # Assert that the result is an instance of FunctionOneVariableProblemElements
+        self.assertIsInstance(result, FunctionOneVariableProblemElements)
+        # Assert that the expression, domain_low, and domain_high values are correct
+        self.assertEqual(result.expression, 'expression')
+        self.assertEqual(result.domain_low, 1.0)
+        self.assertEqual(result.domain_high, 2.0)
+
+    # Skips comments at the beginning of the file and loads the first line with data
+    def test_skip_comments(self):
+        # Mock the open function to return a file object with comments and data
+        mocker.patch('builtins.open', mocker.mock_open(read_data='// Comment\nexpression 1.0 2.0'))
+    
+        # Call the method under test
+        result = FunctionOneVariableProblem.__load_from_file__('file.txt', 'txt')
+    
+        # Assert that the result is an instance of FunctionOneVariableProblemElements
+        self.assertIsInstance(result, FunctionOneVariableProblemElements)
+        # Assert that the expression, domain_low, and domain_high values are correct
+        self.assertEqual(result.expression, 'expression')
+        self.assertEqual(result.domain_low, 1.0)
+        self.assertEqual(result.domain_high, 2.0)
+
+    # Returns a FunctionOneVariableProblemElements object with the correct expression, domain_low, and domain_high values
+    def test_correct_values(self):
+        # Mock the open function to return a file object with data
+        mocker.patch('builtins.open', mocker.mock_open(read_data='expression 1.0 2.0'))
+    
+        # Call the method under test
+        result = FunctionOneVariableProblem.__load_from_file__('file.txt', 'txt')
+    
+        # Assert that the result is an instance of FunctionOneVariableProblemElements
+        self.assertIsInstance(result, FunctionOneVariableProblemElements)
+        # Assert that the expression, domain_low, and domain_high values are correct
+        self.assertEqual(result.expression, 'expression')
+        self.assertEqual(result.domain_low, 1.0)
+        self.assertEqual(result.domain_high, 2.0)
+
+    # Raises a ValueError when the input file path is empty
+    def test_empty_file_path(self):
+        # Call the method under test with an empty file path
+        with self.assertRaises(ValueError):
+            FunctionOneVariableProblem.__load_from_file__('', 'txt')
+
+    # Raises a ValueError when the input file path is invalid
+    def test_invalid_file_path(self):
+        # Call the method under test with an invalid file path
+        with self.assertRaises(ValueError):
+            FunctionOneVariableProblem.__load_from_file__('invalid_file.txt', 'txt')
+
+    # Raises a ValueError when the data format is not supported
+    def test_invalid_data_format(self):
+        # Call the method under test with an invalid data format
+        with self.assertRaises(ValueError):
+            FunctionOneVariableProblem.__load_from_file__('file.txt', 'csv')

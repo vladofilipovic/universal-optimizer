@@ -57,7 +57,6 @@ class TestVnsOptimizerProperties(unittest.TestCase):
                 additional_statistics_control=None,
                 local_search_type='first_improvement'
         )
-        return
     
     def test_name_should_be_vns(self):
         self.assertEqual(self.vns_optimizer.name, 'vns')

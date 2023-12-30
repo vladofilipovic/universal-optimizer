@@ -9,14 +9,14 @@ sys.path.append(directory.parent.parent.parent.parent.parent)
 sys.path.append(directory.parent.parent.parent.parent.parent.parent)
 sys.path.append(directory.parent.parent.parent.parent.parent.parent.parent)
 sys.path.append(directory.parent.parent.parent.parent.parent.parent.parent.parent)
+sys.path.append(directory.parent.parent.parent.parent.parent.parent.parent.parent.parent)
 
 import unittest   
 import unittest.mock as mocker
 
 from copy import deepcopy
 
-from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem import \
-        FunctionOneVariableProblem
+from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem import FunctionOneVariableProblem
 
 
 class TestFunctionOneVariableProblemOperations(unittest.TestCase):
@@ -34,7 +34,6 @@ class TestFunctionOneVariableProblemOperations(unittest.TestCase):
                 domain_low = self.domain_low,
                 domain_high = self.domain_high
         )
-        return
     
     def test_create_with_invalid_local_search_type_should_raise_value_exception_with_proper_message(self):
         with self.assertRaises(ValueError) as context:

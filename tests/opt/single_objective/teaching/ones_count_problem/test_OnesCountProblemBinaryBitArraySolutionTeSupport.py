@@ -12,6 +12,7 @@ sys.path.append(directory.parent.parent.parent.parent.parent)
 sys.path.append(directory.parent.parent.parent.parent.parent.parent)
 sys.path.append(directory.parent.parent.parent.parent.parent.parent.parent)
 sys.path.append(directory.parent.parent.parent.parent.parent.parent.parent.parent)
+sys.path.append(directory.parent.parent.parent.parent.parent.parent.parent.parent.parent)
 
 import unittest.mock as mocker
 

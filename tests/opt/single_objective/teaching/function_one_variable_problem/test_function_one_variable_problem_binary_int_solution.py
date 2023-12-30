@@ -9,14 +9,13 @@ sys.path.append(directory.parent.parent.parent.parent.parent)
 sys.path.append(directory.parent.parent.parent.parent.parent.parent)
 sys.path.append(directory.parent.parent.parent.parent.parent.parent.parent)
 sys.path.append(directory.parent.parent.parent.parent.parent.parent.parent.parent)
+sys.path.append(directory.parent.parent.parent.parent.parent.parent.parent.parent.parent)
 
 import unittest
 import unittest.mock as mocker
 
-from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem_binary_int_solution \
-    import FunctionOneVariableProblemBinaryIntSolution
-from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem \
-    import FunctionOneVariableProblem
+from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem_binary_int_solution import FunctionOneVariableProblemBinaryIntSolution
+from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem import FunctionOneVariableProblem
 
 from uo.target_solution.target_solution import QualityOfSolution
 from uo.target_solution.target_solution import TargetSolution
