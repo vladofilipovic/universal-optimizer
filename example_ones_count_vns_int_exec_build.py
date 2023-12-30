@@ -52,8 +52,9 @@ class OnesCountProblem2(TargetProblem):
 class OnesCountProblemBinaryIntSolution(TargetSolution[int,str]):
     
     def __init__(self, random_seed:int=None)->None:
-        super().__init__("OnesCountProblemBinaryIntSolution", random_seed, fitness_value=None, objective_value=None, 
-                is_feasible=False, evaluation_cache_is_used=False, evaluation_cache_max_size=0, 
+        super().__init__("OnesCountProblemBinaryIntSolution", random_seed, 
+                fitness_value=None, fitness_values=None, objective_value=None, objective_values=None, is_feasible=False, 
+                evaluation_cache_is_used=False, evaluation_cache_max_size=0, 
                 distance_calculation_cache_is_used=False, distance_calculation_cache_max_size=0)
 
     def __copy__(self):
