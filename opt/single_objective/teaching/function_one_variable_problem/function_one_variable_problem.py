@@ -125,3 +125,4 @@ class FunctionOneVariableProblem(TargetProblem):
 
     def __format__(self, spec:str)->str:
         return self.string_rep('|')
+
