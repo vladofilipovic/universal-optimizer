@@ -151,3 +151,4 @@ class FunctionOneVariableProblemBinaryIntSolution(TargetSolution[int,float]):
     def __format__(self, spec:str)->str:
         return self.string_rep('\n', 0, '   ', '{', '}')
 
+

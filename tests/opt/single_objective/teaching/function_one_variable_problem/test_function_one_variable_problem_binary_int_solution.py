@@ -287,3 +287,268 @@ class TestInitRandom(unittest.TestCase):
         self.assertIsInstance(solution.representation, int)
         self.assertGreaterEqual(solution.representation, 0)
         self.assertLessEqual(solution.representation, solution.number_of_intervals)
+
+
+
+class TestCalculateQualityDirectly(unittest.TestCase):
+
+    # Returns a QualityOfSolution object with the correct fitness value when given a valid representation and problem.
+    def test_valid_representation_and_problem(self):
+        # Arrange
+        problem = FunctionOneVariableProblem("x**2", 0, 10)
+        solution = FunctionOneVariableProblemBinaryIntSolution(0, 10, 5)
+        representation = 3
+        expected_fitness_value = (0 + 3*((10-0)/5)) ** 2
+
+        # Act
+        result = solution.calculate_quality_directly(representation, problem)
+
+        # Assert
+        self.assertEqual(result.fitness_value, expected_fitness_value)
+
+    # Returns a QualityOfSolution object with the is_feasible attribute set to True when given a valid representation and problem.
+    def test_valid_representation_and_problem_is_feasible(self):
+        # Arrange
+        problem = FunctionOneVariableProblem("x**2", 0, 10)
+        solution = FunctionOneVariableProblemBinaryIntSolution(0, 10, 5)
+        representation = 3
+
+        # Act
+        result = solution.calculate_quality_directly(representation, problem)
+
+        # Assert
+        self.assertTrue(result.is_feasible)
+
+    # Returns a QualityOfSolution object with the correct objective value when given a valid representation and problem.
+    def test_valid_representation_and_problem_objective_value(self):
+        # Arrange
+        problem = FunctionOneVariableProblem("x", 0, 10)
+        solution = FunctionOneVariableProblemBinaryIntSolution(0, 10, 5)
+        representation = 3
+        expected_objective_value = 6.0
+
+        # Act
+        result = solution.calculate_quality_directly(representation, problem)
+
+        # Assert
+        self.assertEqual(result.objective_value, expected_objective_value)
+
+
+    # Returns a QualityOfSolution object with the correct fitness value when given the minimum valid representation and problem.
+    def test_minimum_valid_representation_and_problem(self):
+        # Arrange
+        problem = FunctionOneVariableProblem("x**2", 0, 10)
+        solution = FunctionOneVariableProblemBinaryIntSolution(0, 10, 5)
+        representation = 0
+        expected_fitness_value = 0.0
+
+        # Act
+        result = solution.calculate_quality_directly(representation, problem)
+
+        # Assert
+        self.assertEqual(result.fitness_value, expected_fitness_value)
+
+    # Returns a QualityOfSolution object with the correct fitness value when given the maximum valid representation and problem.
+    def test_maximum_valid_representation_and_problem(self):
+        # Arrange
+        problem = FunctionOneVariableProblem("x**3", 0, 10)
+        solution = FunctionOneVariableProblemBinaryIntSolution(0, 10, 5)
+        representation = 5
+        expected_fitness_value =  (0 + 5*((10-0)/5)) ** 3
+
+        # Act
+        result = solution.calculate_quality_directly(representation, problem)
+
+        # Assert
+        self.assertEqual(result.fitness_value, expected_fitness_value)
+
+class TestNativeRepresentation(unittest.TestCase):
+
+    # Should correctly convert a binary string to an integer
+    def test_correct_conversion(self):
+        # Arrange
+        binary_str = '101010'
+        expected_result = 42
+    
+        # Act
+        result = FunctionOneVariableProblemBinaryIntSolution(0, 10, 3).native_representation(binary_str)
+    
+        # Assert
+        self.assertEqual(result, expected_result)
+
+    # Should return 0 when given a binary string of all 0s
+    def test_all_zeros(self):
+        # Arrange
+        binary_str = '000000'
+        expected_result = 0
+    
+        # Act
+        result = FunctionOneVariableProblemBinaryIntSolution(0, 50, 10).native_representation(binary_str)
+    
+        # Assert
+        self.assertEqual(result, expected_result)
+
+    # Should return the maximum integer value when given a binary string of all 1s
+    def test_all_ones(self):
+        # Arrange
+        binary_str = '111111'
+        expected_result = int('111111', 2)
+    
+        # Act
+        result = FunctionOneVariableProblemBinaryIntSolution(0,20,3).native_representation(binary_str)
+    
+        # Assert
+        self.assertEqual(result, expected_result)
+
+    # Should raise a ValueError when given an empty string
+    def test_empty_string(self):
+        # Arrange
+        binary_str = ''
+    
+        # Act & Assert
+        with self.assertRaises(ValueError):
+            FunctionOneVariableProblemBinaryIntSolution(0,20,3).native_representation(binary_str)
+
+    # Should raise a ValueError when given a string with non-binary characters
+    def test_non_binary_characters(self):
+        # Arrange
+        binary_str = '12345'
+    
+        # Act & Assert
+        with self.assertRaises(ValueError):
+            FunctionOneVariableProblemBinaryIntSolution(0,20,3).native_representation(binary_str)
+
+class TestRepresentationDistanceDirectly(unittest.TestCase):
+
+    # Calculate distance between two binary representations with different lengths
+    def test_distance_different_lengths(self):
+        # Arrange
+        solution = FunctionOneVariableProblemBinaryIntSolution(0, 10, 10)
+        solution_code_1 = "101010"
+        solution_code_2 = "110"
+    
+        # Act
+        result = solution.representation_distance_directly(solution_code_1, solution_code_2)
+    
+        # Assert
+        self.assertEqual(result, 3)
+
+    # Calculate distance between two identical binary representations
+    def test_distance_identical_representations(self):
+        # Arrange
+        solution = FunctionOneVariableProblemBinaryIntSolution(0, 10, 10)
+        solution_code_1 = "101010"
+        solution_code_2 = "101010"
+    
+        # Act
+        result = solution.representation_distance_directly(solution_code_1, solution_code_2)
+    
+        # Assert
+        self.assertEqual(result, 0)
+
+    # Calculate distance between two different binary representations
+    def test_distance_different_representations(self):
+        # Arrange
+        solution = FunctionOneVariableProblemBinaryIntSolution(0, 10, 10)
+        solution_code_1 = "101010"
+        solution_code_2 = "010101"
+    
+        # Act
+        result = solution.representation_distance_directly(solution_code_1, solution_code_2)
+    
+        # Assert
+        self.assertEqual(result, 6)
+
+    # Calculate distance between a binary representation and a non-binary representation
+    def test_distance_binary_and_non_binary_representations(self):
+        # Arrange
+        solution = FunctionOneVariableProblemBinaryIntSolution(0, 10, 10)
+        solution_code_1 = "101010"
+        solution_code_2 = "12345"
+    
+        # Act and Assert
+        with self.assertRaises(ValueError):
+            solution.representation_distance_directly(solution_code_1, solution_code_2)
+
+    # Calculate distance between two binary representations with different lengths and values
+    def test_distance_different_lengths_and_values(self):
+        # Arrange
+        solution = FunctionOneVariableProblemBinaryIntSolution(0, 10, 10)
+        solution_code_1 = "101010"
+        solution_code_2 = "11001100"
+    
+        # Act
+        result = solution.representation_distance_directly(solution_code_1, solution_code_2)
+    
+        # Assert
+        self.assertEqual(result, 5)
+
+
+class TestStringRep(unittest.TestCase):
+
+    # Returns a string representation of the object, including its superclass string representation and its string representation.
+    def test_returns_string_representation(self):
+        # Arrange
+        obj = FunctionOneVariableProblemBinaryIntSolution(0, 10, 5)
+        obj.representation = 3
+
+        # Act
+        result = obj.string_rep()
+    
+        # Assert
+        self.assertIsInstance(result, str)
+        self.assertIn("FunctionOneVariableProblemBinaryIntSolution", result)
+        self.assertIn("string_representation()=", result)
+
+    # The string representation includes the string representation of the object's string representation.
+    def test_includes_string_representation(self):
+        # Arrange
+        obj = FunctionOneVariableProblemBinaryIntSolution(0, 10, 5)
+        obj.representation = 3
+
+        # Act
+        result = obj.string_rep()
+    
+        # Assert
+        self.assertIn("string_representation()=", result)
+        self.assertIn(obj.string_representation(), result)
+
+    # The string representation is properly indented and formatted.
+    def test_properly_indented_and_formatted(self):
+        # Arrange
+        obj = FunctionOneVariableProblemBinaryIntSolution(0, 10, 5)
+        obj.representation = 3
+
+        # Act
+        result = obj.string_rep(indentation=2, indentation_symbol='  ')
+    
+        # Assert
+        self.assertIn("FunctionOneVariableProblemBinaryIntSolution", result)
+        self.assertIn("string_representation()=", result)
+        self.assertIn("  ", result)
+
+
+    # The object has string representation.
+    def test_no_string_representation(self):
+        # Arrange
+        obj = FunctionOneVariableProblemBinaryIntSolution(0, 10, 5)
+        obj.representation = 3
+
+        # Act
+        result = obj.string_rep()
+    
+        # Assert
+        self.assertIn("string_representation()=", result)
+
+    # The delimiter, indentation, indentation_symbol, group_start, and group_end parameters are empty strings.
+    def test_empty_parameters(self):
+        # Arrange
+        obj = FunctionOneVariableProblemBinaryIntSolution(0, 10, 5)
+        obj.representation = 3
+
+        # Act
+        result = obj.string_rep(delimiter='', indentation=0, indentation_symbol='', group_start='', group_end='')
+    
+        # Assert
+        self.assertNotIn('\n', result)
+        self.assertNotIn('   ', result)
