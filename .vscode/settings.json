@@ -32,18 +32,18 @@
     "[python]": {
         "editor.defaultFormatter": "ms-python.autopep8"
     },
-    "python.formatting.provider": "none",
     "sonarlint.connectedMode.project": {
         "connectionId": "vladofilipovic",
         "projectKey": "vladofilipovic_universal-optimizer"
     },
+    "python.formatting.provider": "none",
+    "python.testing.pytestEnabled": false,
+    "python.testing.unittestEnabled": true,
     "python.testing.unittestArgs": [
         "-v",
         "-s",
-        "./tests",
+        ".",
         "-p",
         "test_*.py"
-    ],
-    "python.testing.pytestEnabled": false,
-    "python.testing.unittestEnabled": true
+    ]
 }
