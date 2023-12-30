@@ -90,7 +90,13 @@ class FunctionOneVariableProblem(TargetProblem):
         return self.__number_of_intervals
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
-        group_end:str ='}')->str:
+            group_end:str ='}')->str:
+        if delimiter is None:
+            return ''
+        if indentation is None or indentation < 0:
+            return ''
+        if indentation_symbol is None:
+            return ''
         s = delimiter
         for i in range(0, indentation):
             s += indentation_symbol  
@@ -119,5 +125,3 @@ class FunctionOneVariableProblem(TargetProblem):
 
     def __format__(self, spec:str)->str:
         return self.string_rep('|')
-
-
