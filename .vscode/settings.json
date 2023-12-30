@@ -32,8 +32,10 @@
         "editor.defaultFormatter": "ms-python.autopep8"
     },
     "python.formatting.provider": "none",
-    "python.testing.pytestEnabled": false,
-    "python.testing.unittestEnabled": true,
+    "sonarlint.connectedMode.project": {
+        "connectionId": "vladofilipovic",
+        "projectKey": "vladofilipovic_universal-optimizer"
+    },
     "python.testing.unittestArgs": [
         "-v",
         "-s",
@@ -41,8 +43,6 @@
         "-p",
         "test_*.py"
     ],
-    "sonarlint.connectedMode.project": {
-        "connectionId": "vladofilipovic",
-        "projectKey": "vladofilipovic_universal-optimizer"
-    }
+    "python.testing.pytestEnabled": false,
+    "python.testing.unittestEnabled": true
 }
