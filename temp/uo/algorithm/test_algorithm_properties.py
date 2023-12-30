@@ -33,23 +33,23 @@ class TestAlgorithmProperties(unittest.TestCase):
 
         self.oc_write_to_output = True
         self.oc_output_file = "some file path..."
-        self.output_control = mocker.MagicMock()
-        type(self.output_control).write_to_output = self.oc_write_to_output
-        type(self.output_control).output_file = self.oc_output_file
+        self.output_control_stub = mocker.MagicMock()
+        type(self.output_control_stub).write_to_output = self.oc_write_to_output
+        type(self.output_control_stub).output_file = self.oc_output_file
 
         self.pr_name = 'some_problem'
         self.pr_is_minimization = True
         self.pr_file_path = 'some problem file path'
         self.pr_dimension = 42
-        self.problem = mocker.MagicMock()
-        type(self.problem).name = mocker.PropertyMock(return_value=self.pr_name)
-        type(self.problem).is_minimization = mocker.PropertyMock(return_value=self.pr_is_minimization)
-        type(self.problem).file_path = mocker.PropertyMock(return_value=self.pr_file_path)
-        type(self.problem).dimension = mocker.PropertyMock(return_value=self.pr_dimension)
+        self.problem_stub = mocker.MagicMock()
+        type(self.problem_stub).name = mocker.PropertyMock(return_value=self.pr_name)
+        type(self.problem_stub).is_minimization = mocker.PropertyMock(return_value=self.pr_is_minimization)
+        type(self.problem_stub).file_path = mocker.PropertyMock(return_value=self.pr_file_path)
+        type(self.problem_stub).dimension = mocker.PropertyMock(return_value=self.pr_dimension)
 
-        self.algorithm = AlgorithmVoid(output_control=self.output_control,
+        self.algorithm = AlgorithmVoid(output_control=self.output_control_stub,
                 name=self.name,
-                target_problem=self.problem 
+                target_problem=self.problem_stub 
         )
 
 

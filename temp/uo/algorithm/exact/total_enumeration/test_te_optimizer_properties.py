@@ -30,19 +30,19 @@ class TestTeOptimizerProperties(unittest.TestCase):
 
         self.oc_write_to_output = True
         self.oc_output_file = "some file path..."
-        self.output_control = mocker.MagicMock()
-        type(self.output_control).write_to_output = self.oc_write_to_output
-        type(self.output_control).output_file = self.oc_output_file
+        self.output_control_stub = mocker.MagicMock()
+        type(self.output_control_stub).write_to_output = self.oc_write_to_output
+        type(self.output_control_stub).output_file = self.oc_output_file
 
         self.pr_name = 'some_problem'
         self.pr_is_minimization = True
         self.pr_file_path = 'some problem file path'
         self.pr_dimension = 42
-        self.problem = mocker.MagicMock()
-        type(self.problem).name = mocker.PropertyMock(return_value=self.pr_name)
-        type(self.problem).is_minimization = mocker.PropertyMock(return_value=self.pr_is_minimization)
-        type(self.problem).file_path = mocker.PropertyMock(return_value=self.pr_file_path)
-        type(self.problem).dimension = mocker.PropertyMock(return_value=self.pr_dimension)
+        self.problem_stub = mocker.MagicMock()
+        type(self.problem_stub).name = mocker.PropertyMock(return_value=self.pr_name)
+        type(self.problem_stub).is_minimization = mocker.PropertyMock(return_value=self.pr_is_minimization)
+        type(self.problem_stub).file_path = mocker.PropertyMock(return_value=self.pr_file_path)
+        type(self.problem_stub).dimension = mocker.PropertyMock(return_value=self.pr_dimension)
 
 
         self.solution_name = "void solution"
@@ -50,57 +50,57 @@ class TestTeOptimizerProperties(unittest.TestCase):
         self.fitness_value = 42.0
         self.objective_value = -42.0
         self.is_feasible = True
-        self.solution = mocker.MagicMock()
-        type(self.solution).name = self.solution_name, 
-        type(self.solution).random_seed = self.random_seed,
-        type(self.solution).fitness_value=self.fitness_value,
-        type(self.solution).objective_value=self.objective_value,
-        type(self.solution).is_feasible= self.is_feasible
+        self.solution_mock = mocker.MagicMock()
+        type(self.solution_mock).name = self.solution_name, 
+        type(self.solution_mock).random_seed = self.random_seed,
+        type(self.solution_mock).fitness_value=self.fitness_value,
+        type(self.solution_mock).objective_value=self.objective_value,
+        type(self.solution_mock).is_feasible= self.is_feasible
         
-        self.te_support = mocker.MagicMock()
+        self.te_support_stub = mocker.MagicMock()
 
-        self.te_optimizer = TeOptimizer(output_control=self.output_control,
-                target_problem=self.problem,
-                initial_solution= self.solution,
-                problem_solution_te_support=self.te_support )
+        self.te_optimizer = TeOptimizer(output_control=self.output_control_stub,
+                target_problem=self.problem_stub,
+                initial_solution= self.solution_mock,
+                problem_solution_te_support=self.te_support_stub )
     
     def test_is_feasible_should_be_equal_as_in_constructor(self):
-        self.assertEqual(self.solution.is_feasible, self.is_feasible)
+        self.assertEqual(self.solution_mock.is_feasible, self.is_feasible)
 
     def test_fitness_value_should_be_equal_as_value_set_by_property_setter(self):
         val:float = 42.1
-        self.solution.fitness_value = val
-        self.assertEqual(self.solution.fitness_value, val)
+        self.solution_mock.fitness_value = val
+        self.assertEqual(self.solution_mock.fitness_value, val)
 
     def test_fitness_value_should_be_equal_as_value_set_by_property_setter_2(self):
         val:int = 11
-        self.solution.fitness_value = val
-        self.assertEqual(self.solution.fitness_value, val)
+        self.solution_mock.fitness_value = val
+        self.assertEqual(self.solution_mock.fitness_value, val)
 
     def test_objective_value_should_be_equal_as_value_set_by_property_setter(self):
         val:float = 43.1
-        self.solution.objective_value = val
-        self.assertEqual(self.solution.objective_value, val)
+        self.solution_mock.objective_value = val
+        self.assertEqual(self.solution_mock.objective_value, val)
 
     def test_is_feasible_should_be_equal_as_value_set_by_property_setter(self):
         val:bool = False
-        self.solution.is_feasible = val
-        self.assertEqual(self.solution.is_feasible, val)
+        self.solution_mock.is_feasible = val
+        self.assertEqual(self.solution_mock.is_feasible, val)
 
     def test_is_feasible_should_be_equal_as_value_set_by_property_setter_2(self):
         val:bool = True
-        self.solution.is_feasible = val
-        self.assertEqual(self.solution.is_feasible, val)
+        self.solution_mock.is_feasible = val
+        self.assertEqual(self.solution_mock.is_feasible, val)
 
     def test_representation_should_be_equal_as_value_set_by_property_setter(self):
         val:int = 42
-        self.solution.representation =  val
-        self.assertEqual(self.solution.representation, val)
+        self.solution_mock.representation =  val
+        self.assertEqual(self.solution_mock.representation, val)
 
     def test_representation_should_be_equal_as_value_set_by_property_setter_2(self):
         val:int = -7
-        self.solution.representation =  val
-        self.assertEqual(self.solution.representation, val)
+        self.solution_mock.representation =  val
+        self.assertEqual(self.solution_mock.representation, val)
 
     def tearDown(self):
         return
