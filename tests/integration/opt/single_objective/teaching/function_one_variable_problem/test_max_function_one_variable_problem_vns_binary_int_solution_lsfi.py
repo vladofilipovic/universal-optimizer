@@ -33,7 +33,7 @@ from opt.single_objective.teaching.function_one_variable_problem.\
     function_one_variable_problem_binary_int_solution_vns_support import \
         FunctionOneVariableProblemBinaryIntSolutionVnsSupport
 
-class TestIntegrationFunctionOneVariableProblemBinaryIntSolutionLsfi(unittest.TestCase):
+class TestMaxFunctionOneVariableProblemBinaryIntSolutionLsfi(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):

@@ -29,7 +29,7 @@ from opt.single_objective.teaching.ones_count_problem.ones_count_problem import 
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_ilp_linopy import \
         OnesCountProblemIntegerLinearProgrammingSolver
 
-class TestIntegrationOnesCountProblemIlpLinopy(unittest.TestCase):
+class TestOnesCountProblemIlpLinopy(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):

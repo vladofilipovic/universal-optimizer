@@ -27,7 +27,7 @@ from opt.single_objective.teaching.ones_count_problem.ones_count_problem import 
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_bit_array_solution import OnesCountProblemBinaryBitArraySolution
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_bit_array_solution_te_support import OnesCountProblemBinaryBitArraySolutionTeSupport
 
-class TestIntegrationOnesCountProblemTeBinaryBitArraySolution(unittest.TestCase):
+class TestOnesCountProblemTeBinaryBitArraySolution(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):

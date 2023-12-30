@@ -28,17 +28,17 @@ from opt.single_objective.teaching.ones_count_problem.ones_count_problem import 
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_int_solution import OnesCountProblemBinaryIntSolution
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_int_solution_vns_support import OnesCountProblemBinaryIntSolutionVnsSupport
 
-class TestIntegrationOnesCountProblemVnsBinaryIntSolutionLsfi(unittest.TestCase):
+class TestOnesCountProblemVnsBinaryIntSolutionLsbi(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
-        print("setUpClass TestIntegrationOnesCountProblemVnsBinaryIntSolutionLsfi\n")
+        print("setUpClass TestIntegrationOnesCountProblemVnsBinaryIntSolutionLsbi\n")
 
     def setUp(self):
         self.output_control = OutputControl(False)
         self.problem_to_solve:OnesCountProblem = OnesCountProblem.from_dimension(dimension=22)
         self.solution:OnesCountProblemBinaryIntSolution = OnesCountProblemBinaryIntSolution()
-        self.finish_control:FinishControl = FinishControl(criteria='evaluations', evaluations_max=5000)
+        self.finish_control:FinishControl = FinishControl(criteria='evaluations', evaluations_max=1000)
         self.vns_support:OnesCountProblemBinaryIntSolutionVnsSupport = OnesCountProblemBinaryIntSolutionVnsSupport()
         self.additional_stat = AdditionalStatisticsControl(keep='')
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
@@ -51,10 +51,9 @@ class TestIntegrationOnesCountProblemVnsBinaryIntSolutionLsfi(unittest.TestCase)
         vns_construction_params.additional_statistics_control = self.additional_stat
         vns_construction_params.k_min = 1
         vns_construction_params.k_max = 3
-        vns_construction_params.local_search_type = 'local_search_first_improvement'
+        vns_construction_params.local_search_type = 'local_search_best_improvement'
         self.optimizer:VnsOptimizer = VnsOptimizer.from_construction_tuple(vns_construction_params)
         self.optimizer.optimize()
-        return
     
     def test_best_solution_after_optimization_should_be_all_optimal(self):
         result = int('0b1111111111111111111111', base=0)
@@ -68,7 +67,7 @@ class TestIntegrationOnesCountProblemVnsBinaryIntSolutionLsfi(unittest.TestCase)
 
     @classmethod
     def tearDownClass(cls):
-        print("\ntearDownClass TestIntegrationOnesCountProblemVnsBinaryIntSolutionLsfi")
+        print("\ntearDownClass TestIntegrationOnesCountProblemVnsBinaryIntSolutionLsbi")
     
 if __name__ == '__main__':
     unittest.main()

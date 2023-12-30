@@ -32,7 +32,7 @@ from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_bit_array_solution_vns_support import \
     OnesCountProblemBinaryBitArraySolutionVnsSupport
 
-class TestIntegrationOnesCountProblemVnsBinaryBitArraySolutionLsbi(unittest.TestCase):
+class TestOnesCountProblemVnsBinaryBitArraySolutionLsbi(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
