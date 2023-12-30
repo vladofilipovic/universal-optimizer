@@ -155,3 +155,135 @@ class TestFunctionOneVariableProblemBinaryIntSolution(unittest.TestCase):
 
         with self.assertRaises(ValueError):
             solution.native_representation(representation_str)
+
+
+class Test__Init__(unittest.TestCase):
+
+    # Initializes the object with valid input parameters.
+    def test_valid_input_parameters(self):
+        # Arrange
+        domain_from = 0.0
+        domain_to = 1.0
+        number_of_intervals = 10
+
+        # Act
+        obj = FunctionOneVariableProblemBinaryIntSolution(domain_from, domain_to, number_of_intervals)
+
+        # Assert
+        self.assertEqual(obj.domain_from, domain_from)
+        self.assertEqual(obj.domain_to, domain_to)
+        self.assertEqual(obj.number_of_intervals, number_of_intervals)
+
+    # Initializes the object with the minimum possible values for domain_from, domain_to, and number_of_intervals.
+    def test_minimum_values(self):
+        # Arrange
+        domain_from = sys.float_info.min
+        domain_to = sys.float_info.min
+        number_of_intervals = 1
+
+        # Act & Assert
+        with self.assertRaises(ValueError):
+            FunctionOneVariableProblemBinaryIntSolution(domain_from, domain_to, number_of_intervals)
+
+    # Initializes the object with the maximum possible values for domain_from, domain_to, and number_of_intervals.
+    def test_maximum_values(self):
+        # Arrange
+        domain_from = sys.float_info.max
+        domain_to = sys.float_info.max
+        number_of_intervals = sys.maxsize
+
+        # Act & Assert
+        with self.assertRaises(ValueError):
+            FunctionOneVariableProblemBinaryIntSolution(domain_from, domain_to, number_of_intervals)
+
+    # Initializes the object with the non-integer number_of_intervals.
+    def test_non_integer_number_of_intervals(self):
+        # Arrange
+        domain_from = 0
+        domain_to = 10
+        number_of_intervals = 5.6
+
+        # Act & Assert
+        with self.assertRaises(ValueError):
+            FunctionOneVariableProblemBinaryIntSolution(domain_from, domain_to, number_of_intervals)
+
+
+
+    # Initializes the object with domain_from and domain_to as integers.
+    def test_integer_domain(self):
+        # Arrange
+        domain_from = 0
+        domain_to = 10
+        number_of_intervals = 5
+
+        # Act
+        obj = FunctionOneVariableProblemBinaryIntSolution(domain_from, domain_to, number_of_intervals)
+
+        # Assert
+        self.assertEqual(obj.domain_from, float(domain_from))
+        self.assertEqual(obj.domain_to, float(domain_to))
+        self.assertEqual(obj.number_of_intervals, number_of_intervals)
+
+    # Initializes the object with domain_from and domain_to as floats.
+    def test_float_domain(self):
+        # Arrange
+        domain_from = 0.0
+        domain_to = 10.0
+        number_of_intervals = 5
+
+        # Act
+        obj = FunctionOneVariableProblemBinaryIntSolution(domain_from, domain_to, number_of_intervals)
+
+        # Assert
+        self.assertEqual(obj.domain_from, domain_from)
+        self.assertEqual(obj.domain_to, domain_to)
+        self.assertEqual(obj.number_of_intervals, number_of_intervals)
+
+
+class Test__MakeToBeFeasibleHelper__(unittest.TestCase):
+
+    # If the representation is within the range of [0, number_of_intervals], the representation should not be changed.
+    def test_representation_within_range(self):
+        problem = FunctionOneVariableProblem("x**2", 0, 10)
+        solution = FunctionOneVariableProblemBinaryIntSolution(0, 10, 5)
+        solution.representation = 3
+        solution.__make_to_be_feasible_helper__(problem)
+        self.assertEqual(solution.representation, 3)
+
+    # If the representation is equal to number_of_intervals, the representation should be set to number_of_intervals.
+    def test_representation_equal_to_number_of_intervals(self):
+        problem = FunctionOneVariableProblem("x**2", 0, 10)
+        solution = FunctionOneVariableProblemBinaryIntSolution(0, 10, 5)
+        solution.representation = 5
+        solution.__make_to_be_feasible_helper__(problem)
+        self.assertEqual(solution.representation, 5)
+
+    # If the representation is negative, the representation should be set to 0.
+    def test_representation_negative(self):
+        problem = FunctionOneVariableProblem("x**2", 0, 10)
+        solution = FunctionOneVariableProblemBinaryIntSolution(0, 10, 5)
+        solution.representation = -2
+        solution.__make_to_be_feasible_helper__(problem)
+        self.assertEqual(solution.representation, 0)
+
+
+class TestInitRandom(unittest.TestCase):
+
+    # When called, 'init_random' should set the 'representation' attribute of the 'FunctionOneVariableProblemBinaryIntSolution' instance to a random integer between 0 and 'number_of_intervals'
+    def test_set_representation_to_random_integer(self):
+        problem = FunctionOneVariableProblem("x**2", 0, 10)
+        solution = FunctionOneVariableProblemBinaryIntSolution(0, 10, 5)
+        solution.init_random(problem)
+        self.assertIsInstance(solution.representation, int)
+        self.assertGreaterEqual(solution.representation, 0)
+        self.assertLessEqual(solution.representation, solution.number_of_intervals)
+
+    # If the 'representation' attribute is already set, calling 'init_random' should overwrite it with a new random integer between 0 and 'number_of_intervals'
+    def test_overwrite_representation_with_random_integer(self):
+        problem = FunctionOneVariableProblem("x**2", 0, 10)
+        solution = FunctionOneVariableProblemBinaryIntSolution(0, 10, 5)
+        solution.representation = 3
+        solution.init_random(problem)
+        self.assertIsInstance(solution.representation, int)
+        self.assertGreaterEqual(solution.representation, 0)
+        self.assertLessEqual(solution.representation, solution.number_of_intervals)

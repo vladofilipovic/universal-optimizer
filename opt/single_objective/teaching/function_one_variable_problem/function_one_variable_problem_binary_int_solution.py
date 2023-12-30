@@ -35,6 +35,8 @@ class FunctionOneVariableProblemBinaryIntSolution(TargetSolution[int,float]):
             raise ValueError("Domain to should be number.")        
         if domain_from >= domain_to:
             raise ValueError("Domain from should be smaller than Domain to.")
+        if not isinstance(number_of_intervals, int):
+            raise ValueError("Number of intervals should be integer.")
         if number_of_intervals <= 0 :
             raise ValueError("Number of intervals should be positive.")
         super().__init__("FunctionOneVariableProblemBinaryIntSolution", random_seed=random_seed, fitness_value=None, 
