@@ -160,3 +160,59 @@ class TestFunctionOneVariableProblemBinaryIntSolutionVnsSupport(unittest.TestCas
 
         # Assert
         self.assertEqual(new_solution, solution)
+
+    # should return a string representation of the class name 'FunctionOneVariableProblemBinaryIntSolutionVnsSupport'
+    def test_string_rep_class_name(self):
+        # Arrange
+        solution = FunctionOneVariableProblemBinaryIntSolutionVnsSupport()
+    
+        # Act
+        result = solution.string_rep('|')
+    
+        # Assert
+        self.assertEqual(result, 'FunctionOneVariableProblemBinaryIntSolutionVnsSupport')
+
+
+    # should return a string with the delimiter passed as argument
+    def test_string_rep_delimiter(self):
+        # Arrange
+        solution = FunctionOneVariableProblemBinaryIntSolutionVnsSupport()
+    
+        # Act
+        result = solution.string_rep('|')
+    
+        # Assert
+        self.assertEqual(result, 'FunctionOneVariableProblemBinaryIntSolutionVnsSupport')
+
+    # should return a string with the indentation passed as argument
+    def test_string_rep_indentation(self):
+        # Arrange
+        solution = FunctionOneVariableProblemBinaryIntSolutionVnsSupport()
+    
+        # Act
+        result = solution.string_rep('|', indentation=4)
+    
+        # Assert
+        self.assertEqual(result, 'FunctionOneVariableProblemBinaryIntSolutionVnsSupport')
+
+    # should return an empty string when all arguments are empty
+    def test_string_rep_empty_arguments(self):
+        # Arrange
+        solution = FunctionOneVariableProblemBinaryIntSolutionVnsSupport()
+    
+        # Act
+        result = solution.string_rep('', indentation=0, indentation_symbol='', group_start='', group_end='')
+    
+        # Assert
+        self.assertEqual(result, 'FunctionOneVariableProblemBinaryIntSolutionVnsSupport')
+
+    # should return a string with the indentation_symbol passed as argument
+    def test_string_rep_indentation_symbol(self):
+        # Arrange
+        solution = FunctionOneVariableProblemBinaryIntSolutionVnsSupport()
+    
+        # Act
+        result = solution.string_rep('|', indentation_symbol=' ')
+    
+        # Assert
+        self.assertEqual(result, 'FunctionOneVariableProblemBinaryIntSolutionVnsSupport')

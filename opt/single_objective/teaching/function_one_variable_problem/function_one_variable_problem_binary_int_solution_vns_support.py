@@ -129,7 +129,7 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
         best_fv:float = solution.fitness_value
         # initialize indexes
         indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k,representation_length)
-        in_loop:boolean = indexes.reset()
+        in_loop:bool = indexes.reset()
         while in_loop:
             # collect positions for inversion from indexes
             positions:list[int] = indexes.current_state()
@@ -168,3 +168,6 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
 
     def __format__(self, spec:str)->str:
         return self.string_rep('|')
+
+
+
