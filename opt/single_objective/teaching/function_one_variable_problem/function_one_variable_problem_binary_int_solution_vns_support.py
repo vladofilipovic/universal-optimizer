@@ -87,7 +87,7 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
                 solution.fitness_value, None, solution.is_feasible)
         # initialize indexes
         indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k,representation_length)
-        in_loop:boolean = indexes.reset()
+        in_loop:bool = indexes.reset()
         while in_loop:
             # collect positions for inversion from indexes
             positions:list[int] = indexes.current_state()
@@ -101,10 +101,10 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
                     optimizer.evaluation > optimizer.finish_control.evaluations_max:
                 return solution
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
-            new_triplet = solution.calculate_quality(problem)
+            new_qos = solution.calculate_quality(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
-            if new_triplet.fitness_value > best_tuple.fitness_value:
-                best_tuple = new_triplet
+            if new_qos.fitness_value > best_tuple.fitness_value:
+                best_tuple = new_qos
                 best_rep = solution.representation
             solution.representation ^= mask 
             # increment indexes and set in_loop accordingly
@@ -143,12 +143,12 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
                     optimizer.evaluation > optimizer.finish_control.evaluations_max:
                 return solution
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
-            new_triplet = solution.calculate_quality(problem)
+            new_qos = solution.calculate_quality(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
-            if new_triplet.fitness_value > best_fv:
-                solution.fitness_value = new_triplet.fitness_value
-                solution.objective_value = new_triplet.objective_value
-                solution.is_feasible = new_triplet.is_feasible
+            if new_qos.fitness_value > best_fv:
+                solution.fitness_value = new_qos.fitness_value
+                solution.objective_value = new_qos.objective_value
+                solution.is_feasible = new_qos.is_feasible
                 return solution
             solution.representation ^= mask
             # increment indexes and set in_loop accordingly
