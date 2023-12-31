@@ -2,6 +2,8 @@
 
 import unittest
 import unittest.mock as mocker
+from unittest.mock import patch
+from unittest.mock import mock_open
 
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem import OnesCountProblem
 
@@ -138,3 +140,106 @@ class TestOnesCountProblem(unittest.TestCase):
         # Assert
         self.assertIsNot(problem, copy_problem)
         self.assertEqual(problem.dimension, copy_problem.dimension)
+
+
+
+class TestFromDimension(unittest.TestCase):
+
+    # Can create a new instance of OnesCountProblem with a specified dimension
+    def test_create_instance_with_dimension(self):
+        # Arrange
+        dimension = 10
+    
+        # Act
+        problem = OnesCountProblem.from_dimension(dimension)
+    
+        # Assert
+        self.assertIsInstance(problem, OnesCountProblem)
+
+    # The created instance has the correct dimension value
+    def test_correct_dimension_value(self):
+        # Arrange
+        dimension = 10
+    
+        # Act
+        problem = OnesCountProblem.from_dimension(dimension)
+    
+        # Assert
+        self.assertEqual(problem.dimension, dimension)
+
+    # Raises a TypeError if dimension is not an integer
+    def test_raises_type_error_if_dimension_not_integer(self):
+        # Arrange
+        dimension = "10"
+    
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            OnesCountProblem.from_dimension(dimension)
+
+    # Raises a ValueError if dimension is less than or equal to zero
+    def test_raises_value_error_if_dimension_less_than_or_equal_to_zero(self):
+        # Arrange
+        dimension = 0
+    
+        # Act & Assert
+        with self.assertRaises(ValueError):
+            OnesCountProblem.from_dimension(dimension)
+
+
+class Test__LoadFromFile__(unittest.TestCase):
+
+    # Should read the dimension from a txt file with valid data format
+    def test_read_dimension_from_txt_file(self):
+        # Arrange
+        file_path = "data.txt"
+        data_format = "txt"
+        expected_dimension = 10
+    
+        # Mock the open function and return a file object
+        with patch('builtins.open', mock_open(read_data='10')) as mock_file:
+
+            # Act
+            dimension = OnesCountProblem.__load_from_file__(file_path, data_format)
+        
+            # Assert
+            self.assertEqual(dimension, expected_dimension)
+            mock_file.assert_called_once_with(file_path, 'r')
+            mock_file.return_value.readline.assert_called_once()
+
+    # Should return an integer representing the dimension of the problem
+    def test_return_dimension_as_integer(self):
+        # Arrange
+        file_path = "data.txt"
+        data_format = "txt"
+    
+        # Mock the open function and return a file object
+        with patch('builtins.open', mock_open(read_data='10')) as mock_file:
+    
+            # Act
+            dimension = OnesCountProblem.__load_from_file__(file_path, data_format)
+        
+            # Assert
+            self.assertIsInstance(dimension, int)
+
+    # Should raise a ValueError if data format is not txt
+    def test_raise_value_error_if_data_format_not_txt(self):
+        # Arrange
+        file_path = "data.txt"
+        data_format = "csv"
+    
+        # Act & Assert
+        with self.assertRaises(ValueError):
+            OnesCountProblem.__load_from_file__(file_path, data_format)
+
+    # Should raise a ValueError if loading from file produces invalid dimension
+    def test_raise_value_error_if_loading_from_file_produces_invalid_dimension(self):
+        # Arrange
+        file_path = "data.txt"
+        data_format = "txt"
+    
+        # Mock the open function and return a file object
+        with patch('builtins.open', mock_open(read_data='invalid')) as mock_file:
+    
+            # Act & Assert
+            with self.assertRaises(ValueError):
+                OnesCountProblem.__load_from_file__(file_path, data_format)
