@@ -26,6 +26,8 @@ class OnesCountProblem(TargetProblem):
 
         :param int dim: dimension of the problem
         """
+        if dim is None:
+            raise ValueError('Dimension for  OnesCountProblem should not be None')
         if not isinstance(dim, int):
             raise TypeError('Dimension for  OnesCountProblem should be integer.')
         if dim <= 0:

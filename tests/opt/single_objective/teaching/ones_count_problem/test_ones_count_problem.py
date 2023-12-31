@@ -48,12 +48,12 @@ class TestOnesCountProblem(unittest.TestCase):
     # The OnesCountProblem class can be instantiated without a dimension parameter
     def test_instantiation_without_dimension_parameter(self):
         # Arrange
-    
-        # Act
-        problem = OnesCountProblem()
-    
-        # Assert
-        self.assertIsNone(problem.dimension)
+        dim = None
+
+        # Act & Assert
+        with self.assertRaises(ValueError):
+            problem = OnesCountProblem(dim)
+
 
     # The OnesCountProblem class can be instantiated from an input file with a specified format
     def test_instantiation_from_input_file_with_specified_format(self):
