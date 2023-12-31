@@ -122,3 +122,167 @@ class TestOnesCountProblemBinaryBitArraySolution(unittest.TestCase):
         self.assertIsNone(quality.objective_values)
         self.assertTrue(quality.is_feasible)
 
+    # Initialize a new instance of OnesCountProblemBinaryBitArraySolution with default parameters and verify that all properties are set correctly.
+    def test_initialize_instance_with_default_parameters(self):
+        # Arrange
+        solution = OnesCountProblemBinaryBitArraySolution()
+
+        # Act
+
+        # Assert
+        self.assertEqual(solution.name, "OnesCountProblemBinaryBitArraySolution")
+        self.assertIsNone(solution.fitness_value)
+        self.assertIsNone(solution.fitness_values)
+        self.assertIsNone(solution.objective_value)
+        self.assertIsNone(solution.objective_values)
+        self.assertFalse(solution.is_feasible)
+        self.assertFalse(solution.evaluation_cache_is_used)
+        self.assertEqual(solution.evaluation_cache_max_size, 0)
+        self.assertFalse(solution.distance_calculation_cache_is_used)
+        self.assertEqual(solution.distance_calculation_cache_max_size, 0)
+
+    # Call the init_random() method with a TargetProblem instance as an argument and verify that the representation property is set to a BitArray with the correct length.
+    def test_init_random_method_with_target_problem(self):
+        # Arrange
+        problem = TargetProblem()
+        problem.dimension = 10
+        solution = OnesCountProblemBinaryBitArraySolution()
+
+        # Act
+        solution.init_random(problem)
+
+        # Assert
+        self.assertIsInstance(solution.representation, BitArray)
+        self.assertEqual(len(solution.representation), problem.dimension)
+
+    # Call the init_from() method with a BitArray instance and a TargetProblem instance as arguments and verify that the representation property is set to the correct BitArray.
+    def test_init_from_method_with_bitarray_and_target_problem(self):
+        # Arrange
+        problem = TargetProblem()
+        problem.dimension = 10
+        representation = BitArray(bin="1010101010")
+        solution = OnesCountProblemBinaryBitArraySolution()
+
+        # Act
+        solution.init_from(representation, problem)
+
+        # Assert
+        self.assertEqual(solution.representation, representation)
+
+    # Call the calculate_quality_directly() method with a BitArray instance and a TargetProblem instance as arguments and verify that the returned QualityOfSolution instance has the correct values.
+    def test_calculate_quality_directly_method_with_bitarray_and_target_problem(self):
+        # Arrange
+        problem = TargetProblem()
+        representation = BitArray(bin="1010101010")
+        solution = OnesCountProblemBinaryBitArraySolution()
+
+        # Act
+        quality = solution.calculate_quality_directly(representation, problem)
+
+        # Assert
+        self.assertEqual(quality.objective_value, representation.count(True))
+        self.assertIsNone(quality.fitness_value)
+        self.assertEqual(quality.fitness_values, representation.count(True))
+        self.assertIsNone(quality.objective_values)
+        self.assertTrue(quality.is_feasible)
+
+    # Call the native_representation() method with a string representation of a BitArray instance as an argument and verify that the returned BitArray instance has the correct value.
+    def test_native_representation_method_with_string_representation(self):
+        # Arrange
+        representation_str = "1010101010"
+        solution = OnesCountProblemBinaryBitArraySolution()
+
+        # Act
+        native_representation = solution.native_representation(representation_str)
+
+        # Assert
+        self.assertEqual(native_representation.bin, representation_str)
+
+    # Call the representation_distance_directly() method with two string representations of BitArray instances as arguments and verify that the returned distance is correct.
+    def test_representation_distance_directly_method_with_string_representations(self):
+        # Arrange
+        solution_code_1 = "1010101010"
+        solution_code_2 = "1111000011"
+        solution = OnesCountProblemBinaryBitArraySolution()
+
+        # Act
+        distance = solution.representation_distance_directly(solution_code_1, solution_code_2)
+
+        # Assert
+        self.assertEqual(distance, 6)
+
+
+    # Call the calculate_quality_directly() method with a BitArray instance that has all bits set to False and verify that the returned QualityOfSolution instance has the correct values.
+    def test_calculate_quality_directly_method_with_all_bits_false(self):
+        # Arrange
+        problem = TargetProblem()
+        representation = BitArray(bin="0000000000")
+        solution = OnesCountProblemBinaryBitArraySolution()
+
+        # Act
+        quality = solution.calculate_quality_directly(representation, problem)
+
+        # Assert
+        self.assertEqual(quality.objective_value, 0)
+        self.assertIsNone(quality.fitness_value)
+        self.assertEqual(quality.fitness_values, 0)
+        self.assertIsNone(quality.objective_values)
+        self.assertTrue(quality.is_feasible)
+
+    # Call the calculate_quality_directly() method with a BitArray instance that has all bits set to True and verify that the returned QualityOfSolution instance has the correct values.
+    def test_calculate_quality_directly_method_with_all_bits_true(self):
+        # Arrange
+        problem = TargetProblemVoid('problem name', is_minimization=True)
+        representation = BitArray(bin="1111111")
+        solution = OnesCountProblemBinaryBitArraySolution()
+
+        # Act
+        quality = solution.calculate_quality_directly(representation, problem)
+
+        # Assert
+        self.assertEqual(quality.objective_value, 7)
+        self.assertIsNone(quality.fitness_values)
+        self.assertEqual(quality.fitness_value, 7)
+        self.assertIsNone(quality.objective_values)
+        self.assertTrue(quality.is_feasible)
+
+
+    # Call the copy() method and verify that the returned OnesCountProblemBinaryBitArraySolution instance is a deep copy of the original instance.
+    def test_copy_method_returns_deep_copy(self):
+        # Arrange
+        solution = OnesCountProblemBinaryBitArraySolution()
+    
+        # Act
+        copy_solution = solution.copy()
+    
+        # Assert
+        self.assertIsNot(solution, copy_solution)
+        self.assertEqual(solution.name, copy_solution.name)
+        self.assertEqual(solution.fitness_value, copy_solution.fitness_value)
+        self.assertEqual(solution.fitness_values, copy_solution.fitness_values)
+        self.assertEqual(solution.objective_value, copy_solution.objective_value)
+        self.assertEqual(solution.objective_values, copy_solution.objective_values)
+        self.assertEqual(solution.is_feasible, copy_solution.is_feasible)
+
+    # Call the representation_distance_directly() method with two string representations of BitArray instances that have different lengths and verify that the method raises a ValueError.
+    def test_representation_distance_directly_raises_value_error(self):
+        # Arrange
+        solution = OnesCountProblemBinaryBitArraySolution()
+        representation_1 = "101010"
+        representation_2 = "10101010"
+    
+        # Act & Assert
+        with self.assertRaises(ValueError):
+            solution.representation_distance_directly(representation_1, representation_2)
+
+    # Call the argument() method with a BitArray instance as an argument and verify that the returned string representation is correct.
+    def test_argument_method_returns_correct_string_representation(self):
+        # Arrange
+        solution = OnesCountProblemBinaryBitArraySolution()
+        representation = BitArray(bin="101010")
+    
+        # Act
+        argument = solution.argument(representation)
+    
+        # Assert
+        self.assertEqual(argument, "101010")
