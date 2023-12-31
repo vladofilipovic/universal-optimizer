@@ -286,3 +286,110 @@ class TestOnesCountProblemBinaryBitArraySolution(unittest.TestCase):
     
         # Assert
         self.assertEqual(argument, "101010")
+
+
+class TestArgument(unittest.TestCase):
+
+    # Returns a string representation of the internal BitArray representation.
+    def test_returns_string_representation(self):
+        # Arrange
+        representation = BitArray(bin='101010')
+        solution = OnesCountProblemBinaryBitArraySolution()
+    
+        # Act
+        argument = solution.argument(representation)
+    
+        # Assert
+        self.assertEqual(argument, '101010')
+
+    # Returns a binary string representation of the internal BitArray representation.
+    def test_returns_binary_string_representation(self):
+        # Arrange
+        representation = BitArray(bin='101010')
+        solution = OnesCountProblemBinaryBitArraySolution()
+    
+        # Act
+        argument = solution.argument(representation)
+    
+        # Assert
+        self.assertIsInstance(argument, str)
+        self.assertTrue(all(bit in ['0', '1'] for bit in argument))
+
+    # Returns an empty string when the internal BitArray representation is empty.
+    def test_returns_empty_string_for_empty_representation(self):
+        # Arrange
+        representation = BitArray()
+        solution = OnesCountProblemBinaryBitArraySolution()
+    
+        # Act
+        argument = solution.argument(representation)
+    
+        # Assert
+        self.assertEqual(argument, '')
+
+    # Returns a string representation of the internal BitArray representation with leading zeros when all bits are False.
+    def test_returns_string_representation_with_leading_zeros_for_all_false_bits(self):
+        # Arrange
+        representation = BitArray(bin='000000')
+        solution = OnesCountProblemBinaryBitArraySolution()
+    
+        # Act
+        argument = solution.argument(representation)
+    
+        # Assert
+        self.assertEqual(argument, '000000')
+
+
+class TestInitRandom(unittest.TestCase):
+
+    # Initializes a solution with a BitArray representation of the correct dimension
+    def test_initializes_solution_with_correct_dimension(self):
+        # Arrange
+        problem = TargetProblemVoid('problem name', is_minimization=True)
+        problem.dimension = 10
+        solution = OnesCountProblemBinaryBitArraySolution()
+    
+        # Act
+        solution.init_random(problem)
+    
+        # Assert
+        self.assertEqual(len(solution.representation), problem.dimension)
+
+    # Sets each element of the BitArray representation to True or False with a 50% probability
+    def test_sets_elements_to_true_or_false_with_probability_50_percent(self):
+        # Arrange
+        problem = TargetProblemVoid('problem name', is_minimization=True)
+        problem.dimension = 10
+        solution = OnesCountProblemBinaryBitArraySolution()
+        
+        # Act
+        solution.init_random(problem)
+    
+        # Assert
+        for element in solution.representation:
+            self.assertTrue(element in [True, False])
+
+    # Initializes a solution with a BitArray representation of dimension 0
+    def test_initializes_solution_with_dimension_0(self):
+        # Arrange
+        problem = TargetProblemVoid('problem name', is_minimization=True)
+        problem.dimension = 0
+        solution = OnesCountProblemBinaryBitArraySolution()
+    
+        # Act
+        solution.init_random(problem)
+    
+        # Assert
+        self.assertEqual(len(solution.representation), 0)
+
+    # Initializes a solution with a BitArray representation of negative dimension
+    def test_initializes_solution_with_negative_dimension(self):
+        # Arrange
+        problem = TargetProblemVoid('problem name', is_minimization=True)
+        problem.dimension = -1
+        solution = OnesCountProblemBinaryBitArraySolution()
+    
+        # Act & Assert
+        with self.assertRaises(ValueError):
+            solution.init_random(problem)
+    

@@ -81,6 +81,10 @@ class OnesCountProblemBinaryBitArraySolution(TargetSolution[BitArray,str]):
         :param `TargetProblem` problem: problem which is solved by solution
         """
         #logger.debug('Solution: ' + str(self))
+        if problem.dimension is None:
+            raise ValueError('Can not randomly initialize solution without its dimension.')
+        if problem.dimension <0:
+            raise ValueError('Can not randomly initialize solution with negative dimension.')
         self.representation = BitArray(problem.dimension)
         for i in range(problem.dimension):
             if random() > 0.5:
