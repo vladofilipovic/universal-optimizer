@@ -1,19 +1,5 @@
 
 import unittest
-
-from pathlib import Path
-directory = Path(__file__).resolve()
-import sys
-sys.path.append(directory.parent)
-sys.path.append(directory.parent.parent)
-sys.path.append(directory.parent.parent.parent)
-sys.path.append(directory.parent.parent.parent.parent)
-sys.path.append(directory.parent.parent.parent.parent.parent)
-sys.path.append(directory.parent.parent.parent.parent.parent.parent)
-sys.path.append(directory.parent.parent.parent.parent.parent.parent.parent)
-sys.path.append(directory.parent.parent.parent.parent.parent.parent.parent.parent)
-sys.path.append(directory.parent.parent.parent.parent.parent.parent.parent.parent.parent)
-
 import unittest.mock as mocker
 
 from bitstring import BitArray

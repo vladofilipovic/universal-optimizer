@@ -20,13 +20,17 @@ from uo.utils.logger import logger
 
 class OnesCountProblem(TargetProblem):
     
-    def __init__(self, dim:int=None)->None:
+    def __init__(self, dim:int=None, is_minimization=False)->None:
         """
         Create new `OnesCountProblem` instance
 
         :param int dim: dimension of the problem
         """
-        super().__init__(name="OnesCountProblem", is_minimization=False)
+        if not isinstance(dim, int):
+            raise TypeError('Dimension for  OnesCountProblem should be integer.')
+        if dim <= 0:
+            raise ValueError('Dimension for  OnesCountProblem should be greater than zero.')
+        super().__init__(name="OnesCountProblem", is_minimization=is_minimization)
         self.__dimension = dim
 
     @classmethod
@@ -71,6 +75,8 @@ class OnesCountProblem(TargetProblem):
         :param str input_format: format of the input
         """
         dimension:int = OnesCountProblem.__load_from_file__(input_file_path, input_format)
+        if dimension is None or str(dimension).strip() == '':
+            raise ValueError('Loading from file \'{}\' produces invalid dimension'.format(input_file_path))
         return cls(dim=dimension)
 
     def __copy__(self):
