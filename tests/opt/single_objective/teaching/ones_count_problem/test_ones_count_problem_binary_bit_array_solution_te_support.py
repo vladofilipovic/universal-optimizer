@@ -69,3 +69,85 @@ class TestOnesCountProblemBinaryBitArraySolutionTeSupport(unittest.TestCase):
     
         self.assertTrue(te_support.can_progress(problem, solution, optimizer))
 
+class TestCalculateQualityDirectly(unittest.TestCase):
+
+    # Calculate quality of a binary BitArray solution with all bits set to 1
+    def test_all_bits_set_to_1(self):
+        # Arrange
+        representation = BitArray('0b111111')
+        problem = OnesCountProblem(dim=6)
+        solution = OnesCountProblemBinaryBitArraySolution()
+        solution.init_from(representation, problem)
+    
+        # Act
+        quality = solution.calculate_quality_directly(representation, problem)
+    
+        # Assert
+        self.assertEqual(quality.objective_value, 6)
+        self.assertEqual(quality.fitness_value, 6)
+        self.assertTrue(quality.is_feasible)
+
+    # Calculate quality of a binary BitArray solution with all bits set to 0
+    def test_all_bits_set_to_0(self):
+        # Arrange
+        representation = BitArray('0b000000')
+        problem = OnesCountProblem(dim=6)
+        solution = OnesCountProblemBinaryBitArraySolution()
+        solution.init_from(representation, problem)
+    
+        # Act
+        quality = solution.calculate_quality_directly(representation, problem)
+    
+        # Assert
+        self.assertEqual(quality.objective_value, 0)
+        self.assertEqual(quality.fitness_value, 0)
+        self.assertTrue(quality.is_feasible)
+
+    # Calculate quality of a binary BitArray solution with a random bit string
+    def test_random_bit_string(self):
+        # Arrange
+        representation = BitArray('0b101010')
+        problem = OnesCountProblem(dim=6)
+        solution = OnesCountProblemBinaryBitArraySolution()
+        solution.init_from(representation, problem)
+    
+        # Act
+        quality = solution.calculate_quality_directly(representation, problem)
+    
+        # Assert
+        self.assertEqual(quality.objective_value, 3)
+        self.assertEqual(quality.fitness_value, 3)
+        self.assertTrue(quality.is_feasible)
+
+    # Calculate quality of a binary BitArray solution with a None representation
+    def test_none_representation(self):
+        # Arrange
+        representation = None
+        problem = OnesCountProblem(dim=6)
+        solution = OnesCountProblemBinaryBitArraySolution()
+        
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            solution.init_from(representation, problem)
+
+    # Calculate quality of a binary BitArray solution with a non-BitArray representation
+    def test_non_bitarray_representation(self):
+        # Arrange
+        representation = "101010"
+        problem = OnesCountProblem(dim=6)
+        solution = OnesCountProblemBinaryBitArraySolution()
+
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            solution.init_from(representation, problem)
+
+    # Calculate quality of a binary BitArray solution with a BitArray representation of length 0
+    def test_bitarray_length_0(self):
+        # Arrange
+        representation = BitArray()
+        problem = OnesCountProblem(dim=6)
+        solution = OnesCountProblemBinaryBitArraySolution()
+
+        # Act & Assert
+        with self.assertRaises(ValueError):
+            solution.init_from(representation, problem)

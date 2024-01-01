@@ -99,6 +99,8 @@ class OnesCountProblemBinaryBitArraySolution(TargetSolution[BitArray,str]):
         """
         if not isinstance(representation, BitArray):
             raise TypeError('Representation have to be BitArray.')
+        if len(representation) == 0:
+            raise ValueError('Representation must have positive length.')
         self.representation = BitArray(bin=representation.bin)
 
     def calculate_quality_directly(self, representation:BitArray, 
