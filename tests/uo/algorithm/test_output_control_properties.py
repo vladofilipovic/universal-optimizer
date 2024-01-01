@@ -25,12 +25,11 @@ class TestOutputControlProperties(unittest.TestCase):
 
     def setUp(self):
         self.write_to_output = True
-        self.output_file = "some file path..."
+        self.output_file = None
         self.output_control = OutputControl(
                 write_to_output=self.write_to_output,
                 output_file=self.output_file 
         )
-        return
 
     def test_write_to_output_should_be_as_it_is_in_constructor(self):
         self.assertEqual(self.output_control.write_to_output, self.write_to_output)

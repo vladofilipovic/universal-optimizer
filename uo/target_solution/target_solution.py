@@ -30,11 +30,11 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
     @abstractmethod
     def __init__(self, 
             name:str, 
-            random_seed:int, 
-            fitness_value:float, 
-            fitness_values:float|list[float]|tuple[float], 
-            objective_value:float, 
-            objective_values:list[float]|tuple[float], 
+            random_seed:Optional[int], 
+            fitness_value:Optional[float|int], 
+            fitness_values:Optional[list[float]|tuple[float]], 
+            objective_value:Optional[float|int], 
+            objective_values:Optional[list[float]|tuple[float]], 
             is_feasible:bool,
             evaluation_cache_is_used:bool,
             evaluation_cache_max_size:int,
@@ -59,6 +59,28 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         :param int distance_calculation_cache_max_size: maximum size of the cache used for distance calculation - 0 if 
         size is unlimited
         """
+        if not isinstance(name, str):
+                raise TypeError('Parameter \'name\' must be \'str\'.')        
+        if not isinstance(random_seed, Optional[int]):
+                raise TypeError('Parameter \'random_seed\' must be \'inr\' or \'None\'.')        
+        if not isinstance(objective_value, Optional[float|int]):
+                raise TypeError('Parameter \'objective_value\' must be \'float\' or \'int\' or \'None\'.')        
+        if not isinstance(objective_values, Optional[list]) and not isinstance(objective_values, Optional[tuple]):
+                raise TypeError('Parameter \'objective_values\' must be \'lost[float]\' or \'tuple[float]\' or \'None\'.')        
+        if not isinstance(fitness_value, Optional[float|int]):
+                raise TypeError('Parameter \'fitness_value\' must be \'float\' or \'int\' or \'None\'.')        
+        if not isinstance(fitness_values, Optional[list]) and not isinstance(fitness_values, Optional[tuple]):
+                raise TypeError('Parameter \'fitness_values\' must be \'lost[float]\' or \'tuple[float]\' or \'None\'.')        
+        if not isinstance(is_feasible, bool):
+                raise TypeError('Parameter \'is_feasible\' must be \'bool\'.')        
+        if not isinstance(evaluation_cache_is_used, bool):
+                raise TypeError('Parameter \'evaluation_cache_is_used\' must be \'bool\'.')        
+        if not isinstance(evaluation_cache_max_size, int):
+                raise TypeError('Parameter \'evaluation_cache_max_size\' must be \'int\'.')        
+        if not isinstance(distance_calculation_cache_is_used, bool):
+                raise TypeError('Parameter \'distance_calculation_cache_is_used\' must be \'bool\'.')        
+        if not isinstance(distance_calculation_cache_max_size, int):
+                raise TypeError('Parameter \'distance_calculation_cache_max_size\' must be \'int\'.')        
         self.__name:str = name
         if random_seed is not None and isinstance(random_seed, int) and random_seed != 0:
             self.__random_seed:int = random_seed

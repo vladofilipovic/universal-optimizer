@@ -17,7 +17,7 @@ from io import TextIOWrapper
 from bitstring import BitArray
 
 from abc import ABCMeta, abstractmethod
-from typing import TypeVar, Generic
+from typing import Optional, TypeVar, Generic
 from typing import Generic
 
 
@@ -41,7 +41,7 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
     def __init__(self, 
             name:str, 
             finish_control:FinishControl,
-            random_seed:int, 
+            random_seed:Optional[int], 
             additional_statistics_control:AdditionalStatisticsControl,
             output_control:OutputControl, 
             target_problem:TargetProblem
@@ -57,6 +57,18 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         :param `OutputControl` output_control: structure that controls output
         :param `TargetProblem` target_problem: problem to be solved
         """
+        if not isinstance(name, str):
+                raise TypeError('Parameter \'name\' must be \'str\'.')
+        if not isinstance(finish_control, FinishControl):
+                raise TypeError('Parameter \'finish_control\' must be \'FinishControl\'.')
+        if not isinstance(random_seed, Optional[int]):
+                raise TypeError('Parameter \'random_seed\' must be \'int\' or \'None\'.')
+        if not isinstance(additional_statistics_control, AdditionalStatisticsControl):
+                raise TypeError('Parameter \'additional_statistics_control\' must be \'AdditionalStatisticsControl\'.')
+        if not isinstance(output_control, OutputControl):
+                raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
+        if not isinstance(target_problem, TargetProblem):
+                raise TypeError('Parameter \'target_problem\' must be \'TargetProblem\'.')
         super().__init__(name=name, 
                 output_control=output_control, 
                 target_problem=target_problem)

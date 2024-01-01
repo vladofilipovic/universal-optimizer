@@ -29,6 +29,10 @@ class DistanceCalculationCacheControlStatistics(Generic[E_co]):
         :param bool is_caching: is cashing enabled during calculation of distances among solution representations
         :param Optional[int] max_cache_size: maximum size of the cache - if 0 cache is with unlimited size
         """
+        if not isinstance(is_caching, bool):
+                raise TypeError('Parameter \'is_caching\' must be \'bool\'.')        
+        if not isinstance(max_cache_size, Optional[int]):
+                raise TypeError('Parameter \'is_caching\' must be \'int\' or \'None\'.')        
         self.__is_caching:bool = is_caching
         self.__max_cache_size:int = max_cache_size
         self.__cache:dict[(E_co,E_co)] = {}

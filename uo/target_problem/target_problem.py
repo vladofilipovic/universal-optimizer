@@ -20,6 +20,10 @@ class TargetProblem(metaclass=ABCMeta):
         :param str name: name of the target problem
         :param bool is_minimization: should minimum or maximum be determined
         """
+        if not isinstance(name, str):
+                raise TypeError('Parameter \'name\' must be \'str\'.')
+        if not isinstance(is_minimization, bool):
+                raise TypeError('Parameter \'is_minimization\' must be \'bool\'.')        
         self.__name:str = name
         self.__is_minimization = is_minimization
 

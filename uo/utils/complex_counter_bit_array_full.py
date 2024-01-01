@@ -22,6 +22,8 @@ class ComplexCounterBitArrayFull:
         :param int number_of_counters: number of counters within complex counter
         :param int counter_size: size of each counter within complex counter
         """
+        if not isinstance(number_of_counters, int):
+                raise TypeError('Parameter \'number_of_counters\' must be \'int\'.')        
         self.__number_of_counters:int = number_of_counters
         self.__counters:BitArray = BitArray(number_of_counters)
 

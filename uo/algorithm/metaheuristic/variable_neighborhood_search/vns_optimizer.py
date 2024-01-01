@@ -18,7 +18,7 @@ from random import random
 
 from bitstring import Bits, BitArray, BitStream, pack
 
-from typing import TypeVar, Generic
+from typing import Optional, TypeVar, Generic
 from typing import Generic
 from typing import NamedTuple
 
@@ -62,7 +62,7 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
     
     def __init__(self, 
             finish_control:FinishControl, 
-            random_seed:int, 
+            random_seed:Optional[int], 
             additional_statistics_control:AdditionalStatisticsControl,
             output_control:OutputControl, 
             target_problem:TargetProblem, 
@@ -89,6 +89,26 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         :param local_search_type: type of the local search
         :type local_search_type: str, possible values: 'local_search_best_improvement', 'local_search_first_improvement' 
         """
+        if not isinstance(finish_control, FinishControl):
+                raise TypeError('Parameter \'finish_control\' must be \'FinishControl\'.')
+        if not isinstance(random_seed, Optional[int]):
+                raise TypeError('Parameter \'random_seed\' must be \'int\' or \'None\'.')
+        if not isinstance(additional_statistics_control, AdditionalStatisticsControl):
+                raise TypeError('Parameter \'additional_statistics_control\' must be \'AdditionalStatisticsControl\'.')
+        if not isinstance(output_control, OutputControl):
+                raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
+        if not isinstance(target_problem, TargetProblem):
+                raise TypeError('Parameter \'target_problem\' must be \'TargetProblem\'.')
+        if not isinstance(initial_solution, Optional[TargetSolution]):
+                raise TypeError('Parameter \'initial_solution\' must be \'TargetSolution\' or \'None\'.')        
+        if not isinstance(problem_solution_vns_support, ProblemSolutionVnsSupport):
+                raise TypeError('Parameter \'problem_solution_vns_support\' must be \'ProblemSolutionVnsSupport\'.')        
+        if not isinstance(k_min, int):
+                raise TypeError('Parameter \'k_min\' must be \'int\'.')        
+        if not isinstance(k_max, int):
+                raise TypeError('Parameter \'k_max\' must be \'int\'.')        
+        if not isinstance(local_search_type, str):
+                raise TypeError('Parameter \'local_search_type\' must be \'str\'.')        
         super().__init__( name='vns', 
                 finish_control=finish_control, 
                 random_seed=random_seed, 
@@ -100,29 +120,29 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         if problem_solution_vns_support is not None:
             if isinstance(problem_solution_vns_support, ProblemSolutionVnsSupport):
                 self.__problem_solution_vns_support:ProblemSolutionVnsSupport = problem_solution_vns_support
-                self.__implemented_local_searches:Dict[str,function] = {
+                self.__implemented_local_searches:dict[str,function] = {
                     'local_search_best_improvement':  self.__problem_solution_vns_support.local_search_best_improvement,
                     'local_search_first_improvement':  self.__problem_solution_vns_support.local_search_first_improvement,
                 }
-                if( self.__local_search_type not in self.__implemented_local_searches):
+                if( self.__local_search_type not in self.__implemented_local_searches.keys()):
                     raise ValueError( 'Value \'{}\' for VNS local_search_type is not supported'.format(
                             self.__local_search_type))
                 self.__ls_method = self.__implemented_local_searches[self.__local_search_type]
                 self.__shaking_method = self.__problem_solution_vns_support.shaking
             else:
                 self.__problem_solution_vns_support:ProblemSolutionVnsSupport = problem_solution_vns_support
-                self.__implemented_local_searches:Dict[str,function] = None
+                self.__implemented_local_searches:Optional[dict[str,function]] = None
                 self.__ls_method = None
                 self.__shaking_method = None
         else:
             self.__problem_solution_vns_support:ProblemSolutionVnsSupport = None
-            self.__implemented_local_searches:Dict[str,function] = None
+            self.__implemented_local_searches:Optional[dict[str,function]] = None
             self.__ls_method = None
             self.__shaking_method = None
         self.__k_min:int = k_min
         self.__k_max:int = k_max
         # current value of the vns parameter k
-        self.__k_current:int = None
+        self.__k_current:Optional[int] = None
 
     @classmethod
     def from_construction_tuple(cls, construction_tuple:VnsOptimizerConstructionParameters):

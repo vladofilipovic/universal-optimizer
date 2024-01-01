@@ -20,6 +20,10 @@ class ComplexCounterUniformFull:
         :param int number_of_counters: number of counters within complex counter
         :param int counter_size: size of each counter within complex counter
         """
+        if not isinstance(number_of_counters, int):
+                raise TypeError('Parameter \'number_of_counters\' must be \'int\'.')        
+        if not isinstance(counter_size, int):
+                raise TypeError('Parameter \'counter_size\' must be \'int\'.')        
         self.__number_of_counters:int = number_of_counters
         self.__counter_size:int = counter_size
         self.__counters:list[int] = [0] * number_of_counters

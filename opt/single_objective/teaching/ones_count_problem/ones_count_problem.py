@@ -29,14 +29,10 @@ class OnesCountProblem(TargetProblem):
         """
         if not isinstance(dim, int):
             raise TypeError('Parameter \'dimension\' for  OnesCountProblem should be \'int\'.')
-        if dim is None:
-            raise ValueError('Parameter \'dimension\' for OnesCountProblem should not be \'None\'')
         if dim <= 0:
             raise ValueError('Parameter \'dimension\' for  OnesCountProblem should be greater than zero.')
         if not isinstance(is_minimization, bool):
             raise TypeError('Parameter \'is_minimization\' for  OnesCountProblem should be \'bool\'.')
-        if is_minimization is None:
-            raise ValueError('Parameter \'is_minimization\' for OnesCountProblem should not be \'None\'')
         super().__init__(name="OnesCountProblem", is_minimization=is_minimization)
         self.__dimension = dim
 

@@ -30,6 +30,8 @@ class QualityOfSolution:
         Returns:
             None. The method is a constructor and does not return anything.
         """
+        if not isinstance(is_feasible, bool):
+                raise TypeError('Parameter \'is_feasible\' must be \'bool\'.')        
         self.__objective_value:Optional[float] = objective_value
         self.__objective_values:Optional[list[float]|tuple[float]] = objective_values
         self.__fitness_value:Optional[float] = fitness_value

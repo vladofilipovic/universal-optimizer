@@ -25,6 +25,10 @@ class AdditionalStatisticsControl:
         (currently it contains strings `all_solution_code`, `more_local_optima`) 
         :param int max_local_optima: number of local optima to be kept
         """
+        if not isinstance(keep, str):
+                raise TypeError('Parameter \'keep\' must be \'str\'.')
+        if not isinstance(max_local_optima, int):
+                raise TypeError('Parameter \'max_local_optima\' must be \'int\'.')
         self.__can_be_kept:list[str] = ['all_solution_code',
                 'more_local_optima']
         self.__max_local_optima:int = max_local_optima

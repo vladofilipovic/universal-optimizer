@@ -1,5 +1,6 @@
 import unittest   
 import unittest.mock as mocker
+from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
 from uo.target_problem.target_problem import TargetProblem
 from uo.algorithm.output_control import OutputControl
@@ -23,6 +24,9 @@ class TestVnsOptimizerProperties(unittest.TestCase):
         type(self.problem_mock).file_path = mocker.PropertyMock(return_value='some file path')
         type(self.problem_mock).dimension = mocker.PropertyMock(return_value=42)
 
+        self.problem_solution_vns_support_stub = mocker.MagicMock(spec=ProblemSolutionVnsSupport)
+        self.problem_solution_vns_support_stub.local_search_first_improvement = mocker.Mock(return_value="mocked stuff")
+        
         self.evaluations_max = 42
         self.iterations_max = 42
         self.seconds_max = 42
@@ -34,18 +38,20 @@ class TestVnsOptimizerProperties(unittest.TestCase):
         self.random_seed = 42
         self.k_min = 3
         self.k_max = 42
-
+        
+        self.additional_statistics_control = AdditionalStatisticsControl()
+        
         self.vns_optimizer = VnsOptimizer(
                 output_control=self.output_control_stub,
                 target_problem=self.problem_mock, 
                 initial_solution=None,
-                problem_solution_vns_support=None, 
+                problem_solution_vns_support=self.problem_solution_vns_support_stub, 
                 finish_control=self.finish_control_mock,
                 random_seed=self.random_seed, 
                 k_min=self.k_min, 
                 k_max=self.k_max, 
-                additional_statistics_control=None,
-                local_search_type='first_improvement'
+                additional_statistics_control=self.additional_statistics_control,
+                local_search_type='local_search_first_improvement'
         )
     
     def test_name_should_be_vns(self):
@@ -96,7 +102,7 @@ class TestVnsOptimizerProperties(unittest.TestCase):
                 random_seed=self.random_seed, 
                 k_min=self.k_min, 
                 k_max=self.k_max, 
-                additional_statistics_control=None,
+                additional_statistics_control=AdditionalStatisticsControl(),
                 local_search_type='xxx'
             )            
         self.assertEqual("Value 'xxx' for VNS local_search_type is not supported", context.exception.args[0])

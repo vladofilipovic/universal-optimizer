@@ -36,7 +36,8 @@ class TestOnesCountProblemVnsBinaryBitArraySolutionLsbi(unittest.TestCase):
         self.output_control = OutputControl(False)
         self.problem_to_solve:OnesCountProblem = OnesCountProblem.from_dimension(dimension=24)
         self.solution:OnesCountProblemBinaryBitArraySolution = OnesCountProblemBinaryBitArraySolution(random_seed=43434343)
-        self.finish_control:FinishControl = FinishControl(criteria='evaluations', evaluations_max=1000)
+        self.finish_control:FinishControl = FinishControl(criteria='evaluations', evaluations_max=1000, 
+                    iterations_max=0, seconds_max=0)
         self.additional_stat = AdditionalStatisticsControl(keep='')
         self.vns_support:OnesCountProblemBinaryBitArraySolutionVnsSupport = \
                 OnesCountProblemBinaryBitArraySolutionVnsSupport()

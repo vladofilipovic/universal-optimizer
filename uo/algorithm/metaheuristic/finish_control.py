@@ -18,7 +18,7 @@ class FinishControl:
             criteria:str='evaluations & seconds & iterations', 
             evaluations_max:int = 0,
             iterations_max:int = 0,
-            seconds_max:float = 0  
+            seconds_max:int|float = 0  
         ) -> None:
         """
         Creates new :class:`uo.algorithm.metaheuristic.FinishControl` instance
@@ -29,6 +29,14 @@ class FinishControl:
         :param int iterations_max: maximum number of iterations for metaheuristic execution
         :param float seconds_max: maximum number of seconds for metaheuristic execution
         """
+        if not isinstance(criteria, str):
+                raise TypeError('Parameter \'criteria\' must be \'str\'.')
+        if not isinstance(evaluations_max, int):
+                raise TypeError('Parameter \'evaluations_max\' must be \'int\'.')
+        if not isinstance(iterations_max, int):
+                raise TypeError('Parameter \'iterations_max\' must be \'int\'.')
+        if not isinstance(seconds_max, int|float):
+                raise TypeError('Parameter \'seconds_max\' must be \'float\' or \'int\'.')
         self.__implemented_criteria:list[str] = ['evaluations_max',
                 'iterations_max',
                 'seconds_max']

@@ -3,6 +3,7 @@ The :mod:`~uo.algorithm.output_control` module describes the class :class:`~uo.a
 """
 
 from pathlib import Path
+from typing import Optional
 directory = Path(__file__).resolve()
 import sys
 sys.path.append(directory.parent)
@@ -16,7 +17,7 @@ class OutputControl:
     :class:`uo.algorithm.Algorithm` instance will be written 
     """
 
-    def __init__(self, write_to_output:bool=False, output_file:TextIOWrapper=None, 
+    def __init__(self, write_to_output:bool=False, output_file:Optional[TextIOWrapper]=None, 
             fields:str='iteration, evaluation, "step_name", best_solution.argument(), '
                 'best_solution.fitness_value, best_solution.objective_value, best_solution.is_feasible', 
             moments:str='after_algorithm') -> None:
@@ -33,6 +34,14 @@ class OutputControl:
         `before_algorithm`, `after_algorithm`, `before_iteration`, `after_iteration`, 
         `before_evaluation`, `after_evaluation`, `before_step_in_iteration`, `after_step_in_iteration`
         """
+        if not isinstance(write_to_output, bool):
+            raise TypeError('Parameter \'write_to_output\' must have type \'bool\'.')
+        if not isinstance(output_file, Optional[TextIOWrapper]):
+            raise TypeError('Parameter \'output_file\' must have type \'TextIOWrapper\' or be \'None\'.')
+        if not isinstance(fields, str):
+            raise TypeError('Parameter \'fields\' must have type \'str\'.')
+        if not isinstance(moments, str):
+            raise TypeError('Parameter \'moments\' must have type \'str\'.')
         self.__write_to_output:bool = write_to_output
         self.__output_file:TextIOWrapper = output_file
         self.__fields_headings:list[str] = ['iteration',

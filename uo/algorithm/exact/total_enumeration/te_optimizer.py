@@ -60,6 +60,14 @@ class TeOptimizer(Algorithm):
         :param `TargetSolution` initial_solution: solution from which algorithm started
         :param `ProblemSolutionTeSupport` problem_solution_te_support: placeholder for additional methods, specific for TE 
         """
+        if not isinstance(output_control, OutputControl):
+                raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
+        if not isinstance(target_problem, TargetProblem):
+                raise TypeError('Parameter \'target_problem\' must be \'TargetProblem\'.')
+        if not isinstance(initial_solution, TargetSolution):
+                raise TypeError('Parameter \'initial_solution\' must be \'TargetSolution\'.')
+        if not isinstance(problem_solution_te_support, ProblemSolutionTeSupport):
+                raise TypeError('Parameter \'problem_solution_te_support\' must be \'ProblemSolutionTeSupport\'.')
         super().__init__(name='total_enumerations', 
                 output_control=output_control, 
                 target_problem=target_problem)

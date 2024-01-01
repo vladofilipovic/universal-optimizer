@@ -40,12 +40,12 @@ from uo.algorithm.exact.total_enumeration.problem_solution_te_support import Pro
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import \
-    ProblemSolutionVnsSupport
+        ProblemSolutionVnsSupport
 
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_ilp_linopy import \
-    OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters
+        OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_ilp_linopy import \
-    OnesCountProblemIntegerLinearProgrammingSolver
+        OnesCountProblemIntegerLinearProgrammingSolver
 
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem import OnesCountProblem
 
@@ -63,21 +63,21 @@ from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_
 
 @dataclass
 class MaxOneProblemSolverConstructionParameters:
-    """
-    Instance of the class :class:`MaxOneProblemSolverConstructionParameters` represents constructor parameters for max ones problem solver.
-    """
-    method: str = None
-    finish_control: FinishControl = None
-    output_control: OutputControl = None
-    target_problem: TargetProblem = None
-    initial_solution: TargetSolution = None
-    vns_problem_solution_support: ProblemSolutionVnsSupport = None
-    vns_random_seed: int = None
-    vns_additional_statistics_control: AdditionalStatisticsControl = None
-    vns_k_min: int = None
-    vns_k_max: int = None
-    vns_local_search_type: str = None
-    te_problem_solution_support:ProblemSolutionTeSupport = None
+        """
+        Instance of the class :class:`MaxOneProblemSolverConstructionParameters` represents constructor parameters for max ones problem solver.
+        """
+        method: str = None
+        finish_control: FinishControl = None
+        output_control: OutputControl = None
+        target_problem: TargetProblem = None
+        initial_solution: TargetSolution = None
+        vns_problem_solution_support: ProblemSolutionVnsSupport = None
+        vns_random_seed: int = None
+        vns_additional_statistics_control: AdditionalStatisticsControl = None
+        vns_k_min: int = None
+        vns_k_max: int = None
+        vns_local_search_type: str = None
+        te_problem_solution_support:ProblemSolutionTeSupport = None
 
 class OnesCountProblemSolver:
     """

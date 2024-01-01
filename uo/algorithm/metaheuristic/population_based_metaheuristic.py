@@ -17,7 +17,7 @@ from io import TextIOWrapper
 from bitstring import BitArray
 
 from abc import ABCMeta, abstractmethod
-from typing import TypeVar, Generic
+from typing import Optional, TypeVar, Generic
 from typing import Generic
 
 
@@ -41,11 +41,11 @@ class PopulationBasedMetaheuristic(Metaheuristic, metaclass=ABCMeta):
     def __init__(self, 
             name:str, 
             finish_control:FinishControl,
-            random_seed:int, 
+            random_seed:Optional[int], 
             additional_statistics_control:AdditionalStatisticsControl,
             output_control:OutputControl, 
             target_problem:TargetProblem,
-            initial_solutions:list[TargetSolution]
+            initial_solutions:Optional[list[TargetSolution]]
     )->None:
         """
         Create new PopulationBasedMetaheuristic instance
@@ -59,6 +59,20 @@ class PopulationBasedMetaheuristic(Metaheuristic, metaclass=ABCMeta):
         :param `TargetProblem` target_problem: problem to be solved
         :param `list[TargetSolution]` initial_solutions: population with initial solutions of the problem
         """
+        if not isinstance(name, str):
+                raise TypeError('Parameter \'name\' must be \'str\'.')
+        if not isinstance(finish_control, FinishControl):
+                raise TypeError('Parameter \'finish_control\' must be \'FinishControl\'.')
+        if not isinstance(random_seed, Optional[int]):
+                raise TypeError('Parameter \'random_seed\' must be \'int\' or \'None\'.')
+        if not isinstance(additional_statistics_control, AdditionalStatisticsControl):
+                raise TypeError('Parameter \'additional_statistics_control\' must be \'AdditionalStatisticsControl\'.')
+        if not isinstance(output_control, OutputControl):
+                raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
+        if not isinstance(target_problem, TargetProblem):
+                raise TypeError('Parameter \'target_problem\' must be \'TargetProblem\'.')
+        if not isinstance(initial_solutions, Optional[list[TargetSolution]]):
+                raise TypeError('Parameter \'initial_solutions\' must be \'list[TargetSolution]\' or \'None\'.')
         super().__init__(name=name, 
                 finish_control=finish_control,
                 random_seed=random_seed,
@@ -67,11 +81,11 @@ class PopulationBasedMetaheuristic(Metaheuristic, metaclass=ABCMeta):
                 target_problem=target_problem)
         if initial_solutions is not None: 
             if isinstance(initial_solutions, list[TargetSolution]):
-                self.__current_solutions:list[TargetSolution] = initial_solutions.copy()
+                self.__current_solutions:Optional[list[TargetSolution]] = initial_solutions.copy()
             else:
-                self.__current_solutions:list[TargetSolution] = initial_solutions
+                self.__current_solutions:Optional[list[TargetSolution]] = initial_solutions
         else:
-            self.__current_solution:list[TargetSolution] =  None
+            self.__current_solution:Optional[list[TargetSolution]] =  None
 
     @abstractmethod
     def __copy__(self)->'PopulationBasedMetaheuristic':
