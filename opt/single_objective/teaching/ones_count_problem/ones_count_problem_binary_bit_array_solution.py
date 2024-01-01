@@ -124,6 +124,8 @@ class OnesCountProblemBinaryBitArraySolution(TargetSolution[BitArray,str]):
         :return: solution's representation as BitArray
         :rtype: `BitArray`
         """
+        if not isinstance(representation_str, str):
+            raise TypeError('Representation argument have to be string.')
         ret:BitArray = BitArray(bin=representation_str)
         return ret
 

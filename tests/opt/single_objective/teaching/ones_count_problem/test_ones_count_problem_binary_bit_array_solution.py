@@ -418,3 +418,327 @@ class TestInitFrom(unittest.TestCase):
         # Act & Assert
         with self.assertRaises(TypeError):
             solution.init_from(representation, problem)
+
+class TestCalculateQualityDirectly(unittest.TestCase):
+
+    # Calculate quality of a binary BitArray solution with all bits set to 1
+    def test_all_bits_set_to_1(self):
+        # Arrange
+        representation = BitArray('0b111111')
+        problem = OnesCountProblem(dim=6)
+        solution = OnesCountProblemBinaryBitArraySolution()
+        solution.init_from(representation, problem)
+    
+        # Act
+        quality = solution.calculate_quality_directly(representation, problem)
+    
+        # Assert
+        self.assertEqual(quality.objective_value, 6)
+        self.assertEqual(quality.fitness_value, 6)
+        self.assertTrue(quality.is_feasible)
+
+    # Calculate quality of a binary BitArray solution with all bits set to 0
+    def test_all_bits_set_to_0(self):
+        # Arrange
+        representation = BitArray('0b000000')
+        problem = OnesCountProblem(dim=6)
+        solution = OnesCountProblemBinaryBitArraySolution()
+        solution.init_from(representation, problem)
+    
+        # Act
+        quality = solution.calculate_quality_directly(representation, problem)
+    
+        # Assert
+        self.assertEqual(quality.objective_value, 0)
+        self.assertEqual(quality.fitness_value, 0)
+        self.assertTrue(quality.is_feasible)
+
+    # Calculate quality of a binary BitArray solution with a random bit string
+    def test_random_bit_string(self):
+        # Arrange
+        representation = BitArray('0b101010')
+        problem = OnesCountProblem(dim=6)
+        solution = OnesCountProblemBinaryBitArraySolution()
+        solution.init_from(representation, problem)
+    
+        # Act
+        quality = solution.calculate_quality_directly(representation, problem)
+    
+        # Assert
+        self.assertEqual(quality.objective_value, 3)
+        self.assertEqual(quality.fitness_value, 3)
+        self.assertTrue(quality.is_feasible)
+
+    # Calculate quality of a binary BitArray solution with a None representation
+    def test_none_representation(self):
+        # Arrange
+        representation = None
+        problem = OnesCountProblem(dim=6)
+        solution = OnesCountProblemBinaryBitArraySolution()
+        
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            solution.init_from(representation, problem)
+
+    # Calculate quality of a binary BitArray solution with a non-BitArray representation
+    def test_non_bitarray_representation(self):
+        # Arrange
+        representation = "101010"
+        problem = OnesCountProblem(dim=6)
+        solution = OnesCountProblemBinaryBitArraySolution()
+
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            solution.init_from(representation, problem)
+
+    # Calculate quality of a binary BitArray solution with a BitArray representation of length 0
+    def test_bitarray_length_0(self):
+        # Arrange
+        representation = BitArray()
+        problem = OnesCountProblem(dim=6)
+        solution = OnesCountProblemBinaryBitArraySolution()
+
+        # Act & Assert
+        with self.assertRaises(ValueError):
+            solution.init_from(representation, problem)
+
+class TestNativeRepresentation(unittest.TestCase):
+
+    # Should return a BitArray object when given a valid binary string representation of a solution
+    def test_valid_binary_string_representation(self):
+        # Arrange
+        representation_str = "101010"
+        solution = OnesCountProblemBinaryBitArraySolution()
+    
+        # Act
+        native_representation = solution.native_representation(representation_str)
+    
+        # Assert
+        self.assertIsInstance(native_representation, BitArray)
+
+    # Should return a BitArray object with the same binary representation as the input string representation
+    def test_same_binary_representation(self):
+        # Arrange
+        representation_str = "101010"
+        solution = OnesCountProblemBinaryBitArraySolution()
+    
+        # Act
+        native_representation = solution.native_representation(representation_str)
+    
+        # Assert
+        self.assertEqual(native_representation.bin, representation_str)
+
+    # Should work correctly for a binary string representation of length 1
+    def test_length_1_representation(self):
+        # Arrange
+        representation_str = "1"
+        solution = OnesCountProblemBinaryBitArraySolution()
+    
+        # Act
+        native_representation = solution.native_representation(representation_str)
+    
+        # Assert
+        self.assertEqual(native_representation.bin, representation_str)
+
+    # Should raise a TypeError when given a representation that is not a string
+    def test_non_string_representation(self):
+        # Arrange
+        representation_str = 101010
+        solution = OnesCountProblemBinaryBitArraySolution()
+    
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            solution.native_representation(representation_str)
+
+
+    # Should raise a ValueError when given a string representation that contains characters other than '0' and '1'
+    def test_invalid_characters_representation(self):
+        # Arrange
+        representation_str = "10102"
+        solution = OnesCountProblemBinaryBitArraySolution()
+    
+        # Act & Assert
+        with self.assertRaises(ValueError):
+            solution.native_representation(representation_str)
+
+
+class TestRepresentationDistanceDirectly(unittest.TestCase):
+
+    # Calculate distance between two identical solutions
+    def test_identical_solutions(self):
+        # Arrange
+        solution = OnesCountProblemBinaryBitArraySolution()
+        solution_code_1 = "101010"
+        solution_code_2 = "101010"
+    
+        # Act
+        distance = solution.representation_distance_directly(solution_code_1, solution_code_2)
+    
+        # Assert
+        self.assertEqual(distance, 0)
+
+    # Calculate distance between two completely different solutions
+    def test_completely_different_solutions(self):
+        # Arrange
+        solution = OnesCountProblemBinaryBitArraySolution()
+        solution_code_1 = "101010"
+        solution_code_2 = "000000"
+    
+        # Act
+        distance = solution.representation_distance_directly(solution_code_1, solution_code_2)
+    
+        # Assert
+        self.assertEqual(distance, 3)
+
+    # Calculate distance between two solutions with only one different bit
+    def test_one_different_bit(self):
+        # Arrange
+        solution = OnesCountProblemBinaryBitArraySolution()
+        solution_code_1 = "101010"
+        solution_code_2 = "101011"
+    
+        # Act
+        distance = solution.representation_distance_directly(solution_code_1, solution_code_2)
+    
+        # Assert
+        self.assertEqual(distance, 1)
+
+    # Calculate distance between two empty solutions
+    def test_empty_solutions(self):
+        # Arrange
+        solution = OnesCountProblemBinaryBitArraySolution()
+        solution_code_1 = ""
+        solution_code_2 = ""
+    
+        # Act
+        distance = solution.representation_distance_directly(solution_code_1, solution_code_2)
+    
+        # Assert
+        self.assertEqual(distance, 0)
+
+    # Calculate distance between two solutions with different lengths
+    def test_different_lengths(self):
+        # Arrange
+        solution = OnesCountProblemBinaryBitArraySolution()
+        solution_code_1 = "101010"
+        solution_code_2 = "10101010"
+    
+        # Act & Assert
+        with self.assertRaises(ValueError):
+            solution.representation_distance_directly(solution_code_1, solution_code_2)
+    
+    # Calculate distance between two solutions with different types
+    def test_different_types(self):
+        # Arrange
+        solution = OnesCountProblemBinaryBitArraySolution()
+        solution_code_1 = "101010"
+        solution_code_2 = 101010
+    
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            solution.representation_distance_directly(solution_code_1, solution_code_2)
+
+
+class TestStringRep(unittest.TestCase):
+
+    # Returns a string representation of the solution instance.
+    def test_returns_string_representation(self):
+        # Arrange
+        problem = TargetProblemVoid("x**2", True)
+        solution = OnesCountProblemBinaryBitArraySolution()
+        solution.init_from(BitArray('0b1110'), problem)
+    
+        # Act
+        result = solution.string_rep()
+    
+        # Assert
+        self.assertIsInstance(result, str)
+
+    # Includes the string representation of the super class.
+    def test_includes_super_class_representation(self):
+        # Arrange
+        problem = TargetProblemVoid("x**2", True)
+        solution = OnesCountProblemBinaryBitArraySolution()
+        solution.init_from(BitArray('0b1110'), problem)
+    
+        # Act
+        result = solution.string_rep()
+    
+        # Assert
+        self.assertIn("OnesCountProblemBinaryBitArraySolution", result)
+
+    # Includes the string representation of the solution's string_representation.
+    def test_includes_string_representation(self):
+        # Arrange
+        problem = TargetProblemVoid("x**2", True)
+        solution = OnesCountProblemBinaryBitArraySolution()
+        solution.init_from(BitArray('0b1110'), problem)
+    
+        # Act
+        result = solution.string_rep()
+    
+        # Assert
+        self.assertIn("string_representation()", result)
+
+    # Delimiter, indentation, indentation_symbol, group_start, and group_end are optional parameters.
+    def test_optional_parameters(self):
+        # Arrange
+        problem = TargetProblemVoid("x**2", True)
+        solution = OnesCountProblemBinaryBitArraySolution()
+        solution.init_from(BitArray('0b1110'), problem)
+    
+        # Act
+        result = solution.string_rep()
+    
+        # Assert
+        self.assertIsInstance(result, str)
+
+    # Default values for delimiter, indentation, indentation_symbol, group_start, and group_end are '\n', 0, '   ', '{', and '}', respectively.
+    def test_default_values(self):
+        # Arrange
+        problem = TargetProblemVoid("x**2", True)
+        solution = OnesCountProblemBinaryBitArraySolution()
+        solution.init_from(BitArray('0b1110'), problem)
+    
+        # Act
+        result = solution.string_rep()
+    
+        # Assert
+        expected_result = "string_representation()=1110"
+        self.assertIn(result, result)
+
+    # If delimiter is None, it raises a TypeError.
+    def test_delimiter_is_none(self):
+        # Arrange
+        solution = OnesCountProblemBinaryBitArraySolution()
+    
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            solution.string_rep(delimiter=None)
+
+    # If indentation is None, it raises a TypeError.
+    def test_indentation_is_none(self):
+        # Arrange
+        solution = OnesCountProblemBinaryBitArraySolution()
+    
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            solution.string_rep(indentation=None)
+
+    # If indentation_symbol is None, it raises a TypeError.
+    def test_indentation_symbol_is_none(self):
+        # Arrange
+        solution = OnesCountProblemBinaryBitArraySolution()
+    
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            solution.string_rep(indentation_symbol=None)
+
+    # If group_start is None, it raises a TypeError.
+    def test_group_start_is_none(self):
+        # Arrange
+        solution = OnesCountProblemBinaryBitArraySolution()
+    
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            solution.string_rep(group_start=None)
