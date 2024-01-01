@@ -112,6 +112,16 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         :rtype: str
         """
         return self.__name
+    
+    @property
+    def random_seed(self)->int:
+        """
+        Property getter for the random seed used during metaheuristic execution
+        
+        :return: random seed 
+        :rtype: int
+        """
+        return self.__random_seed
 
     @property
     def fitness_value(self)->float:
