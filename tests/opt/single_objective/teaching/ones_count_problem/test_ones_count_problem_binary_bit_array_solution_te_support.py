@@ -4,17 +4,8 @@ import unittest.mock as mocker
 
 from bitstring import BitArray
 
-from uo.target_problem.target_problem import TargetProblem
-from uo.target_solution.target_solution import TargetSolution
-
-from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.algorithm_void import AlgorithmVoid
 from uo.algorithm.output_control import OutputControl
-from uo.algorithm.metaheuristic.finish_control import FinishControl
-from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
-
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem import OnesCountProblem
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_bit_array_solution import OnesCountProblemBinaryBitArraySolution

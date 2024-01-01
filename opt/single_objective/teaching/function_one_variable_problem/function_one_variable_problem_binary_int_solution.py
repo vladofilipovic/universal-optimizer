@@ -14,7 +14,7 @@ from random import random
 from random import randint
 
 from uo.target_problem.target_problem import TargetProblem
-from uo.target_solution.target_solution import QualityOfSolution
+from uo.target_solution.quality_of_solution import QualityOfSolution
 from uo.target_solution.target_solution import TargetSolution
 
 from uo.utils.logger import logger

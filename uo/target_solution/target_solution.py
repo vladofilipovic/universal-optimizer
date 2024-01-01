@@ -18,15 +18,9 @@ from typing import Generic
 from typing import Optional
 
 from uo.target_problem.target_problem import TargetProblem
+from uo.target_solution.quality_of_solution import QualityOfSolution
 from uo.target_solution.evaluation_cache_control_statistics import EvaluationCacheControlStatistics
 from uo.target_solution.distance_calculation_cache_control_statistics import DistanceCalculationCacheControlStatistics
-
-QualityOfSolution = NamedTuple('QualityOfSolution', [('objective_value',float), 
-            ('objective_values',list[float]),
-            ('fitness_value',float), 
-            ('fitness_values',list[float]), 
-            ('is_feasible',bool)]
-        )
 
 R_co = TypeVar("R_co", covariant=True) 
 A_co = TypeVar("A_co", covariant=True)

@@ -16,7 +16,7 @@ from random import randint
 from uo.utils.logger import logger
 from uo.utils.complex_counter_uniform_distinct import ComplexCounterUniformAscending
 
-from uo.target_solution.target_solution import QualityOfSolution
+from uo.target_solution.quality_of_solution import QualityOfSolution
 from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import \
         ProblemSolutionVnsSupport
@@ -83,7 +83,7 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
         if k < 1 or k > representation_length:
             return solution
         best_rep:int = None
-        best_tuple:QualityOfSolution =  QualityOfSolution(solution.objective_value, None,
+        best_qos:QualityOfSolution =  QualityOfSolution(solution.objective_value, None,
                 solution.fitness_value, None, solution.is_feasible)
         # initialize indexes
         indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k,representation_length)
@@ -103,17 +103,19 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             new_qos = solution.calculate_quality(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
-            if new_qos.fitness_value > best_tuple.fitness_value:
-                best_tuple = new_qos
+            if QualityOfSolution.is_first_fitness_better(new_qos, best_qos, problem.is_minimization):
+                best_qos = new_qos
                 best_rep = solution.representation
             solution.representation ^= mask 
             # increment indexes and set in_loop accordingly
             in_loop = indexes.progress()
         if best_rep is not None:
             solution.representation = best_rep
-            solution.objective_value = best_tuple.objective_value
-            solution.fitness_value = best_tuple.fitness_value
-            solution.is_feasible = best_tuple.is_feasible
+            solution.objective_value = best_qos.objective_value
+            solution.objective_values = None
+            solution.fitness_value = best_qos.fitness_value
+            solution.fitness_values = None
+            solution.is_feasible = best_qos.is_feasible
             return solution
         return solution
 
@@ -126,7 +128,8 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
             return solution
         if k < 1 or k > representation_length:
             return solution
-        best_fv:float = solution.fitness_value
+        best_qos:QualityOfSolution =  QualityOfSolution(solution.objective_value, None,
+                solution.fitness_value, None, solution.is_feasible)
         # initialize indexes
         indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k,representation_length)
         in_loop:bool = indexes.reset()
@@ -145,7 +148,7 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             new_qos = solution.calculate_quality(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
-            if new_qos.fitness_value > best_fv:
+            if  QualityOfSolution.is_first_fitness_better(new_qos, best_qos, problem.is_minimization):
                 solution.fitness_value = new_qos.fitness_value
                 solution.objective_value = new_qos.objective_value
                 solution.is_feasible = new_qos.is_feasible

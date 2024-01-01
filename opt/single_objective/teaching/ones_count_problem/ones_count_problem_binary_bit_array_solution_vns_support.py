@@ -25,7 +25,7 @@ from bitstring import Bits, BitArray, BitStream, pack
 from uo.utils.logger import logger
 from uo.utils.complex_counter_uniform_distinct import ComplexCounterUniformAscending
 
-from uo.target_solution.target_solution import QualityOfSolution
+from uo.target_solution.quality_of_solution import QualityOfSolution
 from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
 
@@ -78,13 +78,13 @@ class OnesCountProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport
         tries:int = 0
         limit:int = 10000
         while tries < limit:
+            repres:BitArray = BitArray(solution.representation)
             positions:list[int] = []
-            for i in range(0,k):
-                positions.append(choice(range(problem.dimension)))
-            repr:BitArray = BitArray(solution.representation.tobytes())
+            for _ in range(0,k):
+                positions.append(choice(range(len(repres))))
             for pos in positions:
-                repr[pos] = not repr[pos]
-            solution.representation = repr
+                repres.invert(pos)
+            solution.representation = repres
             all_ok:bool = True
             if solution.representation.count(value=1) > problem.dimension:
                 all_ok = False
@@ -119,11 +119,11 @@ class OnesCountProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport
         if k < 1 or k > problem.dimension:
             return solution
         best_rep:BitArray = None
-        best_tuple:QualityOfSolution =  QualityOfSolution(solution.objective_value, None,
+        best_qos:QualityOfSolution =  QualityOfSolution(solution.objective_value, None,
                 solution.fitness_value, None, solution.is_feasible)
         # initialize indexes
         indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k, problem.dimension)
-        in_loop:boolean = indexes.reset()
+        in_loop:bool = indexes.reset()
         while in_loop:
             # collect positions for inversion from indexes
             positions:list[int] = indexes.current_state()
@@ -133,19 +133,19 @@ class OnesCountProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport
             if optimizer.finish_control.check_evaluations and optimizer.evaluation > optimizer.finish_control.evaluations_max:
                 return solution
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
-            new_triplet:QualityOfSolution = solution.calculate_quality(problem)
+            new_qos:QualityOfSolution = solution.calculate_quality(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
-            if new_triplet.fitness_value > best_tuple.fitness_value:
-                best_tuple = new_triplet
+            if QualityOfSolution.is_first_fitness_better(new_qos, best_qos, problem.is_minimization):
+                best_qos = new_qos
                 best_rep = BitArray(bin=solution.representation.bin)
             solution.representation.invert(positions)
             # increment indexes and set in_loop according to the state
             in_loop = indexes.progress()
         if best_rep is not None:
             solution.representation = best_rep
-            solution.objective_value = best_tuple.objective_value
-            solution.fitness_value = best_tuple.fitness_value
-            solution.is_feasible = best_tuple.is_feasible
+            solution.objective_value = best_qos.objective_value
+            solution.fitness_value = best_qos.fitness_value
+            solution.is_feasible = best_qos.is_feasible
             return solution
         return solution
 
@@ -165,10 +165,11 @@ class OnesCountProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport
             return solution
         if k < 1 or k > problem.dimension:
             return solution
-        best_fv:float = solution.fitness_value
+        best_qos:QualityOfSolution = QualityOfSolution(solution.objective_value, solution.objective_values,
+                                        solution.fitness_value, solution.fitness_values, solution.is_feasible)
         # initialize indexes
         indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k, problem.dimension)
-        in_loop:boolean = indexes.reset()
+        in_loop:bool = indexes.reset()
         while in_loop:
             # collect positions for inversion from indexes
             positions:list[int] = indexes.current_state()
@@ -178,12 +179,12 @@ class OnesCountProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport
             if optimizer.finish_control.check_evaluations and optimizer.evaluation > optimizer.finish_control.evaluations_max:
                 return solution
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
-            new_triplet:QualityOfSolution = solution.calculate_quality(problem)
+            new_qos:QualityOfSolution = solution.calculate_quality(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
-            if new_triplet.fitness_value > best_fv:
-                solution.objective_value = new_triplet.objective_value
-                solution.fitness_value = new_triplet.fitness_value
-                solution.is_feasible = new_triplet.is_feasible
+            if QualityOfSolution.is_first_fitness_better(new_qos, best_qos, problem.is_minimization):
+                solution.objective_value = new_qos.objective_value
+                solution.fitness_value = new_qos.fitness_value
+                solution.is_feasible = new_qos.is_feasible
                 return solution
             solution.representation.invert(positions)
             # increment indexes and set in_loop accordingly

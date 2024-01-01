@@ -11,9 +11,12 @@ from copy import deepcopy
 from datetime import datetime
 from abc import ABCMeta, abstractmethod
 
+from typing import Optional
+
 from uo.utils.logger import logger
 from uo.algorithm.output_control import OutputControl
 from uo.target_problem.target_problem import TargetProblem
+from uo.target_solution.quality_of_solution import QualityOfSolution
 from uo.target_solution.target_solution import TargetSolution
 
 from uo.algorithm.optimizer import Optimizer
@@ -120,7 +123,7 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
         """
         raise NotImplementedError
 
-    def is_first_solution_better(self, sol1:TargetSolution, sol2:TargetSolution)->bool:
+    def is_first_solution_better(self, sol1:TargetSolution, sol2:TargetSolution)->Optional[bool]:
         """
         Checks if first solution is better than the second one
 
@@ -135,31 +138,26 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
         if self.target_problem.is_minimization is None:
             raise ValueError('Information if minimization or maximization is set within metaheuristic target problem'
                     'have to be defined.')
-        is_minimization:bool = self.target_problem.is_minimization
+        is_minimization:bool = self.target_problem.is_minimization    
         if sol1 is None:
-            fit1:float = None
+            qos1:Optional[QualityOfSolution] = None
         else:
-            fit1:float = sol1.calculate_quality(self.target_problem).fitness_value;
+            qos1:Optional[QualityOfSolution] = sol1.calculate_quality(self.target_problem)
         if sol2 is None:
-            fit2:float = None
+            qos2:Optional[QualityOfSolution] = None
         else:
-            fit2:float = sol2.calculate_quality(self.target_problem).fitness_value;
+            qos2:Optional[QualityOfSolution] = sol2.calculate_quality(self.target_problem)
         # with fitness is better than without fitness
-        if fit1 is None:
-            if fit2 is not None:
+        if qos1 is None:
+            if qos2 is not None:
                 return False
             else:
                 return None
-        elif fit2 is None:
+        elif qos2 is None:
             return True
-        # if better, return true
-        if (is_minimization and fit1 < fit2) or (not is_minimization and fit1 > fit2):
-            return True
-        # if same fitness, return None
-        if fit1 == fit2:
-            return None
-        # otherwise, return false
-        return False
+        if qos1.fitness_value is not None or qos2.fitness_value is not None:
+            return QualityOfSolution.is_first_fitness_better(qos1, qos2, is_minimization)
+        return None
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:

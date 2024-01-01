@@ -3,7 +3,7 @@ from random import randint
 from random import choice
 
 from uo.target_problem.target_problem import TargetProblem
-from uo.target_solution.target_solution import QualityOfSolution
+from uo.target_solution.quality_of_solution import QualityOfSolution
 from uo.target_solution.target_solution import TargetSolution
 
 from uo.algorithm.algorithm import Algorithm
@@ -163,24 +163,26 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
         if k<1:
             return solution
         # ls_bi for k==1
-        best_ind:int = None
-        best_fv:float = solution.fitness_value
+        best_ind:int = -1
+        best_qos:QualityOfSolution =  QualityOfSolution(solution.objective_value, None,
+                solution.fitness_value, None, solution.is_feasible)
         for i in range(0, problem.dimension):
             mask:int = 1 << i
             solution.representation ^= mask 
             optimizer.evaluation +=1 
-            new_triplet:QualityOfSolution = solution.calculate_quality(problem)
-            if new_triplet.fitness_value > best_fv:
+            new_qos:QualityOfSolution = solution.calculate_quality(problem)
+            if QualityOfSolution.is_first_fitness_better(new_qos, best_qos, problem.is_minimization):
                 best_ind = i
-                best_fv = new_triplet.fitness_value
+                best_qos = new_qos
             solution.representation ^= mask 
-        if best_ind is not None:
+        if best_ind >= 0:
             mask:int = 1 << best_ind
             solution.representation ^= mask
             optimizer.evaluation += 1
             solution.evaluate(problem)
-            if solution.fitness_value != best_fv:
-                raise Exception('Fitness calculation within `local_search_best_improvement` function is not correct.')
+            if solution.fitness_value is not None:
+                if solution.fitness_value != best_qos.fitness_value:
+                    raise RuntimeError('Fitness calculation within `local_search_best_improvement` function is not correct.')
         return solution
 
     def local_search_first_improvement(self, k:int, problem:OnesCountProblem2, solution:OnesCountProblemBinaryIntSolution, 
@@ -190,16 +192,19 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
         if k<1:
             return solution
         # ls_fi for k==1
-        best_fv:float = solution.fitness_value
+        best_qos:QualityOfSolution =  QualityOfSolution(solution.objective_value, None,
+                solution.fitness_value, None, solution.is_feasible)
         for i in range(0, problem.dimension):
             mask:int = 1 << i
             solution.representation ^= mask 
             optimizer.evaluation += 1
-            new_triplet:QualityOfSolution = solution.calculate_quality(problem)
-            if new_triplet.fitness_value > best_fv:
-                solution.objective_value = new_triplet.objective_value
-                solution.fitness_value = new_triplet.fitness_value
-                solution.is_feasible = new_triplet.is_feasible
+            new_qos:QualityOfSolution = solution.calculate_quality(problem)
+            if QualityOfSolution.is_first_fitness_better(new_qos, best_qos, problem.is_minimization):
+                solution.objective_value = new_qos.objective_value
+                solution.objective_values = None
+                solution.fitness_value = new_qos.fitness_value
+                solution.fitness_values = None
+                solution.is_feasible = new_qos.is_feasible
                 return solution
             solution.representation ^= mask
         return solution
