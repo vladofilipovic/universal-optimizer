@@ -153,3 +153,191 @@ class TestOnesCountProblemBinaryIntSolution(unittest.TestCase):
         with self.assertRaises(ValueError):
             solution.init_random(problem_stub)
 
+
+
+class TestNativeRepresentation(unittest.TestCase):
+
+    # Obtain int representation from binary string representation
+    def test_obtain_int_representation(self):
+        # Arrange
+        representation_str = "101010"
+        solution = OnesCountProblemBinaryIntSolution()
+        # Act
+        result = solution.native_representation(representation_str)
+        # Assert
+        self.assertEqual(result, 42)
+
+    # String representation contains only binary digits
+    def test_string_representation_contains_binary_digits(self):
+        # Arrange
+        representation_str = "101010"
+        solution = OnesCountProblemBinaryIntSolution()
+        # Act
+        result = solution.native_representation(representation_str)
+        # Assert
+        self.assertIsInstance(result, int)
+
+    # String representation is not empty
+    def test_string_representation_not_empty(self):
+        # Arrange
+        representation_str = "101010"
+        solution = OnesCountProblemBinaryIntSolution()
+        # Act
+        result = solution.native_representation(representation_str)
+        # Assert
+        self.assertIsNotNone(result)
+
+    # String representation is '0'
+    def test_string_representation_is_zero(self):
+        # Arrange
+        representation_str = "0"
+        solution = OnesCountProblemBinaryIntSolution()
+        # Act
+        result = solution.native_representation(representation_str)
+        # Assert
+        self.assertEqual(result, 0)
+
+    # String representation is '1'
+    def test_string_representation_is_one(self):
+        # Arrange
+        representation_str = "1"
+        solution = OnesCountProblemBinaryIntSolution()
+        # Act
+        result = solution.native_representation(representation_str)
+        # Assert
+        self.assertEqual(result, 1)
+
+    # String representation is '00'
+    def test_string_representation_is_double_zero(self):
+        # Arrange
+        representation_str = "00"
+        solution = OnesCountProblemBinaryIntSolution()
+        # Act
+        result = solution.native_representation(representation_str)
+        # Assert
+        self.assertEqual(result, 0)
+
+
+class TestRepresentationDistanceDirectly(unittest.TestCase):
+
+    # Calculate distance between two solutions with different representation codes.
+    def test_different_representation_codes(self):
+        # Arrange
+        solution = OnesCountProblemBinaryIntSolution()
+        solution.native_representation = mocker.Mock(side_effect=[10, 15])    
+        # Act
+        distance = solution.representation_distance_directly("101010", "111000")
+        # Assert
+        self.assertEqual(distance, 2)
+
+    # Calculate distance between two solutions with same representation codes.
+    def test_same_representation_codes(self):
+        # Arrange
+        solution = OnesCountProblemBinaryIntSolution()
+        solution.native_representation = mocker.Mock(return_value=10)
+        # Act
+        distance = solution.representation_distance_directly("101010", "101010")
+        # Assert
+        self.assertEqual(distance, 0)
+
+    # Calculate distance between two solutions with different lengths of representation codes.
+    def test_different_lengths_of_representation_codes(self):
+        # Arrange
+        solution = OnesCountProblemBinaryIntSolution()
+        solution.native_representation = mocker.Mock(side_effect=[10, 15])
+        # Act
+        distance = solution.representation_distance_directly("101010", "111")
+        # Assert
+        self.assertEqual(distance, 2)
+
+    # Calculate distance between two solutions with non-string representation codes.
+    def test_non_string_representation_codes(self):
+        # Arrange
+        solution = OnesCountProblemBinaryIntSolution()
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            solution.representation_distance_directly(101010, 111000)
+
+class TestRepresentationDistanceDirectly(unittest.TestCase):
+
+    # Calculate distance between two identical solutions
+    def test_identical_solutions(self):
+        # Arrange
+        solution = OnesCountProblemBinaryIntSolution()
+        solution_code_1 = "101010"
+        solution_code_2 = "101010"
+        # Act
+        distance = solution.representation_distance_directly(solution_code_1, solution_code_2)
+        # Assert
+        self.assertEqual(distance, 0)
+
+    # Calculate distance between two different solutions
+    def test_different_solutions(self):
+        # Arrange
+        solution = OnesCountProblemBinaryIntSolution()
+        solution_code_1 = "101010"
+        solution_code_2 = "111000"
+        # Act
+        distance = solution.representation_distance_directly(solution_code_1, solution_code_2)
+        # Assert
+        self.assertEqual(distance, 2)
+
+    # Calculate distance between two solutions with one bit difference
+    def test_one_bit_difference(self):
+        # Arrange
+        solution = OnesCountProblemBinaryIntSolution()
+        solution_code_1 = "101010"
+        solution_code_2 = "101011"
+        # Act
+        distance = solution.representation_distance_directly(solution_code_1, solution_code_2)
+        # Assert
+        self.assertEqual(distance, 1)
+
+    # Calculate distance between two solutions with different lengths
+    def test_different_lengths(self):
+        # Arrange
+        solution = OnesCountProblemBinaryIntSolution()
+        solution_code_1 = "101010"
+        solution_code_2 = "10101010"
+        # Act
+        distance = solution.representation_distance_directly(solution_code_1, solution_code_2)
+        # Assert
+        self.assertEqual(distance, 1)
+
+    # Calculate distance between two solutions with non-binary characters
+    def test_non_binary_characters(self):
+        # Arrange
+        solution = OnesCountProblemBinaryIntSolution()
+        solution_code_1 = "101010"
+        solution_code_2 = "1010A0"
+        # Act & Assert
+        with self.assertRaises(ValueError):
+            solution.representation_distance_directly(solution_code_1, solution_code_2)
+
+
+# Generated by CodiumAI
+
+import unittest
+
+class TestStringRep(unittest.TestCase):
+
+    # Includes the string representation of the superclass
+    def test_includes_superclass_representation(self):
+        # Arrange
+        sol = OnesCountProblemBinaryIntSolution()
+        sol.representation = 123
+        # Act
+        result = sol.string_rep()
+        # Assert
+        self.assertIn("OnesCountProblemBinaryIntSolution", result)
+
+    # Includes the string representation of the solution's native representation
+    def test_includes_native_representation(self):
+        # Arrange
+        sol = OnesCountProblemBinaryIntSolution()
+        sol.representation = 123    
+        # Act
+        result = sol.string_rep()
+        # Assert
+        self.assertIn("string_representation()=", result)
+
