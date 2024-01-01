@@ -26,16 +26,41 @@ from uo.algorithm.output_control import OutputControl
 
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem import OnesCountProblem
 
-@dataclass
 class OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters:
+    """
+    Instance of the class :class:`OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters` represents constructor parameters for max ones problem ILP solver.
+    """
+    def __init__(self, output_control: OutputControl = None, target_problem: TargetProblem = None)->None:
+        if not isinstance(output_control, OutputControl):
+            raise TypeError('Parameter \'output_control\' have not valid type.')
+        if not isinstance(target_problem, TargetProblem):
+            raise TypeError('Parameter \'target_problem\' have not valid type.')
+        self.__output_control = output_control
+        self.__target_problem = target_problem
+
+    @property
+    def output_control(self)->OutputControl:
         """
-        Instance of the class :class:`OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters` represents constructor parameters for max ones problem ILP solver.
+        Property getter for the output control
+        
+        :return: output control 
+        :rtype: `OutputControl`
         """
-        output_control: OutputControl = None
-        target_problem: TargetProblem = None
+        return self.__output_control    
+
+    @property
+    def target_problem(self)->TargetProblem:
+        """
+        Property getter for the output control
+        
+        :return: problem that is solved
+        :rtype: `TargetProblem`
+        """
+        return self.__target_problem    
+
 
 class OnesCountProblemIntegerLinearProgrammingSolution(TargetSolutionVoidObjectStr):
-    def __init__(self, sol:'Solution')->None:
+    def __init__(self, sol:TargetSolution)->None:
         super().__init__(name="OnesCountProblemIntegerLinearProgrammingSolution")
         self.__sol = sol
 
@@ -64,8 +89,8 @@ class OnesCountProblemIntegerLinearProgrammingSolver(Optimizer):
         :param `OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters` construction_params: parameters for construction 
         """
         return cls(
-            construction_tuple.output_control, 
-            construction_tuple.target_problem)
+            construction_params.output_control, 
+            construction_params.target_problem)
 
     def __copy__(self):
         """
@@ -104,7 +129,7 @@ class OnesCountProblemIntegerLinearProgrammingSolver(Optimizer):
         self.evaluation = -1
         self.execution_started = datetime.now() 
         l = []
-        for i in range(self.target_problem.dimension):
+        for _ in range(self.target_problem.dimension):
             l.append(0)
         coords = xr.DataArray(l)
         x = self.model.add_variables(binary=True, coords=[coords], name='x')
