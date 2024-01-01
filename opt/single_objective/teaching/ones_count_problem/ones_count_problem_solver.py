@@ -111,8 +111,30 @@ class OnesCountProblemSolver:
         :param int vns_k_max: VNS parameter k_max
         :param str vns_local_search_type: type of the local search        
         """
+        if not isinstance(method, str):
+                raise TypeError('Parameter \'method\' must be \'str\'.')
         self.__optimizer:Optimizer = None
         if method == 'variable_neighborhood_search':
+            if not isinstance(finish_control, FinishControl):
+                    raise TypeError('Parameter \'finish_control\' must be \'FinishControl\'.')
+            if not isinstance(output_control, OutputControl):
+                    raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
+            if not isinstance(target_problem, TargetProblem):
+                    raise TypeError('Parameter \'target_problem\' must be \'TargetProblem\'.')
+            if not isinstance(initial_solution, TargetSolution):
+                    raise TypeError('Parameter \'initial_solution\' must be \'TargetSolution\'.')
+            if not isinstance(vns_problem_solution_support, ProblemSolutionVnsSupport):
+                    raise TypeError('Parameter \'vns_problem_solution_support\' must be \'ProblemSolutionVnsSupport\'.')
+            if not isinstance(vns_random_seed, int):
+                    raise TypeError('Parameter \'vns_random_seed\' must be \'int\'.')
+            if not isinstance(vns_additional_statistics_control, AdditionalStatisticsControl):
+                    raise TypeError('Parameter \'vns_additional_statistics_control\' must be \'AdditionalStatisticsControl\'.')
+            if not isinstance(vns_k_min, int):
+                    raise TypeError('Parameter \'vns_k_min\' must be \'int\'.')
+            if not isinstance(vns_k_max, int):
+                    raise TypeError('Parameter \'vns_k_max\' must be \'int\'.')
+            if not isinstance(vns_local_search_type, str):
+                    raise TypeError('Parameter \'vns_local_search_type\' must be \'str\'.')
             self.__optimizer = VnsOptimizer(
                     finish_control= finish_control,
                     output_control= output_control,
@@ -125,6 +147,14 @@ class OnesCountProblemSolver:
                     k_max= vns_k_max,
                     local_search_type= vns_local_search_type)
         elif method == 'total_enumeration':
+            if not isinstance(output_control, OutputControl):
+                    raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
+            if not isinstance(target_problem, TargetProblem):
+                    raise TypeError('Parameter \'target_problem\' must be \'TargetProblem\'.')
+            if not isinstance(initial_solution, TargetSolution):
+                    raise TypeError('Parameter \'initial_solution\' must be \'TargetSolution\'.')
+            if not isinstance(te_problem_solution_support, ProblemSolutionTeSupport):
+                    raise TypeError('Parameter \'te_problem_solution_support\' must be \'ProblemSolutionTeSupport\'.')
             self.__optimizer = TeOptimizer(
                     output_control = output_control,
                     target_problem= target_problem,
@@ -132,6 +162,10 @@ class OnesCountProblemSolver:
                     problem_solution_te_support= te_problem_solution_support
             )
         elif method == 'integer_linear_programming':
+            if not isinstance(output_control, OutputControl):
+                    raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
+            if not isinstance(target_problem, TargetProblem):
+                    raise TypeError('Parameter \'target_problem\' must be \'TargetProblem\'.')
             self.__optimizer:Optimizer = OnesCountProblemIntegerLinearProgrammingSolver(
                 output_control = output_control,
                 problem = target_problem

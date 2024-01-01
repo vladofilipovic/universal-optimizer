@@ -26,11 +26,11 @@ class FunctionOneVariableProblem(TargetProblem):
     
     def __init__(self, expression:str, domain_low:float, domain_high:float)->None:
         if expression is None or expression=="":
-            raise ValueError("Expression should not be empty.")
+            raise ValueError("Parameter \'expression\' should not be empty.")
         if not isinstance(domain_low, int | float):
-            raise ValueError("Domain low border should be number.")
+            raise TypeError("Parameter \'domain_low\' should be \'int\' or \'float\'.")
         if not isinstance(domain_high, int | float):
-            raise ValueError("Domain high border should be number.")
+            raise TypeError("Parameter \'domain_high\' should be \'int\' or \'float\'.")
         super().__init__(name="FunctionOneVariableProblem", is_minimization=False)
         self.__expression:str = expression
         self.__domain_low:float = domain_low
@@ -98,20 +98,20 @@ class FunctionOneVariableProblem(TargetProblem):
         if indentation_symbol is None:
             return ''
         s = delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_start
         s+= super().string_rep(delimiter, indentation, indentation_symbol, '', '')
         s+= delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s+= 'expression=' + self.expression
         s+= delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s+= 'domain_low=' + str(self.domain_low)
         s+= delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s+= 'domain_high=' + str(self.domain_high)
         s += group_end 

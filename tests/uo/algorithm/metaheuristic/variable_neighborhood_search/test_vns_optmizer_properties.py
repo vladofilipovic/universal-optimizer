@@ -1,18 +1,9 @@
-from pathlib import Path
-directory = Path(__file__).resolve()
-import sys
-sys.path.append(directory.parent)
-sys.path.append(directory.parent.parent)
-sys.path.append(directory.parent.parent.parent)
-sys.path.append(directory.parent.parent.parent.parent)
-sys.path.append(directory.parent.parent.parent.parent.parent)
-sys.path.append(directory.parent.parent.parent.parent.parent.parent)
-sys.path.append(directory.parent.parent.parent.parent.parent.parent.parent)
-sys.path.append(directory.parent.parent.parent.parent.parent.parent.parent.parent)
-
 import unittest   
 import unittest.mock as mocker
 
+from uo.target_problem.target_problem import TargetProblem
+from uo.algorithm.output_control import OutputControl
+from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer 
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
 
@@ -23,10 +14,10 @@ class TestVnsOptimizerProperties(unittest.TestCase):
         print("setUpClass TestVnsOptimizerProperties\n")
 
     def setUp(self):
-        self.output_control_stub = mocker.MagicMock()
+        self.output_control_stub = mocker.MagicMock(spec=OutputControl)
         type(self.output_control_stub).write_to_output = False
 
-        self.problem_mock = mocker.MagicMock()
+        self.problem_mock = mocker.MagicMock(spec=TargetProblem)
         type(self.problem_mock).name = mocker.PropertyMock(return_value='some_problem')
         type(self.problem_mock).is_minimization = mocker.PropertyMock(return_value=True)
         type(self.problem_mock).file_path = mocker.PropertyMock(return_value='some file path')
@@ -35,7 +26,7 @@ class TestVnsOptimizerProperties(unittest.TestCase):
         self.evaluations_max = 42
         self.iterations_max = 42
         self.seconds_max = 42
-        self.finish_control_mock = mocker.MagicMock()
+        self.finish_control_mock = mocker.MagicMock(spec=FinishControl)
         type(self.finish_control_mock).evaluations_max= mocker.PropertyMock(return_value=self.evaluations_max)
         type(self.finish_control_mock).iterations_max= mocker.PropertyMock(return_value=self.iterations_max)
         type(self.finish_control_mock).seconds_max= mocker.PropertyMock(return_value=self.seconds_max)

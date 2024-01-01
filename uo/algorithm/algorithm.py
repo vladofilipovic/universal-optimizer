@@ -35,6 +35,12 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
         :param `OutputControl` output_control: structure that controls output
         :param `TargetProblem` target_problem: problem to be solved
         """
+        if not isinstance(name, str):
+                raise TypeError('Parameter \'name\' must be \'str\'.')
+        if not isinstance(output_control, OutputControl):
+                raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
+        if not isinstance(target_problem, TargetProblem):
+                raise TypeError('Parameter \'target_problem\' must be \'TargetProblem\'.')
         super().__init__(name=name, output_control=output_control, target_problem=target_problem)
         self.__evaluation:int = 0
         self.__iteration:int = 0
@@ -178,28 +184,31 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
         :rtype: str
         """            
         s = delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s = group_start
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += 'name=' + self.name + delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += 'target_problem=' + self.target_problem.string_rep(delimiter, indentation + 1, 
                 indentation_symbol, '{', '}')  + delimiter 
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += '__output_control=' + self.__output_control.string_rep(
                 delimiter, indentation + 1, indentation_symbol, '{', '}') + delimiter
         s += '__evaluation=' + str(self.__evaluation) + delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
+            s += indentation_symbol  
+        s += '__iteration=' + str(self.__iteration) + delimiter
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += 'execution_started=' + str(self.execution_started) + delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += 'execution_ended=' + str(self.execution_ended) + delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_end 
         return s

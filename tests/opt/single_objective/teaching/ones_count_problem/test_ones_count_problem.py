@@ -51,7 +51,7 @@ class TestOnesCountProblem(unittest.TestCase):
         dim = None
 
         # Act & Assert
-        with self.assertRaises(ValueError):
+        with self.assertRaises(TypeError):
             problem = OnesCountProblem(dim)
 
 

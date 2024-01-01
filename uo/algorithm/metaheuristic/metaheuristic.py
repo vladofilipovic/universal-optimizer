@@ -179,34 +179,28 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         :rtype: str
         """       
         s = delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_start
         s = super().string_rep(delimiter, indentation, indentation_symbol, '', '')
         s += delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += 'random_seed=' + str(self.random_seed) + delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += 'finish_control=' + str(self.finish_control) + delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += 'additional_statistics_control=' + str(self.additional_statistics_control) + delimiter
-        for i in range(0, indentation):
-            s += indentation_symbol  
-        s += '__iteration=' + str(self.__iteration) + delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += '__iteration_best_found=' + str(self.__iteration_best_found) + delimiter
-        for i in range(0, indentation):
-            s += indentation_symbol  
-        s += '__second_when_best_obtained=' + str(self.__second_when_best_obtained) + delimiter
         if self.execution_ended is not None and self.execution_started is not None:
-            for i in range(0, indentation):
+            for _ in range(0, indentation):
                 s += indentation_symbol  
             s += 'execution time=' + str( (self.execution_ended - self.execution_started).total_seconds() ) + delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_end 
         return s

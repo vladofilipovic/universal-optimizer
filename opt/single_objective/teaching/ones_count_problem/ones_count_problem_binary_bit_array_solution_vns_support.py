@@ -38,7 +38,6 @@ class OnesCountProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport
         """
         Create new `OnesCountProblemBinaryBitArraySolutionVnsSupport` instance
         """
-        return
 
     def __copy__(self):
         """

@@ -30,15 +30,15 @@ class FunctionOneVariableProblemBinaryIntSolution(TargetSolution[int,float]):
             distance_calculation_cache_is_used:bool=False,
             distance_calculation_cache_max_size:int=0)->None:
         if not isinstance(domain_from, int | float):
-            raise ValueError("Domain from should be number.")
+            raise TypeError("Parameter \'domain_from\' must be \'int\' or \'float\'.")
         if not isinstance(domain_to, int | float):
-            raise ValueError("Domain to should be number.")        
+            raise TypeError("Parameter \'domain_to\' must be \'int\' or \'float\'.")
         if domain_from >= domain_to:
-            raise ValueError("Domain from should be smaller than Domain to.")
+            raise ValueError("Parameter \'domain_from\' should be smaller than \'domain_to\'.")
         if not isinstance(number_of_intervals, int):
-            raise ValueError("Number of intervals should be integer.")
+            raise TypeError("Parameter \'number_of_intervals\' should be integer.")
         if number_of_intervals <= 0 :
-            raise ValueError("Number of intervals should be positive.")
+            raise ValueError("Parameter \'number_of_intervals\' should be positive.")
         super().__init__("FunctionOneVariableProblemBinaryIntSolution", random_seed=random_seed, fitness_value=None, 
                 fitness_values=None, objective_value=None, objective_values=None,
                 is_feasible=False, evaluation_cache_is_used=evaluation_cache_is_used,
@@ -127,17 +127,17 @@ class FunctionOneVariableProblemBinaryIntSolution(TargetSolution[int,float]):
     def string_rep(self, delimiter:str='\n', indentation:int=0, indentation_symbol:str='   ', 
             group_start:str='{', group_end:str='}',)->str:
         s = delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_start
         s += super().string_rep(delimiter, indentation, indentation_symbol, '', '')
         s += delimiter
         s += delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += 'string_representation()=' + str(self.string_representation())
         s += delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_end 
         return s

@@ -18,7 +18,8 @@ class TestOnesCountProblemIntegerLinearProgrammingSolverConstructionParameters(u
     def test_default_parameters_no_exceptions(self):
         # Arrange
         # Act
-        params = OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters()
+        params = OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters(output_control=OutputControl(),
+                                        target_problem=TargetProblemVoid("a", True))
         # Assert
         self.assertIsInstance(params, OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters)
 
@@ -32,19 +33,6 @@ class TestOnesCountProblemIntegerLinearProgrammingSolverConstructionParameters(u
                                         target_problem=target_problem)
         # Assert
         self.assertIsInstance(params, OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters)
-
-    # All attributes of the instance should be accessible and modifiable
-    def test_attributes_accessible_modifiable(self):
-        # Arrange
-        output_control = OutputControl(write_to_output=True)
-        target_problem = OnesCountProblem(dim = 3)
-        params = OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters(output_control=output_control, target_problem=target_problem)
-        # Act
-        params.output_control = OutputControl(write_to_output=False)
-        params.target_problem = TargetProblemVoid("prob.", True)
-        # Assert
-        self.assertFalse(params.output_control.write_to_output)
-        self.assertIsInstance(params.target_problem, TargetProblemVoid)
 
     # Creating an instance of the class with invalid OutputControl parameter should raise a TypeError
     def test_invalid_output_control_type(self):

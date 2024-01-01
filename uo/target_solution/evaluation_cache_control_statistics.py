@@ -144,19 +144,19 @@ class EvaluationCacheControlStatistics:
         :rtype: str
         """       
         s = delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_start + delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol      
         s += '__is_caching=' + str(self.__is_caching) + delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol      
         s += '__cache_hit_count=' + str(self.__cache_hit_count) + delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol      
         s += '__cache_request_count=' + str(self.__cache_request_count) + delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_end 
         return s

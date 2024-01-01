@@ -65,16 +65,10 @@ class TeOptimizer(Algorithm):
                 target_problem=target_problem)
         # total enumeration support
         if problem_solution_te_support is not None:
-            if isinstance(problem_solution_te_support, ProblemSolutionTeSupport):
-                self.__problem_solution_te_support:ProblemSolutionTeSupport = problem_solution_te_support.copy()
-                self.__reset_method = self.__problem_solution_te_support.reset
-                self.__progress_method = self.__problem_solution_te_support.progress
-                self.__can_progress_method = self.__problem_solution_te_support.can_progress
-            else:
-                self.__problem_solution_te_support:ProblemSolutionTeSupport = problem_solution_te_support
-                self.__reset_method = problem_solution_te_support.reset
-                self.__progress_method = problem_solution_te_support.progress
-                self.__can_progress_method = problem_solution_te_support.can_progress
+            self.__problem_solution_te_support:ProblemSolutionTeSupport = problem_solution_te_support
+            self.__reset_method = problem_solution_te_support.reset
+            self.__progress_method = problem_solution_te_support.progress
+            self.__can_progress_method = problem_solution_te_support.can_progress
         else:
             self.__problem_solution_te_support:ProblemSolutionTeSupport = None
             self.__reset_method = None
@@ -82,7 +76,6 @@ class TeOptimizer(Algorithm):
             self.__can_progress_method = None
         # current solution
         self.__current_solution = initial_solution
-        self.__iteration = None
 
     @classmethod
     def from_construction_tuple(cls, construction_tuple:TeOptimizerConstructionParameters):
@@ -187,14 +180,14 @@ class TeOptimizer(Algorithm):
         :rtype: str
         """            
         s = delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_start
         s = super().string_rep(delimiter, indentation, indentation_symbol, '', '')
         s += delimiter
         s += 'current_solution=' + self.current_solution.string_rep(delimiter, indentation + 1, 
                 indentation_symbol, group_start, group_end) + delimiter 
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_end 
         return s

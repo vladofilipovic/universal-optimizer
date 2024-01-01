@@ -19,8 +19,8 @@ class TestOnesCountProblemBinaryBitArraySolutionTeSupport(unittest.TestCase):
         problem = OnesCountProblem(dim=len(result))
         solution = OnesCountProblemBinaryBitArraySolution()
         solution.init_from(BitArray(bin=result), problem)
-        optimizer = AlgorithmVoid("test", None, problem)
-        optimizer.output_control = OutputControl(write_to_output=False)
+        output_control = OutputControl(write_to_output=False)
+        optimizer = AlgorithmVoid("test", output_control, problem)
         te_support = OnesCountProblemBinaryBitArraySolutionTeSupport()
     
         te_support.reset(problem, solution, optimizer)
@@ -35,8 +35,8 @@ class TestOnesCountProblemBinaryBitArraySolutionTeSupport(unittest.TestCase):
         problem = OnesCountProblem(dim=len(result))
         solution = OnesCountProblemBinaryBitArraySolution()
         solution.init_from(BitArray(bin=result), problem)
-        optimizer = AlgorithmVoid("test", None, problem)
-        optimizer.output_control = OutputControl(write_to_output=False)
+        output_control = OutputControl(write_to_output=False)
+        optimizer = AlgorithmVoid("test", output_control, problem)
         te_support = OnesCountProblemBinaryBitArraySolutionTeSupport()
     
         te_support.reset(problem, solution, optimizer)
@@ -52,8 +52,8 @@ class TestOnesCountProblemBinaryBitArraySolutionTeSupport(unittest.TestCase):
         problem = OnesCountProblem(dim=len(result))
         solution = OnesCountProblemBinaryBitArraySolution()
         solution.init_from(BitArray(bin=result), problem)
-        optimizer = AlgorithmVoid("test", None, problem)
-        optimizer.output_control = OutputControl(write_to_output=False)
+        output_control = OutputControl(write_to_output=False)
+        optimizer = AlgorithmVoid("test", output_control, problem)
         te_support = OnesCountProblemBinaryBitArraySolutionTeSupport()
     
         te_support.reset(problem, solution, optimizer)

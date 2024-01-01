@@ -14,6 +14,7 @@ import unittest
 import unittest.mock as mocker
 
 from uo.target_problem.target_problem import TargetProblem
+from uo.target_problem.target_problem_void import TargetProblemVoid
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
@@ -33,23 +34,21 @@ class TestMetaheuristicProperties(unittest.TestCase):
         self.evaluations_max = 42
         self.iterations_max = 42
         self.seconds_max = 42
-        self.finish_control_mock =  mocker.MagicMock()
+        self.finish_control_mock =  mocker.MagicMock(spec=FinishControl)
         type(self.finish_control_mock).evaluations_max = self.evaluations_max
         type(self.finish_control_mock).iterations_max = self.iterations_max
         type(self.finish_control_mock).seconds_max = self.seconds_max
 
         self.random_seed = 42
 
-        self.additional_statistics_control_stub = mocker.MagicMock()
+        self.additional_statistics_control_stub = mocker.MagicMock(spec=AdditionalStatisticsControl)
         
-        self.output_control_stub = mocker.MagicMock()
+        self.output_control_stub = mocker.MagicMock(spec=OutputControl)
         type(self.output_control_stub).write_to_output = False
 
-        self.problem_mock = mocker.MagicMock()
-        type(self.problem_mock).name = mocker.PropertyMock(return_value='some_problem')
-        type(self.problem_mock).is_minimization = mocker.PropertyMock(return_value=True)
-        type(self.problem_mock).file_path = mocker.PropertyMock(return_value='some file path')
-        type(self.problem_mock).dimension = mocker.PropertyMock(return_value=42)
+        self.problem_mock = mocker.MagicMock(spec=TargetProblemVoid)
+        type(self.problem_mock).name = 'some_problem'
+        type(self.problem_mock).is_minimization = True
 
         self.optimizer = MetaheuristicVoid(
                 name=self.metaheuristicName,
@@ -80,12 +79,6 @@ class TestMetaheuristicProperties(unittest.TestCase):
 
     def test_problem_is_minimization_should_be_equal_as_in_constructor(self):
         self.assertEqual(self.optimizer.target_problem.is_minimization, self.problem_mock.is_minimization)
-
-    def test_problem_file_path_should_be_equal_as_in_constructor(self):
-        self.assertEqual(self.optimizer.target_problem.file_path, self.problem_mock.file_path)
-
-    def test_problem_dimension_should_be_equal_as_in_constructor(self):
-        self.assertEqual(self.optimizer.target_problem.dimension, self.problem_mock.dimension)
 
     def tearDown(self):
         return

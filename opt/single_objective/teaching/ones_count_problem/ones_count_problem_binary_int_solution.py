@@ -6,6 +6,7 @@ The :mod:`~opt.single_objective.teaching.ones_count_problem.ones_count_problem_b
 
 import sys
 from pathlib import Path
+from typing import Optional
 directory = Path(__file__).resolve()
 sys.path.append(directory.parent)
 sys.path.append(directory.parent.parent)
@@ -25,7 +26,7 @@ from uo.utils.logger import logger
 
 class OnesCountProblemBinaryIntSolution(TargetSolution[int,str]):
     
-    def __init__(self,random_seed:int=None, 
+    def __init__(self,random_seed:Optional[int]=None, 
             evaluation_cache_is_used:bool=False, 
             evaluation_cache_max_size:int=0,
             distance_calculation_cache_is_used:bool=False,
@@ -35,6 +36,8 @@ class OnesCountProblemBinaryIntSolution(TargetSolution[int,str]):
 
         :param int random_seed: random seed for initialization, default value `Null`
         """
+        if not isinstance(random_seed, Optional[int]):
+            raise TypeError('Parameter \'random_seed\' must be \'int\' or \'None\'.')
         super().__init__("OnesCountProblemBinaryIntSolution", random_seed=random_seed, fitness_value=None, 
                 fitness_values=None,
                 objective_value=None, objective_values=None, is_feasible=False, 
@@ -166,17 +169,17 @@ class OnesCountProblemBinaryIntSolution(TargetSolution[int,str]):
         :rtype: str
         """        
         s = delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_start
         s += super().string_rep(delimiter, indentation, indentation_symbol, '', '')
         s += delimiter
         s += delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += 'string_representation()=' + self.string_representation()
         s += delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_end 
         return s

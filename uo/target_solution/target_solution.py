@@ -424,33 +424,33 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         :rtype: str
         """         
         s = delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_start + delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol     
         s += 'name=' + self.name + delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol     
         s += 'fitness_value=' + str(self.fitness_value) + delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol     
         s += 'objective_value=' + str(self.objective_value) + delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol     
         s += 'is_feasible=' + str(self.is_feasible) + delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol     
         s += 'representation()=' + str(self.representation) + delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol     
         s += 'evaluation_cache_cs=' + self.evaluation_cache_cs.string_rep(
                 delimiter, indentation+1, indentation_symbol, '{', '}')  
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += '__representation_distance_cache_cs(static)=' + TargetSolution.representation_distance_cache_cs.string_rep(
                 delimiter, indentation + 1, indentation_symbol, '{', '}') + delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_end 
         return s

@@ -40,7 +40,7 @@ from uo.algorithm.exact.total_enumeration.problem_solution_te_support import Pro
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import \
-    ProblemSolutionVnsSupport
+        ProblemSolutionVnsSupport
 
 from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem import \
         FunctionOneVariableProblem
@@ -53,121 +53,143 @@ from opt.single_objective.teaching.function_one_variable_problem.\
 
 @dataclass
 class FunctionOneVariableProblemSolverConstructionParameters:
-    """
-    Instance of the class :class:`FunctionOneVariableProblemSolverConstructionParameters` represents constructor parameters for max ones problem solver.
-    """
-    method: str = None
-    finish_control: FinishControl = None
-    output_control: OutputControl = None
-    target_problem: TargetProblem = None
-    initial_solution: TargetSolution = None
-    vns_problem_solution_support: ProblemSolutionVnsSupport = None
-    vns_random_seed: int = None
-    vns_additional_statistics_control: AdditionalStatisticsControl = None
-    vns_k_min: int = None
-    vns_k_max: int = None
-    vns_local_search_type: str = None
+        """
+        Instance of the class :class:`FunctionOneVariableProblemSolverConstructionParameters` represents constructor parameters for max ones problem solver.
+        """
+        method: str = None
+        finish_control: FinishControl = None
+        output_control: OutputControl = None
+        target_problem: TargetProblem = None
+        initial_solution: TargetSolution = None
+        vns_problem_solution_support: ProblemSolutionVnsSupport = None
+        vns_random_seed: int = None
+        vns_additional_statistics_control: AdditionalStatisticsControl = None
+        vns_k_min: int = None
+        vns_k_max: int = None
+        vns_local_search_type: str = None
 
 class FunctionOneVariableProblemSolver:
-    """
-    Instance of the class :class:`FunctionOneVariableProblemSolver` any of the developed solvers max ones problem.
-    """
-    def __init__(self, method:str=None,
-            finish_control:FinishControl = None,
-            output_control:OutputControl = None,
-            target_problem:TargetProblem = None,
-            initial_solution:TargetSolution = None,
-            vns_problem_solution_support:ProblemSolutionVnsSupport = None,
-            vns_random_seed:int = None,
-            vns_additional_statistics_control:AdditionalStatisticsControl = None,
-            vns_k_min:int = None,
-            vns_k_max:int = None,
-            vns_local_search_type:str = None,
-    )->None:
         """
-        Create new `FunctionOneVariableProblemSolver` instance
+        Instance of the class :class:`FunctionOneVariableProblemSolver` any of the developed solvers max ones problem.
+        """
+        def __init__(self, method:str=None,
+                finish_control:FinishControl = None,
+                output_control:OutputControl = None,
+                target_problem:TargetProblem = None,
+                initial_solution:TargetSolution = None,
+                vns_problem_solution_support:ProblemSolutionVnsSupport = None,
+                vns_random_seed:int = None,
+                vns_additional_statistics_control:AdditionalStatisticsControl = None,
+                vns_k_min:int = None,
+                vns_k_max:int = None,
+                vns_local_search_type:str = None,
+        )->None:
+                """
+                Create new `FunctionOneVariableProblemSolver` instance
 
-        :param str method: method used for solving the Max Ones Problem 
-        :param FinishControl finish_control: controls finish criteria
-        :param output_control:OutputControl = controls output
-        :param TargetProblem target_problem: problem that is solved
-        :param TargetSolution initial_solution: initial solution
-        :param ProblemSolutionVnsSupport vns_problem_solution_support: Specific VNS support
-        :param int vns_random_seed: random seed
-        :param AdditionalStatisticsControl vns_additional_statistics_control: additional statistics control
-        :param int vns_k_min: VNS parameter k_min
-        :param int vns_k_max: VNS parameter k_max
-        :param str vns_local_search_type: type of the local search        
-        """
-        self.__optimizer:Optimizer = None
-        if method == 'variable_neighborhood_search':
-            self.__optimizer = VnsOptimizer(
-                    finish_control= finish_control,
-                    output_control= output_control,
-                    target_problem= target_problem,
-                    initial_solution= initial_solution,
-                    problem_solution_vns_support= vns_problem_solution_support,
-                    random_seed= vns_random_seed, 
-                    additional_statistics_control= vns_additional_statistics_control,
-                    k_min= vns_k_min,
-                    k_max= vns_k_max,
-                    local_search_type= vns_local_search_type)
-        else:
-            raise ValueError("Invalid optimization method {} - should be: '{}'.".format(method,
-                    'variable_neighborhood_search'))
+                :param str method: method used for solving the Max Ones Problem 
+                :param FinishControl finish_control: controls finish criteria
+                :param output_control:OutputControl = controls output
+                :param TargetProblem target_problem: problem that is solved
+                :param TargetSolution initial_solution: initial solution
+                :param ProblemSolutionVnsSupport vns_problem_solution_support: Specific VNS support
+                :param int vns_random_seed: random seed
+                :param AdditionalStatisticsControl vns_additional_statistics_control: additional statistics control
+                :param int vns_k_min: VNS parameter k_min
+                :param int vns_k_max: VNS parameter k_max
+                :param str vns_local_search_type: type of the local search        
+                """
+                if not isinstance(method, str):
+                        raise TypeError('Parameter \'method\' must be \'str\'.')
+                self.__optimizer:Optimizer = None
+                if method == 'variable_neighborhood_search':
+                        if not isinstance(finish_control, FinishControl):
+                                raise TypeError('Parameter \'finish_control\' must be \'FinishControl\'.')
+                        if not isinstance(output_control, OutputControl):
+                                raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
+                        if not isinstance(target_problem, TargetProblem):
+                                raise TypeError('Parameter \'target_problem\' must be \'TargetProblem\'.')
+                        if not isinstance(initial_solution, TargetSolution):
+                                raise TypeError('Parameter \'initial_solution\' must be \'TargetSolution\'.')
+                        if not isinstance(vns_problem_solution_support, ProblemSolutionVnsSupport):
+                                raise TypeError('Parameter \'vns_problem_solution_support\' must be \'ProblemSolutionVnsSupport\'.')
+                        if not isinstance(vns_random_seed, int):
+                                raise TypeError('Parameter \'vns_random_seed\' must be \'int\'.')
+                        if not isinstance(vns_additional_statistics_control, AdditionalStatisticsControl):
+                                raise TypeError('Parameter \'vns_additional_statistics_control\' must be \'AdditionalStatisticsControl\'.')
+                        if not isinstance(vns_k_min, int):
+                                raise TypeError('Parameter \'vns_k_min\' must be \'int\'.')
+                        if not isinstance(vns_k_max, int):
+                                raise TypeError('Parameter \'vns_k_max\' must be \'int\'.')
+                        if not isinstance(vns_local_search_type, str):
+                                raise TypeError('Parameter \'vns_local_search_type\' must be \'str\'.')
+                        self.__optimizer = VnsOptimizer(
+                                finish_control= finish_control,
+                                output_control= output_control,
+                                target_problem= target_problem,
+                                initial_solution= initial_solution,
+                                problem_solution_vns_support= vns_problem_solution_support,
+                                random_seed= vns_random_seed, 
+                                additional_statistics_control= vns_additional_statistics_control,
+                                k_min= vns_k_min,
+                                k_max= vns_k_max,
+                                local_search_type= vns_local_search_type)
+                else:
+                        raise ValueError("Invalid optimization method {} - should be: '{}'.".format(method,
+                                'variable_neighborhood_search'))
 
-    @classmethod
-    def from_construction_tuple(cls, construction_params:FunctionOneVariableProblemSolverConstructionParameters=None):
-        """
-        Additional constructor. Create new `FunctionOneVariableProblemSolver` instance from construction parameters
+        @classmethod
+        def from_construction_tuple(cls, construction_params:FunctionOneVariableProblemSolverConstructionParameters=None):
+                """
+                Additional constructor. Create new `FunctionOneVariableProblemSolver` instance from construction parameters
 
-        :param `FunctionOneVariableProblemSolverConstructionParameters` construction_params: parameters for construction 
-        """
-        return cls(
-            method = construction_params.method,
-            finish_control = construction_params.finish_control,
-            output_control = construction_params.output_control,
-            target_problem = construction_params.target_problem,
-            initial_solution = construction_params.initial_solution,
-            vns_problem_solution_support = construction_params.vns_problem_solution_support,
-            vns_random_seed = construction_params.vns_random_seed, 
-            vns_additional_statistics_control = construction_params.vns_additional_statistics_control,
-            vns_k_min = construction_params.vns_k_min,
-            vns_k_max = construction_params.vns_k_max,
-            vns_local_search_type = construction_params.vns_local_search_type,
-        )
+                :param `FunctionOneVariableProblemSolverConstructionParameters` construction_params: parameters for construction 
+                """
+                return cls(
+                        method = construction_params.method,
+                        finish_control = construction_params.finish_control,
+                        output_control = construction_params.output_control,
+                        target_problem = construction_params.target_problem,
+                        initial_solution = construction_params.initial_solution,
+                        vns_problem_solution_support = construction_params.vns_problem_solution_support,
+                        vns_random_seed = construction_params.vns_random_seed, 
+                        vns_additional_statistics_control = construction_params.vns_additional_statistics_control,
+                        vns_k_min = construction_params.vns_k_min,
+                        vns_k_max = construction_params.vns_k_max,
+                        vns_local_search_type = construction_params.vns_local_search_type,
+                )
 
-    @classmethod
-    def from_variable_neighborhood_search(cls, vns_construction_params:VnsOptimizerConstructionParameters=None):
-        """
-        Additional constructor. Create new `OnesCountProblemSolver` instance when solving method is `Variable Neighborhood Search`
+        @classmethod
+        def from_variable_neighborhood_search(cls, vns_construction_params:VnsOptimizerConstructionParameters=None):
+                """
+                Additional constructor. Create new `OnesCountProblemSolver` instance when solving method is `Variable Neighborhood Search`
 
-        :param VnsOptimizerConstructionParameters vns_construction_params: construction parameters 
-        """
-        params:FunctionOneVariableProblemSolverConstructionParameters = \
-                FunctionOneVariableProblemSolverConstructionParameters()
-        params.method:str = 'variable_neighborhood_search'
-        params.finish_control:FinishControl = vns_construction_params.finish_control
-        params.output_control:OutputControl = vns_construction_params.output_control
-        params.target_problem:TargetProblem = vns_construction_params.target_problem
-        params.initial_solution:TargetSolution = vns_construction_params.initial_solution
-        params.vns_problem_solution_support:ProblemSolutionVnsSupport = \
-                vns_construction_params.problem_solution_vns_support
-        params.vns_random_seed:int = vns_construction_params.random_seed
-        params.vns_additional_statistics_control:AdditionalStatisticsControl = \
-                vns_construction_params.additional_statistics_control
-        params.vns_k_min:int = vns_construction_params.k_min
-        params.vns_k_max:int = vns_construction_params.k_max
-        params.vns_local_search_type:str = vns_construction_params.local_search_type        
-        return cls.from_construction_tuple(params)
+                :param VnsOptimizerConstructionParameters vns_construction_params: construction parameters 
+                """
+                params:FunctionOneVariableProblemSolverConstructionParameters = \
+                        FunctionOneVariableProblemSolverConstructionParameters()
+                params.method:str = 'variable_neighborhood_search'
+                params.finish_control:FinishControl = vns_construction_params.finish_control
+                params.output_control:OutputControl = vns_construction_params.output_control
+                params.target_problem:TargetProblem = vns_construction_params.target_problem
+                params.initial_solution:TargetSolution = vns_construction_params.initial_solution
+                params.vns_problem_solution_support:ProblemSolutionVnsSupport = \
+                        vns_construction_params.problem_solution_vns_support
+                params.vns_random_seed:int = vns_construction_params.random_seed
+                params.vns_additional_statistics_control:AdditionalStatisticsControl = \
+                        vns_construction_params.additional_statistics_control
+                params.vns_k_min:int = vns_construction_params.k_min
+                params.vns_k_max:int = vns_construction_params.k_max
+                params.vns_local_search_type:str = vns_construction_params.local_search_type        
+                return cls.from_construction_tuple(params)
 
-    @property
-    def opt(self)->Optimizer:
-        """
-        Property getter for the optimizer used for solving
+        @property
+        def opt(self)->Optimizer:
+                """
+                Property getter for the optimizer used for solving
 
-        :return: optimizer
-        :rtype: `Optimizer`
-        """
-        return self.__optimizer
+                :return: optimizer
+                :rtype: `Optimizer`
+                """
+                return self.__optimizer
 

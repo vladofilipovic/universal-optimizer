@@ -5,6 +5,7 @@ The :mod:`~opt.single_objective.teaching.ones_count_problem.ones_count_problem` 
 """
 import sys
 from pathlib import Path
+from typing import Optional
 directory = Path(__file__).resolve()
 sys.path.append(directory.parent)
 sys.path.append(directory.parent.parent)
@@ -20,18 +21,22 @@ from uo.utils.logger import logger
 
 class OnesCountProblem(TargetProblem):
     
-    def __init__(self, dim:int=None, is_minimization=False)->None:
+    def __init__(self, dim:int=None, is_minimization:bool=False)->None:
         """
         Create new `OnesCountProblem` instance
 
         :param int dim: dimension of the problem
         """
-        if dim is None:
-            raise ValueError('Dimension for  OnesCountProblem should not be None')
         if not isinstance(dim, int):
-            raise TypeError('Dimension for  OnesCountProblem should be integer.')
+            raise TypeError('Parameter \'dimension\' for  OnesCountProblem should be \'int\'.')
+        if dim is None:
+            raise ValueError('Parameter \'dimension\' for OnesCountProblem should not be \'None\'')
         if dim <= 0:
-            raise ValueError('Dimension for  OnesCountProblem should be greater than zero.')
+            raise ValueError('Parameter \'dimension\' for  OnesCountProblem should be greater than zero.')
+        if not isinstance(is_minimization, bool):
+            raise TypeError('Parameter \'is_minimization\' for  OnesCountProblem should be \'bool\'.')
+        if is_minimization is None:
+            raise ValueError('Parameter \'is_minimization\' for OnesCountProblem should not be \'None\'')
         super().__init__(name="OnesCountProblem", is_minimization=is_minimization)
         self.__dimension = dim
 
@@ -129,12 +134,12 @@ class OnesCountProblem(TargetProblem):
         :rtype: str
         """          
         s = delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_start
         s+= super().string_rep(delimiter, indentation, indentation_symbol, '', '')
         s+= delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += 'dimension=' + str(self.dimension) + delimiter
         s += group_end 

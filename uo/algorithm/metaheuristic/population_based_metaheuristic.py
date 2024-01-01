@@ -133,15 +133,15 @@ class PopulationBasedMetaheuristic(Metaheuristic, metaclass=ABCMeta):
         :rtype: str
         """       
         s = delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_start
         s = super().string_rep(delimiter, indentation, indentation_symbol, '', '')
         s += delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += 'current_solutions=' + str(self.current_solutions) + delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_end 
         return s

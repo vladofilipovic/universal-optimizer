@@ -33,7 +33,7 @@ class TestAlgorithmProperties(unittest.TestCase):
 
         self.oc_write_to_output = True
         self.oc_output_file = "some file path..."
-        self.output_control_stub = mocker.MagicMock()
+        self.output_control_stub = mocker.MagicMock(spec=OutputControl)
         type(self.output_control_stub).write_to_output = self.oc_write_to_output
         type(self.output_control_stub).output_file = self.oc_output_file
 
@@ -41,7 +41,7 @@ class TestAlgorithmProperties(unittest.TestCase):
         self.pr_is_minimization = True
         self.pr_file_path = 'some problem file path'
         self.pr_dimension = 42
-        self.problem_stub = mocker.MagicMock()
+        self.problem_stub = mocker.MagicMock(spec=TargetProblem)
         type(self.problem_stub).name = mocker.PropertyMock(return_value=self.pr_name)
         type(self.problem_stub).is_minimization = mocker.PropertyMock(return_value=self.pr_is_minimization)
         type(self.problem_stub).file_path = mocker.PropertyMock(return_value=self.pr_file_path)

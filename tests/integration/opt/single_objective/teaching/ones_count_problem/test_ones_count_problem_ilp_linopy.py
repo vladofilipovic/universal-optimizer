@@ -37,7 +37,6 @@ class TestOnesCountProblemIlpLinopy(unittest.TestCase):
             problem=self.problem_to_solve
         )
         self.optimizer.optimize()
-        return
     
     def test_best_solution_after_optimization_should_be_optimal(self):
         result = ''

@@ -245,29 +245,29 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         :rtype: str
         """             
         s = delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_start
         s = super().string_rep(delimiter, indentation, indentation_symbol, '', '')
         s += delimiter
         s += 'current_solution=' + self.current_solution.string_rep(delimiter, indentation + 1, 
                 indentation_symbol, group_start, group_end) + delimiter 
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += 'k_min=' + str(self.k_min) + delimiter 
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += 'k_max=' + str(self.k_max) + delimiter
         s += delimiter
         s += '__problem_solution_vns_support=' + self.__problem_solution_vns_support.string_rep(delimiter, 
                 indentation + 1, indentation_symbol, group_start, group_end) + delimiter 
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += '__max_local_optima=' + str(self.__max_local_optima) + delimiter 
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += '__local_search_type=' + str(self.__local_search_type) + delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_end 
         return s

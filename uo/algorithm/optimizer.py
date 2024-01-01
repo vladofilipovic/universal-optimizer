@@ -3,6 +3,7 @@ The :mod:`~uo.algorithm.optimizer` module describes the class :class:`~uo.algori
 """
 
 from pathlib import Path
+from typing import Optional
 directory = Path(__file__).resolve()
 import sys
 sys.path.append(directory.parent)
@@ -31,16 +32,19 @@ class Optimizer(metaclass=ABCMeta):
         :param `OutputControl` output_control: structure that controls output
         :param `TargetProblem` target_problem: problem to be solved
         """
+        if not isinstance(name, str):
+                raise TypeError('Parameter \'name\' must be \'str\'.')
+        if not isinstance(output_control, OutputControl):
+                raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
+        if not isinstance(target_problem, TargetProblem):
+                raise TypeError('Parameter \'target_problem\' must be \'TargetProblem\'.')
         self.__name:str = name
         self.__output_control:OutputControl = output_control
-        if isinstance(target_problem, TargetProblem):
-            self.__target_problem:TargetProblem = target_problem.copy()
-        else:
-            self.__target_problem:TargetProblem = target_problem
-        self.__execution_started:datetime = None
-        self.__execution_ended:datetime = None
-        self.__best_solution:TargetSolution = None
-        self.__second_when_best_obtained:float = 0.0
+        self.__target_problem:TargetProblem = target_problem
+        self.__execution_started:Optional[datetime] = None
+        self.__execution_ended:Optional[datetime] = None
+        self.__best_solution:Optional[TargetSolution] = None
+        self.__second_when_best_obtained:Optional[float] = None
 
     @abstractmethod
     def __copy__(self):
@@ -161,7 +165,7 @@ class Optimizer(metaclass=ABCMeta):
         Write headers(with field names) to output file, if necessary 
         """            
         if self.output_control.write_to_output:
-            output:TextIOWrapper = self.output_control.output_file
+            output:'TextIOWrapper' = self.output_control.output_file
             f_hs:list[str] = self.output_control.fields_headings
             line:str = ''
             for f_h in f_hs:
@@ -180,7 +184,7 @@ class Optimizer(metaclass=ABCMeta):
         :param str step_name_value: what should be written to the output instead of step_name
         """            
         if self.output_control.write_to_output:
-            output:TextIOWrapper = self.output_control.output_file
+            output:'TextIOWrapper' = self.output_control.output_file
             should_write:bool = False
             if step_name == 'after_algorithm':
                 should_write = True
@@ -246,27 +250,30 @@ class Optimizer(metaclass=ABCMeta):
         :rtype: str
         """            
         s = delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s = group_start
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += 'name=' + self.name + delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += 'target_problem=' + self.target_problem.string_rep(delimiter, indentation + 1, 
                 indentation_symbol, '{', '}')  + delimiter 
         s += '__output_control=' + self.__output_control.string_rep(
                 delimiter, indentation + 1, indentation_symbol, '{', '}') + delimiter
         s += 'execution_started=' + str(self.execution_started) + delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += 'execution_ended=' + str(self.execution_ended) + delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += 'best_solution=' + self.best_solution.string_rep(delimiter, indentation + 1, 
                 indentation_symbol, group_start, group_end) + delimiter 
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
+            s += indentation_symbol  
+        s += '__second_when_best_obtained=' + str(self.__second_when_best_obtained) + delimiter
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_end 
         return s

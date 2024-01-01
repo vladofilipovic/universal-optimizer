@@ -170,22 +170,22 @@ class AdditionalStatisticsControl:
         :rtype: str
         """        
         s = delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_start + delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += 'keep=' + str(self.keep) + delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += 'use_cache_for_distance_calculation=' + str(self.use_cache_for_distance_calculation) + delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         if self.keep_all_solution_codes:
-            for i in range(0, indentation):
+            for _ in range(0, indentation):
                 s += indentation_symbol  
             s += 'all solution codes=' + str(len(AdditionalStatisticsControl.all_solution_codes)) + delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_end 
         return s

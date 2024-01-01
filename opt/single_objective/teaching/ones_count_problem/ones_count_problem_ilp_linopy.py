@@ -32,9 +32,9 @@ class OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters:
     """
     def __init__(self, output_control: OutputControl = None, target_problem: TargetProblem = None)->None:
         if not isinstance(output_control, OutputControl):
-            raise TypeError('Parameter \'output_control\' have not valid type.')
+            raise TypeError('Parameter \'output_control\' must have type \'OutputControl\'.')
         if not isinstance(target_problem, TargetProblem):
-            raise TypeError('Parameter \'target_problem\' have not valid type.')
+            raise TypeError('Parameter \'target_problem\' must have type \'TargetProblem\'.')
         self.__output_control = output_control
         self.__target_problem = target_problem
 
@@ -60,7 +60,7 @@ class OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters:
 
 
 class OnesCountProblemIntegerLinearProgrammingSolution(TargetSolutionVoidObjectStr):
-    def __init__(self, sol:TargetSolution)->None:
+    def __init__(self, sol:'OnesCountProblemIntegerLinearProgrammingSolver')->None:
         super().__init__(name="OnesCountProblemIntegerLinearProgrammingSolution")
         self.__sol = sol
 
@@ -76,6 +76,10 @@ class OnesCountProblemIntegerLinearProgrammingSolver(Optimizer):
         :param `OutputControls` output_control: object that control output
         :param `OnesCountProblem` problem: problem to be solved
         """
+        if not isinstance(output_control, OutputControl):
+            raise TypeError('Parameter \'output_control\' must have type \'OutputControl\'.')
+        if not isinstance(problem, OnesCountProblem):
+            raise TypeError('Parameter \'problem\' must have type \'OnesCountProblem\'.')
         super().__init__("OnesCountProblemIntegerLinearProgrammingSolver", output_control=output_control, 
                 target_problem=problem)
         self.__model = Model()
@@ -163,7 +167,7 @@ class OnesCountProblemIntegerLinearProgrammingSolver(Optimizer):
         :rtype: str
         """            
         s = delimiter
-        for i in range(0, indentation):
+        for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_start
         s = super().string_rep(delimiter, indentation, indentation_symbol, '', '')

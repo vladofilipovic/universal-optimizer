@@ -1,6 +1,7 @@
 from copy import deepcopy
 from random import randint
 from random import choice
+from typing import Optional
 
 from uo.target_problem.target_problem import TargetProblem
 from uo.target_solution.quality_of_solution import QualityOfSolution
@@ -19,6 +20,8 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vn
 class OnesCountProblem2(TargetProblem):
 
     def __init__(self, dim:int)->None:
+        if not isinstance(dim, int):
+            raise TypeError('Parameter \'dim\' have not valid type.')
         if dim <= 0:
             raise ValueError("Problem dimension should be positive!")
         if dim > 31:
@@ -51,7 +54,9 @@ class OnesCountProblem2(TargetProblem):
 
 class OnesCountProblemBinaryIntSolution(TargetSolution[int,str]):
     
-    def __init__(self, random_seed:int=None)->None:
+    def __init__(self, random_seed:Optional[int]=None)->None:
+        if not isinstance(random_seed, Optional[int]):
+            raise TypeError('Parameter \'random_seed\' must be \'int\' or \'None\'.')
         super().__init__("OnesCountProblemBinaryIntSolution", random_seed, 
                 fitness_value=None, fitness_values=None, objective_value=None, objective_values=None, is_feasible=False, 
                 evaluation_cache_is_used=False, evaluation_cache_max_size=0, 

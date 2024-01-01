@@ -71,12 +71,12 @@ class TestFunctionOneVariableProblem(unittest.TestCase):
 
     # Creating a new instance of FunctionOneVariableProblem with invalid domain_low parameter should raise a ValueError.
     def test_invalid_domain_low_parameter(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaises(TypeError):
             FunctionOneVariableProblem("x^2", "a", 10)
 
     # Creating a new instance of FunctionOneVariableProblem with invalid domain_high parameter should raise a ValueError.
     def test_invalid_domain_high_parameter(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaises(TypeError):
             FunctionOneVariableProblem("x^2", 0, "b")
 
 
@@ -360,5 +360,5 @@ class TestExpression(unittest.TestCase):
 
     # Raises a ValueError when domain_low is not a number.
     def test_raises_value_error_when_domain_low_is_not_a_number(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaises(TypeError):
             problem = FunctionOneVariableProblem("x^2", "a", 10)

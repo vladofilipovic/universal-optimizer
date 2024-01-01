@@ -165,10 +165,8 @@ class Test__Init__(unittest.TestCase):
         domain_from = 0.0
         domain_to = 1.0
         number_of_intervals = 10
-
         # Act
         obj = FunctionOneVariableProblemBinaryIntSolution(domain_from, domain_to, number_of_intervals)
-
         # Assert
         self.assertEqual(obj.domain_from, domain_from)
         self.assertEqual(obj.domain_to, domain_to)
@@ -180,7 +178,6 @@ class Test__Init__(unittest.TestCase):
         domain_from = sys.float_info.min
         domain_to = sys.float_info.min
         number_of_intervals = 1
-
         # Act & Assert
         with self.assertRaises(ValueError):
             FunctionOneVariableProblemBinaryIntSolution(domain_from, domain_to, number_of_intervals)
@@ -191,7 +188,6 @@ class Test__Init__(unittest.TestCase):
         domain_from = sys.float_info.max
         domain_to = sys.float_info.max
         number_of_intervals = sys.maxsize
-
         # Act & Assert
         with self.assertRaises(ValueError):
             FunctionOneVariableProblemBinaryIntSolution(domain_from, domain_to, number_of_intervals)
@@ -202,9 +198,8 @@ class Test__Init__(unittest.TestCase):
         domain_from = 0
         domain_to = 10
         number_of_intervals = 5.6
-
         # Act & Assert
-        with self.assertRaises(ValueError):
+        with self.assertRaises(TypeError):
             FunctionOneVariableProblemBinaryIntSolution(domain_from, domain_to, number_of_intervals)
 
 
