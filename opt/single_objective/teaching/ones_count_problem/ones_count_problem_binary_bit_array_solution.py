@@ -97,6 +97,8 @@ class OnesCountProblemBinaryBitArraySolution(TargetSolution[BitArray,str]):
         :param BitArray representation: representation that will be ste to solution
         :param `TargetProblem` problem: problem which is solved by solution
         """
+        if not isinstance(representation, BitArray):
+            raise TypeError('Representation have to be BitArray.')
         self.representation = BitArray(bin=representation.bin)
 
     def calculate_quality_directly(self, representation:BitArray, 

@@ -136,15 +136,15 @@ class TestOnesCountProblemBinaryBitArraySolution(unittest.TestCase):
         self.assertIsNone(solution.objective_value)
         self.assertIsNone(solution.objective_values)
         self.assertFalse(solution.is_feasible)
-        self.assertFalse(solution.evaluation_cache_is_used)
-        self.assertEqual(solution.evaluation_cache_max_size, 0)
-        self.assertFalse(solution.distance_calculation_cache_is_used)
-        self.assertEqual(solution.distance_calculation_cache_max_size, 0)
+        self.assertFalse(TargetSolution.evaluation_cache_cs.is_caching)
+        self.assertEqual(TargetSolution.evaluation_cache_cs.max_cache_size, 0)
+        self.assertFalse(TargetSolution.representation_distance_cache_cs.is_caching)
+        self.assertEqual(TargetSolution.representation_distance_cache_cs.max_cache_size, 0)
 
     # Call the init_random() method with a TargetProblem instance as an argument and verify that the representation property is set to a BitArray with the correct length.
     def test_init_random_method_with_target_problem(self):
         # Arrange
-        problem = TargetProblem()
+        problem = TargetProblemVoid('problem name', is_minimization=True)
         problem.dimension = 10
         solution = OnesCountProblemBinaryBitArraySolution()
 
@@ -158,7 +158,7 @@ class TestOnesCountProblemBinaryBitArraySolution(unittest.TestCase):
     # Call the init_from() method with a BitArray instance and a TargetProblem instance as arguments and verify that the representation property is set to the correct BitArray.
     def test_init_from_method_with_bitarray_and_target_problem(self):
         # Arrange
-        problem = TargetProblem()
+        problem = TargetProblemVoid('problem name', is_minimization=True)
         problem.dimension = 10
         representation = BitArray(bin="1010101010")
         solution = OnesCountProblemBinaryBitArraySolution()
@@ -172,7 +172,7 @@ class TestOnesCountProblemBinaryBitArraySolution(unittest.TestCase):
     # Call the calculate_quality_directly() method with a BitArray instance and a TargetProblem instance as arguments and verify that the returned QualityOfSolution instance has the correct values.
     def test_calculate_quality_directly_method_with_bitarray_and_target_problem(self):
         # Arrange
-        problem = TargetProblem()
+        problem = TargetProblemVoid('problem name', is_minimization=True)
         representation = BitArray(bin="1010101010")
         solution = OnesCountProblemBinaryBitArraySolution()
 
@@ -181,8 +181,8 @@ class TestOnesCountProblemBinaryBitArraySolution(unittest.TestCase):
 
         # Assert
         self.assertEqual(quality.objective_value, representation.count(True))
-        self.assertIsNone(quality.fitness_value)
-        self.assertEqual(quality.fitness_values, representation.count(True))
+        self.assertIsNone(quality.fitness_values)
+        self.assertEqual(quality.fitness_value, representation.count(True))
         self.assertIsNone(quality.objective_values)
         self.assertTrue(quality.is_feasible)
 
@@ -209,13 +209,13 @@ class TestOnesCountProblemBinaryBitArraySolution(unittest.TestCase):
         distance = solution.representation_distance_directly(solution_code_1, solution_code_2)
 
         # Assert
-        self.assertEqual(distance, 6)
+        self.assertEqual(distance, 5)
 
 
     # Call the calculate_quality_directly() method with a BitArray instance that has all bits set to False and verify that the returned QualityOfSolution instance has the correct values.
     def test_calculate_quality_directly_method_with_all_bits_false(self):
         # Arrange
-        problem = TargetProblem()
+        problem = TargetProblemVoid('problem name', is_minimization=True)
         representation = BitArray(bin="0000000000")
         solution = OnesCountProblemBinaryBitArraySolution()
 
@@ -224,8 +224,8 @@ class TestOnesCountProblemBinaryBitArraySolution(unittest.TestCase):
 
         # Assert
         self.assertEqual(quality.objective_value, 0)
-        self.assertIsNone(quality.fitness_value)
-        self.assertEqual(quality.fitness_values, 0)
+        self.assertIsNone(quality.fitness_values)
+        self.assertEqual(quality.fitness_value, 0)
         self.assertIsNone(quality.objective_values)
         self.assertTrue(quality.is_feasible)
 
@@ -393,3 +393,28 @@ class TestInitRandom(unittest.TestCase):
         with self.assertRaises(ValueError):
             solution.init_random(problem)
     
+class TestInitFrom(unittest.TestCase):
+
+    # Sets the internal representation of the solution to the given BitArray representation
+    def test_sets_internal_representation(self):
+        # Arrange
+        representation = BitArray(bin='101010')
+        problem = TargetProblemVoid('problem name', is_minimization=True)
+        solution = OnesCountProblemBinaryBitArraySolution()
+
+        # Act
+        solution.init_from(representation, problem)
+
+        # Assert
+        self.assertEqual(solution.representation, representation)
+
+    # Raises a TypeError if the given representation is not a BitArray
+    def test_raises_type_error_for_invalid_representation(self):
+        # Arrange
+        representation = '101010'
+        problem = TargetProblemVoid('problem name', is_minimization=True)
+        solution = OnesCountProblemBinaryBitArraySolution()
+
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            solution.init_from(representation, problem)
