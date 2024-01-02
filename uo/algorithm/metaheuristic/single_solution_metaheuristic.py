@@ -80,10 +80,7 @@ class SingleSolutionMetaheuristic(Metaheuristic, metaclass=ABCMeta):
                 output_control=output_control, 
                 target_problem=target_problem)
         if initial_solution is not None: 
-            if isinstance(initial_solution, TargetSolution):
-                self.__current_solution:Optional[TargetSolution] = initial_solution.copy()
-            else:
-                self.__current_solution:Optional[TargetSolution] = initial_solution
+            self.__current_solution:Optional[TargetSolution] = initial_solution.copy()
         else:
             self.__current_solution:Optional[TargetSolution] =  None
 
