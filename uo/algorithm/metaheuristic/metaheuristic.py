@@ -72,7 +72,7 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         super().__init__(name=name, 
                 output_control=output_control, 
                 target_problem=target_problem)
-        self.__finish_control = finish_control
+        self.__finish_control = finish_control.copy()
         if random_seed is not None and isinstance(random_seed, int) and random_seed != 0:
             self.__random_seed:int = random_seed
         else:

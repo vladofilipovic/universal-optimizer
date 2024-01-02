@@ -81,7 +81,6 @@ class OutputControl:
         """
         return self.__copy__()
 
-
     def __determine_fields_helper__(self, fields:str):
         """
         Helper function that determines fields header list anf field definition lists of the control instance

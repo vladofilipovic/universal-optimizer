@@ -38,6 +38,7 @@ class TestMetaheuristicProperties(unittest.TestCase):
         type(self.finish_control_mock).evaluations_max = self.evaluations_max
         type(self.finish_control_mock).iterations_max = self.iterations_max
         type(self.finish_control_mock).seconds_max = self.seconds_max
+        self.finish_control_mock.copy = mocker.Mock(return_value=self.finish_control_mock)
 
         self.random_seed = 42
 
