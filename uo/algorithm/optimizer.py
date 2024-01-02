@@ -39,8 +39,8 @@ class Optimizer(metaclass=ABCMeta):
         if not isinstance(target_problem, TargetProblem):
                 raise TypeError('Parameter \'target_problem\' must be \'TargetProblem\'.')
         self.__name:str = name
-        self.__output_control:OutputControl = output_control
-        self.__target_problem:TargetProblem = target_problem
+        self.__output_control:OutputControl = output_control.copy()
+        self.__target_problem:TargetProblem = target_problem.copy()
         self.__execution_started:Optional[datetime] = None
         self.__execution_ended:Optional[datetime] = None
         self.__best_solution:Optional[TargetSolution] = None

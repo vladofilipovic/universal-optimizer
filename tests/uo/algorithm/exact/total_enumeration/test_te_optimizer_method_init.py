@@ -34,6 +34,7 @@ class TestTeOptimizerMethodInit(unittest.TestCase):
         type(self.problem_mock).is_minimization = mocker.PropertyMock(return_value=self.pr_is_minimization)
         type(self.problem_mock).file_path = mocker.PropertyMock(return_value=self.pr_file_path)
         type(self.problem_mock).dimension = mocker.PropertyMock(return_value=self.pr_dimension)
+        self.problem_mock.copy = mocker.Mock(return_value=self.problem_mock)
 
         self.solution_name = "void solution"
         self.random_seed = 42

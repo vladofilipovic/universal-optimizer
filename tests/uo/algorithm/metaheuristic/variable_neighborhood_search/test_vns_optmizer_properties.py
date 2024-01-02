@@ -23,9 +23,11 @@ class TestVnsOptimizerProperties(unittest.TestCase):
         type(self.problem_mock).is_minimization = mocker.PropertyMock(return_value=True)
         type(self.problem_mock).file_path = mocker.PropertyMock(return_value='some file path')
         type(self.problem_mock).dimension = mocker.PropertyMock(return_value=42)
+        self.problem_mock.copy = mocker.Mock(return_value=self.problem_mock)
 
         self.problem_solution_vns_support_stub = mocker.MagicMock(spec=ProblemSolutionVnsSupport)
         self.problem_solution_vns_support_stub.local_search_first_improvement = mocker.Mock(return_value="mocked stuff")
+        type(self.problem_solution_vns_support_stub).copy = mocker.CallableMixin(spec="return self")        
         
         self.evaluations_max = 42
         self.iterations_max = 42

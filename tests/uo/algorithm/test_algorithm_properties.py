@@ -46,6 +46,7 @@ class TestAlgorithmProperties(unittest.TestCase):
         type(self.problem_stub).is_minimization = mocker.PropertyMock(return_value=self.pr_is_minimization)
         type(self.problem_stub).file_path = mocker.PropertyMock(return_value=self.pr_file_path)
         type(self.problem_stub).dimension = mocker.PropertyMock(return_value=self.pr_dimension)
+        self.problem_stub.copy = mocker.Mock(return_value=self.problem_stub)
 
         self.algorithm = AlgorithmVoid(output_control=self.output_control_stub,
                 name=self.name,

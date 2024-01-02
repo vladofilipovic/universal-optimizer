@@ -49,6 +49,7 @@ class TestMetaheuristicProperties(unittest.TestCase):
         self.problem_mock = mocker.MagicMock(spec=TargetProblemVoid)
         type(self.problem_mock).name = 'some_problem'
         type(self.problem_mock).is_minimization = True
+        self.problem_mock.copy = mocker.Mock(return_value=self.problem_mock)
 
         self.optimizer = MetaheuristicVoid(
                 name=self.metaheuristicName,

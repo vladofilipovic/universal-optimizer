@@ -2,6 +2,7 @@
 The :mod:`~uo.algorithm.output_control` module describes the class :class:`~uo.algorithm.OutputControl`.
 """
 
+from copy import deepcopy
 from pathlib import Path
 from typing import Optional
 directory = Path(__file__).resolve()
@@ -60,6 +61,26 @@ class OutputControl:
                 'self.best_solution.is_feasible']
         self.__determine_fields_helper__(fields)
         self.__determine_moments_helper__(moments)
+
+    def __copy__(self):
+        """
+        Internal copy of the current output control
+
+        :return:  new `OutputControl` instance with the same properties
+        :rtype: OutputControl
+        """
+        oc = deepcopy(self)
+        return oc
+
+    def copy(self):
+        """
+        Copy the current output control
+
+        :return: new `OutputControl` instance with the same properties
+        :rtype: OutputControl
+        """
+        return self.__copy__()
+
 
     def __determine_fields_helper__(self, fields:str):
         """
