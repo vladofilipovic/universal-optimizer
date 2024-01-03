@@ -45,10 +45,8 @@ class TestOnesCountProblemIlpLinopy(unittest.TestCase):
         # Arrange
         output_control = OutputControl()
         target_problem = TargetProblemVoid('problem_name', False)
-
         # Act
         construction_params = OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters(output_control, target_problem)
-
         # Assert
         self.assertIsInstance(construction_params, OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters)
         self.assertEqual(construction_params.output_control, output_control)
@@ -57,7 +55,6 @@ class TestOnesCountProblemIlpLinopy(unittest.TestCase):
     # creating an instance of OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters with default parameters should return an instance of the class with None parameters
     def test_default_parameters(self):
         # Arrange
-
         # Act & Assert
         with self.assertRaises(TypeError):
             construction_params = OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters()
@@ -67,7 +64,6 @@ class TestOnesCountProblemIlpLinopy(unittest.TestCase):
         # Arrange
         output_control = "invalid_output_control"
         target_problem = TargetProblemVoid('problem_name', False)
-
         # Act & Assert
         with self.assertRaises(TypeError):
             OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters(output_control, target_problem)
@@ -77,7 +73,6 @@ class TestOnesCountProblemIlpLinopy(unittest.TestCase):
         # Arrange
         output_control = OutputControl()
         target_problem = "invalid_target_problem"
-
         # Act & Assert
         with self.assertRaises(TypeError):
             OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters(output_control, target_problem)
@@ -87,7 +82,6 @@ class TestOnesCountProblemIlpLinopy(unittest.TestCase):
         # Arrange
         output_control = OutputControl()
         target_problem = TargetSolutionVoid('a', 42, None, None, False)
-
         # Act & Assert
         with self.assertRaises(TypeError):
             OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters(output_control, target_problem)
@@ -97,7 +91,6 @@ class TestOnesCountProblemIlpLinopy(unittest.TestCase):
         # Arrange
         output_control = OutputControl()
         target_problem = TargetSolutionVoidObjectStr("miki")
-
         # Act & Assert
         with self.assertRaises(TypeError):
             OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters(output_control, target_problem)
@@ -180,3 +173,53 @@ class TestOptimize(unittest.TestCase):
         solver.optimize()
         # Assert
         self.assertIsNotNone(solver.best_solution)
+        
+
+class TestStringRep(unittest.TestCase):
+
+    # Returns a string representation of the 'OnesCountProblemIntegerLinearProgrammingSolver' instance
+    def test_returns_string_representation(self):
+        # Arrange
+        output_control = OutputControl()
+        problem = OnesCountProblem(dim=5)
+        best_solution_mock = mocker.MagicMock(spec=TargetSolution)
+        best_solution_mock.string_rep = mocker.Mock(return_value="something")
+        solver = OnesCountProblemIntegerLinearProgrammingSolver(output_control, problem)
+        solver.best_solution = best_solution_mock
+        # Act
+        result = solver.string_rep("|")
+        # Assert
+        self.assertIsInstance(result, str)
+
+    # The string representation contains the name of the class and its properties
+    def test_contains_class_name_and_properties(self):
+        # Arrange
+        output_control = OutputControl()
+        problem = OnesCountProblem(dim=5)
+        best_solution_mock = mocker.MagicMock(spec=TargetSolution)
+        best_solution_mock.string_rep = mocker.Mock(return_value="something")
+        solver = OnesCountProblemIntegerLinearProgrammingSolver(output_control, problem)
+        solver.best_solution = best_solution_mock    
+        # Act
+        result = solver.string_rep("|")
+        # Assert
+        self.assertIn("OnesCountProblemIntegerLinearProgrammingSolver", result)
+        self.assertIn("output_control", result)
+        self.assertIn("target_problem", result)
+
+    # The string representation is properly formatted with indentation and grouping symbols
+    def test_properly_formatted_with_indentation_and_grouping_symbols(self):
+        # Arrange
+        output_control = OutputControl()
+        problem = OnesCountProblem(dim=5)
+        best_solution_mock = mocker.MagicMock(spec=TargetSolution)
+        best_solution_mock.string_rep = mocker.Mock(return_value="something")
+        solver = OnesCountProblemIntegerLinearProgrammingSolver(output_control, problem)
+        solver.best_solution = best_solution_mock    
+        # Act
+        result = solver.string_rep("|", indentation=2, indentation_symbol="-", group_start="[", group_end="]")    
+        # Assert
+        self.assertIn( "output_control", result)
+        self.assertIn( "target_problem", result)
+
+ 
