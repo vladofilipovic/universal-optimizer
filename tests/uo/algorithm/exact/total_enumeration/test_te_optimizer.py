@@ -3,6 +3,8 @@ import unittest.mock as mocker
 
 from copy import deepcopy
 from datetime import datetime
+from uo.target_problem.target_problem_void import TargetProblemVoid
+from uo.target_solution.target_solution_void import TargetSolutionVoid
 
 from uo.utils.logger import logger
 
@@ -11,7 +13,7 @@ from uo.target_solution.quality_of_solution import QualityOfSolution
 from uo.target_solution.target_solution import TargetSolution
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.exact.total_enumeration.problem_solution_te_support import ProblemSolutionTeSupport 
-from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizer
+from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizer, TeOptimizerConstructionParameters
 
 class TestTeOptimizerProperties(unittest.TestCase):
     
@@ -378,7 +380,131 @@ class TestOptimize(unittest.TestCase):
         # Act & Assert
         with self.assertRaises(TypeError):
             TeOptimizer(output_control, problem_mock, solution_mock, problem_solution_te_support)
-    
+
+
+class TestStringRep(unittest.TestCase):
+
+    # Returns a string representation of the 'TeOptimizer' instance with the current solution included
+    def test_returns_string_representation_with_current_solution(self):
+        # Arrange
+        output_control = OutputControl()
+        target_problem = TargetProblemVoid("problem name", True)
+        initial_solution = TargetSolutionVoid("", 42, 42.0, 42.0, True)
+        te_support_mock = mocker.MagicMock(spec=ProblemSolutionTeSupport)
+        te_optimizer = TeOptimizer(output_control, target_problem, initial_solution, te_support_mock)
+        # Act
+        result = te_optimizer.string_rep('|')
+        # Assert
+        self.assertIsInstance(result, str)
+        self.assertIn('current_solution=', result)
+
+    # Uses the specified delimiter, indentation, indentation symbol, group start and group end
+    def test_uses_specified_parameters(self):
+        # Arrange
+        output_control = OutputControl()
+        target_problem = TargetProblemVoid("problem name", True)
+        initial_solution = TargetSolutionVoid("", 42, 42.0, 42.0, True)
+        te_support_mock = mocker.MagicMock(spec=ProblemSolutionTeSupport)
+        te_optimizer = TeOptimizer(output_control, target_problem, initial_solution, te_support_mock)
+        delimiter = ','
+        indentation = 2
+        indentation_symbol = '-'
+        group_start = '['
+        group_end = ']'
+        # Act
+        result = te_optimizer.string_rep(delimiter, indentation, indentation_symbol, group_start, group_end)
+        # Assert
+        self.assertIsInstance(result, str)
+        self.assertEqual(result[0], indentation_symbol)
+
+    # Returns a string representation of the 'TeOptimizer' instance with default parameters when all parameters are not specified
+    def test_returns_string_representation_with_default_parameters(self):
+        # Arrange
+        output_control = OutputControl()
+        target_problem = TargetProblemVoid("problem name", True)
+        initial_solution = TargetSolutionVoid("", 42, 42.0, 42.0, True)
+        te_support_mock = mocker.MagicMock(spec=ProblemSolutionTeSupport)
+        te_optimizer = TeOptimizer(output_control, target_problem, initial_solution, te_support_mock)
+        expected_result = '|current_solution=|'
+        # Act
+        result = te_optimizer.string_rep('|')
+        # Assert
+        self.assertIn(expected_result, result)
+
+    # Returns a string representation of the 'TeOptimizer' instance with default parameters when only delimiter is specified
+    def test_returns_string_representation_with_default_parameters_when_only_delimiter_is_specified(self):
+        # Arrange
+        output_control = OutputControl()
+        target_problem = TargetProblemVoid("problem name", True)
+        initial_solution = TargetSolutionVoid("", 42, 42.0, 42.0, True)
+        te_support_mock = mocker.MagicMock(spec=ProblemSolutionTeSupport)
+        te_optimizer = TeOptimizer(output_control, target_problem, initial_solution, te_support_mock)
+        delimiter = ','
+        # Act
+        result = te_optimizer.string_rep(delimiter)
+        # Assert
+        self.assertIn(delimiter, result)
+
+
+class TestFromConstructionTuple(unittest.TestCase):
+
+    # should create a new instance of TeOptimizer with the given construction parameters
+    def test_create_new_instance_with_given_parameters(self):
+        # Arrange
+        construction_tuple = TeOptimizerConstructionParameters()
+        construction_tuple.output_control = OutputControl()
+        construction_tuple.target_problem = TargetProblemVoid("problem name", True)
+        construction_tuple.initial_solution = TargetSolutionVoid("", 42, 42.0, 42.0, True)
+        construction_tuple.problem_solution_te_support = mocker.MagicMock(spec=ProblemSolutionTeSupport)
+        # Act
+        te_optimizer = TeOptimizer.from_construction_tuple(construction_tuple)
+        # Assert
+        self.assertIsInstance(te_optimizer, TeOptimizer)
+        self.assertEqual(te_optimizer.target_problem.name, construction_tuple.target_problem.name)
+        self.assertEqual(te_optimizer.target_problem.is_minimization, construction_tuple.target_problem.is_minimization)
+        self.assertEqual(te_optimizer.current_solution.name, construction_tuple.initial_solution.name)
+        self.assertEqual(te_optimizer.current_solution.random_seed, construction_tuple.initial_solution.random_seed)
+        self.assertEqual(te_optimizer.current_solution.fitness_value, construction_tuple.initial_solution.fitness_value)
+        self.assertEqual(te_optimizer.current_solution.objective_value, construction_tuple.initial_solution.objective_value)
+        self.assertEqual(te_optimizer.current_solution.is_feasible, construction_tuple.initial_solution.is_feasible)
+
+    # should return the created instance
+    def test_return_created_instance(self):
+        # Arrange
+        construction_tuple = TeOptimizerConstructionParameters()
+        construction_tuple.output_control = OutputControl()
+        construction_tuple.target_problem = TargetProblemVoid("problem name", True)
+        construction_tuple.initial_solution = TargetSolutionVoid("", 42, 42.0, 42.0, True)
+        construction_tuple.problem_solution_te_support = mocker.MagicMock(spec=ProblemSolutionTeSupport)
+        # Act
+        te_optimizer = TeOptimizer.from_construction_tuple(construction_tuple)
+        # Assert
+        self.assertIsInstance(te_optimizer, TeOptimizer)
+
+    # should raise a TypeError if output_control parameter is not an instance of OutputControl
+    def test_raise_TypeError_if_output_control_not_instance_of_OutputControl(self):
+        # Arrange
+        construction_tuple = TeOptimizerConstructionParameters()
+        construction_tuple.output_control = "not an instance of OutputControl"
+        construction_tuple.target_problem = TargetProblemVoid("problem name", True)
+        construction_tuple.initial_solution = TargetSolutionVoid("", 42, 42.0, 42.0, True)
+        construction_tuple.problem_solution_te_support = mocker.MagicMock(spec=ProblemSolutionTeSupport)
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            TeOptimizer.from_construction_tuple(construction_tuple)
+
+    # should raise a TypeError if target_problem parameter is not an instance of TargetProblem
+    def test_raise_TypeError_if_target_problem_not_instance_of_TargetProblem(self):
+        # Arrange
+        construction_tuple = TeOptimizerConstructionParameters()
+        construction_tuple.output_control = OutputControl()
+        construction_tuple.target_problem = "not an instance of TargetProblem"
+        construction_tuple.initial_solution = TargetSolutionVoid("", 42, 42.0, 42.0, True)
+        construction_tuple.problem_solution_te_support = mocker.MagicMock(spec=ProblemSolutionTeSupport)
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            TeOptimizer.from_construction_tuple(construction_tuple)
+
 if __name__ == '__main__':
     unittest.main()
     
