@@ -196,18 +196,10 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
                 indentation_symbol, '{', '}')  + delimiter 
         for _ in range(0, indentation):
             s += indentation_symbol  
-        s += '__output_control=' + self.__output_control.string_rep(
-                delimiter, indentation + 1, indentation_symbol, '{', '}') + delimiter
         s += '__evaluation=' + str(self.__evaluation) + delimiter
         for _ in range(0, indentation):
             s += indentation_symbol  
         s += '__iteration=' + str(self.__iteration) + delimiter
-        for _ in range(0, indentation):
-            s += indentation_symbol  
-        s += 'execution_started=' + str(self.execution_started) + delimiter
-        for _ in range(0, indentation):
-            s += indentation_symbol  
-        s += 'execution_ended=' + str(self.execution_ended) + delimiter
         for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_end 
