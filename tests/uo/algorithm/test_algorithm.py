@@ -147,6 +147,51 @@ class TestAlgorithm(unittest.TestCase):
         self.assertFalse(result4)
         self.assertIsNone(result5)
 
+
+    # Returns True if the first solution has a better fitness value than the second one.
+    def test_first_solution_better(self):
+        # Arrange
+        algorithm = AlgorithmVoid(name="MyAlgorithm", output_control=OutputControl(), 
+                                target_problem=TargetProblemVoid("problem", False))
+        solution1 = TargetSolutionVoid("", 42, 0, 0, True)
+        solution2 = TargetSolutionVoid("", 42, 0, 0, True)
+        solution1.calculate_quality = mocker.Mock(return_value=QualityOfSolution(10, None, 10, None, True))
+        solution2.calculate_quality = mocker.Mock(return_value=QualityOfSolution(5, None, 5, None, True))
+        # Act
+        result = algorithm.is_first_solution_better(solution1, solution2)
+        # Assert
+        self.assertTrue(result)
+
+    # Returns False if the first solution has a worse fitness value than the second one.
+    def test_first_solution_worse(self):
+        # Arrange
+        algorithm = AlgorithmVoid(name="MyAlgorithm", output_control=OutputControl(), 
+                                target_problem=TargetProblemVoid("problem", False))
+        solution1 = TargetSolutionVoid("", 42, 0, 0, True)
+        solution2 = TargetSolutionVoid("", 42, 0, 0, True)
+        solution1.calculate_quality = mocker.Mock(return_value=QualityOfSolution(5, None, 5, None, True))
+        solution2.calculate_quality = mocker.Mock(return_value=QualityOfSolution(10, None, 10, None, True))
+        # Act
+        result = algorithm.is_first_solution_better(solution1, solution2)
+
+        # Assert
+        self.assertFalse(result)
+
+    # Raises a ValueError if the target problem is not defined within the metaheuristic.
+    def test_target_problem_not_defined(self):
+        # Arrange
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            algorithm = AlgorithmVoid(name="MyAlgorithm", output_control=OutputControl(), target_problem=None)
+
+    # Raises a ValueError if the information about minimization or maximization is not set within the metaheuristic target problem.
+    def test_minimization_not_set(self):
+        # Arrange
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            algorithm = AlgorithmVoid(name="MyAlgorithm", output_control=OutputControl(), 
+                                    target_problem=TargetProblemVoid("aaa", is_minimization=None))
+
     # Algorithm can generate a string representation of itself.
     def test_algorithm_string_representation(self):
         # Arrange
@@ -161,3 +206,46 @@ class TestAlgorithm(unittest.TestCase):
         self.assertIn('target_problem=', string_rep)
         self.assertIn('__evaluation=0', string_rep)
         self.assertIn('__iteration=0', string_rep)
+    
+
+class TestEvaluation(unittest.TestCase):
+
+    # Set evaluation to a positive integer value
+    def test_set_evaluation_positive_integer(self):
+        # Arrange
+        algorithm = AlgorithmVoid("MyAlgorithm", OutputControl(), TargetProblemVoid("problem", False))
+        value = 10
+        # Act
+        algorithm.evaluation = value
+        # Assert
+        self.assertEqual(algorithm.evaluation, value)
+
+    # Set evaluation to zero
+    def test_set_evaluation_zero(self):
+        # Arrange
+        algorithm = AlgorithmVoid("MyAlgorithm", OutputControl(), TargetProblemVoid("problem", False))
+        value = 0
+        # Act
+        algorithm.evaluation = value
+        # Assert
+        self.assertEqual(algorithm.evaluation, value)
+
+    # Set evaluation to None
+    def test_set_evaluation_none(self):
+        # Arrange
+        algorithm = AlgorithmVoid("MyAlgorithm", OutputControl(), TargetProblemVoid("problem", False))
+        value = None
+        # Act
+        algorithm.evaluation = value
+        # Assert
+        self.assertIsNone(algorithm.evaluation)
+
+    # Set evaluation to a float value
+    def test_set_evaluation_float_value(self):
+        # Arrange
+        algorithm = AlgorithmVoid("MyAlgorithm", OutputControl(), TargetProblemVoid("problem", False))
+        value = 3.14
+        # Act
+        algorithm.evaluation = value
+        # Assert
+        self.assertEqual(algorithm.evaluation, value)

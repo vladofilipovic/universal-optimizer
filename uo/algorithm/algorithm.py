@@ -235,3 +235,5 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
         :rtype: str
         """
         return self.string_rep('|')
+
+
