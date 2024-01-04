@@ -73,6 +73,8 @@ class FinishControl:
         :param str criteria: list of finish criteria, separated with sign `&` 
         (currently finish criteria contains strings `evaluations`, `iterations`, `seconds`) 
         """
+        if not isinstance( criteria, str):
+            raise TypeError('Parameter \'criteria\' must be string.')
         self.__check_evaluations = False
         self.__check_iterations = False
         self.__check_seconds = False
@@ -140,7 +142,7 @@ class FinishControl:
         if self.__check_seconds:
             ret += 'seconds & '
         ret = ret[0:-2]
-        return ret
+        return ret.strip()
 
     @criteria.setter
     def criteria(self, value:str)->None:
