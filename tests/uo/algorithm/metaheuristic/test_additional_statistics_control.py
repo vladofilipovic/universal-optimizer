@@ -49,18 +49,16 @@ class TestAdditionalStatisticsControl(unittest.TestCase):
     def test_add_to_all_solution_codes_if_required(self):
         # Arrange
         control = AdditionalStatisticsControl(keep='all_solution_code')
-        AdditionalStatisticsControl.all_solution_codes = set() 
         representation = 'solution_representation'
         # Act
         control.add_to_all_solution_codes_if_required(representation)
         # Assert
-        self.assertIn(representation, AdditionalStatisticsControl.all_solution_codes)
+        self.assertIn(representation, control.all_solution_codes)
 
     # Calling 'add_to_more_local_optima_if_required' with 'keep_more_local_optima' set to True and a new solution representation should add the solution to the 'more_local_optima' dictionary.
     def test_add_to_more_local_optima_if_required_new_solution(self):
         # Arrange
         control = AdditionalStatisticsControl(keep='more_local_optima')
-        AdditionalStatisticsControl.more_local_optima = {}
         solution_to_add_rep = 'solution_representation'
         solution_to_add_fitness = 0.5
         best_solution_rep = 'best_solution_representation'
@@ -68,24 +66,23 @@ class TestAdditionalStatisticsControl(unittest.TestCase):
         result = control.add_to_more_local_optima_if_required(solution_to_add_rep, solution_to_add_fitness, best_solution_rep)
         # Assert
         self.assertTrue(result)
-        self.assertIn(solution_to_add_rep, AdditionalStatisticsControl.more_local_optima)
-        self.assertEqual(AdditionalStatisticsControl.more_local_optima[solution_to_add_rep], solution_to_add_fitness)
+        self.assertIn(solution_to_add_rep, control.more_local_optima)
+        self.assertEqual(control.more_local_optima[solution_to_add_rep], solution_to_add_fitness)
 
     # Calling 'add_to_more_local_optima_if_required' with 'keep_more_local_optima' set to True and an existing solution representation should not add the solution to the 'more_local_optima' dictionary.
     def test_add_to_more_local_optima_if_required_existing_solution(self):
         # Arrange
         control = AdditionalStatisticsControl(keep='more_local_optima')
-        AdditionalStatisticsControl.more_local_optima ={}
         solution_to_add_rep = 'solution_representation'
         solution_to_add_fitness = 0.5
         best_solution_rep = 'best_solution_representation'
-        AdditionalStatisticsControl.more_local_optima[solution_to_add_rep] = solution_to_add_fitness
+        control.more_local_optima[solution_to_add_rep] = solution_to_add_fitness
         # Act
         result = control.add_to_more_local_optima_if_required(solution_to_add_rep, solution_to_add_fitness, best_solution_rep)
         # Assert
         self.assertFalse(result)
-        self.assertIn(solution_to_add_rep, AdditionalStatisticsControl.more_local_optima)
-        self.assertEqual(AdditionalStatisticsControl.more_local_optima[solution_to_add_rep], solution_to_add_fitness)
+        self.assertIn(solution_to_add_rep, control.more_local_optima)
+        self.assertEqual(control.more_local_optima[solution_to_add_rep], solution_to_add_fitness)
 
     # Creating an instance of AdditionalStatisticsControl with invalid 'keep' parameter should raise a TypeError.
     def test_invalid_keep_parameter_type(self):
@@ -137,7 +134,7 @@ class Test__DetermineKeepHelper__(unittest.TestCase):
         self.assertFalse(obj.keep_more_local_optima)
 
     # Parses the 'keep' parameter and sets the corresponding flags to True
-    def test_determine_keep_helper_parse_keep_parameter(self):
+    def test_determine_keep_helper_parse_keep_parameter3(self):
         # Arrange
         keep = 'all_solution_code, more_local_optima'
         obj = AdditionalStatisticsControl()
@@ -183,35 +180,31 @@ class TestAddToAllSolutionCodesIfRequired(unittest.TestCase):
     def test_keep_all_solution_codes_false(self):
         # Arrange
         control = AdditionalStatisticsControl(keep='more_local_optima')
-        AdditionalStatisticsControl.all_solution_codes = set()
         representation = "solution1"
         # Act
         control.add_to_all_solution_codes_if_required(representation)
         # Assert
-        self.assertNotIn(representation, AdditionalStatisticsControl.all_solution_codes)
+        self.assertNotIn(representation, control.all_solution_codes)
 
     # If keep_all_solution_codes is True, add the representation to all_solution_codes.
     def test_keep_all_solution_codes_true(self):
         # Arrange
         control = AdditionalStatisticsControl(keep='all_solution_code')
-        AdditionalStatisticsControl.all_solution_codes = set()
         representation = "solution1"
         # Act
         control.add_to_all_solution_codes_if_required(representation)
         # Assert
-        self.assertIn(representation, AdditionalStatisticsControl.all_solution_codes)
+        self.assertIn(representation, control.all_solution_codes)
 
     # If all_solution_codes is empty, add the representation to all_solution_codes.
     def test_all_solution_codes_empty(self):
         # Arrange
         control = AdditionalStatisticsControl(keep='all_solution_code')
-        AdditionalStatisticsControl.all_solution_codes = set()
         representation = "solution1"
-        AdditionalStatisticsControl.all_solution_codes = set()
         # Act
         control.add_to_all_solution_codes_if_required(representation)
         # Assert
-        self.assertIn(representation, AdditionalStatisticsControl.all_solution_codes)
+        self.assertIn(representation, control.all_solution_codes)
 
     # If representation is not a string, raise a TypeError.
     def test_representation_not_string(self):
@@ -225,24 +218,24 @@ class TestAddToAllSolutionCodesIfRequired(unittest.TestCase):
     # If all_solution_codes is not a set, raise an AttributeError.
     def test_all_solution_codes_not_set(self):
         # Arrange
-        control = AdditionalStatisticsControl(keep='all_solution_code')
+        control = AdditionalStatisticsControl(keep='more_local_optima')
         representation = "solution1"
-        AdditionalStatisticsControl.all_solution_codes = []
-        # Act & Assert
-        with self.assertRaises(AttributeError):
-            control.add_to_all_solution_codes_if_required(representation)
+        # Act
+        control.add_to_all_solution_codes_if_required(representation)
+        # Assert
+        self.assertEqual(len(control.all_solution_codes), 0)
+        
 
     # If all_solution_codes already contains the representation, do not add it again.
     def test_representation_already_in_all_solution_codes(self):
         # Arrange
         control = AdditionalStatisticsControl(keep='all_solution_code')
-        AdditionalStatisticsControl.all_solution_codes = set()
         representation = "solution1"
-        AdditionalStatisticsControl.all_solution_codes = {representation}
+        control.all_solution_codes = {representation}
         # Act
         control.add_to_all_solution_codes_if_required(representation)
         # Assert
-        self.assertEqual(len(AdditionalStatisticsControl.all_solution_codes), 1)
+        self.assertEqual(len(control.all_solution_codes), 1)
         
 
 class TestAddToMoreLocalOptimaIfRequired(unittest.TestCase):
@@ -250,55 +243,51 @@ class TestAddToMoreLocalOptimaIfRequired(unittest.TestCase):
     # Add a new solution to the local optima structure when it is empty
     def test_add_to_more_local_optima_if_required_empty_structure(self):
         # Arrange
-        statistics_control = AdditionalStatisticsControl('more_local_optima')
-        AdditionalStatisticsControl.more_local_optima = {}
+        control = AdditionalStatisticsControl('more_local_optima')
         solution_to_add_rep = "solution1"
         solution_to_add_fitness = 0.8
         best_solution_rep = "best_solution"
         # Act
-        result = statistics_control.add_to_more_local_optima_if_required(solution_to_add_rep, solution_to_add_fitness, best_solution_rep)
+        result = control.add_to_more_local_optima_if_required(solution_to_add_rep, solution_to_add_fitness, best_solution_rep)
         # Assert
         self.assertTrue(result)
-        self.assertEqual(len(AdditionalStatisticsControl.more_local_optima), 1)
-        self.assertEqual(AdditionalStatisticsControl.more_local_optima[solution_to_add_rep], solution_to_add_fitness)
+        self.assertEqual(len(control.more_local_optima), 1)
+        self.assertEqual(control.more_local_optima[solution_to_add_rep], solution_to_add_fitness)
 
     # Add a new solution to the local optima structure when it is not full
     def test_add_to_more_local_optima_if_required_not_full_structure(self):
         # Arrange
         statistics_control = AdditionalStatisticsControl('more_local_optima')
-        AdditionalStatisticsControl.more_local_optima = {}
         solution_to_add_rep = "solution1"
         solution_to_add_fitness = 0.8
         best_solution_rep = "best_solution"
-        AdditionalStatisticsControl.more_local_optima = {"existing_solution": 0.5}
+        statistics_control.more_local_optima = {"existing_solution": 0.5}
         # Act
         result = statistics_control.add_to_more_local_optima_if_required(solution_to_add_rep, solution_to_add_fitness, best_solution_rep)
         # Assert
         self.assertTrue(result)
-        self.assertEqual(len(AdditionalStatisticsControl.more_local_optima), 2)
-        self.assertEqual(AdditionalStatisticsControl.more_local_optima[solution_to_add_rep], solution_to_add_fitness)
+        self.assertEqual(len(statistics_control.more_local_optima), 2)
+        self.assertEqual(statistics_control.more_local_optima[solution_to_add_rep], solution_to_add_fitness)
 
     # Add a new solution to the local optima structure when it is full but the new solution is better than at least one of the existing ones
     def test_add_to_more_local_optima_if_required_full_structure_new_solution_better(self):
         # Arrange
         statistics_control = AdditionalStatisticsControl('more_local_optima')
-        AdditionalStatisticsControl.more_local_optima = {}
         solution_to_add_rep = "solution1"
         solution_to_add_fitness = 0.8
         best_solution_rep = "best_solution"
-        AdditionalStatisticsControl.more_local_optima = {"existing_solution1": 0.5, "existing_solution2": 0.6}
+        statistics_control.more_local_optima = {"existing_solution1": 0.5, "existing_solution2": 0.6}
         # Act
         result = statistics_control.add_to_more_local_optima_if_required(solution_to_add_rep, solution_to_add_fitness, best_solution_rep)
         # Assert
         self.assertTrue(result)
-        self.assertEqual(len(AdditionalStatisticsControl.more_local_optima), 3)
-        self.assertEqual(AdditionalStatisticsControl.more_local_optima[solution_to_add_rep], solution_to_add_fitness)
+        self.assertEqual(len(statistics_control.more_local_optima), 3)
+        self.assertEqual(statistics_control.more_local_optima[solution_to_add_rep], solution_to_add_fitness)
 
     # Return False when the keep_more_local_optima property is False
     def test_add_to_more_local_optima_if_required_keep_more_local_optima_false(self):
         # Arrange
         statistics_control = AdditionalStatisticsControl()
-        AdditionalStatisticsControl.more_local_optima = {}
         solution_to_add_rep = "solution1"
         solution_to_add_fitness = 0.8
         best_solution_rep = "best_solution"
@@ -306,13 +295,12 @@ class TestAddToMoreLocalOptimaIfRequired(unittest.TestCase):
         result = statistics_control.add_to_more_local_optima_if_required(solution_to_add_rep, solution_to_add_fitness, best_solution_rep)
         # Assert
         self.assertFalse(result)
-        self.assertEqual(len(AdditionalStatisticsControl.more_local_optima), 0)
+        self.assertEqual(len(statistics_control.more_local_optima), 0)
 
     # Return False when the keep_more_local_optima property is False
     def test_add_to_more_local_optima_if_required_keep_more_local_optima_false2(self):
         # Arrange
         statistics_control = AdditionalStatisticsControl('all_solution_code')
-        AdditionalStatisticsControl.more_local_optima = {}
         solution_to_add_rep = "solution1"
         solution_to_add_fitness = 0.8
         best_solution_rep = "best_solution"
@@ -320,16 +308,66 @@ class TestAddToMoreLocalOptimaIfRequired(unittest.TestCase):
         result = statistics_control.add_to_more_local_optima_if_required(solution_to_add_rep, solution_to_add_fitness, best_solution_rep)
         # Assert
         self.assertFalse(result)
-        self.assertEqual(len(AdditionalStatisticsControl.more_local_optima), 0)
+        self.assertEqual(len(statistics_control.more_local_optima), 0)
 
     # Return False when the solution_to_add_rep parameter is not a string
     def test_add_to_more_local_optima_if_required_solution_to_add_rep_not_string(self):
         # Arrange
         statistics_control = AdditionalStatisticsControl('more_local_optima')
-        AdditionalStatisticsControl.more_local_optima = {}
         solution_to_add_rep = 123
         solution_to_add_fitness = 0.8
         best_solution_rep = "best_solution"
         # Act & Assert
         with self.assertRaises(TypeError):
             statistics_control.add_to_more_local_optima_if_required(solution_to_add_rep, solution_to_add_fitness, best_solution_rep)
+
+
+class TestMaxLocalOptima(unittest.TestCase):
+
+    # Returns the value of the private attribute '__max_local_optima' when called.
+    def test_returns_max_local_optima_value2(self):
+        # Arrange
+        control = AdditionalStatisticsControl('more_local_optima', max_local_optima=10)    
+        # Act
+        result = control.max_local_optima
+        # Assert
+        self.assertEqual(result, 10)
+
+    # Returns an integer value.
+    def test_returns_integer_value(self):
+        # Arrange
+        control = AdditionalStatisticsControl(max_local_optima=12)
+        # Act
+        result = control.max_local_optima
+        # Assert
+        self.assertIsInstance(result, int)
+
+    # The value returned is the maximum number of local optima that will be kept.
+    def test_returns_maximum_number_of_local_optima(self):
+        # Arrange
+        control = AdditionalStatisticsControl(max_local_optima=12)
+        # Act
+        result = control.max_local_optima
+        # Assert
+        self.assertEqual(result, 12)
+
+    # Raises a TypeError if the value of the attribute '__max_local_optima' is not an integer.
+    def test_raises_type_error_if_max_local_optima_not_integer(self):
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            AdditionalStatisticsControl(max_local_optima='10')
+
+    # The value of the attribute '__max_local_optima' can be zero.
+    def test_max_local_optima_can_be_zero(self):
+        # Arrange
+        control = AdditionalStatisticsControl(max_local_optima=0)
+        # Act
+        result = control.max_local_optima
+        # Assert
+        self.assertEqual(result, 0)
+
+    # The value of the attribute '__max_local_optima' can be negative.
+    def test_max_local_optima_can_not_be_negative(self):
+        # Act & Assert
+        with self.assertRaises(ValueError):
+            AdditionalStatisticsControl(max_local_optima=-10)

@@ -30,6 +30,8 @@ class AdditionalStatisticsControl:
                 raise TypeError('Parameter \'keep\' must be \'str\'.')
         if not isinstance(max_local_optima, int):
                 raise TypeError('Parameter \'max_local_optima\' must be \'int\'.')
+        if max_local_optima < 0:
+                raise ValueError('Parameter \'max_local_optima\' must be greater or equal to zero.')
         self.__can_be_kept:list[str] = ['all_solution_code',
                 'more_local_optima']
         self.__max_local_optima:int = max_local_optima
@@ -58,12 +60,8 @@ class AdditionalStatisticsControl:
             else:
                 raise ValueError("Invalid value for keep '{}'. Should be one of:{}.".format( k, 
                     "all_solution_code, more_local_optima"))
-        #class/static variable all_solution_codes
-        if not hasattr(AdditionalStatisticsControl, 'all_solution_code'):
-            AdditionalStatisticsControl.all_solution_codes:set[str] = set()
-        # values of the local optima foreach element calculated 
-        if not hasattr(AdditionalStatisticsControl, 'more_local_optima'):                
-            AdditionalStatisticsControl.more_local_optima:dict[str, float] = {}
+        self.__all_solution_codes:set[str] = set()
+        self.__more_local_optima:dict[str, float|list[float]] = {}
 
     @property
     def max_local_optima(self)->int:
@@ -118,6 +116,40 @@ class AdditionalStatisticsControl:
         """
         return self.__keep_more_local_optima
 
+    @property
+    def all_solution_codes(self)->set[str]:
+        """
+        Property getter for all solution codes, if kept
+
+        :return: set with all solution codes as strings
+        :rtype: set[str]
+        """
+        return self.__all_solution_codes
+
+    @all_solution_codes.setter
+    def all_solution_codes(self, value:set[str])->None:
+        """
+        Property setter for the all solution codes property 
+        """
+        self.__all_solution_codes = value
+
+    @property
+    def more_local_optima(self)->dict[str, float|list[float]]:
+        """
+        Property getter for other local optima, if kept
+
+        :return: dictionary with more local optimums (representation as string and fitness as float|list[float]
+        :rtype: dict[str, float|list[float]]
+        """
+        return self.__more_local_optima
+
+    @more_local_optima.setter
+    def more_local_optima(self, value:dict[str, float|list[float]])->None:
+        """
+        Property setter for the more local optimums 
+        """
+        self.__more_local_optima = value
+
     def add_to_all_solution_codes_if_required(self, representation:str)->None:
         """
         Filling all solution code, if necessary 
@@ -129,7 +161,7 @@ class AdditionalStatisticsControl:
         if not isinstance(representation, str):
             raise TypeError('Parameter \'representation\' must be string.')
         if self.keep_all_solution_codes:
-            AdditionalStatisticsControl.all_solution_codes.add(representation)
+            self.all_solution_codes.add(representation)
 
     def add_to_more_local_optima_if_required(self, solution_to_add_rep:str, solution_to_add_fitness:float|list[float], 
             best_solution_rep:str)->bool:
@@ -146,18 +178,17 @@ class AdditionalStatisticsControl:
             raise TypeError('Parameter \'solution_to_add_rep\' must be string.')
         if not self.keep_more_local_optima:
             return False
-        if solution_to_add_rep in AdditionalStatisticsControl.more_local_optima:
+        if solution_to_add_rep in self.more_local_optima:
             return False
-        if len(AdditionalStatisticsControl.more_local_optima) >= self.__max_local_optima:
+        if len(self.more_local_optima) >= self.__max_local_optima:
             # removing random, just taking care not to remove the best ones
             while True:
-                code:str = random.choice(AdditionalStatisticsControl.more_local_optima.keys())
+                code:str = random.choice(self.more_local_optima.keys())
                 if code != best_solution_rep:
-                    del AdditionalStatisticsControl.more_local_optima[code]
+                    del self.more_local_optima[code]
                     break
-        AdditionalStatisticsControl.more_local_optima[solution_to_add_rep]=solution_to_add_fitness
+        self.more_local_optima[solution_to_add_rep]=solution_to_add_fitness
         return True
-
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
@@ -192,7 +223,7 @@ class AdditionalStatisticsControl:
         if self.keep_all_solution_codes:
             for _ in range(0, indentation):
                 s += indentation_symbol  
-            s += 'all solution codes=' + str(len(AdditionalStatisticsControl.all_solution_codes)) + delimiter
+            s += 'all solution codes=' + str(len(self.all_solution_codes)) + delimiter
         for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_end 
