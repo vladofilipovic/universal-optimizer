@@ -176,6 +176,10 @@ class AdditionalStatisticsControl:
         """       
         if not isinstance(solution_to_add_rep, str):
             raise TypeError('Parameter \'solution_to_add_rep\' must be string.')
+        if not isinstance(solution_to_add_fitness, float) and not isinstance(solution_to_add_fitness, list[float]):
+            raise TypeError('Parameter \'solution_to_add_fitness\' must be float or list of floats.')
+        if not isinstance(best_solution_rep, str):
+            raise TypeError('Parameter \'best_solution_rep\' must be string.')
         if not self.keep_more_local_optima:
             return False
         if solution_to_add_rep in self.more_local_optima:

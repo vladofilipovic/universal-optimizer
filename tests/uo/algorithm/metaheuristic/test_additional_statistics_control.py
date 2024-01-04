@@ -1,15 +1,7 @@
 import unittest   
 import unittest.mock as mocker
 
-from uo.target_problem.target_problem import TargetProblem
-from uo.target_problem.target_problem_void import TargetProblemVoid
-from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
-
-from uo.algorithm.output_control import OutputControl
-from uo.algorithm.metaheuristic.metaheuristic import Metaheuristic 
-from uo.algorithm.metaheuristic.metaheuristic_void import MetaheuristicVoid
-
 
 class TestAdditionalStatisticsControl(unittest.TestCase):
 
@@ -197,7 +189,7 @@ class TestAddToAllSolutionCodesIfRequired(unittest.TestCase):
         self.assertIn(representation, control.all_solution_codes)
 
     # If all_solution_codes is empty, add the representation to all_solution_codes.
-    def test_all_solution_codes_empty(self):
+    def test_all_solution_codes_empty2(self):
         # Arrange
         control = AdditionalStatisticsControl(keep='all_solution_code')
         representation = "solution1"
