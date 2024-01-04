@@ -165,6 +165,8 @@ class AdditionalStatisticsControl:
         """        
         if not isinstance(representation, str):
             raise TypeError('Parameter \'representation\' must be string.')
+        if representation.strip() == '':
+            return
         if self.keep_all_solution_codes:
             self.all_solution_codes.add(representation)
 
@@ -226,9 +228,6 @@ class AdditionalStatisticsControl:
         for _ in range(0, indentation):
             s += indentation_symbol  
         s += 'keep=' + str(self.keep) + delimiter
-        for _ in range(0, indentation):
-            s += indentation_symbol  
-        s += 'use_cache_for_distance_calculation=' + str(self.use_cache_for_distance_calculation) + delimiter
         for _ in range(0, indentation):
             s += indentation_symbol  
         if self.keep_all_solution_codes:
