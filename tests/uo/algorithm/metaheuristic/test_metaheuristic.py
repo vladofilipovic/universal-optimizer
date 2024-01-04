@@ -307,5 +307,113 @@ class TestMetaheuristic2(unittest.TestCase):
         assert isinstance(metaheuristic.random_seed, int)
 
 
+class TestFinishControl(unittest.TestCase):
+
+    # Returns the structure that controls finish criteria for metaheuristic execution.
+    def test_returns_finish_control_structure(self):
+        # Arrange
+        finish_control = FinishControl()
+        random_seed = None
+        additional_statistics_control = mocker.Mock(AdditionalStatisticsControl)
+        output_control = mocker.Mock(OutputControl)
+        target_problem = mocker.Mock(TargetProblem)
+        metaheuristic = MetaheuristicVoid("Test", finish_control, random_seed, additional_statistics_control, output_control, target_problem)
+        # Act
+        result = metaheuristic.finish_control
+        # Assert
+        self.assertEqual(result.criteria, finish_control.criteria)
+        self.assertEqual(result.evaluations_max, finish_control.evaluations_max)
+        self.assertEqual(result.iterations_max, finish_control.iterations_max)
+        self.assertEqual(result.seconds_max, finish_control.seconds_max)
+
+    # Returns the same instance of FinishControl every time it is called.
+    def test_returns_same_instance_of_finish_control(self):
+        # Arrange
+        finish_control = FinishControl()
+        random_seed = None
+        additional_statistics_control = mocker.Mock(AdditionalStatisticsControl)
+        output_control = mocker.Mock(OutputControl)
+        target_problem = mocker.Mock(TargetProblem)
+        metaheuristic = MetaheuristicVoid("Test", finish_control, random_seed, additional_statistics_control, output_control, target_problem)
+        # Act
+        result1 = metaheuristic.finish_control
+        result2 = metaheuristic.finish_control    
+        # Assert
+        self.assertEqual(result1.criteria, result2.criteria)
+        self.assertEqual(result1.evaluations_max, result2.evaluations_max)
+        self.assertEqual(result1.iterations_max, result2.iterations_max)
+        self.assertEqual(result1.seconds_max, result2.seconds_max)
+
+    # Raises a TypeError if the FinishControl instance is not of type FinishControl.
+    def test_raises_type_error_if_finish_control_not_of_type_finish_control(self):
+        # Arrange
+        finish_control = "not a FinishControl instance"
+        random_seed = None
+        additional_statistics_control = mocker.Mock(AdditionalStatisticsControl)
+        output_control = mocker.Mock(OutputControl)
+        target_problem = mocker.Mock(TargetProblem)
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            metaheuristic = MetaheuristicVoid("Test", finish_control, random_seed, additional_statistics_control, output_control, target_problem)
+
+    # The FinishControl instance returned is identical to the one set during initialization.
+    def test_returns_identical_finish_control(self):
+        # Arrange
+        finish_control = FinishControl()
+        random_seed = None
+        additional_statistics_control = mocker.Mock(AdditionalStatisticsControl)
+        output_control = mocker.Mock(OutputControl)
+        target_problem = mocker.Mock(TargetProblem)
+        metaheuristic = MetaheuristicVoid("Test", finish_control, random_seed, additional_statistics_control, output_control, target_problem)
+        # Act
+        result = metaheuristic.finish_control
+        # Assert
+        self.assertIsInstance(result, FinishControl)
+        self.assertEqual(result.criteria, finish_control.criteria)
+        self.assertEqual(result.evaluations_max, finish_control.evaluations_max)
+        self.assertEqual(result.iterations_max, finish_control.iterations_max)
+        self.assertEqual(result.seconds_max, finish_control.seconds_max)
+
+
+
+class TestRandomSeed(unittest.TestCase):
+
+    # Returns the random seed used during metaheuristic execution.
+    def test_returns_random_seed(self):
+        # Arrange
+        metaheuristic = MetaheuristicVoid("MyMetaheuristic", FinishControl(), 12345, AdditionalStatisticsControl(), 
+                                        OutputControl(), TargetProblemVoid("aaa", False))    
+        # Act
+        seed = metaheuristic.random_seed
+        # Assert
+        self.assertEqual(seed, 12345)
+
+    # Returns the correct random seed value when it is set to a non-zero integer.
+    def test_returns_correct_random_seed_value(self):
+        # Arrange
+        metaheuristic = MetaheuristicVoid("MyMetaheuristic", FinishControl(), 54321, AdditionalStatisticsControl(), 
+                                        OutputControl(), TargetProblemVoid("aaa", False))
+        # Act
+        seed = metaheuristic.random_seed
+        # Assert
+        self.assertEqual(seed, 54321)
+
+    # Raises a TypeError when the random seed is not an integer or None.
+    def test_raises_type_error_when_random_seed_not_integer_or_none(self):
+        # Arrange & Act & Assert
+        with self.assertRaises(TypeError):
+            MetaheuristicVoid("MyMetaheuristic", FinishControl(), "abc", AdditionalStatisticsControl(), 
+                                    OutputControl(), TargetProblemVoid("aaa", False))
+
+    # Raises no errors when the random seed is set to 0.
+    def test_raises_no_errors_when_random_seed_is_zero(self):
+        # Arrange
+        metaheuristic = MetaheuristicVoid("MyMetaheuristic", FinishControl(), 0, AdditionalStatisticsControl(), 
+                                    OutputControl(), TargetProblemVoid("aaa", False))
+        # Act
+        seed = metaheuristic.random_seed
+        # Assert
+        self.assertNotEqual(seed, 0)
+
 if __name__ == '__main__':
     unittest.main()
