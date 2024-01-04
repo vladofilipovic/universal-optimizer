@@ -134,6 +134,8 @@ class TeOptimizer(Algorithm):
         :param value: the current solution
         :type value: :class:`TargetSolution`
         """
+        if not isinstance(value, TargetSolution):
+            raise TypeError('Parameter \'current_solution\' must have type \'TargetSolution\'.')
         self.__current_solution = value
 
     def init(self):

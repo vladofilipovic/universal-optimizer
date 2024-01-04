@@ -102,6 +102,8 @@ class Optimizer(metaclass=ABCMeta):
 
         :param datetime value: time when execution started
         """
+        if not isinstance(value, datetime):
+            raise TypeError('Parameter \'execution_started\' must have type \'datetime\'.')
         self.__execution_started = value
 
     @property
@@ -120,6 +122,8 @@ class Optimizer(metaclass=ABCMeta):
         
         :param datetime value: time when execution ended
         """
+        if not isinstance(value, datetime):
+            raise TypeError('Parameter \'execution_ended\' must have type \'datetime\'.')
         self.__execution_ended = value
 
     @property
@@ -139,6 +143,8 @@ class Optimizer(metaclass=ABCMeta):
         
         :param TargetSolution value: best solution so far
         """
+        if not isinstance(value, TargetSolution):
+            raise TypeError('Parameter \'best_solution\' must have type \'TargetSolution\'.')
         self.__best_solution = value
 
     @property
@@ -158,6 +164,8 @@ class Optimizer(metaclass=ABCMeta):
         
         :param int value: `OutputControl`
         """
+        if not isinstance(value, OutputControl):
+            raise TypeError('Parameter \'output_control\' must have type \'OutputControl\'.')
         self.__output_control = value
 
     def write_output_headers_if_needed(self):

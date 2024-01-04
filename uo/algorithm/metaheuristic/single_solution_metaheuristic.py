@@ -123,6 +123,8 @@ class SingleSolutionMetaheuristic(Metaheuristic, metaclass=ABCMeta):
         :param value: the current solution
         :type value: :class:`TargetSolution`
         """
+        if not isinstance(value, TargetSolution):
+            raise TypeError('Property \'current_solution\' must have type \'TargetSolution\'.')
         self.__current_solution = value
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 

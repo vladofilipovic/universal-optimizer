@@ -149,6 +149,8 @@ class FinishControl:
         """
         Property setter for the finish criteria property
         """
+        if not isinstance(value, str):
+            raise TypeError('Parameter \'criteria\' must have type \'str\'.')
         self.__determine_criteria_helper__(value)
 
     @property

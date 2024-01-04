@@ -163,16 +163,8 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         :param value: value of the `fitness` to be set
         :type value: float
         """
-        self.__fitness_value = value
-
-    @fitness_value.setter
-    def fitness_value(self, value:float)->None:
-        """
-        Property setter for fitness value of the target solution
-
-        :param value: value of the `fitness` to be set
-        :type value: float
-        """
+        if not isinstance(value, Optional[float]) and not isinstance(value, Optional[int]):
+            raise TypeError('Parameter \'fitness_value\' must have type \'float\' or \'int\'.')
         self.__fitness_value = value
 
     @property
@@ -193,6 +185,8 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         :param value: values of the `fitness` to be set
         :type value: list[float]|tuple[float]
         """
+        if not isinstance(value, Optional[list]):
+            raise TypeError('Parameter \'fitness_values\' must be list or tuple that consists of numbers.')
         self.__fitness_values = value
 
     @property
@@ -213,6 +207,8 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         :param value: value of the `objective_value` to be set
         :type value: float
         """
+        if not isinstance(value, Optional[float]) and not isinstance(value, Optional[int]):
+            raise TypeError('Parameter \'objective_value\' must have type \'float\' or \'int\'.')
         self.__objective_value = value
 
     @property
@@ -233,6 +229,8 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         :param value: objective values to be set
         :type value: list[float]|tuple[float]
         """
+        if not isinstance(value, Optional[list]):
+            raise TypeError('Parameter \'objective_values\' must be list or tuple that consists of numbers.')
         self.__objective_values = value
 
     @property
@@ -253,6 +251,8 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         :param value: value to be set for the `is_feasible`
         :type value: bool
         """
+        if not isinstance(value, bool):
+            raise TypeError('Parameter \'is_feasible\' must have type \'bool\'.')
         self.__is_feasible = value
 
     @property
@@ -485,7 +485,7 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         :return: string representation of the target solution instance
         :rtype: str
         """
-        return self.string_repr('|')
+        return self.string_rep('|')
 
     @abstractmethod
     def __repr__(self)->str:

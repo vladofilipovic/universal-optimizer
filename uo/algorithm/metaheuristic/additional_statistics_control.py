@@ -95,6 +95,8 @@ class AdditionalStatisticsControl:
         """
         Property setter for the keep property 
         """
+        if not isinstance(value, str):
+            raise TypeError('Parameter \'keep\' must have type \'str\'.')
         self.__determine_keep_helper__(value)
 
     @property

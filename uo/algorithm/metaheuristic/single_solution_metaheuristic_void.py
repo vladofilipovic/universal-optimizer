@@ -19,16 +19,17 @@ from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 
 from uo.algorithm.algorithm import Algorithm
-from uo.algorithm.metaheuristic.metaheuristic import Metaheuristic
+from uo.algorithm.metaheuristic.single_solution_metaheuristic import SingleSolutionMetaheuristic
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
-class MetaheuristicVoid(Metaheuristic):
+class SingleSolutionMetaheuristicVoid(SingleSolutionMetaheuristic):
     def __init__(self, 
             name:str, 
             finish_control:FinishControl,
             random_seed:int, 
             additional_statistics_control:AdditionalStatisticsControl,
             output_control:OutputControl, 
-            target_problem:TargetProblem   
+            target_problem:TargetProblem,
+            initial_solution:TargetSolution   
     )->None:
         super().__init__(
                 name=name, 
@@ -36,7 +37,8 @@ class MetaheuristicVoid(Metaheuristic):
                 random_seed=random_seed,
                 additional_statistics_control=additional_statistics_control,
                 output_control=output_control, 
-                target_problem=target_problem
+                target_problem=target_problem,
+                initial_solution=initial_solution
         )
 
     def __copy__(self):
@@ -50,7 +52,6 @@ class MetaheuristicVoid(Metaheuristic):
     
     def main_loop_iteration(self)->None:
         return
-
 
     def __str__(self)->str:
         return super().__str__()

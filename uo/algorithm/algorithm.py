@@ -82,6 +82,8 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
         """
         Property setter for current number of evaluations
         """
+        if not isinstance(value, int):
+            raise TypeError('Parameter \'evaluation\' must have type \'int\'.')
         self.__evaluation = value
 
     @property
@@ -101,6 +103,8 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
         
         :param int value: iteration
         """
+        if not isinstance(value, int):
+            raise TypeError('Parameter \'iteration\' must have type \'int\'.')
         self.__iteration = value
 
     @property
@@ -120,6 +124,8 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
         
         :param int value: iteration when the best solution is found
         """
+        if not isinstance(value, int):
+            raise TypeError('Parameter \'iteration_best_found\' must have type \'int\'.')
         self.__iteration_best_found = value
 
     @abstractmethod

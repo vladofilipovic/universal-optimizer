@@ -45,8 +45,8 @@ class FunctionOneVariableProblemBinaryIntSolution(TargetSolution[int,float]):
                 evaluation_cache_max_size=evaluation_cache_max_size,
                 distance_calculation_cache_is_used=distance_calculation_cache_is_used,
                 distance_calculation_cache_max_size=distance_calculation_cache_max_size)
-        self.__domain_from:float = domain_from
-        self.__domain_to:float = domain_to
+        self.__domain_from:float|int = domain_from
+        self.__domain_to:float|int = domain_to
         self.__number_of_intervals:int = number_of_intervals
 
     def __copy__(self):
@@ -64,7 +64,9 @@ class FunctionOneVariableProblemBinaryIntSolution(TargetSolution[int,float]):
         return self.__domain_from    
 
     @domain_from.setter
-    def domain_from(self, value:float)->None:
+    def domain_from(self, value:float|int)->None:
+        if not isinstance(value, float) and not isinstance(value, int):
+            raise TypeError('Parameter \'domain_from\' must have type \'int\' or \'float\'.')
         self.__domain_from = value
 
     @property
@@ -72,7 +74,9 @@ class FunctionOneVariableProblemBinaryIntSolution(TargetSolution[int,float]):
         return self.__domain_to    
 
     @domain_to.setter
-    def domain_to(self, value:float)->None:
+    def domain_to(self, value:float|int)->None:
+        if not isinstance(value, float) and not isinstance(value, int):
+            raise TypeError('Parameter \'domain_to\' must have type \'int\' or \'float\'.')
         self.__domain_to = value
 
     @property
@@ -81,6 +85,8 @@ class FunctionOneVariableProblemBinaryIntSolution(TargetSolution[int,float]):
 
     @number_of_intervals.setter
     def number_of_intervals(self, value:int)->None:
+        if not isinstance(value, int):
+            raise TypeError('Parameter \'number_of_intervals\' must have type \'int\'.')
         self.__number_of_intervals= value
 
     def __make_to_be_feasible_helper__(self, problem:FunctionOneVariableProblem):

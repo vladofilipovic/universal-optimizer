@@ -207,7 +207,6 @@ class TestAlgorithm(unittest.TestCase):
         self.assertIn('__evaluation=0', string_rep)
         self.assertIn('__iteration=0', string_rep)
     
-
 class TestEvaluation(unittest.TestCase):
 
     # Set evaluation to a positive integer value
@@ -235,17 +234,15 @@ class TestEvaluation(unittest.TestCase):
         # Arrange
         algorithm = AlgorithmVoid("MyAlgorithm", OutputControl(), TargetProblemVoid("problem", False))
         value = None
-        # Act
-        algorithm.evaluation = value
-        # Assert
-        self.assertIsNone(algorithm.evaluation)
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            algorithm.evaluation = value
 
     # Set evaluation to a float value
     def test_set_evaluation_float_value(self):
         # Arrange
         algorithm = AlgorithmVoid("MyAlgorithm", OutputControl(), TargetProblemVoid("problem", False))
         value = 3.14
-        # Act
-        algorithm.evaluation = value
-        # Assert
-        self.assertEqual(algorithm.evaluation, value)
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            algorithm.evaluation = value

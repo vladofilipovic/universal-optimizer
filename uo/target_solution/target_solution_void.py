@@ -67,4 +67,4 @@ class TargetSolutionVoid(TargetSolution[int, str]):
         return super().__repr__()
 
     def __format__(self, spec:str)->str:
-        return super().__format__()    
+        return super().__format__(spec)    

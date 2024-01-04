@@ -123,6 +123,8 @@ class PopulationBasedMetaheuristic(Metaheuristic, metaclass=ABCMeta):
         :param value: the current solutions
         :type value: list[TargetSolution]
         """
+        if not isinstance(value, list):
+            raise TypeError('Parameter \'current_solutions\' must be list or tuple of \'TargetSolution\' objects.')
         self.__current_solutions = value
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 

@@ -56,6 +56,8 @@ class DistanceCalculationCacheControlStatistics(Generic[E_co]):
         
         :param bool value: value that is set for `is_caching`
         """
+        if not isinstance(value, bool):
+            raise TypeError('Parameter \'is_caching\' must have type \'bool\'.')
         self.__is_caching = value
 
     @property
@@ -85,6 +87,8 @@ class DistanceCalculationCacheControlStatistics(Generic[E_co]):
 
         :param dict[(E_co,E_co)] value: value that is set for `cache`
         """
+        if not isinstance(value, dict):
+            raise TypeError('Parameter \'cache\' must be a dictionary.')
         self.__cache = value
 
     @property

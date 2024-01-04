@@ -66,6 +66,8 @@ class EvaluationCacheControlStatistics:
 
         :param bool value: value for determining if caching is activated
         """
+        if not isinstance(value, bool):
+            raise TypeError('Parameter \'is_caching\' must have type \'bool\'.')
         self.__is_caching = value
 
     @property
@@ -95,6 +97,8 @@ class EvaluationCacheControlStatistics:
 
         :param dict[str] value: value for cache
         """
+        if not isinstance(value, dict):
+            raise TypeError('Parameter \'cache\' must be a dictionary.')
         self.__cache = value
 
     @property

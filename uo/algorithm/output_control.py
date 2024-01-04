@@ -199,13 +199,16 @@ class OutputControl:
         :return: comma-separated string with list of fields for output
         :rtype: str
         """
-        return self.__fields_definitions.join(', ').replace('self.','')
+        ret:str = ",".join(self.__fields_definitions)
+        return ret
 
     @fields.setter
     def fields(self, value:str)->None:
         """
         Property setter for the fields property
         """
+        if not isinstance(value, str):
+            raise TypeError('Parameter \'fields\' must have type \'str\'.')
         self.__determine_fields_helper__(value)
 
     @property
@@ -239,6 +242,8 @@ class OutputControl:
         """
         Property setter for the moments property
         """
+        if not isinstance(value, str):
+            raise TypeError('Parameter \'moments\' must have type \'str\'.')
         self.__determine_moments_helper__(value)
 
     @property
