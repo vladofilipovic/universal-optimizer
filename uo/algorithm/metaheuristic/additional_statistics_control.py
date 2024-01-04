@@ -2,8 +2,9 @@
 The :mod:`~uo.algorithm.metaheuristic.additional_statistics_control` module describes the class :class:`~uo.algorithm.metaheuristic.AdditionalStatisticsControl`.
 """
 
+import random
+
 from pathlib import Path
-from random import random
 directory = Path(__file__).resolve()
 import sys
 sys.path.append(directory.parent)
@@ -131,6 +132,8 @@ class AdditionalStatisticsControl:
         """
         Property setter for the all solution codes property 
         """
+        if not isinstance(value, set):
+            raise TypeError('Value for property \'all_solution_codes\' should be set of strings.')
         self.__all_solution_codes = value
 
     @property
@@ -148,6 +151,8 @@ class AdditionalStatisticsControl:
         """
         Property setter for the more local optimums 
         """
+        if not isinstance(value, dict):
+            raise TypeError('Value for property \'more_local_optima\' must be dictionary with adequate component types.')
         self.__more_local_optima = value
 
     def add_to_all_solution_codes_if_required(self, representation:str)->None:
@@ -163,7 +168,7 @@ class AdditionalStatisticsControl:
         if self.keep_all_solution_codes:
             self.all_solution_codes.add(representation)
 
-    def add_to_more_local_optima_if_required(self, solution_to_add_rep:str, solution_to_add_fitness:float|list[float], 
+    def add_to_more_local_optima_if_required(self, solution_to_add_rep:str, solution_to_add_fitness:int|float|list[float], 
             best_solution_rep:str)->bool:
         """
         Add solution to the local optima structure 
@@ -176,8 +181,10 @@ class AdditionalStatisticsControl:
         """       
         if not isinstance(solution_to_add_rep, str):
             raise TypeError('Parameter \'solution_to_add_rep\' must be string.')
-        if not isinstance(solution_to_add_fitness, float) and not isinstance(solution_to_add_fitness, list[float]):
-            raise TypeError('Parameter \'solution_to_add_fitness\' must be float or list of floats.')
+        if not isinstance(solution_to_add_fitness, int) \
+                    and not isinstance(solution_to_add_fitness, float)\
+                    and not isinstance(solution_to_add_fitness, list):
+            raise TypeError('Parameter \'solution_to_add_fitness\' must be int, float or list.')
         if not isinstance(best_solution_rep, str):
             raise TypeError('Parameter \'best_solution_rep\' must be string.')
         if not self.keep_more_local_optima:
@@ -187,7 +194,7 @@ class AdditionalStatisticsControl:
         if len(self.more_local_optima) >= self.__max_local_optima:
             # removing random, just taking care not to remove the best ones
             while True:
-                code:str = random.choice(self.more_local_optima.keys())
+                code:str = random.choice(list(self.more_local_optima.keys()))
                 if code != best_solution_rep:
                     del self.more_local_optima[code]
                     break

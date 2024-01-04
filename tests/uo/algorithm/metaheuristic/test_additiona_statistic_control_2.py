@@ -255,7 +255,6 @@ class TestKeepAllSolutionCodes(unittest.TestCase):
             control.keep_all_solution_codes = 'True'
             
 
-
 class TestKeepMoreLocalOptima(unittest.TestCase):
 
     # Returns False if keep_more_local_optima is False.
@@ -313,3 +312,104 @@ class TestKeepMoreLocalOptima(unittest.TestCase):
         # Act & Assert
         with self.assertRaises(TypeError):
             statistics_control.add_to_more_local_optima_if_required(solution_to_add_rep, solution_to_add_fitness, best_solution_rep)
+            
+
+class TestAllSolutionCodes(unittest.TestCase):
+
+    # Setting a non-empty set of solution codes should update the __all_solution_codes attribute
+    def test_set_non_empty_solution_codes(self):
+        # Arrange
+        statistics_control = AdditionalStatisticsControl()
+        solution_codes = {'code1', 'code2', 'code3'}
+        # Act
+        statistics_control.all_solution_codes = solution_codes
+        # Assert
+        self.assertEqual(statistics_control.all_solution_codes, solution_codes)
+
+    # Setting an empty set of solution codes should not update the __all_solution_codes attribute
+    def test_set_empty_solution_codes(self):
+        # Arrange
+        statistics_control = AdditionalStatisticsControl()
+        solution_codes = set()
+        # Act
+        statistics_control.all_solution_codes = solution_codes
+        # Assert
+        self.assertEqual(statistics_control.all_solution_codes, set())
+
+    # Setting a set of solution codes with duplicate values should update the __all_solution_codes attribute with only unique values
+    def test_set_duplicate_solution_codes(self):
+        # Arrange
+        statistics_control = AdditionalStatisticsControl()
+        solution_codes = {'code1', 'code2', 'code2', 'code3'}
+        # Act
+        statistics_control.all_solution_codes = solution_codes
+        # Assert
+        self.assertEqual(statistics_control.all_solution_codes, {'code1', 'code2', 'code3'})
+
+    # Setting the all_solution_codes property with a None value should raise a TypeError
+    def test_set_all_solution_codes_with_none_value(self):
+        # Arrange
+        statistics_control = AdditionalStatisticsControl()
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            statistics_control.all_solution_codes = None
+
+    # Setting the all_solution_codes property with a non-set value should raise a TypeError
+    def test_set_all_solution_codes_with_non_set_value(self):
+        # Arrange
+        statistics_control = AdditionalStatisticsControl()
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            statistics_control.all_solution_codes = "solution_codes"
+
+
+class TestMoreLocalOptima(unittest.TestCase):
+
+    # Setting a new dictionary of local optima with valid input should update the __more_local_optima attribute
+    def test_valid_input_updates_attribute(self):
+        # Arrange
+        additional_stats = AdditionalStatisticsControl()
+        new_local_optima = {'solution1': 0.5, 'solution2': [0.3, 0.4]}
+        # Act
+        additional_stats.more_local_optima = new_local_optima
+        # Assert
+        self.assertEqual(additional_stats.more_local_optima, new_local_optima)
+
+    # Setting an empty dictionary of local optima should update the __more_local_optima attribute to an empty dictionary
+    def test_empty_input_updates_attribute(self):
+        # Arrange
+        additional_stats = AdditionalStatisticsControl()
+        # Act
+        additional_stats.more_local_optima = {}
+        # Assert
+        self.assertEqual(additional_stats.more_local_optima, {})
+
+    # Setting the __more_local_optima attribute to None should update it to an empty dictionary
+    def test_none_input_updates_attribute(self):
+        # Arrange
+        additional_stats = AdditionalStatisticsControl()
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            additional_stats.more_local_optima = None
+
+    # Setting a new dictionary of local optima with more than max_local_optima elements should remove the oldest element
+    def test_max_local_optima_elements_removes_oldest_element(self):
+        # Arrange
+        additional_stats = AdditionalStatisticsControl('more_local_optima', max_local_optima=2)
+        additional_stats.more_local_optima = {'solution1': 0.5, 'solution2': [0.3, 0.4]}
+        new_local_optima = {'solution3': 0.6}
+        # Act
+        success = additional_stats.add_to_more_local_optima_if_required('solution3', 0.6, 'solution1')
+        # Assert
+        self.assertTrue(success)
+        self.assertEqual(len(additional_stats.more_local_optima), 2)
+        self.assertIn('solution3', additional_stats.more_local_optima.keys())
+
+    # Setting the __more_local_optima attribute to an empty dictionary when keep_more_local_optima is False should not update the attribute
+    def test_empty_input_does_not_update_attribute_when_keep_more_local_optima_is_false(self):
+        # Arrange
+        additional_stats = AdditionalStatisticsControl(keep='all_solution_code')
+        # Act
+        additional_stats.more_local_optima = {}
+        # Assert
+        self.assertEqual(additional_stats.more_local_optima, {})
