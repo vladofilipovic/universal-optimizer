@@ -3,6 +3,7 @@ The :mod:`~uo.algorithm.metaheuristic.additional_statistics_control` module desc
 """
 
 from pathlib import Path
+from random import random
 directory = Path(__file__).resolve()
 import sys
 sys.path.append(directory.parent)
@@ -41,9 +42,11 @@ class AdditionalStatisticsControl:
         :param str keep: comma-separated list of values that should be kept 
         (currently keep contains strings `all_solution_code`, `more_local_optima`) 
         """
+        if not isinstance(keep, str):
+            raise TypeError('Parameter \'keep\' must be string.')
         self.__keep_all_solution_codes = False
         self.__keep_more_local_optima = False
-        kep:list[str] = keep.split('&')
+        kep:list[str] = keep.split(',')
         for ke in kep: 
             k:str = ke.strip()
             if k=='' or k=='None':
@@ -55,15 +58,12 @@ class AdditionalStatisticsControl:
             else:
                 raise ValueError("Invalid value for keep '{}'. Should be one of:{}.".format( k, 
                     "all_solution_code, more_local_optima"))
-        if self.__keep_all_solution_codes:
-            #class/static variable all_solution_codes
-            if not hasattr(AdditionalStatisticsControl, 'all_solution_codes'):
-                AdditionalStatisticsControl.all_solution_codes:set[str] = set()
-        if self.__keep_more_local_optima:
-            # values of the local optima foreach element calculated 
-            if not hasattr(AdditionalStatisticsControl, 'all_solution_codes'):                
-                AdditionalStatisticsControl.more_local_optima:Dict[str, float] = {}
-
+        #class/static variable all_solution_codes
+        if not hasattr(AdditionalStatisticsControl, 'all_solution_code'):
+            AdditionalStatisticsControl.all_solution_codes:set[str] = set()
+        # values of the local optima foreach element calculated 
+        if not hasattr(AdditionalStatisticsControl, 'more_local_optima'):                
+            AdditionalStatisticsControl.more_local_optima:dict[str, float] = {}
 
     @property
     def max_local_optima(self)->int:
@@ -126,10 +126,12 @@ class AdditionalStatisticsControl:
         :type representation: str
         :rtype: None
         """        
+        if not isinstance(representation, str):
+            raise TypeError('Parameter \'representation\' must be string.')
         if self.keep_all_solution_codes:
             AdditionalStatisticsControl.all_solution_codes.add(representation)
 
-    def add_to_more_local_optima_if_required(self, solution_to_add_rep:str, solution_to_add_fitness, 
+    def add_to_more_local_optima_if_required(self, solution_to_add_rep:str, solution_to_add_fitness:float|list[float], 
             best_solution_rep:str)->bool:
         """
         Add solution to the local optima structure 
@@ -140,6 +142,8 @@ class AdditionalStatisticsControl:
         :return:  if adding is successful e.g. current_solution is new element in the structure
         :rtype: bool
         """       
+        if not isinstance(solution_to_add_rep, str):
+            raise TypeError('Parameter \'solution_to_add_rep\' must be string.')
         if not self.keep_more_local_optima:
             return False
         if solution_to_add_rep in AdditionalStatisticsControl.more_local_optima:
