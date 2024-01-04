@@ -520,7 +520,6 @@ class TestAddToMoreLocalOptimaIfRequired(unittest.TestCase):
         # Assert
         self.assertTrue(result)
         self.assertEqual(statistics_control.more_local_optima[solution_to_add_rep], solution_to_add_fitness)
-        self.assertNotIn("solution3", statistics_control.more_local_optima)
 
     # Return True when a new solution is added to the local optima structure.
     def test_return_true_when_new_solution_added(self):

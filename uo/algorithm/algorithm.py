@@ -202,6 +202,9 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
         s += '__iteration=' + str(self.__iteration) + delimiter
         for _ in range(0, indentation):
             s += indentation_symbol  
+        s += '__iteration_best_found=' + str(self.__iteration_best_found) + delimiter
+        for _ in range(0, indentation):
+            s += indentation_symbol  
         s += group_end 
         return s
 

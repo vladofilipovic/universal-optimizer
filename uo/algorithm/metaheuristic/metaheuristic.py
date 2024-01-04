@@ -205,9 +205,6 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         for _ in range(0, indentation):
             s += indentation_symbol  
         s += 'additional_statistics_control=' + str(self.additional_statistics_control) + delimiter
-        for _ in range(0, indentation):
-            s += indentation_symbol  
-        s += '__iteration_best_found=' + str(self.__iteration_best_found) + delimiter
         if self.execution_ended is not None and self.execution_started is not None:
             for _ in range(0, indentation):
                 s += indentation_symbol  
