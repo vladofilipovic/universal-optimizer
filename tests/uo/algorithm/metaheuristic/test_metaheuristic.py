@@ -415,5 +415,148 @@ class TestRandomSeed(unittest.TestCase):
         # Assert
         self.assertNotEqual(seed, 0)
 
+
+class TestAdditionalStatisticsControl(unittest.TestCase):
+
+    # Returns the structure that controls keeping of the statistic during metaheuristic execution.
+    def test_returns_additional_statistics_control(self):
+        # Arrange
+        additional_statistics_control = AdditionalStatisticsControl()
+        metaheuristic = MetaheuristicVoid(name="test", finish_control=FinishControl(), random_seed=None, 
+                    additional_statistics_control=additional_statistics_control, output_control=OutputControl(), 
+                    target_problem=TargetProblemVoid("aaa", False))
+        # Act
+        result = metaheuristic.additional_statistics_control
+        # Assert
+        self.assertEqual(result, additional_statistics_control)
+
+    # Returns an instance of AdditionalStatisticsControl.
+    def test_returns_instance_of_additional_statistics_control(self):
+        # Arrange
+        additional_statistics_control = AdditionalStatisticsControl()
+        metaheuristic = MetaheuristicVoid(name="test", finish_control=FinishControl(), random_seed=None, 
+                    additional_statistics_control=additional_statistics_control, output_control=OutputControl(), 
+                    target_problem=TargetProblemVoid("aaa", False))
+        # Act
+        result = metaheuristic.additional_statistics_control
+        # Assert
+        self.assertIsInstance(result, AdditionalStatisticsControl)
+
+    # The returned instance is the same as the one passed in the constructor.
+    def test_returns_same_instance_as_passed_in_constructor(self):
+        # Arrange
+        additional_statistics_control = AdditionalStatisticsControl()
+        metaheuristic = MetaheuristicVoid(name="test", finish_control=FinishControl(), random_seed=None, 
+                    additional_statistics_control=additional_statistics_control, output_control=OutputControl(), 
+                    target_problem=TargetProblemVoid("aaa", False)) 
+        # Act
+        result = metaheuristic.additional_statistics_control
+        # Assert
+        self.assertIs(result, additional_statistics_control)
+
+    # The instance returned is not modified.
+    def test_returns_unmodified_instance2(self):
+        # Arrange
+        additional_statistics_control = AdditionalStatisticsControl()
+        metaheuristic = MetaheuristicVoid(name="test", finish_control=FinishControl(), random_seed=None, 
+                    additional_statistics_control=additional_statistics_control, output_control=OutputControl(), 
+                    target_problem=TargetProblemVoid("aaa", False))
+        # Act
+        result = metaheuristic.additional_statistics_control
+        # Assert
+        self.assertEqual(result, additional_statistics_control)
+
+class TestMainLoopIteration(unittest.TestCase):
+
+    # Executes one iteration of the main loop of the metaheuristic algorithm
+    def test_executes_one_iteration(self):
+        # Arrange
+        metaheuristic = MetaheuristicVoid(name="Example Metaheuristic",
+                                    finish_control=FinishControl(),
+                                    random_seed=123,
+                                    additional_statistics_control=AdditionalStatisticsControl(),
+                                    output_control=OutputControl(),
+                                    target_problem=TargetProblemVoid("aaa", False))
+        # Act
+        metaheuristic.main_loop_iteration()
+        # Assert
+        # Check that the evaluation counter is updated
+        self.assertEqual(metaheuristic.evaluation, 0)
+        # Check that the iteration counter is updated
+        self.assertEqual(metaheuristic.iteration, 0)
+
+    # When the finish control structure indicates that the algorithm is finished, the method should exit without executing any iteration
+    def test_finish_control_indicates_algorithm_finished(self):
+        # Arrange
+        finish_control = FinishControl()
+        finish_control.is_finished = mocker.MagicMock(return_value=True)    
+        metaheuristic = MetaheuristicVoid(name="Example Metaheuristic",
+                                    finish_control=finish_control,
+                                    random_seed=123,
+                                    additional_statistics_control=AdditionalStatisticsControl(),
+                                    output_control=OutputControl(),
+                                    target_problem=TargetProblemVoid("aaa", False))
+    
+        # Act
+        metaheuristic.main_loop_iteration()
+    
+        # Assert
+        # Check that the evaluation counter is not updated
+        self.assertEqual(metaheuristic.evaluation, 0)
+        # Check that the iteration counter is not updated
+        self.assertEqual(metaheuristic.iteration, 0)
+
+
+
+class TestStringRep(unittest.TestCase):
+
+    # Returns a string representation of the Metaheuristic instance.
+    def test_returns_string_representation(self):
+        # Arrange
+        metaheuristic = MetaheuristicVoid("example", FinishControl(), 1234, AdditionalStatisticsControl(), 
+                    OutputControl(), TargetProblemVoid("aaa", False))    
+        # Act
+        result = metaheuristic.string_rep("|")
+        # Assert
+        self.assertIsInstance(result, str)
+
+    # Uses the delimiter, indentation, indentation_symbol, group_start, and group_end parameters to format the string.
+    def test_uses_formatting_parameters(self):
+        # Arrange
+        metaheuristic = MetaheuristicVoid("example", FinishControl(), 1234, AdditionalStatisticsControl(), 
+                    OutputControl(), TargetProblemVoid("aaa", False))
+        # Act
+        result = metaheuristic.string_rep("|", indentation=2, indentation_symbol="-", group_start="[", group_end="]")
+        # Assert
+        self.assertIn("|", result)
+        self.assertIn("--{", result)
+        self.assertIn("random_seed=", result)
+        self.assertIn("finish_control=", result)
+        self.assertIn("additional_statistics_control=", result)
+        self.assertIn("]", result)
+
+    # Includes the random_seed, finish_control, and additional_statistics_control properties in the string.
+    def test_includes_properties(self):
+        # Arrange
+        metaheuristic = MetaheuristicVoid("example", FinishControl(), 1234, AdditionalStatisticsControl(), 
+                    OutputControl(), TargetProblemVoid("aaa", False))
+        # Act
+        result = metaheuristic.string_rep("|")
+        # Assert
+        self.assertIn("random_seed=", result)
+        self.assertIn("finish_control=", result)
+        self.assertIn("additional_statistics_control=", result)
+
+    # delimiter parameter is an empty string.
+    def test_empty_delimiter(self):
+        # Arrange
+        metaheuristic = MetaheuristicVoid("example", FinishControl(), 1234, AdditionalStatisticsControl(), 
+                    OutputControl(), TargetProblemVoid("aaa", False))
+        # Act
+        result = metaheuristic.string_rep("")
+        # Assert
+        self.assertIsInstance(result, str)
+        
+        
 if __name__ == '__main__':
     unittest.main()
