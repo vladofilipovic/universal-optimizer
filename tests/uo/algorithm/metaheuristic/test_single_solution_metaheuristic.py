@@ -226,3 +226,92 @@ class TestSingleSolutionMetaheuristic(unittest.TestCase):
         # Assert
         self.assertIsInstance(metaheuristic.current_solution, TargetSolution)
 
+
+class TestCurrentSolution(unittest.TestCase):
+
+    # Setting a valid TargetSolution object as the current solution updates the value of __current_solution.
+    def test_set_valid_current_solution_updates_value(self):
+        # Arrange
+        name = "Metaheuristic"
+        finish_control = FinishControl()
+        random_seed = 12345
+        additional_statistics_control = AdditionalStatisticsControl()
+        output_control = OutputControl()
+        target_problem = TargetProblemVoid("aaa", True)
+        initial_solution = TargetSolutionVoid("", 43, 43, 43, True)
+        metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
+                    output_control, target_problem, initial_solution)
+        solution = TargetSolutionVoid("bbb", 0, 0, 0, True)
+        # Act
+        metaheuristic.current_solution = solution
+        # Assert
+        self.assertEqual(metaheuristic.current_solution, solution)
+
+    # Getting the current solution returns the value of __current_solution.
+    def test_get_current_solution_returns_value(self):
+        # Arrange
+        name = "Metaheuristic"
+        finish_control = FinishControl()
+        random_seed = 12345
+        additional_statistics_control = AdditionalStatisticsControl()
+        output_control = OutputControl()
+        target_problem = TargetProblemVoid("aaa", True)
+        initial_solution = TargetSolutionVoid("", 43, 43, 43, True)
+        metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
+                    output_control, target_problem, initial_solution)
+        solution = TargetSolutionVoid("bbb", 0, 0, 0, True)
+        metaheuristic.current_solution = solution
+        # Act
+        current_solution = metaheuristic.current_solution
+        # Assert
+        self.assertEqual(current_solution, solution)
+
+    # Setting the current solution to None sets the value of __current_solution to None.
+    def test_set_current_solution_to_none_sets_value_to_none(self):
+        # Arrange
+        name = "Metaheuristic"
+        finish_control = FinishControl()
+        random_seed = 12345
+        additional_statistics_control = AdditionalStatisticsControl()
+        output_control = OutputControl()
+        target_problem = TargetProblemVoid("aaa", True)
+        initial_solution = TargetSolutionVoid("", 43, 43, 43, True)
+        metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
+                    output_control, target_problem, initial_solution)
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            metaheuristic.current_solution = None    
+
+    # Setting an object that is not an instance of TargetSolution as the current solution raises a TypeError.
+    def test_set_invalid_current_solution_raises_type_error(self):
+        # Arrange
+        name = "Metaheuristic"
+        finish_control = FinishControl()
+        random_seed = 12345
+        additional_statistics_control = AdditionalStatisticsControl()
+        output_control = OutputControl()
+        target_problem = TargetProblemVoid("aaa", True)
+        initial_solution = TargetSolutionVoid("", 43, 43, 43, True)
+        metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
+                    output_control, target_problem, initial_solution)
+        invalid_solution = "invalid"    
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            metaheuristic.current_solution = invalid_solution
+
+    # Setting the current solution to an object of the wrong type raises a TypeError.
+    def test_set_current_solution_wrong_type_raises_type_error(self):
+        # Arrange
+        name = "Metaheuristic"
+        finish_control = FinishControl()
+        random_seed = 12345
+        additional_statistics_control = AdditionalStatisticsControl()
+        output_control = OutputControl()
+        target_problem = TargetProblemVoid("aaa", True)
+        initial_solution = TargetSolutionVoid("", 43, 43, 43, True)
+        metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
+                    output_control, target_problem, initial_solution)
+        solution = TargetProblemVoid("xxx", True)    
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            metaheuristic.current_solution = solution
