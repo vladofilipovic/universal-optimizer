@@ -82,7 +82,7 @@ class PopulationBasedMetaheuristic(Metaheuristic, metaclass=ABCMeta):
         if initial_solutions is not None: 
             self.__current_solutions:Optional[list[TargetSolution]] = initial_solutions.copy()
         else:
-            self.__current_solution:Optional[list[TargetSolution]] =  None
+            self.__current_solutions:Optional[list[TargetSolution]] =  None
 
     @abstractmethod
     def __copy__(self)->'PopulationBasedMetaheuristic':

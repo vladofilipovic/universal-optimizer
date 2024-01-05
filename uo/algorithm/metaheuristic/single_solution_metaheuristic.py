@@ -191,3 +191,4 @@ class SingleSolutionMetaheuristic(Metaheuristic, metaclass=ABCMeta):
         :rtype: str
         """
         return self.string_rep('|')
+

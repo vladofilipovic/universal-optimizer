@@ -315,3 +315,107 @@ class TestCurrentSolution(unittest.TestCase):
         # Act & Assert
         with self.assertRaises(TypeError):
             metaheuristic.current_solution = solution
+
+    # Setting a valid TargetSolution object as the current solution updates the value of __current_solution.
+    def test_set_valid_current_solution_updates_value2(self):
+        # Arrange
+        name = "Metaheuristic"
+        finish_control = FinishControl()
+        random_seed = 12345
+        additional_statistics_control = AdditionalStatisticsControl()
+        output_control = OutputControl()
+        target_problem = TargetProblemVoid("aaa", True)
+        solution = TargetSolutionVoid("", 43, 43, 43, True)
+        metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
+                    output_control, target_problem, None)
+        # Act
+        metaheuristic.current_solution = solution
+        # Assert
+        self.assertEqual(metaheuristic.current_solution, solution)
+
+    # Setting an object that is not a TargetSolution as the current solution raises a TypeError.
+    def test_set_invalid_current_solution_raises_type_error4(self):
+        # Arrange
+        name = "Metaheuristic"
+        finish_control = FinishControl()
+        random_seed = 12345
+        additional_statistics_control = AdditionalStatisticsControl()
+        output_control = OutputControl()
+        target_problem = TargetProblemVoid("aaa", True)
+        metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
+                    output_control, target_problem, None)
+        invalid_solution = "not a TargetSolution object"
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            metaheuristic.current_solution = invalid_solution
+
+class Test__Str__2(unittest.TestCase):
+
+    # Should return a string representation of the SingleSolutionMetaheuristic instance
+    def test_return_string_representation(self):
+        # Arrange
+        metaheuristic = SingleSolutionMetaheuristicVoid(
+            name="MyMetaheuristic",
+            finish_control=FinishControl(),
+            random_seed=123,
+            additional_statistics_control=AdditionalStatisticsControl(),
+            output_control=OutputControl(),
+            target_problem=TargetProblemVoid("aaa", True),
+            initial_solution=None
+        )
+        # Act
+        result = str(metaheuristic)   
+        # Assert
+        self.assertIsInstance(result, str)
+
+    # Should include the string representation of the Metaheuristic instance
+    def test_include_metaheuristic_representation(self):
+        # Arrange
+        metaheuristic = SingleSolutionMetaheuristicVoid(
+            name="MyMetaheuristic",
+            finish_control=FinishControl(),
+            random_seed=123,
+            additional_statistics_control=AdditionalStatisticsControl(),
+            output_control=OutputControl(),
+            target_problem=TargetProblemVoid("aaa", True),
+            initial_solution=None
+        )
+        # Act
+        result = str(metaheuristic)    
+        # Assert
+        self.assertIn("name=MyMetaheuristic", result)
+
+    # Should include the string representation of the current solution
+    def test_include_current_solution_representation(self):
+        # Arrange
+        current_solution = TargetSolutionVoid("aaa", 43, 0, 0, False)
+        metaheuristic = SingleSolutionMetaheuristicVoid(
+            name="MyMetaheuristic",
+            finish_control=FinishControl(),
+            random_seed=123,
+            additional_statistics_control=AdditionalStatisticsControl(),
+            output_control=OutputControl(),
+            target_problem=TargetProblemVoid("aaa", True),
+            initial_solution=current_solution
+        )
+        # Act
+        result = str(metaheuristic)
+        # Assert
+        self.assertIn("current_solution=" + str(current_solution), result)
+
+    # Should return an empty string if the current solution is None
+    def test_return_empty_string_if_current_solution_is_none(self):
+        # Arrange
+        metaheuristic = SingleSolutionMetaheuristicVoid(
+            name="MyMetaheuristic",
+            finish_control=FinishControl(),
+            random_seed=123,
+            additional_statistics_control=AdditionalStatisticsControl(),
+            output_control=OutputControl(),
+            target_problem=TargetProblemVoid("aaa", True),
+            initial_solution=None
+        )
+        # Act
+        result = str(metaheuristic)    
+        # Assert
+        self.assertIn("|current_solution=None|", result)
