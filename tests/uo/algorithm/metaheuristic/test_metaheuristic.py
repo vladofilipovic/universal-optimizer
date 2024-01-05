@@ -499,8 +499,8 @@ class TestMainLoopIteration(unittest.TestCase):
     
         # Act
         metaheuristic.main_loop_iteration()
-    
         # Assert
+        # Add assertions here
         # Check that the evaluation counter is not updated
         self.assertEqual(metaheuristic.evaluation, 0)
         # Check that the iteration counter is not updated

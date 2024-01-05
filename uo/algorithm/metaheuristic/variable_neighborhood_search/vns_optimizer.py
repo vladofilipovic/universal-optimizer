@@ -48,11 +48,11 @@ class VnsOptimizerConstructionParameters:
         target_problem: TargetProblem = None
         initial_solution: TargetSolution = None
         problem_solution_vns_support: ProblemSolutionVnsSupport = None
-        random_seed: int = None
+        random_seed: Optional[int] = None
         additional_statistics_control: AdditionalStatisticsControl = None
-        k_min: int = None
-        k_max: int = None
-        local_search_type: str = None
+        k_min: Optional[int] = None
+        k_max: Optional[int] = None
+        local_search_type: Optional[str] = None
 
 class VnsOptimizer(SingleSolutionMetaheuristic):
     """
@@ -278,12 +278,10 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         for _ in range(0, indentation):
             s += indentation_symbol  
         s += 'k_max=' + str(self.k_max) + delimiter
-        s += delimiter
-        s += '__problem_solution_vns_support=' + self.__problem_solution_vns_support.string_rep(delimiter, 
-                indentation + 1, indentation_symbol, group_start, group_end) + delimiter 
         for _ in range(0, indentation):
             s += indentation_symbol  
-        s += '__max_local_optima=' + str(self.__max_local_optima) + delimiter 
+        s += '__problem_solution_vns_support=' + self.__problem_solution_vns_support.string_rep(delimiter, 
+                indentation + 1, indentation_symbol, group_start, group_end) + delimiter 
         for _ in range(0, indentation):
             s += indentation_symbol  
         s += '__local_search_type=' + str(self.__local_search_type) + delimiter

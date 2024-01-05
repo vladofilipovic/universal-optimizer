@@ -1,0 +1,428 @@
+from datetime import datetime
+import unittest   
+import unittest.mock as mocker
+from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
+
+from uo.target_problem.target_problem import TargetProblem
+from uo.algorithm.output_control import OutputControl
+from uo.algorithm.metaheuristic.finish_control import FinishControl
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer 
+from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
+from uo.target_problem.target_problem_void import TargetProblemVoid
+from uo.target_solution.target_solution_void import TargetSolutionVoid
+
+
+class TestVnsOptimizer(unittest.TestCase):
+
+    # VnsOptimizer can be initialized with valid parameters
+    def test_vns_optimizer_initialized_with_valid_parameters(self):
+        # Arrange
+        finish_control = FinishControl()
+        random_seed = 123
+        additional_statistics_control = AdditionalStatisticsControl()
+        output_control = OutputControl()
+        target_problem = TargetProblemVoid("a problem", True)
+        initial_solution = TargetSolutionVoid("s1", 43, 43, 43, True)
+        vns_support_stub = mocker.MagicMock(spec=ProblemSolutionVnsSupport)
+        type(vns_support_stub).local_search_best_improvement = mocker.CallableMixin(spec=lambda x: x)
+        type(vns_support_stub).local_search_first_improvement= mocker.CallableMixin(spec=lambda x: x)
+        type(vns_support_stub).copy = mocker.CallableMixin(spec="return self")
+        k_min = 1
+        k_max = 10
+        local_search_type = 'local_search_best_improvement'
+        # Act
+        vns_optimizer = VnsOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
+                    target_problem, initial_solution, vns_support_stub, k_min, k_max, local_search_type)
+        # Assert
+        self.assertIsInstance(vns_optimizer, VnsOptimizer)
+
+    # VnsOptimizer can be initialized with None for initial_solution parameter
+    def test_vns_optimizer_initialized_with_none_initial_solution_2(self):
+        # Arrange
+        finish_control = FinishControl()
+        random_seed = 123
+        additional_statistics_control = AdditionalStatisticsControl()
+        output_control = OutputControl()
+        target_problem = TargetProblemVoid("a problem", True)
+        initial_solution = None
+        vns_support_stub = mocker.MagicMock(spec=ProblemSolutionVnsSupport)
+        type(vns_support_stub).local_search_best_improvement = mocker.CallableMixin(spec=lambda x: x)
+        type(vns_support_stub).local_search_first_improvement= mocker.CallableMixin(spec=lambda x: x)
+        type(vns_support_stub).copy = mocker.CallableMixin(spec="return self")
+        k_min = 1
+        k_max = 10
+        local_search_type = 'local_search_best_improvement'
+        # Act
+        vns_optimizer = VnsOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
+                    target_problem, initial_solution, vns_support_stub, k_min, k_max, local_search_type)
+        # Assert
+        self.assertIsInstance(vns_optimizer, VnsOptimizer)
+
+    # VnsOptimizer can be initialized with None for random_seed parameter
+    def test_vns_optimizer_initialized_with_none_random_seed(self):
+        # Arrange
+        finish_control = FinishControl()
+        random_seed = None
+        additional_statistics_control = AdditionalStatisticsControl()
+        output_control = OutputControl()
+        target_problem = TargetProblemVoid("a problem", True)
+        initial_solution = None
+        vns_support_stub = mocker.MagicMock(spec=ProblemSolutionVnsSupport)
+        type(vns_support_stub).local_search_best_improvement = mocker.CallableMixin(spec=lambda x: x)
+        type(vns_support_stub).local_search_first_improvement= mocker.CallableMixin(spec=lambda x: x)
+        type(vns_support_stub).copy = mocker.CallableMixin(spec="return self")
+        k_min = 1
+        k_max = 10
+        local_search_type = 'local_search_best_improvement'
+        # Act
+        vns_optimizer = VnsOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
+                    target_problem, initial_solution, vns_support_stub, k_min, k_max, local_search_type)
+        # Assert
+        self.assertIsInstance(vns_optimizer, VnsOptimizer)
+
+    # VnsOptimizer can not be initialized without ProblemSolutionVnsSupport parameter
+    def test_vns_optimizer_initialized_with_problem_solution_vns_support(self):
+        finish_control = FinishControl()
+        random_seed = 123
+        additional_statistics_control = AdditionalStatisticsControl()
+        output_control = OutputControl()
+        target_problem = TargetProblemVoid("a problem", True)
+        initial_solution = None
+        vns_support = None
+        k_min = 1
+        k_max = 10
+        local_search_type = 'local_search_best_improvement'
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            vns_optimizer = VnsOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
+                    target_problem, initial_solution, vns_support, k_min, k_max, local_search_type)
+
+    # VnsOptimizer can successfully execute init
+    def test_vns_optimizer_init(self):
+        # Arrange
+        finish_control = FinishControl()
+        random_seed = None
+        additional_statistics_control = AdditionalStatisticsControl()
+        output_control = OutputControl()
+        target_problem = TargetProblemVoid("a problem", True)
+        initial_solution = TargetSolutionVoid("s1", 43, 43, 43, True)
+        vns_support_stub = mocker.MagicMock(spec=ProblemSolutionVnsSupport)
+        type(vns_support_stub).local_search_best_improvement = mocker.CallableMixin(spec=lambda x: x)
+        type(vns_support_stub).local_search_first_improvement= mocker.CallableMixin(spec=lambda x: x)
+        type(vns_support_stub).copy = mocker.CallableMixin(spec="return self")
+        k_min = 1
+        k_max = 10
+        local_search_type = 'local_search_best_improvement'
+        vns_optimizer = VnsOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
+                    target_problem, initial_solution, vns_support_stub, k_min, k_max, local_search_type)
+        # Act
+        vns_optimizer.execution_started = datetime.now()
+        vns_optimizer.init()
+        # Assert
+        # Add assertions here
+        self.assertEqual( vns_optimizer.evaluation, 0)
+
+    # VnsOptimizer can successfully execute copy
+    def test_copy(self):
+        # Arrange
+        finish_control = FinishControl()
+        random_seed = None
+        additional_statistics_control = AdditionalStatisticsControl()
+        output_control = OutputControl()
+        target_problem = TargetProblemVoid("a problem", True)
+        initial_solution = TargetSolutionVoid("s1", 43, 43, 43, True)
+        vns_support_stub = mocker.MagicMock(spec=ProblemSolutionVnsSupport)
+        type(vns_support_stub).local_search_best_improvement = mocker.CallableMixin(spec=lambda x: x)
+        type(vns_support_stub).local_search_first_improvement= mocker.CallableMixin(spec=lambda x: x)
+        type(vns_support_stub).copy = mocker.CallableMixin(spec="return self")
+        k_min = 1
+        k_max = 10
+        local_search_type = 'local_search_first_improvement'
+        vns_optimizer = VnsOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
+                    target_problem, initial_solution, vns_support_stub, k_min, k_max, local_search_type)
+        # Act
+        copied_optimizer = vns_optimizer.copy()
+        # Assert
+        self.assertIsNot(vns_optimizer, copied_optimizer)
+        self.assertEqual(vns_optimizer.random_seed, copied_optimizer.random_seed)
+        self.assertEqual(vns_optimizer.finish_control.criteria, copied_optimizer.finish_control.criteria)
+
+    # VnsOptimizer can successfully execute string_rep
+    def test_string_rep(self):
+        # Arrange
+        finish_control = FinishControl()
+        random_seed = 123
+        additional_statistics_control = AdditionalStatisticsControl()
+        output_control = OutputControl()
+        target_problem = TargetProblemVoid("a problem", True)
+        initial_solution = TargetSolutionVoid("s1", 43, 43, 43, True)
+        vns_support_stub = mocker.MagicMock(spec=ProblemSolutionVnsSupport)
+        type(vns_support_stub).local_search_best_improvement = mocker.CallableMixin(spec=lambda x: x)
+        type(vns_support_stub).local_search_first_improvement= mocker.CallableMixin(spec=lambda x: x)
+        type(vns_support_stub).copy = mocker.CallableMixin(spec="return self")
+        type(vns_support_stub).string_rep = mocker.Mock(return_value="")
+        k_min = 1
+        k_max = 10
+        local_search_type = 'local_search_first_improvement'
+        vns_optimizer = VnsOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
+                    target_problem, initial_solution, vns_support_stub, k_min, k_max, local_search_type)
+        # Act
+        string_representation = vns_optimizer.string_rep('|')
+        # Assert
+        expected_string = "name=vns|"
+        self.assertIn(expected_string, string_representation)
+        expected_string = "|finish_control="
+        self.assertIn(expected_string, string_representation)
+        expected_string = "|random_seed=123|"
+        self.assertIn(expected_string, string_representation)
+        expected_string = "|additional_statistics_control="
+        self.assertIn(expected_string, string_representation)
+        expected_string = "|target_problem="
+        self.assertIn(expected_string, string_representation)
+        expected_string = "|current_solution="
+        self.assertIn(expected_string, string_representation)
+        expected_string = "|k_min=1|"
+        self.assertIn(expected_string, string_representation)
+        expected_string = "|k_max=10|"
+        self.assertIn(expected_string, string_representation)
+        expected_string = "|__problem_solution_vns_support="
+        self.assertIn(expected_string, string_representation)
+        expected_string = "__local_search_type=local_search_first_improvement|"
+        self.assertIn(expected_string, string_representation)
+
+    # VnsOptimizer can successfully execute __str__
+    def test_str(self):
+        # Arrange
+        finish_control = FinishControl()
+        random_seed = 123
+        additional_statistics_control = AdditionalStatisticsControl()
+        output_control = OutputControl()
+        target_problem = TargetProblemVoid("a problem", True)
+        initial_solution = TargetSolutionVoid("s1", 43, 43, 43, True)
+        vns_support_stub = mocker.MagicMock(spec=ProblemSolutionVnsSupport)
+        type(vns_support_stub).local_search_best_improvement = mocker.CallableMixin(spec=lambda x: x)
+        type(vns_support_stub).local_search_first_improvement= mocker.CallableMixin(spec=lambda x: x)
+        type(vns_support_stub).copy = mocker.CallableMixin(spec="return self")
+        type(vns_support_stub).string_rep = mocker.Mock(return_value="")
+        k_min = 1
+        k_max = 10
+        local_search_type = 'local_search_first_improvement'
+        vns_optimizer = VnsOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
+                    target_problem, initial_solution, vns_support_stub, k_min, k_max, local_search_type)
+        # Act
+        string_representation = str(vns_optimizer)
+        # Assert
+        expected_string = "name=vns|"
+        self.assertIn(expected_string, string_representation)
+        expected_string = "|finish_control="
+        self.assertIn(expected_string, string_representation)
+        expected_string = "|random_seed=123|"
+        self.assertIn(expected_string, string_representation)
+        expected_string = "|additional_statistics_control="
+        self.assertIn(expected_string, string_representation)
+        expected_string = "|target_problem="
+        self.assertIn(expected_string, string_representation)
+        expected_string = "|current_solution="
+        self.assertIn(expected_string, string_representation)
+        expected_string = "|k_min=1|"
+        self.assertIn(expected_string, string_representation)
+        expected_string = "|k_max=10|"
+        self.assertIn(expected_string, string_representation)
+        expected_string = "|__problem_solution_vns_support="
+        self.assertIn(expected_string, string_representation)
+        expected_string = "__local_search_type=local_search_first_improvement|"
+        self.assertIn(expected_string, string_representation)
+
+    # VnsOptimizer can successfully execute __repr__
+    def test_repr_method(self):
+        # Arrange
+        finish_control = FinishControl()
+        random_seed = 123
+        additional_statistics_control = AdditionalStatisticsControl()
+        output_control = OutputControl()
+        target_problem = TargetProblemVoid("a problem", True)
+        initial_solution = TargetSolutionVoid("s1", 43, 43, 43, True)
+        vns_support_stub = mocker.MagicMock(spec=ProblemSolutionVnsSupport)
+        type(vns_support_stub).local_search_best_improvement = mocker.CallableMixin(spec=lambda x: x)
+        type(vns_support_stub).local_search_first_improvement= mocker.CallableMixin(spec=lambda x: x)
+        type(vns_support_stub).copy = mocker.CallableMixin(spec="return self")
+        type(vns_support_stub).string_rep = mocker.Mock(return_value="")
+        k_min = 1
+        k_max = 10
+        local_search_type = 'local_search_first_improvement'
+        vns_optimizer = VnsOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
+                    target_problem, initial_solution, vns_support_stub, k_min, k_max, local_search_type)
+        # Act
+        repr_string = repr(vns_optimizer)
+        # Assert
+        self.assertIsInstance(repr_string, str)
+        expected_string = "name="
+        self.assertIn(expected_string, repr_string)
+        expected_string = "finish_control="
+        self.assertIn(expected_string, repr_string)
+        expected_string = "random_seed=123"
+        self.assertIn(expected_string, repr_string)
+        expected_string = "additional_statistics_control="
+        self.assertIn(expected_string, repr_string)
+        expected_string = "target_problem="
+        self.assertIn(expected_string, repr_string)
+        expected_string = "current_solution="
+        self.assertIn(expected_string, repr_string)
+        expected_string = "k_min=1"
+        self.assertIn(expected_string, repr_string)
+        expected_string = "k_max=10"
+        self.assertIn(expected_string, repr_string)
+        expected_string = "__problem_solution_vns_support="
+        self.assertIn(expected_string, repr_string)
+        expected_string = "__local_search_type=local_search_first_improvement"
+        self.assertIn(expected_string, repr_string)
+
+    # VnsOptimizer raises TypeError if finish_control parameter is not of type FinishControl
+    def test_finish_control_type_error(self):
+        # Arrange
+        finish_control = "not a FinishControl"
+        random_seed = 123
+        additional_statistics_control = AdditionalStatisticsControl()
+        output_control = OutputControl()
+        target_problem = TargetProblemVoid("a problem", True)
+        initial_solution = TargetSolutionVoid("s1", 43, 43, 43, True)
+        vns_support_stub = mocker.MagicMock(spec=ProblemSolutionVnsSupport)
+        type(vns_support_stub).local_search_best_improvement = mocker.CallableMixin(spec=lambda x: x)
+        type(vns_support_stub).local_search_first_improvement= mocker.CallableMixin(spec=lambda x: x)
+        type(vns_support_stub).copy = mocker.CallableMixin(spec="return self")
+        type(vns_support_stub).string_rep = mocker.Mock(return_value="")
+        k_min = 1
+        k_max = 10
+        local_search_type = 'local_search_first_improvement'
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            VnsOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
+                        target_problem, initial_solution, vns_support_stub, k_min, k_max, local_search_type)
+
+    # VnsOptimizer raises TypeError if random_seed parameter is not of type Optional[int]
+    def test_random_seed_type_error(self):
+        # Arrange
+        finish_control = FinishControl()
+        random_seed = "not an int"
+        additional_statistics_control = AdditionalStatisticsControl()
+        output_control = OutputControl()
+        target_problem = TargetProblemVoid("a problem", True)
+        initial_solution = TargetSolutionVoid("s1", 43, 43, 43, True)
+        vns_support_stub = mocker.MagicMock(spec=ProblemSolutionVnsSupport)
+        type(vns_support_stub).local_search_best_improvement = mocker.CallableMixin(spec=lambda x: x)
+        type(vns_support_stub).local_search_first_improvement= mocker.CallableMixin(spec=lambda x: x)
+        type(vns_support_stub).copy = mocker.CallableMixin(spec="return self")
+        type(vns_support_stub).string_rep = mocker.Mock(return_value="")
+        k_min = 1
+        k_max = 10
+        local_search_type = 'local_search_first_improvement'
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            VnsOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
+                        target_problem, initial_solution, vns_support_stub, k_min, k_max, local_search_type)
+
+    # VnsOptimizer raises TypeError if additional_statistics_control parameter is not of type AdditionalStatisticsControl
+    def test_additional_statistics_control_type_error(self):
+        # Arrange
+        finish_control = FinishControl()
+        random_seed = 123
+        additional_statistics_control = "not a valid type"
+        output_control = OutputControl()
+        target_problem = TargetProblemVoid("a problem", True)
+        initial_solution = TargetSolutionVoid("s1", 43, 43, 43, True)
+        vns_support_stub = mocker.MagicMock(spec=ProblemSolutionVnsSupport)
+        type(vns_support_stub).local_search_best_improvement = mocker.CallableMixin(spec=lambda x: x)
+        type(vns_support_stub).local_search_first_improvement= mocker.CallableMixin(spec=lambda x: x)
+        type(vns_support_stub).copy = mocker.CallableMixin(spec="return self")
+        type(vns_support_stub).string_rep = mocker.Mock(return_value="")
+        k_min = 1
+        k_max = 10
+        local_search_type = 'local_search_first_improvement'
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            VnsOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
+                        target_problem, initial_solution, vns_support_stub, k_min, k_max, local_search_type)
+
+    # VnsOptimizer raises TypeError if initial_solution parameter is not of type Optional[TargetSolution]
+    def test_initial_solution_parameter_type_error(self):
+        # Arrange
+        finish_control = FinishControl()
+        random_seed = 123
+        additional_statistics_control = AdditionalStatisticsControl()
+        output_control = OutputControl()
+        target_problem = TargetProblemVoid("a problem", True)
+        initial_solution = "not a TargetSolution"        
+        vns_support_stub = mocker.MagicMock(spec=ProblemSolutionVnsSupport)
+        type(vns_support_stub).local_search_best_improvement = mocker.CallableMixin(spec=lambda x: x)
+        type(vns_support_stub).local_search_first_improvement= mocker.CallableMixin(spec=lambda x: x)
+        type(vns_support_stub).copy = mocker.CallableMixin(spec="return self")
+        type(vns_support_stub).string_rep = mocker.Mock(return_value="")
+        k_min = 1
+        k_max = 10
+        local_search_type = 'local_search_first_improvement'
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            VnsOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
+                        target_problem, initial_solution, vns_support_stub, k_min, k_max, local_search_type)
+
+    # VnsOptimizer raises TypeError if problem_solution_vns_support parameter is not of type ProblemSolutionVnsSupport
+    def test_problem_solution_vns_support_parameter_type_error(self):
+        # Arrange
+        finish_control = FinishControl()
+        random_seed = 123
+        additional_statistics_control = AdditionalStatisticsControl()
+        output_control = OutputControl()
+        target_problem = TargetProblemVoid("a problem", True)
+        initial_solution = TargetSolutionVoid("s1", 43, 43, 43, True)        
+        vns_support = "not appropriate type"       
+        k_min = 1
+        k_max = 10
+        local_search_type = 'local_search_first_improvement'
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            VnsOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
+                        target_problem, initial_solution, vns_support, k_min, k_max, local_search_type)
+
+    # VnsOptimizer raises TypeError if k_min parameter is not of type int
+    def test_k_min_parameter_type_error(self):
+        # Arrange
+        finish_control = FinishControl()
+        random_seed = 123
+        additional_statistics_control = AdditionalStatisticsControl()
+        output_control = OutputControl()
+        target_problem = TargetProblemVoid("a problem", True)
+        initial_solution = TargetSolutionVoid("s1", 43, 43, 43, True)         
+        vns_support_stub = mocker.MagicMock(spec=ProblemSolutionVnsSupport)
+        type(vns_support_stub).local_search_best_improvement = mocker.CallableMixin(spec=lambda x: x)
+        type(vns_support_stub).local_search_first_improvement= mocker.CallableMixin(spec=lambda x: x)
+        type(vns_support_stub).copy = mocker.CallableMixin(spec="return self")
+        type(vns_support_stub).string_rep = mocker.Mock(return_value="")
+        k_min = "1"
+        k_max = 10
+        local_search_type = 'local_search_first_improvement'
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            VnsOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
+                        target_problem, initial_solution, vns_support_stub, k_min, k_max, local_search_type)
+
+    # VnsOptimizer raises TypeError if k_max parameter is not of type int
+    def test_k_min_parameter_type_error(self):
+        # Arrange
+        finish_control = FinishControl()
+        random_seed = 123
+        additional_statistics_control = AdditionalStatisticsControl()
+        output_control = OutputControl()
+        target_problem = TargetProblemVoid("a problem", True)
+        initial_solution = TargetSolutionVoid("s1", 43, 43, 43, True)         
+        vns_support_stub = mocker.MagicMock(spec=ProblemSolutionVnsSupport)
+        type(vns_support_stub).local_search_best_improvement = mocker.CallableMixin(spec=lambda x: x)
+        type(vns_support_stub).local_search_first_improvement= mocker.CallableMixin(spec=lambda x: x)
+        type(vns_support_stub).copy = mocker.CallableMixin(spec="return self")
+        type(vns_support_stub).string_rep = mocker.Mock(return_value="")
+        k_min = 1
+        k_max = "10"
+        local_search_type = 'local_search_first_improvement'
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            VnsOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
+                        target_problem, initial_solution, vns_support_stub, k_min, k_max, local_search_type)
