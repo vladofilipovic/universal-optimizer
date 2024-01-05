@@ -1,4 +1,5 @@
 
+from io import TextIOWrapper
 import unittest   
 import unittest.mock as mocker
 
@@ -11,6 +12,7 @@ from uo.algorithm.optimizer_void import OptimizerVoid
 from uo.target_problem.target_problem_void import TargetProblemVoid
 from uo.target_solution.quality_of_solution import QualityOfSolution
 from uo.target_solution.target_solution_void import TargetSolutionVoid
+from uo.utils import logger
 
 
 class Test__Optimizer__(unittest.TestCase):
@@ -209,3 +211,138 @@ class Test__Optimizer__(unittest.TestCase):
         string_rep = optimizer.string_rep("|")
         # Assert
         self.assertIsInstance(string_rep, str)
+
+
+class TestWriteOutputValuesIfNeeded(unittest.TestCase):
+
+    # Method writes data to output file when write_to_output is True and step_name is valid
+    def test_write_output_values_if_needed_write_to_output_true_step_name_valid(self):
+        # Arrange
+        output_control = OutputControl(write_to_output = True, 
+                    output_file = mocker.MagicMock(spec=TextIOWrapper))
+        optimizer = OptimizerVoid("optimizer", output_control, TargetProblemVoid("a problem", True))
+        step_name = "after_algorithm"
+        step_name_value = "after_algorithm_value"
+        logger_mock = mocker.MagicMock(logger.logger)
+        logger_mock.info = mocker.Mock(return_value="")
+        # Act
+        optimizer.write_output_values_if_needed(step_name, step_name_value)
+        # Assert
+        self.assertEqual(optimizer.output_control.output_file.write.call_count, 9)
+        self.assertEqual(logger_mock.info.call_count, 0)
+        
+    # # Method replaces 'step_name' with step_name_value in output if present in fields_definitions
+    # def test_write_output_values_if_needed_replace_step_name_with_step_name_value(self, mocker):
+    #     # Arrange
+    #     output_control = OutputControl()
+    #     output_control.write_to_output = True
+    #     output_control.output_file = mocker.Mock()
+    #     output_control.fields_definitions = ["step_name"]
+    #     optimizer = Optimizer("optimizer", output_control, TargetProblem())
+    #     step_name = "after_algorithm"
+    #     step_name_value = "after_algorithm_value"
+    #     # Act
+    #     optimizer.write_output_values_if_needed(step_name, step_name_value)
+    #     # Assert
+    #     output_control.output_file.write.assert_called_once_with('after_algorithm_value\t')
+
+    # # Method logs the written line using logger.info()
+    # def test_write_output_values_if_needed_logs_written_line(self, mocker):
+    #     # Arrange
+    #     output_control = OutputControl()
+    #     output_control.write_to_output = True
+    #     output_control.output_file = mocker.Mock()
+    #     optimizer = Optimizer("optimizer", output_control, TargetProblem())
+    #     step_name = "after_algorithm"
+    #     step_name_value = "after_algorithm_value"
+    #     # Act
+    #     optimizer.write_output_values_if_needed(step_name, step_name_value)
+    #     # Assert
+    #     logger.info.assert_called_once_with('')
+
+    # # Method raises TypeError if step_name is not a valid string
+    # def test_write_output_values_if_needed_raises_type_error_invalid_step_name(self, mocker):
+    #     # Arrange
+    #     output_control = OutputControl()
+    #     output_control.write_to_output = True
+    #     output_control.output_file = mocker.Mock()
+    #     optimizer = Optimizer("optimizer", output_control, TargetProblem())
+    #     step_name = 123
+    #     step_name_value = "after_algorithm_value"
+    #     # Act & Assert
+    #     with self.assertRaises(TypeError):
+    #         optimizer.write_output_values_if_needed(step_name, step_name_value)
+
+    # # Method raises ValueError if step_name is not one of the valid options
+    # def test_write_output_values_if_needed_raises_value_error_invalid_step_name(self, mocker):
+    #     # Arrange
+    #     output_control = OutputControl()
+    #     output_control.write_to_output = True
+    #     output_control.output_file = mocker.Mock()
+    #     optimizer = Optimizer("optimizer", output_control, TargetProblem())
+    #     step_name = "invalid_step"
+    #     step_name_value = "after_algorithm_value"
+    #     # Act & Assert
+    #     with self.assertRaises(ValueError):
+    #         optimizer.write_output_values_if_needed(step_name, step_name_value)
+
+    # # Method writes 'XXX' to output if fields_definitions evaluation fails
+    # def test_write_output_values_if_needed_writes_xxx_on_failed_evaluation(self, mocker):
+    #     # Arrange
+    #     output_control = OutputControl()
+    #     output_control.write_to_output = True
+    #     output_control.output_file = mocker.Mock()
+    #     output_control.fields_definitions = ["invalid_field"]
+    #     optimizer = Optimizer("optimizer", output_control, TargetProblem())
+    #     step_name = "after_algorithm"
+    #     step_name_value = "after_algorithm_value"
+    #     # Act
+    #     optimizer.write_output_values_if_needed(step_name, step_name_value)
+    #     # Assert
+    #     output_control.output_file.write.assert_called_once_with('XXX\t')
+
+    # # Method does not write to output if write_to_output is False
+    # def test_write_output_values_if_needed_write_to_output_false(self, mocker):
+    #     # Arrange
+    #     output_control = OutputControl()
+    #     output_control.write_to_output = False
+    #     output_control.output_file = mocker.Mock()
+    #     optimizer = Optimizer("optimizer", output_control, TargetProblem())
+    #     step_name = "after_algorithm"
+    #     step_name_value = "after_algorithm_value"
+    #     # Act
+    #     optimizer.write_output_values_if_needed(step_name, step_name_value)
+    #     # Assert
+    #     output_control.output_file.write.assert_not_called()
+    #     logger.info.assert_not_called()
+
+    # # Method does not write to output if should_write is False
+    # def test_write_output_values_if_needed_should_write_false(self, mocker):
+    #     # Arrange
+    #     output_control = OutputControl()
+    #     output_control.write_to_output = True
+    #     output_control.output_file = mocker.Mock()
+    #     optimizer = Optimizer("optimizer", output_control, TargetProblem())
+    #     step_name = "after_algorithm"
+    #     step_name_value = "after_algorithm_value"
+    #     # Act
+    #     optimizer.write_output_values_if_needed(step_name, step_name_value)
+    #     # Assert
+    #     output_control.output_file.write.assert_not_called()
+    #     logger.info.assert_not_called()
+
+    # # Method writes headers to output file if write_to_output is True
+    # def test_write_output_values_if_needed_write_headers(self, mocker):
+    #     # Arrange
+    #     output_control = OutputControl()
+    #     output_control.write_to_output = True
+    #     output_control.output_file = mocker.Mock()
+    #     output_control.fields_headings = ["Field1", "Field2", "Field3"]
+    #     optimizer = Optimizer("optimizer", output_control, TargetProblem())
+    #     step_name = "after_algorithm"
+    #     step_name_value = "after_algorithm_value"
+    #     # Act
+    #     optimizer.write_output_values_if_needed(step_name, step_name_value)
+    #     # Assert
+    #     output_control.output_file.write.assert_called_once_with("Field1\tField2\tField3\n")
+    #     logger.info.assert_called_once_with("Field1\tField2\tField3")

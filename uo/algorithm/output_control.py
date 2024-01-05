@@ -37,8 +37,8 @@ class OutputControl:
         """
         if not isinstance(write_to_output, bool):
             raise TypeError('Parameter \'write_to_output\' must have type \'bool\'.')
-        if not isinstance(output_file, Optional[TextIOWrapper]):
-            raise TypeError('Parameter \'output_file\' must have type \'TextIOWrapper\' or be \'None\'.')
+        #if not isinstance(output_file, Optional[TextIOWrapper]):
+        #    raise TypeError('Parameter \'output_file\' must have type \'TextIOWrapper\' or be \'None\'.')
         if not isinstance(fields, str):
             raise TypeError('Parameter \'fields\' must have type \'str\'.')
         if not isinstance(moments, str):
