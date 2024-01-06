@@ -45,7 +45,7 @@ class SingleSolutionMetaheuristic(Metaheuristic, metaclass=ABCMeta):
             additional_statistics_control:AdditionalStatisticsControl,
             output_control:OutputControl, 
             target_problem:TargetProblem,
-            initial_solution:Optional[TargetSolution]
+            initial_solution:TargetSolution
     )->None:
         """
         Create new SingleSolutionMetaheuristic instance
@@ -71,8 +71,8 @@ class SingleSolutionMetaheuristic(Metaheuristic, metaclass=ABCMeta):
                 raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
         if not isinstance(target_problem, TargetProblem):
                 raise TypeError('Parameter \'target_problem\' must be \'TargetProblem\'.')
-        if not isinstance(initial_solution, Optional[TargetSolution]):
-                raise TypeError('Parameter \'initial_solution\' must be \'TargetSolution\' or \'None\'.')        
+        if not isinstance(initial_solution, TargetSolution):
+                raise TypeError('Parameter \'initial_solution\' must be \'TargetSolution\'.')        
         super().__init__(name=name, 
                 finish_control=finish_control,
                 random_seed=random_seed,
@@ -114,18 +114,6 @@ class SingleSolutionMetaheuristic(Metaheuristic, metaclass=ABCMeta):
         :rtype: :class:`TargetSolution`        
         """
         return self.__current_solution
-
-    @current_solution.setter
-    def current_solution(self, value:TargetSolution)->None:
-        """
-        Property setter for the current solution used during single solution metaheuristic execution
-
-        :param value: the current solution
-        :type value: :class:`TargetSolution`
-        """
-        if not isinstance(value, TargetSolution):
-            raise TypeError('Property \'current_solution\' must have type \'TargetSolution\'.')
-        self.__current_solution = value
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
             group_end:str ='}')->str:

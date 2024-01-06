@@ -45,7 +45,7 @@ class PopulationBasedMetaheuristic(Metaheuristic, metaclass=ABCMeta):
             additional_statistics_control:AdditionalStatisticsControl,
             output_control:OutputControl, 
             target_problem:TargetProblem,
-            initial_solutions:Optional[list[TargetSolution]]
+            initial_solutions:list[TargetSolution]
     )->None:
         """
         Create new PopulationBasedMetaheuristic instance
@@ -71,8 +71,8 @@ class PopulationBasedMetaheuristic(Metaheuristic, metaclass=ABCMeta):
                 raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
         if not isinstance(target_problem, TargetProblem):
                 raise TypeError('Parameter \'target_problem\' must be \'TargetProblem\'.')
-        if not isinstance(initial_solutions, Optional[list[TargetSolution]]):
-                raise TypeError('Parameter \'initial_solutions\' must be \'list[TargetSolution]\' or \'None\'.')
+        if not isinstance(initial_solutions, list[TargetSolution]):
+                raise TypeError('Parameter \'initial_solutions\' must be \'list[TargetSolution]\'.')
         super().__init__(name=name, 
                 finish_control=finish_control,
                 random_seed=random_seed,
@@ -114,18 +114,6 @@ class PopulationBasedMetaheuristic(Metaheuristic, metaclass=ABCMeta):
         :rtype: list[TargetSolution]        
         """
         return self.__current_solutions
-
-    @current_solutions.setter
-    def current_solutions(self, value:list[TargetSolution])->None:
-        """
-        Property setter for the population of current solutions used during population-based metaheuristic execution
-
-        :param value: the current solutions
-        :type value: list[TargetSolution]
-        """
-        if not isinstance(value, list):
-            raise TypeError('Parameter \'current_solutions\' must be list or tuple of \'TargetSolution\' objects.')
-        self.__current_solutions = value
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
             group_end:str ='}')->str:

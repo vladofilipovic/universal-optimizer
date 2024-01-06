@@ -135,16 +135,15 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
         return self.__copy__()
         
     def shaking(self, k:int, problem:OnesCountProblem2, solution:OnesCountProblemBinaryIntSolution, 
-            optimizer:Algorithm)->bool:
+            optimizer:Algorithm, )->bool:
         if optimizer.finish_control.check_evaluations and optimizer.evaluation > optimizer.finish_control.evaluations_max:
             return False
         tries:int = 0
         limit:int = 10000
         while tries < limit:
             positions:list[int] = []
-            for i in range(0,k):
+            for _ in range(0,k):
                 positions.append(choice(range(problem.dimension)))
-            new_representation:int = solution.representation
             mask:int = 0
             for p in positions:
                 mask |= 1 << p
@@ -162,11 +161,11 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
             return False 
 
     def local_search_best_improvement(self, k:int, problem:OnesCountProblem2, solution:OnesCountProblemBinaryIntSolution, 
-            optimizer: Algorithm)->OnesCountProblemBinaryIntSolution:
+            optimizer: Algorithm)->bool:
         if optimizer.finish_control.check_evaluations and optimizer.evaluation > optimizer.finish_control.evaluations_max:
-            return solution
+            return False
         if k<1:
-            return solution
+            return False
         # ls_bi for k==1
         best_ind:int = -1
         best_qos:QualityOfSolution =  QualityOfSolution(solution.objective_value, None,
@@ -188,14 +187,15 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
             if solution.fitness_value is not None:
                 if solution.fitness_value != best_qos.fitness_value:
                     raise RuntimeError('Fitness calculation within `local_search_best_improvement` function is not correct.')
-        return solution
+            return True
+        return False
 
     def local_search_first_improvement(self, k:int, problem:OnesCountProblem2, solution:OnesCountProblemBinaryIntSolution, 
-            optimizer: Algorithm)->OnesCountProblemBinaryIntSolution:
+            optimizer: Algorithm)->bool:
         if optimizer.finish_control.check_evaluations and optimizer.evaluation > optimizer.finish_control.evaluations_max:
-            return solution
+            return False
         if k<1:
-            return solution
+            return False
         # ls_fi for k==1
         best_qos:QualityOfSolution =  QualityOfSolution(solution.objective_value, None,
                 solution.fitness_value, None, solution.is_feasible)
@@ -210,9 +210,9 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
                 solution.fitness_value = new_qos.fitness_value
                 solution.fitness_values = None
                 solution.is_feasible = new_qos.is_feasible
-                return solution
+                return True
             solution.representation ^= mask
-        return solution
+        return False
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:

@@ -99,7 +99,7 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
             return False 
 
     def local_search_best_improvement(self, k:int, problem:OnesCountProblem, solution:OnesCountProblemBinaryIntSolution, 
-            optimizer: Algorithm)->OnesCountProblemBinaryIntSolution:
+            optimizer: Algorithm)->bool:
         """
         Executes "best improvement" variant of the local search procedure 
         
@@ -108,12 +108,12 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
         :param `OnesCountProblemBinaryIntSolution` solution: solution used for the problem that is solved
         :param `Algorithm` optimizer: optimizer that is executed
         :return: result of the local search procedure 
-        :rtype: OnesCountProblemBinaryIntSolution
+        :rtype: if local search is successful
         """
         if optimizer.finish_control.check_evaluations and optimizer.evaluation > optimizer.finish_control.evaluations_max:
-            return solution
+            return False
         if k < 1 or k > problem.dimension:
-            return solution
+            return False
         best_rep:Optional[int] = None
         best_qos:QualityOfSolution =  QualityOfSolution(solution.objective_value, solution.objective_values,
                 solution.fitness_value, solution.objective_values, solution.is_feasible)
@@ -130,7 +130,7 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
             solution.representation ^= mask 
             optimizer.evaluation += 1
             if optimizer.finish_control.check_evaluations and optimizer.evaluation > optimizer.finish_control.evaluations_max:
-                return solution
+                return False
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             new_qos = solution.calculate_quality(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
@@ -145,11 +145,11 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
             solution.objective_value = best_qos.objective_value
             solution.fitness_value = best_qos.fitness_value
             solution.is_feasible = best_qos.is_feasible
-            return solution
-        return solution
+            return True
+        return False
 
     def local_search_first_improvement(self, k:int, problem:OnesCountProblem, solution:OnesCountProblemBinaryIntSolution, 
-            optimizer: Algorithm)->OnesCountProblemBinaryIntSolution:
+            optimizer: Algorithm)->bool:
         """
         Executes "first improvement" variant of the local search procedure 
         
@@ -158,12 +158,12 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
         :param `OnesCountProblemBinaryIntSolution` solution: solution used for the problem that is solved
         :param `Algorithm` optimizer: optimizer that is executed
         :return: result of the local search procedure 
-        :rtype: OnesCountProblemBinaryIntSolution
+        :rtype: if local search is successful
         """
         if optimizer.finish_control.check_evaluations and optimizer.evaluation > optimizer.finish_control.evaluations_max:
-            return solution
+            return False
         if k < 1 or k > problem.dimension:
-            return solution
+            return False
         best_qos:QualityOfSolution =  QualityOfSolution(solution.objective_value, solution.objective_values,
                 solution.fitness_value, solution.objective_values, solution.is_feasible)
         # initialize indexes
@@ -179,7 +179,7 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
             solution.representation ^= mask 
             optimizer.evaluation += 1
             if optimizer.finish_control.check_evaluations and optimizer.evaluation > optimizer.finish_control.evaluations_max:
-                return solution
+                return False
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             new_qos = solution.calculate_quality(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
@@ -189,11 +189,11 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
                 solution.objective_value = new_qos.objective_value
                 solution.objective_values = new_qos.objective_values
                 solution.is_feasible = new_qos.is_feasible
-                return solution
+                return True
             solution.representation ^= mask
             # increment indexes and set in_loop accordingly
             in_loop = indexes.progress()
-        return solution
+        return False
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:

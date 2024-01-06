@@ -2,6 +2,7 @@
 
 import sys
 from pathlib import Path
+from typing import Optional
 directory = Path(__file__).resolve()
 sys.path.append(directory.parent)
 sys.path.append(directory.parent.parent)
@@ -75,14 +76,14 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
 
     def local_search_best_improvement(self, k:int, problem:FunctionOneVariableProblem, 
             solution:FunctionOneVariableProblemBinaryIntSolution, 
-            optimizer: Algorithm)->FunctionOneVariableProblemBinaryIntSolution:
+            optimizer: Algorithm)->bool:
         representation_length:int = 32
         if optimizer.finish_control.check_evaluations and \
                 optimizer.evaluation > optimizer.finish_control.evaluations_max:
-            return solution
+            return False
         if k < 1 or k > representation_length:
-            return solution
-        best_rep:int = None
+            return False
+        best_rep:Optional[int] = None
         best_qos:QualityOfSolution =  QualityOfSolution(solution.objective_value, None,
                 solution.fitness_value, None, solution.is_feasible)
         # initialize indexes
@@ -116,18 +117,18 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
             solution.fitness_value = best_qos.fitness_value
             solution.fitness_values = None
             solution.is_feasible = best_qos.is_feasible
-            return solution
-        return solution
+            return True
+        return False
 
     def local_search_first_improvement(self, k:int, problem:FunctionOneVariableProblem, 
             solution:FunctionOneVariableProblemBinaryIntSolution, 
-            optimizer: Algorithm)->FunctionOneVariableProblemBinaryIntSolution:
+            optimizer: Algorithm)->bool:
         representation_length:int = 32
         if optimizer.finish_control.check_evaluations and \
                 optimizer.evaluation > optimizer.finish_control.evaluations_max:
-            return solution
+            return False
         if k < 1 or k > representation_length:
-            return solution
+            return False
         best_qos:QualityOfSolution =  QualityOfSolution(solution.objective_value, None,
                 solution.fitness_value, None, solution.is_feasible)
         # initialize indexes
@@ -152,11 +153,11 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
                 solution.fitness_value = new_qos.fitness_value
                 solution.objective_value = new_qos.objective_value
                 solution.is_feasible = new_qos.is_feasible
-                return solution
+                return True
             solution.representation ^= mask
             # increment indexes and set in_loop accordingly
             in_loop = indexes.progress()
-        return solution
+        return False
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:

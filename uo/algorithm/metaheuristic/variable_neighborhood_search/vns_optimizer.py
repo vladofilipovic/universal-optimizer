@@ -117,28 +117,16 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
                 target_problem=target_problem,
                 initial_solution=initial_solution)
         self.__local_search_type:str = local_search_type
-        if problem_solution_vns_support is not None:
-            if isinstance(problem_solution_vns_support, ProblemSolutionVnsSupport):
-                self.__problem_solution_vns_support:ProblemSolutionVnsSupport = problem_solution_vns_support
-                self.__implemented_local_searches:dict[str,function] = {
-                    'local_search_best_improvement':  self.__problem_solution_vns_support.local_search_best_improvement,
-                    'local_search_first_improvement':  self.__problem_solution_vns_support.local_search_first_improvement,
-                }
-                if( self.__local_search_type not in self.__implemented_local_searches.keys()):
-                    raise ValueError( 'Value \'{}\' for VNS local_search_type is not supported'.format(
-                            self.__local_search_type))
-                self.__ls_method = self.__implemented_local_searches[self.__local_search_type]
-                self.__shaking_method = self.__problem_solution_vns_support.shaking
-            else:
-                self.__problem_solution_vns_support:ProblemSolutionVnsSupport = problem_solution_vns_support
-                self.__implemented_local_searches:Optional[dict[str,function]] = None
-                self.__ls_method = None
-                self.__shaking_method = None
-        else:
-            self.__problem_solution_vns_support:ProblemSolutionVnsSupport = None
-            self.__implemented_local_searches:Optional[dict[str,function]] = None
-            self.__ls_method = None
-            self.__shaking_method = None
+        self.__problem_solution_vns_support:ProblemSolutionVnsSupport = problem_solution_vns_support
+        self.__implemented_local_searches:dict[str,function] = {
+            'local_search_best_improvement':  self.__problem_solution_vns_support.local_search_best_improvement,
+            'local_search_first_improvement':  self.__problem_solution_vns_support.local_search_first_improvement,
+        }
+        if( self.__local_search_type not in self.__implemented_local_searches.keys()):
+            raise ValueError( 'Value \'{}\' for VNS local_search_type is not supported'.format(
+                    self.__local_search_type))
+        self.__ls_method = self.__implemented_local_searches[self.__local_search_type]
+        self.__shaking_method = self.__problem_solution_vns_support.shaking
         self.__k_min:int = k_min
         self.__k_max:int = k_max
         # current value of the vns parameter k
@@ -216,14 +204,18 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         One iteration within main loop of the VNS algorithm
         """
         self.write_output_values_if_needed("before_step_in_iteration", "shaking")
+        temp:TargetSolution = self.current_solution.copy()
         if not self.__shaking_method(self.__k_current, self.target_problem, self.current_solution, self):
             self.write_output_values_if_needed("after_step_in_iteration", "shaking")
+            self.current_solution.copy_from(temp)
             return
         self.write_output_values_if_needed("after_step_in_iteration", "shaking")
         self.iteration += 1
         while self.__k_current <= self.__k_max:
             self.write_output_values_if_needed("before_step_in_iteration", "ls")
-            self.current_solution = self.__ls_method(self.__k_current, self.target_problem, self.current_solution, self)
+            temp:TargetSolution = self.current_solution.copy()
+            if not self.__ls_method(self.__k_current, self.target_problem, self.current_solution, self):
+                self.current_solution.copy_from(temp)
             self.write_output_values_if_needed("after_step_in_iteration", "ls")
             # update auxiliary structure that keeps all solution codes
             self.additional_statistics_control.add_to_all_solution_codes_if_required(

@@ -49,29 +49,6 @@ class TestSingleSolutionMetaheuristic(unittest.TestCase):
         self.assertEqual(metaheuristic.current_solution.objective_value, initial_solution.objective_value)
         self.assertEqual(metaheuristic.current_solution.is_feasible, initial_solution.is_feasible)
 
-    # Setting a new current solution should update the current_solution property.
-    def test_set_current_solution(self):
-        # Arrange
-        name = "Metaheuristic"
-        finish_control = FinishControl()
-        random_seed = 12345
-        additional_statistics_control = AdditionalStatisticsControl()
-        output_control = OutputControl()
-        target_problem = TargetProblemVoid("aaa", True)
-        initial_solution = TargetSolutionVoid("bbb", 43, 43, 43, True)
-        # Act
-        metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
-                    output_control, target_problem, initial_solution)
-        new_solution = TargetSolutionVoid("ccc", 42, 42, 42, False)
-        # Act
-        metaheuristic.current_solution = new_solution
-        # Assert
-        self.assertEqual(metaheuristic.current_solution.name, new_solution.name)
-        self.assertEqual(metaheuristic.current_solution.random_seed, new_solution.random_seed)
-        self.assertEqual(metaheuristic.current_solution.fitness_value, new_solution.fitness_value)
-        self.assertEqual(metaheuristic.current_solution.objective_value, new_solution.objective_value)
-        self.assertEqual(metaheuristic.current_solution.is_feasible, new_solution.is_feasible)
-
     # Copying a SingleSolutionMetaheuristic instance should create a new instance with the same properties.
     def test_copy(self):
         # Arrange
@@ -176,39 +153,20 @@ class TestSingleSolutionMetaheuristic(unittest.TestCase):
 
     # Creating a new instance of SingleSolutionMetaheuristic with initial_solution=None should set current_solution to None.
     def test_initial_solution_none(self):
-        # Arrange
-        metaheuristic = SingleSolutionMetaheuristicVoid("Metaheuristic", FinishControl(), 12345, 
+        # Arrange Act & Assert
+        with self.assertRaises(TypeError):
+            SingleSolutionMetaheuristicVoid("Metaheuristic", FinishControl(), 12345, 
                     AdditionalStatisticsControl(), OutputControl(), TargetProblemVoid("aaa", True), None)
-        # Assert
-        self.assertIsNone(metaheuristic.current_solution)
-
+        
     # Setting current_solution to an invalid value should raise a TypeError.
     def test_set_invalid_current_solution(self):
-        # Arrange
-        metaheuristic = SingleSolutionMetaheuristicVoid("Metaheuristic", FinishControl(), 12345, 
-                    AdditionalStatisticsControl(), OutputControl(), TargetProblemVoid("aaa", True), 
-                    TargetSolutionVoid("", 43, 43, 43, True))
+        # Arrange  
         invalid_solution = "InvalidSolution"
         # Act & Assert
         with self.assertRaises(TypeError):
-            metaheuristic.current_solution = invalid_solution
-
-    # Copying a SingleSolutionMetaheuristic instance with an invalid property should raise an exception.
-    def test_invalid_property_copy(self):
-        # Arrange
-        name = "Metaheuristic"
-        finish_control = FinishControl()
-        random_seed = 12345
-        additional_statistics_control = AdditionalStatisticsControl()
-        output_control = OutputControl()
-        target_problem = TargetProblemVoid("aaa", True)
-        initial_solution = TargetSolutionVoid("", 43, 43, 43, True)
-        metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
-                    output_control, target_problem, initial_solution)
-        # Act & Assert
-        with self.assertRaises(TypeError):
-            metaheuristic.current_solution = "Invalid Solution"
-            metaheuristic_copy = metaheuristic.copy()
+            SingleSolutionMetaheuristicVoid("Metaheuristic", FinishControl(), 12345, 
+                    AdditionalStatisticsControl(), OutputControl(), TargetProblemVoid("aaa", True), 
+                    invalid_solution)
 
     # SingleSolutionMetaheuristic should be able to handle problems with different types of solutions.
     def test_different_solution_types(self):
@@ -229,23 +187,6 @@ class TestSingleSolutionMetaheuristic(unittest.TestCase):
 
 class TestCurrentSolution(unittest.TestCase):
 
-    # Setting a valid TargetSolution object as the current solution updates the value of __current_solution.
-    def test_set_valid_current_solution_updates_value(self):
-        # Arrange
-        name = "Metaheuristic"
-        finish_control = FinishControl()
-        random_seed = 12345
-        additional_statistics_control = AdditionalStatisticsControl()
-        output_control = OutputControl()
-        target_problem = TargetProblemVoid("aaa", True)
-        initial_solution = TargetSolutionVoid("", 43, 43, 43, True)
-        metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
-                    output_control, target_problem, initial_solution)
-        solution = TargetSolutionVoid("bbb", 0, 0, 0, True)
-        # Act
-        metaheuristic.current_solution = solution
-        # Assert
-        self.assertEqual(metaheuristic.current_solution, solution)
 
     # Getting the current solution returns the value of __current_solution.
     def test_get_current_solution_returns_value(self):
@@ -259,12 +200,14 @@ class TestCurrentSolution(unittest.TestCase):
         initial_solution = TargetSolutionVoid("", 43, 43, 43, True)
         metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
                     output_control, target_problem, initial_solution)
-        solution = TargetSolutionVoid("bbb", 0, 0, 0, True)
-        metaheuristic.current_solution = solution
         # Act
         current_solution = metaheuristic.current_solution
         # Assert
-        self.assertEqual(current_solution, solution)
+        self.assertEqual(current_solution.name, initial_solution.name)
+        self.assertEqual(current_solution.random_seed, initial_solution.random_seed)
+        self.assertEqual(current_solution.fitness_value, initial_solution.fitness_value)
+        self.assertEqual(current_solution.objective_value, initial_solution.objective_value)
+        self.assertEqual(current_solution.is_feasible, initial_solution.is_feasible)
 
     # Setting the current solution to None sets the value of __current_solution to None.
     def test_set_current_solution_to_none_sets_value_to_none(self):
@@ -275,15 +218,14 @@ class TestCurrentSolution(unittest.TestCase):
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
         target_problem = TargetProblemVoid("aaa", True)
-        initial_solution = TargetSolutionVoid("", 43, 43, 43, True)
-        metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
-                    output_control, target_problem, initial_solution)
+        initial_solution = None
         # Act & Assert
         with self.assertRaises(TypeError):
-            metaheuristic.current_solution = None    
+            SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
+                    output_control, target_problem, initial_solution)
 
-    # Setting an object that is not an instance of TargetSolution as the current solution raises a TypeError.
-    def test_set_invalid_current_solution_raises_type_error(self):
+    # Creating an object with solution that is not an instance of TargetSolution as the current solution raises a TypeError.
+    def test_create_with_invalid_current_solution_raises_type_error(self):
         # Arrange
         name = "Metaheuristic"
         finish_control = FinishControl()
@@ -291,16 +233,14 @@ class TestCurrentSolution(unittest.TestCase):
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
         target_problem = TargetProblemVoid("aaa", True)
-        initial_solution = TargetSolutionVoid("", 43, 43, 43, True)
-        metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
-                    output_control, target_problem, initial_solution)
         invalid_solution = "invalid"    
         # Act & Assert
         with self.assertRaises(TypeError):
-            metaheuristic.current_solution = invalid_solution
+            SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
+                    output_control, target_problem, invalid_solution)
 
-    # Setting the current solution to an object of the wrong type raises a TypeError.
-    def test_set_current_solution_wrong_type_raises_type_error(self):
+    # Creating an object with solution that is not an instance of TargetSolution as the current solution raises a TypeError.
+    def test_create_with_invalid_current_solution_raises_type_error2(self):
         # Arrange
         name = "Metaheuristic"
         finish_control = FinishControl()
@@ -308,46 +248,12 @@ class TestCurrentSolution(unittest.TestCase):
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
         target_problem = TargetProblemVoid("aaa", True)
-        initial_solution = TargetSolutionVoid("", 43, 43, 43, True)
-        metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
-                    output_control, target_problem, initial_solution)
         solution = TargetProblemVoid("xxx", True)    
         # Act & Assert
         with self.assertRaises(TypeError):
-            metaheuristic.current_solution = solution
+            SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
+                    output_control, target_problem, solution)
 
-    # Setting a valid TargetSolution object as the current solution updates the value of __current_solution.
-    def test_set_valid_current_solution_updates_value2(self):
-        # Arrange
-        name = "Metaheuristic"
-        finish_control = FinishControl()
-        random_seed = 12345
-        additional_statistics_control = AdditionalStatisticsControl()
-        output_control = OutputControl()
-        target_problem = TargetProblemVoid("aaa", True)
-        solution = TargetSolutionVoid("", 43, 43, 43, True)
-        metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
-                    output_control, target_problem, None)
-        # Act
-        metaheuristic.current_solution = solution
-        # Assert
-        self.assertEqual(metaheuristic.current_solution, solution)
-
-    # Setting an object that is not a TargetSolution as the current solution raises a TypeError.
-    def test_set_invalid_current_solution_raises_type_error4(self):
-        # Arrange
-        name = "Metaheuristic"
-        finish_control = FinishControl()
-        random_seed = 12345
-        additional_statistics_control = AdditionalStatisticsControl()
-        output_control = OutputControl()
-        target_problem = TargetProblemVoid("aaa", True)
-        metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
-                    output_control, target_problem, None)
-        invalid_solution = "not a TargetSolution object"
-        # Act & Assert
-        with self.assertRaises(TypeError):
-            metaheuristic.current_solution = invalid_solution
 
 class Test__Str__2(unittest.TestCase):
 
@@ -361,7 +267,7 @@ class Test__Str__2(unittest.TestCase):
             additional_statistics_control=AdditionalStatisticsControl(),
             output_control=OutputControl(),
             target_problem=TargetProblemVoid("aaa", True),
-            initial_solution=None
+            initial_solution=TargetSolutionVoid("", 43, 43, 43, True)
         )
         # Act
         result = str(metaheuristic)   
@@ -378,7 +284,7 @@ class Test__Str__2(unittest.TestCase):
             additional_statistics_control=AdditionalStatisticsControl(),
             output_control=OutputControl(),
             target_problem=TargetProblemVoid("aaa", True),
-            initial_solution=None
+            initial_solution=TargetSolutionVoid("", 43, 43, 43, True)
         )
         # Act
         result = str(metaheuristic)    
@@ -403,19 +309,16 @@ class Test__Str__2(unittest.TestCase):
         # Assert
         self.assertIn("current_solution=" + str(current_solution), result)
 
-    # Should return an empty string if the current solution is None
-    def test_return_empty_string_if_current_solution_is_none(self):
-        # Arrange
-        metaheuristic = SingleSolutionMetaheuristicVoid(
-            name="MyMetaheuristic",
-            finish_control=FinishControl(),
-            random_seed=123,
-            additional_statistics_control=AdditionalStatisticsControl(),
-            output_control=OutputControl(),
-            target_problem=TargetProblemVoid("aaa", True),
-            initial_solution=None
-        )
-        # Act
-        result = str(metaheuristic)    
-        # Assert
-        self.assertIn("|current_solution=None|", result)
+    # Should raise TypeError if the initial solution is None
+    def test_raise_typeerror_if_initial_solution_is_none(self):
+        # Arrange & Act & Assert
+        with self.assertRaises(TypeError):
+            metaheuristic = SingleSolutionMetaheuristicVoid(
+                name="MyMetaheuristic",
+                finish_control=FinishControl(),
+                random_seed=123,
+                additional_statistics_control=AdditionalStatisticsControl(),
+                output_control=OutputControl(),
+                target_problem=TargetProblemVoid("aaa", True),
+                initial_solution=None
+            )

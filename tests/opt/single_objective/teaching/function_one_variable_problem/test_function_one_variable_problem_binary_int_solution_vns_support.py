@@ -13,9 +13,6 @@ from opt.single_objective.teaching.function_one_variable_problem.function_one_va
 from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem_binary_int_solution_vns_support import FunctionOneVariableProblemBinaryIntSolutionVnsSupport
 
 
-# import unittest
-# import unitest.mock as mocker
-
 class TestFunctionOneVariableProblemBinaryIntSolutionVnsSupport(unittest.TestCase):
 
     # shaking method returns True when k is greater than 0 and the solution is valid
@@ -32,10 +29,8 @@ class TestFunctionOneVariableProblemBinaryIntSolutionVnsSupport(unittest.TestCas
         type(optimizer_stub).finish_control = mocker.PropertyMock(return_value=finish_control_stub) 
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
         type(optimizer_stub).vns_support = mocker.PropertyMock(return_value=vns_support)
-
         # Act
         result = vns_support.shaking(1, problem, solution, optimizer_stub)
-
         # Assert
         self.assertTrue(result)
 
@@ -54,12 +49,12 @@ class TestFunctionOneVariableProblemBinaryIntSolutionVnsSupport(unittest.TestCas
         type(optimizer_stub).finish_control = mocker.PropertyMock(return_value=finish_control_stub) 
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
         type(optimizer_stub).vns_support = mocker.PropertyMock(return_value=vns_support)
-
         # Act
-        new_solution = vns_support.local_search_best_improvement(1, problem, solution, optimizer_stub)
-
+        old_fitness = solution.fitness_value
+        result = vns_support.local_search_best_improvement(1, problem, solution, optimizer_stub)
         # Assert
-        self.assertGreaterEqual(new_solution.fitness_value, solution.fitness_value)
+        self.assertTrue(result)
+        self.assertGreaterEqual(solution.fitness_value, old_fitness)
 
     # local_search_first_improvement method returns a new solution with a better fitness value
     def test_local_search_first_improvement_returns_new_solution_with_better_fitness_value(self):
@@ -76,12 +71,12 @@ class TestFunctionOneVariableProblemBinaryIntSolutionVnsSupport(unittest.TestCas
         type(optimizer_stub).finish_control = mocker.PropertyMock(return_value=finish_control_stub) 
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
         type(optimizer_stub).vns_support = mocker.PropertyMock(return_value=vns_support)
-
         # Act
-        new_solution = vns_support.local_search_first_improvement(1, problem, solution, optimizer_stub)
-
+        old_fitness = solution.fitness_value
+        result = vns_support.local_search_best_improvement(1, problem, solution, optimizer_stub)
         # Assert
-        self.assertGreaterEqual(new_solution.fitness_value, solution.fitness_value)
+        self.assertTrue(result)
+        self.assertGreaterEqual(solution.fitness_value, old_fitness)
 
     # shaking method returns False when k is less than or equal to 0
     def test_shaking_returns_false_when_k_is_less_than_or_equal_to_0(self):
@@ -98,10 +93,8 @@ class TestFunctionOneVariableProblemBinaryIntSolutionVnsSupport(unittest.TestCas
         type(optimizer_stub).finish_control = mocker.PropertyMock(return_value=finish_control_stub) 
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
         type(optimizer_stub).vns_support = mocker.PropertyMock(return_value=vns_support)
-
         # Act
         result = vns_support.shaking(0, problem, solution, optimizer_stub)
-
         # Assert
         self.assertFalse(result)
 
@@ -120,18 +113,14 @@ class TestFunctionOneVariableProblemBinaryIntSolutionVnsSupport(unittest.TestCas
         type(optimizer_stub).finish_control = mocker.PropertyMock(return_value=finish_control_stub) 
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
         type(optimizer_stub).vns_support = mocker.PropertyMock(return_value=vns_support)
-
         # Act
-        new_solution = vns_support.local_search_best_improvement(0, problem, solution, optimizer_stub)
-
+        result = vns_support.local_search_best_improvement(0, problem, solution, optimizer_stub)
         # Assert
-        self.assertEqual(new_solution, solution)
-
+        self.assertFalse(result)
         # Act
-        new_solution = vns_support.local_search_best_improvement(33, problem, solution, optimizer_stub)
-
+        result = vns_support.local_search_best_improvement(33, problem, solution, optimizer_stub)
         # Assert
-        self.assertEqual(new_solution, solution)
+        self.assertFalse(result)
 
     # local_search_first_improvement method returns the same solution when k is less than 1 or greater than the representation length
     def test_local_search_first_improvement_returns_same_solution_when_k_is_less_than_1_or_greater_than_representation_length(self):
@@ -148,18 +137,14 @@ class TestFunctionOneVariableProblemBinaryIntSolutionVnsSupport(unittest.TestCas
         type(optimizer_stub).finish_control = mocker.PropertyMock(return_value=finish_control_stub) 
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
         type(optimizer_stub).vns_support = mocker.PropertyMock(return_value=vns_support)
-
         # Act
-        new_solution = vns_support.local_search_first_improvement(0, problem, solution, optimizer_stub)
-
+        result = vns_support.local_search_first_improvement(0, problem, solution, optimizer_stub)
         # Assert
-        self.assertEqual(new_solution, solution)
-
+        self.assertFalse(result)
         # Act
-        new_solution = vns_support.local_search_first_improvement(33, problem, solution, optimizer_stub)
-
+        result = vns_support.local_search_first_improvement(33, problem, solution, optimizer_stub)
         # Assert
-        self.assertEqual(new_solution, solution)
+        self.assertFalse(result)
 
     # should return a string representation of the class name 'FunctionOneVariableProblemBinaryIntSolutionVnsSupport'
     def test_string_rep_class_name(self):

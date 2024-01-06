@@ -125,6 +125,18 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         """
         return self.__copy__()
 
+    def copy_from(self, original)->None:
+        """
+        Copy all data from the original target solution
+        """
+        self.__fitness_value = original.__fitness_value
+        self.__fitness_values = original.__fitness_values
+        self.__objective_value = original.__objective_value
+        self.__objective_values = original.__objective_values
+        self.__is_feasible = original.__is_feasible
+        self.__representation = original.__representation
+
+
     @property
     def name(self)->str:
         """

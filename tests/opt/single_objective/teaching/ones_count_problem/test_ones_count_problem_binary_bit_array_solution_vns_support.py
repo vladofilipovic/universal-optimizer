@@ -48,6 +48,7 @@ class TestOnesCountProblemBinaryBitArraySolutionVnsSupport(unittest.TestCase):
         problem = OnesCountProblem(dim=5)
         solution = OnesCountProblemBinaryBitArraySolution(random_seed=434343)
         solution.init_from( BitArray('0b10101'), problem)
+        solution.evaluate(problem)
         vns_support = OnesCountProblemBinaryBitArraySolutionVnsSupport()
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).check_evaluations = mocker.PropertyMock(return_value=False)
@@ -57,16 +58,19 @@ class TestOnesCountProblemBinaryBitArraySolutionVnsSupport(unittest.TestCase):
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
         type(optimizer_stub).vns_support = mocker.PropertyMock(return_value=vns_support)
         # Act
+        old_fitness = solution.fitness_value
         result = vns_support.local_search_best_improvement(3, problem, solution, optimizer_stub)
         # Assert
-        self.assertGreaterEqual(result.fitness_value, solution.fitness_value)
+        self.assertTrue(result)
+        self.assertGreaterEqual(solution.fitness_value, old_fitness)
 
     # local_search_first_improvement method returns a solution with higher fitness value
     def test_local_search_first_improvement_returns_solution_with_higher_fitness_value10(self):
         # Arrange
-        problem = OnesCountProblem(dim=5)
+        problem = OnesCountProblem(dim=5, is_minimization=False)
         solution = OnesCountProblemBinaryBitArraySolution(random_seed=434343)
         solution.init_from( BitArray('0b10101'), problem)
+        solution.evaluate(problem)
         vns_support = OnesCountProblemBinaryBitArraySolutionVnsSupport()
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).check_evaluations = mocker.PropertyMock(return_value=False)
@@ -76,9 +80,11 @@ class TestOnesCountProblemBinaryBitArraySolutionVnsSupport(unittest.TestCase):
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
         type(optimizer_stub).vns_support = mocker.PropertyMock(return_value=vns_support)
         # Act
+        old_fitness = solution.fitness_value
         result = vns_support.local_search_first_improvement(3, problem, solution, optimizer_stub)
         # Assert
-        self.assertGreaterEqual(result.fitness_value, solution.fitness_value)
+        self.assertTrue(result)
+        self.assertGreaterEqual(solution.fitness_value, old_fitness)
 
 
     # shaking method modifies the solution representation when the number of ones in the solution representation is less than the problem dimension
@@ -117,9 +123,11 @@ class TestOnesCountProblemBinaryBitArraySolutionVnsSupport(unittest.TestCase):
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
         type(optimizer_stub).vns_support = mocker.PropertyMock(return_value=vns_support)        
         # Act
+        old_fitness = solution.fitness_value
         result = vns_support.local_search_best_improvement(3, problem, solution, optimizer_stub)
         # Assert
-        self.assertGreater(result.fitness_value, sfv)
+        self.assertTrue(result)
+        self.assertGreaterEqual(solution.fitness_value, old_fitness)
 
     # local_search_first_improvement method returns a solution with higher fitness value
     def test_local_search_first_improvement_returns_solution_with_higher_fitness_value4(self):
@@ -138,9 +146,11 @@ class TestOnesCountProblemBinaryBitArraySolutionVnsSupport(unittest.TestCase):
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
         type(optimizer_stub).vns_support = mocker.PropertyMock(return_value=vns_support)        
         # Act
+        old_fitness = solution.fitness_value
         result = vns_support.local_search_first_improvement(3, problem, solution, optimizer_stub)
         # Assert
-        self.assertGreater(result.fitness_value, sfv)
+        self.assertTrue(result)
+        self.assertGreaterEqual(solution.fitness_value, old_fitness)
 
 
 
