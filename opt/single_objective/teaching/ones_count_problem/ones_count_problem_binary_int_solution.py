@@ -109,6 +109,8 @@ class OnesCountProblemBinaryIntSolution(TargetSolution[int,str]):
         :param int representation: representation that will be ste to solution
         :param `TargetProblem` problem: problem which is solved by solution
         """
+        if not isinstance(representation, int):
+            raise TypeError('Parameter \'representation\' must have type \'int\'.')
         self.representation = representation
 
     def calculate_quality_directly(self, representation:int, 

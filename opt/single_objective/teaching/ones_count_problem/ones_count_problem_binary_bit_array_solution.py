@@ -101,7 +101,7 @@ class OnesCountProblemBinaryBitArraySolution(TargetSolution[BitArray,str]):
         :param `TargetProblem` problem: problem which is solved by solution
         """
         if not isinstance(representation, BitArray):
-            raise TypeError('Representation have to be BitArray.')
+            raise TypeError('Parameter \'representation\' must have type \'BitArray\'.')
         if len(representation) == 0:
             raise ValueError('Representation must have positive length.')
         self.representation = BitArray(bin=representation.bin)

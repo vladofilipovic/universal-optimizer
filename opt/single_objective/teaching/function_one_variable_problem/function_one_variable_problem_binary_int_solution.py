@@ -103,6 +103,8 @@ class FunctionOneVariableProblemBinaryIntSolution(TargetSolution[int,float]):
         self.__make_to_be_feasible_helper__(problem)
 
     def init_from(self, representation:int, problem:FunctionOneVariableProblem)->None:
+        if not isinstance(representation, int):
+            raise TypeError('Parameter \'representation\' must have type \'int\'.')
         self.representation = representation
 
     def calculate_quality_directly(self, representation:int, problem:FunctionOneVariableProblem)->QualityOfSolution:

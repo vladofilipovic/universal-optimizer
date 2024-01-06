@@ -86,6 +86,8 @@ class OnesCountProblemBinaryIntSolution(TargetSolution[int,str]):
         self.__make_to_be_feasible_helper__(problem)
 
     def init_from(self, representation:int, problem:TargetProblem)->None:
+        if not isinstance(representation, int):
+            raise TypeError('Parameter \'representation\' must have type \'int\'.')
         self.representation = representation
 
     def argument(self)->str:

@@ -340,3 +340,45 @@ class TestTargetSolution(unittest.TestCase):
         expected_string_rep = "|representation()=None|"
         self.assertIn(expected_string_rep, string_rep)
 
+
+    # initializes the solution with a valid representation and problem
+    def test_initialization_with_valid_representation_and_problem(self):
+        # Arrange
+        representation = 42
+        problem = TargetProblemVoid("a", True)
+        solution = TargetSolutionVoid("b", None, 20, 20, True )
+        # Act
+        solution.init_from(representation, problem)
+        # Assert
+        self.assertEqual(solution._TargetSolution__representation, representation)
+
+    # sets the representation of the solution to the given representation
+    def test_sets_representation_to_given_representation2(self):
+        # Arrange
+        representation = 42
+        problem = TargetProblemVoid("a", True)
+        solution = TargetSolutionVoid("c", None, 20, 20, True )
+        # Act
+        solution.init_from(representation, problem)
+        # Assert
+        self.assertEqual(solution._TargetSolution__representation, representation)
+
+    # raises TypeError if the given representation is not of type R_co
+    def test_raises_TypeError_if_representation_not_of_type_R_co(self):
+        # Arrange
+        representation = "invalid representation"
+        problem = TargetProblemVoid("a", True)
+        solution = TargetSolutionVoid("c", None, 20, 20, True )
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            solution.init_from(representation, problem)
+
+    # raises TypeError if the given problem is not of type TargetProblem
+    def test_raises_TypeError_if_problem_not_of_type_TargetProblem(self):
+        # Arrange
+        representation = "example_representation"
+        problem = "example_problem"
+        solution = TargetSolutionVoid("a", None, 0, 0, True)
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            solution.init_from(representation, problem)
