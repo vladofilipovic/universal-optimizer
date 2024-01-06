@@ -340,6 +340,63 @@ class TestTargetSolution(unittest.TestCase):
         expected_string_rep = "|representation()=None|"
         self.assertIn(expected_string_rep, string_rep)
 
+    # TargetSolution can be represented as a string with a specified delimiter, indentation, and grouping symbols
+    def test_string_conversion(self):
+        # Arrange
+        name = "solution"
+        random_seed = 123
+        fitness_value = 0.5
+        objective_value = 100
+        is_feasible = True
+        evaluation_cache_is_used = True
+        evaluation_cache_max_size = 100
+        distance_calculation_cache_is_used = True
+        distance_calculation_cache_max_size = 200
+        target_solution = TargetSolutionVoid(name, random_seed, fitness_value, objective_value, is_feasible, 
+                    evaluation_cache_is_used, evaluation_cache_max_size, distance_calculation_cache_is_used, 
+                    distance_calculation_cache_max_size)
+        # Act
+        string_rep = str(target_solution)
+        # Assert
+        expected_string_rep = "|name=solution|"
+        self.assertIn(expected_string_rep, string_rep)
+        expected_string_rep = "|fitness_value=0.5|"
+        self.assertIn(expected_string_rep, string_rep)
+        expected_string_rep = "|objective_value=100|"
+        self.assertIn(expected_string_rep, string_rep)
+        expected_string_rep = "|is_feasible=True|"
+        self.assertIn(expected_string_rep, string_rep)
+        expected_string_rep = "|representation()=None|"
+        self.assertIn(expected_string_rep, string_rep)
+
+    # TargetSolution can be represented as a string with a specified delimiter, indentation, and grouping symbols
+    def test_format_to_string(self):
+        # Arrange
+        name = "solution"
+        random_seed = 123
+        fitness_value = 0.5
+        objective_value = 100
+        is_feasible = True
+        evaluation_cache_is_used = True
+        evaluation_cache_max_size = 100
+        distance_calculation_cache_is_used = True
+        distance_calculation_cache_max_size = 200
+        target_solution = TargetSolutionVoid(name, random_seed, fitness_value, objective_value, is_feasible, 
+                    evaluation_cache_is_used, evaluation_cache_max_size, distance_calculation_cache_is_used, 
+                    distance_calculation_cache_max_size)
+        # Act
+        string_rep = format(target_solution)
+        # Assert
+        expected_string_rep = "|name=solution|"
+        self.assertIn(expected_string_rep, string_rep)
+        expected_string_rep = "|fitness_value=0.5|"
+        self.assertIn(expected_string_rep, string_rep)
+        expected_string_rep = "|objective_value=100|"
+        self.assertIn(expected_string_rep, string_rep)
+        expected_string_rep = "|is_feasible=True|"
+        self.assertIn(expected_string_rep, string_rep)
+        expected_string_rep = "|representation()=None|"
+        self.assertIn(expected_string_rep, string_rep)
 
     # initializes the solution with a valid representation and problem
     def test_initialization_with_valid_representation_and_problem(self):
