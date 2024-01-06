@@ -14,7 +14,6 @@ class TestEvaluationCacheControlStatisticsOperations(unittest.TestCase):
 
     def setUp(self):
         self.eccs = EvaluationCacheControlStatistics()
-        return
     
     def test_clear_cache_should_work_0(self):
         self.eccs.cache.clear()
