@@ -18,8 +18,10 @@ from uo.target_solution.distance_calculation_cache_control_statistics import Dis
 
 class TargetSolutionVoid(TargetSolution[int, str]):
     
-    def __init__(self, name:str, random_seed:int, fitness_value:float, 
-            objective_value:float, is_feasible:bool, 
+    def __init__(self, name:str, random_seed:int, 
+            fitness_value:float, 
+            objective_value:float, 
+            is_feasible:bool, 
             evaluation_cache_is_used:bool=False, 
             evaluation_cache_max_size:int=0,
             distance_calculation_cache_is_used:bool=False,
@@ -31,7 +33,7 @@ class TargetSolutionVoid(TargetSolution[int, str]):
                 evaluation_cache_is_used=evaluation_cache_is_used,
                 evaluation_cache_max_size=evaluation_cache_max_size,
                 distance_calculation_cache_is_used=distance_calculation_cache_is_used,
-                distance_calculation_cache_max_size=distance_calculation_cache_is_used)
+                distance_calculation_cache_max_size=distance_calculation_cache_max_size)
 
     def __copy__(self):
         pr = deepcopy(self)

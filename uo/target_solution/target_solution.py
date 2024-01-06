@@ -92,12 +92,10 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         self.__objective_values:list[float]|tuple[float] = objective_values
         self.__is_feasible:bool = is_feasible
         self.__representation:R_co = None
-        self.__evaluation_cache_is_used:bool = evaluation_cache_is_used
-        self.__evaluation_cache_max_size:int = evaluation_cache_max_size
         #class/static variable evaluation_cache_cs
         if not hasattr(TargetSolution, 'evaluation_cache_cs'):
             TargetSolution.evaluation_cache_cs:EvaluationCacheControlStatistics = EvaluationCacheControlStatistics(
-                self.__evaluation_cache_is_used, self.__evaluation_cache_max_size)  
+                evaluation_cache_is_used, evaluation_cache_max_size)  
         #class/static variable representation_distance_cache_cs
         if not hasattr(TargetSolution, 'representation_distance_cache_cs'):
             TargetSolution.representation_distance_cache_cs: DistanceCalculationCacheControlStatistics[R_co] = \
