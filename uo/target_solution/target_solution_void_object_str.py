@@ -39,7 +39,6 @@ class TargetSolutionVoidObjectStr(TargetSolution[object, str]):
 
     def init_random(self, problem:TargetProblem)->None:
         self.representation = None
- 
 
     def init_from(self, representation:object, problem:TargetProblem)->None:
         self.representation = representation
