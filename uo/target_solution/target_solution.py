@@ -127,6 +127,8 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         """
         Copy all data from the original target solution
         """
+        self.__name = original.__name
+        self.__random_seed = original.__random_seed
         self.__fitness_value = original.__fitness_value
         self.__fitness_values = original.__fitness_values
         self.__objective_value = original.__objective_value
