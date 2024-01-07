@@ -41,6 +41,8 @@ class TargetSolutionVoidObjectStr(TargetSolution[object, str]):
         self.representation = None
 
     def init_from(self, representation:object, problem:TargetProblem)->None:
+        if not isinstance(problem, TargetProblem):
+            raise TypeError('Parameter \'problem\' must be of type \'TargetProblem\'.')
         self.representation = representation
 
     def native_representation(self, representation_str:str)->object:
@@ -54,13 +56,13 @@ class TargetSolutionVoidObjectStr(TargetSolution[object, str]):
         return 0
 
     def string_representation(self):
-        return str(self)    
+        return str(self.representation)    
 
     def __str__(self)->str:
-        return str(self)
+        return self.string_rep("|")
 
     def __repr__(self)->str:
-        return self.__repr__()
+        return self.string_rep("|")
 
     def __format__(self, spec:str)->str:
-        return self.__format__()    
+        return self.string_rep(spec)  

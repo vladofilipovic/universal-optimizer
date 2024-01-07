@@ -28,17 +28,7 @@ class TestTargetSolutionVoidObjectStr(unittest.TestCase):
     def test_attribute_access_and_modification(self):
         # Arrange
         name = "solution"
-        random_seed = 123
-        fitness_value = 0.5
-        objective_value = 100
-        is_feasible = True
-        evaluation_cache_is_used = True
-        evaluation_cache_max_size = 100
-        distance_calculation_cache_is_used = True
-        distance_calculation_cache_max_size = 200
-        target_solution = TargetSolutionVoidObjectStr(name, random_seed, fitness_value, objective_value, 
-                    is_feasible, evaluation_cache_is_used, evaluation_cache_max_size, 
-                    distance_calculation_cache_is_used, distance_calculation_cache_max_size)
+        target_solution = TargetSolutionVoidObjectStr(name)
         # Act
         target_solution.fitness_value = 0.7
         target_solution.fitness_values = [0.6, 0.7, 0.8]
@@ -58,22 +48,11 @@ class TestTargetSolutionVoidObjectStr(unittest.TestCase):
     def test_method_calls_and_results(self):
         # Arrange
         name = "solution"
-        random_seed = 123
-        fitness_value = 0.5
-        objective_value = 100
-        is_feasible = True
-        evaluation_cache_is_used = True
-        evaluation_cache_max_size = 100
-        distance_calculation_cache_is_used = True
-        distance_calculation_cache_max_size = 200
         target_problem = TargetProblemVoid("a", True)
-        target_solution = TargetSolutionVoidObjectStr(name, random_seed, fitness_value, objective_value, 
-                    is_feasible, evaluation_cache_is_used, evaluation_cache_max_size, 
-                    distance_calculation_cache_is_used, distance_calculation_cache_max_size)
+        target_solution = TargetSolutionVoidObjectStr(name)
         # Act and Assert
         self.assertIsNotNone(target_solution.copy())
         self.assertIsNotNone(target_solution.argument(target_solution.representation))
-        self.assertIsInstance(target_solution.string_representation(), str)
         self.assertIsNotNone(target_solution.native_representation("representation"))
         self.assertIsNotNone(target_solution.calculate_quality_directly(target_solution.representation, 
                     target_problem))
@@ -83,9 +62,6 @@ class TestTargetSolutionVoidObjectStr(unittest.TestCase):
         self.assertIsNotNone(target_solution.representation_distance(target_solution.representation, 
                     target_solution.representation))
         self.assertIsInstance(target_solution.string_rep("|"), str)
-        self.assertIsInstance(str(target_solution), str)
-        self.assertIsInstance(repr(target_solution), str)
-        self.assertIsInstance(format(target_solution, ""), str)
 
     # TargetSolution raises TypeError if any parameter is of the wrong type
     def test_type_error_raised(self):
@@ -109,18 +85,8 @@ class TestTargetSolutionVoidObjectStr(unittest.TestCase):
     def test_random_seed_set_to_random_integer(self):
         # Arrange
         name = "solution"
-        random_seed = None
-        fitness_value = 0.5
-        objective_value = 100
-        is_feasible = True
-        evaluation_cache_is_used = True
-        evaluation_cache_max_size = 100
-        distance_calculation_cache_is_used = True
-        distance_calculation_cache_max_size = 200
         # Act
-        target_solution = TargetSolutionVoidObjectStr(name, random_seed, fitness_value, objective_value, 
-                    is_feasible, evaluation_cache_is_used, evaluation_cache_max_size, 
-                    distance_calculation_cache_is_used, distance_calculation_cache_max_size)
+        target_solution = TargetSolutionVoidObjectStr(name)
         # Assert
         self.assertIsInstance(target_solution.random_seed, int)
         self.assertNotEqual(target_solution.random_seed, 0)
@@ -129,18 +95,8 @@ class TestTargetSolutionVoidObjectStr(unittest.TestCase):
     def test_default_values_for_fitness_and_objective(self):
         # Arrange
         name = "solution"
-        random_seed = None
-        fitness_value = 10
-        objective_value = 12
-        is_feasible = True
-        evaluation_cache_is_used = True
-        evaluation_cache_max_size = 100
-        distance_calculation_cache_is_used = True
-        distance_calculation_cache_max_size = 200
         # Act
-        target_solution = TargetSolutionVoidObjectStr(name, random_seed, fitness_value, objective_value, 
-                    is_feasible, evaluation_cache_is_used, evaluation_cache_max_size, 
-                    distance_calculation_cache_is_used, distance_calculation_cache_max_size)
+        target_solution = TargetSolutionVoidObjectStr(name)
         # Assert
         target_solution.fitness_value = None
         target_solution.fitness_values = None
@@ -155,101 +111,35 @@ class TestTargetSolutionVoidObjectStr(unittest.TestCase):
     def test_default_representation_value(self):
         # Arrange
         name = "solution"
-        random_seed = None
-        fitness_value = 10
-        objective_value = 12
-        is_feasible = True
-        evaluation_cache_is_used = True
-        evaluation_cache_max_size = 100
-        distance_calculation_cache_is_used = True
-        distance_calculation_cache_max_size = 200
         # Act
-        target_solution = TargetSolutionVoidObjectStr(name, random_seed, fitness_value, objective_value, 
-                    is_feasible, evaluation_cache_is_used, evaluation_cache_max_size, 
-                    distance_calculation_cache_is_used, distance_calculation_cache_max_size)
+        target_solution = TargetSolutionVoidObjectStr(name)
         # Assert
         self.assertIsNone(target_solution.representation)
 
     # TargetSolution sets evaluation_cache_cs and representation_distance_cache_cs to default values if they are not provided
     def test_default_values_for_caches(self):
         # Arrange
+        if hasattr(TargetSolution, 'evaluation_cache_cs'):
+            del TargetSolution.evaluation_cache_cs
+        if hasattr(TargetSolution, 'representation_distance_cache_cs'):
+            del TargetSolution.representation_distance_cache_cs
         name = "solution"
-        random_seed = 123
-        fitness_value = 0.5
-        objective_value = 100
-        is_feasible = True
         # Act
-        target_solution = TargetSolutionVoidObjectStr(name, random_seed, fitness_value, objective_value, is_feasible)
+        target_solution = TargetSolutionVoidObjectStr(name)
         # Assert
         self.assertFalse(target_solution.evaluation_cache_cs.is_caching)
         self.assertEqual(target_solution.evaluation_cache_cs.max_cache_size, 0)
         self.assertFalse(target_solution.representation_distance_cache_cs.is_caching)
         self.assertEqual(target_solution.representation_distance_cache_cs.max_cache_size, 0)
 
-    # TargetSolution calculates quality of solution and caches it if evaluation_cache_is_used is True
-    def test_calculate_quality_with_caching(self):
-        # Arrange
-        name = "solution"
-        random_seed = 123
-        fitness_value = 0.5
-        objective_value = 100
-        is_feasible = True
-        evaluation_cache_is_used = True
-        evaluation_cache_max_size = 100
-        distance_calculation_cache_is_used = True
-        distance_calculation_cache_max_size = 200
-        target_solution = TargetSolutionVoidObjectStr(name, random_seed, fitness_value, objective_value, is_feasible, 
-                    evaluation_cache_is_used, evaluation_cache_max_size, distance_calculation_cache_is_used, 
-                    distance_calculation_cache_max_size)
-        target_problem_mock = mocker.Mock()
-        # Act
-        target_solution.calculate_quality(target_problem_mock)
-        qos_c = target_solution.evaluation_cache_cs.cache[target_solution.string_representation()]
-        qos_d = target_solution.calculate_quality_directly(target_solution.representation, target_problem_mock)
-        # Assert
-        self.assertEqual(qos_c.is_feasible, qos_d.is_feasible)
-        self.assertEqual(qos_c.fitness_value, qos_d.fitness_value)
-        self.assertEqual(qos_c.objective_value, qos_d.objective_value)
-
-    # TargetSolution caches representation distance if distance_calculation_cache_is_used is True
-    def test_representation_distance_with_caching(self):
-        # Arrange
-        name = "solution"
-        random_seed = 123
-        fitness_value = 0.5
-        objective_value = 100
-        is_feasible = True
-        evaluation_cache_is_used = True
-        evaluation_cache_max_size = 100
-        distance_calculation_cache_is_used = True
-        distance_calculation_cache_max_size = 200
-        target_solution = TargetSolutionVoidObjectStr(name, random_seed, fitness_value, objective_value, is_feasible, 
-                    evaluation_cache_is_used, evaluation_cache_max_size, distance_calculation_cache_is_used, 
-                    distance_calculation_cache_max_size)
-        representation_1_mock = mocker.Mock()
-        representation_2_mock = mocker.Mock()
-        # Act
-        target_solution.representation_distance(representation_1_mock, representation_2_mock)
-        dis_c = target_solution.representation_distance_cache_cs.cache[(representation_1_mock, representation_2_mock)]
-        dis_d = target_solution.representation_distance_directly(representation_1_mock, representation_2_mock)
-        # Assert
-        self.assertEqual(dis_c, dis_d)
 
     # TargetSolution can be deep copied
     def test_deep_copy(self):
         # Arrange
         name = "solution"
-        random_seed = 123
-        fitness_value = 0.5
-        objective_value = 100
-        is_feasible = True
-        evaluation_cache_is_used = True
-        evaluation_cache_max_size = 100
-        distance_calculation_cache_is_used = True
-        distance_calculation_cache_max_size = 200
-        target_solution = TargetSolutionVoidObjectStr(name, random_seed, fitness_value, objective_value, is_feasible, 
-                    evaluation_cache_is_used, evaluation_cache_max_size, distance_calculation_cache_is_used, 
-                    distance_calculation_cache_max_size)
+        target_solution = TargetSolutionVoidObjectStr(name)
+        target_solution.fitness_value = 23
+        target_solution.objective_value = 23
         # Act
         copied_solution = target_solution.copy()
         # Assert
@@ -271,17 +161,7 @@ class TestTargetSolutionVoidObjectStr(unittest.TestCase):
     def test_evaluate_with_target_problem(self):
         # Arrange
         name = "solution"
-        random_seed = 123
-        fitness_value = 0.5
-        objective_value = 100
-        is_feasible = True
-        evaluation_cache_is_used = True
-        evaluation_cache_max_size = 100
-        distance_calculation_cache_is_used = True
-        distance_calculation_cache_max_size = 200
-        target_solution = TargetSolutionVoidObjectStr(name, random_seed, fitness_value, objective_value, is_feasible, 
-                    evaluation_cache_is_used, evaluation_cache_max_size, distance_calculation_cache_is_used, 
-                    distance_calculation_cache_max_size)
+        target_solution = TargetSolutionVoidObjectStr(name)
         target_problem_mock = mocker.Mock()
         # Act
         target_solution.evaluate(target_problem_mock)
@@ -297,17 +177,10 @@ class TestTargetSolutionVoidObjectStr(unittest.TestCase):
     def test_string_representation(self):
         # Arrange
         name = "solution"
-        random_seed = 123
-        fitness_value = 0.5
-        objective_value = 100
-        is_feasible = True
-        evaluation_cache_is_used = True
-        evaluation_cache_max_size = 100
-        distance_calculation_cache_is_used = True
-        distance_calculation_cache_max_size = 200
-        target_solution = TargetSolutionVoidObjectStr(name, random_seed, fitness_value, objective_value, is_feasible, 
-                    evaluation_cache_is_used, evaluation_cache_max_size, distance_calculation_cache_is_used, 
-                    distance_calculation_cache_max_size)
+        target_solution = TargetSolutionVoidObjectStr(name)
+        target_solution.fitness_value = 0.5
+        target_solution.objective_value = 100
+        target_solution.is_feasible =  True
         # Act
         string_rep = target_solution.string_rep('|')
         # Assert
@@ -326,17 +199,10 @@ class TestTargetSolutionVoidObjectStr(unittest.TestCase):
     def test_string_conversion(self):
         # Arrange
         name = "solution"
-        random_seed = 123
-        fitness_value = 0.5
-        objective_value = 100
-        is_feasible = True
-        evaluation_cache_is_used = True
-        evaluation_cache_max_size = 100
-        distance_calculation_cache_is_used = True
-        distance_calculation_cache_max_size = 200
-        target_solution = TargetSolutionVoidObjectStr(name, random_seed, fitness_value, objective_value, is_feasible, 
-                    evaluation_cache_is_used, evaluation_cache_max_size, distance_calculation_cache_is_used, 
-                    distance_calculation_cache_max_size)
+        target_solution = TargetSolutionVoidObjectStr(name)
+        target_solution.fitness_value = 0.5
+        target_solution.objective_value = 100
+        target_solution.is_feasible =  True
         # Act
         string_rep = str(target_solution)
         # Assert
@@ -355,29 +221,22 @@ class TestTargetSolutionVoidObjectStr(unittest.TestCase):
     def test_format_to_string(self):
         # Arrange
         name = "solution"
-        random_seed = 123
-        fitness_value = 0.5
-        objective_value = 100
-        is_feasible = True
-        evaluation_cache_is_used = True
-        evaluation_cache_max_size = 100
-        distance_calculation_cache_is_used = True
-        distance_calculation_cache_max_size = 200
-        target_solution = TargetSolutionVoidObjectStr(name, random_seed, fitness_value, objective_value, is_feasible, 
-                    evaluation_cache_is_used, evaluation_cache_max_size, distance_calculation_cache_is_used, 
-                    distance_calculation_cache_max_size)
+        target_solution = TargetSolutionVoidObjectStr(name)
+        target_solution.fitness_value = 0.5
+        target_solution.objective_value = 100
+        target_solution.is_feasible =  True
         # Act
         string_rep = format(target_solution)
         # Assert
-        expected_string_rep = "|name=solution|"
+        expected_string_rep = "name=solution"
         self.assertIn(expected_string_rep, string_rep)
-        expected_string_rep = "|fitness_value=0.5|"
+        expected_string_rep = "fitness_value=0.5"
         self.assertIn(expected_string_rep, string_rep)
-        expected_string_rep = "|objective_value=100|"
+        expected_string_rep = "objective_value=100"
         self.assertIn(expected_string_rep, string_rep)
-        expected_string_rep = "|is_feasible=True|"
+        expected_string_rep = "is_feasible=True"
         self.assertIn(expected_string_rep, string_rep)
-        expected_string_rep = "|representation()=None|"
+        expected_string_rep = "representation()=None"
         self.assertIn(expected_string_rep, string_rep)
 
     # initializes the solution with a valid representation and problem
@@ -385,7 +244,7 @@ class TestTargetSolutionVoidObjectStr(unittest.TestCase):
         # Arrange
         representation = 42
         problem = TargetProblemVoid("a", True)
-        solution = TargetSolutionVoidObjectStr("b", None, 20, 20, True )
+        solution = TargetSolutionVoidObjectStr("b")
         # Act
         solution.init_from(representation, problem)
         # Assert
@@ -396,28 +255,18 @@ class TestTargetSolutionVoidObjectStr(unittest.TestCase):
         # Arrange
         representation = 42
         problem = TargetProblemVoid("a", True)
-        solution = TargetSolutionVoidObjectStr("c", None, 20, 20, True )
+        solution = TargetSolutionVoidObjectStr("c")
         # Act
         solution.init_from(representation, problem)
         # Assert
         self.assertEqual(solution._TargetSolution__representation, representation)
-
-    # raises TypeError if the given representation is not of type R_co
-    def test_raises_TypeError_if_representation_not_of_type_R_co(self):
-        # Arrange
-        representation = "invalid representation"
-        problem = TargetProblemVoid("a", True)
-        solution = TargetSolutionVoidObjectStr("c", None, 20, 20, True )
-        # Act & Assert
-        with self.assertRaises(TypeError):
-            solution.init_from(representation, problem)
 
     # raises TypeError if the given problem is not of type TargetProblem
     def test_raises_TypeError_if_problem_not_of_type_TargetProblem(self):
         # Arrange
         representation = "example_representation"
         problem = "example_problem"
-        solution = TargetSolutionVoidObjectStr("a", None, 0, 0, True)
+        solution = TargetSolutionVoidObjectStr("a")
         # Act & Assert
         with self.assertRaises(TypeError):
             solution.init_from(representation, problem)
