@@ -22,12 +22,14 @@ class TestFunctionOneVariableProblemBinaryIntSolution(unittest.TestCase):
 
     # Creating an instance of FunctionOneVariableProblemBinaryIntSolution with valid arguments should initialize the object correctly
     def test_valid_arguments_initialization(self):
+        if hasattr(TargetSolution, 'evaluation_cache_cs'):
+            del TargetSolution.evaluation_cache_cs
+        if hasattr(TargetSolution, 'representation_distance_cache_cs'):
+            del TargetSolution.representation_distance_cache_cs
         domain_from = 0.0
         domain_to = 1.0
         number_of_intervals = 10
-
         solution = FunctionOneVariableProblemBinaryIntSolution(domain_from, domain_to, number_of_intervals)
-
         self.assertEqual(solution.domain_from, domain_from)
         self.assertEqual(solution.domain_to, domain_to)
         self.assertEqual(solution.number_of_intervals, number_of_intervals)
