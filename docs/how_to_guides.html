@@ -145,15 +145,25 @@
 </pre></div>
 </div>
 </div>
+<ul class="simple">
+<li><p>Execute command for obtaining coverage analysis from directory <cite>/</cite></p></li>
+</ul>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">Obtain coverage analysis of tests within project</span><a class="headerlink" href="#id6" title="Link to this code"></a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="o">&gt;</span> <span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">coverage</span> <span class="n">run</span> <span class="o">-</span><span class="n">m</span> <span class="n">unittest</span>
+    <span class="o">&gt;</span> <span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">coverage</span> <span class="n">report</span>
+</pre></div>
+</div>
+</div>
 </div></blockquote>
 </li>
 <li><p><strong>Building documentation for the library</strong></p>
 <blockquote>
 <div><ol class="arabic simple">
-<li><p>Build documentation sources into <cite>/docs/source</cite> folder from <cite>python</cite> source files</p></li>
+<li><p>Build documentation sources into <cite>/documentation/source</cite> folder from <cite>python</cite> source files</p></li>
 </ol>
-<div class="literal-block-wrapper docutils container" id="id6">
-<div class="code-block-caption"><span class="caption-text">Build documentation sources</span><a class="headerlink" href="#id6" title="Link to this code"></a></div>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text">Build documentation sources</span><a class="headerlink" href="#id7" title="Link to this code"></a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="o">&gt;</span> <span class="n">sphinx</span><span class="o">-</span><span class="n">apidoc</span> <span class="o">-</span><span class="n">o</span> <span class="n">documentation</span><span class="o">/</span><span class="n">source</span><span class="o">/</span> <span class="n">uo</span>
     <span class="o">&gt;</span> <span class="n">sphinx</span><span class="o">-</span><span class="n">apidoc</span> <span class="o">-</span><span class="n">o</span> <span class="n">documentation</span><span class="o">/</span><span class="n">source</span><span class="o">/</span> <span class="n">opt</span>
 </pre></div>
@@ -162,8 +172,8 @@
 <ol class="arabic simple" start="2">
 <li><p>Change current directory to <cite>/documentation</cite></p></li>
 </ol>
-<div class="literal-block-wrapper docutils container" id="id7">
-<div class="code-block-caption"><span class="caption-text">Change directory</span><a class="headerlink" href="#id7" title="Link to this code"></a></div>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text">Change directory</span><a class="headerlink" href="#id8" title="Link to this code"></a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="o">&gt;</span> <span class="n">cd</span> <span class="n">documentation</span>
 </pre></div>
 </div>
@@ -171,8 +181,8 @@
 <ol class="arabic simple" start="3">
 <li><p>Clean previously builded HTML documentation</p></li>
 </ol>
-<div class="literal-block-wrapper docutils container" id="id8">
-<div class="code-block-caption"><span class="caption-text">Clean HTML documentation</span><a class="headerlink" href="#id8" title="Link to this code"></a></div>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text">Clean HTML documentation</span><a class="headerlink" href="#id9" title="Link to this code"></a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="o">/</span><span class="n">documentation</span><span class="o">&gt;</span> <span class="o">./</span><span class="n">make</span> <span class="n">clean</span> <span class="n">html</span>
 </pre></div>
 </div>
@@ -180,8 +190,8 @@
 <ol class="arabic simple" start="4">
 <li><p>Build HTML documentation from <cite>/documentation/source</cite> directory. Created documentation is within <cite>/documentation/build/html</cite> directory.</p></li>
 </ol>
-<div class="literal-block-wrapper docutils container" id="id9">
-<div class="code-block-caption"><span class="caption-text">Build HTML documentation</span><a class="headerlink" href="#id9" title="Link to this code"></a></div>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-text">Build HTML documentation</span><a class="headerlink" href="#id10" title="Link to this code"></a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="o">/</span><span class="n">documentation</span><span class="o">&gt;</span> <span class="o">./</span><span class="n">make</span> <span class="n">html</span>
 </pre></div>
 </div>

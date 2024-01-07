@@ -52,7 +52,7 @@ How-to Guides
 
 - **Building documentation for the library**
 
-    1. Build documentation sources into `/docs/source` folder from `python` source files 
+    1. Build documentation sources into `/documentation/source` folder from `python` source files 
 
     .. code-block::
         :caption: Build documentation sources

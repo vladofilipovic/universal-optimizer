@@ -135,6 +135,7 @@
 <li class="toctree-l4"><a class="reference internal" href="uo.algorithm.html#uo.algorithm.algorithm.Algorithm.init"><code class="docutils literal notranslate"><span class="pre">Algorithm.init()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="uo.algorithm.html#uo.algorithm.algorithm.Algorithm.is_first_solution_better"><code class="docutils literal notranslate"><span class="pre">Algorithm.is_first_solution_better()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="uo.algorithm.html#uo.algorithm.algorithm.Algorithm.iteration"><code class="docutils literal notranslate"><span class="pre">Algorithm.iteration</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.algorithm.html#uo.algorithm.algorithm.Algorithm.iteration_best_found"><code class="docutils literal notranslate"><span class="pre">Algorithm.iteration_best_found</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="uo.algorithm.html#uo.algorithm.algorithm.Algorithm.string_rep"><code class="docutils literal notranslate"><span class="pre">Algorithm.string_rep()</span></code></a></li>
 </ul>
 </li>
@@ -142,6 +143,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="uo.algorithm.html#module-uo.algorithm.output_control">uo.algorithm.output_control module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="uo.algorithm.html#uo.algorithm.output_control.OutputControl"><code class="docutils literal notranslate"><span class="pre">OutputControl</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="uo.algorithm.html#uo.algorithm.output_control.OutputControl.copy"><code class="docutils literal notranslate"><span class="pre">OutputControl.copy()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="uo.algorithm.html#uo.algorithm.output_control.OutputControl.fields"><code class="docutils literal notranslate"><span class="pre">OutputControl.fields</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="uo.algorithm.html#uo.algorithm.output_control.OutputControl.fields_definitions"><code class="docutils literal notranslate"><span class="pre">OutputControl.fields_definitions</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="uo.algorithm.html#uo.algorithm.output_control.OutputControl.fields_headings"><code class="docutils literal notranslate"><span class="pre">OutputControl.fields_headings</span></code></a></li>
@@ -197,26 +199,23 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="uo.target_solution.html#module-uo.target_solution.target_solution">uo.target_solution.target_solution module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.QualityOfSolution"><code class="docutils literal notranslate"><span class="pre">QualityOfSolution</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.QualityOfSolution.fitness_value"><code class="docutils literal notranslate"><span class="pre">QualityOfSolution.fitness_value</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.QualityOfSolution.is_feasible"><code class="docutils literal notranslate"><span class="pre">QualityOfSolution.is_feasible</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.QualityOfSolution.objective_value"><code class="docutils literal notranslate"><span class="pre">QualityOfSolution.objective_value</span></code></a></li>
-</ul>
-</li>
 <li class="toctree-l3"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution"><code class="docutils literal notranslate"><span class="pre">TargetSolution</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution.argument"><code class="docutils literal notranslate"><span class="pre">TargetSolution.argument()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution.calculate_quality"><code class="docutils literal notranslate"><span class="pre">TargetSolution.calculate_quality()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution.calculate_quality_directly"><code class="docutils literal notranslate"><span class="pre">TargetSolution.calculate_quality_directly()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution.copy"><code class="docutils literal notranslate"><span class="pre">TargetSolution.copy()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution.copy_to"><code class="docutils literal notranslate"><span class="pre">TargetSolution.copy_to()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution.copy_from"><code class="docutils literal notranslate"><span class="pre">TargetSolution.copy_from()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution.evaluate"><code class="docutils literal notranslate"><span class="pre">TargetSolution.evaluate()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution.fitness_value"><code class="docutils literal notranslate"><span class="pre">TargetSolution.fitness_value</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution.fitness_values"><code class="docutils literal notranslate"><span class="pre">TargetSolution.fitness_values</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution.init_from"><code class="docutils literal notranslate"><span class="pre">TargetSolution.init_from()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution.init_random"><code class="docutils literal notranslate"><span class="pre">TargetSolution.init_random()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution.is_feasible"><code class="docutils literal notranslate"><span class="pre">TargetSolution.is_feasible</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution.name"><code class="docutils literal notranslate"><span class="pre">TargetSolution.name</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution.native_representation"><code class="docutils literal notranslate"><span class="pre">TargetSolution.native_representation()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution.objective_value"><code class="docutils literal notranslate"><span class="pre">TargetSolution.objective_value</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution.objective_values"><code class="docutils literal notranslate"><span class="pre">TargetSolution.objective_values</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution.random_seed"><code class="docutils literal notranslate"><span class="pre">TargetSolution.random_seed</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution.representation"><code class="docutils literal notranslate"><span class="pre">TargetSolution.representation</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution.representation_distance"><code class="docutils literal notranslate"><span class="pre">TargetSolution.representation_distance()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="uo.target_solution.html#uo.target_solution.target_solution.TargetSolution.representation_distance_directly"><code class="docutils literal notranslate"><span class="pre">TargetSolution.representation_distance_directly()</span></code></a></li>

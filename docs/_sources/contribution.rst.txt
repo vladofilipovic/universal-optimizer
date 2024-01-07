@@ -30,6 +30,8 @@ Contribution is encouraged in following four domains:
         
         - Test should be placed into separate directory under directory `/tests/uo/`. 
 
+        - All developed code should be covered with unit test, and test coverage rate should be not less than 80%. 
+
 
 2. Building application for solving optimization problems. Requirements:
 

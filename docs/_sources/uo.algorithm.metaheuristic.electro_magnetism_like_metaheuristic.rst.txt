@@ -1,0 +1,10 @@
+uo.algorithm.metaheuristic.electro\_magnetism\_like\_metaheuristic package
+==========================================================================
+
+Module contents
+---------------
+
+.. automodule:: uo.algorithm.metaheuristic.electro_magnetism_like_metaheuristic
+   :members:
+   :undoc-members:
+   :show-inheritance:
