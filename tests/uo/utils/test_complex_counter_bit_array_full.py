@@ -71,32 +71,47 @@ class TestComplexCounterBitArrayFull(unittest.TestCase):
     def test_create_instance_with_zero_counters(self):
         # Arrange
         number_of_counters = 0
-        # Act
-        cc = ComplexCounterBitArrayFull(number_of_counters)
-        # Assert
-        self.assertEqual(cc.current_state().bin, '')
+        # Act & Assert
+        with self.assertRaisesRegex(ValueError, 'number_of_counters'):
+            ComplexCounterBitArrayFull(number_of_counters)
 
-
-    # can progress the complex counter with zero counters
-    def test_progress_complex_counter_with_zero_counters(self):
+    # can progress the complex counter with one counters
+    def test_progress_complex_counter_with_one_counter(self):
         # Arrange
-        number_of_counters = 0
+        number_of_counters = 1
         cc = ComplexCounterBitArrayFull(number_of_counters)
         # Act
+        cc.progress()
         result = cc.progress()
         # Assert
         self.assertFalse(result)
 
-    # can check if the complex counter can progress with zero counters
-    def test_can_progress_complex_counter_with_zero_counters(self):
+    # can check if the complex counter can progress X 2 with two counters
+    def test_can_progress_x_2_complex_counter_with_two_counters(self):
         # Arrange
-        number_of_counters = 0
+        number_of_counters = 2
         cc = ComplexCounterBitArrayFull(number_of_counters)
         # Act
+        cc.progress()
+        cc.progress()
+        result = cc.can_progress()
+        # Assert
+        self.assertTrue(result)
+        
+    # can check if the complex counter can progress X 4 with two counters
+    def test_can_progress_x_4_complex_counter_with_two_counters(self):
+        # Arrange
+        number_of_counters = 2
+        cc = ComplexCounterBitArrayFull(number_of_counters)
+        # Act
+        cc.progress()
+        cc.progress()
+        cc.progress()
+        cc.progress()
         result = cc.can_progress()
         # Assert
         self.assertFalse(result)
-        
+
 
 class TestComplexCounterBitArrayFull2(unittest.TestCase):
 
