@@ -21,12 +21,19 @@ class ComplexCounterUniformAscending:
         :param int counter_size: size of each counter within complex counter
         """
         if not isinstance(number_of_counters, int):
-                raise TypeError('Parameter \'number_of_counters\' must be \'int\'.')        
+                raise TypeError('Parameter \'number_of_counters\' must be \'int\'.')    
+        if number_of_counters <= 0:    
+                raise ValueError('Parameter \'number_of_counters\' must be greater than zero.')    
         if not isinstance(counter_size, int):
                 raise TypeError('Parameter \'counter_size\' must be \'int\'.')        
+        if counter_size <= 0:    
+                raise ValueError('Parameter \'counter_size\' must be greater than zero.')    
+        if counter_size < number_of_counters:    
+                raise ValueError('Parameter \'counter_size\' must be greater or equal to parameter \'number_of_counters\'.')    
         self.__number_of_counters:int = number_of_counters
         self.__counter_size:int = counter_size
         self.__counters:list[int] = [0] * number_of_counters
+        self.reset()
 
     def __copy__(self):
         """

@@ -15,7 +15,7 @@ from random import choice
 from random import randint
 
 from uo.utils.logger import logger
-from uo.utils.complex_counter_uniform_distinct import ComplexCounterUniformAscending
+from uo.utils.complex_counter_uniform_ascending import ComplexCounterUniformAscending
 
 from uo.target_solution.quality_of_solution import QualityOfSolution
 from uo.algorithm.algorithm import Algorithm

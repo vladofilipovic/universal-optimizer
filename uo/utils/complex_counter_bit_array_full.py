@@ -24,6 +24,8 @@ class ComplexCounterBitArrayFull:
         """
         if not isinstance(number_of_counters, int):
                 raise TypeError('Parameter \'number_of_counters\' must be \'int\'.')        
+        if number_of_counters <= 0:
+                raise ValueError('Parameter \'number_of_counters\' must be greater than zero.')                    
         self.__number_of_counters:int = number_of_counters
         self.__counters:BitArray = BitArray(number_of_counters)
 
@@ -73,7 +75,7 @@ class ComplexCounterBitArrayFull:
         :return: if progress is successful
         :rtype: bool
         """
-        if self.__counters.all(True):
+        if self.__counters.all(True, range(self.__number_of_counters)):
             return False
         ind_not_max:int = self.__counters.find('0b0')[0]
         self.__counters[ind_not_max] = True
