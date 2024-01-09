@@ -111,13 +111,11 @@ class TestTeOptimizerMethodInit(unittest.TestCase):
         print("setUpClass TestTeOptimizerMethodInit\n")
 
     def setUp(self):       
-
         self.oc_write_to_output = False
         self.oc_output_file = "some file path..."
         self.output_control_stub = mocker.MagicMock(spec=OutputControl)
         type(self.output_control_stub).write_to_output = self.oc_write_to_output
         type(self.output_control_stub).output_file = self.oc_output_file
-
         self.pr_name = 'some_problem'
         self.pr_is_minimization = True
         self.pr_file_path = 'some .problem_mock file path'
@@ -128,7 +126,6 @@ class TestTeOptimizerMethodInit(unittest.TestCase):
         type(self.problem_mock).file_path = mocker.PropertyMock(return_value=self.pr_file_path)
         type(self.problem_mock).dimension = mocker.PropertyMock(return_value=self.pr_dimension)
         self.problem_mock.copy = mocker.Mock(return_value=self.problem_mock)
-
         self.solution_name = "void solution"
         self.random_seed = 42
         self.fitness_value = 42.0
@@ -141,10 +138,9 @@ class TestTeOptimizerMethodInit(unittest.TestCase):
         type(self.solution_mock).objective_value=self.objective_value,
         type(self.solution_mock).is_feasible= self.is_feasible
         self.solution_mock.evaluate = mocker.Mock(return_value='evaluate')
-
+        self.solution_mock.copy = mocker.Mock(return_value=self.solution_mock)
         self.te_support = mocker.MagicMock(spec=ProblemSolutionTeSupport)
         self.te_support.reset = mocker.Mock(return_value='reset')
-
         self.te_optimizer = TeOptimizer(output_control=self.output_control_stub,
                 target_problem=self.problem_mock,
                 solution_template= self.solution_mock,

@@ -99,7 +99,7 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
                 raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
         if not isinstance(target_problem, TargetProblem):
                 raise TypeError('Parameter \'target_problem\' must be \'TargetProblem\'.')
-        if not isinstance(solution_template, Optional[TargetSolution]):
+        if not isinstance(solution_template, TargetSolution) and solution_template is not None:
                 raise TypeError('Parameter \'solution_template\' must be \'TargetSolution\' or \'None\'.')        
         if not isinstance(problem_solution_vns_support, ProblemSolutionVnsSupport):
                 raise TypeError('Parameter \'problem_solution_vns_support\' must be \'ProblemSolutionVnsSupport\'.')        

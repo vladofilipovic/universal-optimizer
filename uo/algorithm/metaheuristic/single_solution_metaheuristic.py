@@ -63,7 +63,7 @@ class SingleSolutionMetaheuristic(Metaheuristic, metaclass=ABCMeta):
                 raise TypeError('Parameter \'name\' must be \'str\'.')
         if not isinstance(finish_control, FinishControl):
                 raise TypeError('Parameter \'finish_control\' must be \'FinishControl\'.')
-        if not isinstance(random_seed, Optional[int]):
+        if not isinstance(random_seed, int) and random_seed is not None:
                 raise TypeError('Parameter \'random_seed\' must be \'int\' or \'None\'.')
         if not isinstance(additional_statistics_control, AdditionalStatisticsControl):
                 raise TypeError('Parameter \'additional_statistics_control\' must be \'AdditionalStatisticsControl\'.')
@@ -71,7 +71,7 @@ class SingleSolutionMetaheuristic(Metaheuristic, metaclass=ABCMeta):
                 raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
         if not isinstance(target_problem, TargetProblem):
                 raise TypeError('Parameter \'target_problem\' must be \'TargetProblem\'.')
-        if not isinstance(solution_template, Optional[TargetSolution]):
+        if not isinstance(solution_template, TargetSolution) and solution_template is not None:
                 raise TypeError('Parameter \'solution_template\' must be \'TargetSolution\' or None.')        
         super().__init__(name=name, 
                 finish_control=finish_control,
@@ -120,7 +120,7 @@ class SingleSolutionMetaheuristic(Metaheuristic, metaclass=ABCMeta):
         
         :param datetime value: the current solution used during single solution metaheuristic execution
         """
-        if not isinstance(value, Optional[TargetSolution]):
+        if not isinstance(value, TargetSolution) and value is not None:
             raise TypeError('Parameter \'current_solution\' must have type \'TargetSolution\' or be None.')
         self.__current_solution = value
 

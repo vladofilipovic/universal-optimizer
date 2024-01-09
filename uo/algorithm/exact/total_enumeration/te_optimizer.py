@@ -39,7 +39,7 @@ class TeOptimizerConstructionParameters:
     """
     output_control:OutputControl = None
     target_problem:TargetProblem = None
-    solution_template:TargetSolution = None
+    solution_template:Optional[TargetSolution] = None
     problem_solution_te_support:ProblemSolutionTeSupport = None
 
 class TeOptimizer(Algorithm):
@@ -50,21 +50,21 @@ class TeOptimizer(Algorithm):
     def __init__(self,   
             output_control:OutputControl, 
             target_problem:TargetProblem,
-            solution_template:TargetSolution,
+            solution_template:Optional[TargetSolution],
             problem_solution_te_support:ProblemSolutionTeSupport)->None:
         """
         Create new TeOptimizer instance
 
         :param `OutputControl` output_control: structure that controls output
         :param `TargetProblem` target_problem: problem to be solved
-        :param `TargetSolution` solution_template: solution from which algorithm started
+        :param `Optional[TargetSolution]` solution_template: solution from which algorithm started
         :param `ProblemSolutionTeSupport` problem_solution_te_support: placeholder for additional methods, specific for TE 
         """
         if not isinstance(output_control, OutputControl):
                 raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
         if not isinstance(target_problem, TargetProblem):
                 raise TypeError('Parameter \'target_problem\' must be \'TargetProblem\'.')
-        if not isinstance(solution_template, TargetSolution):
+        if not isinstance(solution_template, TargetSolution) and solution_template is not None:
                 raise TypeError('Parameter \'solution_template\' must be \'TargetSolution\' or None.')
         if not isinstance(problem_solution_te_support, ProblemSolutionTeSupport):
                 raise TypeError('Parameter \'problem_solution_te_support\' must be \'ProblemSolutionTeSupport\'.')
@@ -135,7 +135,7 @@ class TeOptimizer(Algorithm):
         :param value: the current solution
         :type value: :class:`Optional[TargetSolution]`
         """
-        if not isinstance(value, Optional[TargetSolution]):
+        if not isinstance(value, TargetSolution) and value is not None:
             raise TypeError('Parameter \'current_solution\' must have type \'TargetSolution\' or be None.')
         self.__current_solution = value
 

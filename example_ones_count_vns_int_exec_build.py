@@ -55,7 +55,7 @@ class OnesCountProblem2(TargetProblem):
 class OnesCountProblemBinaryIntSolution(TargetSolution[int,str]):
     
     def __init__(self, random_seed:Optional[int]=None)->None:
-        if not isinstance(random_seed, Optional[int]):
+        if not isinstance(random_seed, int) and random_seed is not None:
             raise TypeError('Parameter \'random_seed\' must be \'int\' or \'None\'.')
         super().__init__(random_seed, 
                 fitness_value=None, fitness_values=None, objective_value=None, objective_values=None, is_feasible=False, 

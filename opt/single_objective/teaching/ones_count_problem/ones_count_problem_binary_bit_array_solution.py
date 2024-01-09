@@ -35,7 +35,7 @@ class OnesCountProblemBinaryBitArraySolution(TargetSolution[BitArray,str]):
         """
         Create new `OnesCountProblemBinaryBitArraySolution` instance
         """
-        if not isinstance(random_seed, Optional[int]):
+        if not isinstance(random_seed, int) and random_seed is not None:
             raise TypeError('Parameter \'random_seed\' must be \'int\' or \'None\'.')
         super().__init__(random_seed=random_seed, fitness_value=None, fitness_values=None,
                 objective_value=None, objective_values=None, is_feasible=False, evaluation_cache_is_used=evaluation_cache_is_used,

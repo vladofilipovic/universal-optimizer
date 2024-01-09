@@ -45,8 +45,8 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
                 raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
         if not isinstance(target_problem, TargetProblem):
                 raise TypeError('Parameter \'target_problem\' must be \'TargetProblem\'.')
-        # if not isinstance(solution_template, Optional[TargetSolution]):
-        #         raise TypeError('Parameter \'solution_template\' must be \'TargetSolution\' or None.')
+        if not isinstance(solution_template, TargetSolution) and solution_template is not None:
+                raise TypeError('Parameter \'solution_template\' must be \'TargetSolution\' or None.')
         super().__init__(name=name, output_control=output_control, target_problem=target_problem)
         self.__solution_template:Optional[TargetSolution] = solution_template
         self.__evaluation:int = 0
