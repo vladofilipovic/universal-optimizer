@@ -8,7 +8,7 @@ import sys
 sys.path.append(directory.parent)
 
 from copy import deepcopy
-from random import randrange
+from random import random, randrange
 from random import choice
 
 from abc import ABCMeta, abstractmethod
@@ -29,7 +29,6 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
     
     @abstractmethod
     def __init__(self, 
-            name:str, 
             random_seed:Optional[int], 
             fitness_value:Optional[float|int], 
             fitness_values:Optional[list[float]|tuple[float]], 
@@ -43,7 +42,6 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
     )->None:
         """
         Create new TargetSolution instance
-        :param str name: name of the target solution
         :param int random_seed: random seed for initialization
         :param fitness_value: fitness value of the target solution
         :type fitness_value: float 
@@ -59,8 +57,6 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         :param int distance_calculation_cache_max_size: maximum size of the cache used for distance calculation - 0 if 
         size is unlimited
         """
-        if not isinstance(name, str):
-                raise TypeError('Parameter \'name\' must be \'str\'.')        
         if not isinstance(random_seed, Optional[int]):
                 raise TypeError('Parameter \'random_seed\' must be \'inr\' or \'None\'.')        
         if not isinstance(objective_value, Optional[float|int]):
@@ -81,7 +77,6 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
                 raise TypeError('Parameter \'distance_calculation_cache_is_used\' must be \'bool\'.')        
         if not isinstance(distance_calculation_cache_max_size, int):
                 raise TypeError('Parameter \'distance_calculation_cache_max_size\' must be \'int\'.')        
-        self.__name:str = name
         if random_seed is not None and isinstance(random_seed, int) and random_seed != 0:
             self.__random_seed:int = random_seed
         else:
@@ -127,7 +122,6 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         """
         Copy all data from the original target solution
         """
-        self.__name = original.__name
         self.__random_seed = original.__random_seed
         self.__fitness_value = original.__fitness_value
         self.__fitness_values = original.__fitness_values
@@ -461,9 +455,6 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_start + delimiter
-        for _ in range(0, indentation):
-            s += indentation_symbol     
-        s += 'name=' + self.name + delimiter
         for _ in range(0, indentation):
             s += indentation_symbol     
         s += 'fitness_value=' + str(self.fitness_value) + delimiter

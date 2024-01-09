@@ -37,7 +37,7 @@ class OnesCountProblemBinaryBitArraySolution(TargetSolution[BitArray,str]):
         """
         if not isinstance(random_seed, Optional[int]):
             raise TypeError('Parameter \'random_seed\' must be \'int\' or \'None\'.')
-        super().__init__("OnesCountProblemBinaryBitArraySolution", random_seed=random_seed, fitness_value=None, fitness_values=None,
+        super().__init__(random_seed=random_seed, fitness_value=None, fitness_values=None,
                 objective_value=None, objective_values=None, is_feasible=False, evaluation_cache_is_used=evaluation_cache_is_used,
                 evaluation_cache_max_size=evaluation_cache_max_size,
                 distance_calculation_cache_is_used=distance_calculation_cache_is_used,

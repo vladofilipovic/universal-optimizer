@@ -494,7 +494,6 @@ class TestStringRep(unittest.TestCase):
     
         # Assert
         self.assertIsInstance(result, str)
-        self.assertIn("FunctionOneVariableProblemBinaryIntSolution", result)
         self.assertIn("string_representation()=", result)
 
     # The string representation includes the string representation of the object's string representation.
@@ -520,7 +519,6 @@ class TestStringRep(unittest.TestCase):
         result = obj.string_rep(indentation=2, indentation_symbol='  ')
     
         # Assert
-        self.assertIn("FunctionOneVariableProblemBinaryIntSolution", result)
         self.assertIn("string_representation()=", result)
         self.assertIn("  ", result)
 
