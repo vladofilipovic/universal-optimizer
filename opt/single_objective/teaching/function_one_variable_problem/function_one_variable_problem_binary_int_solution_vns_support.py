@@ -51,7 +51,7 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
         representation_length:int = 32
         while tries < limit:
             positions:list[int] = []
-            for i in range(0,k):
+            for _ in range(0,k):
                 positions.append(choice(range(representation_length)))
             mask:int = 0
             for p in positions:
