@@ -25,10 +25,10 @@ class TestSingleSolutionMetaheuristic(unittest.TestCase):
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
         target_problem = TargetProblemVoid("aaa", True)
-        initial_solution = TargetSolutionVoid(43, 43, 43, True)
+        solution_template = TargetSolutionVoid(43, 43, 43, True)
         # Act
         metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
-                    output_control, target_problem, initial_solution)
+                    output_control, target_problem, solution_template)
         # Assert
         self.assertEqual(metaheuristic.finish_control.criteria, finish_control.criteria)
         self.assertEqual(metaheuristic.finish_control.evaluations_max, finish_control.evaluations_max)
@@ -42,10 +42,10 @@ class TestSingleSolutionMetaheuristic(unittest.TestCase):
         self.assertEqual(metaheuristic.output_control.moments, output_control.moments)
         self.assertEqual(metaheuristic.target_problem.name, target_problem.name)
         self.assertEqual(metaheuristic.target_problem.is_minimization, target_problem.is_minimization)
-        self.assertEqual(metaheuristic.current_solution.random_seed, initial_solution.random_seed)
-        self.assertEqual(metaheuristic.current_solution.fitness_value, initial_solution.fitness_value)
-        self.assertEqual(metaheuristic.current_solution.objective_value, initial_solution.objective_value)
-        self.assertEqual(metaheuristic.current_solution.is_feasible, initial_solution.is_feasible)
+        self.assertEqual(metaheuristic.solution_template.random_seed, solution_template.random_seed)
+        self.assertEqual(metaheuristic.solution_template.fitness_value, solution_template.fitness_value)
+        self.assertEqual(metaheuristic.solution_template.objective_value, solution_template.objective_value)
+        self.assertEqual(metaheuristic.solution_template.is_feasible, solution_template.is_feasible)
 
     # Copying a SingleSolutionMetaheuristic instance should create a new instance with the same properties.
     def test_copy(self):
@@ -56,9 +56,9 @@ class TestSingleSolutionMetaheuristic(unittest.TestCase):
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
         target_problem = TargetProblemVoid("aaa", True)
-        initial_solution = TargetSolutionVoid(43, 43, 43, True)
+        solution_template = TargetSolutionVoid(43, 43, 43, True)
         metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
-                    output_control, target_problem, initial_solution)
+                    output_control, target_problem, solution_template)
         # Act
         copied_metaheuristic = metaheuristic.copy()
         # Assert
@@ -80,12 +80,12 @@ class TestSingleSolutionMetaheuristic(unittest.TestCase):
         self.assertEqual(metaheuristic.target_problem.name, copied_metaheuristic.target_problem.name)
         self.assertEqual(metaheuristic.target_problem.is_minimization, 
                         copied_metaheuristic.target_problem.is_minimization)
-        self.assertEqual(metaheuristic.current_solution.random_seed, copied_metaheuristic.current_solution.random_seed)
-        self.assertEqual(metaheuristic.current_solution.fitness_value, 
-                        copied_metaheuristic.current_solution.fitness_value)
-        self.assertEqual(metaheuristic.current_solution.objective_value, 
-                        copied_metaheuristic.current_solution.objective_value)
-        self.assertEqual(metaheuristic.current_solution.is_feasible, copied_metaheuristic.current_solution.is_feasible)
+        self.assertEqual(metaheuristic.solution_template.random_seed, copied_metaheuristic.solution_template.random_seed)
+        self.assertEqual(metaheuristic.solution_template.fitness_value, 
+                        copied_metaheuristic.solution_template.fitness_value)
+        self.assertEqual(metaheuristic.solution_template.objective_value, 
+                        copied_metaheuristic.solution_template.objective_value)
+        self.assertEqual(metaheuristic.solution_template.is_feasible, copied_metaheuristic.solution_template.is_feasible)
 
     # String representation of a SingleSolutionMetaheuristic instance should return a string with all properties and their values.
     def test_string_representation(self):
@@ -96,9 +96,9 @@ class TestSingleSolutionMetaheuristic(unittest.TestCase):
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
         target_problem = TargetProblemVoid("aaa", True)
-        initial_solution = TargetSolutionVoid(43, 43, 43, True)
+        solution_template = TargetSolutionVoid(43, 43, 43, True)
         metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
-                    output_control, target_problem, initial_solution)
+                    output_control, target_problem, solution_template)
         # Act
         string_rep = str(metaheuristic)
         # Assert
@@ -117,9 +117,9 @@ class TestSingleSolutionMetaheuristic(unittest.TestCase):
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
         target_problem = TargetProblemVoid("aaa", True)
-        initial_solution = TargetSolutionVoid(43, 43, 43, True)
+        solution_template = TargetSolutionVoid(43, 43, 43, True)
         metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
-                    output_control, target_problem, initial_solution)
+                    output_control, target_problem, solution_template)
         spec = "|"
         # Act
         formatted_rep = metaheuristic.__format__(spec)
@@ -140,18 +140,18 @@ class TestSingleSolutionMetaheuristic(unittest.TestCase):
         additional_statistics_control = "AdditionalStatisticsControl"
         output_control = "OutputControl"
         target_problem = "TargetProblem"
-        initial_solution = "TargetSolution"
+        solution_template = "TargetSolution"
         # Act & Assert
         with self.assertRaises(TypeError):
             SingleSolutionMetaheuristic(name, finish_control, random_seed, additional_statistics_control, 
-                    output_control, target_problem, initial_solution)
+                    output_control, target_problem, solution_template)
 
-    # Creating a new instance of SingleSolutionMetaheuristic with initial_solution=None should set current_solution to None.
-    def test_initial_solution_none(self):
+    # Creating a new instance of SingleSolutionMetaheuristic with solution_template=None should set current_solution to None.
+    def test_solution_template_not_target_solution(self):
         # Arrange Act & Assert
         with self.assertRaises(TypeError):
             SingleSolutionMetaheuristicVoid("Metaheuristic", FinishControl(), 12345, 
-                    AdditionalStatisticsControl(), OutputControl(), TargetProblemVoid("aaa", True), None)
+                    AdditionalStatisticsControl(), OutputControl(), TargetProblemVoid("aaa", True), "invalid solution")
         
     # Setting current_solution to an invalid value should raise a TypeError.
     def test_set_invalid_current_solution(self):
@@ -172,12 +172,12 @@ class TestSingleSolutionMetaheuristic(unittest.TestCase):
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
         target_problem = TargetProblemVoid("aaa", True)
-        initial_solution = TargetSolutionVoid(43, 43, 43, True)
+        solution_template = TargetSolutionVoid(43, 43, 43, True)
         # Act
         metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
-                    output_control, target_problem, initial_solution)
+                    output_control, target_problem, solution_template)
         # Assert
-        self.assertIsInstance(metaheuristic.current_solution, TargetSolution)
+        self.assertIsInstance(metaheuristic.solution_template, TargetSolution)
 
 
 class TestCurrentSolution(unittest.TestCase):
@@ -192,19 +192,19 @@ class TestCurrentSolution(unittest.TestCase):
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
         target_problem = TargetProblemVoid("aaa", True)
-        initial_solution = TargetSolutionVoid(43, 43, 43, True)
+        solution_template = TargetSolutionVoid(43, 43, 43, True)
         metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
-                    output_control, target_problem, initial_solution)
+                    output_control, target_problem, solution_template)
         # Act
-        current_solution = metaheuristic.current_solution
+        current_solution = metaheuristic.solution_template
         # Assert
-        self.assertEqual(current_solution.random_seed, initial_solution.random_seed)
-        self.assertEqual(current_solution.fitness_value, initial_solution.fitness_value)
-        self.assertEqual(current_solution.objective_value, initial_solution.objective_value)
-        self.assertEqual(current_solution.is_feasible, initial_solution.is_feasible)
+        self.assertEqual(current_solution.random_seed, solution_template.random_seed)
+        self.assertEqual(current_solution.fitness_value, solution_template.fitness_value)
+        self.assertEqual(current_solution.objective_value, solution_template.objective_value)
+        self.assertEqual(current_solution.is_feasible, solution_template.is_feasible)
 
     # Setting the current solution to None sets the value of __current_solution to None.
-    def test_set_current_solution_to_none_sets_value_to_none(self):
+    def test_set_solution_template_to_not_Target_solution(self):
         # Arrange
         name = "Metaheuristic"
         finish_control = FinishControl()
@@ -212,11 +212,11 @@ class TestCurrentSolution(unittest.TestCase):
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
         target_problem = TargetProblemVoid("aaa", True)
-        initial_solution = None
+        solution_template = "invalid solution"
         # Act & Assert
         with self.assertRaises(TypeError):
             SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
-                    output_control, target_problem, initial_solution)
+                    output_control, target_problem, solution_template)
 
     # Creating an object with solution that is not an instance of TargetSolution as the current solution raises a TypeError.
     def test_create_with_invalid_current_solution_raises_type_error(self):
@@ -261,7 +261,7 @@ class Test__Str__2(unittest.TestCase):
             additional_statistics_control=AdditionalStatisticsControl(),
             output_control=OutputControl(),
             target_problem=TargetProblemVoid("aaa", True),
-            initial_solution=TargetSolutionVoid(43, 43, 43, True)
+            solution_template=TargetSolutionVoid(43, 43, 43, True)
         )
         # Act
         result = str(metaheuristic)   
@@ -278,7 +278,7 @@ class Test__Str__2(unittest.TestCase):
             additional_statistics_control=AdditionalStatisticsControl(),
             output_control=OutputControl(),
             target_problem=TargetProblemVoid("aaa", True),
-            initial_solution=TargetSolutionVoid(43, 43, 43, True)
+            solution_template=TargetSolutionVoid(43, 43, 43, True)
         )
         # Act
         result = str(metaheuristic)    
@@ -296,15 +296,15 @@ class Test__Str__2(unittest.TestCase):
             additional_statistics_control=AdditionalStatisticsControl(),
             output_control=OutputControl(),
             target_problem=TargetProblemVoid("aaa", True),
-            initial_solution=current_solution
+            solution_template=current_solution
         )
         # Act
         result = str(metaheuristic)
         # Assert
-        self.assertIn("current_solution=" + str(current_solution), result)
+        self.assertIn("current_solution=", result)
 
     # Should raise TypeError if the initial solution is None
-    def test_raise_typeerror_if_initial_solution_is_none(self):
+    def test_raise_typeerror_if_solution_template_is_not_target_solution(self):
         # Arrange & Act & Assert
         with self.assertRaises(TypeError):
             SingleSolutionMetaheuristicVoid(
@@ -314,5 +314,5 @@ class Test__Str__2(unittest.TestCase):
                 additional_statistics_control=AdditionalStatisticsControl(),
                 output_control=OutputControl(),
                 target_problem=TargetProblemVoid("aaa", True),
-                initial_solution=None
+                solution_template="invalid solution"
             )

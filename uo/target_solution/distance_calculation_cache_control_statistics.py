@@ -31,7 +31,7 @@ class DistanceCalculationCacheControlStatistics(Generic[E_co]):
         """
         if not isinstance(is_caching, bool):
                 raise TypeError('Parameter \'is_caching\' must be \'bool\'.')        
-        if not isinstance(max_cache_size, Optional[int]):
+        if not isinstance(max_cache_size, int) and max_cache_size is not None:
                 raise TypeError('Parameter \'is_caching\' must be \'int\' or \'None\'.')        
         self.__is_caching:bool = is_caching
         self.__max_cache_size:int = max_cache_size

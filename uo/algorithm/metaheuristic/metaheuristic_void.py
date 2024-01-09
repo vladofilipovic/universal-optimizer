@@ -28,7 +28,8 @@ class MetaheuristicVoid(Metaheuristic):
             random_seed:int, 
             additional_statistics_control:AdditionalStatisticsControl,
             output_control:OutputControl, 
-            target_problem:TargetProblem   
+            target_problem:TargetProblem ,
+            solution_template:TargetSolution = None
     )->None:
         super().__init__(
                 name=name, 
@@ -36,7 +37,8 @@ class MetaheuristicVoid(Metaheuristic):
                 random_seed=random_seed,
                 additional_statistics_control=additional_statistics_control,
                 output_control=output_control, 
-                target_problem=target_problem
+                target_problem=target_problem,
+                solution_template=solution_template
         )
 
     def __copy__(self):

@@ -27,7 +27,11 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
     """
 
     @abstractmethod
-    def __init__(self, name:str, output_control:OutputControl, target_problem:TargetProblem)->None:
+    def __init__(self, 
+                name:str, 
+                output_control:OutputControl, 
+                target_problem:TargetProblem,
+                solution_template:Optional[TargetSolution] = None)->None:
         """
         Create new Algorithm instance
 
@@ -41,7 +45,10 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
                 raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
         if not isinstance(target_problem, TargetProblem):
                 raise TypeError('Parameter \'target_problem\' must be \'TargetProblem\'.')
+        if not isinstance(solution_template, TargetSolution) and solution_template is not None:
+                raise TypeError('Parameter \'solution_template\' must be \'TargetSolution\' or None.')
         super().__init__(name=name, output_control=output_control, target_problem=target_problem)
+        self.__solution_template:Optional[TargetSolution] = solution_template
         self.__evaluation:int = 0
         self.__iteration:int = 0
         self.__iteration_best_found:int = 0
@@ -66,6 +73,16 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
         :rtype: :class:`uo.algorithm.Algorithm`
         """
         return self.__copy__()
+
+    @property
+    def solution_template(self)->Optional[TargetSolution]:
+        """
+        Property getter for the solution template for the problem to be solved
+        
+        :return: solution template for the problem to be solved 
+        :rtype: `TargetSolution`
+        """
+        return self.__solution_template
 
     @property
     def evaluation(self)->int:
@@ -200,6 +217,13 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
             s += indentation_symbol  
         s += 'target_problem=' + self.target_problem.string_rep(delimiter, indentation + 1, 
                 indentation_symbol, '{', '}')  + delimiter 
+        for _ in range(0, indentation):
+            s += indentation_symbol  
+        if self.solution_template is not None:
+            s += 'solution_template=' + self.solution_template.string_rep(delimiter, indentation + 1, 
+                    indentation_symbol, '{', '}')  + delimiter 
+        else:
+            s += 'solution_template=None' + delimiter
         for _ in range(0, indentation):
             s += indentation_symbol  
         s += '__evaluation=' + str(self.__evaluation) + delimiter

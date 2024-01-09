@@ -17,7 +17,7 @@ from io import TextIOWrapper
 
 from bitstring import BitArray
 
-from typing import TypeVar, Generic
+from typing import Optional, TypeVar, Generic
 from typing import Generic
 from typing import NamedTuple
 
@@ -39,7 +39,7 @@ class TeOptimizerConstructionParameters:
     """
     output_control:OutputControl = None
     target_problem:TargetProblem = None
-    initial_solution:TargetSolution = None
+    solution_template:Optional[TargetSolution] = None
     problem_solution_te_support:ProblemSolutionTeSupport = None
 
 class TeOptimizer(Algorithm):
@@ -50,27 +50,28 @@ class TeOptimizer(Algorithm):
     def __init__(self,   
             output_control:OutputControl, 
             target_problem:TargetProblem,
-            initial_solution:TargetSolution,
+            solution_template:Optional[TargetSolution],
             problem_solution_te_support:ProblemSolutionTeSupport)->None:
         """
         Create new TeOptimizer instance
 
         :param `OutputControl` output_control: structure that controls output
         :param `TargetProblem` target_problem: problem to be solved
-        :param `TargetSolution` initial_solution: solution from which algorithm started
+        :param `Optional[TargetSolution]` solution_template: solution from which algorithm started
         :param `ProblemSolutionTeSupport` problem_solution_te_support: placeholder for additional methods, specific for TE 
         """
         if not isinstance(output_control, OutputControl):
                 raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
         if not isinstance(target_problem, TargetProblem):
                 raise TypeError('Parameter \'target_problem\' must be \'TargetProblem\'.')
-        if not isinstance(initial_solution, TargetSolution):
-                raise TypeError('Parameter \'initial_solution\' must be \'TargetSolution\'.')
+        if not isinstance(solution_template, TargetSolution) and solution_template is not None:
+                raise TypeError('Parameter \'solution_template\' must be \'TargetSolution\' or None.')
         if not isinstance(problem_solution_te_support, ProblemSolutionTeSupport):
                 raise TypeError('Parameter \'problem_solution_te_support\' must be \'ProblemSolutionTeSupport\'.')
         super().__init__(name='total_enumerations', 
                 output_control=output_control, 
-                target_problem=target_problem)
+                target_problem=target_problem,
+                solution_template=solution_template)
         # total enumeration support
         if problem_solution_te_support is not None:
             self.__problem_solution_te_support:ProblemSolutionTeSupport = problem_solution_te_support
@@ -83,7 +84,7 @@ class TeOptimizer(Algorithm):
             self.__progress_method = None
             self.__can_progress_method = None
         # current solution
-        self.__current_solution = initial_solution
+        self.__current_solution:Optional[TargetSolution] = None
 
     @classmethod
     def from_construction_tuple(cls, construction_tuple:TeOptimizerConstructionParameters):
@@ -94,7 +95,7 @@ class TeOptimizer(Algorithm):
         """
         return cls(construction_tuple.output_control, 
             construction_tuple.target_problem, 
-            construction_tuple.initial_solution,
+            construction_tuple.solution_template,
             construction_tuple.problem_solution_te_support)
 
     def __copy__(self):
@@ -117,31 +118,32 @@ class TeOptimizer(Algorithm):
         return self.__copy__()
 
     @property
-    def current_solution(self)->TargetSolution:
+    def current_solution(self)->Optional[TargetSolution]:
         """
         Property getter for the current solution used during VNS execution
 
         :return: instance of the :class:`uo.target_solution.TargetSolution` class subtype -- current solution of the problem 
-        :rtype: :class:`TargetSolution`        
+        :rtype: :class:`Optional[TargetSolution]`        
         """
         return self.__current_solution
 
     @current_solution.setter
-    def current_solution(self, value:TargetSolution)->None:
+    def current_solution(self, value:Optional[TargetSolution])->None:
         """
         Property setter for the current solution used during VNS execution
 
         :param value: the current solution
-        :type value: :class:`TargetSolution`
+        :type value: :class:`Optional[TargetSolution]`
         """
-        if not isinstance(value, TargetSolution):
-            raise TypeError('Parameter \'current_solution\' must have type \'TargetSolution\'.')
+        if not isinstance(value, TargetSolution) and value is not None:
+            raise TypeError('Parameter \'current_solution\' must have type \'TargetSolution\' or be None.')
         self.__current_solution = value
 
     def init(self):
         """
         Initialization of the total enumeration algorithm
         """
+        self.current_solution = self.solution_template.copy()
         self.__reset_method(self.target_problem,self.current_solution, self)
         self.write_output_values_if_needed("before_evaluation", "b_e")
         self.evaluation += 1
@@ -195,8 +197,11 @@ class TeOptimizer(Algorithm):
         s += group_start
         s = super().string_rep(delimiter, indentation, indentation_symbol, '', '')
         s += delimiter
-        s += 'current_solution=' + self.current_solution.string_rep(delimiter, indentation + 1, 
-                indentation_symbol, group_start, group_end) + delimiter 
+        if self.current_solution is not None:
+            s += 'current_solution=' + self.current_solution.string_rep(delimiter, indentation + 1, 
+                    indentation_symbol, group_start, group_end) + delimiter 
+        else:
+            s += 'current_solution=None' + delimiter 
         for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_end 

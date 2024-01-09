@@ -45,7 +45,7 @@ class SingleSolutionMetaheuristic(Metaheuristic, metaclass=ABCMeta):
             additional_statistics_control:AdditionalStatisticsControl,
             output_control:OutputControl, 
             target_problem:TargetProblem,
-            initial_solution:TargetSolution
+            solution_template:TargetSolution
     )->None:
         """
         Create new SingleSolutionMetaheuristic instance
@@ -57,13 +57,13 @@ class SingleSolutionMetaheuristic(Metaheuristic, metaclass=ABCMeta):
         statistics obtained during population-based metaheuristic execution        
         :param `OutputControl` output_control: structure that controls output
         :param `TargetProblem` target_problem: problem to be solved
-        :param `TargetSolution` initial_solution: initial solution of the problem
+        :param `Optional[TargetSolution]` solution_template: initial solution of the problem
         """
         if not isinstance(name, str):
                 raise TypeError('Parameter \'name\' must be \'str\'.')
         if not isinstance(finish_control, FinishControl):
                 raise TypeError('Parameter \'finish_control\' must be \'FinishControl\'.')
-        if not isinstance(random_seed, Optional[int]):
+        if not isinstance(random_seed, int) and random_seed is not None:
                 raise TypeError('Parameter \'random_seed\' must be \'int\' or \'None\'.')
         if not isinstance(additional_statistics_control, AdditionalStatisticsControl):
                 raise TypeError('Parameter \'additional_statistics_control\' must be \'AdditionalStatisticsControl\'.')
@@ -71,18 +71,16 @@ class SingleSolutionMetaheuristic(Metaheuristic, metaclass=ABCMeta):
                 raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
         if not isinstance(target_problem, TargetProblem):
                 raise TypeError('Parameter \'target_problem\' must be \'TargetProblem\'.')
-        if not isinstance(initial_solution, TargetSolution):
-                raise TypeError('Parameter \'initial_solution\' must be \'TargetSolution\'.')        
+        if not isinstance(solution_template, TargetSolution) and solution_template is not None:
+                raise TypeError('Parameter \'solution_template\' must be \'TargetSolution\' or None.')        
         super().__init__(name=name, 
                 finish_control=finish_control,
                 random_seed=random_seed,
                 additional_statistics_control=additional_statistics_control,
                 output_control=output_control, 
-                target_problem=target_problem)
-        if initial_solution is not None: 
-            self.__current_solution:Optional[TargetSolution] = initial_solution.copy()
-        else:
-            self.__current_solution:Optional[TargetSolution] =  None
+                target_problem=target_problem,
+                solution_template=solution_template)
+        self.__current_solution:Optional[TargetSolution] =  None
 
     @abstractmethod
     def __copy__(self):
@@ -106,7 +104,7 @@ class SingleSolutionMetaheuristic(Metaheuristic, metaclass=ABCMeta):
         return self.__copy__()
 
     @property
-    def current_solution(self)->TargetSolution:
+    def current_solution(self)->Optional[TargetSolution]:
         """
         Property getter for the current solution used during single solution metaheuristic execution
 
@@ -114,6 +112,17 @@ class SingleSolutionMetaheuristic(Metaheuristic, metaclass=ABCMeta):
         :rtype: :class:`TargetSolution`        
         """
         return self.__current_solution
+
+    @current_solution.setter
+    def current_solution(self, value:Optional[TargetSolution])->None:
+        """
+        Property setter for the current solution used during single solution metaheuristic execution
+        
+        :param datetime value: the current solution used during single solution metaheuristic execution
+        """
+        if not isinstance(value, TargetSolution) and value is not None:
+            raise TypeError('Parameter \'current_solution\' must have type \'TargetSolution\' or be None.')
+        self.__current_solution = value
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
             group_end:str ='}')->str:

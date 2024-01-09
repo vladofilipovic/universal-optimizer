@@ -55,7 +55,7 @@ class OnesCountProblem2(TargetProblem):
 class OnesCountProblemBinaryIntSolution(TargetSolution[int,str]):
     
     def __init__(self, random_seed:Optional[int]=None)->None:
-        if not isinstance(random_seed, Optional[int]):
+        if not isinstance(random_seed, int) and random_seed is not None:
             raise TypeError('Parameter \'random_seed\' must be \'int\' or \'None\'.')
         super().__init__(random_seed, 
                 fitness_value=None, fitness_values=None, objective_value=None, objective_values=None, is_feasible=False, 
@@ -241,7 +241,7 @@ def main():
     vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
     vns_construction_params.output_control = output_control
     vns_construction_params.target_problem = problem_to_solve
-    vns_construction_params.initial_solution = solution
+    vns_construction_params.solution_template = solution
     vns_construction_params.problem_solution_vns_support = vns_support
     vns_construction_params.finish_control = finish
     vns_construction_params.random_seed = 43434343

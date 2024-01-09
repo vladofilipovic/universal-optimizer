@@ -36,7 +36,7 @@ class OnesCountProblemBinaryIntSolution(TargetSolution[int,str]):
 
         :param int random_seed: random seed for initialization, default value `Null`
         """
-        if not isinstance(random_seed, Optional[int]):
+        if not isinstance(random_seed, int) and random_seed is not None:
             raise TypeError('Parameter \'random_seed\' must be \'int\' or \'None\'.')
         super().__init__(random_seed=random_seed, fitness_value=None, 
                 fitness_values=None,

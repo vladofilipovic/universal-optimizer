@@ -60,7 +60,7 @@ class FunctionOneVariableProblemSolverConstructionParameters:
         finish_control: FinishControl = None
         output_control: OutputControl = None
         target_problem: TargetProblem = None
-        initial_solution: TargetSolution = None
+        solution_template: TargetSolution = None
         vns_problem_solution_support: ProblemSolutionVnsSupport = None
         vns_random_seed: int = None
         vns_additional_statistics_control: AdditionalStatisticsControl = None
@@ -76,7 +76,7 @@ class FunctionOneVariableProblemSolver:
                 finish_control:FinishControl = None,
                 output_control:OutputControl = None,
                 target_problem:TargetProblem = None,
-                initial_solution:TargetSolution = None,
+                solution_template:TargetSolution = None,
                 vns_problem_solution_support:ProblemSolutionVnsSupport = None,
                 vns_random_seed:int = None,
                 vns_additional_statistics_control:AdditionalStatisticsControl = None,
@@ -91,7 +91,7 @@ class FunctionOneVariableProblemSolver:
                 :param FinishControl finish_control: controls finish criteria
                 :param output_control:OutputControl = controls output
                 :param TargetProblem target_problem: problem that is solved
-                :param TargetSolution initial_solution: initial solution
+                :param TargetSolution solution_template: initial solution
                 :param ProblemSolutionVnsSupport vns_problem_solution_support: Specific VNS support
                 :param int vns_random_seed: random seed
                 :param AdditionalStatisticsControl vns_additional_statistics_control: additional statistics control
@@ -109,8 +109,8 @@ class FunctionOneVariableProblemSolver:
                                 raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
                         if not isinstance(target_problem, TargetProblem):
                                 raise TypeError('Parameter \'target_problem\' must be \'TargetProblem\'.')
-                        if not isinstance(initial_solution, TargetSolution):
-                                raise TypeError('Parameter \'initial_solution\' must be \'TargetSolution\'.')
+                        if not isinstance(solution_template, TargetSolution):
+                                raise TypeError('Parameter \'solution_template\' must be \'TargetSolution\'.')
                         if not isinstance(vns_problem_solution_support, ProblemSolutionVnsSupport):
                                 raise TypeError('Parameter \'vns_problem_solution_support\' must be \'ProblemSolutionVnsSupport\'.')
                         if not isinstance(vns_random_seed, int):
@@ -127,7 +127,7 @@ class FunctionOneVariableProblemSolver:
                                 finish_control= finish_control,
                                 output_control= output_control,
                                 target_problem= target_problem,
-                                initial_solution= initial_solution,
+                                solution_template= solution_template,
                                 problem_solution_vns_support= vns_problem_solution_support,
                                 random_seed= vns_random_seed, 
                                 additional_statistics_control= vns_additional_statistics_control,
@@ -150,7 +150,7 @@ class FunctionOneVariableProblemSolver:
                         finish_control = construction_params.finish_control,
                         output_control = construction_params.output_control,
                         target_problem = construction_params.target_problem,
-                        initial_solution = construction_params.initial_solution,
+                        solution_template = construction_params.solution_template,
                         vns_problem_solution_support = construction_params.vns_problem_solution_support,
                         vns_random_seed = construction_params.vns_random_seed, 
                         vns_additional_statistics_control = construction_params.vns_additional_statistics_control,
@@ -172,7 +172,7 @@ class FunctionOneVariableProblemSolver:
                 params.finish_control:FinishControl = vns_construction_params.finish_control
                 params.output_control:OutputControl = vns_construction_params.output_control
                 params.target_problem:TargetProblem = vns_construction_params.target_problem
-                params.initial_solution:TargetSolution = vns_construction_params.initial_solution
+                params.solution_template:TargetSolution = vns_construction_params.solution_template
                 params.vns_problem_solution_support:ProblemSolutionVnsSupport = \
                         vns_construction_params.problem_solution_vns_support
                 params.vns_random_seed:int = vns_construction_params.random_seed

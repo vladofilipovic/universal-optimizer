@@ -29,7 +29,7 @@ class SingleSolutionMetaheuristicVoid(SingleSolutionMetaheuristic):
             additional_statistics_control:AdditionalStatisticsControl,
             output_control:OutputControl, 
             target_problem:TargetProblem,
-            initial_solution:TargetSolution   
+            solution_template:TargetSolution   
     )->None:
         super().__init__(
                 name=name, 
@@ -38,7 +38,7 @@ class SingleSolutionMetaheuristicVoid(SingleSolutionMetaheuristic):
                 additional_statistics_control=additional_statistics_control,
                 output_control=output_control, 
                 target_problem=target_problem,
-                initial_solution=initial_solution
+                solution_template=solution_template
         )
 
     def __copy__(self):

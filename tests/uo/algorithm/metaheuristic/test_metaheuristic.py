@@ -424,7 +424,8 @@ class TestAdditionalStatisticsControl(unittest.TestCase):
         additional_statistics_control = AdditionalStatisticsControl()
         metaheuristic = MetaheuristicVoid(name="test", finish_control=FinishControl(), random_seed=None, 
                     additional_statistics_control=additional_statistics_control, output_control=OutputControl(), 
-                    target_problem=TargetProblemVoid("aaa", False))
+                    target_problem=TargetProblemVoid("aaa", False),
+                    solution_template = None)
         # Act
         result = metaheuristic.additional_statistics_control
         # Assert
