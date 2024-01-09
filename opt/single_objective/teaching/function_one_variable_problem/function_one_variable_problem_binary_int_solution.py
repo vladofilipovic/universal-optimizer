@@ -39,7 +39,7 @@ class FunctionOneVariableProblemBinaryIntSolution(TargetSolution[int,float]):
             raise TypeError("Parameter \'number_of_intervals\' should be integer.")
         if number_of_intervals <= 0 :
             raise ValueError("Parameter \'number_of_intervals\' should be positive.")
-        super().__init__("FunctionOneVariableProblemBinaryIntSolution", random_seed=random_seed, fitness_value=None, 
+        super().__init__(random_seed=random_seed, fitness_value=None, 
                 fitness_values=None, objective_value=None, objective_values=None,
                 is_feasible=False, evaluation_cache_is_used=evaluation_cache_is_used,
                 evaluation_cache_max_size=evaluation_cache_max_size,

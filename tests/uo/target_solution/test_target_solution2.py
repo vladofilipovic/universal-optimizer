@@ -16,7 +16,7 @@ class TestTargetSolution2(unittest.TestCase):
     def test_set_get_fitness_value_attribute(self):
         # Arrange
         fitness_value = 0.5
-        solution = TargetSolutionVoid("solution", None, None, None, False, False, 0, False, 0)
+        solution = TargetSolutionVoid(None, None, None, False, False, 0, False, 0)
         # Act
         solution.fitness_value = fitness_value
         # Assert
@@ -26,7 +26,7 @@ class TestTargetSolution2(unittest.TestCase):
     def test_set_get_fitness_values_attribute(self):
         # Arrange
         fitness_values = [0.2, 0.3, 0.4]
-        solution = TargetSolutionVoid("solution", None, None, None, False, False, 0, False, 0)
+        solution = TargetSolutionVoid(None, None, None, False, False, 0, False, 0)
         # Act
         solution.fitness_values = fitness_values
         # Assert
@@ -36,7 +36,7 @@ class TestTargetSolution2(unittest.TestCase):
     def test_set_get_objective_value_attribute(self):
         # Arrange
         objective_value = 100
-        solution = TargetSolutionVoid("solution", None, None, None, False, False, 0, False, 0)
+        solution = TargetSolutionVoid(None, None, None, False, False, 0, False, 0)
         # Act
         solution.objective_value = objective_value
         # Assert
@@ -46,7 +46,7 @@ class TestTargetSolution2(unittest.TestCase):
     def test_set_get_objective_values_attribute(self):
         # Arrange
         objective_values = [50, 75, 100]
-        solution = TargetSolutionVoid("solution", None, None, None, False, False, 0, False, 0)
+        solution = TargetSolutionVoid(None, None, None, False, False, 0, False, 0)
         # Act
         solution.objective_values = objective_values
         # Assert
@@ -74,7 +74,7 @@ class TestTargetSolution2(unittest.TestCase):
     def test_set_fitness_value_with_invalid_type(self):
         # Arrange
         fitness_value = "0.5"  # Invalid type
-        solution = TargetSolutionVoid("solution", None, None, None, False, False, 0, False, 0)
+        solution = TargetSolutionVoid(None, None, None, False, False, 0, False, 0)
         # Act & Assert
         with self.assertRaises(TypeError):
             solution.fitness_value = fitness_value
@@ -83,7 +83,7 @@ class TestTargetSolution2(unittest.TestCase):
     def test_set_fitness_values_with_invalid_type(self):
         # Arrange
         fitness_values = "0.2, 0.3, 0.4"  # Invalid type
-        solution = TargetSolutionVoid("solution", None, None, None, False, False, 0, False, 0)
+        solution = TargetSolutionVoid(None, None, None, False, False, 0, False, 0)
         # Act & Assert
         with self.assertRaises(TypeError):
             solution.fitness_values = fitness_values
@@ -92,7 +92,7 @@ class TestTargetSolution2(unittest.TestCase):
     def test_set_objective_value_with_invalid_type(self):
         # Arrange
         objective_value = "100"  # Invalid type
-        solution = TargetSolutionVoid("solution", None, None, None, False, False, 0, False, 0)
+        solution = TargetSolutionVoid(None, None, None, False, False, 0, False, 0)
         # Act & Assert
         with self.assertRaises(TypeError):
             solution.objective_value = objective_value
@@ -101,7 +101,7 @@ class TestTargetSolution2(unittest.TestCase):
     def test_set_objective_values_with_invalid_type(self):
         # Arrange
         objective_values = "50, 75, 100"  # Invalid type
-        solution = TargetSolutionVoid("solution", None, None, None, False, False, 0, False, 0)
+        solution = TargetSolutionVoid(None, None, None, False, False, 0, False, 0)
         # Act & Assert
         with self.assertRaises(TypeError):
             solution.objective_values = objective_values
@@ -110,7 +110,7 @@ class TestTargetSolution2(unittest.TestCase):
     def test_set_is_feasible_with_invalid_type(self):
         # Arrange
         is_feasible = "True"  # Invalid type
-        solution = TargetSolutionVoid("solution", None, None, None, False, False, 0, False, 0)
+        solution = TargetSolutionVoid(None, None, None, False, False, 0, False, 0)
         # Act & Assert
         with self.assertRaisesRegex(TypeError, "Parameter 'is_feasible'"):
             solution.is_feasible = is_feasible
@@ -118,7 +118,7 @@ class TestTargetSolution2(unittest.TestCase):
     # Setting and getting the is_feasible attribute should work as expected.
     def test_set_and_get_is_feasible(self):
         # Arrange
-        solution = TargetSolutionVoid("solution", None, None, None, False, False, 0, False, 0)
+        solution = TargetSolutionVoid(None, None, None, False, False, 0, False, 0)
         # Act
         solution.is_feasible = True
         is_feasible = solution.is_feasible
@@ -128,12 +128,11 @@ class TestTargetSolution2(unittest.TestCase):
     # The copy() method should create a deep copy of the TargetSolution instance.
     def test_copy_method(self):
         # Arrange
-        solution = TargetSolutionVoid("solution", None, 0.5, 100, True, True, 100, True, 200)
+        solution = TargetSolutionVoid(None, 0.5, 100, True, True, 100, True, 200)
         # Act
         copied_solution = solution.copy()
         # Assert
         self.assertIsNot(solution, copied_solution)
-        self.assertEqual(solution.name, copied_solution.name)
         self.assertEqual(solution.random_seed, copied_solution.random_seed)
         self.assertEqual(solution.fitness_value, copied_solution.fitness_value)
         self.assertEqual(solution.fitness_values, copied_solution.fitness_values)
@@ -147,14 +146,13 @@ class TestTargetSolution2(unittest.TestCase):
     # The copy_from() method should copy all attributes from another TargetSolution instance to the current instance.
     def test_copy_from_method(self):
         # Arrange
-        original_solution = TargetSolutionVoid("original", None, 0.5, 100, True, True, 100, True, 200)
+        original_solution = TargetSolutionVoid(None, 0.5, 100, True, True, 100, True, 200)
         original_solution.fitness_values = [1, 2, 4]
         original_solution.objective_values = [5, 6, 7]
-        solution = TargetSolutionVoid("solution", None, None, None, False, False, 0, False, 0)
+        solution = TargetSolutionVoid(None, None, None, False, False, 0, False, 0)
         # Act
         solution.copy_from(original_solution)
         # Assert
-        self.assertEqual(solution.name, original_solution.name)
         self.assertEqual(solution.random_seed, original_solution.random_seed)
         self.assertEqual(solution.fitness_value, original_solution.fitness_value)
         self.assertEqual(solution.fitness_values, original_solution.fitness_values)
@@ -166,7 +164,6 @@ class TestTargetSolution2(unittest.TestCase):
     # The string_representation() method should return a string representation of the TargetSolution instance.
     def test_string_representation(self):
         # Arrange
-        name = "solution"
         random_seed = 123
         fitness_value = 0.5
         objective_value = 100
@@ -175,7 +172,7 @@ class TestTargetSolution2(unittest.TestCase):
         evaluation_cache_max_size = 100
         distance_calculation_cache_is_used = True
         distance_calculation_cache_max_size = 200
-        solution = TargetSolutionVoid(name, random_seed, fitness_value, objective_value, is_feasible, 
+        solution = TargetSolutionVoid(random_seed, fitness_value, objective_value, is_feasible, 
                     evaluation_cache_is_used, evaluation_cache_max_size, 
                     distance_calculation_cache_is_used, distance_calculation_cache_max_size)
         # Act
@@ -187,7 +184,6 @@ class TestTargetSolution2(unittest.TestCase):
     # The string_rep() method should return a string representation of the TargetSolution instance with the specified delimiter, indentation, and grouping symbols.
     def test_string_rep(self):
         # Arrange
-        name = "solution"
         random_seed = 123
         fitness_value = 0.5
         objective_value = 100
@@ -196,14 +192,12 @@ class TestTargetSolution2(unittest.TestCase):
         evaluation_cache_max_size = 100
         distance_calculation_cache_is_used = True
         distance_calculation_cache_max_size = 200
-        solution = TargetSolutionVoid(name, random_seed, fitness_value, objective_value, is_feasible, 
+        solution = TargetSolutionVoid(random_seed, fitness_value, objective_value, is_feasible, 
                     evaluation_cache_is_used, evaluation_cache_max_size, 
                     distance_calculation_cache_is_used, distance_calculation_cache_max_size)
         # Act
         result = solution.string_rep('|', indentation=1, indentation_symbol='-', group_start='[', group_end=']')
         # Assert
-        expected_string_rep = "|-name=solution|"
-        self.assertIn(expected_string_rep, result)
         expected_string_rep = "|-fitness_value=0.5|"
         self.assertIn(expected_string_rep, result)
         expected_string_rep = "|-objective_value=100|"

@@ -153,8 +153,8 @@ class TestAlgorithm(unittest.TestCase):
         # Arrange
         algorithm = AlgorithmVoid(name="MyAlgorithm", output_control=OutputControl(), 
                                 target_problem=TargetProblemVoid("problem", False))
-        solution1 = TargetSolutionVoid("", 42, 0, 0, True)
-        solution2 = TargetSolutionVoid("", 42, 0, 0, True)
+        solution1 = TargetSolutionVoid( 42, 0, 0, True)
+        solution2 = TargetSolutionVoid( 42, 0, 0, True)
         solution1.calculate_quality = mocker.Mock(return_value=QualityOfSolution(10, None, 10, None, True))
         solution2.calculate_quality = mocker.Mock(return_value=QualityOfSolution(5, None, 5, None, True))
         # Act
@@ -167,8 +167,8 @@ class TestAlgorithm(unittest.TestCase):
         # Arrange
         algorithm = AlgorithmVoid(name="MyAlgorithm", output_control=OutputControl(), 
                                 target_problem=TargetProblemVoid("problem", False))
-        solution1 = TargetSolutionVoid("", 42, 0, 0, True)
-        solution2 = TargetSolutionVoid("", 42, 0, 0, True)
+        solution1 = TargetSolutionVoid( 42, 0, 0, True)
+        solution2 = TargetSolutionVoid( 42, 0, 0, True)
         solution1.calculate_quality = mocker.Mock(return_value=QualityOfSolution(5, None, 5, None, True))
         solution2.calculate_quality = mocker.Mock(return_value=QualityOfSolution(10, None, 10, None, True))
         # Act

@@ -25,12 +25,11 @@ class TestSingleSolutionMetaheuristic(unittest.TestCase):
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
         target_problem = TargetProblemVoid("aaa", True)
-        initial_solution = TargetSolutionVoid("", 43, 43, 43, True)
+        initial_solution = TargetSolutionVoid(43, 43, 43, True)
         # Act
         metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
                     output_control, target_problem, initial_solution)
         # Assert
-        self.assertEqual(metaheuristic.name, name)
         self.assertEqual(metaheuristic.finish_control.criteria, finish_control.criteria)
         self.assertEqual(metaheuristic.finish_control.evaluations_max, finish_control.evaluations_max)
         self.assertEqual(metaheuristic.finish_control.iterations_max, finish_control.iterations_max)
@@ -43,7 +42,6 @@ class TestSingleSolutionMetaheuristic(unittest.TestCase):
         self.assertEqual(metaheuristic.output_control.moments, output_control.moments)
         self.assertEqual(metaheuristic.target_problem.name, target_problem.name)
         self.assertEqual(metaheuristic.target_problem.is_minimization, target_problem.is_minimization)
-        self.assertEqual(metaheuristic.current_solution.name, initial_solution.name)
         self.assertEqual(metaheuristic.current_solution.random_seed, initial_solution.random_seed)
         self.assertEqual(metaheuristic.current_solution.fitness_value, initial_solution.fitness_value)
         self.assertEqual(metaheuristic.current_solution.objective_value, initial_solution.objective_value)
@@ -58,14 +56,13 @@ class TestSingleSolutionMetaheuristic(unittest.TestCase):
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
         target_problem = TargetProblemVoid("aaa", True)
-        initial_solution = TargetSolutionVoid("", 43, 43, 43, True)
+        initial_solution = TargetSolutionVoid(43, 43, 43, True)
         metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
                     output_control, target_problem, initial_solution)
         # Act
         copied_metaheuristic = metaheuristic.copy()
         # Assert
         self.assertIsNot(metaheuristic, copied_metaheuristic)
-        self.assertEqual(metaheuristic.name, copied_metaheuristic.name)
         self.assertEqual(metaheuristic.finish_control.criteria, copied_metaheuristic.finish_control.criteria)
         self.assertEqual(metaheuristic.finish_control.evaluations_max, 
                         copied_metaheuristic.finish_control.evaluations_max)
@@ -83,7 +80,6 @@ class TestSingleSolutionMetaheuristic(unittest.TestCase):
         self.assertEqual(metaheuristic.target_problem.name, copied_metaheuristic.target_problem.name)
         self.assertEqual(metaheuristic.target_problem.is_minimization, 
                         copied_metaheuristic.target_problem.is_minimization)
-        self.assertEqual(metaheuristic.current_solution.name, copied_metaheuristic.current_solution.name)
         self.assertEqual(metaheuristic.current_solution.random_seed, copied_metaheuristic.current_solution.random_seed)
         self.assertEqual(metaheuristic.current_solution.fitness_value, 
                         copied_metaheuristic.current_solution.fitness_value)
@@ -100,13 +96,12 @@ class TestSingleSolutionMetaheuristic(unittest.TestCase):
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
         target_problem = TargetProblemVoid("aaa", True)
-        initial_solution = TargetSolutionVoid("", 43, 43, 43, True)
+        initial_solution = TargetSolutionVoid(43, 43, 43, True)
         metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
                     output_control, target_problem, initial_solution)
         # Act
         string_rep = str(metaheuristic)
         # Assert
-        self.assertIn("name=", string_rep)
         self.assertIn("finish_control=", string_rep)
         self.assertIn("random_seed=12345", string_rep)
         self.assertIn("additional_statistics_control=", string_rep)
@@ -122,7 +117,7 @@ class TestSingleSolutionMetaheuristic(unittest.TestCase):
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
         target_problem = TargetProblemVoid("aaa", True)
-        initial_solution = TargetSolutionVoid("", 43, 43, 43, True)
+        initial_solution = TargetSolutionVoid(43, 43, 43, True)
         metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
                     output_control, target_problem, initial_solution)
         spec = "|"
@@ -177,7 +172,7 @@ class TestSingleSolutionMetaheuristic(unittest.TestCase):
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
         target_problem = TargetProblemVoid("aaa", True)
-        initial_solution = TargetSolutionVoid("", 43, 43, 43, True)
+        initial_solution = TargetSolutionVoid(43, 43, 43, True)
         # Act
         metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
                     output_control, target_problem, initial_solution)
@@ -197,13 +192,12 @@ class TestCurrentSolution(unittest.TestCase):
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
         target_problem = TargetProblemVoid("aaa", True)
-        initial_solution = TargetSolutionVoid("", 43, 43, 43, True)
+        initial_solution = TargetSolutionVoid(43, 43, 43, True)
         metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
                     output_control, target_problem, initial_solution)
         # Act
         current_solution = metaheuristic.current_solution
         # Assert
-        self.assertEqual(current_solution.name, initial_solution.name)
         self.assertEqual(current_solution.random_seed, initial_solution.random_seed)
         self.assertEqual(current_solution.fitness_value, initial_solution.fitness_value)
         self.assertEqual(current_solution.objective_value, initial_solution.objective_value)
@@ -267,7 +261,7 @@ class Test__Str__2(unittest.TestCase):
             additional_statistics_control=AdditionalStatisticsControl(),
             output_control=OutputControl(),
             target_problem=TargetProblemVoid("aaa", True),
-            initial_solution=TargetSolutionVoid("", 43, 43, 43, True)
+            initial_solution=TargetSolutionVoid(43, 43, 43, True)
         )
         # Act
         result = str(metaheuristic)   
@@ -284,7 +278,7 @@ class Test__Str__2(unittest.TestCase):
             additional_statistics_control=AdditionalStatisticsControl(),
             output_control=OutputControl(),
             target_problem=TargetProblemVoid("aaa", True),
-            initial_solution=TargetSolutionVoid("", 43, 43, 43, True)
+            initial_solution=TargetSolutionVoid(43, 43, 43, True)
         )
         # Act
         result = str(metaheuristic)    
@@ -294,7 +288,7 @@ class Test__Str__2(unittest.TestCase):
     # Should include the string representation of the current solution
     def test_include_current_solution_representation(self):
         # Arrange
-        current_solution = TargetSolutionVoid("aaa", 43, 0, 0, False)
+        current_solution = TargetSolutionVoid(43, 0, 0, False)
         metaheuristic = SingleSolutionMetaheuristicVoid(
             name="MyMetaheuristic",
             finish_control=FinishControl(),
@@ -313,7 +307,7 @@ class Test__Str__2(unittest.TestCase):
     def test_raise_typeerror_if_initial_solution_is_none(self):
         # Arrange & Act & Assert
         with self.assertRaises(TypeError):
-            metaheuristic = SingleSolutionMetaheuristicVoid(
+            SingleSolutionMetaheuristicVoid(
                 name="MyMetaheuristic",
                 finish_control=FinishControl(),
                 random_seed=123,

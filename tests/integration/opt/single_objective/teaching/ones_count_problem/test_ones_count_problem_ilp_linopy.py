@@ -81,7 +81,7 @@ class TestOnesCountProblemIlpLinopy(unittest.TestCase):
     def test_different_types(self):
         # Arrange
         output_control = OutputControl()
-        target_problem = TargetSolutionVoid('a', 42, None, None, False)
+        target_problem = TargetSolutionVoid(42, None, None, False)
         # Act & Assert
         with self.assertRaises(TypeError):
             OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters(output_control, target_problem)
@@ -90,7 +90,7 @@ class TestOnesCountProblemIlpLinopy(unittest.TestCase):
     def test_same_types_different_classes(self):
         # Arrange
         output_control = OutputControl()
-        target_problem = TargetSolutionVoidObjectStr("miki")
+        target_problem = TargetSolutionVoidObjectStr()
         # Act & Assert
         with self.assertRaises(TypeError):
             OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters(output_control, target_problem)

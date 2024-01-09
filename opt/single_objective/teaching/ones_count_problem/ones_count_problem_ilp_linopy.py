@@ -61,7 +61,7 @@ class OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters:
 
 class OnesCountProblemIntegerLinearProgrammingSolution(TargetSolutionVoidObjectStr):
     def __init__(self, sol:'OnesCountProblemIntegerLinearProgrammingSolver')->None:
-        super().__init__(name="OnesCountProblemIntegerLinearProgrammingSolution")
+        super().__init__()
         self.__sol = sol
 
     def string_representation(self):

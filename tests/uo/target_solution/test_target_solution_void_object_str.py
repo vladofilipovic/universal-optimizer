@@ -16,19 +16,16 @@ class TestTargetSolutionVoidObjectStr(unittest.TestCase):
     # TargetSolution can be instantiated with valid parameters
     def test_instantiation_with_valid_parameters(self):
         # Arrange
-        name = "solution"
         # Act
-        target_solution = TargetSolutionVoidObjectStr(name)
+        target_solution = TargetSolutionVoidObjectStr()
         # Assert
         self.assertIsInstance(target_solution, TargetSolution)
         self.assertIsInstance(target_solution, TargetSolutionVoidObjectStr)
-        self.assertEqual(target_solution.name, name)
 
     # The name, random_seed, fitness_value, fitness_values, objective_value, objective_values, is_feasible, representation, evaluation_cache_cs, and representation_distance_cache_cs attributes can be accessed and modified
     def test_attribute_access_and_modification(self):
         # Arrange
-        name = "solution"
-        target_solution = TargetSolutionVoidObjectStr(name)
+        target_solution = TargetSolutionVoidObjectStr()
         # Act
         target_solution.fitness_value = 0.7
         target_solution.fitness_values = [0.6, 0.7, 0.8]
@@ -47,9 +44,8 @@ class TestTargetSolutionVoidObjectStr(unittest.TestCase):
     # The copy, copy_from, argument, string_representation, init_random, native_representation, init_from, calculate_quality_directly, calculate_quality, representation_distance_directly, representation_distance, string_rep, __str__, __repr__, and __format__ methods can be called and return expected results
     def test_method_calls_and_results(self):
         # Arrange
-        name = "solution"
         target_problem = TargetProblemVoid("a", True)
-        target_solution = TargetSolutionVoidObjectStr(name)
+        target_solution = TargetSolutionVoidObjectStr()
         # Act and Assert
         self.assertIsNotNone(target_solution.copy())
         self.assertIsNotNone(target_solution.argument(target_solution.representation))
@@ -66,7 +62,6 @@ class TestTargetSolutionVoidObjectStr(unittest.TestCase):
     # TargetSolution raises TypeError if any parameter is of the wrong type
     def test_type_error_raised(self):
         # Arrange
-        name = 123
         random_seed = "seed"
         fitness_value = "fitness"
         fitness_values = [0.3, 0.4, 0.5]
@@ -79,14 +74,13 @@ class TestTargetSolutionVoidObjectStr(unittest.TestCase):
         distance_calculation_cache_max_size = "max_size"
         # Act and Assert
         with self.assertRaises(TypeError):
-            TargetSolution(name, random_seed, fitness_value, fitness_values, objective_value, objective_values, is_feasible, evaluation_cache_is_used, evaluation_cache_max_size, distance_calculation_cache_is_used, distance_calculation_cache_max_size)
+            TargetSolution(random_seed, fitness_value, fitness_values, objective_value, objective_values, is_feasible, evaluation_cache_is_used, evaluation_cache_max_size, distance_calculation_cache_is_used, distance_calculation_cache_max_size)
 
     # TargetSolution sets random_seed to a random integer if it is None or 0
     def test_random_seed_set_to_random_integer(self):
         # Arrange
-        name = "solution"
         # Act
-        target_solution = TargetSolutionVoidObjectStr(name)
+        target_solution = TargetSolutionVoidObjectStr()
         # Assert
         self.assertIsInstance(target_solution.random_seed, int)
         self.assertNotEqual(target_solution.random_seed, 0)
@@ -94,9 +88,8 @@ class TestTargetSolutionVoidObjectStr(unittest.TestCase):
     # TargetSolution sets fitness_value, fitness_values, objective_value, and objective_values to None if they are not provided
     def test_default_values_for_fitness_and_objective(self):
         # Arrange
-        name = "solution"
         # Act
-        target_solution = TargetSolutionVoidObjectStr(name)
+        target_solution = TargetSolutionVoidObjectStr()
         # Assert
         target_solution.fitness_value = None
         target_solution.fitness_values = None
@@ -110,9 +103,8 @@ class TestTargetSolutionVoidObjectStr(unittest.TestCase):
     # TargetSolution sets representation to None by default
     def test_default_representation_value(self):
         # Arrange
-        name = "solution"
         # Act
-        target_solution = TargetSolutionVoidObjectStr(name)
+        target_solution = TargetSolutionVoidObjectStr()
         # Assert
         self.assertIsNone(target_solution.representation)
 
@@ -123,28 +115,24 @@ class TestTargetSolutionVoidObjectStr(unittest.TestCase):
             del TargetSolution.evaluation_cache_cs
         if hasattr(TargetSolution, 'representation_distance_cache_cs'):
             del TargetSolution.representation_distance_cache_cs
-        name = "solution"
         # Act
-        target_solution = TargetSolutionVoidObjectStr(name)
+        target_solution = TargetSolutionVoidObjectStr()
         # Assert
         self.assertFalse(target_solution.evaluation_cache_cs.is_caching)
         self.assertEqual(target_solution.evaluation_cache_cs.max_cache_size, 0)
         self.assertFalse(target_solution.representation_distance_cache_cs.is_caching)
         self.assertEqual(target_solution.representation_distance_cache_cs.max_cache_size, 0)
 
-
     # TargetSolution can be deep copied
     def test_deep_copy(self):
         # Arrange
-        name = "solution"
-        target_solution = TargetSolutionVoidObjectStr(name)
+        target_solution = TargetSolutionVoidObjectStr()
         target_solution.fitness_value = 23
         target_solution.objective_value = 23
         # Act
         copied_solution = target_solution.copy()
         # Assert
         self.assertIsNot(target_solution, copied_solution)
-        self.assertEqual(target_solution.name, copied_solution.name)
         self.assertEqual(target_solution.random_seed, copied_solution.random_seed)
         self.assertEqual(target_solution.fitness_value, copied_solution.fitness_value)
         self.assertEqual(target_solution.fitness_values, copied_solution.fitness_values)
@@ -160,8 +148,7 @@ class TestTargetSolutionVoidObjectStr(unittest.TestCase):
     # TargetSolution can be evaluated with a TargetProblem object
     def test_evaluate_with_target_problem(self):
         # Arrange
-        name = "solution"
-        target_solution = TargetSolutionVoidObjectStr(name)
+        target_solution = TargetSolutionVoidObjectStr()
         target_problem_mock = mocker.Mock()
         # Act
         target_solution.evaluate(target_problem_mock)
@@ -176,16 +163,13 @@ class TestTargetSolutionVoidObjectStr(unittest.TestCase):
     # TargetSolution can be represented as a string with a specified delimiter, indentation, and grouping symbols
     def test_string_representation(self):
         # Arrange
-        name = "solution"
-        target_solution = TargetSolutionVoidObjectStr(name)
+        target_solution = TargetSolutionVoidObjectStr()
         target_solution.fitness_value = 0.5
         target_solution.objective_value = 100
         target_solution.is_feasible =  True
         # Act
         string_rep = target_solution.string_rep('|')
         # Assert
-        expected_string_rep = "|name=solution|"
-        self.assertIn(expected_string_rep, string_rep)
         expected_string_rep = "|fitness_value=0.5|"
         self.assertIn(expected_string_rep, string_rep)
         expected_string_rep = "|objective_value=100|"
@@ -198,16 +182,13 @@ class TestTargetSolutionVoidObjectStr(unittest.TestCase):
     # TargetSolution can be represented as a string with a specified delimiter, indentation, and grouping symbols
     def test_string_conversion(self):
         # Arrange
-        name = "solution"
-        target_solution = TargetSolutionVoidObjectStr(name)
+        target_solution = TargetSolutionVoidObjectStr()
         target_solution.fitness_value = 0.5
         target_solution.objective_value = 100
         target_solution.is_feasible =  True
         # Act
         string_rep = str(target_solution)
         # Assert
-        expected_string_rep = "|name=solution|"
-        self.assertIn(expected_string_rep, string_rep)
         expected_string_rep = "|fitness_value=0.5|"
         self.assertIn(expected_string_rep, string_rep)
         expected_string_rep = "|objective_value=100|"
@@ -220,16 +201,13 @@ class TestTargetSolutionVoidObjectStr(unittest.TestCase):
     # TargetSolution can be represented as a string with a specified delimiter, indentation, and grouping symbols
     def test_format_to_string(self):
         # Arrange
-        name = "solution"
-        target_solution = TargetSolutionVoidObjectStr(name)
+        target_solution = TargetSolutionVoidObjectStr()
         target_solution.fitness_value = 0.5
         target_solution.objective_value = 100
         target_solution.is_feasible =  True
         # Act
         string_rep = format(target_solution)
         # Assert
-        expected_string_rep = "name=solution"
-        self.assertIn(expected_string_rep, string_rep)
         expected_string_rep = "fitness_value=0.5"
         self.assertIn(expected_string_rep, string_rep)
         expected_string_rep = "objective_value=100"
@@ -244,7 +222,7 @@ class TestTargetSolutionVoidObjectStr(unittest.TestCase):
         # Arrange
         representation = 42
         problem = TargetProblemVoid("a", True)
-        solution = TargetSolutionVoidObjectStr("b")
+        solution = TargetSolutionVoidObjectStr()
         # Act
         solution.init_from(representation, problem)
         # Assert
@@ -255,7 +233,7 @@ class TestTargetSolutionVoidObjectStr(unittest.TestCase):
         # Arrange
         representation = 42
         problem = TargetProblemVoid("a", True)
-        solution = TargetSolutionVoidObjectStr("c")
+        solution = TargetSolutionVoidObjectStr()
         # Act
         solution.init_from(representation, problem)
         # Assert
@@ -266,7 +244,7 @@ class TestTargetSolutionVoidObjectStr(unittest.TestCase):
         # Arrange
         representation = "example_representation"
         problem = "example_problem"
-        solution = TargetSolutionVoidObjectStr("a")
+        solution = TargetSolutionVoidObjectStr()
         # Act & Assert
         with self.assertRaises(TypeError):
             solution.init_from(representation, problem)

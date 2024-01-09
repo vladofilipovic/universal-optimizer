@@ -17,22 +17,16 @@ class TestTargetSolutionProperties(unittest.TestCase):
         print("setUpClass TestTargetSolutionProperties\n")
 
     def setUp(self):       
-        self.solution_name = "void solution"
         self.random_seed = 42
         self.fitness_value = 42.0
         self.objective_value = -42.0
         self.is_feasible = True
-        self.solution = TargetSolutionVoid(name=self.solution_name, 
-                random_seed=self.random_seed,
+        self.solution = TargetSolutionVoid( random_seed=self.random_seed,
                 fitness_value=self.fitness_value,
                 objective_value=self.objective_value,
                 is_feasible= self.is_feasible
         )
-
     
-    def test_solution_name_should_be_equal_as_in_constructor(self):
-        self.assertEqual(self.solution.name, self.solution_name)
-
     def test_fitness_value_should_be_equal_as_in_constructor(self):
         self.assertEqual(self.solution.fitness_value, self.fitness_value)
 
