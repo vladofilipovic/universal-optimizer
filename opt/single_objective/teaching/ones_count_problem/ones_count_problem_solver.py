@@ -81,7 +81,7 @@ class MaxOneProblemSolverConstructionParameters:
 
 class OnesCountProblemSolver:
     """
-    Instance of the class :class:`MaxOneProblemSolver` any of the developed solvers max ones problem.
+    Instance of the class :class:`OnesCountProblemSolver` any of the developed solvers Ones Count Problem.
     """
     def __init__(self, method:str=None,
             finish_control:FinishControl = None,
