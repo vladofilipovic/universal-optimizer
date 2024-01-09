@@ -46,7 +46,7 @@ class VnsOptimizerConstructionParameters:
         finish_control: FinishControl = None
         output_control: OutputControl = None
         target_problem: TargetProblem = None
-        initial_solution: TargetSolution = None
+        solution_template: TargetSolution = None
         problem_solution_vns_support: ProblemSolutionVnsSupport = None
         random_seed: Optional[int] = None
         additional_statistics_control: AdditionalStatisticsControl = None
@@ -66,7 +66,7 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
             additional_statistics_control:AdditionalStatisticsControl,
             output_control:OutputControl, 
             target_problem:TargetProblem, 
-            initial_solution:TargetSolution,
+            solution_template:TargetSolution,
             problem_solution_vns_support:ProblemSolutionVnsSupport, 
             k_min:int, 
             k_max:int, 
@@ -81,7 +81,7 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         statistics obtained during population-based metaheuristic execution        
         :param `OutputControl` output_control: structure that controls output
         :param `TargetProblem` target_problem: problem to be solved
-        :param `TargetSolution` initial_solution: initial solution of the problem 
+        :param `TargetSolution` solution_template: initial solution of the problem 
         :param `ProblemSolutionVnsSupport` problem_solution_vns_support: placeholder for additional methods, specific for VNS 
         execution, which depend of precise solution type 
         :param int k_min: `k_min` parameter for VNS
@@ -99,8 +99,8 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
                 raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
         if not isinstance(target_problem, TargetProblem):
                 raise TypeError('Parameter \'target_problem\' must be \'TargetProblem\'.')
-        if not isinstance(initial_solution, Optional[TargetSolution]):
-                raise TypeError('Parameter \'initial_solution\' must be \'TargetSolution\' or \'None\'.')        
+        if not isinstance(solution_template, Optional[TargetSolution]):
+                raise TypeError('Parameter \'solution_template\' must be \'TargetSolution\' or \'None\'.')        
         if not isinstance(problem_solution_vns_support, ProblemSolutionVnsSupport):
                 raise TypeError('Parameter \'problem_solution_vns_support\' must be \'ProblemSolutionVnsSupport\'.')        
         if not isinstance(k_min, int):
@@ -115,7 +115,7 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
                 additional_statistics_control=additional_statistics_control, 
                 output_control=output_control, 
                 target_problem=target_problem,
-                initial_solution=initial_solution)
+                solution_template=solution_template)
         self.__local_search_type:str = local_search_type
         self.__problem_solution_vns_support:ProblemSolutionVnsSupport = problem_solution_vns_support
         self.__implemented_local_searches:dict[str,function] = {
@@ -145,7 +145,7 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
             construction_tuple.additional_statistics_control,
             construction_tuple.output_control, 
             construction_tuple.target_problem, 
-            construction_tuple.initial_solution,
+            construction_tuple.solution_template,
             construction_tuple.problem_solution_vns_support, 
             construction_tuple.k_min, 
             construction_tuple.k_max, 
@@ -195,6 +195,7 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         Initialization of the VNS algorithm
         """
         self.__k_current = self.k_min
+        self.current_solution = self.solution_template.copy()
         self.current_solution.init_random(self.target_problem)
         self.current_solution.evaluate(self.target_problem)
         self.copy_to_best_solution(self.current_solution)
@@ -262,8 +263,11 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         s += group_start
         s = super().string_rep(delimiter, indentation, indentation_symbol, '', '')
         s += delimiter
-        s += 'current_solution=' + self.current_solution.string_rep(delimiter, indentation + 1, 
-                indentation_symbol, group_start, group_end) + delimiter 
+        if self.current_solution is not None:
+            s += 'current_solution=' + self.current_solution.string_rep(delimiter, indentation + 1, 
+                    indentation_symbol, group_start, group_end) + delimiter
+        else:
+            s += 'current_solution=None' + delimiter
         for _ in range(0, indentation):
             s += indentation_symbol  
         s += 'k_min=' + str(self.k_min) + delimiter 

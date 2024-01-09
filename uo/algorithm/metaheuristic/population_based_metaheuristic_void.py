@@ -30,7 +30,7 @@ class PopulationBasedMetaheuristicVoid(PopulationBasedMetaheuristic):
             additional_statistics_control:AdditionalStatisticsControl,
             output_control:OutputControl, 
             target_problem:TargetProblem,
-            initial_solutions:Optional[list[TargetSolution]]   
+            solution_templates:Optional[list[TargetSolution]]   
     )->None:
         super().__init__(
                 name=name, 
@@ -39,7 +39,7 @@ class PopulationBasedMetaheuristicVoid(PopulationBasedMetaheuristic):
                 additional_statistics_control=additional_statistics_control,
                 output_control=output_control, 
                 target_problem=target_problem,
-                initial_solutions=initial_solutions
+                solution_templates=solution_templates
         )
 
     def __copy__(self):

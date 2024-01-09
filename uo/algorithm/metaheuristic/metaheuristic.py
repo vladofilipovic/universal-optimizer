@@ -44,7 +44,8 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
             random_seed:Optional[int], 
             additional_statistics_control:AdditionalStatisticsControl,
             output_control:OutputControl, 
-            target_problem:TargetProblem
+            target_problem:TargetProblem,
+            solution_template:TargetSolution
     )->None:
         """
         Create new Metaheuristic instance
@@ -56,6 +57,7 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         statistic to be kept during metaheuristic evaluation        
         :param `OutputControl` output_control: structure that controls output
         :param `TargetProblem` target_problem: problem to be solved
+        :param `TargetSolution` solution_template: solution template for the problem to be solved
         """
         if not isinstance(name, str):
                 raise TypeError('Parameter \'name\' must be \'str\'.')
@@ -71,7 +73,8 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
                 raise TypeError('Parameter \'target_problem\' must be \'TargetProblem\'.')
         super().__init__(name=name, 
                 output_control=output_control, 
-                target_problem=target_problem)
+                target_problem=target_problem,
+                solution_template=solution_template)
         self.__finish_control = finish_control.copy()
         if random_seed is not None and isinstance(random_seed, int) and random_seed != 0:
             self.__random_seed:int = random_seed
@@ -119,6 +122,7 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         :rtype: int
         """
         return self.__random_seed
+
     @property
     def additional_statistics_control(self)->AdditionalStatisticsControl:
         """

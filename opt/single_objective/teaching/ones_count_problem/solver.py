@@ -194,7 +194,7 @@ def main():
             vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
             vns_construction_params.output_control = output_control
             vns_construction_params.target_problem = problem
-            vns_construction_params.initial_solution = solution
+            vns_construction_params.solution_template = solution
             vns_construction_params.problem_solution_vns_support = vns_support
             vns_construction_params.finish_control = finish_control
             vns_construction_params.random_seed = r_seed
@@ -219,7 +219,7 @@ def main():
             te_construction_params:TeOptimizerConstructionParameters = TeOptimizerConstructionParameters()
             te_construction_params.output_control = output_control
             te_construction_params.target_problem = problem
-            te_construction_params.initial_solution = solution
+            te_construction_params.solution_template = solution
             te_construction_params.problem_solution_te_support = te_support
             solver:OnesCountProblemSolver = OnesCountProblemSolver.from_total_enumeration(te_construction_params)
         elif parameters['algorithm'] == 'integer_linear_programming':
