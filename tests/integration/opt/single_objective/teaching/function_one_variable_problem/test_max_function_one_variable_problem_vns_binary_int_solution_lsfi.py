@@ -36,7 +36,7 @@ class TestMaxFunctionOneVariableProblemBinaryIntSolutionLsfi(unittest.TestCase):
                 domain_high=3 )
         self.solution:FunctionOneVariableProblemBinaryIntSolution = FunctionOneVariableProblemBinaryIntSolution(
                 domain_from=self.problem_to_solve.domain_low, domain_to=self.problem_to_solve.domain_high, 
-                number_of_intervals=6000, random_seed=43434343)
+                number_of_intervals=600, random_seed=43434343)
         self.solution.init_random(problem=self.problem_to_solve)
         self.solution.evaluate(self.problem_to_solve)           
         self.finish_control:FinishControl = FinishControl(criteria='evaluations & seconds', evaluations_max=10000, 

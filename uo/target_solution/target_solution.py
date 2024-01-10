@@ -262,6 +262,35 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         self.__is_feasible = value
 
     @property
+    def quality_single(self)->QualityOfSolution:
+        """
+        Property getter for the quality of the target solution, in the single-objective optimization context
+
+        :return: quality of the target solution, in the single-objective optimization context
+        :rtype: QualityOfSolution
+        """
+        return QualityOfSolution(objective_value=self.objective_value, 
+                    objective_values=None,
+                    fitness_value=self.fitness_value,
+                    fitness_values=None,
+                    is_feasible=self.is_feasible) 
+
+
+    @property
+    def quality_multi(self)->QualityOfSolution:
+        """
+        Property getter for the quality of the target solution, in the multi-objective optimization context
+
+        :return: quality of the target solution, in the multi-objective optimization context
+        :rtype: QualityOfSolution
+        """
+        return QualityOfSolution(objective_values=self.objective_values, 
+                    objective_value=None,
+                    fitness_values=self.fitness_values,
+                    fitness_value=None,
+                    is_feasible=self.is_feasible) 
+
+    @property
     def representation(self)->R_co:
         """
         Property getter for representation of the target solution

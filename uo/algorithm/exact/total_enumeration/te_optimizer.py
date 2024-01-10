@@ -3,6 +3,8 @@ The :mod:`~uo.algorithm.exact.total_enumeration` module describes the class :cla
 """
 
 from pathlib import Path
+
+from uo.target_solution.quality_of_solution import QualityOfSolution
 directory = Path(__file__).resolve()
 import sys
 sys.path.append(directory.parent)
@@ -164,7 +166,8 @@ class TeOptimizer(Algorithm):
             self.write_output_values_if_needed("before_iteration", "b_i")
             self.iteration += 1
             self.__progress_method(self.target_problem, self.current_solution, self)
-            new_is_better:bool = self.is_first_solution_better(self.current_solution, self.best_solution)
+            new_is_better:bool = QualityOfSolution.is_first_fitness_better(self.current_solution.quality_single, 
+                        self.best_solution.quality_single, self.target_problem.is_minimization)
             if new_is_better:
                 self.copy_to_best_solution(self.current_solution)
             self.write_output_values_if_needed("after_iteration", "a_i")

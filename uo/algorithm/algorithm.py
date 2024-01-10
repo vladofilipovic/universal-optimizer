@@ -151,43 +151,7 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
         Initialization of the algorithm
         """
         raise NotImplementedError
-
-    def is_first_solution_better(self, sol1:TargetSolution, sol2:TargetSolution)->Optional[bool]:
-        """
-        Checks if first solution is better than the second one
-
-        :param TargetSolution sol1: first solution
-        :param TargetSolution sol2: second solution
-        :return: `True` if first solution is better, `False` if first solution is worse, `None` if fitnesses of both 
-                solutions are equal
-        :rtype: bool
-        """
-        if self.target_problem is None:
-            raise ValueError('Target problem have to be defined within metaheuristic.')
-        if self.target_problem.is_minimization is None:
-            raise ValueError('Information if minimization or maximization is set within metaheuristic target problem'
-                    'have to be defined.')
-        is_minimization:bool = self.target_problem.is_minimization    
-        if sol1 is None:
-            qos1:Optional[QualityOfSolution] = None
-        else:
-            qos1:Optional[QualityOfSolution] = sol1.calculate_quality(self.target_problem)
-        if sol2 is None:
-            qos2:Optional[QualityOfSolution] = None
-        else:
-            qos2:Optional[QualityOfSolution] = sol2.calculate_quality(self.target_problem)
-        # with fitness is better than without fitness
-        if qos1 is None:
-            if qos2 is not None:
-                return False
-            else:
-                return None
-        elif qos2 is None:
-            return True
-        if qos1.fitness_value is not None or qos2.fitness_value is not None:
-            return QualityOfSolution.is_first_fitness_better(qos1, qos2, is_minimization)
-        return None
-
+    
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
         """

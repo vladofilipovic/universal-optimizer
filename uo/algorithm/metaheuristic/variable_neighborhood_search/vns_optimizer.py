@@ -5,6 +5,8 @@ The :mod:`~uo.algorithm.metaheuristic.variable_neighborhood_search` contains cla
 """
 
 from pathlib import Path
+
+from uo.target_solution.quality_of_solution import QualityOfSolution
 directory = Path(__file__).resolve()
 import sys
 sys.path.append(directory.parent)
@@ -222,9 +224,10 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
             self.additional_statistics_control.add_to_all_solution_codes_if_required(
                     self.current_solution.string_representation())
             self.additional_statistics_control.add_to_more_local_optima_if_required(
-                    self.current_solution.string_representation(), self.current_solution.fitness_value,
-                    self.best_solution.string_representation())
-            new_is_better:bool = self.is_first_solution_better(self.current_solution, self.best_solution)
+                        self.current_solution.string_representation(), self.current_solution.fitness_value,
+                        self.best_solution.string_representation())
+            new_is_better:bool = QualityOfSolution.is_first_fitness_better(self.current_solution.quality_single, 
+                        self.best_solution.quality_single, self.target_problem.is_minimization)
             make_move:bool = new_is_better
             if new_is_better is None:
                 if  self.current_solution.string_representation() == \

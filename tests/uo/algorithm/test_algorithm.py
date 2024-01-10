@@ -122,61 +122,6 @@ class TestAlgorithm(unittest.TestCase):
         self.assertEqual(algorithm.iteration, 10)
         self.assertEqual(algorithm.iteration_best_found, 5)
 
-    # Algorithm can check if one TargetSolution instance is better than another.
-    def test_algorithm_is_first_solution_better(self):
-        # Arrange
-        target_problem = TargetProblemVoid("problem", False)
-        output_control = OutputControl(write_to_output=True, output_file=None, fields='iteration, evaluation', moments='after_algorithm')
-        algorithm = AlgorithmVoid(name='MyAlgorithm', output_control=output_control, target_problem=target_problem)
-        solution1_mock = mocker.MagicMock(spec=TargetSolutionVoid)
-        solution1_mock.calculate_quality = mocker.Mock(return_value=QualityOfSolution(42, None, 42, None, True))
-        solution2_mock = mocker.MagicMock(spec=TargetSolutionVoid)
-        solution2_mock.calculate_quality = mocker.Mock(return_value=QualityOfSolution(13, None, 13, None, True))
-        solution3_mock = mocker.MagicMock(spec=TargetSolutionVoid)
-        solution3_mock.calculate_quality = mocker.Mock(return_value=QualityOfSolution(42, None, 42, None, True))
-        # Act
-        result1 = algorithm.is_first_solution_better(solution1_mock, solution2_mock)
-        result2 = algorithm.is_first_solution_better(solution2_mock, solution1_mock)
-        result3 = algorithm.is_first_solution_better(solution1_mock, None)
-        result4 = algorithm.is_first_solution_better(None, solution2_mock)
-        result5 = algorithm.is_first_solution_better(solution1_mock, solution3_mock)
-        # Assert
-        self.assertTrue(result1)
-        self.assertFalse(result2)
-        self.assertTrue(result3)
-        self.assertFalse(result4)
-        self.assertIsNone(result5)
-
-
-    # Returns True if the first solution has a better fitness value than the second one.
-    def test_first_solution_better(self):
-        # Arrange
-        algorithm = AlgorithmVoid(name="MyAlgorithm", output_control=OutputControl(), 
-                                target_problem=TargetProblemVoid("problem", False))
-        solution1 = TargetSolutionVoid( 42, 0, 0, True)
-        solution2 = TargetSolutionVoid( 42, 0, 0, True)
-        solution1.calculate_quality = mocker.Mock(return_value=QualityOfSolution(10, None, 10, None, True))
-        solution2.calculate_quality = mocker.Mock(return_value=QualityOfSolution(5, None, 5, None, True))
-        # Act
-        result = algorithm.is_first_solution_better(solution1, solution2)
-        # Assert
-        self.assertTrue(result)
-
-    # Returns False if the first solution has a worse fitness value than the second one.
-    def test_first_solution_worse(self):
-        # Arrange
-        algorithm = AlgorithmVoid(name="MyAlgorithm", output_control=OutputControl(), 
-                                target_problem=TargetProblemVoid("problem", False))
-        solution1 = TargetSolutionVoid( 42, 0, 0, True)
-        solution2 = TargetSolutionVoid( 42, 0, 0, True)
-        solution1.calculate_quality = mocker.Mock(return_value=QualityOfSolution(5, None, 5, None, True))
-        solution2.calculate_quality = mocker.Mock(return_value=QualityOfSolution(10, None, 10, None, True))
-        # Act
-        result = algorithm.is_first_solution_better(solution1, solution2)
-
-        # Assert
-        self.assertFalse(result)
-
     # Raises a ValueError if the target problem is not defined within the metaheuristic.
     def test_target_problem_not_defined(self):
         # Arrange
