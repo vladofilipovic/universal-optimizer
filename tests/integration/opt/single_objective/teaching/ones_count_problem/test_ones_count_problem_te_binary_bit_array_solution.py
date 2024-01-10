@@ -39,7 +39,6 @@ class TestOnesCountProblemTeBinaryBitArraySolution(unittest.TestCase):
         construction_params.problem_solution_te_support = self.te_support
         self.optimizer:TeOptimizer = TeOptimizer.from_construction_tuple(construction_params)
         self.optimizer.optimize()
-        return
     
     def test_best_solution_after_optimization_should_be_optimal(self):
         result:str = '111111111111'
