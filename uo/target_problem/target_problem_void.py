@@ -2,6 +2,7 @@
 The :mod:`~uo.target_problem.target_problem` module describes the class :class:`~uo.target_problem.TargetProblem`.
 """
 
+from abc import ABCMeta
 from pathlib import Path
 directory = Path(__file__).resolve()
 import sys
@@ -14,8 +15,12 @@ from uo.target_problem.target_problem import TargetProblem
 
 class TargetProblemVoid(TargetProblem):
     
-    def __init__(self, name:str, is_minimization:bool)->None:
-        super().__init__(name, is_minimization)
+    def __init__(self, name:str, is_minimization:bool, is_multi_objective:bool=False)->None:
+        if not isinstance(is_minimization, bool):
+                raise TypeError('Parameter \'is_minimization\' must be \'bool\'.')        
+        if not isinstance(is_multi_objective, bool):
+                raise TypeError('Parameter \'is_multi_objective\' must be \'bool\' .')        
+        super().__init__(name, is_minimization, is_multi_objective)
 
     def __copy__(self):
         pr = deepcopy(self)
@@ -24,7 +29,8 @@ class TargetProblemVoid(TargetProblem):
     def copy(self):
         return self.__copy__()
 
-    def load_from_file(data_representation: str)->None:
+    @classmethod
+    def __load_from_file__(cls, data_representation: str)->None:
         return
 
     def __str__(self)->str:
