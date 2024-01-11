@@ -9,7 +9,7 @@ from uo.target_problem.target_problem_void import TargetProblemVoid
 from uo.algorithm.output_control import OutputControl
 
 
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem import OnesCountProblem
+from opt.single_objective.teaching.ones_count_problem.ones_count_problem_max import OnesCountProblemMax
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_ilp_linopy import OnesCountProblemIntegerLinearProgrammingSolver
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_ilp_linopy import OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters
 from uo.target_solution.target_solution import TargetSolution
@@ -24,7 +24,7 @@ class TestOnesCountProblemIlpLinopy(unittest.TestCase):
 
     def setUp(self):
         self.output_control = OutputControl(False)
-        self.problem_to_solve:OnesCountProblem = OnesCountProblem.from_dimension(dimension=12)
+        self.problem_to_solve:OnesCountProblemMax = OnesCountProblemMax.from_dimension(dimension=12)
         self.optimizer:OnesCountProblemIntegerLinearProgrammingSolver = OnesCountProblemIntegerLinearProgrammingSolver(
             output_control=self.output_control,
             problem=self.problem_to_solve
@@ -112,7 +112,7 @@ class TestOptimize(unittest.TestCase):
     def test_valid_instance_no_errors(self):
         # Arrange
         output_control = OutputControl()
-        problem = OnesCountProblem(dim=5)
+        problem = OnesCountProblemMax(dim=5)
         solver = OnesCountProblemIntegerLinearProgrammingSolver(output_control, problem)
         # Act
         try:
@@ -126,7 +126,7 @@ class TestOptimize(unittest.TestCase):
     def test_model_instance_and_variables_added(self):
         # Arrange
         output_control = OutputControl()
-        problem = OnesCountProblem(dim=5)
+        problem = OnesCountProblemMax(dim=5)
         solver = OnesCountProblemIntegerLinearProgrammingSolver(output_control, problem)
         # Act
         solver.optimize()
@@ -138,7 +138,7 @@ class TestOptimize(unittest.TestCase):
     def test_objective_function_set(self):
         # Arrange
         output_control = OutputControl()
-        problem = OnesCountProblem(dim=5)
+        problem = OnesCountProblemMax(dim=5)
         solver = OnesCountProblemIntegerLinearProgrammingSolver(output_control, problem)
         # Act
         solver.optimize()
@@ -147,11 +147,11 @@ class TestOptimize(unittest.TestCase):
         self.assertIsNotNone(objective)
         self.assertIn("LinearExpression: +1 x[0] + 1 x[0] + 1 x[0] + 1 x[0] + 1 x[0] + 0\nSense: max\nValue: 5.0", str(objective))
 
-    # The method raises a TypeError if called with an invalid instance of OutputControl or OnesCountProblem.
+    # The method raises a TypeError if called with an invalid instance of OutputControl or OnesCountProblemMax.
     def test_invalid_instance_type_error(self):
         # Arrange
         output_control = "invalid_output_control"
-        problem = OnesCountProblem(dim=5)
+        problem = OnesCountProblemMax(dim=5)
         # Act & Assert
         with self.assertRaises(TypeError):
             solver = OnesCountProblemIntegerLinearProgrammingSolver(output_control, problem)
@@ -167,7 +167,7 @@ class TestOptimize(unittest.TestCase):
     def test_model_solved_and_best_solution_set(self):
         # Arrange
         output_control = OutputControl()
-        problem = OnesCountProblem(dim=5)
+        problem = OnesCountProblemMax(dim=5)
         solver = OnesCountProblemIntegerLinearProgrammingSolver(output_control, problem)
         # Act
         solver.optimize()
@@ -181,7 +181,7 @@ class TestStringRep(unittest.TestCase):
     def test_returns_string_representation(self):
         # Arrange
         output_control = OutputControl()
-        problem = OnesCountProblem(dim=5)
+        problem = OnesCountProblemMax(dim=5)
         best_solution_mock = mocker.MagicMock(spec=TargetSolution)
         best_solution_mock.string_rep = mocker.Mock(return_value="something")
         solver = OnesCountProblemIntegerLinearProgrammingSolver(output_control, problem)
@@ -195,7 +195,7 @@ class TestStringRep(unittest.TestCase):
     def test_contains_class_name_and_properties(self):
         # Arrange
         output_control = OutputControl()
-        problem = OnesCountProblem(dim=5)
+        problem = OnesCountProblemMax(dim=5)
         best_solution_mock = mocker.MagicMock(spec=TargetSolution)
         best_solution_mock.string_rep = mocker.Mock(return_value="something")
         solver = OnesCountProblemIntegerLinearProgrammingSolver(output_control, problem)
@@ -211,7 +211,7 @@ class TestStringRep(unittest.TestCase):
     def test_properly_formatted_with_indentation_and_grouping_symbols(self):
         # Arrange
         output_control = OutputControl()
-        problem = OnesCountProblem(dim=5)
+        problem = OnesCountProblemMax(dim=5)
         best_solution_mock = mocker.MagicMock(spec=TargetSolution)
         best_solution_mock.string_rep = mocker.Mock(return_value="something")
         solver = OnesCountProblemIntegerLinearProgrammingSolver(output_control, problem)

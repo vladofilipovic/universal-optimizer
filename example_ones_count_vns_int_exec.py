@@ -10,14 +10,14 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer impor
                 VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem import OnesCountProblem
+from opt.single_objective.teaching.ones_count_problem.ones_count_problem_max import OnesCountProblemMax
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_int_solution import \
                 OnesCountProblemBinaryIntSolution
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_int_solution_vns_support import \
                 OnesCountProblemBinaryIntSolutionVnsSupport
 
 def main():
-        problem_to_solve:OnesCountProblem = OnesCountProblem.from_dimension(dimension=24)
+        problem_to_solve:OnesCountProblemMax = OnesCountProblemMax.from_dimension(dimension=24)
         solution:OnesCountProblemBinaryIntSolution = OnesCountProblemBinaryIntSolution()
         finish:FinishControl = FinishControl(criteria='evaluations & seconds', evaluations_max=500, seconds_max=10)
         vns_support:OnesCountProblemBinaryIntSolutionVnsSupport = OnesCountProblemBinaryIntSolutionVnsSupport()

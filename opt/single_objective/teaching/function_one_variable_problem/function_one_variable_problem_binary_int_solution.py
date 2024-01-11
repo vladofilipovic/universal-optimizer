@@ -19,8 +19,8 @@ from uo.target_solution.target_solution import TargetSolution
 
 from uo.utils.logger import logger
 
-from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem \
-        import FunctionOneVariableProblem
+from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem_max \
+        import FunctionOneVariableProblemMax
 
 class FunctionOneVariableProblemBinaryIntSolution(TargetSolution[int,float]):
     
@@ -89,7 +89,7 @@ class FunctionOneVariableProblemBinaryIntSolution(TargetSolution[int,float]):
             raise TypeError('Parameter \'number_of_intervals\' must have type \'int\'.')
         self.__number_of_intervals= value
 
-    def obtain_feasible_representation(self, problem:FunctionOneVariableProblem):
+    def obtain_feasible_representation(self, problem:FunctionOneVariableProblemMax):
         if self.representation is None:
             raise ValueError('Solution representation should not be None.')
         if self.representation > self.number_of_intervals:
@@ -102,16 +102,16 @@ class FunctionOneVariableProblemBinaryIntSolution(TargetSolution[int,float]):
         x:float = self.domain_from + representation * (self.domain_to - self.domain_from) / self.number_of_intervals
         return x
     
-    def init_random(self, problem:FunctionOneVariableProblem)->None:
+    def init_random(self, problem:FunctionOneVariableProblemMax)->None:
         self.representation = randint(0, self.number_of_intervals)
         self.representation = self.obtain_feasible_representation(problem)
 
-    def init_from(self, representation:int, problem:FunctionOneVariableProblem)->None:
+    def init_from(self, representation:int, problem:FunctionOneVariableProblemMax)->None:
         if not isinstance(representation, int):
             raise TypeError('Parameter \'representation\' must have type \'int\'.')
         self.representation = representation
 
-    def calculate_quality_directly(self, representation:int, problem:FunctionOneVariableProblem)->QualityOfSolution:
+    def calculate_quality_directly(self, representation:int, problem:FunctionOneVariableProblemMax)->QualityOfSolution:
         arg:float = self.argument(representation) 
         res:float = eval(problem.expression, {"x":arg}) 
         return QualityOfSolution(res, None, res, None, True)

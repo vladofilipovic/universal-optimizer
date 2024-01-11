@@ -27,7 +27,7 @@ from uo.target_solution.quality_of_solution import QualityOfSolution
 from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
 
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem import OnesCountProblem
+from opt.single_objective.teaching.ones_count_problem.ones_count_problem_max import OnesCountProblemMax
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_int_solution import OnesCountProblemBinaryIntSolution
 
 class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,str]):
@@ -57,14 +57,14 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
         """        
         return self.__copy__()
         
-    def shaking(self, k:int, problem:OnesCountProblem, solution:OnesCountProblemBinaryIntSolution, 
+    def shaking(self, k:int, problem:OnesCountProblemMax, solution:OnesCountProblemBinaryIntSolution, 
             optimizer:Algorithm)->bool:
         """
         Random VNS shaking of k parts such that new solution code does not differ more than k from all solution codes 
         inside shakingPoints 
 
         :param int k: int parameter for VNS
-        :param `OnesCountProblem` problem: problem that is solved
+        :param `OnesCountProblemMax` problem: problem that is solved
         :param `OnesCountProblemBinaryIntSolution` solution: solution used for the problem that is solved
         :param `Algorithm` optimizer: optimizer that is executed
         :return: if shaking is successful
@@ -98,13 +98,13 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
         else:
             return False 
 
-    def local_search_best_improvement(self, k:int, problem:OnesCountProblem, solution:OnesCountProblemBinaryIntSolution, 
+    def local_search_best_improvement(self, k:int, problem:OnesCountProblemMax, solution:OnesCountProblemBinaryIntSolution, 
             optimizer: Algorithm)->bool:
         """
         Executes "best improvement" variant of the local search procedure 
         
         :param int k: int parameter for VNS
-        :param `OnesCountProblem` problem: problem that is solved
+        :param `OnesCountProblemMax` problem: problem that is solved
         :param `OnesCountProblemBinaryIntSolution` solution: solution used for the problem that is solved
         :param `Algorithm` optimizer: optimizer that is executed
         :return: result of the local search procedure 
@@ -147,13 +147,13 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
         solution.copy_from(start_sol)
         return False
 
-    def local_search_first_improvement(self, k:int, problem:OnesCountProblem, solution:OnesCountProblemBinaryIntSolution, 
+    def local_search_first_improvement(self, k:int, problem:OnesCountProblemMax, solution:OnesCountProblemBinaryIntSolution, 
             optimizer: Algorithm)->bool:
         """
         Executes "first improvement" variant of the local search procedure 
         
         :param int k: int parameter for VNS
-        :param `OnesCountProblem` problem: problem that is solved
+        :param `OnesCountProblemMax` problem: problem that is solved
         :param `OnesCountProblemBinaryIntSolution` solution: solution used for the problem that is solved
         :param `Algorithm` optimizer: optimizer that is executed
         :return: result of the local search procedure 
@@ -163,8 +163,7 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
             return False
         if k < 1 or k > problem.dimension:
             return False
-        best_qos:QualityOfSolution =  QualityOfSolution(solution.objective_value, solution.objective_values,
-                solution.fitness_value, solution.objective_values, solution.is_feasible)
+        start_sol:OnesCountProblemBinaryIntSolution = solution.copy()
         # initialize indexes
         indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k,problem.dimension)
         in_loop:bool = indexes.reset()
@@ -178,20 +177,17 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
             solution.representation ^= mask 
             optimizer.evaluation += 1
             if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
+                solution.copy_from(start_sol)
                 return False
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
-            new_qos = solution.calculate_quality(problem)
+            solution.evaluate(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
-            if QualityOfSolution.is_first_fitness_better(new_qos, best_qos, problem.is_minimization):
-                solution.fitness_value = new_qos.fitness_value
-                solution.fitness_values = new_qos.fitness_values
-                solution.objective_value = new_qos.objective_value
-                solution.objective_values = new_qos.objective_values
-                solution.is_feasible = new_qos.is_feasible
+            if optimizer.is_first_better(solution, start_sol, problem):
                 return True
             solution.representation ^= mask
             # increment indexes and set in_loop accordingly
             in_loop = indexes.progress()
+        solution.copy_from(start_sol)
         return False
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 

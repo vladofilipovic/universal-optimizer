@@ -39,8 +39,8 @@ from uo.utils.logger import logger
 from opt.single_objective.teaching.function_one_variable_problem.command_line import default_parameters_cl
 from opt.single_objective.teaching.function_one_variable_problem.command_line import parse_arguments
 
-from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem import \
-        FunctionOneVariableProblem
+from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem_max import \
+        FunctionOneVariableProblemMax
 
 from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem_binary_int_solution \
         import FunctionOneVariableProblemBinaryIntSolution
@@ -168,7 +168,7 @@ def main():
                 keep=additional_statistics_keep, 
                 max_local_optima=max_local_optima)
         # problem to be solved
-        problem = FunctionOneVariableProblem.from_input_file(input_file_path=input_file_path,
+        problem = FunctionOneVariableProblemMax.from_input_file(input_file_path=input_file_path,
                 input_format=input_format)
         start_time = datetime.now()
         if write_to_output_file:

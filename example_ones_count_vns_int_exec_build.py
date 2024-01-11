@@ -163,8 +163,8 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
         if k<1:
             return False
         # ls_bi for k==1
-        start_sol:OnesCountProblemBinaryIntSolution = solution.clone()
-        best_sol:OnesCountProblemBinaryIntSolution = solution.clone()
+        start_sol:OnesCountProblemBinaryIntSolution = solution.copy()
+        best_sol:OnesCountProblemBinaryIntSolution = solution.copy()
         better_sol_found:bool = False
         for i in range(0, problem.dimension):
             mask:int = 1 << i
@@ -188,7 +188,7 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
         if k<1:
             return False
         # ls_fi for k==1
-        start_sol:OnesCountProblemBinaryIntSolution = solution.clone()
+        start_sol:OnesCountProblemBinaryIntSolution = solution.copy()
         for i in range(0, problem.dimension):
             mask:int = 1 << i
             solution.representation ^= mask 

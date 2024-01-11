@@ -29,7 +29,7 @@ from uo.target_solution.quality_of_solution import QualityOfSolution
 from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
 
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem import OnesCountProblem
+from opt.single_objective.teaching.ones_count_problem.ones_count_problem_max import OnesCountProblemMax
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_bit_array_solution import OnesCountProblemBinaryBitArraySolution
 
 class OnesCountProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[BitArray,str]):
@@ -58,14 +58,14 @@ class OnesCountProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport
         """
         return self.__copy__()
 
-    def shaking(self, k:int, problem:OnesCountProblem, solution:OnesCountProblemBinaryBitArraySolution, 
+    def shaking(self, k:int, problem:OnesCountProblemMax, solution:OnesCountProblemBinaryBitArraySolution, 
             optimizer:Algorithm)->bool:
         """
         Random shaking of k parts such that new solution code does not differ more than k from all solution codes 
         inside shakingPoints 
 
         :param int k: int parameter for VNS
-        :param `OnesCountProblem` problem: problem that is solved
+        :param `OnesCountProblemMax` problem: problem that is solved
         :param `OnesCountProblemBinaryBitArraySolution` solution: solution used for the problem that is solved
         :param `Algorithm` optimizer: optimizer that is executed
         :return: if randomization is successful
@@ -100,13 +100,13 @@ class OnesCountProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport
         else:
             return False 
 
-    def local_search_best_improvement(self, k:int, problem:OnesCountProblem, solution:OnesCountProblemBinaryBitArraySolution, 
+    def local_search_best_improvement(self, k:int, problem:OnesCountProblemMax, solution:OnesCountProblemBinaryBitArraySolution, 
             optimizer: Algorithm)->bool:
         """
         Executes "best improvement" variant of the local search procedure 
         
         :param int k: int parameter for VNS
-        :param `OnesCountProblem` problem: problem that is solved
+        :param `OnesCountProblemMax` problem: problem that is solved
         :param `OnesCountProblemBinaryBitArraySolution` solution: solution used for the problem that is solved
         :param `Algorithm` optimizer: optimizer that is executed
         :return: result of the local search procedure 
@@ -146,13 +146,13 @@ class OnesCountProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport
         solution.copy_from(start_sol)
         return False
     
-    def local_search_first_improvement(self, k:int, problem:OnesCountProblem, solution:OnesCountProblemBinaryBitArraySolution, 
+    def local_search_first_improvement(self, k:int, problem:OnesCountProblemMax, solution:OnesCountProblemBinaryBitArraySolution, 
             optimizer: Algorithm)->bool:
         """
         Executes "first improvement" variant of the local search procedure 
         
         :param int k: int parameter for VNS
-        :param `OnesCountProblem` problem: problem that is solved
+        :param `OnesCountProblemMax` problem: problem that is solved
         :param `OnesCountProblemBinaryBitArraySolution` solution: solution used for the problem that is solved
         :param `Algorithm` optimizer: optimizer that is executed
         :return: result of the local search procedure 

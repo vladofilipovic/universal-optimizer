@@ -42,8 +42,8 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer impor
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import \
         ProblemSolutionVnsSupport
 
-from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem import \
-        FunctionOneVariableProblem
+from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem_max import \
+        FunctionOneVariableProblemMax
 
 from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem_binary_int_solution \
         import FunctionOneVariableProblemBinaryIntSolution

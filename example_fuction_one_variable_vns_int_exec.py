@@ -9,8 +9,8 @@ from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalS
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
-from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem import \
-                FunctionOneVariableProblem
+from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem_max import \
+                FunctionOneVariableProblemMax
 from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem_binary_int_solution \
                 import FunctionOneVariableProblemBinaryIntSolution
 from opt.single_objective.teaching.function_one_variable_problem.\
@@ -19,7 +19,7 @@ from opt.single_objective.teaching.function_one_variable_problem.\
 
 def main():
         output_control:OutputControl = OutputControl(write_to_output=False)
-        problem_to_solve:FunctionOneVariableProblem = FunctionOneVariableProblem.from_input_file(
+        problem_to_solve:FunctionOneVariableProblemMax = FunctionOneVariableProblemMax.from_input_file(
                 input_file_path='./opt/single_objective/teaching/function_one_variable_problem/inputs/7-x^2f-3t3.txt',
                 input_format='txt')
         print('Problem: {}'.format(problem_to_solve))            

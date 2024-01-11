@@ -31,7 +31,7 @@ from uo.target_solution.quality_of_solution import QualityOfSolution
 from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.exact.total_enumeration.problem_solution_te_support import ProblemSolutionTeSupport
 
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem import OnesCountProblem
+from opt.single_objective.teaching.ones_count_problem.ones_count_problem_max import OnesCountProblemMax
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_bit_array_solution import OnesCountProblemBinaryBitArraySolution
 
 class OnesCountProblemBinaryBitArraySolutionTeSupport(ProblemSolutionTeSupport[BitArray,str]):
@@ -61,12 +61,12 @@ class OnesCountProblemBinaryBitArraySolutionTeSupport(ProblemSolutionTeSupport[B
         """
         return self.__copy__()
 
-    def reset(self, problem:OnesCountProblem, solution:OnesCountProblemBinaryBitArraySolution, optimizer:Algorithm)->None:
+    def reset(self, problem:OnesCountProblemMax, solution:OnesCountProblemBinaryBitArraySolution, optimizer:Algorithm)->None:
         """
         Resets internal counter of the total enumerator, so process will start over. Internal state of the solution 
         will be set to reflect reset operation. 
 
-        :param `OnesCountProblem` problem: problem that is solved
+        :param `OnesCountProblemMax` problem: problem that is solved
         :param `OnesCountProblemBinaryBitArraySolution` solution: solution used for the problem that is solved
         :param `Algorithm` optimizer: optimizer that is executed
         """        
@@ -78,13 +78,13 @@ class OnesCountProblemBinaryBitArraySolutionTeSupport(ProblemSolutionTeSupport[B
         solution.evaluate(problem)
         optimizer.write_output_values_if_needed("after_evaluation", "a_e")
 
-    def progress(self, problem:OnesCountProblem, solution:OnesCountProblemBinaryBitArraySolution, 
+    def progress(self, problem:OnesCountProblemMax, solution:OnesCountProblemBinaryBitArraySolution, 
             optimizer:Algorithm)->None:
         """
         Progress internal counter of the total enumerator, so next configuration will be taken into consideration. 
         Internal state of the solution will be set to reflect progress operation.  
 
-        :param `OnesCountProblem` problem: problem that is solved
+        :param `OnesCountProblemMax` problem: problem that is solved
         :param `OnesCountProblemBinaryBitArraySolution` solution: solution used for the problem that is solved
         :param `Algorithm` optimizer: optimizer that is executed
         """        
@@ -95,12 +95,12 @@ class OnesCountProblemBinaryBitArraySolutionTeSupport(ProblemSolutionTeSupport[B
         solution.evaluate(problem)
         optimizer.write_output_values_if_needed("after_evaluation", "a_e")
 
-    def can_progress(self, problem:OnesCountProblem, solution:OnesCountProblemBinaryBitArraySolution, 
+    def can_progress(self, problem:OnesCountProblemMax, solution:OnesCountProblemBinaryBitArraySolution, 
             optimizer:Algorithm)->bool:
         """
         Check if total enumeration process is not at end.  
 
-        :param `OnesCountProblem` problem: problem that is solved
+        :param `OnesCountProblemMax` problem: problem that is solved
         :param `OnesCountProblemBinaryBitArraySolution` solution: solution used for the problem that is solved
         :param `Algorithm` optimizer: optimizer that is executed
         :return: indicator if total enumeration process is not at end 
@@ -108,12 +108,12 @@ class OnesCountProblemBinaryBitArraySolutionTeSupport(ProblemSolutionTeSupport[B
         """        
         return self.__bit_array_counter.can_progress()
 
-    def overall_number_of_evaluations(self, problem:OnesCountProblem, solution:OnesCountProblemBinaryBitArraySolution, 
+    def overall_number_of_evaluations(self, problem:OnesCountProblemMax, solution:OnesCountProblemBinaryBitArraySolution, 
             optimizer:Algorithm)->int:
         """
         Returns overall number of evaluations required for finishing total enumeration process.  
 
-        :param `OnesCountProblem` problem: problem that is solved
+        :param `OnesCountProblemMax` problem: problem that is solved
         :param `OnesCountProblemBinaryBitArraySolution` solution: solution used for the problem that is solved
         :param `Algorithm` optimizer: optimizer that is executed
         :return: overall number of evaluations required for finishing total enumeration process

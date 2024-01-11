@@ -9,7 +9,7 @@ from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalS
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem import OnesCountProblem
+from opt.single_objective.teaching.ones_count_problem.ones_count_problem_max import OnesCountProblemMax
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_bit_array_solution import \
                 OnesCountProblemBinaryBitArraySolution
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_bit_array_solution_vns_support import \
@@ -17,7 +17,7 @@ from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_
 
 def main():
         output_control:OutputControl = OutputControl(write_to_output=False)
-        problem_to_solve:OnesCountProblem = OnesCountProblem.from_dimension(dimension=24)
+        problem_to_solve:OnesCountProblemMax = OnesCountProblemMax.from_dimension(dimension=24)
         solution:OnesCountProblemBinaryBitArraySolution = OnesCountProblemBinaryBitArraySolution()
         finish:FinishControl = FinishControl(criteria='evaluations', evaluations_max=5000)
         additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(keep='')

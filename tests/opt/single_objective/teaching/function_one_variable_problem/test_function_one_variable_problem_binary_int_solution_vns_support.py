@@ -8,7 +8,8 @@ import unittest.mock as mocker
 from unittest.mock import patch
 from unittest.mock import mock_open
 
-from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem import FunctionOneVariableProblem
+from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem_max import FunctionOneVariableProblemMax
+from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem_max import FunctionOneVariableProblemMaxElements
 from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem_binary_int_solution import FunctionOneVariableProblemBinaryIntSolution
 from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem_binary_int_solution_vns_support import FunctionOneVariableProblemBinaryIntSolutionVnsSupport
 
@@ -18,7 +19,7 @@ class TestFunctionOneVariableProblemBinaryIntSolutionVnsSupport(unittest.TestCas
     # shaking method returns True when k is greater than 0 and the solution is valid
     def test_shaking_returns_true_when_k_is_greater_than_0_and_solution_is_valid(self):
         # Arrange
-        problem = FunctionOneVariableProblem("x**2", 0, 10)
+        problem = FunctionOneVariableProblemMax("x**2", 0, 10)
         solution = FunctionOneVariableProblemBinaryIntSolution(0, 10, 4)
         solution.representation = 3
         vns_support = FunctionOneVariableProblemBinaryIntSolutionVnsSupport()
@@ -36,7 +37,7 @@ class TestFunctionOneVariableProblemBinaryIntSolutionVnsSupport(unittest.TestCas
     # local_search_best_improvement method returns a new solution with a better fitness value
     def test_local_search_best_improvement_returns_new_solution_with_better_fitness_value(self):
         # Arrange
-        problem = FunctionOneVariableProblem("x**2", 0, 10)
+        problem = FunctionOneVariableProblemMax("x**2", 0, 10)
         solution = FunctionOneVariableProblemBinaryIntSolution(0, 10, 4)
         solution.representation = 3
         solution.evaluate(problem)
@@ -57,7 +58,7 @@ class TestFunctionOneVariableProblemBinaryIntSolutionVnsSupport(unittest.TestCas
     # local_search_first_improvement method returns a new solution with a better fitness value
     def test_local_search_first_improvement_returns_new_solution_with_better_fitness_value(self):
         # Arrange
-        problem = FunctionOneVariableProblem("x**2", 0, 10)
+        problem = FunctionOneVariableProblemMax("x**2", 0, 10)
         solution = FunctionOneVariableProblemBinaryIntSolution(0, 10, 4)
         solution.representation = 3
         solution.evaluate(problem)
@@ -78,7 +79,7 @@ class TestFunctionOneVariableProblemBinaryIntSolutionVnsSupport(unittest.TestCas
     # shaking method returns False when k is less than or equal to 0
     def test_shaking_returns_false_when_k_is_less_than_or_equal_to_0(self):
         # Arrange
-        problem = FunctionOneVariableProblem("x**2", 0, 10)
+        problem = FunctionOneVariableProblemMax("x**2", 0, 10)
         solution = FunctionOneVariableProblemBinaryIntSolution(0, 10, 4)
         solution.representation = 3
         solution.evaluate(problem)
@@ -98,7 +99,7 @@ class TestFunctionOneVariableProblemBinaryIntSolutionVnsSupport(unittest.TestCas
     # local_search_best_improvement method returns the same solution when k is less than 1 or greater than the representation length
     def test_local_search_best_improvement_returns_same_solution_when_k_is_less_than_1_or_greater_than_representation_length(self):
         # Arrange
-        problem = FunctionOneVariableProblem("x**2", 0, 10)
+        problem = FunctionOneVariableProblemMax("x**2", 0, 10)
         solution = FunctionOneVariableProblemBinaryIntSolution(0, 10, 4)
         solution.representation = 3
         solution.evaluate(problem)
@@ -122,7 +123,7 @@ class TestFunctionOneVariableProblemBinaryIntSolutionVnsSupport(unittest.TestCas
     # local_search_first_improvement method returns the same solution when k is less than 1 or greater than the representation length
     def test_local_search_first_improvement_returns_same_solution_when_k_is_less_than_1_or_greater_than_representation_length(self):
         # Arrange
-        problem = FunctionOneVariableProblem("x**2", 0, 10)
+        problem = FunctionOneVariableProblemMax("x**2", 0, 10)
         solution = FunctionOneVariableProblemBinaryIntSolution(0, 10, 4)
         solution.representation = 3
         solution.evaluate(problem)

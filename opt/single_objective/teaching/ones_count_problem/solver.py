@@ -34,7 +34,7 @@ from uo.utils.logger import logger
 from opt.single_objective.teaching.ones_count_problem.command_line import default_parameters_cl
 from opt.single_objective.teaching.ones_count_problem.command_line import parse_arguments
 
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem import OnesCountProblem
+from opt.single_objective.teaching.ones_count_problem.ones_count_problem_max import OnesCountProblemMax
 
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_int_solution import \
         OnesCountProblemBinaryIntSolution
@@ -167,7 +167,7 @@ def main():
                 keep=additional_statistics_keep, 
                 max_local_optima=max_local_optima)
         # problem to be solved
-        problem = OnesCountProblem.from_input_file(input_file_path=input_file_path,input_format=input_format)
+        problem = OnesCountProblemMax.from_input_file(input_file_path=input_file_path,input_format=input_format)
         start_time = datetime.now()
         if write_to_output_file:
             output_file.write("# {} started at: {}\n".format(parameters['algorithm'], str(start_time)) )

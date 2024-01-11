@@ -6,7 +6,7 @@ from unittest.mock import mock_open
 
 from bitstring import BitArray
 
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem import OnesCountProblem
+from opt.single_objective.teaching.ones_count_problem.ones_count_problem_max import OnesCountProblemMax
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_int_solution import OnesCountProblemBinaryIntSolution
 from uo.target_problem.target_problem import TargetProblem
 from uo.target_problem.target_problem_void import TargetProblemVoid
@@ -52,7 +52,7 @@ class TestOnesCountProblemBinaryIntSolution(unittest.TestCase):
     # Initialize solution randomly
     def test_initialize_solution_randomly(self):
         # Arrange
-        problem_mock = mocker.MagicMock(spec=OnesCountProblem)
+        problem_mock = mocker.MagicMock(spec=OnesCountProblemMax)
         type(problem_mock).name = mocker.PropertyMock(return_value='some_problem')
         type(problem_mock).dimension = mocker.PropertyMock(return_value=12)
         # Act

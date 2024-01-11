@@ -24,7 +24,7 @@ from uo.target_solution.quality_of_solution import QualityOfSolution
 from uo.algorithm.optimizer import Optimizer
 from uo.algorithm.output_control import OutputControl
 
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem import OnesCountProblem
+from opt.single_objective.teaching.ones_count_problem.ones_count_problem_max import OnesCountProblemMax
 
 class OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters:
     """
@@ -69,17 +69,17 @@ class OnesCountProblemIntegerLinearProgrammingSolution(TargetSolutionVoidObjectS
 
 class OnesCountProblemIntegerLinearProgrammingSolver(Optimizer):
 
-    def __init__(self, output_control:OutputControl,  problem:OnesCountProblem)->None:
+    def __init__(self, output_control:OutputControl,  problem:OnesCountProblemMax)->None:
         """
         Create new `OnesCountProblemIntegerLinearProgrammingSolver` instance
 
         :param `OutputControls` output_control: object that control output
-        :param `OnesCountProblem` problem: problem to be solved
+        :param `OnesCountProblemMax` problem: problem to be solved
         """
         if not isinstance(output_control, OutputControl):
             raise TypeError('Parameter \'output_control\' must have type \'OutputControl\'.')
-        if not isinstance(problem, OnesCountProblem):
-            raise TypeError('Parameter \'problem\' must have type \'OnesCountProblem\'.')
+        if not isinstance(problem, OnesCountProblemMax):
+            raise TypeError('Parameter \'problem\' must have type \'OnesCountProblemMax\'.')
         super().__init__("OnesCountProblemIntegerLinearProgrammingSolver", output_control=output_control, 
                 target_problem=problem)
         self.__model = Model()
@@ -127,7 +127,7 @@ class OnesCountProblemIntegerLinearProgrammingSolver(Optimizer):
 
     def optimize(self)->None:
         """
-        Uses ILP model in order to solve OnesCountProblem
+        Uses ILP model in order to solve OnesCountProblemMax
         """
         self.iteration = -1
         self.evaluation = -1

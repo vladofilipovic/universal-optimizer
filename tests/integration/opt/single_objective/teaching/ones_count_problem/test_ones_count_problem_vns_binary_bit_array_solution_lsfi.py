@@ -20,7 +20,7 @@ from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalS
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem import OnesCountProblem
+from opt.single_objective.teaching.ones_count_problem.ones_count_problem_max import OnesCountProblemMax
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_bit_array_solution import OnesCountProblemBinaryBitArraySolution
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_bit_array_solution_vns_support import OnesCountProblemBinaryBitArraySolutionVnsSupport
 
@@ -32,7 +32,7 @@ class TestOnesCountProblemVnsBinaryBitArraySolutionLsbi(unittest.TestCase):
 
     def setUp(self):
         self.output_control = OutputControl(False)
-        self.problem_to_solve:OnesCountProblem = OnesCountProblem.from_dimension(dimension=24)
+        self.problem_to_solve:OnesCountProblemMax = OnesCountProblemMax.from_dimension(dimension=24)
         self.solution:OnesCountProblemBinaryBitArraySolution = OnesCountProblemBinaryBitArraySolution(random_seed=43434343)
         self.finish_control:FinishControl = FinishControl(criteria='evaluations', evaluations_max=1000)
         self.vns_support:OnesCountProblemBinaryBitArraySolutionVnsSupport = \

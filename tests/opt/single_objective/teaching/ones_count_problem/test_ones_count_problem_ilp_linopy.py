@@ -3,7 +3,7 @@ import unittest.mock as mocker
 from unittest.mock import patch
 from unittest.mock import mock_open
 
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem import OnesCountProblem
+from opt.single_objective.teaching.ones_count_problem.ones_count_problem_max import OnesCountProblemMax
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_ilp_linopy import OnesCountProblemIntegerLinearProgrammingSolution
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_ilp_linopy import OnesCountProblemIntegerLinearProgrammingSolver
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_ilp_linopy import OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters
@@ -27,7 +27,7 @@ class TestOnesCountProblemIntegerLinearProgrammingSolverConstructionParameters(u
     def test_valid_parameters_no_exceptions(self):
         # Arrange
         output_control = OutputControl(write_to_output=True)
-        target_problem = OnesCountProblem(dim=3)
+        target_problem = OnesCountProblemMax(dim=3)
         # Act
         params = OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters(output_control=output_control, 
                                         target_problem=target_problem)
@@ -38,7 +38,7 @@ class TestOnesCountProblemIntegerLinearProgrammingSolverConstructionParameters(u
     def test_invalid_output_control_type(self):
         # Arrange
         invalid_output_control = "invalid"
-        target_problem = OnesCountProblem(dim=3)
+        target_problem = OnesCountProblemMax(dim=3)
     
         # Act & Assert
         with self.assertRaises(TypeError):

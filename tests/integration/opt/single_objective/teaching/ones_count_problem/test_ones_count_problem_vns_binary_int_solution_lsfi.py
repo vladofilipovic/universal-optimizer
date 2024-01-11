@@ -14,7 +14,7 @@ from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalS
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem import OnesCountProblem
+from opt.single_objective.teaching.ones_count_problem.ones_count_problem_max import OnesCountProblemMax
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_int_solution import OnesCountProblemBinaryIntSolution
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_int_solution_vns_support import OnesCountProblemBinaryIntSolutionVnsSupport
 
@@ -26,7 +26,7 @@ class TestOnesCountProblemVnsBinaryIntSolutionLsfi(unittest.TestCase):
 
     def setUp(self):
         self.output_control = OutputControl(False)
-        self.problem_to_solve:OnesCountProblem = OnesCountProblem.from_dimension(dimension=22)
+        self.problem_to_solve:OnesCountProblemMax = OnesCountProblemMax.from_dimension(dimension=22)
         self.solution:OnesCountProblemBinaryIntSolution = OnesCountProblemBinaryIntSolution()
         self.finish_control:FinishControl = FinishControl(criteria='evaluations', evaluations_max=5000)
         self.vns_support:OnesCountProblemBinaryIntSolutionVnsSupport = OnesCountProblemBinaryIntSolutionVnsSupport()

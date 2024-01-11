@@ -1,8 +1,3 @@
-""" 
-..  _py_ones_count_problem:
-
-The :mod:`~opt.single_objective.teaching.ones_count_problem.ones_count_problem` contains class :class:`~opt.single_objective.teaching.ones_count_problem.ones_count_problem.OnesCountProblem`, that represents :ref:`Problem_Max_Ones`.
-"""
 import sys
 from pathlib import Path
 from typing import Optional
@@ -16,34 +11,33 @@ sys.path.append(directory.parent.parent.parent.parent.parent)
 from copy import deepcopy
 
 from uo.target_problem.target_problem import TargetProblem
-
 from uo.utils.logger import logger
 
-class OnesCountProblem(TargetProblem):
+class OnesCountProblemMax(TargetProblem):
     
-    def __init__(self, dim:int=None, is_minimization:bool=False)->None:
+    def __init__(self, dim:int)->None:
         """
-        Create new `OnesCountProblem` instance
+        Create new `OnesCountProblemMax` instance
 
         :param int dim: dimension of the problem
         """
         if not isinstance(dim, int):
-            raise TypeError('Parameter \'dimension\' for  OnesCountProblem should be \'int\'.')
+            raise TypeError('Parameter \'dimension\' for  OnesCountProblemMax should be \'int\'.')
         if dim <= 0:
-            raise ValueError('Parameter \'dimension\' for  OnesCountProblem should be greater than zero.')
-        if not isinstance(is_minimization, bool):
-            raise TypeError('Parameter \'is_minimization\' for  OnesCountProblem should be \'bool\'.')
-        super().__init__(name="OnesCountProblem", is_minimization=is_minimization)
+            raise ValueError('Parameter \'dimension\' for  OnesCountProblemMax should be greater than zero.')
+        super().__init__(name="OnesCountProblemMax", is_minimization=False, is_multi_objective=False)
         self.__dimension = dim
-
+        
+        
     @classmethod
     def from_dimension(cls, dimension:int):
         """
-        Additional constructor. Create new `OnesCountProblem` instance when dimension is specified
+        Additional constructor. Create new `OnesCountProblemMax` instance when dimension is specified
 
         :param int dimension: dimension of the problem
         """
         return cls(dim=dimension)
+
 
     @classmethod
     def __load_from_file__(cls, file_path:str, data_format:str)->int:
@@ -72,32 +66,32 @@ class OnesCountProblem(TargetProblem):
     @classmethod
     def from_input_file(cls, input_file_path:str, input_format:str):
         """
-        Additional constructor. Create new `OnesCountProblem` instance when input file and input format are specified
+        Additional constructor. Create new `OnesCountProblemMax` instance when input file and input format are specified
 
         :param str input_file_path: path of the input file with problem data
         :param str input_format: format of the input
         """
-        dimension:int = OnesCountProblem.__load_from_file__(input_file_path, input_format)
+        dimension:int = OnesCountProblemMax.__load_from_file__(input_file_path, input_format)
         if dimension is None or str(dimension).strip() == '':
             raise ValueError('Loading from file \'{}\' produces invalid dimension'.format(input_file_path))
         return cls(dim=dimension)
 
     def __copy__(self):
         """
-        Internal copy of the `OnesCountProblem` problem
+        Internal copy of the `OnesCountProblemMax` problem
 
-        :return: new `OnesCountProblem` instance with the same properties
-        :rtype: `OnesCountProblem`
+        :return: new `OnesCountProblemMax` instance with the same properties
+        :rtype: `OnesCountProblemMax`
         """
         pr = deepcopy(self)
         return pr
 
     def copy(self):
         """
-        Copy the `OnesCountProblem` problem
+        Copy the `OnesCountProblemMax` problem
 
-        :return: new `OnesCountProblem` instance with the same properties
-        :rtype: OnesCountProblem
+        :return: new `OnesCountProblemMax` instance with the same properties
+        :rtype: OnesCountProblemMax
         """
         return self.__copy__()
 

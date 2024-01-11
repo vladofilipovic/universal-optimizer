@@ -22,8 +22,8 @@ from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import \
         ProblemSolutionVnsSupport
 
-from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem import \
-        FunctionOneVariableProblem
+from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem_max import \
+        FunctionOneVariableProblemMax
 from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem_binary_int_solution \
         import FunctionOneVariableProblemBinaryIntSolution
 
@@ -39,7 +39,7 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
     def copy(self):
         return self.__copy__()
         
-    def shaking(self, k:int, problem:FunctionOneVariableProblem, solution:FunctionOneVariableProblemBinaryIntSolution, 
+    def shaking(self, k:int, problem:FunctionOneVariableProblemMax, solution:FunctionOneVariableProblemBinaryIntSolution, 
             optimizer:Algorithm)->bool:
         if k <= 0:
             return False
@@ -73,7 +73,7 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
         else:
             return False 
 
-    def local_search_best_improvement(self, k:int, problem:FunctionOneVariableProblem, 
+    def local_search_best_improvement(self, k:int, problem:FunctionOneVariableProblemMax, 
             solution:FunctionOneVariableProblemBinaryIntSolution, 
             optimizer: Algorithm)->bool:
         representation_length:int = 32
@@ -81,8 +81,8 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
             return False
         if k < 1:
             return False
-        start_sol:OnesCountProblemBinaryIntSolution = solution.clone()
-        best_sol:FunctionOneVariableProblemBinaryIntSolution = solution.clone()
+        start_sol:FunctionOneVariableProblemBinaryIntSolution = solution.copy()
+        best_sol:FunctionOneVariableProblemBinaryIntSolution = solution.copy()
         better_sol_found:bool = False
         # initialize indexes
         indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k,representation_length)
@@ -114,7 +114,7 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
         solution.copy_from(start_sol)
         return False
 
-    def local_search_first_improvement(self, k:int, problem:FunctionOneVariableProblem, 
+    def local_search_first_improvement(self, k:int, problem:FunctionOneVariableProblemMax, 
             solution:FunctionOneVariableProblemBinaryIntSolution, 
             optimizer: Algorithm)->bool:
         representation_length:int = 32

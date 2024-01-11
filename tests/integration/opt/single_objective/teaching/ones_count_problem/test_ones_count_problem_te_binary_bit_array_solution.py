@@ -17,7 +17,7 @@ from uo.algorithm.output_control import OutputControl
 from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizerConstructionParameters
 from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizer
 
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem import OnesCountProblem
+from opt.single_objective.teaching.ones_count_problem.ones_count_problem_max import OnesCountProblemMax
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_bit_array_solution import OnesCountProblemBinaryBitArraySolution
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_bit_array_solution_te_support import OnesCountProblemBinaryBitArraySolutionTeSupport
 
@@ -29,7 +29,7 @@ class TestOnesCountProblemTeBinaryBitArraySolution(unittest.TestCase):
 
     def setUp(self):
         self.output_control = OutputControl(False)
-        self.problem_to_solve:OnesCountProblem = OnesCountProblem.from_dimension(dimension=12)
+        self.problem_to_solve:OnesCountProblemMax = OnesCountProblemMax.from_dimension(dimension=12)
         self.solution:OnesCountProblemBinaryBitArraySolution = OnesCountProblemBinaryBitArraySolution(random_seed=43434343)
         self.te_support:OnesCountProblemBinaryBitArraySolutionTeSupport = OnesCountProblemBinaryBitArraySolutionTeSupport()
         construction_params:TeOptimizerConstructionParameters = TeOptimizerConstructionParameters()

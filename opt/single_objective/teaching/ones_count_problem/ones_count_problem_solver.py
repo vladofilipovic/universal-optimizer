@@ -47,7 +47,7 @@ from opt.single_objective.teaching.ones_count_problem.ones_count_problem_ilp_lin
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_ilp_linopy import \
         OnesCountProblemIntegerLinearProgrammingSolver
 
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem import OnesCountProblem
+from opt.single_objective.teaching.ones_count_problem.ones_count_problem_max import OnesCountProblemMax
 
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_int_solution import \
         OnesCountProblemBinaryIntSolution

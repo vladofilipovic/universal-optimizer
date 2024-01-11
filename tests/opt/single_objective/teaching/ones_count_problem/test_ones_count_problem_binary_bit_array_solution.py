@@ -6,7 +6,7 @@ from unittest.mock import mock_open
 
 from bitstring import BitArray
 
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem import OnesCountProblem
+from opt.single_objective.teaching.ones_count_problem.ones_count_problem_max import OnesCountProblemMax
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_bit_array_solution import OnesCountProblemBinaryBitArraySolution
 from uo.target_problem.target_problem import TargetProblem
 from uo.target_problem.target_problem_void import TargetProblemVoid
@@ -387,7 +387,7 @@ class TestCalculateQualityDirectly(unittest.TestCase):
     def test_all_bits_set_to_1(self):
         # Arrange
         representation = BitArray('0b111111')
-        problem = OnesCountProblem(dim=6)
+        problem = OnesCountProblemMax(dim=6)
         solution = OnesCountProblemBinaryBitArraySolution()
         solution.init_from(representation, problem)
     
@@ -403,7 +403,7 @@ class TestCalculateQualityDirectly(unittest.TestCase):
     def test_all_bits_set_to_0(self):
         # Arrange
         representation = BitArray('0b000000')
-        problem = OnesCountProblem(dim=6)
+        problem = OnesCountProblemMax(dim=6)
         solution = OnesCountProblemBinaryBitArraySolution()
         solution.init_from(representation, problem)
     
@@ -419,7 +419,7 @@ class TestCalculateQualityDirectly(unittest.TestCase):
     def test_random_bit_string(self):
         # Arrange
         representation = BitArray('0b101010')
-        problem = OnesCountProblem(dim=6)
+        problem = OnesCountProblemMax(dim=6)
         solution = OnesCountProblemBinaryBitArraySolution()
         solution.init_from(representation, problem)
     
@@ -435,7 +435,7 @@ class TestCalculateQualityDirectly(unittest.TestCase):
     def test_none_representation(self):
         # Arrange
         representation = None
-        problem = OnesCountProblem(dim=6)
+        problem = OnesCountProblemMax(dim=6)
         solution = OnesCountProblemBinaryBitArraySolution()
         
         # Act & Assert
@@ -446,7 +446,7 @@ class TestCalculateQualityDirectly(unittest.TestCase):
     def test_non_bitarray_representation(self):
         # Arrange
         representation = "101010"
-        problem = OnesCountProblem(dim=6)
+        problem = OnesCountProblemMax(dim=6)
         solution = OnesCountProblemBinaryBitArraySolution()
 
         # Act & Assert
@@ -457,7 +457,7 @@ class TestCalculateQualityDirectly(unittest.TestCase):
     def test_bitarray_length_0(self):
         # Arrange
         representation = BitArray()
-        problem = OnesCountProblem(dim=6)
+        problem = OnesCountProblemMax(dim=6)
         solution = OnesCountProblemBinaryBitArraySolution()
 
         # Act & Assert

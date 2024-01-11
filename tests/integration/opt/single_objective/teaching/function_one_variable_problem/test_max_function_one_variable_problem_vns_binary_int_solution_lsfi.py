@@ -14,8 +14,8 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer impor
         VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
-from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem import \
-        FunctionOneVariableProblem
+from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem_max import \
+        FunctionOneVariableProblemMax
 from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem_binary_int_solution \
     import FunctionOneVariableProblemBinaryIntSolution
 from opt.single_objective.teaching.function_one_variable_problem.\
@@ -31,7 +31,7 @@ class TestMaxFunctionOneVariableProblemBinaryIntSolutionLsfi(unittest.TestCase):
     def setUp(self):
         # Arrange
         self.output_control:OutputControl = OutputControl(write_to_output=False)
-        self.problem_to_solve:FunctionOneVariableProblem = FunctionOneVariableProblem(
+        self.problem_to_solve:FunctionOneVariableProblemMax = FunctionOneVariableProblemMax(
                 expression='7-x*x',
                 domain_low=-3,
                 domain_high=3 )

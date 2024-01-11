@@ -7,13 +7,13 @@ from uo.algorithm.output_control import OutputControl
 from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizerConstructionParameters
 from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizer
 
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem import OnesCountProblem
+from opt.single_objective.teaching.ones_count_problem.ones_count_problem_min import OnesCountProblemMin
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_bit_array_solution import OnesCountProblemBinaryBitArraySolution
 from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_bit_array_solution_te_support import OnesCountProblemBinaryBitArraySolutionTeSupport
 
 def main():
         output_control:OutputControl = OutputControl(write_to_output=False)
-        problem_to_solve:OnesCountProblem = OnesCountProblem.from_dimension(dimension=10)
+        problem_to_solve:OnesCountProblemMin = OnesCountProblemMin.from_dimension(dimension=10)
         solution:OnesCountProblemBinaryBitArraySolution = OnesCountProblemBinaryBitArraySolution()
         te_support:OnesCountProblemBinaryBitArraySolutionTeSupport = OnesCountProblemBinaryBitArraySolutionTeSupport()
         construction_params:TeOptimizerConstructionParameters = TeOptimizerConstructionParameters()

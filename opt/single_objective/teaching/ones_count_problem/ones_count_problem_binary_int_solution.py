@@ -8,7 +8,7 @@ import sys
 from pathlib import Path
 from typing import Optional
 
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem import OnesCountProblem
+from opt.single_objective.teaching.ones_count_problem.ones_count_problem_max import OnesCountProblemMax
 directory = Path(__file__).resolve()
 sys.path.append(directory.parent)
 sys.path.append(directory.parent.parent)
@@ -91,7 +91,7 @@ class OnesCountProblemBinaryIntSolution(TargetSolution[int,str]):
         """
         return bin(representation)
 
-    def init_random(self, problem:OnesCountProblem)->None:
+    def init_random(self, problem:OnesCountProblemMax)->None:
         """
         Random initialization of the solution
 
