@@ -69,12 +69,6 @@ class OnesCountProblemBinaryIntSolution(TargetSolution[int,str]):
     def copy(self):
         return self.__copy__()
         
-    def __make_to_be_feasible_helper__(self, problem:TargetProblem):
-        mask:int = ~0
-        mask <<= 32-problem.dimension
-        mask = (mask % 0x100000000) >> (32-problem.dimension) 
-        self.representation &= mask
-
     def init_random(self, problem:TargetProblem)->None:
         if problem.dimension is None:
             raise ValueError("Problem dimension should not be None!")
@@ -83,7 +77,7 @@ class OnesCountProblemBinaryIntSolution(TargetSolution[int,str]):
         if problem.dimension >= 32:
             raise ValueError("Problem dimension should be less than 32!")
         self.representation = randint(0, 2^problem.dimension-1)
-        self.__make_to_be_feasible_helper__(problem)
+        self.representation = self.obtain_feasible_representation(problem)
 
     def init_from(self, representation:int, problem:TargetProblem)->None:
         if not isinstance(representation, int):
@@ -138,7 +132,7 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
         
     def shaking(self, k:int, problem:OnesCountProblem2, solution:OnesCountProblemBinaryIntSolution, 
             optimizer:Algorithm, )->bool:
-        if optimizer.finish_control.check_evaluations and optimizer.evaluation > optimizer.finish_control.evaluations_max:
+        if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
             return False
         tries:int = 0
         limit:int = 10000
@@ -164,7 +158,7 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
 
     def local_search_best_improvement(self, k:int, problem:OnesCountProblem2, solution:OnesCountProblemBinaryIntSolution, 
             optimizer: Algorithm)->bool:
-        if optimizer.finish_control.check_evaluations and optimizer.evaluation > optimizer.finish_control.evaluations_max:
+        if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
             return False
         if k<1:
             return False
@@ -194,7 +188,7 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
 
     def local_search_first_improvement(self, k:int, problem:OnesCountProblem2, solution:OnesCountProblemBinaryIntSolution, 
             optimizer: Algorithm)->bool:
-        if optimizer.finish_control.check_evaluations and optimizer.evaluation > optimizer.finish_control.evaluations_max:
+        if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
             return False
         if k<1:
             return False
@@ -248,7 +242,7 @@ def main():
     vns_construction_params.additional_statistics_control = additional_stat
     vns_construction_params.k_min = 1
     vns_construction_params.k_max = 3
-    vns_construction_params.local_search_type = 'local_search_first_improvement'
+    vns_construction_params.local_search_type = 'localSearchFirstImprovement'
     optimizer:VnsOptimizer = VnsOptimizer.from_construction_tuple(vns_construction_params)
     optimizer.optimize()
     print('Best solution representation: {}'.format(optimizer.best_solution.representation))            

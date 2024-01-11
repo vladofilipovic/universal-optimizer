@@ -70,7 +70,7 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
         :return: if shaking is successful
         :rtype: bool
         """    
-        if optimizer.finish_control.check_evaluations and optimizer.evaluation > optimizer.finish_control.evaluations_max:
+        if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
             return False
         tries:int = 0
         limit:int = 10000
@@ -89,7 +89,7 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
                 break
         if tries < limit:
             optimizer.evaluation += 1
-            if optimizer.finish_control.check_evaluations and optimizer.evaluation > optimizer.finish_control.evaluations_max:
+            if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
                 return solution
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             solution.evaluate(problem)
@@ -110,7 +110,7 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
         :return: result of the local search procedure 
         :rtype: if local search is successful
         """
-        if optimizer.finish_control.check_evaluations and optimizer.evaluation > optimizer.finish_control.evaluations_max:
+        if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
             return False
         if k < 1 or k > problem.dimension:
             return False
@@ -129,7 +129,7 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
                 mask |= 1 << i
             solution.representation ^= mask 
             optimizer.evaluation += 1
-            if optimizer.finish_control.check_evaluations and optimizer.evaluation > optimizer.finish_control.evaluations_max:
+            if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
                 return False
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             new_qos = solution.calculate_quality(problem)
@@ -160,7 +160,7 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
         :return: result of the local search procedure 
         :rtype: if local search is successful
         """
-        if optimizer.finish_control.check_evaluations and optimizer.evaluation > optimizer.finish_control.evaluations_max:
+        if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
             return False
         if k < 1 or k > problem.dimension:
             return False
@@ -178,7 +178,7 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
                 mask |= 1 << i
             solution.representation ^= mask 
             optimizer.evaluation += 1
-            if optimizer.finish_control.check_evaluations and optimizer.evaluation > optimizer.finish_control.evaluations_max:
+            if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
                 return False
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             new_qos = solution.calculate_quality(problem)

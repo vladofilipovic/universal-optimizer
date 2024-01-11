@@ -33,7 +33,7 @@ def main():
         vns_construction_params.additional_statistics_control = additional_statistics_control
         vns_construction_params.k_min = 1
         vns_construction_params.k_max = 3
-        vns_construction_params.local_search_type = 'local_search_best_improvement'
+        vns_construction_params.local_search_type = 'localSearchBestImprovement'
         optimizer:VnsOptimizer = VnsOptimizer.from_construction_tuple(vns_construction_params)
         optimizer.optimize()
         print('Best solution representation: {}'.format(optimizer.best_solution.representation))            

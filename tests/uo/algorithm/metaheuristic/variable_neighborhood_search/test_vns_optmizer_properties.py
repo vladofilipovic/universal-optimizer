@@ -55,7 +55,7 @@ class TestVnsOptimizerProperties(unittest.TestCase):
                 k_min=self.k_min, 
                 k_max=self.k_max, 
                 additional_statistics_control=self.additional_statistics_control,
-                local_search_type='local_search_first_improvement'
+                local_search_type='localSearchFirstImprovement'
         )
     
     def test_name_should_be_vns(self):

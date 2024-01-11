@@ -52,7 +52,7 @@ class TestOnesCountProblemBinaryIntSolution(unittest.TestCase):
     # Initialize solution randomly
     def test_initialize_solution_randomly(self):
         # Arrange
-        problem_mock = mocker.MagicMock()
+        problem_mock = mocker.MagicMock(spec=OnesCountProblem)
         type(problem_mock).name = mocker.PropertyMock(return_value='some_problem')
         type(problem_mock).dimension = mocker.PropertyMock(return_value=12)
         # Act

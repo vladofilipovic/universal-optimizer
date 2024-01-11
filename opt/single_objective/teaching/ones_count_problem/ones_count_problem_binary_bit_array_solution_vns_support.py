@@ -71,8 +71,7 @@ class OnesCountProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport
         :return: if randomization is successful
         :rtype: bool
         """    
-        if optimizer.finish_control.check_evaluations \
-                and optimizer.evaluation > optimizer.finish_control.evaluations_max:
+        if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
             return False
         tries:int = 0
         limit:int = 10000
@@ -91,7 +90,7 @@ class OnesCountProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport
                 break
         if tries < limit:
             optimizer.evaluation += 1
-            if optimizer.finish_control.check_evaluations and optimizer.evaluation > optimizer.finish_control.evaluations_max:
+            if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
                 return False
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             solution.evaluate(problem)
@@ -113,7 +112,7 @@ class OnesCountProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport
         :return: result of the local search procedure 
         :rtype: if local search is successful
         """
-        if optimizer.finish_control.check_evaluations and optimizer.evaluation > optimizer.finish_control.evaluations_max:
+        if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
             return False
         if k < 1 or k > problem.dimension:
             return False
@@ -129,7 +128,7 @@ class OnesCountProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport
             # invert and compare, switch of new is better
             solution.representation.invert(positions) 
             optimizer.evaluation += 1
-            if optimizer.finish_control.check_evaluations and optimizer.evaluation > optimizer.finish_control.evaluations_max:
+            if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
                 return False
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             new_qos:QualityOfSolution = solution.calculate_quality(problem)
@@ -160,7 +159,7 @@ class OnesCountProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport
         :return: result of the local search procedure 
         :rtype: if local search is successful
         """
-        if optimizer.finish_control.check_evaluations and optimizer.evaluation > optimizer.finish_control.evaluations_max:
+        if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
             return False
         if k < 1 or k > problem.dimension:
             return False
@@ -175,7 +174,7 @@ class OnesCountProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport
             # invert and compare, switch and exit if new is better
             solution.representation.invert(positions) 
             optimizer.evaluation += 1
-            if optimizer.finish_control.check_evaluations and optimizer.evaluation > optimizer.finish_control.evaluations_max:
+            if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
                 return solution
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             new_qos:QualityOfSolution = solution.calculate_quality(problem)

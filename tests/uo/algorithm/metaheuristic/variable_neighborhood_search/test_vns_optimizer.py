@@ -29,7 +29,7 @@ class TestVnsOptimizer(unittest.TestCase):
         type(vns_support_stub).copy = mocker.CallableMixin(spec="return self")
         k_min = 1
         k_max = 10
-        local_search_type = 'local_search_best_improvement'
+        local_search_type = 'localSearchBestImprovement'
         # Act
         vns_optimizer = VnsOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
                     target_problem, solution_template, vns_support_stub, k_min, k_max, local_search_type)
@@ -51,7 +51,7 @@ class TestVnsOptimizer(unittest.TestCase):
         type(vns_support_stub).copy = mocker.CallableMixin(spec="return self")
         k_min = 1
         k_max = 10
-        local_search_type = 'local_search_best_improvement'
+        local_search_type = 'localSearchBestImprovement'
         # Act
         vns_optimizer = VnsOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
                     target_problem, solution_template, vns_support_stub, k_min, k_max, local_search_type)
@@ -73,7 +73,7 @@ class TestVnsOptimizer(unittest.TestCase):
         type(vns_support_stub).copy = mocker.CallableMixin(spec="return self")
         k_min = 1
         k_max = 10
-        local_search_type = 'local_search_best_improvement'
+        local_search_type = 'localSearchBestImprovement'
         # Act
         vns_optimizer = VnsOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
                     target_problem, solution_template, vns_support_stub, k_min, k_max, local_search_type)
@@ -91,7 +91,7 @@ class TestVnsOptimizer(unittest.TestCase):
         vns_support = None
         k_min = 1
         k_max = 10
-        local_search_type = 'local_search_best_improvement'
+        local_search_type = 'localSearchBestImprovement'
         # Act & Assert
         with self.assertRaises(TypeError):
             VnsOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
@@ -112,7 +112,7 @@ class TestVnsOptimizer(unittest.TestCase):
         type(vns_support_stub).copy = mocker.CallableMixin(spec="return self")
         k_min = 1
         k_max = 10
-        local_search_type = 'local_search_best_improvement'
+        local_search_type = 'localSearchBestImprovement'
         vns_optimizer = VnsOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
                     target_problem, solution_template, vns_support_stub, k_min, k_max, local_search_type)
         # Act
@@ -137,7 +137,7 @@ class TestVnsOptimizer(unittest.TestCase):
         type(vns_support_stub).copy = mocker.CallableMixin(spec="return self")
         k_min = 1
         k_max = 10
-        local_search_type = 'local_search_first_improvement'
+        local_search_type = 'localSearchFirstImprovement'
         vns_optimizer = VnsOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
                     target_problem, solution_template, vns_support_stub, k_min, k_max, local_search_type)
         # Act
@@ -163,7 +163,7 @@ class TestVnsOptimizer(unittest.TestCase):
         type(vns_support_stub).string_rep = mocker.Mock(return_value="")
         k_min = 1
         k_max = 10
-        local_search_type = 'local_search_first_improvement'
+        local_search_type = 'localSearchFirstImprovement'
         vns_optimizer = VnsOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
                     target_problem, solution_template, vns_support_stub, k_min, k_max, local_search_type)
         # Act
@@ -187,7 +187,7 @@ class TestVnsOptimizer(unittest.TestCase):
         self.assertIn(expected_string, string_representation)
         expected_string = "|__problem_solution_vns_support="
         self.assertIn(expected_string, string_representation)
-        expected_string = "__local_search_type=local_search_first_improvement|"
+        expected_string = "__local_search_type=" + local_search_type + "|"
         self.assertIn(expected_string, string_representation)
 
     # VnsOptimizer can successfully execute __str__
@@ -206,7 +206,7 @@ class TestVnsOptimizer(unittest.TestCase):
         type(vns_support_stub).string_rep = mocker.Mock(return_value="")
         k_min = 1
         k_max = 10
-        local_search_type = 'local_search_first_improvement'
+        local_search_type = 'localSearchFirstImprovement'
         vns_optimizer = VnsOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
                     target_problem, solution_template, vns_support_stub, k_min, k_max, local_search_type)
         # Act
@@ -230,7 +230,7 @@ class TestVnsOptimizer(unittest.TestCase):
         self.assertIn(expected_string, string_representation)
         expected_string = "|__problem_solution_vns_support="
         self.assertIn(expected_string, string_representation)
-        expected_string = "__local_search_type=local_search_first_improvement|"
+        expected_string = "__local_search_type=" + local_search_type + "|"
         self.assertIn(expected_string, string_representation)
 
     # VnsOptimizer can successfully execute __repr__
@@ -249,7 +249,7 @@ class TestVnsOptimizer(unittest.TestCase):
         type(vns_support_stub).string_rep = mocker.Mock(return_value="")
         k_min = 1
         k_max = 10
-        local_search_type = 'local_search_first_improvement'
+        local_search_type = 'localSearchFirstImprovement'
         vns_optimizer = VnsOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
                     target_problem, solution_template, vns_support_stub, k_min, k_max, local_search_type)
         # Act
@@ -274,7 +274,7 @@ class TestVnsOptimizer(unittest.TestCase):
         self.assertIn(expected_string, repr_string)
         expected_string = "__problem_solution_vns_support="
         self.assertIn(expected_string, repr_string)
-        expected_string = "__local_search_type=local_search_first_improvement"
+        expected_string = "__local_search_type=" + local_search_type 
         self.assertIn(expected_string, repr_string)
 
     # VnsOptimizer raises TypeError if finish_control parameter is not of type FinishControl
@@ -293,7 +293,7 @@ class TestVnsOptimizer(unittest.TestCase):
         type(vns_support_stub).string_rep = mocker.Mock(return_value="")
         k_min = 1
         k_max = 10
-        local_search_type = 'local_search_first_improvement'
+        local_search_type = 'localSearchFirstImprovement'
         # Act & Assert
         with self.assertRaises(TypeError):
             VnsOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
@@ -315,7 +315,7 @@ class TestVnsOptimizer(unittest.TestCase):
         type(vns_support_stub).string_rep = mocker.Mock(return_value="")
         k_min = 1
         k_max = 10
-        local_search_type = 'local_search_first_improvement'
+        local_search_type = 'localSearchFirstImprovement'
         # Act & Assert
         with self.assertRaises(TypeError):
             VnsOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
@@ -337,7 +337,7 @@ class TestVnsOptimizer(unittest.TestCase):
         type(vns_support_stub).string_rep = mocker.Mock(return_value="")
         k_min = 1
         k_max = 10
-        local_search_type = 'local_search_first_improvement'
+        local_search_type = 'localSearchFirstImprovement'
         # Act & Assert
         with self.assertRaises(TypeError):
             VnsOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
@@ -359,7 +359,7 @@ class TestVnsOptimizer(unittest.TestCase):
         type(vns_support_stub).string_rep = mocker.Mock(return_value="")
         k_min = 1
         k_max = 10
-        local_search_type = 'local_search_first_improvement'
+        local_search_type = 'localSearchFirstImprovement'
         # Act & Assert
         with self.assertRaises(TypeError):
             VnsOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
@@ -377,7 +377,7 @@ class TestVnsOptimizer(unittest.TestCase):
         vns_support = "not appropriate type"       
         k_min = 1
         k_max = 10
-        local_search_type = 'local_search_first_improvement'
+        local_search_type = 'localSearchFirstImprovement'
         # Act & Assert
         with self.assertRaises(TypeError):
             VnsOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
@@ -399,7 +399,7 @@ class TestVnsOptimizer(unittest.TestCase):
         type(vns_support_stub).string_rep = mocker.Mock(return_value="")
         k_min = "1"
         k_max = 10
-        local_search_type = 'local_search_first_improvement'
+        local_search_type = 'localSearchFirstImprovement'
         # Act & Assert
         with self.assertRaises(TypeError):
             VnsOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
@@ -421,7 +421,7 @@ class TestVnsOptimizer(unittest.TestCase):
         type(vns_support_stub).string_rep = mocker.Mock(return_value="")
         k_min = 1
         k_max = "10"
-        local_search_type = 'local_search_first_improvement'
+        local_search_type = 'localSearchFirstImprovement'
         # Act & Assert
         with self.assertRaises(TypeError):
             VnsOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 

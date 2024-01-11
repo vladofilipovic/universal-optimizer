@@ -40,7 +40,7 @@ class TestOnesCountProblemVnsBinaryIntSolutionLsbi(unittest.TestCase):
         vns_construction_params.additional_statistics_control = self.additional_stat
         vns_construction_params.k_min = 1
         vns_construction_params.k_max = 3
-        vns_construction_params.local_search_type = 'local_search_best_improvement'
+        vns_construction_params.local_search_type = 'localSearchBestImprovement'
         self.optimizer:VnsOptimizer = VnsOptimizer.from_construction_tuple(vns_construction_params)
         self.optimizer.optimize()
     

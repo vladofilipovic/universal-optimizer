@@ -7,6 +7,8 @@ The :mod:`~opt.single_objective.teaching.ones_count_problem.ones_count_problem_b
 import sys
 from pathlib import Path
 from typing import Optional
+
+from opt.single_objective.teaching.ones_count_problem.ones_count_problem import OnesCountProblem
 directory = Path(__file__).resolve()
 sys.path.append(directory.parent)
 sys.path.append(directory.parent.parent)
@@ -65,7 +67,7 @@ class OnesCountProblemBinaryIntSolution(TargetSolution[int,str]):
         """
         return self.__copy__()
         
-    def __make_to_be_feasible_helper__(self, problem:TargetProblem):
+    def obtain_feasible_representation(self, problem:TargetProblem) -> int:
         """
         Helper function that modifies representation to be feasible
 
@@ -74,7 +76,7 @@ class OnesCountProblemBinaryIntSolution(TargetSolution[int,str]):
         mask:int = ~0
         mask <<= 32-problem.dimension
         mask = (mask % 0x100000000) >> (32-problem.dimension) 
-        self.representation &= mask
+        return self.representation & mask
 
     def argument(self, representation:int)->str:
         """
@@ -87,7 +89,7 @@ class OnesCountProblemBinaryIntSolution(TargetSolution[int,str]):
         """
         return bin(representation)
 
-    def init_random(self, problem:TargetProblem)->None:
+    def init_random(self, problem:OnesCountProblem)->None:
         """
         Random initialization of the solution
 
@@ -99,8 +101,8 @@ class OnesCountProblemBinaryIntSolution(TargetSolution[int,str]):
             raise ValueError("Problem dimension should be positive!")
         if problem.dimension >= 32:
             raise ValueError("Problem dimension should be less than 32!")
-        self.representation = randint(0, 2^problem.dimension-1)
-        self.__make_to_be_feasible_helper__(problem)
+        self.representation = randint(0, 2 ^ problem.dimension - 1) 
+        self.representation = self.obtain_feasible_representation(problem)
 
     def init_from(self, representation:int, problem:TargetProblem)->None:
         """

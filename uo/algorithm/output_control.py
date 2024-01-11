@@ -69,7 +69,7 @@ class OutputControl:
         :return:  new `OutputControl` instance with the same properties
         :rtype: OutputControl
         """
-        oc = deepcopy(self)
+        oc = self
         return oc
 
     def copy(self):

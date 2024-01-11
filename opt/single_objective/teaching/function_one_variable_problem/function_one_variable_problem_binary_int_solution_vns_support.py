@@ -43,8 +43,7 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
             optimizer:Algorithm)->bool:
         if k <= 0:
             return False
-        if optimizer.finish_control.check_evaluations and \
-                optimizer.evaluation > optimizer.finish_control.evaluations_max:
+        if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
             return False
         tries:int = 0
         limit:int = 10000
@@ -63,9 +62,9 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
             if all_ok:
                 break
         if tries < limit:
+            solution.representation = solution.obtain_feasible_representation(problem)
             optimizer.evaluation += 1
-            if optimizer.finish_control.check_evaluations and \
-                    optimizer.evaluation > optimizer.finish_control.evaluations_max:
+            if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
                 return False
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             solution.evaluate(problem)
@@ -78,10 +77,9 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
             solution:FunctionOneVariableProblemBinaryIntSolution, 
             optimizer: Algorithm)->bool:
         representation_length:int = 32
-        if optimizer.finish_control.check_evaluations and \
-                optimizer.evaluation > optimizer.finish_control.evaluations_max:
+        if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
             return False
-        if k < 1 or k > representation_length:
+        if k < 1:
             return False
         best_rep:Optional[int] = None
         best_qos:QualityOfSolution =  QualityOfSolution(solution.objective_value, None,
@@ -98,8 +96,7 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
                 mask |= 1 << i
             solution.representation ^= mask 
             optimizer.evaluation += 1
-            if optimizer.finish_control.check_evaluations and \
-                    optimizer.evaluation > optimizer.finish_control.evaluations_max:
+            if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
                 return solution
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             new_qos = solution.calculate_quality(problem)
@@ -124,8 +121,7 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
             solution:FunctionOneVariableProblemBinaryIntSolution, 
             optimizer: Algorithm)->bool:
         representation_length:int = 32
-        if optimizer.finish_control.check_evaluations and \
-                optimizer.evaluation > optimizer.finish_control.evaluations_max:
+        if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
             return False
         if k < 1 or k > representation_length:
             return False
@@ -143,8 +139,7 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
                 mask |= 1 << i
             solution.representation ^= mask 
             optimizer.evaluation += 1
-            if optimizer.finish_control.check_evaluations and \
-                    optimizer.evaluation > optimizer.finish_control.evaluations_max:
+            if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
                 return solution
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             new_qos = solution.calculate_quality(problem)

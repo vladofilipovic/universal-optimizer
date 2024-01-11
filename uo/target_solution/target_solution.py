@@ -118,6 +118,11 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         """
         return self.__copy__()
 
+
+    def obtain_feasible_representation(self, problem:TargetProblem)->R_co:
+        return self.representation
+
+
     def copy_from(self, original)->None:
         """
         Copy all data from the original target solution
@@ -129,17 +134,6 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         self.__objective_values = original.__objective_values
         self.__is_feasible = original.__is_feasible
         self.__representation = original.__representation
-
-
-    @property
-    def name(self)->str:
-        """
-        Property getter for the name of the target solution
-
-        :return: name of the target solution instance 
-        :rtype: str
-        """
-        return self.__name
     
     @property
     def random_seed(self)->int:

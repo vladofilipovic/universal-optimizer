@@ -89,7 +89,7 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         :param int k_min: `k_min` parameter for VNS
         :param int k_max: `k_max` parameter for VNS
         :param local_search_type: type of the local search
-        :type local_search_type: str, possible values: 'local_search_best_improvement', 'local_search_first_improvement' 
+        :type local_search_type: str, possible values: 'localSearchBestImprovement', 'localSearchFirstImprovement' 
         """
         if not isinstance(finish_control, FinishControl):
                 raise TypeError('Parameter \'finish_control\' must be \'FinishControl\'.')
@@ -121,8 +121,8 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         self.__local_search_type:str = local_search_type
         self.__problem_solution_vns_support:ProblemSolutionVnsSupport = problem_solution_vns_support
         self.__implemented_local_searches:dict[str,function] = {
-            'local_search_best_improvement':  self.__problem_solution_vns_support.local_search_best_improvement,
-            'local_search_first_improvement':  self.__problem_solution_vns_support.local_search_first_improvement,
+            'localSearchBestImprovement':  self.__problem_solution_vns_support.local_search_best_improvement,
+            'localSearchFirstImprovement':  self.__problem_solution_vns_support.local_search_first_improvement,
         }
         if( self.__local_search_type not in self.__implemented_local_searches.keys()):
             raise ValueError( 'Value \'{}\' for VNS local_search_type is not supported'.format(

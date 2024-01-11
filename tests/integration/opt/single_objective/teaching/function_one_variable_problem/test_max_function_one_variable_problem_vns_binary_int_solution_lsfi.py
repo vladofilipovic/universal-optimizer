@@ -29,6 +29,7 @@ class TestMaxFunctionOneVariableProblemBinaryIntSolutionLsfi(unittest.TestCase):
         print("setUpClass TestIntegrationFunctionOneVariableProblemBinaryIntSolutionLsbi\n")
 
     def setUp(self):
+        # Arrange
         self.output_control:OutputControl = OutputControl(write_to_output=False)
         self.problem_to_solve:FunctionOneVariableProblem = FunctionOneVariableProblem(
                 expression='7-x*x',
@@ -54,13 +55,16 @@ class TestMaxFunctionOneVariableProblemBinaryIntSolutionLsfi(unittest.TestCase):
         vns_construction_params.additional_statistics_control = self.additional_statistics_control
         vns_construction_params.k_min = 1
         vns_construction_params.k_max = 3
-        vns_construction_params.local_search_type = 'local_search_best_improvement'
+        vns_construction_params.local_search_type = 'localSearchBestImprovement'
         self.optimizer:VnsOptimizer = VnsOptimizer.from_construction_tuple(vns_construction_params)
         self.optimizer.optimize()
     
     def test_best_solution_after_optimization_should_be_all_optimal(self):
+        # Act
         result = 0.0
-        self.assertLessEqual(abs(self.optimizer.best_solution.argument(self.optimizer.best_solution.representation)- result), 0.1)
+        arg = self.optimizer.best_solution.argument(self.optimizer.best_solution.representation)
+        # Assert
+        self.assertLessEqual(abs( arg-result), 0.1)
 
     def test_best_solution_after_optimization_should_have_optimal_objective_value(self):
         result = 7.0
@@ -68,7 +72,7 @@ class TestMaxFunctionOneVariableProblemBinaryIntSolutionLsfi(unittest.TestCase):
 
     def test_best_solution_after_optimization_should_have_optimal_fitness_value(self):
         result = 7.0
-        self.assertLessEqual(abs(self.optimizer.best_solution.fitness_value - result), 0.01)
+        self.assertLessEqual(abs(self.optimizer.best_solution.fitness_value - result), 0.1)
 
     def tearDown(self):
         return

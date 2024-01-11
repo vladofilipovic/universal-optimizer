@@ -38,7 +38,7 @@ default_parameters_cl = {
         'additionalStatisticsMaxLocalOptima':7,
         'kMin': 1,
         'kMax': 3,
-        'localSearchType': 'local_search_best_improvement',
+        'localSearchType': 'localSearchBestImprovement',
         'solutionType': '',
         'solutionNumberOfIntervals': 1000
 }
@@ -113,8 +113,8 @@ def parse_arguments():
         parser_vns.add_argument('--kMax', type=int, default=3, 
                 help=("VNS parameter k max.") )    
         parser_vns.add_argument('--localSearchType', type=str, 
-                choices=['local_search_best_improvement', 'local_search_first_improvement'],  
-                default='local_search_best_improvement', 
+                choices=['localSearchBestImprovement', 'localSearchFirstImprovement'],  
+                default='localSearchBestImprovement', 
                 help=("VNS parameter that determines local search type."))
         parser_vns.add_argument('--solutionType', type=str, 
                 choices=['int'],  

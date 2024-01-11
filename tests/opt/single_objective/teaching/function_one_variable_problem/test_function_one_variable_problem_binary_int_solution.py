@@ -120,31 +120,31 @@ class TestFunctionOneVariableProblemBinaryIntSolution(unittest.TestCase):
         with self.assertRaises(ValueError):
             FunctionOneVariableProblemBinaryIntSolution(domain_from, domain_to, number_of_intervals)
 
-    # Calling __make_to_be_feasible_helper__() method on an instance of FunctionOneVariableProblemBinaryIntSolution with representation greater than number_of_intervals should set representation to number_of_intervals
-    def test_make_to_be_feasible_helper_greater_than_number_of_intervals(self):
+    # Calling obtain_feasible_representation() method on an instance of FunctionOneVariableProblemBinaryIntSolution with representation greater than number_of_intervals should set representation to number_of_intervals
+    def test_obtain_feasible_representation_greater_than_number_of_intervals(self):
+        # Arrange
         domain_from = 0.0
         domain_to = 1.0
         number_of_intervals = 10
-
         solution = FunctionOneVariableProblemBinaryIntSolution(domain_from, domain_to, number_of_intervals)
+        # Act
         solution.representation = 15
+        rep = solution.obtain_feasible_representation(None)
+        # Assert
+        self.assertLessEqual(rep, number_of_intervals)
 
-        solution.__make_to_be_feasible_helper__(None)
-
-        self.assertEqual(solution.representation, number_of_intervals)
-
-    # Calling __make_to_be_feasible_helper__() method on an instance of FunctionOneVariableProblemBinaryIntSolution with representation less than 0 should set representation to 0
-    def test_make_to_be_feasible_helper_less_than_zero(self):
+    # Calling obtain_feasible_representation() method on an instance of FunctionOneVariableProblemBinaryIntSolution with representation less than 0 should set representation to 0
+    def test_obtain_feasible_representation_less_than_zero(self):
+        # Arrange
         domain_from = 0.0
         domain_to = 1.0
         number_of_intervals = 10
-
+        # Act
         solution = FunctionOneVariableProblemBinaryIntSolution(domain_from, domain_to, number_of_intervals)
         solution.representation = -5
-
-        solution.__make_to_be_feasible_helper__(None)
-
-        self.assertEqual(solution.representation, 0)
+        rep = solution.obtain_feasible_representation(None)
+        # Assert
+        self.assertGreaterEqual(rep, 0)
 
     # Calling native_representation() method on an instance of FunctionOneVariableProblemBinaryIntSolution with a string containing non-binary characters should raise a ValueError
     def test_native_representation_non_binary_characters(self):
@@ -237,40 +237,51 @@ class Test__Init__(unittest.TestCase):
         self.assertEqual(obj.number_of_intervals, number_of_intervals)
 
 
-class Test__MakeToBeFeasibleHelper__(unittest.TestCase):
+class Test__ObtainFeasibleHelper__(unittest.TestCase):
 
     # If the representation is within the range of [0, number_of_intervals], the representation should not be changed.
     def test_representation_within_range(self):
+        # Arrange
         problem = FunctionOneVariableProblem("x**2", 0, 10)
         solution = FunctionOneVariableProblemBinaryIntSolution(0, 10, 5)
+        # Act
         solution.representation = 3
-        solution.__make_to_be_feasible_helper__(problem)
-        self.assertEqual(solution.representation, 3)
+        rep = solution.obtain_feasible_representation(problem)
+        # Assert
+        self.assertEqual(rep, 3)
 
     # If the representation is equal to number_of_intervals, the representation should be set to number_of_intervals.
     def test_representation_equal_to_number_of_intervals(self):
+        # Arrange
         problem = FunctionOneVariableProblem("x**2", 0, 10)
         solution = FunctionOneVariableProblemBinaryIntSolution(0, 10, 5)
+        # Act
         solution.representation = 5
-        solution.__make_to_be_feasible_helper__(problem)
-        self.assertEqual(solution.representation, 5)
+        rep = solution.obtain_feasible_representation(problem)
+        # Assert
+        self.assertEqual(rep, 5)
 
     # If the representation is negative, the representation should be set to 0.
     def test_representation_negative(self):
+        # Arrange
         problem = FunctionOneVariableProblem("x**2", 0, 10)
         solution = FunctionOneVariableProblemBinaryIntSolution(0, 10, 5)
+        # Act
         solution.representation = -2
-        solution.__make_to_be_feasible_helper__(problem)
-        self.assertEqual(solution.representation, 0)
-
+        rep = solution.obtain_feasible_representation(problem)
+        # Assert
+        self.assertGreaterEqual(rep, 0)
 
 class TestInitRandom(unittest.TestCase):
 
     # When called, 'init_random' should set the 'representation' attribute of the 'FunctionOneVariableProblemBinaryIntSolution' instance to a random integer between 0 and 'number_of_intervals'
     def test_set_representation_to_random_integer(self):
+        # Arrange
         problem = FunctionOneVariableProblem("x**2", 0, 10)
         solution = FunctionOneVariableProblemBinaryIntSolution(0, 10, 5)
+        # Act
         solution.init_random(problem)
+        # Assert
         self.assertIsInstance(solution.representation, int)
         self.assertGreaterEqual(solution.representation, 0)
         self.assertLessEqual(solution.representation, solution.number_of_intervals)

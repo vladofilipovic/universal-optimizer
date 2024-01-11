@@ -89,18 +89,20 @@ class FunctionOneVariableProblemBinaryIntSolution(TargetSolution[int,float]):
             raise TypeError('Parameter \'number_of_intervals\' must have type \'int\'.')
         self.__number_of_intervals= value
 
-    def __make_to_be_feasible_helper__(self, problem:FunctionOneVariableProblem):
+    def obtain_feasible_representation(self, problem:FunctionOneVariableProblem):
         if self.representation > self.number_of_intervals:
-            self.representation = self.number_of_intervals
+            return self.representation % self.number_of_intervals
         if self.representation < 0:
-            self.representation = 0
+            return (-self.representation) % self.number_of_intervals
+        return self.representation
 
     def argument(self, representation:int)->float:
-        return self.domain_from + representation * (self.domain_to - self.domain_from) / self.number_of_intervals
-
+        x:float = self.domain_from + representation * (self.domain_to - self.domain_from) / self.number_of_intervals
+        return x
+    
     def init_random(self, problem:FunctionOneVariableProblem)->None:
         self.representation = randint(0, self.number_of_intervals)
-        self.__make_to_be_feasible_helper__(problem)
+        self.representation = self.obtain_feasible_representation(problem)
 
     def init_from(self, representation:int, problem:FunctionOneVariableProblem)->None:
         if not isinstance(representation, int):

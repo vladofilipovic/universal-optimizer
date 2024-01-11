@@ -34,7 +34,7 @@
                 "--additionalStatisticsMaxLocalOptima", "5",
                 "--kMin", "1",
                 "--kMax", "3", 
-                "--localSearchType", "local_search_best_improvement",
+                "--localSearchType", "localSearchBestImprovement",
                 "--solutionType", "BitArray"
                 ]        
         },
@@ -88,11 +88,11 @@
                 "variable_neighborhood_search",
                 "maximization",
                 "--writeToOutputFile", "True",
-                "--outputFilePath", "opt/single_objective/teaching/function_one_variable_problem/outputs/7-x^2f-3t3.csv",
+                "--outputFilePath", "opt/single_objective/teaching/function_one_variable_problem/outputs/(7-x2)[-3,3].csv",
                 "--outputFileNameAppendTimeStamp", "False",
                 "--outputFields", "iteration, evaluation, best_solution.argument()",
                 "--outputMoments", "after_algorithm, after_iteration",
-                "--inputFilePath", "opt/single_objective/teaching/function_one_variable_problem/inputs/7-x^2f-3t3.txt", 
+                "--inputFilePath", "opt/single_objective/teaching/function_one_variable_problem/inputs/(7-x2)[-3,3].txt", 
                 "--inputFormat", "txt",
                 "--finishCriteria", "evaluations & seconds",
                 "--finishEvaluationsMax", "3000",  
@@ -107,7 +107,7 @@
                 "--additionalStatisticsMaxLocalOptima", "5",
                 "--kMin", "1",
                 "--kMax", "3", 
-                "--localSearchType", "local_search_best_improvement",
+                "--localSearchType", "localSearchBestImprovement",
                 "--solutionType", "int",
                 "--solutionNumberOfIntervals", "2000"
                 ]        
