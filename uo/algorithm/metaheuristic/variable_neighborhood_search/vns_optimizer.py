@@ -226,8 +226,7 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
             self.additional_statistics_control.add_to_more_local_optima_if_required(
                         self.current_solution.string_representation(), self.current_solution.fitness_value,
                         self.best_solution.string_representation())
-            new_is_better:bool = QualityOfSolution.is_first_fitness_better(self.current_solution.quality_single, 
-                        self.best_solution.quality_single, self.target_problem.is_minimization)
+            new_is_better:bool = self.is_first_fitness(self.current_solution, self.best_solution, self.target_problem)
             make_move:bool = new_is_better
             if new_is_better is None:
                 if  self.current_solution.string_representation() == \

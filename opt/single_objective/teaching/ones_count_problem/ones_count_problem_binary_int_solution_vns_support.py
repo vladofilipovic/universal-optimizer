@@ -114,9 +114,9 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
             return False
         if k < 1 or k > problem.dimension:
             return False
-        best_rep:Optional[int] = None
-        best_qos:QualityOfSolution =  QualityOfSolution(solution.objective_value, solution.objective_values,
-                solution.fitness_value, solution.objective_values, solution.is_feasible)
+        start_sol:OnesCountProblemBinaryIntSolution = solution.copy()
+        best_sol:OnesCountProblemBinaryIntSolution = solution.copy()
+        better_sol_found:bool = False
         # initialize indexes
         indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k,problem.dimension)
         in_loop:bool = indexes.reset()
@@ -130,22 +130,21 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
             solution.representation ^= mask 
             optimizer.evaluation += 1
             if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
+                solution.copy_from(start_sol)
                 return False
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
-            new_qos = solution.calculate_quality(problem)
+            solution.evaluate(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
-            if QualityOfSolution.is_first_fitness_better(new_qos, best_qos, problem.is_minimization):
-                best_qos = new_qos
-                best_rep = solution.representation
+            if optimizer.is_first_better(solution, best_sol, problem):
+                better_sol_found = True
+                best_sol.copy_from(solution)
             solution.representation ^= mask 
             # increment indexes and set in_loop accordingly
             in_loop = indexes.progress()
-        if best_rep is not None:
-            solution.representation = best_rep
-            solution.objective_value = best_qos.objective_value
-            solution.fitness_value = best_qos.fitness_value
-            solution.is_feasible = best_qos.is_feasible
+        if better_sol_found:
+            solution.copy_from(best_sol)
             return True
+        solution.copy_from(start_sol)
         return False
 
     def local_search_first_improvement(self, k:int, problem:OnesCountProblem, solution:OnesCountProblemBinaryIntSolution, 

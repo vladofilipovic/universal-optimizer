@@ -81,9 +81,9 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
             return False
         if k < 1:
             return False
-        best_rep:Optional[int] = None
-        best_qos:QualityOfSolution =  QualityOfSolution(solution.objective_value, None,
-                solution.fitness_value, None, solution.is_feasible)
+        start_sol:OnesCountProblemBinaryIntSolution = solution.clone()
+        best_sol:FunctionOneVariableProblemBinaryIntSolution = solution.clone()
+        better_sol_found:bool = False
         # initialize indexes
         indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k,representation_length)
         in_loop:bool = indexes.reset()
@@ -97,24 +97,21 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
             solution.representation ^= mask 
             optimizer.evaluation += 1
             if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
-                return solution
+                solution.copy_from(best_sol)
+                return False
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
-            new_qos = solution.calculate_quality(problem)
+            solution.evaluate(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
-            if QualityOfSolution.is_first_fitness_better(new_qos, best_qos, problem.is_minimization):
-                best_qos = new_qos
-                best_rep = solution.representation
+            if optimizer.is_first_better(solution, best_sol, problem):
+                better_sol_found = True
+                best_sol.copy_from(solution)
             solution.representation ^= mask 
             # increment indexes and set in_loop accordingly
             in_loop = indexes.progress()
-        if best_rep is not None:
-            solution.representation = best_rep
-            solution.objective_value = best_qos.objective_value
-            solution.objective_values = None
-            solution.fitness_value = best_qos.fitness_value
-            solution.fitness_values = None
-            solution.is_feasible = best_qos.is_feasible
+        if better_sol_found:
+            solution.copy_from(best_sol)
             return True
+        solution.copy_from(start_sol)
         return False
 
     def local_search_first_improvement(self, k:int, problem:FunctionOneVariableProblem, 
@@ -123,10 +120,9 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
         representation_length:int = 32
         if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
             return False
-        if k < 1 or k > representation_length:
+        if k < 1:
             return False
-        best_qos:QualityOfSolution =  QualityOfSolution(solution.objective_value, None,
-                solution.fitness_value, None, solution.is_feasible)
+        start_sol:FunctionOneVariableProblemBinaryIntSolution = solution.clone()
         # initialize indexes
         indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k,representation_length)
         in_loop:bool = indexes.reset()
@@ -140,18 +136,17 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
             solution.representation ^= mask 
             optimizer.evaluation += 1
             if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
-                return solution
+                solution.copy_from(start_sol)
+                return False
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
-            new_qos = solution.calculate_quality(problem)
+            solution.evaluate(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
-            if  QualityOfSolution.is_first_fitness_better(new_qos, best_qos, problem.is_minimization):
-                solution.fitness_value = new_qos.fitness_value
-                solution.objective_value = new_qos.objective_value
-                solution.is_feasible = new_qos.is_feasible
+            if  QualityOfSolution.is_first_better(solution, start_sol, problem):
                 return True
             solution.representation ^= mask
             # increment indexes and set in_loop accordingly
             in_loop = indexes.progress()
+        solution.copy_from(start_sol)
         return False
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 

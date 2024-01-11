@@ -163,27 +163,22 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
         if k<1:
             return False
         # ls_bi for k==1
-        best_ind:int = -1
-        best_qos:QualityOfSolution =  QualityOfSolution(solution.objective_value, None,
-                solution.fitness_value, None, solution.is_feasible)
+        start_sol:OnesCountProblemBinaryIntSolution = solution.clone()
+        best_sol:OnesCountProblemBinaryIntSolution = solution.clone()
+        better_sol_found:bool = False
         for i in range(0, problem.dimension):
             mask:int = 1 << i
             solution.representation ^= mask 
             optimizer.evaluation +=1 
-            new_qos:QualityOfSolution = solution.calculate_quality(problem)
-            if QualityOfSolution.is_first_fitness_better(new_qos, best_qos, problem.is_minimization):
-                best_ind = i
-                best_qos = new_qos
-            solution.representation ^= mask 
-        if best_ind >= 0:
-            mask:int = 1 << best_ind
-            solution.representation ^= mask
-            optimizer.evaluation += 1
             solution.evaluate(problem)
-            if solution.fitness_value is not None:
-                if solution.fitness_value != best_qos.fitness_value:
-                    raise RuntimeError('Fitness calculation within `local_search_best_improvement` function is not correct.')
+            if optimizer.is_first_better(solution, best_sol, problem):
+                better_sol_found = True
+                best_sol.copy_from(solution)
+            solution.representation ^= mask 
+        if better_sol_found:
+            solution.copy_from(best_sol)
             return True
+        solution.copy_from(start_sol)
         return False
 
     def local_search_first_improvement(self, k:int, problem:OnesCountProblem2, solution:OnesCountProblemBinaryIntSolution, 
@@ -193,21 +188,16 @@ class OnesCountProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,
         if k<1:
             return False
         # ls_fi for k==1
-        best_qos:QualityOfSolution =  QualityOfSolution(solution.objective_value, None,
-                solution.fitness_value, None, solution.is_feasible)
+        start_sol:OnesCountProblemBinaryIntSolution = solution.clone()
         for i in range(0, problem.dimension):
             mask:int = 1 << i
             solution.representation ^= mask 
             optimizer.evaluation += 1
-            new_qos:QualityOfSolution = solution.calculate_quality(problem)
-            if QualityOfSolution.is_first_fitness_better(new_qos, best_qos, problem.is_minimization):
-                solution.objective_value = new_qos.objective_value
-                solution.objective_values = None
-                solution.fitness_value = new_qos.fitness_value
-                solution.fitness_values = None
-                solution.is_feasible = new_qos.is_feasible
+            solution.evaluate(problem)
+            if optimizer.is_first_better(solution, start_sol, problem):
                 return True
             solution.representation ^= mask
+        solution.copy_from(start_sol)
         return False
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 

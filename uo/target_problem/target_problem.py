@@ -11,46 +11,46 @@ sys.path.append(directory.parent)
 from copy import deepcopy
 from abc import ABCMeta, abstractmethod
 
-"""
-The `TargetProblem` class represents a target problem for optimization. It is an abstract base class that provides a common interface for defining and manipulating target problems.
-
-Attributes:
-    name (str): The name of the target problem.
-    is_minimization (bool): Indicates whether the problem is a minimization problem.
-    is_multi_objective (bool): Indicates whether the problem is a multi-objective optimization problem.
-
-Methods:
-    __init__(name: str = "", is_minimization: Optional[bool] = None, is_multi_objective: Optional[bool] = None) -> None:
-        Initializes a new `TargetProblem` instance with the specified name, minimization flag, and multi-objective flag.
-    
-    __copy__() -> TargetProblem:
-        Creates a deep copy of the current target problem instance.
-    
-    copy() -> TargetProblem:
-        Creates a copy of the current target problem instance.
-    
-    name() -> str:
-        Returns the name of the target problem.
-    
-    is_minimization() -> bool:
-        Returns whether the problem is a minimization problem.
-    
-    is_multi_objective() -> bool:
-        Returns whether the problem is a multi-objective optimization problem.
-    
-    string_rep(delimiter: str, indentation: int = 0, indentation_symbol: str = '', group_start: str = '{', group_end: str = '}') -> str:
-        Returns a string representation of the target problem instance.
-    
-    __str__() -> str:
-        Returns a string representation of the target problem instance.
-    
-    __repr__() -> str:
-        Returns a string representation of the target problem instance.
-    
-    __format__(spec: str) -> str:
-        Returns a formatted string representation of the target problem instance.
-"""
 class TargetProblem(metaclass=ABCMeta):
+    """
+    The `TargetProblem` class represents a target problem for optimization. It is an abstract base class that provides a common interface for defining and manipulating target problems.
+
+    Attributes:
+        name (str): The name of the target problem.
+        is_minimization (bool): Indicates whether the problem is a minimization problem.
+        is_multi_objective (bool): Indicates whether the problem is a multi-objective optimization problem.
+
+    Methods:
+        __init__(name: str = "", is_minimization: Optional[bool] = None, is_multi_objective: Optional[bool] = None) -> None:
+            Initializes a new `TargetProblem` instance with the specified name, minimization flag, and multi-objective flag.
+        
+        __copy__() -> TargetProblem:
+            Creates a deep copy of the current target problem instance.
+        
+        copy() -> TargetProblem:
+            Creates a copy of the current target problem instance.
+        
+        name() -> str:
+            Returns the name of the target problem.
+        
+        is_minimization() -> bool:
+            Returns whether the problem is a minimization problem.
+        
+        is_multi_objective() -> bool:
+            Returns whether the problem is a multi-objective optimization problem.
+        
+        string_rep(delimiter: str, indentation: int = 0, indentation_symbol: str = '', group_start: str = '{', group_end: str = '}') -> str:
+            Returns a string representation of the target problem instance.
+        
+        __str__() -> str:
+            Returns a string representation of the target problem instance.
+        
+        __repr__() -> str:
+            Returns a string representation of the target problem instance.
+        
+        __format__(spec: str) -> str:
+            Returns a formatted string representation of the target problem instance.
+    """
 
     @abstractmethod
     def __init__(self, name:str = "", 
