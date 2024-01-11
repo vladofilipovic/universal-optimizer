@@ -120,6 +120,8 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
 
 
     def obtain_feasible_representation(self, problem:TargetProblem)->R_co:
+        if self.representation is None:
+            raise ValueError('Solution representation should not be None.')
         return self.representation
 
 

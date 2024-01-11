@@ -73,6 +73,8 @@ class OnesCountProblemBinaryIntSolution(TargetSolution[int,str]):
 
         :param `TargetProblem` problem: problem which is solved by solution
         """
+        if self.representation is None:
+            raise ValueError('Solution representation should not be None.')
         mask:int = ~0
         mask <<= 32-problem.dimension
         mask = (mask % 0x100000000) >> (32-problem.dimension) 

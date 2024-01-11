@@ -90,6 +90,8 @@ class FunctionOneVariableProblemBinaryIntSolution(TargetSolution[int,float]):
         self.__number_of_intervals= value
 
     def obtain_feasible_representation(self, problem:FunctionOneVariableProblem):
+        if self.representation is None:
+            raise ValueError('Solution representation should not be None.')
         if self.representation > self.number_of_intervals:
             return self.representation % self.number_of_intervals
         if self.representation < 0:
