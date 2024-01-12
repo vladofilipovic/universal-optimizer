@@ -87,34 +87,5 @@ class QualityOfSolution:
         :rtype: bool
         """
         return self.__is_feasible
-    
-    @classmethod
-    def is_first_fitness_better(cls, qos1:'QualityOfSolution', qos2:'QualityOfSolution', is_minimization: bool)->Optional[bool]:
-        """
-        Checks if first solution is better than the second one
 
-        :param QualityOfSolution qos1: first quality of solution
-        :param QualityOfSolution qos2: second quality of solution
-        :return: `True` if first is better, `False` if first is worse, `None` if fitnesses of both 
-                solutions are equal
-        :rtype: bool
-        """
-        fit1:Optional[float] = qos1.fitness_value;
-        fit2:Optional[float] = qos2.fitness_value;
-        # with fitness is better than without fitness
-        if fit1 is None:
-            if fit2 is not None:
-                return False
-            else:
-                return None
-        elif fit2 is None:
-            return True
-        # if better, return true
-        if (is_minimization and fit1 < fit2) or (not is_minimization and fit1 > fit2):
-            return True
-        # if same fitness, return None
-        if fit1 == fit2:
-            return None
-        # otherwise, return false
-        return False
 

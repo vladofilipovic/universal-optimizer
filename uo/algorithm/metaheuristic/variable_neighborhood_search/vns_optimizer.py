@@ -199,6 +199,7 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         self.__k_current = self.k_min
         self.current_solution = self.solution_template.copy()
         self.current_solution.init_random(self.target_problem)
+        self.evaluation = 1
         self.current_solution.evaluate(self.target_problem)
         self.copy_to_best_solution(self.current_solution)
     
@@ -207,36 +208,22 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         One iteration within main loop of the VNS algorithm
         """
         self.write_output_values_if_needed("before_step_in_iteration", "shaking")
-        temp:TargetSolution = self.current_solution.copy()
         if not self.__shaking_method(self.__k_current, self.target_problem, self.current_solution, self):
             self.write_output_values_if_needed("after_step_in_iteration", "shaking")
-            self.current_solution.copy_from(temp)
             return
         self.write_output_values_if_needed("after_step_in_iteration", "shaking")
         self.iteration += 1
         while self.__k_current <= self.__k_max:
             self.write_output_values_if_needed("before_step_in_iteration", "ls")
-            temp:TargetSolution = self.current_solution.copy()
-            if not self.__ls_method(self.__k_current, self.target_problem, self.current_solution, self):
-                self.current_solution.copy_from(temp)
+            improvement:bool = self.__ls_method(self.__k_current, self.target_problem, self.current_solution, self)
             self.write_output_values_if_needed("after_step_in_iteration", "ls")
-            # update auxiliary structure that keeps all solution codes
-            self.additional_statistics_control.add_to_all_solution_codes_if_required(
-                    self.current_solution.string_representation())
-            self.additional_statistics_control.add_to_more_local_optima_if_required(
-                        self.current_solution.string_representation(), self.current_solution.fitness_value,
-                        self.best_solution.string_representation())
-            new_is_better:bool = QualityOfSolution.is_first_fitness_better(self.current_solution.quality_single, 
-                        self.best_solution.quality_single, self.target_problem.is_minimization)
-            make_move:bool = new_is_better
-            if new_is_better is None:
-                if  self.current_solution.string_representation() == \
-                        self.best_solution.string_representation():
-                    make_move = False
-                else:
-                    logger.debug('VnsOptimizer::main_loop_iteration: Same solution quality, generating random true with probability 0.5');
-                    make_move = random() < 0.5
-            if make_move:
+            if improvement:
+                # update auxiliary structure that keeps all solution codes
+                self.additional_statistics_control.add_to_all_solution_codes_if_required(
+                        self.current_solution.string_representation())
+                self.additional_statistics_control.add_to_more_local_optima_if_required(
+                            self.current_solution.string_representation(), self.current_solution.fitness_value,
+                            self.best_solution.string_representation())
                 self.copy_to_best_solution(self.current_solution)
                 self.__k_current = self.k_min
             else:

@@ -23,7 +23,39 @@ from uo.algorithm.optimizer import Optimizer
     
 class Algorithm(Optimizer, metaclass=ABCMeta):
     """
-    This class describes Algorithm
+    This class describes Algorithm.
+
+    Attributes:
+        name (str): The name of the algorithm.
+        output_control (OutputControl): The structure that controls output.
+        target_problem (TargetProblem): The problem to be solved.
+        solution_template (Optional[TargetSolution]): The solution template for the problem to be solved.
+
+    Properties:
+        solution_template (Optional[TargetSolution]): The solution template for the problem to be solved.
+        evaluation (int): The current number of evaluations during algorithm execution.
+        iteration (int): The iteration of metaheuristic execution.
+        iteration_best_found (int): The iteration when the best solution is found.
+
+    Methods:
+        __init__(name: str, output_control: OutputControl, target_problem: TargetProblem, solution_template: Optional[TargetSolution] = None) -> None:
+            Create a new Algorithm instance.
+        __copy__() -> Algorithm:
+            Internal copy of the current algorithm.
+        copy() -> Algorithm:
+            Copy the current algorithm.
+        is_first_better(sol1: TargetSolution, sol2: TargetSolution, problem: TargetProblem) -> Optional[bool]:
+            Checks if the first solution is better than the second one, with respect to the problem that is optimized.
+        init() -> None:
+            Initialization of the algorithm.
+        string_rep(delimiter: str, indentation: int = 0, indentation_symbol: str = '', group_start: str = '{', group_end: str = '}') -> str:
+            String representation of the 'Algorithm' instance.
+        __str__() -> str:
+            String representation of the 'Algorithm' instance.
+        __repr__() -> str:
+            Representation of the 'Algorithm' instance.
+        __format__(spec: str) -> str:
+            Formatted 'Algorithm' instance.
     """
 
     @abstractmethod
@@ -145,6 +177,43 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
             raise TypeError('Parameter \'iteration_best_found\' must have type \'int\'.')
         self.__iteration_best_found = value
 
+    def is_first_better(self, sol1:TargetSolution, sol2:TargetSolution, problem: TargetProblem)->Optional[bool]:
+        """
+        Checks if first solution is better than the second one, with respect to problem that is optimized
+
+        :param TargetSolution sol1: first solution
+        :param TargetSolution sol2: second solution
+        :param TargetProblem problem: problem to be solved
+        :return: `True` if first is better, `False` if first is worse, `None` if quality of both 
+                solutions are equal
+        :rtype: bool
+        """
+        if problem.is_multi_objective is None:
+            raise ValueError('Field \'is_multi_objective\' must not be None.')
+        if problem.is_minimization is None:
+            raise ValueError('Field \'is_minimization\' must not be None.')
+        if not problem.is_multi_objective:
+            fit1:Optional[float] = sol1.fitness_value;
+            fit2:Optional[float] = sol2.fitness_value;
+            # with fitness is better than without fitness
+            if fit1 is None:
+                if fit2 is not None:
+                    return False
+                else:
+                    return None
+            elif fit2 is None:
+                return True
+            # if better, return true
+            if (problem.is_minimization and fit1 < fit2) or (not problem.is_minimization and fit1 > fit2):
+                return True
+            # if same fitness, return None
+            if fit1 == fit2:
+                return None
+            # otherwise, return false
+            return False
+        else:
+            raise RuntimeError('Comparison between solutions for multi objective optimization is not currently supported.')
+        
     @abstractmethod
     def init(self)->None:
         """

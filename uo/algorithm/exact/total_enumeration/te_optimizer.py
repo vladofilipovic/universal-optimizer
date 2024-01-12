@@ -40,7 +40,7 @@ class TeOptimizerConstructionParameters:
     Instance of the class :class:`~uo.algorithm.exact.total_enumerations.TotalEnumerationConstructorParameters` represents constructor parameters for total enumeration algorithm.
     """
     output_control:OutputControl = None
-    target_problem:TargetProblem = None
+    target_problem:Optional[TargetProblem] = None
     solution_template:Optional[TargetSolution] = None
     problem_solution_te_support:ProblemSolutionTeSupport = None
 
@@ -166,8 +166,7 @@ class TeOptimizer(Algorithm):
             self.write_output_values_if_needed("before_iteration", "b_i")
             self.iteration += 1
             self.__progress_method(self.target_problem, self.current_solution, self)
-            new_is_better:bool = QualityOfSolution.is_first_fitness_better(self.current_solution.quality_single, 
-                        self.best_solution.quality_single, self.target_problem.is_minimization)
+            new_is_better:bool = self.is_first_better(self.current_solution, self.best_solution, self.target_problem)
             if new_is_better:
                 self.copy_to_best_solution(self.current_solution)
             self.write_output_values_if_needed("after_iteration", "a_i")

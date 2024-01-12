@@ -3,6 +3,7 @@ The :mod:`~uo.target_problem.target_problem` module describes the class :class:`
 """
 
 from pathlib import Path
+from typing import Optional
 directory = Path(__file__).resolve()
 import sys
 sys.path.append(directory.parent)
@@ -11,21 +12,72 @@ from copy import deepcopy
 from abc import ABCMeta, abstractmethod
 
 class TargetProblem(metaclass=ABCMeta):
+    """
+    The `TargetProblem` class represents a target problem for optimization. It is an abstract base class that provides a common interface for defining and manipulating target problems.
+
+    Attributes:
+        name (str): The name of the target problem.
+        is_minimization (bool): Indicates whether the problem is a minimization problem.
+        is_multi_objective (bool): Indicates whether the problem is a multi-objective optimization problem.
+
+    Methods:
+        __init__(name: str = "", is_minimization: Optional[bool] = None, is_multi_objective: Optional[bool] = None) -> None:
+            Initializes a new `TargetProblem` instance with the specified name, minimization flag, and multi-objective flag.
+        
+        __copy__() -> TargetProblem:
+            Creates a deep copy of the current target problem instance.
+        
+        copy() -> TargetProblem:
+            Creates a copy of the current target problem instance.
+        
+        name() -> str:
+            Returns the name of the target problem.
+        
+        is_minimization() -> bool:
+            Returns whether the problem is a minimization problem.
+        
+        is_multi_objective() -> bool:
+            Returns whether the problem is a multi-objective optimization problem.
+        
+        string_rep(delimiter: str, indentation: int = 0, indentation_symbol: str = '', group_start: str = '{', group_end: str = '}') -> str:
+            Returns a string representation of the target problem instance.
+        
+        __str__() -> str:
+            Returns a string representation of the target problem instance.
+        
+        __repr__() -> str:
+            Returns a string representation of the target problem instance.
+        
+        __format__(spec: str) -> str:
+            Returns a formatted string representation of the target problem instance.
+    """
 
     @abstractmethod
-    def __init__(self, name:str, is_minimization:bool)->None:
+    def __init__(self, name:str = "", 
+                is_minimization:Optional[bool]=None, 
+                is_multi_objective:Optional[bool]=None)->None:
         """
-        Create new TargetProblem instance
+        Create a new TargetProblem instance.
 
-        :param str name: name of the target problem
-        :param bool is_minimization: should minimum or maximum be determined
+        Parameters:
+            name (str): The name of the target problem.
+            is_minimization (bool, optional): Indicates whether the problem is a minimization problem. Defaults to None.
+            is_multi_objective (bool, optional): Indicates whether the problem is a multi-objective optimization problem. Defaults to None.
+
+        Raises:
+            TypeError: If the 'name' parameter is not of type 'str'.
+            TypeError: If the 'is_minimization' parameter is not of type 'bool' or None.
+            TypeError: If the 'is_multi_objective' parameter is not of type 'bool' or None.
         """
         if not isinstance(name, str):
                 raise TypeError('Parameter \'name\' must be \'str\'.')
-        if not isinstance(is_minimization, bool):
-                raise TypeError('Parameter \'is_minimization\' must be \'bool\'.')        
+        if not isinstance(is_minimization, bool) and is_minimization is not None:
+                raise TypeError('Parameter \'is_minimization\' must be \'bool\' or have value None.')        
+        if not isinstance(is_multi_objective, bool) and is_multi_objective is not None:
+                raise TypeError('Parameter \'is_multi_objective\' must be \'bool\' or have value None.')        
         self.__name:str = name
-        self.__is_minimization = is_minimization
+        self.__is_minimization:Optional[bool] = is_minimization
+        self.__is_multi_objective:Optional[bool] = is_multi_objective
 
     @abstractmethod
     def __copy__(self):
@@ -37,7 +89,6 @@ class TargetProblem(metaclass=ABCMeta):
         """
         pr = deepcopy(self)
         return pr
-
     @abstractmethod
     def copy(self):
         """
@@ -61,11 +112,21 @@ class TargetProblem(metaclass=ABCMeta):
     @property
     def is_minimization(self)->bool:
         """
-        Property getter for the name of the algorithm
+        Property getter for the info if problem optimization is minimization
 
         :return: bool -- if minimization takes place 
         """
         return self.__is_minimization
+
+
+    @property
+    def is_multi_objective(self)->bool:
+        """
+        Property getter for the info if problem optimization is multi objective
+
+        :return: bool -- if optimization is multi objective
+        """
+        return self.__is_multi_objective
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
             group_end:str ='}')->str:
