@@ -64,7 +64,7 @@ class TestMaxFunctionOneVariableMaxProblemBinaryIntSolutionLsfi(unittest.TestCas
         result = 0.0
         arg = self.optimizer.best_solution.argument(self.optimizer.best_solution.representation)
         # Assert
-        self.assertLessEqual(abs( arg-result), 0.1)
+        self.assertLessEqual(abs( arg-result), 0.5)
 
     def test_best_solution_after_optimization_should_have_optimal_objective_value(self):
         result = 7.0

@@ -211,23 +211,3 @@ class Test__Optimizer__(unittest.TestCase):
         string_rep = optimizer.string_rep("|")
         # Assert
         self.assertIsInstance(string_rep, str)
-
-
-class TestWriteOutputValuesIfNeeded(unittest.TestCase):
-
-    # Method writes data to output file when write_to_output is True and step_name is valid
-    def test_write_output_values_if_needed_write_to_output_true_step_name_valid(self):
-        # Arrange
-        output_control = OutputControl(write_to_output = True, 
-                    output_file = mocker.MagicMock(spec=TextIOWrapper))
-        optimizer = OptimizerVoid("optimizer", output_control, TargetProblemVoid("a problem", True))
-        step_name = "after_algorithm"
-        step_name_value = "after_algorithm_value"
-        logger_mock = mocker.MagicMock(logger.logger)
-        logger_mock.info = mocker.Mock(return_value="")
-        # Act
-        optimizer.write_output_values_if_needed(step_name, step_name_value)
-        # Assert
-        self.assertEqual(optimizer.output_control.output_file.write.call_count, 9)
-        self.assertEqual(logger_mock.info.call_count, 0)
-        

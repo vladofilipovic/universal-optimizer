@@ -70,7 +70,7 @@ class TestOutputControl(unittest.TestCase):
     def test_initialized_with_custom_parameters(self):
         # Arrange
         write_to_output = True
-        output_file = mocker.MagicMock(spec=TextIOWrapper)
+        output_file = None
         fields = 'iteration, evaluation, "step_name", best_solution.argument(), best_solution.fitness_value, best_solution.objective_value, best_solution.is_feasible'
         moments = 'after_algorithm, before_iteration, after_iteration'
         # Act

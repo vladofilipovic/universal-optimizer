@@ -46,9 +46,9 @@ class TestOnesCountMaxProblemBinaryBitArraySolutionVnsSupport(unittest.TestCase)
     # local_search_best_improvement method returns a solution with higher fitness value
     def test_local_search_best_improvement_returns_solution_with_higher_fitness_value11(self):
         # Arrange
-        problem = OnesCountMaxProblem(dim=5)
+        problem = OnesCountMaxProblem(dim=8)
         solution = OnesCountMaxProblemBinaryBitArraySolution(random_seed=434343)
-        solution.init_from( BitArray('0b11001'), problem)
+        solution.init_from( BitArray('0b00110010'), problem)
         solution.evaluate(problem)
         vns_support = OnesCountMaxProblemBinaryBitArraySolutionVnsSupport()
         finish_control_stub = mocker.MagicMock()
@@ -108,9 +108,9 @@ class TestOnesCountMaxProblemBinaryBitArraySolutionVnsSupport(unittest.TestCase)
     # local_search_best_improvement method returns a solution with higher fitness value
     def test_local_search_best_improvement_returns_solution_with_higher_fitness_value6(self):
         # Arrange
-        problem = OnesCountMaxProblem(dim=5)
+        problem = OnesCountMaxProblem(dim=8)
         solution = OnesCountMaxProblemBinaryBitArraySolution(random_seed=434343)
-        solution.init_from(BitArray('0b10101'), problem)
+        solution.init_from( BitArray('0b00110010'), problem)
         solution.evaluate(problem)
         vns_support = OnesCountMaxProblemBinaryBitArraySolutionVnsSupport()
         finish_control_stub = mocker.MagicMock()
@@ -129,9 +129,9 @@ class TestOnesCountMaxProblemBinaryBitArraySolutionVnsSupport(unittest.TestCase)
     # local_search_first_improvement method returns a solution with higher fitness value
     def test_local_search_first_improvement_returns_solution_with_higher_fitness_value4(self):
         # Arrange
-        problem = OnesCountMaxProblem(dim=5)
+        problem = OnesCountMaxProblem(dim=8)
         solution = OnesCountMaxProblemBinaryBitArraySolution(random_seed=434343)
-        solution.init_from(BitArray('0b10101'), problem)
+        solution.init_from( BitArray('0b00110010'), problem)
         solution.evaluate(problem)
         vns_support = OnesCountMaxProblemBinaryBitArraySolutionVnsSupport()
         finish_control_stub = mocker.MagicMock()

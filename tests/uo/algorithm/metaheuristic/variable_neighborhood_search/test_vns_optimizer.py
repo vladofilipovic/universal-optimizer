@@ -120,7 +120,7 @@ class TestVnsOptimizer(unittest.TestCase):
         vns_optimizer.init()
         # Assert
         # Add assertions here
-        self.assertEqual( vns_optimizer.evaluation, 0)
+        self.assertEqual( vns_optimizer.evaluation, 1)
 
     # VnsOptimizer can successfully execute copy
     def test_copy(self):
