@@ -46,7 +46,7 @@ class TestOnesCountMaxProblemBinaryBitArraySolutionVnsSupport(unittest.TestCase)
     # local_search_best_improvement method returns a solution with higher fitness value
     def test_local_search_best_improvement_returns_solution_with_higher_fitness_value11(self):
         # Arrange
-        problem = OnesCountMaxProblemMin(dim=5)
+        problem = OnesCountMaxProblem(dim=5)
         solution = OnesCountMaxProblemBinaryBitArraySolution(random_seed=434343)
         solution.init_from( BitArray('0b11001'), problem)
         solution.evaluate(problem)

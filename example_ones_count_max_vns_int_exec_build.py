@@ -27,7 +27,7 @@ class OnesCountMaxProblem2(TargetProblem):
         if dim > 31:
             raise ValueError("Problem dimension should be less than 32")
         self.__dimension = dim
-        super().__init__("OnesCountMaxProblem2", is_minimization=False)   
+        super().__init__("OnesCountMaxProblem2", is_minimization=False, is_multi_objective=False)   
 
     def __copy__(self):
         pr = deepcopy(self)
