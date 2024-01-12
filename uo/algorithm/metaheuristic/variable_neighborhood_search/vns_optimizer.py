@@ -1,7 +1,7 @@
 """ 
 ..  _py_vns_optimizer:
 
-The :mod:`~uo.algorithm.metaheuristic.variable_neighborhood_search` contains class :class:`~.algorithm.metaheuristic.variable_neighborhood_search.VnsOptimizer`, that represents implements algorithm :ref:`VNS<Algorithm_Variable_Neighborhood_Search>`.
+The :mod:`~uo.algorithm.metaheuristic.variable_neighborhood_search.variable_neighborhood_search` contains class :class:`~.uo.metaheuristic.variable_neighborhood_search.variable_neighborhood_search.VnsOptimizer`, that represents implements algorithm :ref:`VNS<Algorithm_Variable_Neighborhood_Search>`.
 """
 
 from pathlib import Path

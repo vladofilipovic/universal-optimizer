@@ -1,4 +1,7 @@
+""" 
+..  _py_function_one_variable_max_problem:
 
+"""
 import sys
 from pathlib import Path
 directory = Path(__file__).resolve()

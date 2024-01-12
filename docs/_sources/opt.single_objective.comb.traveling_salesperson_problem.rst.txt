@@ -1,10 +1,10 @@
-uo.algorithm.metaheuristic.electro\_magnetism\_like\_metaheusristic package
+opt.single\_objective.combinatorial.traveling\_salesperson\_problem package
 ===========================================================================
 
 Module contents
 ---------------
 
-.. automodule:: uo.algorithm.metaheuristic.electro_magnetism_like_metaheusristic
+.. automodule:: opt.single_objective.comb.traveling_salesperson_problem
    :members:
    :undoc-members:
    :show-inheritance:

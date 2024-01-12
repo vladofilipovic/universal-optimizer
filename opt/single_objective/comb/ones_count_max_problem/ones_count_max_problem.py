@@ -1,3 +1,8 @@
+""" 
+..  _py_ones_count_max_problem:
+
+"""
+
 import sys
 from pathlib import Path
 from typing import Optional
@@ -14,6 +19,27 @@ from uo.target_problem.target_problem import TargetProblem
 from uo.utils.logger import logger
 
 class OnesCountMaxProblem(TargetProblem):
+    """
+    Class representing the Ones Count Max Problem.
+
+    This class inherits from the TargetProblem class and is used to define and solve the Ones Count Max Problem. The problem is defined by a dimension, which represents the number of variables in the problem.
+
+    Attributes:
+        dimension (int): The dimension of the problem.
+
+    Methods:
+        __init__(dim: int): Initializes a new instance of the OnesCountMaxProblem class.
+        from_dimension(dimension: int): Creates a new OnesCountMaxProblem instance when the dimension is specified.
+        __load_from_file__(file_path: str, data_format: str) -> int: Static function that reads problem data from a file.
+        from_input_file(input_file_path: str, input_format: str): Creates a new OnesCountMaxProblem instance when the input file and input format are specified.
+        __copy__() -> OnesCountMaxProblem: Internal copy of the OnesCountMaxProblem problem.
+        copy() -> OnesCountMaxProblem: Copy the OnesCountMaxProblem problem.
+        dimension() -> int: Property getter for the dimension of the target problem.
+        string_rep(delimiter: str, indentation: int = 0, indentation_symbol: str = '', group_start: str = '{', group_end: str = '}') -> str: String representation of the OnesCountMaxProblem instance.
+        __str__() -> str: String representation of the OnesCountMaxProblem structure.
+        __repr__() -> str: Representation of the OnesCountMaxProblem instance.
+        __format__(spec: str) -> str: Formatted OnesCountMaxProblem instance.
+    """
     
     def __init__(self, dim:int)->None:
         """

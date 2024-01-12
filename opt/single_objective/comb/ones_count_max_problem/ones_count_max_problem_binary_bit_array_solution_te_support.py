@@ -1,9 +1,9 @@
 """ 
-..  _py_ones_count_problem_bit_array_solution_te_support:
+..  _py_ones_count_max_problem_bit_array_solution_te_support:
 
 The :mod:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_te_support` 
 contains class :class:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_te_support.OnesCountMaxProblemBinaryBitArraySolutionTeSupport`, 
-that represents supporting parts of the `Total enumeration` algorithm, where solution of the :ref:`Problem_Max_Ones` have `BitArray` 
+that represents supporting parts of the `Total enumeration` algorithm, where solution of the :ref:`Problem_Ones_Count_Max` have `BitArray` 
 representation.
 """
 

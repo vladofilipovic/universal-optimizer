@@ -1,7 +1,7 @@
 """ 
-..  _py_ones_count_problem_bit_array_solution:
+..  _py_ones_count_max_problem_bit_array_solution:
 
-The :mod:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution` contains class :class:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution.OnesCountMaxProblemBinaryBitArraySolution`, that represents solution of the :ref:`Problem_Max_Ones`, where `BitArray` representation of the problem has been used.
+The :mod:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution` contains class :class:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution.OnesCountMaxProblemBinaryBitArraySolution`, that represents solution of the :ref:`Problem_Ones_Count_Max`, where `BitArray` representation of the problem has been used.
 """
 import sys
 from pathlib import Path

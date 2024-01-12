@@ -1,11 +1,11 @@
-..  _Problem_Ones_Count:
+..  _Problem_Ones_Count_Max:
 
-Ones Count Problem
-==================
+Ones Count Max Problem
+======================
 
-* Max Ones Problem. Problem is represented with class :ref:`OnesCountProblem<py_ones_count_problem>`.
+* Max Ones Problem. Problem is represented with class :ref:`OnesCountMaxProblem<py_ones_count_max_problem>`.
 
-    - `BitArray` representation for solution of Max Ones Problem. Implementation of the solution with such representation is given with class :ref:`OnesCountProblemBinaryBitArraySolution <py_ones_count_problem_bit_array_solution>`.  
+    - `BitArray` representation for solution of Max Ones Problem. Implementation of the solution with such representation is given with class :ref:`OnesCountMaxProblemBinaryBitArraySolution <py_ones_count_max_problem_bit_array_solution>`.  
 
-    - `int` representation for solution of Max Ones Problem. Implementation of the solution with such representation is given with class :ref:`OnesCountProblemBinaryIntSolution <py_ones_count_problem_int_solution>`.  
+    - `int` representation for solution of Max Ones Problem. Implementation of the solution with such representation is given with class :ref:`OnesCountMaxProblemBinaryIntSolution <py_ones_count_max_problem_int_solution>`.  
 

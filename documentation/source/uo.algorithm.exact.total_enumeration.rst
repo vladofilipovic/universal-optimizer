@@ -20,13 +20,6 @@ uo.algorithm.exact.total\_enumeration.te\_optimizer module
    :undoc-members:
    :show-inheritance:
 
-uo.algorithm.exact.total\_enumeration.te\_optimizer\_constructor\_parameters module
------------------------------------------------------------------------------------
-
-.. automodule:: uo.algorithm.exact.total_enumeration.te_optimizer_constructor_parameters
-   :members:
-   :undoc-members:
-   :show-inheritance:
 
 Module contents
 ---------------

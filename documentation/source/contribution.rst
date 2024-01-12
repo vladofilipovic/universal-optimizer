@@ -65,7 +65,7 @@ Contribution domains
 
 2. Contribution in solving optimization problems:
 
-    1. Ones Count Optimization Problem :ref:`Problem_Ones_Count`:
+    1. Ones Count Optimization Problem :ref:`Problem_Ones_Count_Max`:
 
         - Integer Linear programming method (using `linopy` library) - [VladimirFilipovic]_  
 

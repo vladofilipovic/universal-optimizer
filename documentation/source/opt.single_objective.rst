@@ -7,9 +7,8 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   opt.single_objective.combinatorial
-   opt.single_objective.global
-   opt.single_objective.teaching
+   opt.single_objective.comb
+   opt.single_objective.glob
 
 Module contents
 ---------------

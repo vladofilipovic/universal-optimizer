@@ -99,7 +99,7 @@ class OnesCountMinProblem(TargetProblem):
     @property
     def dimension(self)->int:
         """
-        Property getter for dimension of the target problem
+        Property getter for dimension of the ones count min problem.
 
         :return: dimension of the target problem instance 
         :rtype: int

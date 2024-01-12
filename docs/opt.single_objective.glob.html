@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>opt.single_objective.glob package &mdash; Optimization Algorithms Library 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=01f34227"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="opt.single_objective.glob.function_one_variable_max_problem package" href="opt.single_objective.glob.function_one_variable_max_problem.html" />
+    <link rel="prev" title="opt.single_objective.combinatorial.traveling_salesperson_problem package" href="opt.single_objective.comb.traveling_salesperson_problem.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Optimization Algorithms Library
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Tutorials and How-To Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how_to_guides.html">How-to Guides</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">In-depth Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="implemented_algorithms.html">Implemented algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="problems_to_be_solved.html">Problems to be solved</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Program code</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Library</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html#optimization">Optimization</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="opt.html">opt package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="opt.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="opt.multi_objective.html">opt.multi_objective package</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="opt.single_objective.html">opt.single_objective package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="opt.html#module-opt">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Changelog and Contribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribution.html">How to Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribution.html#contributors">Contributors</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Optimization Algorithms Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">Library</a></li>
+          <li class="breadcrumb-item"><a href="opt.html">opt package</a></li>
+          <li class="breadcrumb-item"><a href="opt.single_objective.html">opt.single_objective package</a></li>
+      <li class="breadcrumb-item active">opt.single_objective.glob package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/opt.single_objective.glob.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="opt-single-objective-glob-package">
+<h1>opt.single_objective.glob package<a class="headerlink" href="#opt-single-objective-glob-package" title="Link to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html">opt.single_objective.glob.function_one_variable_max_problem package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#module-opt.single_objective.glob.function_one_variable_max_problem.command_line">opt.single_objective.glob.function_one_variable_max_problem.command_line module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.command_line.parse_arguments"><code class="docutils literal notranslate"><span class="pre">parse_arguments()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#module-opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem">opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem.FunctionOneVariableMaxProblemMax"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemMax</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem.FunctionOneVariableMaxProblemMax.copy"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemMax.copy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem.FunctionOneVariableMaxProblemMax.domain_high"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemMax.domain_high</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem.FunctionOneVariableMaxProblemMax.domain_low"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemMax.domain_low</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem.FunctionOneVariableMaxProblemMax.expression"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemMax.expression</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem.FunctionOneVariableMaxProblemMax.from_input_file"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemMax.from_input_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem.FunctionOneVariableMaxProblemMax.number_of_intervals"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemMax.number_of_intervals</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem.FunctionOneVariableMaxProblemMax.string_rep"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemMax.string_rep()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem.FunctionOneVariableMaxProblemMaxElements"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemMaxElements</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem.FunctionOneVariableMaxProblemMaxElements.domain_high"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemMaxElements.domain_high</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem.FunctionOneVariableMaxProblemMaxElements.domain_low"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemMaxElements.domain_low</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem.FunctionOneVariableMaxProblemMaxElements.expression"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemMaxElements.expression</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#module-opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_binary_int_solution">opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_binary_int_solution module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_binary_int_solution.FunctionOneVariableMaxProblemBinaryIntSolution"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemBinaryIntSolution</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_binary_int_solution.FunctionOneVariableMaxProblemBinaryIntSolution.argument"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemBinaryIntSolution.argument()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_binary_int_solution.FunctionOneVariableMaxProblemBinaryIntSolution.calculate_quality_directly"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemBinaryIntSolution.calculate_quality_directly()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_binary_int_solution.FunctionOneVariableMaxProblemBinaryIntSolution.copy"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemBinaryIntSolution.copy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_binary_int_solution.FunctionOneVariableMaxProblemBinaryIntSolution.domain_from"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemBinaryIntSolution.domain_from</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_binary_int_solution.FunctionOneVariableMaxProblemBinaryIntSolution.domain_to"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemBinaryIntSolution.domain_to</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_binary_int_solution.FunctionOneVariableMaxProblemBinaryIntSolution.init_from"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemBinaryIntSolution.init_from()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_binary_int_solution.FunctionOneVariableMaxProblemBinaryIntSolution.init_random"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemBinaryIntSolution.init_random()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_binary_int_solution.FunctionOneVariableMaxProblemBinaryIntSolution.native_representation"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemBinaryIntSolution.native_representation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_binary_int_solution.FunctionOneVariableMaxProblemBinaryIntSolution.number_of_intervals"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemBinaryIntSolution.number_of_intervals</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_binary_int_solution.FunctionOneVariableMaxProblemBinaryIntSolution.obtain_feasible_representation"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemBinaryIntSolution.obtain_feasible_representation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_binary_int_solution.FunctionOneVariableMaxProblemBinaryIntSolution.representation_distance_directly"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemBinaryIntSolution.representation_distance_directly()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_binary_int_solution.FunctionOneVariableMaxProblemBinaryIntSolution.string_rep"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemBinaryIntSolution.string_rep()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_binary_int_solution.random"><code class="docutils literal notranslate"><span class="pre">random()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#module-opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_binary_int_solution_vns_support">opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_binary_int_solution_vns_support module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_binary_int_solution_vns_support.FunctionOneVariableMaxProblemBinaryIntSolutionVnsSupport"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemBinaryIntSolutionVnsSupport</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_binary_int_solution_vns_support.FunctionOneVariableMaxProblemBinaryIntSolutionVnsSupport.copy"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemBinaryIntSolutionVnsSupport.copy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_binary_int_solution_vns_support.FunctionOneVariableMaxProblemBinaryIntSolutionVnsSupport.local_search_best_improvement"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemBinaryIntSolutionVnsSupport.local_search_best_improvement()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_binary_int_solution_vns_support.FunctionOneVariableMaxProblemBinaryIntSolutionVnsSupport.local_search_first_improvement"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemBinaryIntSolutionVnsSupport.local_search_first_improvement()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_binary_int_solution_vns_support.FunctionOneVariableMaxProblemBinaryIntSolutionVnsSupport.shaking"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemBinaryIntSolutionVnsSupport.shaking()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_binary_int_solution_vns_support.FunctionOneVariableMaxProblemBinaryIntSolutionVnsSupport.string_rep"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemBinaryIntSolutionVnsSupport.string_rep()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#module-opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_solver">opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_solver module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_solver.FunctionOneVariableMaxProblemSolver"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemSolver</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_solver.FunctionOneVariableMaxProblemSolver.from_construction_tuple"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemSolver.from_construction_tuple()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_solver.FunctionOneVariableMaxProblemSolver.from_variable_neighborhood_search"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemSolver.from_variable_neighborhood_search()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_solver.FunctionOneVariableMaxProblemSolver.opt"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemSolver.opt</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_solver.FunctionOneVariableMaxProblemSolverConstructionParameters"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemSolverConstructionParameters</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_solver.FunctionOneVariableMaxProblemSolverConstructionParameters.finish_control"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemSolverConstructionParameters.finish_control</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_solver.FunctionOneVariableMaxProblemSolverConstructionParameters.method"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemSolverConstructionParameters.method</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_solver.FunctionOneVariableMaxProblemSolverConstructionParameters.output_control"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemSolverConstructionParameters.output_control</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_solver.FunctionOneVariableMaxProblemSolverConstructionParameters.solution_template"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemSolverConstructionParameters.solution_template</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_solver.FunctionOneVariableMaxProblemSolverConstructionParameters.target_problem"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemSolverConstructionParameters.target_problem</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_solver.FunctionOneVariableMaxProblemSolverConstructionParameters.vns_additional_statistics_control"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemSolverConstructionParameters.vns_additional_statistics_control</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_solver.FunctionOneVariableMaxProblemSolverConstructionParameters.vns_k_max"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemSolverConstructionParameters.vns_k_max</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_solver.FunctionOneVariableMaxProblemSolverConstructionParameters.vns_k_min"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemSolverConstructionParameters.vns_k_min</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_solver.FunctionOneVariableMaxProblemSolverConstructionParameters.vns_local_search_type"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemSolverConstructionParameters.vns_local_search_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_solver.FunctionOneVariableMaxProblemSolverConstructionParameters.vns_problem_solution_support"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemSolverConstructionParameters.vns_problem_solution_support</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_solver.FunctionOneVariableMaxProblemSolverConstructionParameters.vns_random_seed"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMaxProblemSolverConstructionParameters.vns_random_seed</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#module-opt.single_objective.glob.function_one_variable_max_problem.solver">opt.single_objective.glob.function_one_variable_max_problem.solver module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#opt.single_objective.glob.function_one_variable_max_problem.solver.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#module-opt.single_objective.glob.function_one_variable_max_problem">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_min_problem.html">opt.single_objective.glob.function_one_variable_min_problem package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_min_problem.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_min_problem.html#module-opt.single_objective.glob.function_one_variable_min_problem.function_one_variable_min_problem">opt.single_objective.glob.function_one_variable_min_problem.function_one_variable_min_problem module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_min_problem.html#opt.single_objective.glob.function_one_variable_min_problem.function_one_variable_min_problem.FunctionOneVariableMinProblem"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMinProblem</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_min_problem.html#opt.single_objective.glob.function_one_variable_min_problem.function_one_variable_min_problem.FunctionOneVariableMinProblem.copy"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMinProblem.copy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_min_problem.html#opt.single_objective.glob.function_one_variable_min_problem.function_one_variable_min_problem.FunctionOneVariableMinProblem.domain_high"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMinProblem.domain_high</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_min_problem.html#opt.single_objective.glob.function_one_variable_min_problem.function_one_variable_min_problem.FunctionOneVariableMinProblem.domain_low"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMinProblem.domain_low</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_min_problem.html#opt.single_objective.glob.function_one_variable_min_problem.function_one_variable_min_problem.FunctionOneVariableMinProblem.expression"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMinProblem.expression</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_min_problem.html#opt.single_objective.glob.function_one_variable_min_problem.function_one_variable_min_problem.FunctionOneVariableMinProblem.from_input_file"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMinProblem.from_input_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_min_problem.html#opt.single_objective.glob.function_one_variable_min_problem.function_one_variable_min_problem.FunctionOneVariableMinProblem.number_of_intervals"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMinProblem.number_of_intervals</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_min_problem.html#opt.single_objective.glob.function_one_variable_min_problem.function_one_variable_min_problem.FunctionOneVariableMinProblem.string_rep"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMinProblem.string_rep()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_min_problem.html#opt.single_objective.glob.function_one_variable_min_problem.function_one_variable_min_problem.FunctionOneVariableMinProblemElements"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMinProblemElements</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_min_problem.html#opt.single_objective.glob.function_one_variable_min_problem.function_one_variable_min_problem.FunctionOneVariableMinProblemElements.domain_high"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMinProblemElements.domain_high</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_min_problem.html#opt.single_objective.glob.function_one_variable_min_problem.function_one_variable_min_problem.FunctionOneVariableMinProblemElements.domain_low"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMinProblemElements.domain_low</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_min_problem.html#opt.single_objective.glob.function_one_variable_min_problem.function_one_variable_min_problem.FunctionOneVariableMinProblemElements.expression"><code class="docutils literal notranslate"><span class="pre">FunctionOneVariableMinProblemElements.expression</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="opt.single_objective.glob.function_one_variable_min_problem.html#module-opt.single_objective.glob.function_one_variable_min_problem">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-opt.single_objective.glob">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-opt.single_objective.glob" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="opt.single_objective.comb.traveling_salesperson_problem.html" class="btn btn-neutral float-left" title="opt.single_objective.combinatorial.traveling_salesperson_problem package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="opt.single_objective.glob.function_one_variable_max_problem.html" class="btn btn-neutral float-right" title="opt.single_objective.glob.function_one_variable_max_problem package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Vladimir Filipovic.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

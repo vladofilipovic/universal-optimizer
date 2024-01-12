@@ -1,6 +1,15 @@
 uo.algorithm.exact package
 ==========================
 
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   uo.algorithm.exact.total_enumeration
+
+
 Module contents
 ---------------
 

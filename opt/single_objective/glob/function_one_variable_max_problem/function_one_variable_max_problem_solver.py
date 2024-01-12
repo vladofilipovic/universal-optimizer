@@ -1,5 +1,5 @@
 """ 
-The :mod:`opt.single_objective.glob.function_one_variable_max_problem_solver` contains programming code that optimize :ref:`Max Function 1 Variable Problem` with various optimization techniques.
+The :mod:`opt.single_objective.glob.function_one_variable_max_problem_solver` contains programming code that optimize :ref:`Problem_Function_One_Variable_Max` with various optimization techniques.
 """
 import sys
 

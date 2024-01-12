@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>opt.single_objective.comb package &mdash; Optimization Algorithms Library 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=01f34227"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="opt.single_objective.comb.ones_count_max_problem package" href="opt.single_objective.comb.ones_count_max_problem.html" />
+    <link rel="prev" title="opt.single_objective package" href="opt.single_objective.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Optimization Algorithms Library
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Tutorials and How-To Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how_to_guides.html">How-to Guides</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">In-depth Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="implemented_algorithms.html">Implemented algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="problems_to_be_solved.html">Problems to be solved</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Program code</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Library</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html#optimization">Optimization</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="opt.html">opt package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="opt.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="opt.multi_objective.html">opt.multi_objective package</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="opt.single_objective.html">opt.single_objective package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="opt.html#module-opt">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Changelog and Contribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribution.html">How to Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribution.html#contributors">Contributors</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Optimization Algorithms Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">Library</a></li>
+          <li class="breadcrumb-item"><a href="opt.html">opt package</a></li>
+          <li class="breadcrumb-item"><a href="opt.single_objective.html">opt.single_objective package</a></li>
+      <li class="breadcrumb-item active">opt.single_objective.comb package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/opt.single_objective.comb.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="opt-single-objective-comb-package">
+<h1>opt.single_objective.comb package<a class="headerlink" href="#opt-single-objective-comb-package" title="Link to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html">opt.single_objective.comb.ones_count_max_problem package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#module-opt.single_objective.comb.ones_count_max_problem.command_line">opt.single_objective.comb.ones_count_max_problem.command_line module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.command_line.parse_arguments"><code class="docutils literal notranslate"><span class="pre">parse_arguments()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#module-opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem">opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem.OnesCountMaxProblem"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblem</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem.OnesCountMaxProblem.dimension"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblem.dimension</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem.OnesCountMaxProblem.__copy__"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblem.__copy__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem.OnesCountMaxProblem.copy"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblem.copy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#id0"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblem.dimension()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem.OnesCountMaxProblem.__str__"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblem.__str__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem.OnesCountMaxProblem.__repr__"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblem.__repr__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#id1"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblem.copy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#id2"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblem.dimension</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem.OnesCountMaxProblem.from_dimension"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblem.from_dimension()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem.OnesCountMaxProblem.from_input_file"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblem.from_input_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem.OnesCountMaxProblem.string_rep"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblem.string_rep()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#module-opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution">opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution.OnesCountMaxProblemBinaryBitArraySolution"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryBitArraySolution</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution.OnesCountMaxProblemBinaryBitArraySolution.argument"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryBitArraySolution.argument()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution.OnesCountMaxProblemBinaryBitArraySolution.calculate_quality_directly"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryBitArraySolution.calculate_quality_directly()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution.OnesCountMaxProblemBinaryBitArraySolution.copy"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryBitArraySolution.copy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution.OnesCountMaxProblemBinaryBitArraySolution.copy_from"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryBitArraySolution.copy_from()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution.OnesCountMaxProblemBinaryBitArraySolution.init_from"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryBitArraySolution.init_from()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution.OnesCountMaxProblemBinaryBitArraySolution.init_random"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryBitArraySolution.init_random()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution.OnesCountMaxProblemBinaryBitArraySolution.native_representation"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryBitArraySolution.native_representation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution.OnesCountMaxProblemBinaryBitArraySolution.representation_distance_directly"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryBitArraySolution.representation_distance_directly()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution.OnesCountMaxProblemBinaryBitArraySolution.string_rep"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryBitArraySolution.string_rep()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution.random"><code class="docutils literal notranslate"><span class="pre">random()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#module-opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_te_support">opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_te_support module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_te_support.OnesCountMaxProblemBinaryBitArraySolutionTeSupport"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryBitArraySolutionTeSupport</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_te_support.OnesCountMaxProblemBinaryBitArraySolutionTeSupport.can_progress"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryBitArraySolutionTeSupport.can_progress()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_te_support.OnesCountMaxProblemBinaryBitArraySolutionTeSupport.copy"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryBitArraySolutionTeSupport.copy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_te_support.OnesCountMaxProblemBinaryBitArraySolutionTeSupport.overall_number_of_evaluations"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryBitArraySolutionTeSupport.overall_number_of_evaluations()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_te_support.OnesCountMaxProblemBinaryBitArraySolutionTeSupport.progress"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryBitArraySolutionTeSupport.progress()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_te_support.OnesCountMaxProblemBinaryBitArraySolutionTeSupport.reset"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryBitArraySolutionTeSupport.reset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_te_support.OnesCountMaxProblemBinaryBitArraySolutionTeSupport.string_rep"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryBitArraySolutionTeSupport.string_rep()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_te_support.random"><code class="docutils literal notranslate"><span class="pre">random()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#module-opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_vns_support">opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_vns_support module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_vns_support.OnesCountMaxProblemBinaryBitArraySolutionVnsSupport"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryBitArraySolutionVnsSupport</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_vns_support.OnesCountMaxProblemBinaryBitArraySolutionVnsSupport.copy"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryBitArraySolutionVnsSupport.copy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_vns_support.OnesCountMaxProblemBinaryBitArraySolutionVnsSupport.local_search_best_improvement"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryBitArraySolutionVnsSupport.local_search_best_improvement()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_vns_support.OnesCountMaxProblemBinaryBitArraySolutionVnsSupport.local_search_first_improvement"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryBitArraySolutionVnsSupport.local_search_first_improvement()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_vns_support.OnesCountMaxProblemBinaryBitArraySolutionVnsSupport.shaking"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryBitArraySolutionVnsSupport.shaking()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_vns_support.OnesCountMaxProblemBinaryBitArraySolutionVnsSupport.string_rep"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryBitArraySolutionVnsSupport.string_rep()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_vns_support.random"><code class="docutils literal notranslate"><span class="pre">random()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#module-opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution">opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution.OnesCountMaxProblemBinaryIntSolution"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryIntSolution</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution.OnesCountMaxProblemBinaryIntSolution.argument"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryIntSolution.argument()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution.OnesCountMaxProblemBinaryIntSolution.calculate_quality_directly"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryIntSolution.calculate_quality_directly()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution.OnesCountMaxProblemBinaryIntSolution.copy"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryIntSolution.copy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution.OnesCountMaxProblemBinaryIntSolution.init_from"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryIntSolution.init_from()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution.OnesCountMaxProblemBinaryIntSolution.init_random"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryIntSolution.init_random()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution.OnesCountMaxProblemBinaryIntSolution.native_representation"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryIntSolution.native_representation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution.OnesCountMaxProblemBinaryIntSolution.obtain_feasible_representation"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryIntSolution.obtain_feasible_representation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution.OnesCountMaxProblemBinaryIntSolution.representation_distance_directly"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryIntSolution.representation_distance_directly()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution.OnesCountMaxProblemBinaryIntSolution.string_rep"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryIntSolution.string_rep()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#module-opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution_vns_support">opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution_vns_support module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution_vns_support.OnesCountMaxProblemBinaryIntSolutionVnsSupport"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryIntSolutionVnsSupport</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution_vns_support.OnesCountMaxProblemBinaryIntSolutionVnsSupport.copy"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryIntSolutionVnsSupport.copy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution_vns_support.OnesCountMaxProblemBinaryIntSolutionVnsSupport.local_search_best_improvement"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryIntSolutionVnsSupport.local_search_best_improvement()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution_vns_support.OnesCountMaxProblemBinaryIntSolutionVnsSupport.local_search_first_improvement"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryIntSolutionVnsSupport.local_search_first_improvement()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution_vns_support.OnesCountMaxProblemBinaryIntSolutionVnsSupport.shaking"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryIntSolutionVnsSupport.shaking()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution_vns_support.OnesCountMaxProblemBinaryIntSolutionVnsSupport.string_rep"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemBinaryIntSolutionVnsSupport.string_rep()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#module-opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp_linopy">opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp_linopy module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp_linopy.OnesCountMaxProblemIntegerLinearProgrammingSolution"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemIntegerLinearProgrammingSolution</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp_linopy.OnesCountMaxProblemIntegerLinearProgrammingSolution.string_representation"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemIntegerLinearProgrammingSolution.string_representation()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp_linopy.OnesCountMaxProblemIntegerLinearProgrammingSolver"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemIntegerLinearProgrammingSolver</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp_linopy.OnesCountMaxProblemIntegerLinearProgrammingSolver.copy"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemIntegerLinearProgrammingSolver.copy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp_linopy.OnesCountMaxProblemIntegerLinearProgrammingSolver.from_construction_tuple"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemIntegerLinearProgrammingSolver.from_construction_tuple()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp_linopy.OnesCountMaxProblemIntegerLinearProgrammingSolver.model"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemIntegerLinearProgrammingSolver.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp_linopy.OnesCountMaxProblemIntegerLinearProgrammingSolver.optimize"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemIntegerLinearProgrammingSolver.optimize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp_linopy.OnesCountMaxProblemIntegerLinearProgrammingSolver.string_rep"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemIntegerLinearProgrammingSolver.string_rep()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp_linopy.OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp_linopy.OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters.output_control"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters.output_control</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp_linopy.OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters.target_problem"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters.target_problem</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#module-opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_solver">opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_solver module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_solver.MaxOneProblemSolverConstructionParameters"><code class="docutils literal notranslate"><span class="pre">MaxOneProblemSolverConstructionParameters</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_solver.MaxOneProblemSolverConstructionParameters.finish_control"><code class="docutils literal notranslate"><span class="pre">MaxOneProblemSolverConstructionParameters.finish_control</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_solver.MaxOneProblemSolverConstructionParameters.method"><code class="docutils literal notranslate"><span class="pre">MaxOneProblemSolverConstructionParameters.method</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_solver.MaxOneProblemSolverConstructionParameters.output_control"><code class="docutils literal notranslate"><span class="pre">MaxOneProblemSolverConstructionParameters.output_control</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_solver.MaxOneProblemSolverConstructionParameters.solution_template"><code class="docutils literal notranslate"><span class="pre">MaxOneProblemSolverConstructionParameters.solution_template</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_solver.MaxOneProblemSolverConstructionParameters.target_problem"><code class="docutils literal notranslate"><span class="pre">MaxOneProblemSolverConstructionParameters.target_problem</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_solver.MaxOneProblemSolverConstructionParameters.te_problem_solution_support"><code class="docutils literal notranslate"><span class="pre">MaxOneProblemSolverConstructionParameters.te_problem_solution_support</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_solver.MaxOneProblemSolverConstructionParameters.vns_additional_statistics_control"><code class="docutils literal notranslate"><span class="pre">MaxOneProblemSolverConstructionParameters.vns_additional_statistics_control</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_solver.MaxOneProblemSolverConstructionParameters.vns_k_max"><code class="docutils literal notranslate"><span class="pre">MaxOneProblemSolverConstructionParameters.vns_k_max</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_solver.MaxOneProblemSolverConstructionParameters.vns_k_min"><code class="docutils literal notranslate"><span class="pre">MaxOneProblemSolverConstructionParameters.vns_k_min</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_solver.MaxOneProblemSolverConstructionParameters.vns_local_search_type"><code class="docutils literal notranslate"><span class="pre">MaxOneProblemSolverConstructionParameters.vns_local_search_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_solver.MaxOneProblemSolverConstructionParameters.vns_problem_solution_support"><code class="docutils literal notranslate"><span class="pre">MaxOneProblemSolverConstructionParameters.vns_problem_solution_support</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_solver.MaxOneProblemSolverConstructionParameters.vns_random_seed"><code class="docutils literal notranslate"><span class="pre">MaxOneProblemSolverConstructionParameters.vns_random_seed</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_solver.OnesCountMaxProblemSolver"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemSolver</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_solver.OnesCountMaxProblemSolver.from_construction_tuple"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemSolver.from_construction_tuple()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_solver.OnesCountMaxProblemSolver.from_integer_linear_programming"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemSolver.from_integer_linear_programming()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_solver.OnesCountMaxProblemSolver.from_total_enumeration"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemSolver.from_total_enumeration()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_solver.OnesCountMaxProblemSolver.from_variable_neighborhood_search"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemSolver.from_variable_neighborhood_search()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_solver.OnesCountMaxProblemSolver.opt"><code class="docutils literal notranslate"><span class="pre">OnesCountMaxProblemSolver.opt</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#module-opt.single_objective.comb.ones_count_max_problem.solver">opt.single_objective.comb.ones_count_max_problem.solver module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#opt.single_objective.comb.ones_count_max_problem.solver.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#module-opt.single_objective.comb.ones_count_max_problem">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="opt.single_objective.comb.ones_count_min_problem.html">opt.single_objective.comb.ones_count_min_problem package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="opt.single_objective.comb.ones_count_min_problem.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opt.single_objective.comb.ones_count_min_problem.html#module-opt.single_objective.comb.ones_count_min_problem.ones_count_min_problem">opt.single_objective.comb.ones_count_min_problem.ones_count_min_problem module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="opt.single_objective.comb.ones_count_min_problem.html#opt.single_objective.comb.ones_count_min_problem.ones_count_min_problem.OnesCountMinProblem"><code class="docutils literal notranslate"><span class="pre">OnesCountMinProblem</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_min_problem.html#opt.single_objective.comb.ones_count_min_problem.ones_count_min_problem.OnesCountMinProblem.copy"><code class="docutils literal notranslate"><span class="pre">OnesCountMinProblem.copy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_min_problem.html#opt.single_objective.comb.ones_count_min_problem.ones_count_min_problem.OnesCountMinProblem.dimension"><code class="docutils literal notranslate"><span class="pre">OnesCountMinProblem.dimension</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_min_problem.html#opt.single_objective.comb.ones_count_min_problem.ones_count_min_problem.OnesCountMinProblem.from_dimension"><code class="docutils literal notranslate"><span class="pre">OnesCountMinProblem.from_dimension()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_min_problem.html#opt.single_objective.comb.ones_count_min_problem.ones_count_min_problem.OnesCountMinProblem.from_input_file"><code class="docutils literal notranslate"><span class="pre">OnesCountMinProblem.from_input_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="opt.single_objective.comb.ones_count_min_problem.html#opt.single_objective.comb.ones_count_min_problem.ones_count_min_problem.OnesCountMinProblem.string_rep"><code class="docutils literal notranslate"><span class="pre">OnesCountMinProblem.string_rep()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="opt.single_objective.comb.ones_count_min_problem.html#module-opt.single_objective.comb.ones_count_min_problem">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="opt.single_objective.comb.traveling_salesperson_problem.html">opt.single_objective.combinatorial.traveling_salesperson_problem package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="opt.single_objective.comb.traveling_salesperson_problem.html#module-opt.single_objective.comb.traveling_salesperson_problem">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-opt.single_objective.comb">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-opt.single_objective.comb" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="opt.single_objective.html" class="btn btn-neutral float-left" title="opt.single_objective package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="opt.single_objective.comb.ones_count_max_problem.html" class="btn btn-neutral float-right" title="opt.single_objective.comb.ones_count_max_problem package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Vladimir Filipovic.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
