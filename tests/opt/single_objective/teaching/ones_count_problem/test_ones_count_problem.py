@@ -5,8 +5,8 @@ import unittest.mock as mocker
 from unittest.mock import patch
 from unittest.mock import mock_open
 
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem_max import OnesCountProblemMax
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem_max import OnesCountProblemMax
+from opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max import OnesCountProblemMax
+from opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max import OnesCountProblemMax
 
 class TestOnesCountProblemMax(unittest.TestCase):
 

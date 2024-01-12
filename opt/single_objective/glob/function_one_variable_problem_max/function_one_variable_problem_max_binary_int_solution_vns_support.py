@@ -22,12 +22,12 @@ from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import \
         ProblemSolutionVnsSupport
 
-from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem_max import \
-        FunctionOneVariableProblemMax
-from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem_binary_int_solution \
-        import FunctionOneVariableProblemBinaryIntSolution
+from opt.single_objective.glob.function_one_variable_problem_max.function_one_variable_problem_max import \
+        FunctionOneVariableProblemMaxMax
+from opt.single_objective.glob.function_one_variable_problem_max.function_one_variable_problem_max_binary_int_solution \
+        import FunctionOneVariableProblemMaxBinaryIntSolution
 
-class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,float]):
+class FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,float]):
     
     def __init__(self)->None:
         return
@@ -39,7 +39,7 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
     def copy(self):
         return self.__copy__()
         
-    def shaking(self, k:int, problem:FunctionOneVariableProblemMax, solution:FunctionOneVariableProblemBinaryIntSolution, 
+    def shaking(self, k:int, problem:FunctionOneVariableProblemMaxMax, solution:FunctionOneVariableProblemMaxBinaryIntSolution, 
             optimizer:Algorithm)->bool:
         if k <= 0:
             return False
@@ -73,16 +73,16 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
         else:
             return False 
 
-    def local_search_best_improvement(self, k:int, problem:FunctionOneVariableProblemMax, 
-            solution:FunctionOneVariableProblemBinaryIntSolution, 
+    def local_search_best_improvement(self, k:int, problem:FunctionOneVariableProblemMaxMax, 
+            solution:FunctionOneVariableProblemMaxBinaryIntSolution, 
             optimizer: Algorithm)->bool:
         representation_length:int = 32
         if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
             return False
         if k < 1:
             return False
-        start_sol:FunctionOneVariableProblemBinaryIntSolution = solution.copy()
-        best_sol:FunctionOneVariableProblemBinaryIntSolution = solution.copy()
+        start_sol:FunctionOneVariableProblemMaxBinaryIntSolution = solution.copy()
+        best_sol:FunctionOneVariableProblemMaxBinaryIntSolution = solution.copy()
         better_sol_found:bool = False
         # initialize indexes
         indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k,representation_length)
@@ -114,15 +114,15 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
         solution.copy_from(start_sol)
         return False
 
-    def local_search_first_improvement(self, k:int, problem:FunctionOneVariableProblemMax, 
-            solution:FunctionOneVariableProblemBinaryIntSolution, 
+    def local_search_first_improvement(self, k:int, problem:FunctionOneVariableProblemMaxMax, 
+            solution:FunctionOneVariableProblemMaxBinaryIntSolution, 
             optimizer: Algorithm)->bool:
         representation_length:int = 32
         if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
             return False
         if k < 1:
             return False
-        start_sol:FunctionOneVariableProblemBinaryIntSolution = solution.clone()
+        start_sol:FunctionOneVariableProblemMaxBinaryIntSolution = solution.clone()
         # initialize indexes
         indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k,representation_length)
         in_loop:bool = indexes.reset()
@@ -151,7 +151,7 @@ class FunctionOneVariableProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSu
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
-        return 'FunctionOneVariableProblemBinaryIntSolutionVnsSupport'
+        return 'FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport'
 
     def __str__(self)->str:
         return self.string_rep('|')

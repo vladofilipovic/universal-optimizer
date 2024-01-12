@@ -13,22 +13,22 @@ from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalS
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem_max import OnesCountProblemMax
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_int_solution import OnesCountProblemBinaryIntSolution
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_int_solution_vns_support import OnesCountProblemBinaryIntSolutionVnsSupport
+from opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max import OnesCountProblemMax
+from opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max_binary_int_solution import OnesCountProblemMaxBinaryIntSolution
+from opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max_binary_int_solution_vns_support import OnesCountProblemMaxBinaryIntSolutionVnsSupport
 
-class TestOnesCountProblemVnsBinaryIntSolutionLsbi(unittest.TestCase):
+class TestOnesCountProblemMaxVnsBinaryIntSolutionLsbi(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
-        print("setUpClass TestIntegrationOnesCountProblemVnsBinaryIntSolutionLsbi\n")
+        print("setUpClass TestIntegrationOnesCountProblemMaxVnsBinaryIntSolutionLsbi\n")
 
     def setUp(self):
         self.output_control = OutputControl(False)
         self.problem_to_solve:OnesCountProblemMax = OnesCountProblemMax.from_dimension(dimension=22)
-        self.solution:OnesCountProblemBinaryIntSolution = OnesCountProblemBinaryIntSolution()
+        self.solution:OnesCountProblemMaxBinaryIntSolution = OnesCountProblemMaxBinaryIntSolution()
         self.finish_control:FinishControl = FinishControl(criteria='evaluations', evaluations_max=1000)
-        self.vns_support:OnesCountProblemBinaryIntSolutionVnsSupport = OnesCountProblemBinaryIntSolutionVnsSupport()
+        self.vns_support:OnesCountProblemMaxBinaryIntSolutionVnsSupport = OnesCountProblemMaxBinaryIntSolutionVnsSupport()
         self.additional_stat = AdditionalStatisticsControl(keep='')
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
         vns_construction_params.output_control = self.output_control
@@ -56,7 +56,7 @@ class TestOnesCountProblemVnsBinaryIntSolutionLsbi(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        print("\ntearDownClass TestIntegrationOnesCountProblemVnsBinaryIntSolutionLsbi")
+        print("\ntearDownClass TestIntegrationOnesCountProblemMaxVnsBinaryIntSolutionLsbi")
     
 if __name__ == '__main__':
     unittest.main()

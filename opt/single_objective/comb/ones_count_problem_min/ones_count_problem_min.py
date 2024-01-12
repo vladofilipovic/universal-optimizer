@@ -18,22 +18,22 @@ class OnesCountProblemMin(TargetProblem):
     
     def __init__(self, dim:int)->None:
         """
-        Create new `OnesCountProblemMax` instance
+        Create new `OnesCountProblemMin` instance
 
         :param int dim: dimension of the problem
         """
         if not isinstance(dim, int):
-            raise TypeError('Parameter \'dimension\' for  OnesCountProblemMax should be \'int\'.')
+            raise TypeError('Parameter \'dimension\' for  OnesCountProblemMin should be \'int\'.')
         if dim <= 0:
-            raise ValueError('Parameter \'dimension\' for  OnesCountProblemMax should be greater than zero.')
-        super().__init__(name="OnesCountProblemMax", is_minimization=True, is_multi_objective=False)
+            raise ValueError('Parameter \'dimension\' for  OnesCountProblemMin should be greater than zero.')
+        super().__init__(name="OnesCountProblemMin", is_minimization=True, is_multi_objective=False)
         self.__dimension = dim
         
         
     @classmethod
     def from_dimension(cls, dimension:int):
         """
-        Additional constructor. Create new `OnesCountProblemMax` instance when dimension is specified
+        Additional constructor. Create new `OnesCountProblemMin` instance when dimension is specified
 
         :param int dimension: dimension of the problem
         """
@@ -67,7 +67,7 @@ class OnesCountProblemMin(TargetProblem):
     @classmethod
     def from_input_file(cls, input_file_path:str, input_format:str):
         """
-        Additional constructor. Create new `OnesCountProblemMax` instance when input file and input format are specified
+        Additional constructor. Create new `OnesCountProblemMin` instance when input file and input format are specified
 
         :param str input_file_path: path of the input file with problem data
         :param str input_format: format of the input
@@ -79,20 +79,20 @@ class OnesCountProblemMin(TargetProblem):
 
     def __copy__(self):
         """
-        Internal copy of the `OnesCountProblemMax` problem
+        Internal copy of the `OnesCountProblemMin` problem
 
-        :return: new `OnesCountProblemMax` instance with the same properties
-        :rtype: `OnesCountProblemMax`
+        :return: new `OnesCountProblemMin` instance with the same properties
+        :rtype: `OnesCountProblemMin`
         """
         pr = deepcopy(self)
         return pr
 
     def copy(self):
         """
-        Copy the `OnesCountProblemMax` problem
+        Copy the `OnesCountProblemMin` problem
 
-        :return: new `OnesCountProblemMax` instance with the same properties
-        :rtype: OnesCountProblemMax
+        :return: new `OnesCountProblemMin` instance with the same properties
+        :rtype: OnesCountProblemMin
         """
         return self.__copy__()
 

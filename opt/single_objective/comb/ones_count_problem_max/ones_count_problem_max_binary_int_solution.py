@@ -1,14 +1,14 @@
 """ 
 .. _py_ones_count_problem_int_solution:
 
-The :mod:`~opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_int_solution` contains class :class:`~opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_int_solution.OnesCountProblemBinaryIntSolution`, that represents solution of the :ref:`Problem_Max_Ones`, where `int` representation of the problem has been used.
+The :mod:`~opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max_binary_int_solution` contains class :class:`~opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max_binary_int_solution.OnesCountProblemMaxBinaryIntSolution`, that represents solution of the :ref:`Problem_Max_Ones`, where `int` representation of the problem has been used.
 """
 
 import sys
 from pathlib import Path
 from typing import Optional
 
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem_max import OnesCountProblemMax
+from opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max import OnesCountProblemMax
 directory = Path(__file__).resolve()
 sys.path.append(directory.parent)
 sys.path.append(directory.parent.parent)
@@ -26,7 +26,7 @@ from uo.target_solution.target_solution import TargetSolution
 
 from uo.utils.logger import logger
 
-class OnesCountProblemBinaryIntSolution(TargetSolution[int,str]):
+class OnesCountProblemMaxBinaryIntSolution(TargetSolution[int,str]):
     
     def __init__(self,random_seed:Optional[int]=None, 
             evaluation_cache_is_used:bool=False, 
@@ -34,7 +34,7 @@ class OnesCountProblemBinaryIntSolution(TargetSolution[int,str]):
             distance_calculation_cache_is_used:bool=False,
             distance_calculation_cache_max_size:int=0)->None:
         """
-        Create new `OnesCountProblemBinaryIntSolution` instance
+        Create new `OnesCountProblemMaxBinaryIntSolution` instance
 
         :param int random_seed: random seed for initialization, default value `Null`
         """
@@ -50,20 +50,20 @@ class OnesCountProblemBinaryIntSolution(TargetSolution[int,str]):
 
     def __copy__(self):
         """
-        Internal copy of the `OnesCountProblemBinaryIntSolution`
+        Internal copy of the `OnesCountProblemMaxBinaryIntSolution`
 
-        :return: new `OnesCountProblemBinaryIntSolution` instance with the same properties
-        :rtype: OnesCountProblemBinaryIntSolution
+        :return: new `OnesCountProblemMaxBinaryIntSolution` instance with the same properties
+        :rtype: OnesCountProblemMaxBinaryIntSolution
         """
         sol = deepcopy(self)
         return sol
 
     def copy(self):
         """
-        Copy the `OnesCountProblemBinaryIntSolution`
+        Copy the `OnesCountProblemMaxBinaryIntSolution`
         
-        :return: new `OnesCountProblemBinaryIntSolution` instance with the same properties
-        :rtype: `OnesCountProblemBinaryIntSolution`
+        :return: new `OnesCountProblemMaxBinaryIntSolution` instance with the same properties
+        :rtype: `OnesCountProblemMaxBinaryIntSolution`
         """
         return self.__copy__()
         

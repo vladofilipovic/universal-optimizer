@@ -16,13 +16,13 @@ from uo.utils.logger import logger
 
 from uo.target_problem.target_problem import TargetProblem
 
-FunctionOneVariableProblemMinElements = NamedTuple('FunctionOneVariableProblemMinElements', 
+FunctionOneVariableProblemMaxMaxElements = NamedTuple('FunctionOneVariableProblemMaxMaxElements', 
             [('expression',str), 
             ('domain_low',float), 
             ('domain_high',float)]
         )
 
-class FunctionOneVariableProblemMin(TargetProblem):
+class FunctionOneVariableProblemMaxMax(TargetProblem):
     
     def __init__(self, expression:str, domain_low:float, domain_high:float)->None:
         if expression is None or expression=="":
@@ -31,7 +31,7 @@ class FunctionOneVariableProblemMin(TargetProblem):
             raise TypeError("Parameter \'domain_low\' should be \'int\' or \'float\'.")
         if not isinstance(domain_high, int | float):
             raise TypeError("Parameter \'domain_high\' should be \'int\' or \'float\'.")
-        super().__init__(name="FunctionOneVariableProblemMax", is_minimization=True, is_multi_objective=False)
+        super().__init__(name="FunctionOneVariableProblemMaxMax", is_minimization=False, is_multi_objective=False)
         self.__expression:str = expression
         self.__domain_low:float = domain_low
         self.__domain_high:float = domain_high
@@ -48,7 +48,7 @@ class FunctionOneVariableProblemMin(TargetProblem):
                     text_line = input_file.readline()
                 data:list[str] = text_line.split()
                 if len(data)>=3:
-                    return FunctionOneVariableProblemMinElements(data[0], float(data[1]), float(data[2]))
+                    return FunctionOneVariableProblemMaxMaxElements(data[0], float(data[1]), float(data[2]))
                 else:
                     raise ValueError('Invalid line \'{}\' - not enough data'.format(data))        
         else:
@@ -57,12 +57,12 @@ class FunctionOneVariableProblemMin(TargetProblem):
     @classmethod
     def from_input_file(cls, input_file_path:str, input_format:str):
         """
-        Additional constructor. Create new `FunctionOneVariableProblemMax` instance when input file and input format are specified
+        Additional constructor. Create new `FunctionOneVariableProblemMaxMax` instance when input file and input format are specified
 
         :param str input_file_path: path of the input file with problem data
         :param str input_format: format of the input
         """
-        params:FunctionOneVariableProblemMinElements = FunctionOneVariableProblemMin.__load_from_file__(input_file_path, 
+        params:FunctionOneVariableProblemMaxMaxElements = FunctionOneVariableProblemMaxMax.__load_from_file__(input_file_path, 
                 input_format)
         return cls(expression=params.expression, domain_low=params.domain_low, domain_high=params.domain_high)
 

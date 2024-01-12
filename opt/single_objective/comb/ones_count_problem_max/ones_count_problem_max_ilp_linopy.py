@@ -24,11 +24,11 @@ from uo.target_solution.quality_of_solution import QualityOfSolution
 from uo.algorithm.optimizer import Optimizer
 from uo.algorithm.output_control import OutputControl
 
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem_max import OnesCountProblemMax
+from opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max import OnesCountProblemMax
 
-class OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters:
+class OnesCountProblemMaxIntegerLinearProgrammingSolverConstructionParameters:
     """
-    Instance of the class :class:`OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters` represents constructor parameters for max ones problem ILP solver.
+    Instance of the class :class:`OnesCountProblemMaxIntegerLinearProgrammingSolverConstructionParameters` represents constructor parameters for max ones problem ILP solver.
     """
     def __init__(self, output_control: OutputControl = None, target_problem: TargetProblem = None)->None:
         if not isinstance(output_control, OutputControl):
@@ -59,19 +59,19 @@ class OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters:
         return self.__target_problem    
 
 
-class OnesCountProblemIntegerLinearProgrammingSolution(TargetSolutionVoidObjectStr):
-    def __init__(self, sol:'OnesCountProblemIntegerLinearProgrammingSolver')->None:
+class OnesCountProblemMaxIntegerLinearProgrammingSolution(TargetSolutionVoidObjectStr):
+    def __init__(self, sol:'OnesCountProblemMaxIntegerLinearProgrammingSolver')->None:
         super().__init__()
         self.__sol = sol
 
     def string_representation(self):
         return str(self.__sol)    
 
-class OnesCountProblemIntegerLinearProgrammingSolver(Optimizer):
+class OnesCountProblemMaxIntegerLinearProgrammingSolver(Optimizer):
 
     def __init__(self, output_control:OutputControl,  problem:OnesCountProblemMax)->None:
         """
-        Create new `OnesCountProblemIntegerLinearProgrammingSolver` instance
+        Create new `OnesCountProblemMaxIntegerLinearProgrammingSolver` instance
 
         :param `OutputControls` output_control: object that control output
         :param `OnesCountProblemMax` problem: problem to be solved
@@ -80,17 +80,17 @@ class OnesCountProblemIntegerLinearProgrammingSolver(Optimizer):
             raise TypeError('Parameter \'output_control\' must have type \'OutputControl\'.')
         if not isinstance(problem, OnesCountProblemMax):
             raise TypeError('Parameter \'problem\' must have type \'OnesCountProblemMax\'.')
-        super().__init__("OnesCountProblemIntegerLinearProgrammingSolver", output_control=output_control, 
+        super().__init__("OnesCountProblemMaxIntegerLinearProgrammingSolver", output_control=output_control, 
                 target_problem=problem)
         self.__model = Model()
 
     @classmethod
     def from_construction_tuple(cls, 
-            construction_params:OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters=None):
+            construction_params:OnesCountProblemMaxIntegerLinearProgrammingSolverConstructionParameters=None):
         """
-        Additional constructor. Create new `OnesCountProblemIntegerLinearProgrammingSolver` instance from construction parameters
+        Additional constructor. Create new `OnesCountProblemMaxIntegerLinearProgrammingSolver` instance from construction parameters
 
-        :param `OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters` construction_params: parameters for construction 
+        :param `OnesCountProblemMaxIntegerLinearProgrammingSolverConstructionParameters` construction_params: parameters for construction 
         """
         return cls(
             construction_params.output_control, 
@@ -100,8 +100,8 @@ class OnesCountProblemIntegerLinearProgrammingSolver(Optimizer):
         """
         Internal copy of the current algorithm
 
-        :return:  new `OnesCountProblemIntegerLinearProgrammingSolver` instance with the same properties
-        :rtype: :class:`OnesCountProblemIntegerLinearProgrammingSolver`
+        :return:  new `OnesCountProblemMaxIntegerLinearProgrammingSolver` instance with the same properties
+        :rtype: :class:`OnesCountProblemMaxIntegerLinearProgrammingSolver`
         """
         alg = deepcopy(self)
         return alg
@@ -110,8 +110,8 @@ class OnesCountProblemIntegerLinearProgrammingSolver(Optimizer):
         """
         Copy the current algorithm
 
-        :return:  new `OnesCountProblemIntegerLinearProgrammingSolver` instance with the same properties
-        :rtype: :class:``OnesCountProblemIntegerLinearProgrammingSolver``
+        :return:  new `OnesCountProblemMaxIntegerLinearProgrammingSolver` instance with the same properties
+        :rtype: :class:``OnesCountProblemMaxIntegerLinearProgrammingSolver``
         """
         return self.__copy__()
 
@@ -145,13 +145,13 @@ class OnesCountProblemIntegerLinearProgrammingSolver(Optimizer):
         self.model.solve()
         self.execution_ended = datetime.now()
         self.write_output_values_if_needed("after_algorithm", "a_a")
-        self.best_solution = OnesCountProblemIntegerLinearProgrammingSolution( self.model.solution.x )
+        self.best_solution = OnesCountProblemMaxIntegerLinearProgrammingSolution( self.model.solution.x )
         #logger.debug(self.model.solution.x)
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
         """
-        String representation of the 'OnesCountProblemIntegerLinearProgrammingSolver' instance
+        String representation of the 'OnesCountProblemMaxIntegerLinearProgrammingSolver' instance
         
         :param delimiter: delimiter between fields
         :type delimiter: str
@@ -177,28 +177,28 @@ class OnesCountProblemIntegerLinearProgrammingSolver(Optimizer):
 
     def __str__(self)->str:
         """
-        String representation of the 'OnesCountProblemIntegerLinearProgrammingSolver' instance
+        String representation of the 'OnesCountProblemMaxIntegerLinearProgrammingSolver' instance
         
-        :return: string representation of the 'OnesCountProblemIntegerLinearProgrammingSolver' instance
+        :return: string representation of the 'OnesCountProblemMaxIntegerLinearProgrammingSolver' instance
         :rtype: str
         """
         return self.string_rep('|')
 
     def __repr__(self)->str:
         """
-        Representation of the 'OnesCountProblemIntegerLinearProgrammingSolver' instance
+        Representation of the 'OnesCountProblemMaxIntegerLinearProgrammingSolver' instance
         
-        :return: string representation of the 'OnesCountProblemIntegerLinearProgrammingSolver' instance
+        :return: string representation of the 'OnesCountProblemMaxIntegerLinearProgrammingSolver' instance
         :rtype: str
         """
         return self.string_rep('\n')
 
     def __format__(self, spec:str)->str:
         """
-        Formatted 'OnesCountProblemIntegerLinearProgrammingSolver' instance
+        Formatted 'OnesCountProblemMaxIntegerLinearProgrammingSolver' instance
         
         :param str spec: format specification
-        :return: formatted 'OnesCountProblemIntegerLinearProgrammingSolver' instance
+        :return: formatted 'OnesCountProblemMaxIntegerLinearProgrammingSolver' instance
         :rtype: str
         """
         return self.string_rep('|')

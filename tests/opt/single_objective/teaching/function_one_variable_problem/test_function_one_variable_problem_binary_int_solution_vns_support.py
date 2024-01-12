@@ -8,21 +8,21 @@ import unittest.mock as mocker
 from unittest.mock import patch
 from unittest.mock import mock_open
 
-from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem_max import FunctionOneVariableProblemMax
-from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem_max import FunctionOneVariableProblemMaxElements
-from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem_binary_int_solution import FunctionOneVariableProblemBinaryIntSolution
-from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem_binary_int_solution_vns_support import FunctionOneVariableProblemBinaryIntSolutionVnsSupport
+from opt.single_objective.glob.function_one_variable_problem_max.function_one_variable_problem_max import FunctionOneVariableProblemMaxMax
+from opt.single_objective.glob.function_one_variable_problem_max.function_one_variable_problem_max import FunctionOneVariableProblemMaxMaxElements
+from opt.single_objective.glob.function_one_variable_problem_max.function_one_variable_problem_max_binary_int_solution import FunctionOneVariableProblemMaxBinaryIntSolution
+from opt.single_objective.glob.function_one_variable_problem_max.function_one_variable_problem_max_binary_int_solution_vns_support import FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport
 
 
-class TestFunctionOneVariableProblemBinaryIntSolutionVnsSupport(unittest.TestCase):
+class TestFunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport(unittest.TestCase):
 
     # shaking method returns True when k is greater than 0 and the solution is valid
     def test_shaking_returns_true_when_k_is_greater_than_0_and_solution_is_valid(self):
         # Arrange
-        problem = FunctionOneVariableProblemMax("x**2", 0, 10)
-        solution = FunctionOneVariableProblemBinaryIntSolution(0, 10, 4)
+        problem = FunctionOneVariableProblemMaxMax("x**2", 0, 10)
+        solution = FunctionOneVariableProblemMaxBinaryIntSolution(0, 10, 4)
         solution.representation = 3
-        vns_support = FunctionOneVariableProblemBinaryIntSolutionVnsSupport()
+        vns_support = FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport()
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
@@ -37,11 +37,11 @@ class TestFunctionOneVariableProblemBinaryIntSolutionVnsSupport(unittest.TestCas
     # local_search_best_improvement method returns a new solution with a better fitness value
     def test_local_search_best_improvement_returns_new_solution_with_better_fitness_value(self):
         # Arrange
-        problem = FunctionOneVariableProblemMax("x**2", 0, 10)
-        solution = FunctionOneVariableProblemBinaryIntSolution(0, 10, 4)
+        problem = FunctionOneVariableProblemMaxMax("x**2", 0, 10)
+        solution = FunctionOneVariableProblemMaxBinaryIntSolution(0, 10, 4)
         solution.representation = 3
         solution.evaluate(problem)
-        vns_support = FunctionOneVariableProblemBinaryIntSolutionVnsSupport()
+        vns_support = FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport()
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
@@ -58,11 +58,11 @@ class TestFunctionOneVariableProblemBinaryIntSolutionVnsSupport(unittest.TestCas
     # local_search_first_improvement method returns a new solution with a better fitness value
     def test_local_search_first_improvement_returns_new_solution_with_better_fitness_value(self):
         # Arrange
-        problem = FunctionOneVariableProblemMax("x**2", 0, 10)
-        solution = FunctionOneVariableProblemBinaryIntSolution(0, 10, 4)
+        problem = FunctionOneVariableProblemMaxMax("x**2", 0, 10)
+        solution = FunctionOneVariableProblemMaxBinaryIntSolution(0, 10, 4)
         solution.representation = 3
         solution.evaluate(problem)
-        vns_support = FunctionOneVariableProblemBinaryIntSolutionVnsSupport()
+        vns_support = FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport()
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
@@ -79,11 +79,11 @@ class TestFunctionOneVariableProblemBinaryIntSolutionVnsSupport(unittest.TestCas
     # shaking method returns False when k is less than or equal to 0
     def test_shaking_returns_false_when_k_is_less_than_or_equal_to_0(self):
         # Arrange
-        problem = FunctionOneVariableProblemMax("x**2", 0, 10)
-        solution = FunctionOneVariableProblemBinaryIntSolution(0, 10, 4)
+        problem = FunctionOneVariableProblemMaxMax("x**2", 0, 10)
+        solution = FunctionOneVariableProblemMaxBinaryIntSolution(0, 10, 4)
         solution.representation = 3
         solution.evaluate(problem)
-        vns_support = FunctionOneVariableProblemBinaryIntSolutionVnsSupport()
+        vns_support = FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport()
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).check_evaluations = mocker.PropertyMock(return_value=False)
         type(finish_control_stub).evaluations_max = mocker.PropertyMock(return_value=0)
@@ -99,11 +99,11 @@ class TestFunctionOneVariableProblemBinaryIntSolutionVnsSupport(unittest.TestCas
     # local_search_best_improvement method returns the same solution when k is less than 1 or greater than the representation length
     def test_local_search_best_improvement_returns_same_solution_when_k_is_less_than_1_or_greater_than_representation_length(self):
         # Arrange
-        problem = FunctionOneVariableProblemMax("x**2", 0, 10)
-        solution = FunctionOneVariableProblemBinaryIntSolution(0, 10, 4)
+        problem = FunctionOneVariableProblemMaxMax("x**2", 0, 10)
+        solution = FunctionOneVariableProblemMaxBinaryIntSolution(0, 10, 4)
         solution.representation = 3
         solution.evaluate(problem)
-        vns_support = FunctionOneVariableProblemBinaryIntSolutionVnsSupport()
+        vns_support = FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport()
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).check_evaluations = mocker.PropertyMock(return_value=False)
         type(finish_control_stub).evaluations_max = mocker.PropertyMock(return_value=0)
@@ -123,11 +123,11 @@ class TestFunctionOneVariableProblemBinaryIntSolutionVnsSupport(unittest.TestCas
     # local_search_first_improvement method returns the same solution when k is less than 1 or greater than the representation length
     def test_local_search_first_improvement_returns_same_solution_when_k_is_less_than_1_or_greater_than_representation_length(self):
         # Arrange
-        problem = FunctionOneVariableProblemMax("x**2", 0, 10)
-        solution = FunctionOneVariableProblemBinaryIntSolution(0, 10, 4)
+        problem = FunctionOneVariableProblemMaxMax("x**2", 0, 10)
+        solution = FunctionOneVariableProblemMaxBinaryIntSolution(0, 10, 4)
         solution.representation = 3
         solution.evaluate(problem)
-        vns_support = FunctionOneVariableProblemBinaryIntSolutionVnsSupport()
+        vns_support = FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport()
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).check_evaluations = mocker.PropertyMock(return_value=False)
         type(finish_control_stub).evaluations_max = mocker.PropertyMock(return_value=0)
@@ -144,82 +144,82 @@ class TestFunctionOneVariableProblemBinaryIntSolutionVnsSupport(unittest.TestCas
         # Assert
         self.assertFalse(result)
 
-    # should return a string representation of the class name 'FunctionOneVariableProblemBinaryIntSolutionVnsSupport'
+    # should return a string representation of the class name 'FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport'
     def test_string_rep_class_name(self):
         # Arrange
-        solution = FunctionOneVariableProblemBinaryIntSolutionVnsSupport()
+        solution = FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport()
     
         # Act
         result = solution.string_rep('|')
     
         # Assert
-        self.assertEqual(result, 'FunctionOneVariableProblemBinaryIntSolutionVnsSupport')
+        self.assertEqual(result, 'FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport')
 
 
     # should return a string with the delimiter passed as argument
     def test_string_rep_delimiter(self):
         # Arrange
-        solution = FunctionOneVariableProblemBinaryIntSolutionVnsSupport()
+        solution = FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport()
     
         # Act
         result = solution.string_rep('|')
     
         # Assert
-        self.assertEqual(result, 'FunctionOneVariableProblemBinaryIntSolutionVnsSupport')
+        self.assertEqual(result, 'FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport')
 
     # should return a string with the indentation passed as argument
     def test_string_rep_indentation(self):
         # Arrange
-        solution = FunctionOneVariableProblemBinaryIntSolutionVnsSupport()
+        solution = FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport()
     
         # Act
         result = solution.string_rep('|', indentation=4)
     
         # Assert
-        self.assertEqual(result, 'FunctionOneVariableProblemBinaryIntSolutionVnsSupport')
+        self.assertEqual(result, 'FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport')
 
     # should return an empty string when all arguments are empty
     def test_string_rep_empty_arguments(self):
         # Arrange
-        solution = FunctionOneVariableProblemBinaryIntSolutionVnsSupport()
+        solution = FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport()
     
         # Act
         result = solution.string_rep('', indentation=0, indentation_symbol='', group_start='', group_end='')
     
         # Assert
-        self.assertEqual(result, 'FunctionOneVariableProblemBinaryIntSolutionVnsSupport')
+        self.assertEqual(result, 'FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport')
 
     # should return a string with the indentation_symbol passed as argument
     def test_string_rep_indentation_symbol(self):
         # Arrange
-        solution = FunctionOneVariableProblemBinaryIntSolutionVnsSupport()
+        solution = FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport()
     
         # Act
         result = solution.string_rep('|', indentation_symbol=' ')
     
         # Assert
-        self.assertEqual(result, 'FunctionOneVariableProblemBinaryIntSolutionVnsSupport')
+        self.assertEqual(result, 'FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport')
 
 
 class Test__Copy__(unittest.TestCase):
 
     # Should return a deep copy of the object
     def test_return_deep_copy(self):
-        sup = FunctionOneVariableProblemBinaryIntSolutionVnsSupport()
+        sup = FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport()
         copy_sup = sup.__copy__()
         self.assertIsNot(sup, copy_sup)
         self.assertEqual(sup.__dict__, copy_sup.__dict__)
 
     # Should not modify the original object
     def test_not_modify_original_object(self):
-        sup = FunctionOneVariableProblemBinaryIntSolutionVnsSupport()
+        sup = FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport()
         original_dict = sup.__dict__.copy()
         copy_sup = sup.__copy__()
         self.assertEqual(sup.__dict__, original_dict)
 
     # Should copy all attributes of the object
     def test_copy_all_attributes(self):
-        sup = FunctionOneVariableProblemBinaryIntSolutionVnsSupport()
+        sup = FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport()
         sup.attribute1 = "value1"
         sup.attribute2 = "value2"
         copy_sup = sup.__copy__()
@@ -228,13 +228,13 @@ class Test__Copy__(unittest.TestCase):
 
     # Should return a new object even if the original object is empty
     def test_return_new_object_empty(self):
-        sup = FunctionOneVariableProblemBinaryIntSolutionVnsSupport()
+        sup = FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport()
         copy_sup = sup.__copy__()
         self.assertIsNot(sup, copy_sup)
 
     # Should return a new object even if the original object has no mutable attributes
     def test_return_new_object_no_mutable_attributes(self):
-        sup = FunctionOneVariableProblemBinaryIntSolutionVnsSupport()
+        sup = FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport()
         sup.attribute1 = "value1"
         sup.attribute2 = 10
         copy_sup = sup.__copy__()
@@ -244,7 +244,7 @@ class Test__Copy__(unittest.TestCase):
 
     # Should return a new object even if the original object has no immutable attributes
     def test_return_new_object_no_immutable_attributes(self):
-        sup = FunctionOneVariableProblemBinaryIntSolutionVnsSupport()
+        sup = FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport()
         sup.attribute1 = []
         sup.attribute2 = {}
         copy_sup = sup.__copy__()

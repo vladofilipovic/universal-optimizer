@@ -10,17 +10,17 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer impor
                 VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem_max import OnesCountProblemMax
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_int_solution import \
-                OnesCountProblemBinaryIntSolution
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_int_solution_vns_support import \
-                OnesCountProblemBinaryIntSolutionVnsSupport
+from opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max import OnesCountProblemMax
+from opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max_binary_int_solution import \
+                OnesCountProblemMaxBinaryIntSolution
+from opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max_binary_int_solution_vns_support import \
+                OnesCountProblemMaxBinaryIntSolutionVnsSupport
 
 def main():
         problem_to_solve:OnesCountProblemMax = OnesCountProblemMax.from_dimension(dimension=24)
-        solution:OnesCountProblemBinaryIntSolution = OnesCountProblemBinaryIntSolution()
+        solution:OnesCountProblemMaxBinaryIntSolution = OnesCountProblemMaxBinaryIntSolution()
         finish:FinishControl = FinishControl(criteria='evaluations & seconds', evaluations_max=500, seconds_max=10)
-        vns_support:OnesCountProblemBinaryIntSolutionVnsSupport = OnesCountProblemBinaryIntSolutionVnsSupport()
+        vns_support:OnesCountProblemMaxBinaryIntSolutionVnsSupport = OnesCountProblemMaxBinaryIntSolutionVnsSupport()
         output_control:OutputControl = OutputControl(write_to_output=False)
         additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(keep='')
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()

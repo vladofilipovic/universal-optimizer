@@ -3,6 +3,13 @@ The :mod:`opt.single_objective.teaching.ones_count_problem.solver` contains prog
 """
 import sys
 
+#---------- Script should be executed from repository root folder -----------------
+#import path
+#OPTIMIZATION_ALGORITHM_DIR = './optimization-algorithms/optimization_algorithms'
+#abs_path = path.Path(OPTIMIZATION_ALGORITHM_DIR).abspath()
+#sys.path.append(abs_path)
+#--------- Previous code should be commented out when pip install started to work --
+
 from pathlib import Path
 directory = Path(__file__).resolve()
 sys.path.append(directory)
@@ -25,30 +32,24 @@ from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalS
 
 from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem_ilp_linopy import \
-        OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters
 
 from uo.utils.files import ensure_dir 
 from uo.utils.logger import logger
 
-from opt.single_objective.teaching.ones_count_problem.command_line import default_parameters_cl
-from opt.single_objective.teaching.ones_count_problem.command_line import parse_arguments
+from opt.single_objective.glob.function_one_variable_problem_max.command_line import default_parameters_cl
+from opt.single_objective.glob.function_one_variable_problem_max.command_line import parse_arguments
 
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem_max import OnesCountProblemMax
+from opt.single_objective.glob.function_one_variable_problem_max.function_one_variable_problem_max import \
+        FunctionOneVariableProblemMaxMax
 
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_int_solution import \
-        OnesCountProblemBinaryIntSolution
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_int_solution_vns_support import \
-        OnesCountProblemBinaryIntSolutionVnsSupport
+from opt.single_objective.glob.function_one_variable_problem_max.function_one_variable_problem_max_binary_int_solution \
+        import FunctionOneVariableProblemMaxBinaryIntSolution
+from opt.single_objective.glob.function_one_variable_problem_max\
+        .function_one_variable_problem_max_binary_int_solution_vns_support import \
+        FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport
 
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_bit_array_solution import \
-        OnesCountProblemBinaryBitArraySolution
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_bit_array_solution_vns_support import \
-        OnesCountProblemBinaryBitArraySolutionVnsSupport
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_bit_array_solution_te_support import\
-        OnesCountProblemBinaryBitArraySolutionTeSupport
-
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem_solver import OnesCountProblemSolver
+from opt.single_objective.glob.function_one_variable_problem_max.function_one_variable_problem_max_solver import \
+        FunctionOneVariableProblemMaxSolver
 
 """ 
 Solver.
@@ -167,7 +168,8 @@ def main():
                 keep=additional_statistics_keep, 
                 max_local_optima=max_local_optima)
         # problem to be solved
-        problem = OnesCountProblemMax.from_input_file(input_file_path=input_file_path,input_format=input_format)
+        problem = FunctionOneVariableProblemMaxMax.from_input_file(input_file_path=input_file_path,
+                input_format=input_format)
         start_time = datetime.now()
         if write_to_output_file:
             output_file.write("# {} started at: {}\n".format(parameters['algorithm'], str(start_time)) )
@@ -181,13 +183,16 @@ def main():
             # initial solution and vns support
             solution_type:str = parameters['solutionType']
             vns_support = None
-            if solution_type=='BitArray':
-                solution:OnesCountProblemBinaryBitArraySolution = OnesCountProblemBinaryBitArraySolution(
-                    random_seed=r_seed)
-                vns_support = OnesCountProblemBinaryBitArraySolutionVnsSupport()
-            elif solution_type=='int':
-                solution:OnesCountProblemBinaryIntSolution = OnesCountProblemBinaryIntSolution(r_seed)
-                vns_support = OnesCountProblemBinaryIntSolutionVnsSupport()
+            if solution_type=='int':
+                number_of_intervals:int = parameters['solutionNumberOfIntervals']
+                solution:FunctionOneVariableProblemMaxBinaryIntSolution = \
+                        FunctionOneVariableProblemMaxBinaryIntSolution(
+                                domain_from= problem.domain_low, 
+                                domain_to= problem.domain_high,
+                                number_of_intervals= number_of_intervals, 
+                                random_seed= r_seed)
+                vns_support:FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport = \
+                        FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport()
             else:
                 raise ValueError("Invalid solution/representation type is chosen.")
             # solver construction parameters
@@ -203,32 +208,8 @@ def main():
             vns_construction_params.k_max = k_max
             vns_construction_params.max_local_optima = max_local_optima
             vns_construction_params.local_search_type = local_search_type
-            solver:MaxOneProblemSolver = OnesCountProblemSolver.from_variable_neighborhood_search(
-                    vns_construction_params)
-        elif parameters['algorithm'] == 'total_enumeration':
-            # initial solution and te support
-            solution_type:str = parameters['solutionType']
-            te_support = None
-            if solution_type=='BitArray':
-                solution:OnesCountProblemBinaryBitArraySolution = OnesCountProblemBinaryBitArraySolution(r_seed)
-                solution.is_caching = evaluation_cache_is_used
-                te_support = OnesCountProblemBinaryBitArraySolutionTeSupport()
-            else:
-                raise ValueError("Invalid solution/representation type is chosen.")
-            # solver construction parameters
-            te_construction_params:TeOptimizerConstructionParameters = TeOptimizerConstructionParameters()
-            te_construction_params.output_control = output_control
-            te_construction_params.target_problem = problem
-            te_construction_params.solution_template = solution
-            te_construction_params.problem_solution_te_support = te_support
-            solver:OnesCountProblemSolver = OnesCountProblemSolver.from_total_enumeration(te_construction_params)
-        elif parameters['algorithm'] == 'integer_linear_programming':
-            # solver construction parameters
-            ilp_construction_params = OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters()
-            ilp_construction_params.output_control = output_control
-            ilp_construction_params.target_problem = problem
-            solver:OnesCountProblemSolver = OnesCountProblemSolver.from_integer_linear_programming(
-                    ilp_construction_params)
+            solver:FunctionOneVariableProblemMaxSolver = FunctionOneVariableProblemMaxSolver.\
+                    from_variable_neighborhood_search(vns_construction_params)
         else:
             raise ValueError('Invalid optimization algorithm is chosen.')
         solver.opt.optimize()

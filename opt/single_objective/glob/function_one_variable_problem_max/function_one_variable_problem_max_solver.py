@@ -1,5 +1,5 @@
 """ 
-The :mod:`opt.single_objective.teaching.function_one_variable_problem_solver` contains programming code that optimize :ref:`Max Function 1 Variable Problem` with various optimization techniques.
+The :mod:`opt.single_objective.teaching.function_one_variable_problem_maxsolver` contains programming code that optimize :ref:`Max Function 1 Variable Problem` with various optimization techniques.
 """
 import sys
 
@@ -42,19 +42,19 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer impor
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import \
         ProblemSolutionVnsSupport
 
-from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem_max import \
-        FunctionOneVariableProblemMax
+from opt.single_objective.glob.function_one_variable_problem_max.function_one_variable_problem_max import \
+        FunctionOneVariableProblemMaxMax
 
-from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem_binary_int_solution \
-        import FunctionOneVariableProblemBinaryIntSolution
-from opt.single_objective.teaching.function_one_variable_problem.\
-        function_one_variable_problem_binary_int_solution_vns_support import \
-        FunctionOneVariableProblemBinaryIntSolutionVnsSupport
+from opt.single_objective.glob.function_one_variable_problem_max.function_one_variable_problem_max_binary_int_solution \
+        import FunctionOneVariableProblemMaxBinaryIntSolution
+from opt.single_objective.glob.function_one_variable_problem_max.\
+        function_one_variable_problem_max_binary_int_solution_vns_support import \
+        FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport
 
 @dataclass
-class FunctionOneVariableProblemSolverConstructionParameters:
+class FunctionOneVariableProblemMaxSolverConstructionParameters:
         """
-        Instance of the class :class:`FunctionOneVariableProblemSolverConstructionParameters` represents constructor parameters for max ones problem solver.
+        Instance of the class :class:`FunctionOneVariableProblemMaxSolverConstructionParameters` represents constructor parameters for max ones problem solver.
         """
         method: str = None
         finish_control: FinishControl = None
@@ -68,9 +68,9 @@ class FunctionOneVariableProblemSolverConstructionParameters:
         vns_k_max: int = None
         vns_local_search_type: str = None
 
-class FunctionOneVariableProblemSolver:
+class FunctionOneVariableProblemMaxSolver:
         """
-        Instance of the class :class:`FunctionOneVariableProblemSolver` any of the developed solvers max ones problem.
+        Instance of the class :class:`FunctionOneVariableProblemMaxSolver` any of the developed solvers max ones problem.
         """
         def __init__(self, method:str=None,
                 finish_control:FinishControl = None,
@@ -85,7 +85,7 @@ class FunctionOneVariableProblemSolver:
                 vns_local_search_type:str = None,
         )->None:
                 """
-                Create new `FunctionOneVariableProblemSolver` instance
+                Create new `FunctionOneVariableProblemMaxSolver` instance
 
                 :param str method: method used for solving the Max Ones Problem 
                 :param FinishControl finish_control: controls finish criteria
@@ -139,11 +139,11 @@ class FunctionOneVariableProblemSolver:
                                 'variable_neighborhood_search'))
 
         @classmethod
-        def from_construction_tuple(cls, construction_params:FunctionOneVariableProblemSolverConstructionParameters=None):
+        def from_construction_tuple(cls, construction_params:FunctionOneVariableProblemMaxSolverConstructionParameters=None):
                 """
-                Additional constructor. Create new `FunctionOneVariableProblemSolver` instance from construction parameters
+                Additional constructor. Create new `FunctionOneVariableProblemMaxSolver` instance from construction parameters
 
-                :param `FunctionOneVariableProblemSolverConstructionParameters` construction_params: parameters for construction 
+                :param `FunctionOneVariableProblemMaxSolverConstructionParameters` construction_params: parameters for construction 
                 """
                 return cls(
                         method = construction_params.method,
@@ -162,12 +162,12 @@ class FunctionOneVariableProblemSolver:
         @classmethod
         def from_variable_neighborhood_search(cls, vns_construction_params:VnsOptimizerConstructionParameters=None):
                 """
-                Additional constructor. Create new `OnesCountProblemSolver` instance when solving method is `Variable Neighborhood Search`
+                Additional constructor. Create new `OnesCountProblemMaxSolver` instance when solving method is `Variable Neighborhood Search`
 
                 :param VnsOptimizerConstructionParameters vns_construction_params: construction parameters 
                 """
-                params:FunctionOneVariableProblemSolverConstructionParameters = \
-                        FunctionOneVariableProblemSolverConstructionParameters()
+                params:FunctionOneVariableProblemMaxSolverConstructionParameters = \
+                        FunctionOneVariableProblemMaxSolverConstructionParameters()
                 params.method:str = 'variable_neighborhood_search'
                 params.finish_control:FinishControl = vns_construction_params.finish_control
                 params.output_control:OutputControl = vns_construction_params.output_control

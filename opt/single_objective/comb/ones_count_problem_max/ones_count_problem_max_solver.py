@@ -42,24 +42,24 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer impor
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import \
         ProblemSolutionVnsSupport
 
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem_ilp_linopy import \
-        OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem_ilp_linopy import \
-        OnesCountProblemIntegerLinearProgrammingSolver
+from opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max_ilp_linopy import \
+        OnesCountProblemMaxIntegerLinearProgrammingSolverConstructionParameters
+from opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max_ilp_linopy import \
+        OnesCountProblemMaxIntegerLinearProgrammingSolver
 
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem_max import OnesCountProblemMax
+from opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max import OnesCountProblemMax
 
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_int_solution import \
-        OnesCountProblemBinaryIntSolution
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_int_solution_vns_support import \
-        OnesCountProblemBinaryIntSolutionVnsSupport
+from opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max_binary_int_solution import \
+        OnesCountProblemMaxBinaryIntSolution
+from opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max_binary_int_solution_vns_support import \
+        OnesCountProblemMaxBinaryIntSolutionVnsSupport
 
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_bit_array_solution import \
-        OnesCountProblemBinaryBitArraySolution
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_bit_array_solution_vns_support import \
-        OnesCountProblemBinaryBitArraySolutionVnsSupport
-from opt.single_objective.teaching.ones_count_problem.ones_count_problem_binary_bit_array_solution_te_support import\
-        OnesCountProblemBinaryBitArraySolutionTeSupport
+from opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max_binary_bit_array_solution import \
+        OnesCountProblemMaxBinaryBitArraySolution
+from opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max_binary_bit_array_solution_vns_support import \
+        OnesCountProblemMaxBinaryBitArraySolutionVnsSupport
+from opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max_binary_bit_array_solution_te_support import\
+        OnesCountProblemMaxBinaryBitArraySolutionTeSupport
 
 @dataclass
 class MaxOneProblemSolverConstructionParameters:
@@ -79,9 +79,9 @@ class MaxOneProblemSolverConstructionParameters:
         vns_local_search_type: str = None
         te_problem_solution_support:ProblemSolutionTeSupport = None
 
-class OnesCountProblemSolver:
+class OnesCountProblemMaxSolver:
     """
-    Instance of the class :class:`OnesCountProblemSolver` any of the developed solvers Ones Count Problem.
+    Instance of the class :class:`OnesCountProblemMaxSolver` any of the developed solvers Ones Count Problem.
     """
     def __init__(self, method:str=None,
             finish_control:FinishControl = None,
@@ -97,7 +97,7 @@ class OnesCountProblemSolver:
             te_problem_solution_support:ProblemSolutionTeSupport = None
     )->None:
         """
-        Create new `OnesCountProblemSolver` instance
+        Create new `OnesCountProblemMaxSolver` instance
 
         :param str method: method used for solving the Max Ones Problem 
         :param FinishControl finish_control: controls finish criteria
@@ -166,7 +166,7 @@ class OnesCountProblemSolver:
                     raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
             if not isinstance(target_problem, TargetProblem):
                     raise TypeError('Parameter \'target_problem\' must be \'TargetProblem\'.')
-            self.__optimizer:Optimizer = OnesCountProblemIntegerLinearProgrammingSolver(
+            self.__optimizer:Optimizer = OnesCountProblemMaxIntegerLinearProgrammingSolver(
                 output_control = output_control,
                 problem = target_problem
             )
@@ -178,7 +178,7 @@ class OnesCountProblemSolver:
     @classmethod
     def from_construction_tuple(cls, construction_params:MaxOneProblemSolverConstructionParameters=None):
         """
-        Additional constructor. Create new `OnesCountProblemSolver` instance from construction parameters
+        Additional constructor. Create new `OnesCountProblemMaxSolver` instance from construction parameters
 
         :param `MaxOneProblemSolverConstructionParameters` construction_params: parameters for construction 
         """
@@ -200,7 +200,7 @@ class OnesCountProblemSolver:
     @classmethod
     def from_variable_neighborhood_search(cls, vns_construction_params:VnsOptimizerConstructionParameters=None):
         """
-        Additional constructor. Create new `OnesCountProblemSolver` instance when solving method is `Variable Neighborhood Search`
+        Additional constructor. Create new `OnesCountProblemMaxSolver` instance when solving method is `Variable Neighborhood Search`
 
         :param VnsOptimizerConstructionParameters vns_construction_params: construction parameters 
         """
@@ -223,7 +223,7 @@ class OnesCountProblemSolver:
     @classmethod
     def from_total_enumeration(cls, te_construction_params:TeOptimizerConstructionParameters=None):
         """
-        Additional constructor. Create new `OnesCountProblemSolver` instance when solving method is `Total Enumeration`
+        Additional constructor. Create new `OnesCountProblemMaxSolver` instance when solving method is `Total Enumeration`
 
         :param TeOptimizerConstructionParameters te_construction_params: construction parameters 
         """
@@ -237,11 +237,11 @@ class OnesCountProblemSolver:
 
     @classmethod
     def from_integer_linear_programming(cls, ilp_construction_params:\
-            OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters=None):
+            OnesCountProblemMaxIntegerLinearProgrammingSolverConstructionParameters=None):
         """
-        Additional constructor. Create new `OnesCountProblemSolver` instance when solving method is `Integer Linear Programming`
+        Additional constructor. Create new `OnesCountProblemMaxSolver` instance when solving method is `Integer Linear Programming`
 
-        :param `OnesCountProblemIntegerLinearProgrammingSolverConstructionParameters` ilp_construction_params: construction parameters 
+        :param `OnesCountProblemMaxIntegerLinearProgrammingSolverConstructionParameters` ilp_construction_params: construction parameters 
         """
         params:MaxOneProblemSolverConstructionParameters = MaxOneProblemSolverConstructionParameters()
         params.method = 'integer_linear_programming'

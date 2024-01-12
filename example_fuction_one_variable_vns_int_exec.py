@@ -9,29 +9,28 @@ from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalS
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
-from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem_max import \
-                FunctionOneVariableProblemMax
-from opt.single_objective.teaching.function_one_variable_problem.function_one_variable_problem_binary_int_solution \
-                import FunctionOneVariableProblemBinaryIntSolution
-from opt.single_objective.teaching.function_one_variable_problem.\
-                function_one_variable_problem_binary_int_solution_vns_support \
-                import FunctionOneVariableProblemBinaryIntSolutionVnsSupport
+from opt.single_objective.glob.function_one_variable_problem_max.function_one_variable_problem_max import \
+                FunctionOneVariableProblemMaxMax
+from opt.single_objective.glob.function_one_variable_problem_max.function_one_variable_problem_max_binary_int_solution \
+                import FunctionOneVariableProblemMaxBinaryIntSolution
+from opt.single_objective.glob.function_one_variable_problem_max.\
+                function_one_variable_problem_max_binary_int_solution_vns_support \
+                import FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport
 
 def main():
-        output_control:OutputControl = OutputControl(write_to_output=False)
-        problem_to_solve:FunctionOneVariableProblemMax = FunctionOneVariableProblemMax.from_input_file(
-                input_file_path='./opt/single_objective/teaching/function_one_variable_problem/inputs/7-x^2f-3t3.txt',
+        problem_to_solve:FunctionOneVariableProblemMaxMax = FunctionOneVariableProblemMaxMax.from_input_file(
+                input_file_path='./opt/single_objective/glob/function_one_variable_problem_max/inputs/(7-x2)[-3,3].txt',
                 input_format='txt')
         print('Problem: {}'.format(problem_to_solve))            
-        solution:FunctionOneVariableProblemBinaryIntSolution = FunctionOneVariableProblemBinaryIntSolution(
+        solution:FunctionOneVariableProblemMaxBinaryIntSolution = FunctionOneVariableProblemMaxBinaryIntSolution(
                 domain_from=problem_to_solve.domain_low, domain_to=problem_to_solve.domain_high, 
                 number_of_intervals=6000, random_seed=43434343)
         solution.init_random(problem=problem_to_solve)
         solution.evaluate(problem_to_solve)           
         print('Solution: {}'.format(solution))
         finish:FinishControl = FinishControl(criteria='evaluations & seconds', evaluations_max=5000, seconds_max=10)
-        vns_support:FunctionOneVariableProblemBinaryIntSolutionVnsSupport = \
-                FunctionOneVariableProblemBinaryIntSolutionVnsSupport()
+        vns_support:FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport = \
+                FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport()
         output_control:OutputControl = OutputControl(write_to_output=False)
         additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(keep='')
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
