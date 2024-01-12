@@ -89,10 +89,10 @@ class OnesCountProblemMaxBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupp
             if all_ok:
                 break
         if tries < limit:
-            optimizer.evaluation += 1
             if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
                 return False
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
+            optimizer.evaluation += 1
             solution.evaluate(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
             optimizer.write_output_values_if_needed("after_step_in_iteration", "shaking")
@@ -127,11 +127,11 @@ class OnesCountProblemMaxBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupp
             positions:list[int] = indexes.current_state()
             # invert and compare, switch of new is better
             solution.representation.invert(positions) 
-            optimizer.evaluation += 1
             if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
                 solution.copy_from(start_sol)
                 return False
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
+            optimizer.evaluation += 1
             solution.evaluate(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
             if optimizer.is_first_better(solution, best_sol, problem):
@@ -171,11 +171,11 @@ class OnesCountProblemMaxBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupp
             positions:list[int] = indexes.current_state()
             # invert and compare, switch and exit if new is better
             solution.representation.invert(positions) 
-            optimizer.evaluation += 1
             if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
                 solution.copy_from(start_sol)
                 return False
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
+            optimizer.evaluation += 1
             solution.evaluate(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
             if optimizer.is_first_better(solution, start_sol, problem):

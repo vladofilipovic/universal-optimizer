@@ -63,10 +63,10 @@ class FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport(ProblemSolutionVn
                 break
         if tries < limit:
             solution.representation = solution.obtain_feasible_representation(problem)
-            optimizer.evaluation += 1
             if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
                 return False
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
+            optimizer.evaluation += 1
             solution.evaluate(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
             return True
@@ -95,11 +95,11 @@ class FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport(ProblemSolutionVn
             for i in positions:
                 mask |= 1 << i
             solution.representation ^= mask 
-            optimizer.evaluation += 1
             if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
                 solution.copy_from(best_sol)
                 return False
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
+            optimizer.evaluation += 1
             solution.evaluate(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
             if optimizer.is_first_better(solution, best_sol, problem):
@@ -134,11 +134,11 @@ class FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport(ProblemSolutionVn
             for i in positions:
                 mask |= 1 << i
             solution.representation ^= mask 
-            optimizer.evaluation += 1
             if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
                 solution.copy_from(start_sol)
                 return False
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
+            optimizer.evaluation += 1
             solution.evaluate(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
             if  QualityOfSolution.is_first_better(solution, start_sol, problem):

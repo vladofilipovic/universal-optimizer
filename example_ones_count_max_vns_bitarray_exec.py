@@ -17,7 +17,7 @@ from opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max_bin
 
 def main():
         output_control:OutputControl = OutputControl(write_to_output=False)
-        problem_to_solve:OnesCountProblemMax = OnesCountProblemMax.from_dimension(dimension=24)
+        problem_to_solve:OnesCountProblemMax = OnesCountProblemMax.from_dimension(dimension=7)
         solution:OnesCountProblemMaxBinaryBitArraySolution = OnesCountProblemMaxBinaryBitArraySolution()
         finish:FinishControl = FinishControl(criteria='evaluations', evaluations_max=5000)
         additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(keep='')
