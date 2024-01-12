@@ -13,26 +13,27 @@ from copy import deepcopy
 from uo.target_problem.target_problem import TargetProblem
 from uo.utils.logger import logger
 
-class OnesCountProblemMax(TargetProblem):
+
+class OnesCountMinProblem(TargetProblem):
     
     def __init__(self, dim:int)->None:
         """
-        Create new `OnesCountProblemMax` instance
+        Create new `OnesCountMinProblem` instance
 
         :param int dim: dimension of the problem
         """
         if not isinstance(dim, int):
-            raise TypeError('Parameter \'dimension\' for  OnesCountProblemMax should be \'int\'.')
+            raise TypeError('Parameter \'dimension\' for  OnesCountMinProblem should be \'int\'.')
         if dim <= 0:
-            raise ValueError('Parameter \'dimension\' for  OnesCountProblemMax should be greater than zero.')
-        super().__init__(name="OnesCountProblemMax", is_minimization=False, is_multi_objective=False)
+            raise ValueError('Parameter \'dimension\' for  OnesCountMinProblem should be greater than zero.')
+        super().__init__(name="OnesCountMinProblem", is_minimization=True, is_multi_objective=False)
         self.__dimension = dim
         
         
     @classmethod
     def from_dimension(cls, dimension:int):
         """
-        Additional constructor. Create new `OnesCountProblemMax` instance when dimension is specified
+        Additional constructor. Create new `OnesCountMinProblem` instance when dimension is specified
 
         :param int dimension: dimension of the problem
         """
@@ -66,32 +67,32 @@ class OnesCountProblemMax(TargetProblem):
     @classmethod
     def from_input_file(cls, input_file_path:str, input_format:str):
         """
-        Additional constructor. Create new `OnesCountProblemMax` instance when input file and input format are specified
+        Additional constructor. Create new `OnesCountMinProblem` instance when input file and input format are specified
 
         :param str input_file_path: path of the input file with problem data
         :param str input_format: format of the input
         """
-        dimension:int = OnesCountProblemMax.__load_from_file__(input_file_path, input_format)
+        dimension:int = OnesCountMinProblem.__load_from_file__(input_file_path, input_format)
         if dimension is None or str(dimension).strip() == '':
             raise ValueError('Loading from file \'{}\' produces invalid dimension'.format(input_file_path))
         return cls(dim=dimension)
 
     def __copy__(self):
         """
-        Internal copy of the `OnesCountProblemMax` problem
+        Internal copy of the `OnesCountMinProblem` problem
 
-        :return: new `OnesCountProblemMax` instance with the same properties
-        :rtype: `OnesCountProblemMax`
+        :return: new `OnesCountMinProblem` instance with the same properties
+        :rtype: `OnesCountMinProblem`
         """
         pr = deepcopy(self)
         return pr
 
     def copy(self):
         """
-        Copy the `OnesCountProblemMax` problem
+        Copy the `OnesCountMinProblem` problem
 
-        :return: new `OnesCountProblemMax` instance with the same properties
-        :rtype: OnesCountProblemMax
+        :return: new `OnesCountMinProblem` instance with the same properties
+        :rtype: OnesCountMinProblem
         """
         return self.__copy__()
 
@@ -159,5 +160,3 @@ class OnesCountProblemMax(TargetProblem):
         :return: str -- formatted max ones problem instance
         """
         return self.string_rep('|')
-
-

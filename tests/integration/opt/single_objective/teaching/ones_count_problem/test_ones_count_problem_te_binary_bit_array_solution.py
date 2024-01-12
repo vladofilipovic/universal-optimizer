@@ -17,21 +17,21 @@ from uo.algorithm.output_control import OutputControl
 from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizerConstructionParameters
 from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizer
 
-from opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max import OnesCountProblemMax
-from opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max_binary_bit_array_solution import OnesCountProblemMaxBinaryBitArraySolution
-from opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max_binary_bit_array_solution_te_support import OnesCountProblemMaxBinaryBitArraySolutionTeSupport
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution import OnesCountMaxProblemBinaryBitArraySolution
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_te_support import OnesCountMaxProblemBinaryBitArraySolutionTeSupport
 
-class TestOnesCountProblemMaxTeBinaryBitArraySolution(unittest.TestCase):
+class TestOnesCountMaxProblemTeBinaryBitArraySolution(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
-        print("setUpClass TestIntegrationOnesCountProblemMaxTeBinaryBitArraySolution\n")
+        print("setUpClass TestIntegrationOnesCountMaxProblemTeBinaryBitArraySolution\n")
 
     def setUp(self):
         self.output_control = OutputControl(False)
-        self.problem_to_solve:OnesCountProblemMax = OnesCountProblemMax.from_dimension(dimension=12)
-        self.solution:OnesCountProblemMaxBinaryBitArraySolution = OnesCountProblemMaxBinaryBitArraySolution(random_seed=43434343)
-        self.te_support:OnesCountProblemMaxBinaryBitArraySolutionTeSupport = OnesCountProblemMaxBinaryBitArraySolutionTeSupport()
+        self.problem_to_solve:OnesCountMaxProblem = OnesCountMaxProblem.from_dimension(dimension=12)
+        self.solution:OnesCountMaxProblemBinaryBitArraySolution = OnesCountMaxProblemBinaryBitArraySolution(random_seed=43434343)
+        self.te_support:OnesCountMaxProblemBinaryBitArraySolutionTeSupport = OnesCountMaxProblemBinaryBitArraySolutionTeSupport()
         construction_params:TeOptimizerConstructionParameters = TeOptimizerConstructionParameters()
         construction_params.output_control = self.output_control
         construction_params.target_problem = self.problem_to_solve
@@ -58,7 +58,7 @@ class TestOnesCountProblemMaxTeBinaryBitArraySolution(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        print("\ntearDownClass TestIntegrationOnesCountProblemMaxTeBinaryBitArraySolution")
+        print("\ntearDownClass TestIntegrationOnesCountMaxProblemTeBinaryBitArraySolution")
     
 if __name__ == '__main__':
     unittest.main()

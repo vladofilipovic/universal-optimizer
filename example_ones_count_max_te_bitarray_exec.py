@@ -7,15 +7,15 @@ from uo.algorithm.output_control import OutputControl
 from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizerConstructionParameters
 from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizer
 
-from opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max import OnesCountProblemMax
-from opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max_binary_bit_array_solution import OnesCountProblemMaxBinaryBitArraySolution
-from opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max_binary_bit_array_solution_te_support import OnesCountProblemMaxBinaryBitArraySolutionTeSupport
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution import OnesCountMaxProblemBinaryBitArraySolution
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_te_support import OnesCountMaxProblemBinaryBitArraySolutionTeSupport
 
 def main():
         output_control:OutputControl = OutputControl(write_to_output=False)
-        problem_to_solve:OnesCountProblemMax = OnesCountProblemMax.from_dimension(dimension=10)
-        solution:OnesCountProblemMaxBinaryBitArraySolution = OnesCountProblemMaxBinaryBitArraySolution()
-        te_support:OnesCountProblemMaxBinaryBitArraySolutionTeSupport = OnesCountProblemMaxBinaryBitArraySolutionTeSupport()
+        problem_to_solve:OnesCountMaxProblem = OnesCountMaxProblem.from_dimension(dimension=10)
+        solution:OnesCountMaxProblemBinaryBitArraySolution = OnesCountMaxProblemBinaryBitArraySolution()
+        te_support:OnesCountMaxProblemBinaryBitArraySolutionTeSupport = OnesCountMaxProblemBinaryBitArraySolutionTeSupport()
         construction_params:TeOptimizerConstructionParameters = TeOptimizerConstructionParameters()
         construction_params.output_control = output_control
         construction_params.target_problem = problem_to_solve

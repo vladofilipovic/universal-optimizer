@@ -1,7 +1,7 @@
 """ 
 ..  _py_ones_count_problem_bit_array_solution:
 
-The :mod:`~opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max_binary_bit_array_solution` contains class :class:`~opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max_binary_bit_array_solution.OnesCountProblemMaxBinaryBitArraySolution`, that represents solution of the :ref:`Problem_Max_Ones`, where `BitArray` representation of the problem has been used.
+The :mod:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution` contains class :class:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution.OnesCountMaxProblemBinaryBitArraySolution`, that represents solution of the :ref:`Problem_Max_Ones`, where `BitArray` representation of the problem has been used.
 """
 import sys
 from pathlib import Path
@@ -25,7 +25,7 @@ from uo.target_solution.target_solution import TargetSolution
 
 from uo.utils.logger import logger
 
-class OnesCountProblemMaxBinaryBitArraySolution(TargetSolution[BitArray,str]):
+class OnesCountMaxProblemBinaryBitArraySolution(TargetSolution[BitArray,str]):
     
     def __init__(self, random_seed:Optional[int]=None, 
             evaluation_cache_is_used:bool=False, 
@@ -33,7 +33,7 @@ class OnesCountProblemMaxBinaryBitArraySolution(TargetSolution[BitArray,str]):
             distance_calculation_cache_is_used:bool=False,
             distance_calculation_cache_max_size:int=0)->None:
         """
-        Create new `OnesCountProblemMaxBinaryBitArraySolution` instance
+        Create new `OnesCountMaxProblemBinaryBitArraySolution` instance
         """
         if not isinstance(random_seed, int) and random_seed is not None:
             raise TypeError('Parameter \'random_seed\' must be \'int\' or \'None\'.')
@@ -45,10 +45,10 @@ class OnesCountProblemMaxBinaryBitArraySolution(TargetSolution[BitArray,str]):
 
     def __copy__(self):
         """
-        Internal copy of the `OnesCountProblemMaxBinaryBitArraySolution`
+        Internal copy of the `OnesCountMaxProblemBinaryBitArraySolution`
 
-        :return: new `OnesCountProblemMaxBinaryBitArraySolution` instance with the same properties
-        :rtype: OnesCountProblemMaxBinaryBitArraySolution
+        :return: new `OnesCountMaxProblemBinaryBitArraySolution` instance with the same properties
+        :rtype: OnesCountMaxProblemBinaryBitArraySolution
         """
         sol = super().__copy__()
         if self.representation is not None:
@@ -59,10 +59,10 @@ class OnesCountProblemMaxBinaryBitArraySolution(TargetSolution[BitArray,str]):
 
     def copy(self):
         """
-        Copy the `OnesCountProblemMaxBinaryBitArraySolution`
+        Copy the `OnesCountMaxProblemBinaryBitArraySolution`
         
-        :return: new `OnesCountProblemMaxBinaryBitArraySolution` instance with the same properties
-        :rtype: `OnesCountProblemMaxBinaryBitArraySolution`
+        :return: new `OnesCountMaxProblemBinaryBitArraySolution` instance with the same properties
+        :rtype: `OnesCountMaxProblemBinaryBitArraySolution`
         """
         return self.__copy__()
 

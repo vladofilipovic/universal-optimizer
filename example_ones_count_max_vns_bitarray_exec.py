@@ -9,19 +9,19 @@ from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalS
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
-from opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max import OnesCountProblemMax
-from opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max_binary_bit_array_solution import \
-                OnesCountProblemMaxBinaryBitArraySolution
-from opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max_binary_bit_array_solution_vns_support import \
-                OnesCountProblemMaxBinaryBitArraySolutionVnsSupport
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution import \
+                OnesCountMaxProblemBinaryBitArraySolution
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_vns_support import \
+                OnesCountMaxProblemBinaryBitArraySolutionVnsSupport
 
 def main():
         output_control:OutputControl = OutputControl(write_to_output=False)
-        problem_to_solve:OnesCountProblemMax = OnesCountProblemMax.from_dimension(dimension=7)
-        solution:OnesCountProblemMaxBinaryBitArraySolution = OnesCountProblemMaxBinaryBitArraySolution()
+        problem_to_solve:OnesCountMaxProblem = OnesCountMaxProblem.from_dimension(dimension=7)
+        solution:OnesCountMaxProblemBinaryBitArraySolution = OnesCountMaxProblemBinaryBitArraySolution()
         finish:FinishControl = FinishControl(criteria='evaluations', evaluations_max=5000)
         additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(keep='')
-        vns_support:OnesCountProblemMaxBinaryBitArraySolutionVnsSupport = OnesCountProblemMaxBinaryBitArraySolutionVnsSupport()
+        vns_support:OnesCountMaxProblemBinaryBitArraySolutionVnsSupport = OnesCountMaxProblemBinaryBitArraySolutionVnsSupport()
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
         vns_construction_params.output_control = output_control
         vns_construction_params.target_problem = problem_to_solve

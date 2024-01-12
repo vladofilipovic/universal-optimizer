@@ -1,5 +1,5 @@
 """ 
-The :mod:`~opt.single_objective.glob.function_one_variable_problem_max.command_line` module is used for obtaining execution parameters for execution of the optimizers for max ones problem.
+The :mod:`~opt.single_objective.glob.function_one_variable_max_problem.command_line` module is used for obtaining execution parameters for execution of the optimizers for max ones problem.
 """
 import sys
 from pathlib import Path
@@ -19,11 +19,11 @@ default_parameters_cl = {
         'algorithm': 'variable_neighborhood_search', 
         'optimization_type': 'maximization', 
         'writeToOutputFile': True,
-        'outputFilePath':'opt/single_objective/teaching/ones_count_problem/outputs/dimension_77.csv', 
+        'outputFilePath':'opt/single_objective/comb/ones_count_max_problem/outputs/dimension_77.csv', 
         'outputFileNameAppendTimeStamp': False,
         'outputFields': "iteration, evaluation, best_solution.fitness_value, best_solution.argument()",
         'outputMoments': "after_algorithm, after_evaluation",
-        'inputFilePath': 'opt/single_objective/teaching/ones_count_problem/inputs/dimension_77.txt', 
+        'inputFilePath': 'opt/single_objective/comb/ones_count_max_problem/inputs/dimension_77.txt', 
         'inputFormat': 'txt', 
         'finishCriteria':'evaluations & seconds',
         'finishEvaluationsMax': 300, 

@@ -1,8 +1,8 @@
 """ 
 ..  _py_ones_count_problem_bit_array_solution_vns_support:
 
-The :mod:`~opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max_binary_bit_array_solution_vns_support` 
-contains class :class:`~opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max_binary_bit_array_solution_vns_support.OnesCountProblemMaxBinaryBitArraySolutionVnsSupport`, 
+The :mod:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_vns_support` 
+contains class :class:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_vns_support.OnesCountMaxProblemBinaryBitArraySolutionVnsSupport`, 
 that represents supporting parts of the `VNS` algorithm, where solution of the :ref:`Problem_Max_Ones` have `BitArray` 
 representation.
 """
@@ -29,44 +29,44 @@ from uo.target_solution.quality_of_solution import QualityOfSolution
 from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
 
-from opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max import OnesCountProblemMax
-from opt.single_objective.comb.ones_count_problem_max.ones_count_problem_max_binary_bit_array_solution import OnesCountProblemMaxBinaryBitArraySolution
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution import OnesCountMaxProblemBinaryBitArraySolution
 
-class OnesCountProblemMaxBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[BitArray,str]):
+class OnesCountMaxProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[BitArray,str]):
     
     def __init__(self)->None:
         """
-        Create new `OnesCountProblemMaxBinaryBitArraySolutionVnsSupport` instance
+        Create new `OnesCountMaxProblemBinaryBitArraySolutionVnsSupport` instance
         """
 
     def __copy__(self):
         """
-        Internal copy of the `OnesCountProblemMaxBinaryBitArraySolutionVnsSupport`
+        Internal copy of the `OnesCountMaxProblemBinaryBitArraySolutionVnsSupport`
 
-        :return: new `OnesCountProblemMaxBinaryBitArraySolutionVnsSupport` instance with the same properties
-        :rtype: `OnesCountProblemMaxBinaryBitArraySolutionVnsSupport`
+        :return: new `OnesCountMaxProblemBinaryBitArraySolutionVnsSupport` instance with the same properties
+        :rtype: `OnesCountMaxProblemBinaryBitArraySolutionVnsSupport`
         """
         sol = deepcopy(self)
         return sol
 
     def copy(self):
         """
-        Copy the `OnesCountProblemMaxBinaryBitArraySolutionVnsSupport` instance
+        Copy the `OnesCountMaxProblemBinaryBitArraySolutionVnsSupport` instance
 
-        :return: new `OnesCountProblemMaxBinaryBitArraySolutionVnsSupport` instance with the same properties
-        :rtype: `OnesCountProblemMaxBinaryBitArraySolutionVnsSupport`
+        :return: new `OnesCountMaxProblemBinaryBitArraySolutionVnsSupport` instance with the same properties
+        :rtype: `OnesCountMaxProblemBinaryBitArraySolutionVnsSupport`
         """
         return self.__copy__()
 
-    def shaking(self, k:int, problem:OnesCountProblemMax, solution:OnesCountProblemMaxBinaryBitArraySolution, 
+    def shaking(self, k:int, problem:OnesCountMaxProblem, solution:OnesCountMaxProblemBinaryBitArraySolution, 
             optimizer:Algorithm)->bool:
         """
         Random shaking of k parts such that new solution code does not differ more than k from all solution codes 
         inside shakingPoints 
 
         :param int k: int parameter for VNS
-        :param `OnesCountProblemMax` problem: problem that is solved
-        :param `OnesCountProblemMaxBinaryBitArraySolution` solution: solution used for the problem that is solved
+        :param `OnesCountMaxProblem` problem: problem that is solved
+        :param `OnesCountMaxProblemBinaryBitArraySolution` solution: solution used for the problem that is solved
         :param `Algorithm` optimizer: optimizer that is executed
         :return: if randomization is successful
         :rtype: bool
@@ -100,14 +100,14 @@ class OnesCountProblemMaxBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupp
         else:
             return False 
 
-    def local_search_best_improvement(self, k:int, problem:OnesCountProblemMax, solution:OnesCountProblemMaxBinaryBitArraySolution, 
+    def local_search_best_improvement(self, k:int, problem:OnesCountMaxProblem, solution:OnesCountMaxProblemBinaryBitArraySolution, 
             optimizer: Algorithm)->bool:
         """
         Executes "best improvement" variant of the local search procedure 
         
         :param int k: int parameter for VNS
-        :param `OnesCountProblemMax` problem: problem that is solved
-        :param `OnesCountProblemMaxBinaryBitArraySolution` solution: solution used for the problem that is solved
+        :param `OnesCountMaxProblem` problem: problem that is solved
+        :param `OnesCountMaxProblemBinaryBitArraySolution` solution: solution used for the problem that is solved
         :param `Algorithm` optimizer: optimizer that is executed
         :return: result of the local search procedure 
         :rtype: if local search is successful
@@ -116,8 +116,8 @@ class OnesCountProblemMaxBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupp
             return False
         if k < 1 or k > problem.dimension:
             return False
-        start_sol:OnesCountProblemMaxBinaryBitArraySolution = solution.copy()
-        best_sol:OnesCountProblemMaxBinaryBitArraySolution = solution.copy()
+        start_sol:OnesCountMaxProblemBinaryBitArraySolution = solution.copy()
+        best_sol:OnesCountMaxProblemBinaryBitArraySolution = solution.copy()
         better_sol_found:bool = False
         # initialize indexes
         indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k, problem.dimension)
@@ -146,14 +146,14 @@ class OnesCountProblemMaxBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupp
         solution.copy_from(start_sol)
         return False
     
-    def local_search_first_improvement(self, k:int, problem:OnesCountProblemMax, solution:OnesCountProblemMaxBinaryBitArraySolution, 
+    def local_search_first_improvement(self, k:int, problem:OnesCountMaxProblem, solution:OnesCountMaxProblemBinaryBitArraySolution, 
             optimizer: Algorithm)->bool:
         """
         Executes "first improvement" variant of the local search procedure 
         
         :param int k: int parameter for VNS
-        :param `OnesCountProblemMax` problem: problem that is solved
-        :param `OnesCountProblemMaxBinaryBitArraySolution` solution: solution used for the problem that is solved
+        :param `OnesCountMaxProblem` problem: problem that is solved
+        :param `OnesCountMaxProblemBinaryBitArraySolution` solution: solution used for the problem that is solved
         :param `Algorithm` optimizer: optimizer that is executed
         :return: result of the local search procedure 
         :rtype: if local search is successful
@@ -162,7 +162,7 @@ class OnesCountProblemMaxBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupp
             return False
         if k < 1 or k > problem.dimension:
             return False
-        start_sol:OnesCountProblemMaxBinaryBitArraySolution = solution.copy()
+        start_sol:OnesCountMaxProblemBinaryBitArraySolution = solution.copy()
         # initialize indexes
         indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k, problem.dimension)
         in_loop:bool = indexes.reset()
@@ -204,7 +204,7 @@ class OnesCountProblemMaxBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupp
         :return: string representation of vns support instance
         :rtype: str
         """        
-        return 'OnesCountProblemMaxBinaryBitArraySolutionVnsSupport'
+        return 'OnesCountMaxProblemBinaryBitArraySolutionVnsSupport'
 
     def __str__(self)->str:
         """

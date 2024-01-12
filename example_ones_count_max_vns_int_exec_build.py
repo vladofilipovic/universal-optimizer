@@ -17,7 +17,7 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer impor
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import \
         ProblemSolutionVnsSupport
 
-class OnesCountProblemMax2(TargetProblem):
+class OnesCountMaxProblem2(TargetProblem):
 
     def __init__(self, dim:int)->None:
         if not isinstance(dim, int):
@@ -27,7 +27,7 @@ class OnesCountProblemMax2(TargetProblem):
         if dim > 31:
             raise ValueError("Problem dimension should be less than 32")
         self.__dimension = dim
-        super().__init__("OnesCountProblemMax2", is_minimization=False)   
+        super().__init__("OnesCountMaxProblem2", is_minimization=False)   
 
     def __copy__(self):
         pr = deepcopy(self)
@@ -52,7 +52,7 @@ class OnesCountProblemMax2(TargetProblem):
     def __format__(self, spec:str)->str:
         return ''
 
-class OnesCountProblemMaxBinaryIntSolution(TargetSolution[int,str]):
+class OnesCountMaxProblemBinaryIntSolution(TargetSolution[int,str]):
     
     def __init__(self, random_seed:Optional[int]=None)->None:
         if not isinstance(random_seed, int) and random_seed is not None:
@@ -118,7 +118,7 @@ class OnesCountProblemMaxBinaryIntSolution(TargetSolution[int,str]):
     def __format__(self, spec:str)->str:
         return ''
 
-class OnesCountProblemMaxBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,str]):
+class OnesCountMaxProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,str]):
     
     def __init__(self)->None:
         return
@@ -130,7 +130,7 @@ class OnesCountProblemMaxBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[i
     def copy(self):
         return self.__copy__()
         
-    def shaking(self, k:int, problem:OnesCountProblemMax2, solution:OnesCountProblemMaxBinaryIntSolution, 
+    def shaking(self, k:int, problem:OnesCountMaxProblem2, solution:OnesCountMaxProblemBinaryIntSolution, 
             optimizer:Algorithm, )->bool:
         if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
             return False
@@ -156,15 +156,15 @@ class OnesCountProblemMaxBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[i
         else:
             return False 
 
-    def local_search_best_improvement(self, k:int, problem:OnesCountProblemMax2, solution:OnesCountProblemMaxBinaryIntSolution, 
+    def local_search_best_improvement(self, k:int, problem:OnesCountMaxProblem2, solution:OnesCountMaxProblemBinaryIntSolution, 
             optimizer: Algorithm)->bool:
         if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
             return False
         if k<1:
             return False
         # ls_bi for k==1
-        start_sol:OnesCountProblemMaxBinaryIntSolution = solution.copy()
-        best_sol:OnesCountProblemMaxBinaryIntSolution = solution.copy()
+        start_sol:OnesCountMaxProblemBinaryIntSolution = solution.copy()
+        best_sol:OnesCountMaxProblemBinaryIntSolution = solution.copy()
         better_sol_found:bool = False
         for i in range(0, problem.dimension):
             mask:int = 1 << i
@@ -181,14 +181,14 @@ class OnesCountProblemMaxBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[i
         solution.copy_from(start_sol)
         return False
 
-    def local_search_first_improvement(self, k:int, problem:OnesCountProblemMax2, solution:OnesCountProblemMaxBinaryIntSolution, 
+    def local_search_first_improvement(self, k:int, problem:OnesCountMaxProblem2, solution:OnesCountMaxProblemBinaryIntSolution, 
             optimizer: Algorithm)->bool:
         if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
             return False
         if k<1:
             return False
         # ls_fi for k==1
-        start_sol:OnesCountProblemMaxBinaryIntSolution = solution.copy()
+        start_sol:OnesCountMaxProblemBinaryIntSolution = solution.copy()
         for i in range(0, problem.dimension):
             mask:int = 1 << i
             solution.representation ^= mask 
@@ -202,7 +202,7 @@ class OnesCountProblemMaxBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[i
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
-        return 'OnesCountProblemMaxBinaryIntSolutionVnsSupport'
+        return 'OnesCountMaxProblemBinaryIntSolutionVnsSupport'
 
     def __str__(self)->str:
         return self.string_rep('|')
@@ -216,12 +216,12 @@ class OnesCountProblemMaxBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[i
 
 def main():
     output_control:OutputControl = OutputControl(write_to_output=False)
-    problem_to_solve:OnesCountProblemMax2 = OnesCountProblemMax2(dim=24)
-    solution:OnesCountProblemMaxBinaryIntSolution = OnesCountProblemMaxBinaryIntSolution()
+    problem_to_solve:OnesCountMaxProblem2 = OnesCountMaxProblem2(dim=24)
+    solution:OnesCountMaxProblemBinaryIntSolution = OnesCountMaxProblemBinaryIntSolution()
     finish:FinishControl = FinishControl( criteria='evaluations & seconds', 
             evaluations_max=500, seconds_max=10)
     additional_stat:AdditionalStatisticsControl = AdditionalStatisticsControl(keep='')
-    vns_support:OnesCountProblemMaxBinaryIntSolutionVnsSupport = OnesCountProblemMaxBinaryIntSolutionVnsSupport()
+    vns_support:OnesCountMaxProblemBinaryIntSolutionVnsSupport = OnesCountMaxProblemBinaryIntSolutionVnsSupport()
     vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
     vns_construction_params.output_control = output_control
     vns_construction_params.target_problem = problem_to_solve

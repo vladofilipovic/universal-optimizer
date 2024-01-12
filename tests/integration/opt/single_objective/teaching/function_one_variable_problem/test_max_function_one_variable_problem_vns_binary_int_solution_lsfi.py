@@ -14,36 +14,36 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer impor
         VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
-from opt.single_objective.glob.function_one_variable_problem_max.function_one_variable_problem_max import \
-        FunctionOneVariableProblemMaxMax
-from opt.single_objective.glob.function_one_variable_problem_max.function_one_variable_problem_max_binary_int_solution \
-    import FunctionOneVariableProblemMaxBinaryIntSolution
-from opt.single_objective.glob.function_one_variable_problem_max.\
-    function_one_variable_problem_max_binary_int_solution_vns_support import \
-        FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport
+from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem import \
+        FunctionOneVariableMaxProblemMax
+from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_binary_int_solution \
+    import FunctionOneVariableMaxProblemBinaryIntSolution
+from opt.single_objective.glob.function_one_variable_max_problem.\
+    function_one_variable_max_problem_binary_int_solution_vns_support import \
+        FunctionOneVariableMaxProblemBinaryIntSolutionVnsSupport
 
-class TestMaxFunctionOneVariableProblemMaxBinaryIntSolutionLsfi(unittest.TestCase):
+class TestMaxFunctionOneVariableMaxProblemBinaryIntSolutionLsfi(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
-        print("setUpClass TestIntegrationFunctionOneVariableProblemMaxBinaryIntSolutionLsbi\n")
+        print("setUpClass TestIntegrationFunctionOneVariableMaxProblemBinaryIntSolutionLsbi\n")
 
     def setUp(self):
         # Arrange
         self.output_control:OutputControl = OutputControl(write_to_output=False)
-        self.problem_to_solve:FunctionOneVariableProblemMaxMax = FunctionOneVariableProblemMaxMax(
+        self.problem_to_solve:FunctionOneVariableMaxProblemMax = FunctionOneVariableMaxProblemMax(
                 expression='7-x*x',
                 domain_low=-3,
                 domain_high=3 )
-        self.solution:FunctionOneVariableProblemMaxBinaryIntSolution = FunctionOneVariableProblemMaxBinaryIntSolution(
+        self.solution:FunctionOneVariableMaxProblemBinaryIntSolution = FunctionOneVariableMaxProblemBinaryIntSolution(
                 domain_from=self.problem_to_solve.domain_low, domain_to=self.problem_to_solve.domain_high, 
                 number_of_intervals=600, random_seed=43434343)
         self.solution.init_random(problem=self.problem_to_solve)
         self.solution.evaluate(self.problem_to_solve)           
         self.finish_control:FinishControl = FinishControl(criteria='evaluations & seconds', evaluations_max=10000, 
                 seconds_max=100)
-        self.vns_support:FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport = \
-                FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport()
+        self.vns_support:FunctionOneVariableMaxProblemBinaryIntSolutionVnsSupport = \
+                FunctionOneVariableMaxProblemBinaryIntSolutionVnsSupport()
         self.additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(keep='')
         self.vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
         self.vns_construction_params.output_control = self.output_control
@@ -79,7 +79,7 @@ class TestMaxFunctionOneVariableProblemMaxBinaryIntSolutionLsfi(unittest.TestCas
 
     @classmethod
     def tearDownClass(cls):
-        print("\ntearDownClass TestIntegrationFunctionOneVariableProblemMaxBinaryIntSolutionLsbi")
+        print("\ntearDownClass TestIntegrationFunctionOneVariableMaxProblemBinaryIntSolutionLsbi")
     
 if __name__ == '__main__':
     unittest.main()

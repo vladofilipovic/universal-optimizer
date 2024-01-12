@@ -1,5 +1,5 @@
 """ 
-The :mod:`opt.single_objective.teaching.ones_count_problem.solver` contains programming code that optimize :ref:`Max Ones<Problem_Max_Ones>` Problem with various optimization techniques.
+The :mod:`opt.single_objective.comb.ones_count_max_problem.solver` contains programming code that optimize :ref:`Max Ones<Problem_Max_Ones>` Problem with various optimization techniques.
 """
 import sys
 
@@ -36,20 +36,20 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer impor
 from uo.utils.files import ensure_dir 
 from uo.utils.logger import logger
 
-from opt.single_objective.glob.function_one_variable_problem_max.command_line import default_parameters_cl
-from opt.single_objective.glob.function_one_variable_problem_max.command_line import parse_arguments
+from opt.single_objective.glob.function_one_variable_max_problem.command_line import default_parameters_cl
+from opt.single_objective.glob.function_one_variable_max_problem.command_line import parse_arguments
 
-from opt.single_objective.glob.function_one_variable_problem_max.function_one_variable_problem_max import \
-        FunctionOneVariableProblemMaxMax
+from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem import \
+        FunctionOneVariableMaxProblemMax
 
-from opt.single_objective.glob.function_one_variable_problem_max.function_one_variable_problem_max_binary_int_solution \
-        import FunctionOneVariableProblemMaxBinaryIntSolution
-from opt.single_objective.glob.function_one_variable_problem_max\
-        .function_one_variable_problem_max_binary_int_solution_vns_support import \
-        FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport
+from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_binary_int_solution \
+        import FunctionOneVariableMaxProblemBinaryIntSolution
+from opt.single_objective.glob.function_one_variable_max_problem\
+        .function_one_variable_max_problem_binary_int_solution_vns_support import \
+        FunctionOneVariableMaxProblemBinaryIntSolutionVnsSupport
 
-from opt.single_objective.glob.function_one_variable_problem_max.function_one_variable_problem_max_solver import \
-        FunctionOneVariableProblemMaxSolver
+from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_solver import \
+        FunctionOneVariableMaxProblemSolver
 
 """ 
 Solver.
@@ -168,7 +168,7 @@ def main():
                 keep=additional_statistics_keep, 
                 max_local_optima=max_local_optima)
         # problem to be solved
-        problem = FunctionOneVariableProblemMaxMax.from_input_file(input_file_path=input_file_path,
+        problem = FunctionOneVariableMaxProblemMax.from_input_file(input_file_path=input_file_path,
                 input_format=input_format)
         start_time = datetime.now()
         if write_to_output_file:
@@ -185,14 +185,14 @@ def main():
             vns_support = None
             if solution_type=='int':
                 number_of_intervals:int = parameters['solutionNumberOfIntervals']
-                solution:FunctionOneVariableProblemMaxBinaryIntSolution = \
-                        FunctionOneVariableProblemMaxBinaryIntSolution(
+                solution:FunctionOneVariableMaxProblemBinaryIntSolution = \
+                        FunctionOneVariableMaxProblemBinaryIntSolution(
                                 domain_from= problem.domain_low, 
                                 domain_to= problem.domain_high,
                                 number_of_intervals= number_of_intervals, 
                                 random_seed= r_seed)
-                vns_support:FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport = \
-                        FunctionOneVariableProblemMaxBinaryIntSolutionVnsSupport()
+                vns_support:FunctionOneVariableMaxProblemBinaryIntSolutionVnsSupport = \
+                        FunctionOneVariableMaxProblemBinaryIntSolutionVnsSupport()
             else:
                 raise ValueError("Invalid solution/representation type is chosen.")
             # solver construction parameters
@@ -208,7 +208,7 @@ def main():
             vns_construction_params.k_max = k_max
             vns_construction_params.max_local_optima = max_local_optima
             vns_construction_params.local_search_type = local_search_type
-            solver:FunctionOneVariableProblemMaxSolver = FunctionOneVariableProblemMaxSolver.\
+            solver:FunctionOneVariableMaxProblemSolver = FunctionOneVariableMaxProblemSolver.\
                     from_variable_neighborhood_search(vns_construction_params)
         else:
             raise ValueError('Invalid optimization algorithm is chosen.')
