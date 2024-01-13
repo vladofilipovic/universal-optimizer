@@ -201,7 +201,7 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         self.current_solution.init_random(self.target_problem)
         self.evaluation = 1
         self.current_solution.evaluate(self.target_problem)
-        self.copy_to_best_solution(self.current_solution)
+        self.best_solution = self.current_solution
     
     def main_loop_iteration(self)->None:
         """
@@ -224,7 +224,7 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
                 self.additional_statistics_control.add_to_more_local_optima_if_required(
                             self.current_solution.string_representation(), self.current_solution.fitness_value,
                             self.best_solution.string_representation())
-                self.copy_to_best_solution(self.current_solution)
+                self.best_solution = self.current_solution
                 self.__k_current = self.k_min
             else:
                 self.__k_current += 1

@@ -1,4 +1,5 @@
 
+from datetime import datetime
 import unittest   
 import unittest.mock as mocker
 
@@ -185,6 +186,7 @@ class TestStringRep(unittest.TestCase):
         best_solution_mock = mocker.MagicMock(spec=TargetSolution)
         best_solution_mock.string_rep = mocker.Mock(return_value="something")
         solver = OnesCountMaxProblemIntegerLinearProgrammingSolver(output_control, problem)
+        solver.execution_started = datetime.now()
         solver.best_solution = best_solution_mock
         # Act
         result = solver.string_rep("|")

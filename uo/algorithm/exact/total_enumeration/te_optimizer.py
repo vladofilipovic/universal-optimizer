@@ -151,7 +151,7 @@ class TeOptimizer(Algorithm):
         self.evaluation += 1
         self.current_solution.evaluate(self.target_problem);
         self.write_output_values_if_needed("after_evaluation", "a_e")
-        self.copy_to_best_solution(self.current_solution);
+        self.best_solution = self.current_solution
         self.iteration = 1
 
     def optimize(self):
@@ -168,7 +168,7 @@ class TeOptimizer(Algorithm):
             self.__progress_method(self.target_problem, self.current_solution, self)
             new_is_better:bool = self.is_first_better(self.current_solution, self.best_solution, self.target_problem)
             if new_is_better:
-                self.copy_to_best_solution(self.current_solution)
+                self.best_solution = self.current_solution
             self.write_output_values_if_needed("after_iteration", "a_i")
             if not self.__can_progress_method(self.target_problem,self.current_solution, self):
                 break

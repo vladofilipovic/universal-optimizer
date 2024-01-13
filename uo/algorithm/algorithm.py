@@ -106,6 +106,16 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
         """
         return self.__copy__()
 
+    @Optimizer.best_solution.setter
+    def best_solution(self, value:TargetSolution)->None:
+        """
+        Property setter for the best solution so far
+        
+        :param TargetSolution value: best solution so far
+        """
+        super().best_solution = value
+        self.__iteration_best_found = self.iteration
+
     @property
     def solution_template(self)->Optional[TargetSolution]:
         """

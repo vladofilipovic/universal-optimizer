@@ -145,7 +145,8 @@ class Optimizer(metaclass=ABCMeta):
         """
         if not isinstance(value, TargetSolution):
             raise TypeError('Parameter \'best_solution\' must have type \'TargetSolution\'.')
-        self.__best_solution = value
+        self.__best_solution = value.copy()
+        self.__second_when_best_obtained = (datetime.now() - self.execution_started).total_seconds()
 
     @property
     def output_control(self)->OutputControl:
@@ -228,16 +229,6 @@ class Optimizer(metaclass=ABCMeta):
                         line += s_data + '\t'
                 output.write('\n')
                 logger.info(line)
-
-    def copy_to_best_solution(self, solution:TargetSolution)->None:
-        """
-        Copies function argument to become the best solution within metaheuristic instance and update info about time 
-        and iteration when the best solution is updated 
-
-        :param TargetSolution solution: solution that is source for coping operation
-        """
-        self.__best_solution = solution.copy()
-        self.__second_when_best_obtained = (datetime.now() - self.execution_started).total_seconds()
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
