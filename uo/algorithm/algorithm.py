@@ -113,7 +113,7 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
         
         :param TargetSolution value: best solution so far
         """
-        super().best_solution = value
+        super(Algorithm, self.__class__).best_solution.fset(self, value)
         self.__iteration_best_found = self.iteration
 
     @property

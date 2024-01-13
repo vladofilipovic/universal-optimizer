@@ -183,11 +183,12 @@ class TestStringRep(unittest.TestCase):
         # Arrange
         output_control = OutputControl()
         problem = OnesCountMaxProblem(dim=5)
-        best_solution_mock = mocker.MagicMock(spec=TargetSolution)
-        best_solution_mock.string_rep = mocker.Mock(return_value="something")
         solver = OnesCountMaxProblemIntegerLinearProgrammingSolver(output_control, problem)
         solver.execution_started = datetime.now()
-        solver.best_solution = best_solution_mock
+        self.best_solution_mock = mocker.MagicMock(spec=TargetSolution)
+        self.best_solution_mock.copy = mocker.Mock(return_value=self.best_solution_mock)
+        self.best_solution_mock.string_rep = mocker.Mock(return_value="solution mock")
+        solver.best_solution = self.best_solution_mock
         # Act
         result = solver.string_rep("|")
         # Assert
@@ -198,10 +199,12 @@ class TestStringRep(unittest.TestCase):
         # Arrange
         output_control = OutputControl()
         problem = OnesCountMaxProblem(dim=5)
-        best_solution_mock = mocker.MagicMock(spec=TargetSolution)
-        best_solution_mock.string_rep = mocker.Mock(return_value="something")
         solver = OnesCountMaxProblemIntegerLinearProgrammingSolver(output_control, problem)
-        solver.best_solution = best_solution_mock    
+        solver.execution_started = datetime.now()
+        self.best_solution_mock = mocker.MagicMock(spec=TargetSolution)
+        self.best_solution_mock.copy = mocker.Mock(return_value=self.best_solution_mock)
+        self.best_solution_mock.string_rep = mocker.Mock(return_value="solution mock")
+        solver.best_solution = self.best_solution_mock    
         # Act
         result = solver.string_rep("|")
         # Assert
@@ -214,10 +217,12 @@ class TestStringRep(unittest.TestCase):
         # Arrange
         output_control = OutputControl()
         problem = OnesCountMaxProblem(dim=5)
-        best_solution_mock = mocker.MagicMock(spec=TargetSolution)
-        best_solution_mock.string_rep = mocker.Mock(return_value="something")
         solver = OnesCountMaxProblemIntegerLinearProgrammingSolver(output_control, problem)
-        solver.best_solution = best_solution_mock    
+        solver.execution_started = datetime.now()
+        self.best_solution_mock = mocker.MagicMock(spec=TargetSolution)
+        self.best_solution_mock.copy = mocker.Mock(return_value=self.best_solution_mock)
+        self.best_solution_mock.string_rep = mocker.Mock(return_value="solution mock")
+        solver.best_solution = self.best_solution_mock    
         # Act
         result = solver.string_rep("|", indentation=2, indentation_symbol="-", group_start="[", group_end="]")    
         # Assert

@@ -1,8 +1,9 @@
 
-from io import TextIOWrapper
 import unittest   
 import unittest.mock as mocker
 
+from datetime import datetime
+from io import TextIOWrapper
 from copy import deepcopy
 
 from uo.target_problem.target_problem import TargetProblem
@@ -206,6 +207,7 @@ class Test__Optimizer__(unittest.TestCase):
         output_control = OutputControl()
         target_problem = TargetProblemVoid("a problem", True)
         optimizer = OptimizerVoid(name, output_control, target_problem)
+        optimizer.execution_started = datetime.now()
         optimizer.best_solution = TargetSolutionVoid(43, 0, 0, True)
         # Act
         string_rep = optimizer.string_rep("|")
