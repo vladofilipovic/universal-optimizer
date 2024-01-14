@@ -34,8 +34,9 @@ default_parameters_cl = {
         'solutionEvaluationCacheMaxSize': 0,
         'solutionDistanceCalculationCacheIsUsed': False,
         'solutionDistanceCalculationCacheMaxSize': 0,
+        'additionalStatisticsIsActive' : False,
         'additionalStatisticsKeep': 'None',
-        'additionalStatisticsMaxLocalOptima':7,
+        'additionalStatisticsMaxLocalOptimaCount':7,
         'kMin': 1,
         'kMax': 3,
         'localSearchType': 'localSearchBestImprovement',
@@ -101,11 +102,13 @@ def parse_arguments():
         parser_vns.add_argument('--solutionDistanceCalculationCacheMaxSize', type=int, default=0, 
                 help=("Maximum cache size for cache used in distance calculations between two solutions. " 
                 "Value 0 means that there is no limit on cache size.") )        
+        parser_vns.add_argument('--additionalStatisticsIsActive', type=bool, default=False, 
+                help=("Should gathering of additional statistics be active, or not.") )        
         parser_vns.add_argument('--additionalStatisticsKeep', type=str, 
                 default='None', 
                 help=("Comma-separated list of statistical data will be calculated and keep during solving. " 
                 "Currently, data within list can be: 'all_solution_code', 'distance_among_solutions'."))
-        parser_vns.add_argument('--additionalStatisticsMaxLocalOptima', type=int, default=3, 
+        parser_vns.add_argument('--additionalStatisticsMaxLocalOptimaCount', type=int, default=3, 
                 help=("Parameter maximum number of local optima kept during execution.") )    
         parser_vns.add_argument('--kMin', type=int, default=1, 
                 help=("VNS parameter k min.") )    

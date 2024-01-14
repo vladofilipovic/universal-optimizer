@@ -2,6 +2,7 @@
 The :mod:`~uo.algorithm.optimizer` module describes the class :class:`~uo.algorithm.Optimizer`.
 """
 
+from io import TextIOWrapper
 from pathlib import Path
 from typing import Optional
 directory = Path(__file__).resolve()
@@ -44,7 +45,7 @@ class Optimizer(metaclass=ABCMeta):
         self.__execution_started:Optional[datetime] = None
         self.__execution_ended:Optional[datetime] = None
         self.__best_solution:Optional[TargetSolution] = None
-        self.__second_when_best_obtained:Optional[float] = None
+        self.__time_when_best_found:Optional[float] = None
 
     @abstractmethod
     def __copy__(self):
@@ -127,6 +128,16 @@ class Optimizer(metaclass=ABCMeta):
         self.__execution_ended = value
 
     @property
+    def time_when_best_found(self)->Optional[float]:
+        """
+        Property getter for the time when best found
+        
+        :return: name of the algorithm instance 
+        :rtype: Optional[float]
+        """
+        return self.__time_when_best_found
+
+    @property
     def best_solution(self)->TargetSolution:
         """
         Property getter for the best solution obtained during metaheuristic execution
@@ -146,7 +157,7 @@ class Optimizer(metaclass=ABCMeta):
         if not isinstance(value, TargetSolution):
             raise TypeError('Parameter \'best_solution\' must have type \'TargetSolution\'.')
         self.__best_solution = value.copy()
-        self.__second_when_best_obtained = (datetime.now() - self.execution_started).total_seconds()
+        self.__time_when_best_found = (datetime.now() - self.execution_started).total_seconds()
 
     @property
     def output_control(self)->OutputControl:
@@ -169,12 +180,14 @@ class Optimizer(metaclass=ABCMeta):
             raise TypeError('Parameter \'output_control\' must have type \'OutputControl\'.')
         self.__output_control = value
 
-    def write_output_headers_if_needed(self):
+    def write_output_headers_if_needed(self)->None:
         """
         Write headers(with field names) to output file, if necessary 
         """            
         if self.output_control.write_to_output:
-            output:'TextIOWrapper' = self.output_control.output_file
+            output:TextIOWrapper = self.output_control.output_file
+            if output is None:
+                return
             f_hs:list[str] = self.output_control.fields_headings
             line:str = ''
             for f_h in f_hs:
@@ -183,7 +196,7 @@ class Optimizer(metaclass=ABCMeta):
                 output.write('\t')
                 line += '\t'
             output.write('\n')
-            logger.info(line)
+            logger.debug(line)
 
     def write_output_values_if_needed(self, step_name:str, step_name_value:str):
         """
@@ -192,43 +205,52 @@ class Optimizer(metaclass=ABCMeta):
         :param str step_name: name of the step when data should be written to output - have to be one of the following values: 'after_algorithm', 'before_algorithm', 'after_iteration', 'before_iteration', 'after_evaluation', 'before_evaluation', 'after_step_in_iteration', 'before_step_in_iteration'
         :param str step_name_value: what should be written to the output instead of step_name
         """            
-        if self.output_control.write_to_output:
-            output:'TextIOWrapper' = self.output_control.output_file
-            should_write:bool = False
-            if step_name == 'after_algorithm':
-                should_write = True
-            elif step_name == 'before_algorithm':
-                should_write = self.output_control.write_before_algorithm
-            elif step_name == 'after_iteration':
-                should_write = self.output_control.write_after_iteration
-            elif step_name == 'before_iteration':
-                should_write = self.output_control.write_before_iteration
-            elif step_name == 'after_evaluation':
-                should_write = self.output_control.write_after_evaluation
-            elif step_name == 'before_evaluation':
-                should_write = self.output_control.write_before_evaluation
-            elif step_name == 'after_step_in_iteration':
-                should_write = self.output_control.write_after_step_in_iteration
-            elif step_name == 'before_step_in_iteration':
-                should_write = self.output_control.write_before_step_in_iteration
-            else:
-                raise ValueError("Supplied step name '" + step_name + "' is not valid.")
-            if should_write:
-                line:str = ''
-                fields_def:list[str] = self.output_control.fields_definitions 
-                for f_def in fields_def:
-                    if f_def != "":
-                        try:
-                            data = eval(f_def)
-                            s_data:str = str(data)
-                            if s_data == "step_name":
-                                s_data = step_name_value
-                        except:
-                            s_data:str = 'XXX'
-                        output.write( s_data + '\t')
-                        line += s_data + '\t'
-                output.write('\n')
-                logger.info(line)
+        if not self.output_control.write_to_output:
+            return
+        output:'TextIOWrapper' = self.output_control.output_file
+        should_write:bool = False
+        if step_name == 'after_algorithm':
+            should_write = True
+        elif step_name == 'before_algorithm':
+            should_write = self.output_control.write_before_algorithm
+        elif step_name == 'after_iteration':
+            should_write = self.output_control.write_after_iteration
+        elif step_name == 'before_iteration':
+            should_write = self.output_control.write_before_iteration
+        elif step_name == 'after_evaluation':
+            should_write = self.output_control.write_after_evaluation
+        elif step_name == 'before_evaluation':
+            should_write = self.output_control.write_before_evaluation
+        elif step_name == 'after_step_in_iteration':
+            should_write = self.output_control.write_after_step_in_iteration
+        elif step_name == 'before_step_in_iteration':
+            should_write = self.output_control.write_before_step_in_iteration
+        else:
+            raise ValueError("Supplied step name '" + step_name + "' is not valid.")
+        if should_write:
+            line:str = ''
+            fields_def:list[str] = self.output_control.fields_definitions 
+            for f_def in fields_def:
+                if f_def != "":
+                    try:
+                        data = eval(f_def)
+                        s_data:str = str(data)
+                        if s_data == "step_name":
+                            s_data = step_name_value
+                    except:
+                        s_data:str = 'XXX'
+                    output.write( s_data + '\t')
+                    line += s_data + '\t'
+            output.write('\n')
+            logger.info(line)
+
+    @abstractmethod
+    def optimize(self)->None:
+        """
+        Method for optimization   
+        """
+        raise NotImplementedError()
+
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
@@ -271,18 +293,11 @@ class Optimizer(metaclass=ABCMeta):
                 indentation_symbol, group_start, group_end) + delimiter 
         for _ in range(0, indentation):
             s += indentation_symbol  
-        s += '__second_when_best_obtained=' + str(self.__second_when_best_obtained) + delimiter
+        s += '__second_when_best_found=' + str(self.__second_when_best_found) + delimiter
         for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_end 
         return s
-
-    @abstractmethod
-    def optimize(self)->None:
-        """
-        Method for optimization   
-        """
-        raise NotImplemented()
 
     @abstractmethod
     def __str__(self)->str:

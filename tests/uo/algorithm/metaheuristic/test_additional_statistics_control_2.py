@@ -244,7 +244,7 @@ class TestKeepAllSolutionCodes(unittest.TestCase):
         control = AdditionalStatisticsControl()
         # Act & Assert
         with self.assertRaises(TypeError):
-            control.add_to_all_solution_codes_if_required(123)
+            control.add_to_all_solution_codes(123)
 
     # Raises an AttributeError if the keep_all_solution_codes property is not a boolean
     def test_raises_attribute_error_if_keep_all_solution_codes_property_is_not_boolean(self):
@@ -422,7 +422,7 @@ class TestAddToAllSolutionCodesIfRequired(unittest.TestCase):
         representation = "solution123"
         control = AdditionalStatisticsControl(keep="")    
         # Act
-        control.add_to_all_solution_codes_if_required(representation)
+        control.add_to_all_solution_codes(representation)
         # Assert
         self.assertEqual(control.all_solution_codes, set())
 
@@ -432,7 +432,7 @@ class TestAddToAllSolutionCodesIfRequired(unittest.TestCase):
         representation = "solution123"
         control = AdditionalStatisticsControl(keep="all_solution_code") 
         # Act
-        control.add_to_all_solution_codes_if_required(representation)
+        control.add_to_all_solution_codes(representation)
         # Assert
         self.assertEqual(control.all_solution_codes, {"solution123"})
 
@@ -442,7 +442,7 @@ class TestAddToAllSolutionCodesIfRequired(unittest.TestCase):
         representation = ""
         control = AdditionalStatisticsControl(keep="all_solution_code")
         # Act
-        control.add_to_all_solution_codes_if_required(representation)
+        control.add_to_all_solution_codes(representation)
         # Assert
         self.assertEqual(control.all_solution_codes, set())
 
@@ -452,7 +452,7 @@ class TestAddToAllSolutionCodesIfRequired(unittest.TestCase):
         representation = "solution123"
         control = AdditionalStatisticsControl(keep="all_solution_code")
         # Act
-        control.add_to_all_solution_codes_if_required(representation)
+        control.add_to_all_solution_codes(representation)
         # Assert
         self.assertEqual(control.all_solution_codes, {"solution123"})
 
@@ -463,7 +463,7 @@ class TestAddToAllSolutionCodesIfRequired(unittest.TestCase):
         control = AdditionalStatisticsControl(keep="all_solution_code")
         # Act & Assert
         with self.assertRaises(TypeError):
-            control.add_to_all_solution_codes_if_required(representation)
+            control.add_to_all_solution_codes(representation)
 
     # When the 'keep_all_solution_codes' attribute is not a boolean, the constructor should raise a TypeError.
     def test_keep_all_solution_codes_not_boolean(self):
@@ -486,7 +486,7 @@ class TestAddToAllSolutionCodesIfRequired(unittest.TestCase):
         control = AdditionalStatisticsControl(keep="all_solution_code")
         control.all_solution_codes = {"solution123"}
         # Act
-        control.add_to_all_solution_codes_if_required(representation)
+        control.add_to_all_solution_codes(representation)
         # Assert
         self.assertEqual(control.all_solution_codes, {"solution123"})
         

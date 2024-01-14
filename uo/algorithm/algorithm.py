@@ -83,6 +83,7 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
         self.__solution_template:Optional[TargetSolution] = solution_template
         self.__evaluation:int = 0
         self.__iteration:int = 0
+        self.__evaluation_best_found:int = 0
         self.__iteration_best_found:int = 0
 
     @abstractmethod
@@ -114,6 +115,7 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
         :param TargetSolution value: best solution so far
         """
         super(Algorithm, self.__class__).best_solution.fset(self, value)
+        self.__evaluation_best_found = self.evaluation
         self.__iteration_best_found = self.iteration
 
     @property
@@ -186,6 +188,28 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
         if not isinstance(value, int):
             raise TypeError('Parameter \'iteration_best_found\' must have type \'int\'.')
         self.__iteration_best_found = value
+
+    @property
+    def evaluation_best_found(self)->int:
+        """
+        Property getter for the evaluation when the best solution is found
+        
+        :return: evaluation when the best solution is found
+        :rtype: int
+        """
+        return self.__evaluation_best_found
+
+    @evaluation_best_found.setter
+    def evaluation_best_found(self, value:int)->None:
+        """
+        Property setter the evaluation when the best solution is found
+        
+        :param int value: evaluation when the best solution is found
+        """
+        if not isinstance(value, int):
+            raise TypeError('Parameter \'evaluation_best_found\' must have type \'int\'.')
+        self.__evaluation_best_found = value
+
 
     def is_first_better(self, sol1:TargetSolution, sol2:TargetSolution, problem: TargetProblem)->Optional[bool]:
         """

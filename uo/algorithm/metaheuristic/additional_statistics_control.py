@@ -5,6 +5,7 @@ The :mod:`~uo.algorithm.metaheuristic.additional_statistics_control` module desc
 import random
 
 from pathlib import Path
+from typing import Optional
 directory = Path(__file__).resolve()
 import sys
 sys.path.append(directory.parent)
@@ -17,25 +18,30 @@ class AdditionalStatisticsControl:
     """
 
     def __init__(self, 
+            is_active:bool,
             keep:str='', 
-            max_local_optima:int = 10,
+            max_local_optima_count:int = 10,
         ) -> None:
         """
         Creates new :class:`uo.algorithm.metaheuristic.AdditionalStatisticsControl` instance
 
+        :param bool is_active: indicator if statistic control is active
         :param str keep: list of comma-separated strings that describes what to be kept during metaheuristic execution 
         (currently it contains strings `all_solution_code`, `more_local_optima`) 
-        :param int max_local_optima: number of local optima to be kept
+        :param int max_local_optima_count: number of local optima to be kept
         """
+        if not isinstance(is_active, bool):
+                raise TypeError('Parameter \'is_active\' must be \'bool\'.')
         if not isinstance(keep, str):
                 raise TypeError('Parameter \'keep\' must be \'str\'.')
-        if not isinstance(max_local_optima, int):
-                raise TypeError('Parameter \'max_local_optima\' must be \'int\'.')
-        if max_local_optima < 0:
-                raise ValueError('Parameter \'max_local_optima\' must be greater or equal to zero.')
-        self.__can_be_kept:list[str] = ['all_solution_code',
-                'more_local_optima']
-        self.__max_local_optima:int = max_local_optima
+        if not isinstance(max_local_optima_count, int):
+                raise TypeError('Parameter \'max_local_optima_count\' must be \'int\'.')
+        if max_local_optima_count < 0:
+                raise ValueError('Parameter \'max_local_optima_count\' must be greater or equal to zero.')
+        self.__is_active:bool = is_active
+        self.__max_local_optima_count:int = max_local_optima_count
+        self.__all_solution_codes:set[str] = set()
+        self.__more_local_optima:dict[str, float|list[float]] = {}
         self.__determine_keep_helper__(keep)
 
     def __determine_keep_helper__(self, keep:str):
@@ -52,27 +58,46 @@ class AdditionalStatisticsControl:
         kep:list[str] = keep.split(',')
         for ke in kep: 
             k:str = ke.strip()
-            if k=='' or k=='None':
+            if k=='' or k=='none':
                 continue
             if k == 'all_solution_code':
                 self.__keep_all_solution_codes = True
             elif k == 'more_local_optima':
                 self.__keep_more_local_optima = True
             else:
-                raise ValueError("Invalid value for keep '{}'. Should be one of:{}.".format( k, 
-                    "all_solution_code, more_local_optima"))
+                raise ValueError("Invalid value for keep '{}'. Should be either empty string or 'none', either comma-separated sequence of: 'allSolutionCode', 'moreLocalOptima'.".format(k))
         self.__all_solution_codes:set[str] = set()
         self.__more_local_optima:dict[str, float|list[float]] = {}
 
     @property
-    def max_local_optima(self)->int:
+    def is_active(self)->bool:
         """
-        Property getter for maximum number of local optima that will be kept
+        Property getter for for indicator if additional statistics is active.
 
-        :return: maximum number of local optima that will be kept
-        :rtype: int
+        :return: indicator if additional statistics is active.
+        :rtype: bool
         """
-        return self.__max_local_optima
+        return self.__is_active
+
+    @property
+    def keep_all_solution_codes(self)->bool:
+        """
+        Property getter for property if all solution codes to be kept
+
+        :return: if all solution codes to be kept
+        :rtype: bool
+        """
+        return self.__keep_all_solution_codes
+
+    @property
+    def keep_more_local_optima(self)->bool:
+        """
+        Property getter for decision if more local optima should be kept
+
+        :return: if more local optima should be kept
+        :rtype: bool
+        """
+        return self.__keep_more_local_optima
 
     @property
     def keep(self)->str:
@@ -100,26 +125,6 @@ class AdditionalStatisticsControl:
         self.__determine_keep_helper__(value)
 
     @property
-    def keep_all_solution_codes(self)->bool:
-        """
-        Property getter for property if all solution codes to be kept
-
-        :return: if all solution codes to be kept
-        :rtype: bool
-        """
-        return self.__keep_all_solution_codes
-
-    @property
-    def keep_more_local_optima(self)->bool:
-        """
-        Property getter for decision if more local optima should be kept
-
-        :return: if more local optima should be kept
-        :rtype: bool
-        """
-        return self.__keep_more_local_optima
-
-    @property
     def all_solution_codes(self)->set[str]:
         """
         Property getter for all solution codes, if kept
@@ -129,14 +134,15 @@ class AdditionalStatisticsControl:
         """
         return self.__all_solution_codes
 
-    @all_solution_codes.setter
-    def all_solution_codes(self, value:set[str])->None:
+    @property
+    def max_local_optima(self)->int:
         """
-        Property setter for the all solution codes property 
+        Property getter for maximum number of local optima that will be kept
+
+        :return: maximum number of local optima that will be kept
+        :rtype: int
         """
-        if not isinstance(value, set):
-            raise TypeError('Value for property \'all_solution_codes\' should be set of strings.')
-        self.__all_solution_codes = value
+        return self.__max_local_optima
 
     @property
     def more_local_optima(self)->dict[str, float|list[float]]:
@@ -148,16 +154,7 @@ class AdditionalStatisticsControl:
         """
         return self.__more_local_optima
 
-    @more_local_optima.setter
-    def more_local_optima(self, value:dict[str, float|list[float]])->None:
-        """
-        Property setter for the more local optimums 
-        """
-        if not isinstance(value, dict):
-            raise TypeError('Value for property \'more_local_optima\' must be dictionary with adequate component types.')
-        self.__more_local_optima = value
-
-    def add_to_all_solution_codes_if_required(self, representation:str)->None:
+    def add_to_all_solution_codes(self, representation:str)->None:
         """
         Filling all solution code, if necessary 
 
@@ -172,7 +169,7 @@ class AdditionalStatisticsControl:
         if self.keep_all_solution_codes:
             self.all_solution_codes.add(representation)
 
-    def add_to_more_local_optima_if_required(self, solution_to_add_rep:str, solution_to_add_fitness:int|float|list[float], 
+    def add_to_more_local_optima(self, solution_to_add_rep:str, solution_to_add_fitness:Optional[float], 
             best_solution_rep:str)->bool:
         """
         Add solution to the local optima structure 
@@ -186,9 +183,8 @@ class AdditionalStatisticsControl:
         if not isinstance(solution_to_add_rep, str):
             raise TypeError('Parameter \'solution_to_add_rep\' must be string.')
         if not isinstance(solution_to_add_fitness, int) \
-                    and not isinstance(solution_to_add_fitness, float)\
-                    and not isinstance(solution_to_add_fitness, list):
-            raise TypeError('Parameter \'solution_to_add_fitness\' must be int, float or list.')
+                    and not isinstance(solution_to_add_fitness, float):
+            raise TypeError('Parameter \'solution_to_add_fitness\' must be int or float.')
         if not isinstance(best_solution_rep, str):
             raise TypeError('Parameter \'best_solution_rep\' must be string.')
         if not self.keep_more_local_optima:

@@ -37,13 +37,13 @@ class TestAdditionalStatisticsControl(unittest.TestCase):
         self.assertEqual(control.keep_all_solution_codes, True)
         self.assertEqual(control.keep_more_local_optima, True)
 
-    # Calling 'add_to_all_solution_codes_if_required' with 'keep_all_solution_codes' set to True should add the solution representation to the 'all_solution_codes' set.
+    # Calling 'add_to_all_solution_codes' with 'keep_all_solution_codes' set to True should add the solution representation to the 'all_solution_codes' set.
     def test_add_to_all_solution_codes_if_required(self):
         # Arrange
         control = AdditionalStatisticsControl(keep='all_solution_code')
         representation = 'solution_representation'
         # Act
-        control.add_to_all_solution_codes_if_required(representation)
+        control.add_to_all_solution_codes(representation)
         # Assert
         self.assertIn(representation, control.all_solution_codes)
 
@@ -174,7 +174,7 @@ class TestAddToAllSolutionCodesIfRequired(unittest.TestCase):
         control = AdditionalStatisticsControl(keep='more_local_optima')
         representation = "solution1"
         # Act
-        control.add_to_all_solution_codes_if_required(representation)
+        control.add_to_all_solution_codes(representation)
         # Assert
         self.assertNotIn(representation, control.all_solution_codes)
 
@@ -184,7 +184,7 @@ class TestAddToAllSolutionCodesIfRequired(unittest.TestCase):
         control = AdditionalStatisticsControl(keep='all_solution_code')
         representation = "solution1"
         # Act
-        control.add_to_all_solution_codes_if_required(representation)
+        control.add_to_all_solution_codes(representation)
         # Assert
         self.assertIn(representation, control.all_solution_codes)
 
@@ -194,7 +194,7 @@ class TestAddToAllSolutionCodesIfRequired(unittest.TestCase):
         control = AdditionalStatisticsControl(keep='all_solution_code')
         representation = "solution1"
         # Act
-        control.add_to_all_solution_codes_if_required(representation)
+        control.add_to_all_solution_codes(representation)
         # Assert
         self.assertIn(representation, control.all_solution_codes)
 
@@ -205,7 +205,7 @@ class TestAddToAllSolutionCodesIfRequired(unittest.TestCase):
         representation = 123
         # Act & Assert
         with self.assertRaises(TypeError):
-            control.add_to_all_solution_codes_if_required(representation)
+            control.add_to_all_solution_codes(representation)
 
     # If all_solution_codes is not a set, raise an AttributeError.
     def test_all_solution_codes_not_set(self):
@@ -213,7 +213,7 @@ class TestAddToAllSolutionCodesIfRequired(unittest.TestCase):
         control = AdditionalStatisticsControl(keep='more_local_optima')
         representation = "solution1"
         # Act
-        control.add_to_all_solution_codes_if_required(representation)
+        control.add_to_all_solution_codes(representation)
         # Assert
         self.assertEqual(len(control.all_solution_codes), 0)
         
@@ -225,7 +225,7 @@ class TestAddToAllSolutionCodesIfRequired(unittest.TestCase):
         representation = "solution1"
         control.all_solution_codes = {representation}
         # Act
-        control.add_to_all_solution_codes_if_required(representation)
+        control.add_to_all_solution_codes(representation)
         # Assert
         self.assertEqual(len(control.all_solution_codes), 1)
         

@@ -161,9 +161,11 @@ def main():
         calculation_solution_distance_cache_is_used:bool = parameters['solutionDistanceCalculationCacheIsUsed']
         calculation_solution_distance_cache_max_size:int = parameters['solutionDistanceCalculationCacheMaxSize']
         # additional statistic control setup
+        additional_statistics_is_active:bool =  parameters['additionalStatisticsIsActive']
         additional_statistics_keep:str =  parameters['additionalStatisticsKeep']
-        max_local_optima = parameters['additionalStatisticsMaxLocalOptima']
+        max_local_optima = parameters['additionalStatisticsMaxLocalOptimaCount']
         additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(
+                is_active=additional_statistics_is_active,
                 keep=additional_statistics_keep, 
                 max_local_optima=max_local_optima)
         # problem to be solved

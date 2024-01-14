@@ -133,13 +133,6 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         """
         return self.__additional_statistics_control
 
-    @abstractmethod
-    def main_loop_iteration(self)->None:
-        """
-        One iteration within main loop of the metaheuristic algorithm
-        """
-        raise NotImplementedError
-
     def elapsed_seconds(self)->float:
         """
         Calculate time elapsed during execution of the metaheuristic algorithm 
@@ -149,6 +142,27 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         """
         delta = datetime.now() - self.execution_started
         return delta.total_seconds()
+
+    def update_additional_statistics_if_required(self, solution:TargetSolution)->None:
+        """
+        Updates the additional statistics, if required.
+        """
+        if not isinstance(self.additional_statistics_control, AdditionalStatisticsControl):
+            raise ValueError('Field \'additional_statistics_control\' must have type \'AdditionalStatisticsControl\'.')
+        asc:AdditionalStatisticsControl = self.additional_statistics_control
+        if not asc.is_active:
+            return
+        if asc.keep_all_solution_codes:
+            asc.add_to_all_solution_codes(solution.string_representation())
+        if asc.keep_more_local_optima:
+            asc.add_to_more_local_optima(solution.string_representation(), self.best_solution.fitness_value, self.best_solution.string_representation())
+
+    @abstractmethod
+    def main_loop_iteration(self)->None:
+        """
+        One iteration within main loop of the metaheuristic algorithm
+        """
+        raise NotImplementedError
 
     def main_loop(self)->None:
         """
