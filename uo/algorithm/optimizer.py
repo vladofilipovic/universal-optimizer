@@ -293,7 +293,7 @@ class Optimizer(metaclass=ABCMeta):
                 indentation_symbol, group_start, group_end) + delimiter 
         for _ in range(0, indentation):
             s += indentation_symbol  
-        s += '__second_when_best_found=' + str(self.__second_when_best_found) + delimiter
+        s += '__time_when_best_found=' + str(self.__time_when_best_found) + delimiter
         for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_end 

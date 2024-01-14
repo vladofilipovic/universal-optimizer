@@ -36,8 +36,8 @@ class TestSingleSolutionMetaheuristic(unittest.TestCase):
         self.assertEqual(metaheuristic.finish_control.seconds_max, finish_control.seconds_max)
         self.assertEqual(metaheuristic.random_seed, random_seed)
         self.assertEqual(metaheuristic.additional_statistics_control.keep, additional_statistics_control.keep)
-        self.assertEqual(metaheuristic.additional_statistics_control.max_local_optima, 
-                        additional_statistics_control.max_local_optima)
+        self.assertEqual(metaheuristic.additional_statistics_control.max_local_optima_count, 
+                        additional_statistics_control.max_local_optima_count)
         self.assertEqual(metaheuristic.output_control.fields, output_control.fields)
         self.assertEqual(metaheuristic.output_control.moments, output_control.moments)
         self.assertEqual(metaheuristic.target_problem.name, target_problem.name)
@@ -73,8 +73,8 @@ class TestSingleSolutionMetaheuristic(unittest.TestCase):
         self.assertEqual(metaheuristic.random_seed, copied_metaheuristic.random_seed)
         self.assertEqual(metaheuristic.additional_statistics_control.keep, 
                         copied_metaheuristic.additional_statistics_control.keep)
-        self.assertEqual(metaheuristic.additional_statistics_control.max_local_optima, 
-                        copied_metaheuristic.additional_statistics_control.max_local_optima)
+        self.assertEqual(metaheuristic.additional_statistics_control.max_local_optima_count, 
+                        copied_metaheuristic.additional_statistics_control.max_local_optima_count)
         self.assertEqual(metaheuristic.output_control.fields, copied_metaheuristic.output_control.fields)
         self.assertEqual(metaheuristic.output_control.moments, copied_metaheuristic.output_control.moments)
         self.assertEqual(metaheuristic.target_problem.name, copied_metaheuristic.target_problem.name)

@@ -18,7 +18,7 @@ class AdditionalStatisticsControl:
     """
 
     def __init__(self, 
-            is_active:bool,
+            is_active:bool=False,
             keep:str='', 
             max_local_optima_count:int = 10,
         ) -> None:
@@ -65,7 +65,7 @@ class AdditionalStatisticsControl:
             elif k == 'more_local_optima':
                 self.__keep_more_local_optima = True
             else:
-                raise ValueError("Invalid value for keep '{}'. Should be either empty string or 'none', either comma-separated sequence of: 'allSolutionCode', 'moreLocalOptima'.".format(k))
+                raise ValueError("Invalid value for keep \'{}\'. Should be either empty string or 'none', either comma-separated sequence of: 'all_solution_code', 'more_local_optima'.".format(k))
         self.__all_solution_codes:set[str] = set()
         self.__more_local_optima:dict[str, float|list[float]] = {}
 
@@ -135,14 +135,14 @@ class AdditionalStatisticsControl:
         return self.__all_solution_codes
 
     @property
-    def max_local_optima(self)->int:
+    def max_local_optima_count(self)->int:
         """
         Property getter for maximum number of local optima that will be kept
 
         :return: maximum number of local optima that will be kept
         :rtype: int
         """
-        return self.__max_local_optima
+        return self.__max_local_optima_count
 
     @property
     def more_local_optima(self)->dict[str, float|list[float]]:
@@ -191,7 +191,7 @@ class AdditionalStatisticsControl:
             return False
         if solution_to_add_rep in self.more_local_optima:
             return False
-        if len(self.more_local_optima) >= self.__max_local_optima:
+        if len(self.more_local_optima) >= self.__max_local_optima_count:
             # removing random, just taking care not to remove the best ones
             while True:
                 code:str = random.choice(list(self.more_local_optima.keys()))

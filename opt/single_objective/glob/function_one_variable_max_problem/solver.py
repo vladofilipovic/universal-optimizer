@@ -157,11 +157,11 @@ def main():
         # additional statistic control setup
         additional_statistics_is_active:bool =  parameters['additionalStatisticsIsActive']
         additional_statistics_keep:str =  parameters['additionalStatisticsKeep']
-        max_local_optima = parameters['additionalStatisticsMaxLocalOptimaCount']
+        max_local_optima_count = parameters['additionalStatisticsMaxLocalOptimaCount']
         additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(
                 is_active=additional_statistics_is_active,
                 keep=additional_statistics_keep, 
-                max_local_optima=max_local_optima)
+                max_local_optima_count=max_local_optima_count)
         # problem to be solved
         problem = FunctionOneVariableMaxProblemMax.from_input_file(input_file_path=input_file_path,
                 input_format=input_format)
@@ -201,7 +201,6 @@ def main():
             vns_construction_params.additional_statistics_control = additional_statistics_control
             vns_construction_params.k_min = k_min
             vns_construction_params.k_max = k_max
-            vns_construction_params.max_local_optima = max_local_optima
             vns_construction_params.local_search_type = local_search_type
             solver:FunctionOneVariableMaxProblemSolver = FunctionOneVariableMaxProblemSolver.\
                     from_variable_neighborhood_search(vns_construction_params)
