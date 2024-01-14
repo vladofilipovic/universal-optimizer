@@ -16,8 +16,9 @@ sys.path.append(directory)
 sys.path.append(directory.parent)
 sys.path.append(directory.parent.parent)
 sys.path.append(directory.parent.parent.parent)
+sys.path.append(directory.parent.parent.parent.parent)
 
-from random import randrange
+from random import random, randrange
 from random import seed
 from datetime import datetime
 
@@ -140,7 +141,7 @@ def main():
                 output_file.write("# RandomSeed is not predefined. Generated seed value:  %d\n" % r_seed)
             seed(r_seed)
         # finishing criteria setup
-        finish_criteria:string = parameters['finishCriteria']
+        finish_criteria:str = parameters['finishCriteria']
         max_number_evaluations:int = parameters['finishEvaluationsMax']
         max_number_iterations:int = parameters['finishIterationsMax']
         max_time_for_execution_in_seconds = parameters['finishSecondsMax']
@@ -185,7 +186,11 @@ def main():
                                 domain_from= problem.domain_low, 
                                 domain_to= problem.domain_high,
                                 number_of_intervals= number_of_intervals, 
-                                random_seed= r_seed)
+                                random_seed= r_seed,
+                                evaluation_cache_is_used=evaluation_cache_is_used,
+                                evaluation_cache_max_size=evaluation_cache_max_size,
+                                distance_calculation_cache_is_used=calculation_solution_distance_cache_is_used,
+                                distance_calculation_cache_max_size=calculation_solution_distance_cache_max_size)
                 vns_support:FunctionOneVariableMaxProblemBinaryIntSolutionVnsSupport = \
                         FunctionOneVariableMaxProblemBinaryIntSolutionVnsSupport()
             else:
