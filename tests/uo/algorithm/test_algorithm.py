@@ -129,14 +129,6 @@ class TestAlgorithm(unittest.TestCase):
         with self.assertRaises(TypeError):
             algorithm = AlgorithmVoid(name="MyAlgorithm", output_control=OutputControl(), target_problem=None)
 
-    # Raises a ValueError if the information about minimization or maximization is not set within the metaheuristic target problem.
-    def test_minimization_not_set(self):
-        # Arrange
-        # Act & Assert
-        with self.assertRaises(TypeError):
-            algorithm = AlgorithmVoid(name="MyAlgorithm", output_control=OutputControl(), 
-                                    target_problem=TargetProblemVoid("aaa", is_minimization=None))
-
     # Algorithm can generate a string representation of itself.
     def test_algorithm_string_representation(self):
         # Arrange

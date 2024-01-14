@@ -220,7 +220,7 @@ def main():
     solution:OnesCountMaxProblemBinaryIntSolution = OnesCountMaxProblemBinaryIntSolution()
     finish:FinishControl = FinishControl( criteria='evaluations & seconds', 
             evaluations_max=500, seconds_max=10)
-    additional_stat:AdditionalStatisticsControl = AdditionalStatisticsControl(keep='')
+    additional_stat:AdditionalStatisticsControl = AdditionalStatisticsControl(is_active=False, keep='')
     vns_support:OnesCountMaxProblemBinaryIntSolutionVnsSupport = OnesCountMaxProblemBinaryIntSolutionVnsSupport()
     vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
     vns_construction_params.output_control = output_control

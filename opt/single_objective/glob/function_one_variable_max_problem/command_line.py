@@ -17,7 +17,6 @@ from argparse import ArgumentParser
 
 default_parameters_cl = {
         'algorithm': 'variable_neighborhood_search', 
-        'optimization_type': 'maximization', 
         'writeToOutputFile': True,
         'outputFilePath':'opt/single_objective/comb/ones_count_max_problem/outputs/dimension_77.csv', 
         'outputFileNameAppendTimeStamp': False,
@@ -35,7 +34,7 @@ default_parameters_cl = {
         'solutionDistanceCalculationCacheIsUsed': False,
         'solutionDistanceCalculationCacheMaxSize': 0,
         'additionalStatisticsIsActive': False,
-        'additionalStatisticsKeep': 'None',
+        'additionalStatisticsKeep': 'none',
         'additionalStatisticsMaxLocalOptimaCount':7,
         'kMin': 1,
         'kMax': 3,
@@ -54,8 +53,6 @@ def parse_arguments():
         subparsers = parser.add_subparsers(dest='algorithm')
 
         parser_vns = subparsers.add_parser('variable_neighborhood_search', help='Execute VNS metaheuristic for ones_count_problem.')
-        parser_vns.add_argument('optimization_type', help='Decide if minimization or maximization will be executed.'
-                , nargs='?', choices=('minimization', 'maximization'))
         parser_vns.add_argument('--writeToOutputFile', type=bool, default=True, 
                 help=("Should results of metaheuristic execution be written to output file.") )        
         parser_vns.add_argument('--outputFilePath', type=str, default='output/out.txt', 
@@ -106,7 +103,7 @@ def parse_arguments():
         parser_vns.add_argument('--additionalStatisticsIsActive', type=bool, default=False, 
                 help=("Should gathering of additional statistics be active, or not.") )        
         parser_vns.add_argument('--additionalStatisticsKeep', type=str, 
-                default='None', 
+                default='none', 
                 help=("Comma-separated list of statistical data will be calculated and keep during solving. " 
                 "Currently, data within list can be: 'all_solution_code', 'distance_among_solutions'."))
         parser_vns.add_argument('--additionalStatisticsMaxLocalOptimaCount', type=int, default=3, 

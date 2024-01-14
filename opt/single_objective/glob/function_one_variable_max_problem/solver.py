@@ -74,13 +74,6 @@ def main():
             if key is not None and val is not None:
                 parameters[key] = val
         logger.debug('Execution parameters: '+ str(parameters))
-        # set optimization type (minimization or maximization)
-        if parameters['optimization_type'] == 'minimization':
-            is_minimization:bool = True
-        elif parameters['optimization_type'] == 'maximization':
-            is_minimization:bool = False
-        else:
-            raise ValueError("Either minimization or maximization should be selected.")
         # write to output file setup
         if parameters['writeToOutputFile'] is None:
             write_to_output_file:bool = False

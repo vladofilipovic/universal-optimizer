@@ -13,7 +13,6 @@
             "justMyCode": true,
             "args": [
                 "variable_neighborhood_search",
-                "maximization",
                 "--writeToOutputFile", "True",
                 "--outputFilePath", "opt/single_objective/comb/ones_count_problem_max/outputs/dimension_10.csv",
                 "--outputFileNameAppendTimeStamp", "False",
@@ -31,7 +30,7 @@
                 "--solutionDistanceCalculationCacheIsUsed", "False", 
                 "--solutionDistanceCalculationCacheMaxSize", "300000", 
                 "--additionalStatisticsIsActive", "False",
-                "--additionalStatisticsKeep", "None",
+                "--additionalStatisticsKeep", "none",
                 "--additionalStatisticsMaxLocalOptimaCount", "5",
                 "--kMin", "1",
                 "--kMax", "3", 
@@ -48,7 +47,6 @@
             "justMyCode": true,
             "args": [
                 "total_enumeration",
-                "maximization",
                 "--writeToOutputFile", "True",
                 "--outputFilePath", "opt/single_objective/comb/ones_count_problem_max/outputs/dimension_10.csv",
                 "--outputFileNameAppendTimeStamp", "False",
@@ -68,7 +66,6 @@
             "justMyCode": true,
             "args": [
                 "integer_linear_programming",
-                "maximization",
                 "--writeToOutputFile", "True",
                 "--outputFilePath", "opt/single_objective/comb/ones_count_problem_max/outputs/dimension_10.csv",
                 "--outputFileNameAppendTimeStamp", "False",
@@ -87,7 +84,6 @@
             "justMyCode": true,
             "args": [
                 "variable_neighborhood_search",
-                "maximization",
                 "--writeToOutputFile", "True",
                 "--outputFilePath", "opt/single_objective/glob/function_one_variable_problem_max/outputs/(7-x2)[-3,3].csv",
                 "--outputFileNameAppendTimeStamp", "False",
@@ -105,7 +101,7 @@
                 "--solutionDistanceCalculationCacheIsUsed", "False", 
                 "--solutionDistanceCalculationCacheMaxSize", "300000", 
                 "--additionalStatisticsIsActive", "False",
-                "--additionalStatisticsKeep", "None",
+                "--additionalStatisticsKeep", "none",
                 "--additionalStatisticsMaxLocalOptimaCount", "5",
                 "--kMin", "1",
                 "--kMax", "3", 
