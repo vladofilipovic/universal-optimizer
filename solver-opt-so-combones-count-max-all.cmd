@@ -1,4 +1,4 @@
-cd opt/single_objective/comb/ones_count_problem
+cd opt/single_objective/comb/ones_count_max_problem
 @echo -----------
 solver.py -h
 @echo -----------

@@ -1,4 +1,4 @@
 @echo -----------
-ones-count-example-all
+example-opt-comb-ones-count-max-all
 @echo -----------
-maxones-solver-all
+solver-opt-so-combones-count-max-all

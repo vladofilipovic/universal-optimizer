@@ -1,4 +1,4 @@
-cd opt/single_objective/glob/function_one_variable_problem
+cd opt/single_objective/glob/function_one_variable_max_problem
 @echo -----------
 solver.py -h
 @echo -----------

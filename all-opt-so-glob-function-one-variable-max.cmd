@@ -1,4 +1,4 @@
 @echo -----------
-function-one-variable-example-all
+example-opt-so-glob-function-one-variable-max-all
 @echo -----------
-function-one-variable-solver-all
+solver-opt-so-glob-function-one-variable-max-all
