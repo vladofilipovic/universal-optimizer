@@ -1,0 +1,36 @@
+# RandomSeed is not predefined. Generated seed value:  6902749625262068282
+# total_enumeration started at: 2024-01-15 10:12:36.329939
+# Execution parameters: {'algorithm': 'total_enumeration', 'writeToOutputFile': True, 'outputFilePath': 'outputs/dimension_5.csv', 'outputFileNameAppendTimeStamp': False, 'outputFields': 'iteration, evaluation, self.best_solution.argument()', 'outputMoments': 'after_algorithm, after_iteration', 'inputFilePath': 'inputs/dimension_5.txt', 'inputFormat': 'txt', 'finishCriteria': 'evaluations & seconds', 'finishEvaluationsMax': 300, 'finishIterationsMax': 0, 'finishSecondsMax': 0, 'randomSeed': 0, 'solutionEvaluationCacheIsUsed': False, 'solutionEvaluationCacheMaxSize': 0, 'solutionDistanceCalculationCacheIsUsed': False, 'solutionDistanceCalculationCacheMaxSize': 0, 'additionalStatisticsIsActive': False, 'additionalStatisticsKeep': 'none', 'additionalStatisticsMaxLocalOptimaCount': 7, 'kMin': 1, 'kMax': 3, 'localSearchType': 'localSearchBestImprovement', 'solutionType': 'BitArray', 'log': 'warning'}
+iteration	evaluation	step_name	best_solution_string_representation	best_solution_fitness_value	best_solution_objective_value	best_solution_is_feasible	self_best_solution_argument	
+2	3	a_i	10000	1	1	True	XXX	
+3	4	a_i	10000	1	1	True	XXX	
+4	5	a_i	11000	2	2	True	XXX	
+5	6	a_i	11000	2	2	True	XXX	
+6	7	a_i	11000	2	2	True	XXX	
+7	8	a_i	11000	2	2	True	XXX	
+8	9	a_i	11100	3	3	True	XXX	
+9	10	a_i	11100	3	3	True	XXX	
+10	11	a_i	11100	3	3	True	XXX	
+11	12	a_i	11100	3	3	True	XXX	
+12	13	a_i	11100	3	3	True	XXX	
+13	14	a_i	11100	3	3	True	XXX	
+14	15	a_i	11100	3	3	True	XXX	
+15	16	a_i	11100	3	3	True	XXX	
+16	17	a_i	11110	4	4	True	XXX	
+17	18	a_i	11110	4	4	True	XXX	
+18	19	a_i	11110	4	4	True	XXX	
+19	20	a_i	11110	4	4	True	XXX	
+20	21	a_i	11110	4	4	True	XXX	
+21	22	a_i	11110	4	4	True	XXX	
+22	23	a_i	11110	4	4	True	XXX	
+23	24	a_i	11110	4	4	True	XXX	
+24	25	a_i	11110	4	4	True	XXX	
+25	26	a_i	11110	4	4	True	XXX	
+26	27	a_i	11110	4	4	True	XXX	
+27	28	a_i	11110	4	4	True	XXX	
+28	29	a_i	11110	4	4	True	XXX	
+29	30	a_i	11110	4	4	True	XXX	
+30	31	a_i	11110	4	4	True	XXX	
+31	32	a_i	11110	4	4	True	XXX	
+32	33	a_i	11111	5	5	True	XXX	
+32	33	a_a	11111	5	5	True	XXX	

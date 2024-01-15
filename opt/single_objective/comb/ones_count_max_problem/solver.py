@@ -102,12 +102,10 @@ def main():
             output_file_dir:str =  '/'.join(output_file_path_parts)
             if should_add_timestamp_to_file_name:
                 output_file_path_parts.append( output_file_name +  '-maxones-'  + parameters['algorithm'] + '-' + 
-                        parameters['solutionType'] + '-' + parameters['optimization_type'][0:3] + 
-                        '-' + dt.strftime("%Y-%m-%d-%H-%M-%S.%f") + '.' + output_file_ext)
+                        parameters['solutionType'] + '-' + dt.strftime("%Y-%m-%d-%H-%M-%S.%f") + '.' + output_file_ext)
             else:
                 output_file_path_parts.append( output_file_name +  '-maxones-' +  parameters['algorithm'] + '-' + 
-                        parameters['solutionType']  + '-' + parameters['optimization_type'][0:3] + 
-                        '.' + output_file_ext)
+                        parameters['solutionType'] + '.' + output_file_ext)
             output_file_path:str = '/'.join(output_file_path_parts)
             logger.debug('Output file path: ' + str(output_file_path))
             ensure_dir(output_file_dir)
@@ -131,15 +129,15 @@ def main():
             logger.info('RandomSeed is predefined. Predefined seed value:  %d' % r_seed)
             if write_to_output_file:
                 output_file.write('# RandomSeed is predefined. Predefined seed value:  %d\n' % r_seed)
-            random.seed(r_seed)
+            seed(r_seed)
         else:
-            r_seed = randrange(sys.maxsize)
+            r_seed = randrange(sys.maxsize) #NOSONAR
             logger.info('RandomSeed is not predefined. Generated seed value:  %d' % r_seed)
             if write_to_output_file:
                 output_file.write("# RandomSeed is not predefined. Generated seed value:  %d\n" % r_seed)
             seed(r_seed)
         # finishing criteria setup
-        finish_criteria:string = parameters['finishCriteria']
+        finish_criteria:str = parameters['finishCriteria']
         max_number_evaluations:int = parameters['finishEvaluationsMax']
         max_number_iterations:int = parameters['finishIterationsMax']
         max_time_for_execution_in_seconds = parameters['finishSecondsMax']
@@ -197,15 +195,18 @@ def main():
             vns_construction_params.k_min = k_min
             vns_construction_params.k_max = k_max
             vns_construction_params.local_search_type = local_search_type
-            solver:MaxOneProblemSolver = OnesCountMaxProblemSolver.from_variable_neighborhood_search(
+            solver:OnesCountMaxProblem = OnesCountMaxProblemSolver.from_variable_neighborhood_search(
                     vns_construction_params)
         elif parameters['algorithm'] == 'total_enumeration':
             # initial solution and te support
             solution_type:str = parameters['solutionType']
             te_support = None
             if solution_type=='BitArray':
-                solution:OnesCountMaxProblemBinaryBitArraySolution = OnesCountMaxProblemBinaryBitArraySolution(r_seed)
-                solution.is_caching = evaluation_cache_is_used
+                solution:OnesCountMaxProblemBinaryBitArraySolution = OnesCountMaxProblemBinaryBitArraySolution(r_seed, 
+                            evaluation_cache_is_used=evaluation_cache_is_used,
+                            evaluation_cache_max_size=evaluation_cache_max_size,
+                            distance_calculation_cache_is_used=calculation_solution_distance_cache_is_used,
+                            distance_calculation_cache_max_size=calculation_solution_distance_cache_max_size)
                 te_support = OnesCountMaxProblemBinaryBitArraySolutionTeSupport()
             else:
                 raise ValueError("Invalid solution/representation type is chosen.")
@@ -218,9 +219,9 @@ def main():
             solver:OnesCountMaxProblemSolver = OnesCountMaxProblemSolver.from_total_enumeration(te_construction_params)
         elif parameters['algorithm'] == 'integer_linear_programming':
             # solver construction parameters
-            ilp_construction_params = OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters()
-            ilp_construction_params.output_control = output_control
-            ilp_construction_params.target_problem = problem
+            ilp_construction_params = OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters(
+                    output_control=output_control,
+                    target_problem=problem)
             solver:OnesCountMaxProblemSolver = OnesCountMaxProblemSolver.from_integer_linear_programming(
                     ilp_construction_params)
         else:

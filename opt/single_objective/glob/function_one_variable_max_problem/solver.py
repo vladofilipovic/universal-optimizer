@@ -104,11 +104,10 @@ def main():
             output_file_dir:str =  '/'.join(output_file_path_parts)
             if should_add_timestamp_to_file_name:
                 output_file_path_parts.append( output_file_name +  '-maxones-'  + parameters['algorithm'] + '-' + 
-                        parameters['solutionType'] + '-' + parameters['optimization_type'][0:3] + 
-                        '-' + dt.strftime("%Y-%m-%d-%H-%M-%S.%f") + '.' + output_file_ext)
+                        parameters['solutionType'] + '-' + dt.strftime("%Y-%m-%d-%H-%M-%S.%f") + '.' + output_file_ext)
             else:
                 output_file_path_parts.append( output_file_name +  '-maxones-' +  parameters['algorithm'] + '-' + 
-                        parameters['solutionType']  + '-' + parameters['optimization_type'][0:3] + 
+                        parameters['solutionType'] + 
                         '.' + output_file_ext)
             output_file_path:str = '/'.join(output_file_path_parts)
             logger.debug('Output file path: ' + str(output_file_path))
@@ -156,7 +155,7 @@ def main():
         calculation_solution_distance_cache_is_used:bool = parameters['solutionDistanceCalculationCacheIsUsed']
         calculation_solution_distance_cache_max_size:int = parameters['solutionDistanceCalculationCacheMaxSize']
         # additional statistic control setup
-        additional_statistics_is_active:bool =  parameters['additionalStatisticsIsActive']
+        additional_statistics_is_active:bool = parameters['additionalStatisticsIsActive']
         additional_statistics_keep:str =  parameters['additionalStatisticsKeep']
         max_local_optima_count = parameters['additionalStatisticsMaxLocalOptimaCount']
         additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(

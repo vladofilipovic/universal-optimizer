@@ -55,6 +55,10 @@ class AdditionalStatisticsControl:
             raise TypeError('Parameter \'keep\' must be string.')
         self.__keep_all_solution_codes = False
         self.__keep_more_local_optima = False
+        self.__all_solution_codes:set[str] = set()
+        self.__more_local_optima:dict[str, float|list[float]] = {}
+        if keep.strip() == 'none':
+            return
         kep:list[str] = keep.split(',')
         for ke in kep: 
             k:str = ke.strip()
@@ -66,8 +70,6 @@ class AdditionalStatisticsControl:
                 self.__keep_more_local_optima = True
             else:
                 raise ValueError("Invalid value for keep \'{}\'. Should be either empty string or 'none', either comma-separated sequence of: 'all_solution_code', 'more_local_optima'.".format(k))
-        self.__all_solution_codes:set[str] = set()
-        self.__more_local_optima:dict[str, float|list[float]] = {}
 
     @property
     def is_active(self)->bool:
