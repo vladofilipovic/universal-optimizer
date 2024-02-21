@@ -180,6 +180,27 @@ class Optimizer(metaclass=ABCMeta):
             raise TypeError('Parameter \'output_control\' must have type \'OutputControl\'.')
         self.__output_control = value
 
+    def determine_fields_val(self, fields_def:list[str], fields_val:list[str])->list[str]:
+        """
+        Determines fields values upon fields definition and old values 
+
+        :param list[str] fields_def: list of field definitions
+        :param list[str] fields_val: list of old field values
+        :return: list of new field values
+        :rtype: list[str]
+        """ 
+        for i in range(len(fields_def)):
+            f_def = fields_def[i]
+            old_val = fields_val[i]
+            if f_def != "" and old_val == "XXX":
+                try:
+                    data = eval(f_def)
+                    s_data:str = str(data)
+                except:
+                    s_data:str = 'XXX'
+                fields_val[i] = s_data
+        return fields_val
+
     def write_output_headers_if_needed(self)->None:
         """
         Write headers(with field names) to output file, if necessary 
@@ -237,8 +258,9 @@ class Optimizer(metaclass=ABCMeta):
                         s_data:str = str(data)
                         if s_data == "step_name":
                             s_data = step_name_value
-                    except:
+                    except BaseException as e:
                         s_data:str = 'XXX'
+                        logger.debug(e)
                     output.write( s_data + '\t')
                     line += s_data + '\t'
             output.write('\n')
