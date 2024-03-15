@@ -14,7 +14,7 @@ from typing import NamedTuple
 
 from uo.utils.logger import logger
 
-from uo.target_problem.target_problem import TargetProblem
+from uo.problem.problem import Problem
 
 FunctionOneVariableMinProblemElements = NamedTuple('FunctionOneVariableMinProblemElements', 
             [('expression',str), 
@@ -22,7 +22,7 @@ FunctionOneVariableMinProblemElements = NamedTuple('FunctionOneVariableMinProble
             ('domain_high',float)]
         )
 
-class FunctionOneVariableMinProblem(TargetProblem):
+class FunctionOneVariableMinProblem(Problem):
     
     def __init__(self, expression:str, domain_low:float, domain_high:float)->None:
         if expression is None or expression=="":

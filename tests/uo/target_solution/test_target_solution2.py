@@ -3,8 +3,8 @@ import unittest.mock as mocker
 
 from copy import deepcopy
 
-from uo.target_problem.target_problem import TargetProblem
-from uo.target_problem.target_problem_void import TargetProblemVoid
+from uo.problem.problem import Problem
+from uo.problem.problem_void import ProblemVoid
 
 from uo.target_solution.quality_of_solution import QualityOfSolution
 from uo.target_solution.target_solution import TargetSolution 

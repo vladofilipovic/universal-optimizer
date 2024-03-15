@@ -2,8 +2,8 @@ import datetime
 import unittest   
 import unittest.mock as mocker
 
-from uo.target_problem.target_problem import TargetProblem
-from uo.target_problem.target_problem_void import TargetProblemVoid
+from uo.problem.problem import Problem
+from uo.problem.problem_void import ProblemVoid
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
@@ -36,7 +36,7 @@ class TestMetaheuristicProperties(unittest.TestCase):
         self.output_control_stub = mocker.MagicMock(spec=OutputControl)
         type(self.output_control_stub).write_to_output = False
 
-        self.problem_mock = mocker.MagicMock(spec=TargetProblemVoid)
+        self.problem_mock = mocker.MagicMock(spec=ProblemVoid)
         type(self.problem_mock).name = 'some_problem'
         type(self.problem_mock).is_minimization = True
         self.problem_mock.copy = mocker.Mock(return_value=self.problem_mock)
@@ -47,7 +47,7 @@ class TestMetaheuristicProperties(unittest.TestCase):
                 random_seed=self.random_seed, 
                 additional_statistics_control=self.additional_statistics_control_stub, 
                 output_control=self.output_control_stub,
-                target_problem=self.problem_mock
+                problem=self.problem_mock
         )
     
     def test_name_should_be_equal_as_in_constructor(self):
@@ -66,10 +66,10 @@ class TestMetaheuristicProperties(unittest.TestCase):
         self.assertEqual(self.optimizer.random_seed, self.random_seed)
 
     def test_problem_name_should_be_equal_as_in_constructor(self):
-        self.assertEqual(self.optimizer.target_problem.name, self.problem_mock.name)
+        self.assertEqual(self.optimizer.problem.name, self.problem_mock.name)
 
     def test_problem_is_minimization_should_be_equal_as_in_constructor(self):
-        self.assertEqual(self.optimizer.target_problem.is_minimization, self.problem_mock.is_minimization)
+        self.assertEqual(self.optimizer.problem.is_minimization, self.problem_mock.is_minimization)
 
     def tearDown(self):
         return
@@ -97,7 +97,7 @@ class TestMetaheuristic2(unittest.TestCase):
         additional_statistics_control_stub = mocker.MagicMock(spec=AdditionalStatisticsControl)
         output_control_stub = mocker.MagicMock(spec=OutputControl)
         type(output_control_stub).write_to_output = False
-        problem_mock = mocker.MagicMock(spec=TargetProblemVoid)
+        problem_mock = mocker.MagicMock(spec=ProblemVoid)
         type(problem_mock).name = 'some_problem'
         type(problem_mock).is_minimization = True
         problem_mock.copy = mocker.Mock(return_value=problem_mock)
@@ -107,7 +107,7 @@ class TestMetaheuristic2(unittest.TestCase):
                 random_seed=random_seed, 
                 additional_statistics_control=additional_statistics_control_stub, 
                 output_control=output_control_stub,
-                target_problem=problem_mock
+                problem=problem_mock
         )    
         # Act
         optimizer.optimize()
@@ -134,7 +134,7 @@ class TestMetaheuristic2(unittest.TestCase):
         additional_statistics_control_stub = mocker.MagicMock(spec=AdditionalStatisticsControl)
         output_control_stub = mocker.MagicMock(spec=OutputControl)
         type(output_control_stub).write_to_output = False
-        problem_mock = mocker.MagicMock(spec=TargetProblemVoid)
+        problem_mock = mocker.MagicMock(spec=ProblemVoid)
         type(problem_mock).name = 'some_problem'
         type(problem_mock).is_minimization = True
         problem_mock.copy = mocker.Mock(return_value=problem_mock)
@@ -144,7 +144,7 @@ class TestMetaheuristic2(unittest.TestCase):
                 random_seed=random_seed, 
                 additional_statistics_control=additional_statistics_control_stub, 
                 output_control=output_control_stub,
-                target_problem=problem_mock
+                problem=problem_mock
         )    
         optimizer.execution_started = datetime.datetime.now()
         # Act
@@ -161,8 +161,8 @@ class TestMetaheuristic2(unittest.TestCase):
         random_seed = 12345
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
-        target_problem = TargetProblemVoid("aaa", True)
-        metaheuristic = MetaheuristicVoid("Test", finish_control, random_seed, additional_statistics_control, output_control, target_problem)
+        problem = ProblemVoid("aaa", True)
+        metaheuristic = MetaheuristicVoid("Test", finish_control, random_seed, additional_statistics_control, output_control, problem)
         # Act
         result = metaheuristic.string_rep('|')
         # Assert
@@ -176,8 +176,8 @@ class TestMetaheuristic2(unittest.TestCase):
         random_seed = 12345
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
-        target_problem = TargetProblemVoid("aaa", True)
-        metaheuristic = MetaheuristicVoid("Test", finish_control, random_seed, additional_statistics_control, output_control, target_problem)
+        problem = ProblemVoid("aaa", True)
+        metaheuristic = MetaheuristicVoid("Test", finish_control, random_seed, additional_statistics_control, output_control, problem)
         metaheuristic.execution_started = datetime.datetime.now()
         # Act
         result = metaheuristic.elapsed_seconds()
@@ -192,8 +192,8 @@ class TestMetaheuristic2(unittest.TestCase):
         random_seed = 12345
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
-        target_problem = TargetProblemVoid("aaa", True)
-        metaheuristic = MetaheuristicVoid("Test", finish_control, random_seed, additional_statistics_control, output_control, target_problem)
+        problem = ProblemVoid("aaa", True)
+        metaheuristic = MetaheuristicVoid("Test", finish_control, random_seed, additional_statistics_control, output_control, problem)
         # Act
         copy_metaheuristic = metaheuristic.copy()
         # Assert
@@ -207,10 +207,10 @@ class TestMetaheuristic2(unittest.TestCase):
         random_seed = 12345
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
-        target_problem = TargetProblemVoid("aaa", True)    
+        problem = ProblemVoid("aaa", True)    
         # Act & Assert
         with self.assertRaises(TypeError):
-            metaheuristic = MetaheuristicVoid(123, finish_control, random_seed, additional_statistics_control, output_control, target_problem)
+            metaheuristic = MetaheuristicVoid(123, finish_control, random_seed, additional_statistics_control, output_control, problem)
 
     # Create a new instance of Metaheuristic with invalid finish_control parameter and expect TypeError
     def test_invalid_finish_control_parameter(self):
@@ -219,10 +219,10 @@ class TestMetaheuristic2(unittest.TestCase):
         random_seed = 12345
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
-        target_problem = TargetProblemVoid("bbb", False)
+        problem = ProblemVoid("bbb", False)
         # Act & Assert
         with self.assertRaises(TypeError):
-            metaheuristic = Metaheuristic(name, "finish_control", random_seed, additional_statistics_control, output_control, target_problem)
+            metaheuristic = Metaheuristic(name, "finish_control", random_seed, additional_statistics_control, output_control, problem)
 
     # Create a new instance of Metaheuristic with invalid random_seed parameter and expect TypeError
     def test_invalid_random_seed(self):
@@ -231,10 +231,10 @@ class TestMetaheuristic2(unittest.TestCase):
         random_seed = "abc"
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
-        target_problem = TargetProblemVoid('bbb', False)
+        problem = ProblemVoid('bbb', False)
         # Act & Assert
         with self.assertRaises(TypeError):
-            metaheuristic = Metaheuristic("Test", finish_control, random_seed, additional_statistics_control, output_control, target_problem)
+            metaheuristic = Metaheuristic("Test", finish_control, random_seed, additional_statistics_control, output_control, problem)
 
     # Create a new instance of Metaheuristic with invalid additional_statistics_control parameter and expect TypeError
     def test_invalid_additional_statistics_control(self):
@@ -243,10 +243,10 @@ class TestMetaheuristic2(unittest.TestCase):
         random_seed = 12345
         additional_statistics_control = "abc"
         output_control = OutputControl()
-        target_problem = TargetProblemVoid('bbb', False)
+        problem = ProblemVoid('bbb', False)
         # Act & Assert
         with self.assertRaises(TypeError):
-            metaheuristic = Metaheuristic("Test", finish_control, random_seed, additional_statistics_control, output_control, target_problem)
+            metaheuristic = Metaheuristic("Test", finish_control, random_seed, additional_statistics_control, output_control, problem)
 
     # Create a new instance of Metaheuristic with invalid output_control parameter and expect TypeError
     def test_invalid_output_control(self):
@@ -255,22 +255,22 @@ class TestMetaheuristic2(unittest.TestCase):
         random_seed = 12345
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = "abc"
-        target_problem = TargetProblemVoid('bbb', False)
+        problem = ProblemVoid('bbb', False)
         # Act & Assert
         with self.assertRaises(TypeError):
-            metaheuristic = Metaheuristic("Test", finish_control, random_seed, additional_statistics_control, output_control, target_problem)
+            metaheuristic = Metaheuristic("Test", finish_control, random_seed, additional_statistics_control, output_control, problem)
 
-    # Create a new instance of Metaheuristic with invalid target_problem parameter and expect TypeError
-    def test_invalid_target_problem_parameter(self):
+    # Create a new instance of Metaheuristic with invalid problem parameter and expect TypeError
+    def test_invalid_problem_parameter(self):
         # Arrange
         finish_control = FinishControl()
         random_seed = 12345
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
-        target_problem = "invalid_target_problem"
+        problem = "invalid_problem"
         # Act & Assert
         with self.assertRaises(TypeError):
-            metaheuristic = Metaheuristic("Test", finish_control, random_seed, additional_statistics_control, output_control, target_problem)
+            metaheuristic = Metaheuristic("Test", finish_control, random_seed, additional_statistics_control, output_control, problem)
 
 
     # Call main_loop method with finish_control that is already finished and expect the loop to not execute
@@ -281,8 +281,8 @@ class TestMetaheuristic2(unittest.TestCase):
         random_seed = 12345
         additional_statistics_control = mocker.Mock(AdditionalStatisticsControl)
         output_control = mocker.Mock(OutputControl)
-        target_problem = mocker.Mock(TargetProblem)
-        metaheuristic = MetaheuristicVoid("Test", finish_control, random_seed, additional_statistics_control, output_control, target_problem)
+        problem = mocker.Mock(Problem)
+        metaheuristic = MetaheuristicVoid("Test", finish_control, random_seed, additional_statistics_control, output_control, problem)
         metaheuristic.execution_started = datetime.datetime.now()
         # Act
         metaheuristic.main_loop()
@@ -297,8 +297,8 @@ class TestMetaheuristic2(unittest.TestCase):
         random_seed = None
         additional_statistics_control = mocker.Mock(AdditionalStatisticsControl)
         output_control = mocker.Mock(OutputControl)
-        target_problem = mocker.Mock(TargetProblem)
-        metaheuristic = MetaheuristicVoid("Test", finish_control, random_seed, additional_statistics_control, output_control, target_problem)
+        problem = mocker.Mock(Problem)
+        metaheuristic = MetaheuristicVoid("Test", finish_control, random_seed, additional_statistics_control, output_control, problem)
         metaheuristic.write_output_headers_if_needed = mocker.Mock(return_value=None)
         metaheuristic.write_output_values_if_needed = mocker.Mock(return_value=None)
         # Act
@@ -316,8 +316,8 @@ class TestFinishControl(unittest.TestCase):
         random_seed = None
         additional_statistics_control = mocker.Mock(AdditionalStatisticsControl)
         output_control = mocker.Mock(OutputControl)
-        target_problem = mocker.Mock(TargetProblem)
-        metaheuristic = MetaheuristicVoid("Test", finish_control, random_seed, additional_statistics_control, output_control, target_problem)
+        problem = mocker.Mock(Problem)
+        metaheuristic = MetaheuristicVoid("Test", finish_control, random_seed, additional_statistics_control, output_control, problem)
         # Act
         result = metaheuristic.finish_control
         # Assert
@@ -333,8 +333,8 @@ class TestFinishControl(unittest.TestCase):
         random_seed = None
         additional_statistics_control = mocker.Mock(AdditionalStatisticsControl)
         output_control = mocker.Mock(OutputControl)
-        target_problem = mocker.Mock(TargetProblem)
-        metaheuristic = MetaheuristicVoid("Test", finish_control, random_seed, additional_statistics_control, output_control, target_problem)
+        problem = mocker.Mock(Problem)
+        metaheuristic = MetaheuristicVoid("Test", finish_control, random_seed, additional_statistics_control, output_control, problem)
         # Act
         result1 = metaheuristic.finish_control
         result2 = metaheuristic.finish_control    
@@ -351,10 +351,10 @@ class TestFinishControl(unittest.TestCase):
         random_seed = None
         additional_statistics_control = mocker.Mock(AdditionalStatisticsControl)
         output_control = mocker.Mock(OutputControl)
-        target_problem = mocker.Mock(TargetProblem)
+        problem = mocker.Mock(Problem)
         # Act & Assert
         with self.assertRaises(TypeError):
-            metaheuristic = MetaheuristicVoid("Test", finish_control, random_seed, additional_statistics_control, output_control, target_problem)
+            metaheuristic = MetaheuristicVoid("Test", finish_control, random_seed, additional_statistics_control, output_control, problem)
 
     # The FinishControl instance returned is identical to the one set during initialization.
     def test_returns_identical_finish_control(self):
@@ -363,8 +363,8 @@ class TestFinishControl(unittest.TestCase):
         random_seed = None
         additional_statistics_control = mocker.Mock(AdditionalStatisticsControl)
         output_control = mocker.Mock(OutputControl)
-        target_problem = mocker.Mock(TargetProblem)
-        metaheuristic = MetaheuristicVoid("Test", finish_control, random_seed, additional_statistics_control, output_control, target_problem)
+        problem = mocker.Mock(Problem)
+        metaheuristic = MetaheuristicVoid("Test", finish_control, random_seed, additional_statistics_control, output_control, problem)
         # Act
         result = metaheuristic.finish_control
         # Assert
@@ -382,7 +382,7 @@ class TestRandomSeed(unittest.TestCase):
     def test_returns_random_seed(self):
         # Arrange
         metaheuristic = MetaheuristicVoid("MyMetaheuristic", FinishControl(), 12345, AdditionalStatisticsControl(), 
-                                        OutputControl(), TargetProblemVoid("aaa", False))    
+                                        OutputControl(), ProblemVoid("aaa", False))    
         # Act
         seed = metaheuristic.random_seed
         # Assert
@@ -392,7 +392,7 @@ class TestRandomSeed(unittest.TestCase):
     def test_returns_correct_random_seed_value(self):
         # Arrange
         metaheuristic = MetaheuristicVoid("MyMetaheuristic", FinishControl(), 54321, AdditionalStatisticsControl(), 
-                                        OutputControl(), TargetProblemVoid("aaa", False))
+                                        OutputControl(), ProblemVoid("aaa", False))
         # Act
         seed = metaheuristic.random_seed
         # Assert
@@ -403,13 +403,13 @@ class TestRandomSeed(unittest.TestCase):
         # Arrange & Act & Assert
         with self.assertRaises(TypeError):
             MetaheuristicVoid("MyMetaheuristic", FinishControl(), "abc", AdditionalStatisticsControl(), 
-                                    OutputControl(), TargetProblemVoid("aaa", False))
+                                    OutputControl(), ProblemVoid("aaa", False))
 
     # Raises no errors when the random seed is set to 0.
     def test_raises_no_errors_when_random_seed_is_zero(self):
         # Arrange
         metaheuristic = MetaheuristicVoid("MyMetaheuristic", FinishControl(), 0, AdditionalStatisticsControl(), 
-                                    OutputControl(), TargetProblemVoid("aaa", False))
+                                    OutputControl(), ProblemVoid("aaa", False))
         # Act
         seed = metaheuristic.random_seed
         # Assert
@@ -424,7 +424,7 @@ class TestAdditionalStatisticsControl(unittest.TestCase):
         additional_statistics_control = AdditionalStatisticsControl()
         metaheuristic = MetaheuristicVoid(name="test", finish_control=FinishControl(), random_seed=None, 
                     additional_statistics_control=additional_statistics_control, output_control=OutputControl(), 
-                    target_problem=TargetProblemVoid("aaa", False),
+                    problem=ProblemVoid("aaa", False),
                     solution_template = None)
         # Act
         result = metaheuristic.additional_statistics_control
@@ -437,7 +437,7 @@ class TestAdditionalStatisticsControl(unittest.TestCase):
         additional_statistics_control = AdditionalStatisticsControl()
         metaheuristic = MetaheuristicVoid(name="test", finish_control=FinishControl(), random_seed=None, 
                     additional_statistics_control=additional_statistics_control, output_control=OutputControl(), 
-                    target_problem=TargetProblemVoid("aaa", False))
+                    problem=ProblemVoid("aaa", False))
         # Act
         result = metaheuristic.additional_statistics_control
         # Assert
@@ -449,7 +449,7 @@ class TestAdditionalStatisticsControl(unittest.TestCase):
         additional_statistics_control = AdditionalStatisticsControl()
         metaheuristic = MetaheuristicVoid(name="test", finish_control=FinishControl(), random_seed=None, 
                     additional_statistics_control=additional_statistics_control, output_control=OutputControl(), 
-                    target_problem=TargetProblemVoid("aaa", False)) 
+                    problem=ProblemVoid("aaa", False)) 
         # Act
         result = metaheuristic.additional_statistics_control
         # Assert
@@ -461,7 +461,7 @@ class TestAdditionalStatisticsControl(unittest.TestCase):
         additional_statistics_control = AdditionalStatisticsControl()
         metaheuristic = MetaheuristicVoid(name="test", finish_control=FinishControl(), random_seed=None, 
                     additional_statistics_control=additional_statistics_control, output_control=OutputControl(), 
-                    target_problem=TargetProblemVoid("aaa", False))
+                    problem=ProblemVoid("aaa", False))
         # Act
         result = metaheuristic.additional_statistics_control
         # Assert
@@ -477,7 +477,7 @@ class TestMainLoopIteration(unittest.TestCase):
                                     random_seed=123,
                                     additional_statistics_control=AdditionalStatisticsControl(),
                                     output_control=OutputControl(),
-                                    target_problem=TargetProblemVoid("aaa", False))
+                                    problem=ProblemVoid("aaa", False))
         # Act
         metaheuristic.main_loop_iteration()
         # Assert
@@ -496,7 +496,7 @@ class TestMainLoopIteration(unittest.TestCase):
                                     random_seed=123,
                                     additional_statistics_control=AdditionalStatisticsControl(),
                                     output_control=OutputControl(),
-                                    target_problem=TargetProblemVoid("aaa", False))
+                                    problem=ProblemVoid("aaa", False))
     
         # Act
         metaheuristic.main_loop_iteration()
@@ -515,7 +515,7 @@ class TestStringRep(unittest.TestCase):
     def test_returns_string_representation(self):
         # Arrange
         metaheuristic = MetaheuristicVoid("example", FinishControl(), 1234, AdditionalStatisticsControl(), 
-                    OutputControl(), TargetProblemVoid("aaa", False))    
+                    OutputControl(), ProblemVoid("aaa", False))    
         # Act
         result = metaheuristic.string_rep("|")
         # Assert
@@ -525,7 +525,7 @@ class TestStringRep(unittest.TestCase):
     def test_uses_formatting_parameters(self):
         # Arrange
         metaheuristic = MetaheuristicVoid("example", FinishControl(), 1234, AdditionalStatisticsControl(), 
-                    OutputControl(), TargetProblemVoid("aaa", False))
+                    OutputControl(), ProblemVoid("aaa", False))
         # Act
         result = metaheuristic.string_rep("|", indentation=2, indentation_symbol="-", group_start="[", group_end="]")
         # Assert
@@ -540,7 +540,7 @@ class TestStringRep(unittest.TestCase):
     def test_includes_properties(self):
         # Arrange
         metaheuristic = MetaheuristicVoid("example", FinishControl(), 1234, AdditionalStatisticsControl(), 
-                    OutputControl(), TargetProblemVoid("aaa", False))
+                    OutputControl(), ProblemVoid("aaa", False))
         # Act
         result = metaheuristic.string_rep("|")
         # Assert
@@ -552,7 +552,7 @@ class TestStringRep(unittest.TestCase):
     def test_empty_delimiter(self):
         # Arrange
         metaheuristic = MetaheuristicVoid("example", FinishControl(), 1234, AdditionalStatisticsControl(), 
-                    OutputControl(), TargetProblemVoid("aaa", False))
+                    OutputControl(), ProblemVoid("aaa", False))
         # Act
         result = metaheuristic.string_rep("")
         # Assert

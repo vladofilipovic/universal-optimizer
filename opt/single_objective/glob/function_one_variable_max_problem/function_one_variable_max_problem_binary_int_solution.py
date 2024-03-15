@@ -13,7 +13,7 @@ from random import choice
 from random import random
 from random import randint
 
-from uo.target_problem.target_problem import TargetProblem
+from uo.problem.problem import Problem
 from uo.target_solution.quality_of_solution import QualityOfSolution
 from uo.target_solution.target_solution import TargetSolution
 

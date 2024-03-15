@@ -4,20 +4,20 @@ import unittest.mock as mocker
 
 from copy import deepcopy
 
-from uo.target_problem.target_problem import TargetProblem 
-from uo.target_problem.target_problem_void import TargetProblemVoid 
+from uo.problem.problem import Problem 
+from uo.problem.problem_void import ProblemVoid 
 
-class TestTargetProblemProperties(unittest.TestCase):
+class TestProblemProperties(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
-        print("setUpClass TestTargetProblemProperties\n")
+        print("setUpClass TestProblemProperties\n")
 
     def setUp(self):
         self.problem_name = 'some problem'
         self.to_minimize = True
 
-        self.problem = TargetProblemVoid(
+        self.problem = ProblemVoid(
                 name=self.problem_name,
                 is_minimization = self.to_minimize,
         )
@@ -30,7 +30,7 @@ class TestTargetProblemProperties(unittest.TestCase):
 
     def test_invalid_name_problem_initialization(self):
         invalid_name = 'invalid name'
-        problem = TargetProblemVoid(
+        problem = ProblemVoid(
             name=invalid_name,
             is_minimization=self.to_minimize,
         )
@@ -39,7 +39,7 @@ class TestTargetProblemProperties(unittest.TestCase):
     # Test problem initialization with an empty name
     def test_empty_name_problem_initialization(self):
         empty_name = ''
-        problem = TargetProblemVoid(
+        problem = ProblemVoid(
             name=empty_name,
             is_minimization=self.to_minimize,
         )
@@ -50,7 +50,7 @@ class TestTargetProblemProperties(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        print("\ntearDownClass TestTargetProblemProperties")
+        print("\ntearDownClass TestProblemProperties")
     
 if __name__ == '__main__':
     unittest.main()

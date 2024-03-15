@@ -3,8 +3,8 @@ import unittest.mock as mocker
 
 from copy import deepcopy
 
-from uo.target_problem.target_problem import TargetProblem
-from uo.target_problem.target_problem_void import TargetProblemVoid
+from uo.problem.problem import Problem
+from uo.problem.problem_void import ProblemVoid
 
 from uo.target_solution.quality_of_solution import QualityOfSolution
 from uo.target_solution.target_solution import TargetSolution 
@@ -44,15 +44,15 @@ class TestTargetSolutionVoidObjectStr(unittest.TestCase):
     # The copy, copy_from, argument, string_representation, init_random, native_representation, init_from, calculate_quality_directly, calculate_quality, representation_distance_directly, representation_distance, string_rep, __str__, __repr__, and __format__ methods can be called and return expected results
     def test_method_calls_and_results(self):
         # Arrange
-        target_problem = TargetProblemVoid("a", True)
+        problem = ProblemVoid("a", True)
         target_solution = TargetSolutionVoidObjectStr()
         # Act and Assert
         self.assertIsNotNone(target_solution.copy())
         self.assertIsNotNone(target_solution.argument(target_solution.representation))
         self.assertIsNotNone(target_solution.native_representation("representation"))
         self.assertIsNotNone(target_solution.calculate_quality_directly(target_solution.representation, 
-                    target_problem))
-        self.assertIsNotNone(target_solution.calculate_quality(target_problem))
+                    problem))
+        self.assertIsNotNone(target_solution.calculate_quality(problem))
         self.assertIsNotNone(target_solution.representation_distance_directly(target_solution.representation, 
                     target_solution.representation))
         self.assertIsNotNone(target_solution.representation_distance(target_solution.representation, 
@@ -145,20 +145,20 @@ class TestTargetSolutionVoidObjectStr(unittest.TestCase):
         self.assertEqual(target_solution.representation_distance_cache_cs.is_caching, copied_solution.representation_distance_cache_cs.is_caching)
         self.assertEqual(target_solution.representation_distance_cache_cs.max_cache_size, copied_solution.representation_distance_cache_cs.max_cache_size)
 
-    # TargetSolution can be evaluated with a TargetProblem object
-    def test_evaluate_with_target_problem(self):
+    # TargetSolution can be evaluated with a Problem object
+    def test_evaluate_with_problem(self):
         # Arrange
         target_solution = TargetSolutionVoidObjectStr()
-        target_problem_mock = mocker.Mock()
+        problem_mock = mocker.Mock()
         # Act
-        target_solution.evaluate(target_problem_mock)
+        target_solution.evaluate(problem_mock)
         # Assert
         self.assertEqual(target_solution.objective_value, 
-                    target_solution.calculate_quality_directly(target_solution.representation, target_problem_mock).objective_value)
+                    target_solution.calculate_quality_directly(target_solution.representation, problem_mock).objective_value)
         self.assertEqual(target_solution.fitness_value, 
-                    target_solution.calculate_quality_directly(target_solution.representation, target_problem_mock).fitness_value)
+                    target_solution.calculate_quality_directly(target_solution.representation, problem_mock).fitness_value)
         self.assertEqual(target_solution.is_feasible, 
-                    target_solution.calculate_quality_directly(target_solution.representation, target_problem_mock).is_feasible)
+                    target_solution.calculate_quality_directly(target_solution.representation, problem_mock).is_feasible)
 
     # TargetSolution can be represented as a string with a specified delimiter, indentation, and grouping symbols
     def test_string_representation(self):
@@ -221,7 +221,7 @@ class TestTargetSolutionVoidObjectStr(unittest.TestCase):
     def test_initialization_with_valid_representation_and_problem(self):
         # Arrange
         representation = 42
-        problem = TargetProblemVoid("a", True)
+        problem = ProblemVoid("a", True)
         solution = TargetSolutionVoidObjectStr()
         # Act
         solution.init_from(representation, problem)
@@ -232,15 +232,15 @@ class TestTargetSolutionVoidObjectStr(unittest.TestCase):
     def test_sets_representation_to_given_representation2(self):
         # Arrange
         representation = 42
-        problem = TargetProblemVoid("a", True)
+        problem = ProblemVoid("a", True)
         solution = TargetSolutionVoidObjectStr()
         # Act
         solution.init_from(representation, problem)
         # Assert
         self.assertEqual(solution._TargetSolution__representation, representation)
 
-    # raises TypeError if the given problem is not of type TargetProblem
-    def test_raises_TypeError_if_problem_not_of_type_TargetProblem(self):
+    # raises TypeError if the given problem is not of type Problem
+    def test_raises_TypeError_if_problem_not_of_type_Problem(self):
         # Arrange
         representation = "example_representation"
         problem = "example_problem"

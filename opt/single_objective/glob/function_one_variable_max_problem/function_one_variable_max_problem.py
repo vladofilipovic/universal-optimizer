@@ -17,7 +17,7 @@ from typing import NamedTuple
 
 from uo.utils.logger import logger
 
-from uo.target_problem.target_problem import TargetProblem
+from uo.problem.problem import Problem
 
 FunctionOneVariableMaxProblemMaxElements = NamedTuple('FunctionOneVariableMaxProblemMaxElements', 
             [('expression',str), 
@@ -25,7 +25,7 @@ FunctionOneVariableMaxProblemMaxElements = NamedTuple('FunctionOneVariableMaxPro
             ('domain_high',float)]
         )
 
-class FunctionOneVariableMaxProblemMax(TargetProblem):
+class FunctionOneVariableMaxProblemMax(Problem):
     
     def __init__(self, expression:str, domain_low:float, domain_high:float)->None:
         if expression is None or expression=="":

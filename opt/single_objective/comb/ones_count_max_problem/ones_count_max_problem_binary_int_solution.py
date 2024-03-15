@@ -20,7 +20,7 @@ from copy import deepcopy
 from random import choice
 from random import randint
 
-from uo.target_problem.target_problem import TargetProblem
+from uo.problem.problem import Problem
 from uo.target_solution.quality_of_solution import QualityOfSolution
 from uo.target_solution.target_solution import TargetSolution
 
@@ -67,11 +67,11 @@ class OnesCountMaxProblemBinaryIntSolution(TargetSolution[int,str]):
         """
         return self.__copy__()
         
-    def obtain_feasible_representation(self, problem:TargetProblem) -> int:
+    def obtain_feasible_representation(self, problem:Problem) -> int:
         """
         Helper function that modifies representation to be feasible
 
-        :param `TargetProblem` problem: problem which is solved by solution
+        :param `Problem` problem: problem which is solved by solution
         """
         if self.representation is None:
             raise ValueError('Solution representation should not be None.')
@@ -95,7 +95,7 @@ class OnesCountMaxProblemBinaryIntSolution(TargetSolution[int,str]):
         """
         Random initialization of the solution
 
-        :param `TargetProblem` problem: problem which is solved by solution
+        :param `Problem` problem: problem which is solved by solution
         """
         if problem.dimension is None:
             raise ValueError("Problem dimension should not be None!")
@@ -106,24 +106,24 @@ class OnesCountMaxProblemBinaryIntSolution(TargetSolution[int,str]):
         self.representation = randint(0, 2 ^ problem.dimension - 1) 
         self.representation = self.obtain_feasible_representation(problem)
 
-    def init_from(self, representation:int, problem:TargetProblem)->None:
+    def init_from(self, representation:int, problem:Problem)->None:
         """
         Initialization of the solution, by setting its native representation 
 
         :param int representation: representation that will be ste to solution
-        :param `TargetProblem` problem: problem which is solved by solution
+        :param `Problem` problem: problem which is solved by solution
         """
         if not isinstance(representation, int):
             raise TypeError('Parameter \'representation\' must have type \'int\'.')
         self.representation = representation
 
     def calculate_quality_directly(self, representation:int, 
-            problem:TargetProblem)->QualityOfSolution:
+            problem:Problem)->QualityOfSolution:
         """
         Fitness calculation of the max ones binary int solution
 
         :param int representation: native representation of the solution whose fitness, objective and feasibility is calculated
-        :param TargetProblem problem: problem that is solved
+        :param Problem problem: problem that is solved
         :return: objective value, fitness value and feasibility of the solution instance  
         :rtype: `QualityOfSolution`
         """

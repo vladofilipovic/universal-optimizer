@@ -18,7 +18,7 @@ def main():
         te_support:OnesCountMaxProblemBinaryBitArraySolutionTeSupport = OnesCountMaxProblemBinaryBitArraySolutionTeSupport()
         construction_params:TeOptimizerConstructionParameters = TeOptimizerConstructionParameters()
         construction_params.output_control = output_control
-        construction_params.target_problem = problem_to_solve
+        construction_params.problem = problem_to_solve
         construction_params.solution_template = solution
         construction_params.problem_solution_te_support = te_support
         optimizer:TeOptimizer = TeOptimizer.from_construction_tuple(construction_params)

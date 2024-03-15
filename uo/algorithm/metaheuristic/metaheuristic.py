@@ -23,7 +23,7 @@ from typing import Generic
 
 from uo.utils.logger import logger
 
-from uo.target_problem.target_problem import TargetProblem
+from uo.problem.problem import Problem
 from uo.target_solution.target_solution import TargetSolution
 
 from uo.algorithm.output_control import OutputControl
@@ -44,7 +44,7 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
             random_seed:Optional[int], 
             additional_statistics_control:AdditionalStatisticsControl,
             output_control:OutputControl, 
-            target_problem:TargetProblem,
+            problem:Problem,
             solution_template:TargetSolution
     )->None:
         """
@@ -56,7 +56,7 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         :param `AdditionalStatisticsControl` additional_statistics_control: structure that controls additional 
         statistic to be kept during metaheuristic evaluation        
         :param `OutputControl` output_control: structure that controls output
-        :param `TargetProblem` target_problem: problem to be solved
+        :param `Problem` problem: problem to be solved
         :param `TargetSolution` solution_template: solution template for the problem to be solved
         """
         if not isinstance(name, str):
@@ -69,11 +69,11 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
                 raise TypeError('Parameter \'additional_statistics_control\' must be \'AdditionalStatisticsControl\'.')
         if not isinstance(output_control, OutputControl):
                 raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
-        if not isinstance(target_problem, TargetProblem):
-                raise TypeError('Parameter \'target_problem\' must be \'TargetProblem\'.')
+        if not isinstance(problem, Problem):
+                raise TypeError('Parameter \'problem\' must be \'Problem\'.')
         super().__init__(name=name, 
                 output_control=output_control, 
-                target_problem=target_problem,
+                problem=problem,
                 solution_template=solution_template)
         self.__finish_control = finish_control.copy()
         if random_seed is not None and isinstance(random_seed, int) and random_seed != 0:

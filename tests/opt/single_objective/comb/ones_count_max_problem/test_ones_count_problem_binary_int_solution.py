@@ -8,8 +8,8 @@ from bitstring import BitArray
 
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution import OnesCountMaxProblemBinaryIntSolution
-from uo.target_problem.target_problem import TargetProblem
-from uo.target_problem.target_problem_void import TargetProblemVoid
+from uo.problem.problem import Problem
+from uo.problem.problem_void import ProblemVoid
 from uo.target_solution.target_solution import TargetSolution
 
 

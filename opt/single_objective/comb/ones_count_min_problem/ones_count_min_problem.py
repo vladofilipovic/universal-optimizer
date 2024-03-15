@@ -10,11 +10,11 @@ sys.path.append(directory.parent.parent.parent.parent.parent)
 
 from copy import deepcopy
 
-from uo.target_problem.target_problem import TargetProblem
+from uo.problem.problem import Problem
 from uo.utils.logger import logger
 
 
-class OnesCountMinProblem(TargetProblem):
+class OnesCountMinProblem(Problem):
     
     def __init__(self, dim:int)->None:
         """

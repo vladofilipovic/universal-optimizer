@@ -17,7 +17,7 @@ from typing import TypeVar, Generic
 from typing import Generic
 from typing import Optional
 
-from uo.target_problem.target_problem import TargetProblem
+from uo.problem.problem import Problem
 from uo.target_solution.quality_of_solution import QualityOfSolution
 from uo.target_solution.evaluation_cache_control_statistics import EvaluationCacheControlStatistics
 from uo.target_solution.distance_calculation_cache_control_statistics import DistanceCalculationCacheControlStatistics
@@ -119,7 +119,7 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         return self.__copy__()
 
 
-    def obtain_feasible_representation(self, problem:TargetProblem)->R_co:
+    def obtain_feasible_representation(self, problem:Problem)->R_co:
         if self.representation is None:
             raise ValueError('Solution representation should not be None.')
         return self.representation
@@ -315,12 +315,12 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         return str(self.argument(self.representation))
 
     @abstractmethod
-    def init_random(self, problem:TargetProblem)->None:
+    def init_random(self, problem:Problem)->None:
         """
         Random initialization of the solution
 
         :param problem: problem which is solved by solution
-        :type problem: `TargetProblem`
+        :type problem: `Problem`
         """
         raise NotImplementedError
 
@@ -336,41 +336,41 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         raise NotImplementedError
 
     @abstractmethod
-    def init_random(self, problem:TargetProblem)->None:
+    def init_random(self, problem:Problem)->None:
         """
         Random initialization of the solution
 
-        :param `TargetProblem` problem: problem which is solved by solution
+        :param `Problem` problem: problem which is solved by solution
         """
         raise NotImplementedError
 
     @abstractmethod
-    def init_from(self, representation:R_co, problem:TargetProblem)->None:
+    def init_from(self, representation:R_co, problem:Problem)->None:
         """
         Initialization of the solution, by setting its native representation 
 
         :param R_co representation: representation that will be ste to solution
-        :param `TargetProblem` problem: problem which is solved by solution
+        :param `Problem` problem: problem which is solved by solution
         """
         raise NotImplementedError
 
     @abstractmethod
-    def calculate_quality_directly(self, representation:R_co, problem:TargetProblem) -> QualityOfSolution:
+    def calculate_quality_directly(self, representation:R_co, problem:Problem) -> QualityOfSolution:
         """
         Fitness calculation of the target solution
 
         :param R_co representation: native representation of the solution for which objective value, fitness and feasibility are calculated
-        :param TargetProblem problem: problem that is solved
+        :param Problem problem: problem that is solved
         :return: objective value, fitness value and feasibility of the solution instance 
         :rtype: `QualityOfSolution`
         """
         raise NotImplementedError
 
-    def calculate_quality(self, target_problem:TargetProblem) -> QualityOfSolution:
+    def calculate_quality(self, problem:Problem) -> QualityOfSolution:
         """
         Calculate fitness, objective and feasibility of the solution, with optional cache consultation
 
-        :param TargetProblem target_problem: problem that is solved
+        :param Problem problem: problem that is solved
         :return: objective value, fitness value and feasibility of the solution instance 
         :rtype: `QualityOfSolution`
         """
@@ -381,7 +381,7 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
             if rep in eccs.cache:
                 eccs.increment_cache_hit_count()
                 return eccs.cache[rep]
-            qos:QualityOfSolution = self.calculate_quality_directly(self.representation, target_problem)
+            qos:QualityOfSolution = self.calculate_quality_directly(self.representation, problem)
             if len(eccs.cache) >= eccs.max_cache_size:
                 # removing random
                 code:str = random.choice(eccs.cache.keys())
@@ -390,16 +390,16 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
             return qos
         else:
             qos:QualityOfSolution = self.calculate_quality_directly(
-                    self.representation, target_problem)
+                    self.representation, problem)
             return qos
 
-    def evaluate(self, target_problem:TargetProblem)->None:
+    def evaluate(self, problem:Problem)->None:
         """
         Evaluate current target solution
 
-        :param TargetProblem target_problem: problem that is solved
+        :param Problem problem: problem that is solved
         """        
-        qos:QualityOfSolution = self.calculate_quality(target_problem)
+        qos:QualityOfSolution = self.calculate_quality(problem)
         self.objective_value = qos.objective_value;
         self.fitness_value = qos.fitness_value;
         self.is_feasible = qos.is_feasible;

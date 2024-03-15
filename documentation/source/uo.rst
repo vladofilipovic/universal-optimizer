@@ -8,7 +8,7 @@ Subpackages
    :maxdepth: 4
 
    uo.algorithm
-   uo.target_problem
+   uo.problem
    uo.target_solution
    uo.utils
 

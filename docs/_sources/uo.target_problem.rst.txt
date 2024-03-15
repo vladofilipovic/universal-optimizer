@@ -7,7 +7,7 @@ Submodules
 uo.target\_problem.target\_problem module
 -----------------------------------------
 
-.. automodule:: uo.target_problem.target_problem
+.. automodule:: uo.problem.problem
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ uo.target\_problem.target\_problem module
 Module contents
 ---------------
 
-.. automodule:: uo.target_problem
+.. automodule:: uo.problem
    :members:
    :undoc-members:
    :show-inheritance:

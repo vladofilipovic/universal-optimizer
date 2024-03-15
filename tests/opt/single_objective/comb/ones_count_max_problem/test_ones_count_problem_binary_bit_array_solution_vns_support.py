@@ -6,7 +6,7 @@ from bitstring import BitArray
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
 from opt.single_objective.comb.ones_count_min_problem.ones_count_min_problem import OnesCountMinProblem
 
-from uo.target_problem.target_problem import TargetProblem
+from uo.problem.problem import Problem
 from uo.target_solution.target_solution import TargetSolution
 
 from uo.algorithm.algorithm import Algorithm

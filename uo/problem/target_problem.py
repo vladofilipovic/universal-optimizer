@@ -1,5 +1,5 @@
 """ 
-The :mod:`~uo.target_problem.target_problem` module describes the class :class:`~uo.target_problem.TargetProblem`.
+The :mod:`~uo.problem.problem` module describes the class :class:`~uo.problem.Problem`.
 """
 
 from pathlib import Path
@@ -11,9 +11,9 @@ sys.path.append(directory.parent)
 from copy import deepcopy
 from abc import ABCMeta, abstractmethod
 
-class TargetProblem(metaclass=ABCMeta):
+class Problem(metaclass=ABCMeta):
     """
-    The `TargetProblem` class represents a target problem for optimization. It is an abstract base class that provides a common interface for defining and manipulating target problems.
+    The `Problem` class represents a target problem for optimization. It is an abstract base class that provides a common interface for defining and manipulating target problems.
 
     Attributes:
         name (str): The name of the target problem.
@@ -22,12 +22,12 @@ class TargetProblem(metaclass=ABCMeta):
 
     Methods:
         __init__(name: str = "", is_minimization: Optional[bool] = None, is_multi_objective: Optional[bool] = None) -> None:
-            Initializes a new `TargetProblem` instance with the specified name, minimization flag, and multi-objective flag.
+            Initializes a new `Problem` instance with the specified name, minimization flag, and multi-objective flag.
         
-        __copy__() -> TargetProblem:
+        __copy__() -> Problem:
             Creates a deep copy of the current target problem instance.
         
-        copy() -> TargetProblem:
+        copy() -> Problem:
             Creates a copy of the current target problem instance.
         
         name() -> str:
@@ -57,7 +57,7 @@ class TargetProblem(metaclass=ABCMeta):
                 is_minimization:Optional[bool]=None, 
                 is_multi_objective:Optional[bool]=None)->None:
         """
-        Create a new TargetProblem instance.
+        Create a new Problem instance.
 
         Parameters:
             name (str): The name of the target problem.
@@ -84,8 +84,8 @@ class TargetProblem(metaclass=ABCMeta):
         """
         Internal copy of the current target problem
 
-        :return:  new `TargetProblem` instance with the same properties
-        :rtype: TargetProblem
+        :return:  new `Problem` instance with the same properties
+        :rtype: Problem
         """
         pr = deepcopy(self)
         return pr
@@ -94,8 +94,8 @@ class TargetProblem(metaclass=ABCMeta):
         """
         Copy the current target problem
 
-        :return: new `TargetProblem` instance with the same properties
-        :rtype: TargetProblem
+        :return: new `Problem` instance with the same properties
+        :rtype: Problem
         """
         return self.__copy__()
 

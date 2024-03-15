@@ -28,7 +28,7 @@ from dataclasses import dataclass
 
 from uo.utils.logger import logger
 
-from uo.target_problem.target_problem import TargetProblem
+from uo.problem.problem import Problem
 from uo.target_solution.target_solution import TargetSolution
 
 from uo.algorithm.output_control import OutputControl
@@ -47,7 +47,7 @@ class VnsOptimizerConstructionParameters:
         """
         finish_control: FinishControl = None
         output_control: OutputControl = None
-        target_problem: TargetProblem = None
+        problem: Problem = None
         solution_template: TargetSolution = None
         problem_solution_vns_support: ProblemSolutionVnsSupport = None
         random_seed: Optional[int] = None
@@ -67,7 +67,7 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
             random_seed:Optional[int], 
             additional_statistics_control:AdditionalStatisticsControl,
             output_control:OutputControl, 
-            target_problem:TargetProblem, 
+            problem:Problem, 
             solution_template:TargetSolution,
             problem_solution_vns_support:ProblemSolutionVnsSupport, 
             k_min:int, 
@@ -82,7 +82,7 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         :param `AdditionalStatisticsControl` additional_statistics_control: structure that controls additional 
         statistics obtained during population-based metaheuristic execution        
         :param `OutputControl` output_control: structure that controls output
-        :param `TargetProblem` target_problem: problem to be solved
+        :param `Problem` problem: problem to be solved
         :param `TargetSolution` solution_template: initial solution of the problem 
         :param `ProblemSolutionVnsSupport` problem_solution_vns_support: placeholder for additional methods, specific for VNS 
         execution, which depend of precise solution type 
@@ -99,8 +99,8 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
                 raise TypeError('Parameter \'additional_statistics_control\' must be \'AdditionalStatisticsControl\'.')
         if not isinstance(output_control, OutputControl):
                 raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
-        if not isinstance(target_problem, TargetProblem):
-                raise TypeError('Parameter \'target_problem\' must be \'TargetProblem\'.')
+        if not isinstance(problem, Problem):
+                raise TypeError('Parameter \'problem\' must be \'Problem\'.')
         if not isinstance(solution_template, TargetSolution) and solution_template is not None:
                 raise TypeError('Parameter \'solution_template\' must be \'TargetSolution\' or \'None\'.')        
         if not isinstance(problem_solution_vns_support, ProblemSolutionVnsSupport):
@@ -116,7 +116,7 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
                 random_seed=random_seed, 
                 additional_statistics_control=additional_statistics_control, 
                 output_control=output_control, 
-                target_problem=target_problem,
+                problem=problem,
                 solution_template=solution_template)
         self.__local_search_type:str = local_search_type
         self.__problem_solution_vns_support:ProblemSolutionVnsSupport = problem_solution_vns_support
@@ -146,7 +146,7 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
             construction_tuple.random_seed, 
             construction_tuple.additional_statistics_control,
             construction_tuple.output_control, 
-            construction_tuple.target_problem, 
+            construction_tuple.problem, 
             construction_tuple.solution_template,
             construction_tuple.problem_solution_vns_support, 
             construction_tuple.k_min, 
@@ -198,9 +198,9 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         """
         self.__k_current = self.k_min
         self.current_solution = self.solution_template.copy()
-        self.current_solution.init_random(self.target_problem)
+        self.current_solution.init_random(self.problem)
         self.evaluation = 1
-        self.current_solution.evaluate(self.target_problem)
+        self.current_solution.evaluate(self.problem)
         self.best_solution = self.current_solution
     
     def main_loop_iteration(self)->None:
@@ -208,14 +208,14 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         One iteration within main loop of the VNS algorithm
         """
         self.write_output_values_if_needed("before_step_in_iteration", "shaking")
-        if not self.__shaking_method(self.__k_current, self.target_problem, self.current_solution, self):
+        if not self.__shaking_method(self.__k_current, self.problem, self.current_solution, self):
             self.write_output_values_if_needed("after_step_in_iteration", "shaking")
             return
         self.write_output_values_if_needed("after_step_in_iteration", "shaking")
         self.iteration += 1
         while self.__k_current <= self.__k_max:
             self.write_output_values_if_needed("before_step_in_iteration", "ls")
-            improvement:bool = self.__ls_method(self.__k_current, self.target_problem, self.current_solution, self)
+            improvement:bool = self.__ls_method(self.__k_current, self.problem, self.current_solution, self)
             self.write_output_values_if_needed("after_step_in_iteration", "ls")
             if improvement:
                 # update auxiliary structure that keeps all solution codes
