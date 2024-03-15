@@ -24,7 +24,7 @@ def main():
         vns_support:OnesCountMaxProblemBinaryBitArraySolutionVnsSupport = OnesCountMaxProblemBinaryBitArraySolutionVnsSupport()
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
         vns_construction_params.output_control = output_control
-        vns_construction_params.target_problem = problem_to_solve
+        vns_construction_params.problem = problem_to_solve
         vns_construction_params.solution_template = solution
         vns_construction_params.finish_control = finish
         vns_construction_params.problem_solution_vns_support = vns_support

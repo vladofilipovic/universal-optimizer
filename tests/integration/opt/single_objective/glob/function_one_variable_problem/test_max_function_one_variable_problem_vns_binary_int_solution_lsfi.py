@@ -47,7 +47,7 @@ class TestMaxFunctionOneVariableMaxProblemBinaryIntSolutionLsfi(unittest.TestCas
         self.additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(keep='')
         self.vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
         self.vns_construction_params.output_control = self.output_control
-        self.vns_construction_params.target_problem = self.problem_to_solve
+        self.vns_construction_params.problem = self.problem_to_solve
         self.vns_construction_params.solution_template = self.solution
         self.vns_construction_params.problem_solution_vns_support = self.vns_support
         self.vns_construction_params.finish_control =self.finish_control

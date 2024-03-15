@@ -23,7 +23,7 @@ from typing import Generic
 
 from uo.utils.logger import logger
 
-from uo.target_problem.target_problem import TargetProblem
+from uo.problem.problem import Problem
 from uo.target_solution.target_solution import TargetSolution
 
 from uo.algorithm.output_control import OutputControl
@@ -44,7 +44,7 @@ class PopulationBasedMetaheuristic(Metaheuristic, metaclass=ABCMeta):
             random_seed:Optional[int], 
             additional_statistics_control:AdditionalStatisticsControl,
             output_control:OutputControl, 
-            target_problem:TargetProblem,
+            problem:Problem,
             solution_template:Optional[TargetSolution]
     )->None:
         """
@@ -56,7 +56,7 @@ class PopulationBasedMetaheuristic(Metaheuristic, metaclass=ABCMeta):
         :param `AdditionalStatisticsControl` additional_statistics_control: structure that controls additional 
         statistics obtained during population-based metaheuristic execution        
         :param `OutputControl` output_control: structure that controls output
-        :param `TargetProblem` target_problem: problem to be solved
+        :param `Problem` problem: problem to be solved
         :param `Optional[TargetSolution]` solution_template: template for solution of the problem
         """
         if not isinstance(name, str):
@@ -69,8 +69,8 @@ class PopulationBasedMetaheuristic(Metaheuristic, metaclass=ABCMeta):
                 raise TypeError('Parameter \'additional_statistics_control\' must be \'AdditionalStatisticsControl\'.')
         if not isinstance(output_control, OutputControl):
                 raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
-        if not isinstance(target_problem, TargetProblem):
-                raise TypeError('Parameter \'target_problem\' must be \'TargetProblem\'.')
+        if not isinstance(problem, Problem):
+                raise TypeError('Parameter \'problem\' must be \'Problem\'.')
         if not isinstance(solution_template, TargetSolution) and solution_template is not None:
                 raise TypeError('Parameter \'solution_template\' must be \'TargetSolution\' or None.')
         super().__init__(name=name, 
@@ -78,7 +78,7 @@ class PopulationBasedMetaheuristic(Metaheuristic, metaclass=ABCMeta):
                 random_seed=random_seed,
                 additional_statistics_control=additional_statistics_control,
                 output_control=output_control, 
-                target_problem=target_problem,
+                problem=problem,
                 solution_template=solution_template)
         self.__current_population:Optional[list[TargetSolution]] =  None
 

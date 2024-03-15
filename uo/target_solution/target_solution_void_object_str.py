@@ -11,7 +11,7 @@ from copy import deepcopy
 
 from uo.utils.logger import logger
 
-from uo.target_problem.target_problem import TargetProblem
+from uo.problem.problem import Problem
 from uo.target_solution.target_solution import TargetSolution
 from uo.target_solution.quality_of_solution import QualityOfSolution
 
@@ -36,19 +36,19 @@ class TargetSolutionVoidObjectStr(TargetSolution[object, str]):
     def argument(self, representation:object)->str:
         return str(representation)
 
-    def init_random(self, problem:TargetProblem)->None:
+    def init_random(self, problem:Problem)->None:
         self.representation = None
 
-    def init_from(self, representation:object, problem:TargetProblem)->None:
-        if not isinstance(problem, TargetProblem):
-            raise TypeError('Parameter \'problem\' must be of type \'TargetProblem\'.')
+    def init_from(self, representation:object, problem:Problem)->None:
+        if not isinstance(problem, Problem):
+            raise TypeError('Parameter \'problem\' must be of type \'Problem\'.')
         self.representation = representation
 
     def native_representation(self, representation_str:str)->object:
         return representation_str
 
     def calculate_quality_directly(self, representation:object, 
-            problem:TargetProblem)->QualityOfSolution:
+            problem:Problem)->QualityOfSolution:
         return QualityOfSolution(0, None, 0, None, True)
 
     def representation_distance_directly(self, solution_code_1:str, solution_code_2:str)->float:

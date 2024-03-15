@@ -10,7 +10,7 @@ from random import choice
 from typing import NamedTuple
 from typing import Optional
 
-from uo.target_problem.target_problem import TargetProblem
+from uo.problem.problem import Problem
 from uo.target_solution.quality_of_solution import QualityOfSolution
 from uo.target_solution.target_solution import TargetSolution
 from uo.target_solution.evaluation_cache_control_statistics import EvaluationCacheControlStatistics
@@ -45,11 +45,11 @@ class TargetSolutionVoid(TargetSolution[int, str]):
     def argument(self, representation:int)->str:
         return "42"
 
-    def init_random(self, problem:TargetProblem)->None:
+    def init_random(self, problem:Problem)->None:
         self.representation = 42
 
 
-    def init_from(self, representation:int, problem:TargetProblem)->None:
+    def init_from(self, representation:int, problem:Problem)->None:
         if not isinstance(representation, int):
             raise TypeError('Parameter \'representation\' must have type \'int\'.')
         self.representation = representation
@@ -58,7 +58,7 @@ class TargetSolutionVoid(TargetSolution[int, str]):
         return 42
 
     def calculate_quality_directly(self, representation:int, 
-            problem:TargetProblem)->QualityOfSolution:
+            problem:Problem)->QualityOfSolution:
         return QualityOfSolution(42, None, 42, None, True)
 
     def representation_distance_directly(self, solution_code_1:str, solution_code_2:str)->float:

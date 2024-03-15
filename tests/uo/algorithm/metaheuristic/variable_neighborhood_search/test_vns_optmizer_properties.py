@@ -2,7 +2,7 @@ import unittest
 import unittest.mock as mocker
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
-from uo.target_problem.target_problem import TargetProblem
+from uo.problem.problem import Problem
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer 
@@ -19,7 +19,7 @@ class TestVnsOptimizerProperties(unittest.TestCase):
         self.output_control_stub = mocker.MagicMock(spec=OutputControl)
         type(self.output_control_stub).write_to_output = False
 
-        self.problem_mock = mocker.MagicMock(spec=TargetProblem)
+        self.problem_mock = mocker.MagicMock(spec=Problem)
         type(self.problem_mock).name = mocker.PropertyMock(return_value='some_problem')
         type(self.problem_mock).is_minimization = mocker.PropertyMock(return_value=True)
         type(self.problem_mock).file_path = mocker.PropertyMock(return_value='some file path')
@@ -47,7 +47,7 @@ class TestVnsOptimizerProperties(unittest.TestCase):
         
         self.vns_optimizer = VnsOptimizer(
                 output_control=self.output_control_stub,
-                target_problem=self.problem_mock, 
+                problem=self.problem_mock, 
                 solution_template=TargetSolutionVoid( 43, 0, 0, False),
                 problem_solution_vns_support=self.problem_solution_vns_support_stub, 
                 finish_control=self.finish_control_mock,
@@ -80,16 +80,16 @@ class TestVnsOptimizerProperties(unittest.TestCase):
         self.assertEqual(self.vns_optimizer.k_max, self.k_max)
 
     def test_problem_name_should_be_equal_as_in_constructor(self):
-        self.assertEqual(self.vns_optimizer.target_problem.name, self.problem_mock.name)
+        self.assertEqual(self.vns_optimizer.problem.name, self.problem_mock.name)
 
     def test_problem_is_minimization_should_be_equal_as_in_constructor(self):
-        self.assertEqual(self.vns_optimizer.target_problem.is_minimization, self.problem_mock.is_minimization)
+        self.assertEqual(self.vns_optimizer.problem.is_minimization, self.problem_mock.is_minimization)
 
     def test_problem_file_path_should_be_equal_as_in_constructor(self):
-        self.assertEqual(self.vns_optimizer.target_problem.file_path, self.problem_mock.file_path)
+        self.assertEqual(self.vns_optimizer.problem.file_path, self.problem_mock.file_path)
 
     def test_problem_dimension_should_be_equal_as_in_constructor(self):
-        self.assertEqual(self.vns_optimizer.target_problem.dimension, self.problem_mock.dimension)
+        self.assertEqual(self.vns_optimizer.problem.dimension, self.problem_mock.dimension)
 
     def test_create_with_invalid_local_search_type_should_raise_value_exception_with_proper_message(self):
         with self.assertRaises(ValueError) as context:
@@ -99,7 +99,7 @@ class TestVnsOptimizerProperties(unittest.TestCase):
             type(vns_support_stub).copy = mocker.CallableMixin(spec="return self")
             vns_optimizer:VnsOptimizer = VnsOptimizer(
                 output_control=self.output_control_stub,
-                target_problem=self.problem_mock, 
+                problem=self.problem_mock, 
                 solution_template=TargetSolutionVoid( 43, 0, 0, False),
                 problem_solution_vns_support=vns_support_stub, 
                 finish_control=self.finish_control_mock,

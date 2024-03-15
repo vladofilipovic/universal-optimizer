@@ -19,7 +19,7 @@ from random import random
 
 from bitstring import Bits, BitArray, BitStream, pack
 
-from uo.target_problem.target_problem import TargetProblem
+from uo.problem.problem import Problem
 from uo.target_solution.quality_of_solution import QualityOfSolution
 from uo.target_solution.target_solution import TargetSolution
 
@@ -87,11 +87,11 @@ class OnesCountMaxProblemBinaryBitArraySolution(TargetSolution[BitArray,str]):
         """
         return representation.bin
 
-    def init_random(self, problem:TargetProblem)->None:
+    def init_random(self, problem:Problem)->None:
         """
         Random initialization of the solution
 
-        :param `TargetProblem` problem: problem which is solved by solution
+        :param `Problem` problem: problem which is solved by solution
         """
         #logger.debug('Solution: ' + str(self))
         if problem.dimension is None:
@@ -103,12 +103,12 @@ class OnesCountMaxProblemBinaryBitArraySolution(TargetSolution[BitArray,str]):
             if random() > 0.5:
                 self.representation[i] = True
 
-    def init_from(self, representation:BitArray, problem:TargetProblem)->None:
+    def init_from(self, representation:BitArray, problem:Problem)->None:
         """
         Initialization of the solution, by setting its native representation 
 
         :param BitArray representation: representation that will be ste to solution
-        :param `TargetProblem` problem: problem which is solved by solution
+        :param `Problem` problem: problem which is solved by solution
         """
         if not isinstance(representation, BitArray):
             raise TypeError('Parameter \'representation\' must have type \'BitArray\'.')
@@ -117,12 +117,12 @@ class OnesCountMaxProblemBinaryBitArraySolution(TargetSolution[BitArray,str]):
         self.representation = BitArray(bin=representation.bin)
 
     def calculate_quality_directly(self, representation:BitArray, 
-            problem:TargetProblem)->QualityOfSolution:
+            problem:Problem)->QualityOfSolution:
         """
         Fitness calculation of the max ones binary BitArray solution
 
         :param BitArray representation: native representation of solution whose fitness is calculated
-        :param TargetProblem problem: problem that is solved
+        :param Problem problem: problem that is solved
         :return: objective value, fitness value and feasibility of the solution instance  
         :rtype: `QualityOfSolution`
         """

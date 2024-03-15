@@ -4,22 +4,22 @@ import unittest
 
 from copy import deepcopy
 
-from uo.target_problem.target_problem import TargetProblem 
-from uo.target_problem.target_problem_void import TargetProblemVoid 
+from uo.problem.problem import Problem 
+from uo.problem.problem_void import ProblemVoid 
 
 class Test__Copy__(unittest.TestCase):
 
-    # Returns a new instance of TargetProblem with the same properties as the original.
+    # Returns a new instance of Problem with the same properties as the original.
     def test_returns_new_instance_with_same_properties(self):
-        problem = TargetProblemVoid("problem", True)
+        problem = ProblemVoid("problem", True)
         copy_problem = problem.__copy__()
-        self.assertIsInstance(copy_problem, TargetProblem)
+        self.assertIsInstance(copy_problem, Problem)
         self.assertEqual(copy_problem.name, problem.name)
         self.assertEqual(copy_problem.is_minimization, problem.is_minimization)
 
     # The new instance is a deep copy of the original instance.
     def test_new_instance_is_deep_copy(self):
-        problem = TargetProblemVoid("problem", True)
+        problem = ProblemVoid("problem", True)
         copy_problem = problem.__copy__()
         self.assertIsNot(copy_problem, problem)
         self.assertEqual(copy_problem.name, problem.name)
@@ -27,17 +27,17 @@ class Test__Copy__(unittest.TestCase):
 
     # The new instance is not the same object as the original instance.
     def test_new_instance_is_not_same_object(self):
-        problem = TargetProblemVoid("problem", True)
+        problem = ProblemVoid("problem", True)
         copy_problem = problem.__copy__()
         self.assertIsNot(copy_problem, problem)
 
     # The method raises a TypeError if called with arguments.
     def test_raises_type_error_with_arguments(self):
-        problem = TargetProblemVoid("problem", True)
+        problem = ProblemVoid("problem", True)
         with self.assertRaises(TypeError):
             problem.__copy__(1)
 
     # The method raises a TypeError if called on a class instead of an instance.
     def test_raises_type_error_on_class(self):
         with self.assertRaises(TypeError):
-            TargetProblemVoid.__copy__()
+            ProblemVoid.__copy__()

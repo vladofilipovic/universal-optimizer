@@ -15,7 +15,7 @@ from abc import ABCMeta, abstractmethod
 
 from uo.utils.logger import logger
 from uo.algorithm.output_control import OutputControl
-from uo.target_problem.target_problem import TargetProblem
+from uo.problem.problem import Problem
 from uo.target_solution.target_solution import TargetSolution
 
     
@@ -25,23 +25,23 @@ class Optimizer(metaclass=ABCMeta):
     """
 
     @abstractmethod
-    def __init__(self, name:str, output_control:OutputControl, target_problem:TargetProblem)->None:
+    def __init__(self, name:str, output_control:OutputControl, problem:Problem)->None:
         """
         Create new `Optimizer` instance
 
         :param str name: name of the optimizer
         :param `OutputControl` output_control: structure that controls output
-        :param `TargetProblem` target_problem: problem to be solved
+        :param `Problem` problem: problem to be solved
         """
         if not isinstance(name, str):
                 raise TypeError('Parameter \'name\' must be \'str\'.')
         if not isinstance(output_control, OutputControl):
                 raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
-        if not isinstance(target_problem, TargetProblem):
-                raise TypeError('Parameter \'target_problem\' must be \'TargetProblem\'.')
+        if not isinstance(problem, Problem):
+                raise TypeError('Parameter \'problem\' must be \'Problem\'.')
         self.__name:str = name
         self.__output_control:OutputControl = output_control.copy()
-        self.__target_problem:TargetProblem = target_problem.copy()
+        self.__problem:Problem = problem.copy()
         self.__execution_started:Optional[datetime] = None
         self.__execution_ended:Optional[datetime] = None
         self.__best_solution:Optional[TargetSolution] = None
@@ -79,13 +79,13 @@ class Optimizer(metaclass=ABCMeta):
         return self.__name
 
     @property
-    def target_problem(self)->TargetProblem:
+    def problem(self)->Problem:
         """
         Property getter for the target problem to be solved
         
-        :return TargetProblem: target problem to be solved 
+        :return Problem: target problem to be solved 
         """
-        return self.__target_problem
+        return self.__problem
 
     @property
     def execution_started(self)->datetime:
@@ -301,7 +301,7 @@ class Optimizer(metaclass=ABCMeta):
         s += 'name=' + self.name + delimiter
         for _ in range(0, indentation):
             s += indentation_symbol  
-        s += 'target_problem=' + self.target_problem.string_rep(delimiter, indentation + 1, 
+        s += 'problem=' + self.problem.string_rep(delimiter, indentation + 1, 
                 indentation_symbol, '{', '}')  + delimiter 
         s += '__output_control=' + self.__output_control.string_rep(
                 delimiter, indentation + 1, indentation_symbol, '{', '}') + delimiter

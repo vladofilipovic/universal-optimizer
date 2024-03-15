@@ -186,7 +186,7 @@ def main():
             # solver construction parameters
             vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
             vns_construction_params.output_control = output_control
-            vns_construction_params.target_problem = problem
+            vns_construction_params.problem = problem
             vns_construction_params.solution_template = solution
             vns_construction_params.problem_solution_vns_support = vns_support
             vns_construction_params.finish_control = finish_control
@@ -213,7 +213,7 @@ def main():
             # solver construction parameters
             te_construction_params:TeOptimizerConstructionParameters = TeOptimizerConstructionParameters()
             te_construction_params.output_control = output_control
-            te_construction_params.target_problem = problem
+            te_construction_params.problem = problem
             te_construction_params.solution_template = solution
             te_construction_params.problem_solution_te_support = te_support
             solver:OnesCountMaxProblemSolver = OnesCountMaxProblemSolver.from_total_enumeration(te_construction_params)
@@ -221,7 +221,7 @@ def main():
             # solver construction parameters
             ilp_construction_params = OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters(
                     output_control=output_control,
-                    target_problem=problem)
+                    problem=problem)
             solver:OnesCountMaxProblemSolver = OnesCountMaxProblemSolver.from_integer_linear_programming(
                     ilp_construction_params)
         else:

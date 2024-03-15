@@ -4,8 +4,8 @@ import unittest.mock as mocker
 
 from copy import deepcopy
 
-from uo.target_problem.target_problem import TargetProblem
-from uo.target_problem.target_problem_void import TargetProblemVoid
+from uo.problem.problem import Problem
+from uo.problem.problem_void import ProblemVoid
 
 from uo.target_solution.quality_of_solution import QualityOfSolution
 from uo.target_solution.target_solution import TargetSolution 
@@ -84,7 +84,7 @@ class TestTargetSolution(unittest.TestCase):
         evaluation_cache_max_size = 100
         distance_calculation_cache_is_used = True
         distance_calculation_cache_max_size = 200
-        target_problem = TargetProblemVoid("a", True)
+        problem = ProblemVoid("a", True)
         target_solution = TargetSolutionVoid(random_seed, fitness_value, objective_value, 
                     is_feasible, evaluation_cache_is_used, evaluation_cache_max_size, 
                     distance_calculation_cache_is_used, distance_calculation_cache_max_size)
@@ -94,8 +94,8 @@ class TestTargetSolution(unittest.TestCase):
         self.assertIsInstance(target_solution.string_representation(), str)
         self.assertIsNotNone(target_solution.native_representation("representation"))
         self.assertIsNotNone(target_solution.calculate_quality_directly(target_solution.representation, 
-                    target_problem))
-        self.assertIsNotNone(target_solution.calculate_quality(target_problem))
+                    problem))
+        self.assertIsNotNone(target_solution.calculate_quality(problem))
         self.assertIsNotNone(target_solution.representation_distance_directly(target_solution.representation, 
                     target_solution.representation))
         self.assertIsNotNone(target_solution.representation_distance(target_solution.representation, 
@@ -221,11 +221,11 @@ class TestTargetSolution(unittest.TestCase):
         target_solution = TargetSolutionVoid(random_seed, fitness_value, objective_value, is_feasible, 
                     evaluation_cache_is_used, evaluation_cache_max_size, distance_calculation_cache_is_used, 
                     distance_calculation_cache_max_size)
-        target_problem_mock = mocker.Mock()
+        problem_mock = mocker.Mock()
         # Act
-        target_solution.calculate_quality(target_problem_mock)
+        target_solution.calculate_quality(problem_mock)
         qos_c = target_solution.evaluation_cache_cs.cache[target_solution.string_representation()]
-        qos_d = target_solution.calculate_quality_directly(target_solution.representation, target_problem_mock)
+        qos_d = target_solution.calculate_quality_directly(target_solution.representation, problem_mock)
         # Assert
         self.assertEqual(qos_c.is_feasible, qos_d.is_feasible)
         self.assertEqual(qos_c.fitness_value, qos_d.fitness_value)
@@ -288,8 +288,8 @@ class TestTargetSolution(unittest.TestCase):
         self.assertEqual(target_solution.representation_distance_cache_cs.is_caching, copied_solution.representation_distance_cache_cs.is_caching)
         self.assertEqual(target_solution.representation_distance_cache_cs.max_cache_size, copied_solution.representation_distance_cache_cs.max_cache_size)
 
-    # TargetSolution can be evaluated with a TargetProblem object
-    def test_evaluate_with_target_problem(self):
+    # TargetSolution can be evaluated with a Problem object
+    def test_evaluate_with_problem(self):
         # Arrange
         random_seed = 123
         fitness_value = 0.5
@@ -302,16 +302,16 @@ class TestTargetSolution(unittest.TestCase):
         target_solution = TargetSolutionVoid(random_seed, fitness_value, objective_value, is_feasible, 
                     evaluation_cache_is_used, evaluation_cache_max_size, distance_calculation_cache_is_used, 
                     distance_calculation_cache_max_size)
-        target_problem_mock = mocker.Mock()
+        problem_mock = mocker.Mock()
         # Act
-        target_solution.evaluate(target_problem_mock)
+        target_solution.evaluate(problem_mock)
         # Assert
         self.assertEqual(target_solution.objective_value, 
-                    target_solution.calculate_quality_directly(target_solution.representation, target_problem_mock).objective_value)
+                    target_solution.calculate_quality_directly(target_solution.representation, problem_mock).objective_value)
         self.assertEqual(target_solution.fitness_value, 
-                    target_solution.calculate_quality_directly(target_solution.representation, target_problem_mock).fitness_value)
+                    target_solution.calculate_quality_directly(target_solution.representation, problem_mock).fitness_value)
         self.assertEqual(target_solution.is_feasible, 
-                    target_solution.calculate_quality_directly(target_solution.representation, target_problem_mock).is_feasible)
+                    target_solution.calculate_quality_directly(target_solution.representation, problem_mock).is_feasible)
 
     # TargetSolution can be represented as a string with a specified delimiter, indentation, and grouping symbols
     def test_string_representation(self):
@@ -395,7 +395,7 @@ class TestTargetSolution(unittest.TestCase):
     def test_initialization_with_valid_representation_and_problem(self):
         # Arrange
         representation = 42
-        problem = TargetProblemVoid("a", True)
+        problem = ProblemVoid("a", True)
         solution = TargetSolutionVoid(None, 20, 20, True )
         # Act
         solution.init_from(representation, problem)
@@ -406,7 +406,7 @@ class TestTargetSolution(unittest.TestCase):
     def test_sets_representation_to_given_representation2(self):
         # Arrange
         representation = 42
-        problem = TargetProblemVoid("a", True)
+        problem = ProblemVoid("a", True)
         solution = TargetSolutionVoid(None, 20, 20, True )
         # Act
         solution.init_from(representation, problem)
@@ -417,14 +417,14 @@ class TestTargetSolution(unittest.TestCase):
     def test_raises_TypeError_if_representation_not_of_type_R_co(self):
         # Arrange
         representation = "invalid representation"
-        problem = TargetProblemVoid("a", True)
+        problem = ProblemVoid("a", True)
         solution = TargetSolutionVoid(None, 20, 20, True )
         # Act & Assert
         with self.assertRaises(TypeError):
             solution.init_from(representation, problem)
 
-    # raises TypeError if the given problem is not of type TargetProblem
-    def test_raises_TypeError_if_problem_not_of_type_TargetProblem(self):
+    # raises TypeError if the given problem is not of type Problem
+    def test_raises_TypeError_if_problem_not_of_type_Problem(self):
         # Arrange
         representation = "example_representation"
         problem = "example_problem"

@@ -15,7 +15,7 @@ from typing import Optional
 
 from uo.utils.logger import logger
 from uo.algorithm.output_control import OutputControl
-from uo.target_problem.target_problem import TargetProblem
+from uo.problem.problem import Problem
 from uo.target_solution.quality_of_solution import QualityOfSolution
 from uo.target_solution.target_solution import TargetSolution
 
@@ -28,7 +28,7 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
     Attributes:
         name (str): The name of the algorithm.
         output_control (OutputControl): The structure that controls output.
-        target_problem (TargetProblem): The problem to be solved.
+        problem (Problem): The problem to be solved.
         solution_template (Optional[TargetSolution]): The solution template for the problem to be solved.
 
     Properties:
@@ -38,13 +38,13 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
         iteration_best_found (int): The iteration when the best solution is found.
 
     Methods:
-        __init__(name: str, output_control: OutputControl, target_problem: TargetProblem, solution_template: Optional[TargetSolution] = None) -> None:
+        __init__(name: str, output_control: OutputControl, problem: Problem, solution_template: Optional[TargetSolution] = None) -> None:
             Create a new Algorithm instance.
         __copy__() -> Algorithm:
             Internal copy of the current algorithm.
         copy() -> Algorithm:
             Copy the current algorithm.
-        is_first_better(sol1: TargetSolution, sol2: TargetSolution, problem: TargetProblem) -> Optional[bool]:
+        is_first_better(sol1: TargetSolution, sol2: TargetSolution, problem: Problem) -> Optional[bool]:
             Checks if the first solution is better than the second one, with respect to the problem that is optimized.
         init() -> None:
             Initialization of the algorithm.
@@ -62,24 +62,24 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
     def __init__(self, 
                 name:str, 
                 output_control:OutputControl, 
-                target_problem:TargetProblem,
+                problem:Problem,
                 solution_template:Optional[TargetSolution] = None)->None:
         """
         Create new Algorithm instance
 
         :param str name: name of the algorithm
         :param `OutputControl` output_control: structure that controls output
-        :param `TargetProblem` target_problem: problem to be solved
+        :param `Problem` problem: problem to be solved
         """
         if not isinstance(name, str):
                 raise TypeError('Parameter \'name\' must be \'str\'.')
         if not isinstance(output_control, OutputControl):
                 raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
-        if not isinstance(target_problem, TargetProblem):
-                raise TypeError('Parameter \'target_problem\' must be \'TargetProblem\'.')
+        if not isinstance(problem, Problem):
+                raise TypeError('Parameter \'problem\' must be \'Problem\'.')
         if not isinstance(solution_template, TargetSolution) and solution_template is not None:
                 raise TypeError('Parameter \'solution_template\' must be \'TargetSolution\' or None.')
-        super().__init__(name=name, output_control=output_control, target_problem=target_problem)
+        super().__init__(name=name, output_control=output_control, problem=problem)
         self.__solution_template:Optional[TargetSolution] = solution_template
         self.__evaluation:int = 0
         self.__iteration:int = 0
@@ -211,13 +211,13 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
         self.__evaluation_best_found = value
 
 
-    def is_first_better(self, sol1:TargetSolution, sol2:TargetSolution, problem: TargetProblem)->Optional[bool]:
+    def is_first_better(self, sol1:TargetSolution, sol2:TargetSolution, problem: Problem)->Optional[bool]:
         """
         Checks if first solution is better than the second one, with respect to problem that is optimized
 
         :param TargetSolution sol1: first solution
         :param TargetSolution sol2: second solution
-        :param TargetProblem problem: problem to be solved
+        :param Problem problem: problem to be solved
         :return: `True` if first is better, `False` if first is worse, `None` if quality of both 
                 solutions are equal
         :rtype: bool
@@ -282,7 +282,7 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
         s += 'name=' + self.name + delimiter
         for _ in range(0, indentation):
             s += indentation_symbol  
-        s += 'target_problem=' + self.target_problem.string_rep(delimiter, indentation + 1, 
+        s += 'problem=' + self.problem.string_rep(delimiter, indentation + 1, 
                 indentation_symbol, '{', '}')  + delimiter 
         for _ in range(0, indentation):
             s += indentation_symbol  

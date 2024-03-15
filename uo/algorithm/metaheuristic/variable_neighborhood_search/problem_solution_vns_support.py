@@ -13,7 +13,7 @@ from abc import ABCMeta, abstractmethod
 from typing import TypeVar
 from typing import Generic
 
-from uo.target_problem.target_problem import TargetProblem
+from uo.problem.problem import Problem
 from uo.target_solution.target_solution import TargetSolution
 from uo.algorithm.algorithm import Algorithm
 
@@ -23,13 +23,13 @@ A_co = TypeVar("A_co", covariant=True)
 class ProblemSolutionVnsSupport(Generic[R_co,A_co], metaclass=ABCMeta):
     
     @abstractmethod
-    def shaking(self, k:int, problem:TargetProblem, solution:TargetSolution[R_co,A_co], optimizer:Algorithm)->bool:
+    def shaking(self, k:int, problem:Problem, solution:TargetSolution[R_co,A_co], optimizer:Algorithm)->bool:
         """
         Random VNS shaking of several parts such that new solution code does not differ more than supplied from all 
         solution codes inside collection
 
         :param int k: int parameter for VNS
-        :param `TargetProblem` problem: problem that is solved
+        :param `Problem` problem: problem that is solved
         :param `TargetSolution[R_co,A_co]` solution: solution used for the problem that is solved
         :param `Algorithm` optimizer: optimizer that is executed
         :param `list[R_co]` solution_representations: solution representations that should be shaken
@@ -39,13 +39,13 @@ class ProblemSolutionVnsSupport(Generic[R_co,A_co], metaclass=ABCMeta):
         raise NotImplementedError
 
     @abstractmethod
-    def local_search_best_improvement(self, k:int, problem:TargetProblem, solution:TargetSolution[R_co,A_co], 
+    def local_search_best_improvement(self, k:int, problem:Problem, solution:TargetSolution[R_co,A_co], 
             optimizer:Algorithm)->bool:
         """
         Executes "best improvement" variant of the local search procedure 
         
         :param int k: int parameter for VNS
-        :param `TargetProblem` problem: problem that is solved
+        :param `Problem` problem: problem that is solved
         :param `TargetSolution` solution: solution used for the problem that is solved
         :param `Algorithm` optimizer: optimizer that is executed
         :return: result of the local search procedure 
@@ -54,13 +54,13 @@ class ProblemSolutionVnsSupport(Generic[R_co,A_co], metaclass=ABCMeta):
         raise NotImplementedError
 
     @abstractmethod
-    def local_search_first_improvement(self, k:int, problem:TargetProblem, solution:TargetSolution[R_co,A_co], 
+    def local_search_first_improvement(self, k:int, problem:Problem, solution:TargetSolution[R_co,A_co], 
             optimizer:Algorithm)->bool:
         """
         Executes "first improvement" variant of the local search procedure 
         
         :param int k: int parameter for VNS
-        :param `TargetProblem` problem: problem that is solved
+        :param `Problem` problem: problem that is solved
         :param `TargetSolution` solution: solution used for the problem that is solved
         :param `Algorithm` optimizer: optimizer that is executed
         :return: result of the local search procedure 

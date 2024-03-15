@@ -15,14 +15,14 @@ sys.path.append(directory.parent.parent.parent.parent.parent)
 
 from copy import deepcopy
 
-from uo.target_problem.target_problem import TargetProblem
+from uo.problem.problem import Problem
 from uo.utils.logger import logger
 
-class OnesCountMaxProblem(TargetProblem):
+class OnesCountMaxProblem(Problem):
     """
     Class representing the Ones Count Max Problem.
 
-    This class inherits from the TargetProblem class and is used to define and solve the Ones Count Max Problem. The problem is defined by a dimension, which represents the number of variables in the problem.
+    This class inherits from the Problem class and is used to define and solve the Ones Count Max Problem. The problem is defined by a dimension, which represents the number of variables in the problem.
 
     Attributes:
         dimension (int): The dimension of the problem.

@@ -15,7 +15,7 @@ from linopy import Model
 
 from uo.utils.logger import logger
 
-from uo.target_problem.target_problem import TargetProblem
+from uo.problem.problem import Problem
 from uo.target_solution.target_solution import TargetSolution
 from uo.target_solution.target_solution_void_object_str import TargetSolutionVoidObjectStr
 from uo.target_solution.quality_of_solution import QualityOfSolution
@@ -30,13 +30,13 @@ class OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters:
     """
     Instance of the class :class:`OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters` represents constructor parameters for max ones problem ILP solver.
     """
-    def __init__(self, output_control: OutputControl = None, target_problem: TargetProblem = None)->None:
+    def __init__(self, output_control: OutputControl = None, problem: Problem = None)->None:
         if not isinstance(output_control, OutputControl):
             raise TypeError('Parameter \'output_control\' must have type \'OutputControl\'.')
-        if not isinstance(target_problem, TargetProblem):
-            raise TypeError('Parameter \'target_problem\' must have type \'TargetProblem\'.')
+        if not isinstance(problem, Problem):
+            raise TypeError('Parameter \'problem\' must have type \'Problem\'.')
         self.__output_control = output_control
-        self.__target_problem = target_problem
+        self.__problem = problem
 
     @property
     def output_control(self)->OutputControl:
@@ -49,14 +49,14 @@ class OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters:
         return self.__output_control    
 
     @property
-    def target_problem(self)->TargetProblem:
+    def problem(self)->Problem:
         """
         Property getter for the output control
         
         :return: problem that is solved
-        :rtype: `TargetProblem`
+        :rtype: `Problem`
         """
-        return self.__target_problem    
+        return self.__problem    
 
 
 class OnesCountMaxProblemIntegerLinearProgrammingSolution(TargetSolutionVoidObjectStr):
@@ -81,7 +81,7 @@ class OnesCountMaxProblemIntegerLinearProgrammingSolver(Optimizer):
         if not isinstance(problem, OnesCountMaxProblem):
             raise TypeError('Parameter \'problem\' must have type \'OnesCountMaxProblem\'.')
         super().__init__("OnesCountMaxProblemIntegerLinearProgrammingSolver", output_control=output_control, 
-                target_problem=problem)
+                problem=problem)
         self.__model = Model()
 
     @classmethod
@@ -94,7 +94,7 @@ class OnesCountMaxProblemIntegerLinearProgrammingSolver(Optimizer):
         """
         return cls(
             construction_params.output_control, 
-            construction_params.target_problem)
+            construction_params.problem)
 
     def __copy__(self):
         """
@@ -133,12 +133,12 @@ class OnesCountMaxProblemIntegerLinearProgrammingSolver(Optimizer):
         self.evaluation = -1
         self.execution_started = datetime.now() 
         l = []
-        for _ in range(self.target_problem.dimension):
+        for _ in range(self.problem.dimension):
             l.append(0)
         coords = xr.DataArray(l)
         x = self.model.add_variables(binary=True, coords=[coords], name='x')
         #logger.debug(self.model.variables)
-        if self.target_problem.is_minimization:
+        if self.problem.is_minimization:
             self.model.add_objective((x).sum(), sense="min")
         else:
             self.model.add_objective((x).sum(),sense="max")

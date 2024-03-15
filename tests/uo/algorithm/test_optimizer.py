@@ -6,11 +6,11 @@ from datetime import datetime
 from io import TextIOWrapper
 from copy import deepcopy
 
-from uo.target_problem.target_problem import TargetProblem
+from uo.problem.problem import Problem
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.optimizer import Optimizer
 from uo.algorithm.optimizer_void import OptimizerVoid
-from uo.target_problem.target_problem_void import TargetProblemVoid
+from uo.problem.problem_void import ProblemVoid
 from uo.target_solution.quality_of_solution import QualityOfSolution
 from uo.target_solution.target_solution_void import TargetSolutionVoid
 from uo.utils import logger
@@ -23,15 +23,15 @@ class Test__Optimizer__(unittest.TestCase):
         # Arrange
         name = "Optimizer1"
         output_control = OutputControl()
-        target_problem = TargetProblemVoid("a problem", True)
+        problem = ProblemVoid("a problem", True)
         # Act
-        optimizer = OptimizerVoid(name, output_control, target_problem)
+        optimizer = OptimizerVoid(name, output_control, problem)
         # Assert
         self.assertEqual(optimizer.name, name)
         self.assertEqual(optimizer.output_control.fields, output_control.fields)
         self.assertEqual(optimizer.output_control.moments, output_control.moments)
-        self.assertEqual(optimizer.target_problem.name, target_problem.name)
-        self.assertEqual(optimizer.target_problem.is_minimization, target_problem.is_minimization)
+        self.assertEqual(optimizer.problem.name, problem.name)
+        self.assertEqual(optimizer.problem.is_minimization, problem.is_minimization)
         self.assertIsNone(optimizer.execution_started)
         self.assertIsNone(optimizer.execution_ended)
         self.assertIsNone(optimizer.best_solution)
@@ -41,15 +41,15 @@ class Test__Optimizer__(unittest.TestCase):
         # Arrange
         name = "Optimizer1"
         output_control = OutputControl()
-        target_problem = TargetProblemVoid("a problem", True)
+        problem = ProblemVoid("a problem", True)
         # Act
-        optimizer = OptimizerVoid(name, output_control, target_problem)
+        optimizer = OptimizerVoid(name, output_control, problem)
         # Assert
         self.assertEqual(optimizer.name, name)
         self.assertEqual(optimizer.output_control.fields, output_control.fields)
         self.assertEqual(optimizer.output_control.moments, output_control.moments)
-        self.assertEqual(optimizer.target_problem.name, target_problem.name)
-        self.assertEqual(optimizer.target_problem.is_minimization, target_problem.is_minimization)
+        self.assertEqual(optimizer.problem.name, problem.name)
+        self.assertEqual(optimizer.problem.is_minimization, problem.is_minimization)
         self.assertIsNone(optimizer.execution_started)
         self.assertIsNone(optimizer.execution_ended)
         self.assertIsNone(optimizer.best_solution)
@@ -59,9 +59,9 @@ class Test__Optimizer__(unittest.TestCase):
         # Arrange
         name = "Optimizer1"
         output_control = OutputControl()
-        target_problem = TargetProblemVoid("a problem", True)
+        problem = ProblemVoid("a problem", True)
         # Act
-        optimizer = OptimizerVoid(name, output_control, target_problem)
+        optimizer = OptimizerVoid(name, output_control, problem)
         # Assert
         self.assertIsNone(optimizer.execution_started)
         self.assertIsNone(optimizer.execution_ended)
@@ -72,48 +72,48 @@ class Test__Optimizer__(unittest.TestCase):
         # Arrange
         name = 123
         output_control = OutputControl()
-        target_problem = TargetProblemVoid("a problem", True)
+        problem = ProblemVoid("a problem", True)
         # Act & Assert
         with self.assertRaises(TypeError):
-            Optimizer(name, output_control, target_problem)
+            Optimizer(name, output_control, problem)
 
     # Raises a TypeError if the output_control parameter is not an instance of OutputControl.
     def test_output_control_parameter_not_instance_of_OutputControl(self):
         # Arrange
         name = "Optimizer1"
         output_control = "InvalidOutputControl"
-        target_problem = TargetProblemVoid("a problem", True)
+        problem = ProblemVoid("a problem", True)
         # Act & Assert
         with self.assertRaises(TypeError):
-            Optimizer(name, output_control, target_problem)
+            Optimizer(name, output_control, problem)
 
-    # Raises a TypeError if the target_problem parameter is not an instance of TargetProblem.
-    def test_target_problem_parameter_not_instance_of_TargetProblem(self):
+    # Raises a TypeError if the problem parameter is not an instance of Problem.
+    def test_problem_parameter_not_instance_of_Problem(self):
         # Arrange
         name = "Optimizer1"
         output_control = OutputControl()
-        target_problem = "InvalidTargetProblem"
+        problem = "InvalidProblem"
         # Act & Assert
         with self.assertRaises(TypeError):
-            Optimizer(name, output_control, target_problem)
+            Optimizer(name, output_control, problem)
 
     # Does not raise an exception if the name parameter is an empty string.
     def test_empty_name_parameter(self):
         # Arrange
         name = ""
         output_control = OutputControl()
-        target_problem = TargetProblemVoid("a problem", True)
+        problem = ProblemVoid("a problem", True)
         # Act
         try:
-            optimizer = OptimizerVoid(name, output_control, target_problem)
+            optimizer = OptimizerVoid(name, output_control, problem)
         except Exception as e:
             self.fail(f"Unexpected exception: {e}")
         # Assert
         self.assertEqual(optimizer.name, name)
         self.assertEqual(optimizer.output_control.fields, output_control.fields)
         self.assertEqual(optimizer.output_control.moments, output_control.moments)
-        self.assertEqual(optimizer.target_problem.name, target_problem.name)
-        self.assertEqual(optimizer.target_problem.is_minimization, target_problem.is_minimization)
+        self.assertEqual(optimizer.problem.name, problem.name)
+        self.assertEqual(optimizer.problem.is_minimization, problem.is_minimization)
         self.assertIsNone(optimizer.execution_started)
         self.assertIsNone(optimizer.execution_ended)
         self.assertIsNone(optimizer.best_solution)
@@ -123,30 +123,30 @@ class Test__Optimizer__(unittest.TestCase):
         # Arrange
         name = "Optimizer1"
         output_control = None
-        target_problem = TargetProblemVoid("a problem", True)
+        problem = ProblemVoid("a problem", True)
         # Act & Assert
         with self.assertRaises(TypeError):
-            Optimizer(name, output_control, target_problem)
+            Optimizer(name, output_control, problem)
 
 
-    # Does not raise an exception if the target_problem parameter is None.
-    def test_none_target_problem_parameter(self):
+    # Does not raise an exception if the problem parameter is None.
+    def test_none_problem_parameter(self):
         # Arrange
         name = "Optimizer1"
         output_control = OutputControl()
-        target_problem = None
+        problem = None
         # Act & Assert
         with self.assertRaises(TypeError):
-            Optimizer(name, output_control, target_problem)
+            Optimizer(name, output_control, problem)
 
     # The execution_started and execution_ended instance variables are set to None.
     def test_execution_variables_set_to_none(self):
         # Arrange
         name = "Optimizer1"
         output_control = OutputControl()
-        target_problem = TargetProblemVoid("a problem", True)
+        problem = ProblemVoid("a problem", True)
         # Act
-        optimizer = OptimizerVoid(name, output_control, target_problem)
+        optimizer = OptimizerVoid(name, output_control, problem)
         # Assert
         self.assertIsNone(optimizer.execution_started)
         self.assertIsNone(optimizer.execution_ended)
@@ -156,9 +156,9 @@ class Test__Optimizer__(unittest.TestCase):
         # Arrange
         name = "Optimizer1"
         output_control = OutputControl()
-        target_problem = TargetProblemVoid("a problem", True)
+        problem = ProblemVoid("a problem", True)
         # Act
-        optimizer = OptimizerVoid(name, output_control, target_problem)
+        optimizer = OptimizerVoid(name, output_control, problem)
         # Assert
         self.assertIsNone(optimizer.best_solution)
 
@@ -167,15 +167,15 @@ class Test__Optimizer__(unittest.TestCase):
         # Arrange
         name = "Optimizer1"
         output_control = OutputControl()
-        target_problem = TargetProblemVoid("a problem", True)
+        problem = ProblemVoid("a problem", True)
         # Act
-        optimizer = OptimizerVoid(name, output_control, target_problem)
+        optimizer = OptimizerVoid(name, output_control, problem)
         # Assert
         self.assertEqual(optimizer.name, name)
         self.assertEqual(optimizer.output_control.fields, output_control.fields)
         self.assertEqual(optimizer.output_control.moments, output_control.moments)
-        self.assertEqual(optimizer.target_problem.name, target_problem.name)
-        self.assertEqual(optimizer.target_problem.is_minimization, target_problem.is_minimization)
+        self.assertEqual(optimizer.problem.name, problem.name)
+        self.assertEqual(optimizer.problem.is_minimization, problem.is_minimization)
         self.assertIsNone(optimizer.execution_started)
         self.assertIsNone(optimizer.execution_ended)
         self.assertIsNone(optimizer.best_solution)
@@ -185,8 +185,8 @@ class Test__Optimizer__(unittest.TestCase):
         # Arrange
         name = "Optimizer1"
         output_control = OutputControl()
-        target_problem = TargetProblemVoid("a problem", True)
-        optimizer = OptimizerVoid(name, output_control, target_problem)
+        problem = ProblemVoid("a problem", True)
+        optimizer = OptimizerVoid(name, output_control, problem)
         # Act
         copied_optimizer = optimizer.copy()
         # Assert
@@ -194,8 +194,8 @@ class Test__Optimizer__(unittest.TestCase):
         self.assertEqual(optimizer.name, copied_optimizer.name)
         self.assertEqual(optimizer.output_control.fields, copied_optimizer.output_control.fields)
         self.assertEqual(optimizer.output_control.moments, copied_optimizer.output_control.moments)
-        self.assertEqual(optimizer.target_problem.name, copied_optimizer.target_problem.name)
-        self.assertEqual(optimizer.target_problem.is_minimization, copied_optimizer.target_problem.is_minimization)
+        self.assertEqual(optimizer.problem.name, copied_optimizer.problem.name)
+        self.assertEqual(optimizer.problem.is_minimization, copied_optimizer.problem.is_minimization)
         self.assertEqual(optimizer.execution_started, copied_optimizer.execution_started)
         self.assertEqual(optimizer.execution_ended, copied_optimizer.execution_ended)
         self.assertEqual(optimizer.best_solution, copied_optimizer.best_solution)
@@ -205,8 +205,8 @@ class Test__Optimizer__(unittest.TestCase):
         # Arrange
         name = "Optimizer1"
         output_control = OutputControl()
-        target_problem = TargetProblemVoid("a problem", True)
-        optimizer = OptimizerVoid(name, output_control, target_problem)
+        problem = ProblemVoid("a problem", True)
+        optimizer = OptimizerVoid(name, output_control, problem)
         optimizer.execution_started = datetime.now()
         optimizer.best_solution = TargetSolutionVoid(43, 0, 0, True)
         # Act
