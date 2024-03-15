@@ -20,12 +20,12 @@ from random import random
 from bitstring import Bits, BitArray, BitStream, pack
 
 from uo.problem.problem import Problem
-from uo.target_solution.quality_of_solution import QualityOfSolution
-from uo.target_solution.target_solution import TargetSolution
+from uo.solution.quality_of_solution import QualityOfSolution
+from uo.solution.solution import Solution
 
 from uo.utils.logger import logger
 
-class OnesCountMaxProblemBinaryBitArraySolution(TargetSolution[BitArray,str]):
+class OnesCountMaxProblemBinaryBitArraySolution(Solution[BitArray,str]):
     
     def __init__(self, random_seed:Optional[int]=None, 
             evaluation_cache_is_used:bool=False, 

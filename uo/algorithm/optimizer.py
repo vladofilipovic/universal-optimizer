@@ -16,7 +16,7 @@ from abc import ABCMeta, abstractmethod
 from uo.utils.logger import logger
 from uo.algorithm.output_control import OutputControl
 from uo.problem.problem import Problem
-from uo.target_solution.target_solution import TargetSolution
+from uo.solution.solution import Solution
 
     
 class Optimizer(metaclass=ABCMeta):
@@ -44,7 +44,7 @@ class Optimizer(metaclass=ABCMeta):
         self.__problem:Problem = problem.copy()
         self.__execution_started:Optional[datetime] = None
         self.__execution_ended:Optional[datetime] = None
-        self.__best_solution:Optional[TargetSolution] = None
+        self.__best_solution:Optional[Solution] = None
         self.__time_when_best_found:Optional[float] = None
 
     @abstractmethod
@@ -138,24 +138,24 @@ class Optimizer(metaclass=ABCMeta):
         return self.__time_when_best_found
 
     @property
-    def best_solution(self)->TargetSolution:
+    def best_solution(self)->Solution:
         """
         Property getter for the best solution obtained during metaheuristic execution
         
         :return: best solution so far 
-        :rtype: TargetSolution
+        :rtype: Solution
         """
         return self.__best_solution
 
     @best_solution.setter
-    def best_solution(self, value:TargetSolution)->None:
+    def best_solution(self, value:Solution)->None:
         """
         Property setter for the best solution so far
         
-        :param TargetSolution value: best solution so far
+        :param Solution value: best solution so far
         """
-        if not isinstance(value, TargetSolution):
-            raise TypeError('Parameter \'best_solution\' must have type \'TargetSolution\'.')
+        if not isinstance(value, Solution):
+            raise TypeError('Parameter \'best_solution\' must have type \'Solution\'.')
         self.__best_solution = value.copy()
         self.__time_when_best_found = (datetime.now() - self.execution_started).total_seconds()
 

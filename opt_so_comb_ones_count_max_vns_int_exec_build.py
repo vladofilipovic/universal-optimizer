@@ -4,8 +4,8 @@ from random import choice
 from typing import Optional
 
 from uo.problem.problem import Problem
-from uo.target_solution.quality_of_solution import QualityOfSolution
-from uo.target_solution.target_solution import TargetSolution
+from uo.solution.quality_of_solution import QualityOfSolution
+from uo.solution.solution import Solution
 
 from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.output_control import OutputControl
@@ -52,7 +52,7 @@ class OnesCountMaxProblem2(Problem):
     def __format__(self, spec:str)->str:
         return ''
 
-class OnesCountMaxProblemBinaryIntSolution(TargetSolution[int,str]):
+class OnesCountMaxProblemBinaryIntSolution(Solution[int,str]):
     
     def __init__(self, random_seed:Optional[int]=None)->None:
         if not isinstance(random_seed, int) and random_seed is not None:

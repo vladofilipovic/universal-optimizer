@@ -1,5 +1,5 @@
 """ 
-The :mod:`~uo.target_solution.quality_of_solution` module describes the class :class:`~uo.target_solution.QualityOfSolution`.
+The :mod:`~uo.solution.quality_of_solution` module describes the class :class:`~uo.solution.QualityOfSolution`.
 """
 
 from pathlib import Path

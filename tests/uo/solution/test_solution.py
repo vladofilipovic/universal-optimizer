@@ -6,22 +6,22 @@ from copy import deepcopy
 
 from uo.problem.problem import Problem 
 
-from uo.target_solution.quality_of_solution import QualityOfSolution
-from uo.target_solution.target_solution import TargetSolution 
-from uo.target_solution.target_solution_void import TargetSolutionVoid
+from uo.solution.quality_of_solution import QualityOfSolution
+from uo.solution.solution import Solution 
+from uo.solution.solution_void import SolutionVoid
 
-class TestTargetSolutionProperties(unittest.TestCase):
+class TestSolutionProperties(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
-        print("setUpClass TestTargetSolutionProperties\n")
+        print("setUpClass TestSolutionProperties\n")
 
     def setUp(self):       
         self.random_seed = 42
         self.fitness_value = 42.0
         self.objective_value = -42.0
         self.is_feasible = True
-        self.solution = TargetSolutionVoid( random_seed=self.random_seed,
+        self.solution = SolutionVoid( random_seed=self.random_seed,
                 fitness_value=self.fitness_value,
                 objective_value=self.objective_value,
                 is_feasible= self.is_feasible
@@ -82,7 +82,7 @@ class TestTargetSolutionProperties(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        print("\ntearDownClass TestTargetSolutionProperties")
+        print("\ntearDownClass TestSolutionProperties")
     
 if __name__ == '__main__':
     unittest.main()

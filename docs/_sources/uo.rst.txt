@@ -9,7 +9,7 @@ Subpackages
 
    uo.algorithm
    uo.problem
-   uo.target_solution
+   uo.solution
    uo.utils
 
 Module contents

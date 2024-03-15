@@ -1,5 +1,5 @@
 """ 
-The :mod:`~uo.target_solution.evaluation_cache_control_statistics` module describes the class :class:`~uo.target_solution.EvaluationCacheControlStatistics`.
+The :mod:`~uo.solution.evaluation_cache_control_statistics` module describes the class :class:`~uo.solution.EvaluationCacheControlStatistics`.
 """
 
 from typing import Optional

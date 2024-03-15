@@ -26,7 +26,7 @@ from uo.utils.files import ensure_dir
 from uo.utils.logger import logger
 
 from uo.problem.problem import Problem
-from uo.target_solution.target_solution import TargetSolution
+from uo.solution.solution import Solution
 
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.optimizer import Optimizer
@@ -70,7 +70,7 @@ class MaxOneProblemSolverConstructionParameters:
         finish_control: FinishControl = None
         output_control: OutputControl = None
         problem: Problem = None
-        solution_template: TargetSolution = None
+        solution_template: Solution = None
         vns_problem_solution_support: ProblemSolutionVnsSupport = None
         vns_random_seed: int = None
         vns_additional_statistics_control: AdditionalStatisticsControl = None
@@ -87,7 +87,7 @@ class OnesCountMaxProblemSolver:
             finish_control:FinishControl = None,
             output_control:OutputControl = None,
             problem:Problem = None,
-            solution_template:TargetSolution = None,
+            solution_template:Solution = None,
             vns_problem_solution_support:ProblemSolutionVnsSupport = None,
             vns_random_seed:int = None,
             vns_additional_statistics_control:AdditionalStatisticsControl = None,
@@ -103,7 +103,7 @@ class OnesCountMaxProblemSolver:
         :param FinishControl finish_control: controls finish criteria
         :param output_control:OutputControl = controls output
         :param Problem problem: problem that is solved
-        :param TargetSolution solution_template: initial solution
+        :param Solution solution_template: initial solution
         :param ProblemSolutionVnsSupport vns_problem_solution_support: Specific VNS support
         :param int vns_random_seed: random seed
         :param AdditionalStatisticsControl vns_additional_statistics_control: additional statistics control
@@ -121,8 +121,8 @@ class OnesCountMaxProblemSolver:
                     raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
             if not isinstance(problem, Problem):
                     raise TypeError('Parameter \'problem\' must be \'Problem\'.')
-            if not isinstance(solution_template, TargetSolution):
-                    raise TypeError('Parameter \'solution_template\' must be \'TargetSolution\'.')
+            if not isinstance(solution_template, Solution):
+                    raise TypeError('Parameter \'solution_template\' must be \'Solution\'.')
             if not isinstance(vns_problem_solution_support, ProblemSolutionVnsSupport):
                     raise TypeError('Parameter \'vns_problem_solution_support\' must be \'ProblemSolutionVnsSupport\'.')
             if not isinstance(vns_random_seed, int):
@@ -151,8 +151,8 @@ class OnesCountMaxProblemSolver:
                     raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
             if not isinstance(problem, Problem):
                     raise TypeError('Parameter \'problem\' must be \'Problem\'.')
-            if not isinstance(solution_template, TargetSolution):
-                    raise TypeError('Parameter \'solution_template\' must be \'TargetSolution\'.')
+            if not isinstance(solution_template, Solution):
+                    raise TypeError('Parameter \'solution_template\' must be \'Solution\'.')
             if not isinstance(te_problem_solution_support, ProblemSolutionTeSupport):
                     raise TypeError('Parameter \'te_problem_solution_support\' must be \'ProblemSolutionTeSupport\'.')
             self.__optimizer = TeOptimizer(
@@ -209,7 +209,7 @@ class OnesCountMaxProblemSolver:
         params.finish_control:FinishControl = vns_construction_params.finish_control
         params.output_control:OutputControl = vns_construction_params.output_control
         params.problem:Problem = vns_construction_params.problem
-        params.solution_template:TargetSolution = vns_construction_params.solution_template
+        params.solution_template:Solution = vns_construction_params.solution_template
         params.vns_problem_solution_support:ProblemSolutionVnsSupport = \
                 vns_construction_params.problem_solution_vns_support
         params.vns_random_seed:int = vns_construction_params.random_seed

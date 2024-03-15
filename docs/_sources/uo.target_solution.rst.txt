@@ -7,7 +7,7 @@ Submodules
 uo.target\_solution.evaluation\_cache\_control\_statistics module
 -----------------------------------------------------------------
 
-.. automodule:: uo.target_solution.evaluation_cache_control_statistics
+.. automodule:: uo.solution.evaluation_cache_control_statistics
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ uo.target\_solution.evaluation\_cache\_control\_statistics module
 uo.target\_solution.target\_solution module
 -------------------------------------------
 
-.. automodule:: uo.target_solution.target_solution
+.. automodule:: uo.solution.solution
    :members:
    :undoc-members:
    :show-inheritance:
@@ -23,7 +23,7 @@ uo.target\_solution.target\_solution module
 Module contents
 ---------------
 
-.. automodule:: uo.target_solution
+.. automodule:: uo.solution
    :members:
    :undoc-members:
    :show-inheritance:

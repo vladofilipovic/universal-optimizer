@@ -11,12 +11,12 @@ from typing import NamedTuple
 from typing import Optional
 
 from uo.problem.problem import Problem
-from uo.target_solution.quality_of_solution import QualityOfSolution
-from uo.target_solution.target_solution import TargetSolution
-from uo.target_solution.evaluation_cache_control_statistics import EvaluationCacheControlStatistics
-from uo.target_solution.distance_calculation_cache_control_statistics import DistanceCalculationCacheControlStatistics
+from uo.solution.quality_of_solution import QualityOfSolution
+from uo.solution.solution import Solution
+from uo.solution.evaluation_cache_control_statistics import EvaluationCacheControlStatistics
+from uo.solution.distance_calculation_cache_control_statistics import DistanceCalculationCacheControlStatistics
 
-class TargetSolutionVoid(TargetSolution[int, str]):
+class SolutionVoid(Solution[int, str]):
     
     def __init__(self, random_seed:int, 
             fitness_value:float, 

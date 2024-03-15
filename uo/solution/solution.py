@@ -1,5 +1,5 @@
 """ 
-The :mod:`~uo.target_solution.target_solution` module describes the class :class:`~uo.target_solution.TargetSolution`.
+The :mod:`~uo.solution.solution` module describes the class :class:`~uo.solution.Solution`.
 """
 
 from pathlib import Path
@@ -18,14 +18,14 @@ from typing import Generic
 from typing import Optional
 
 from uo.problem.problem import Problem
-from uo.target_solution.quality_of_solution import QualityOfSolution
-from uo.target_solution.evaluation_cache_control_statistics import EvaluationCacheControlStatistics
-from uo.target_solution.distance_calculation_cache_control_statistics import DistanceCalculationCacheControlStatistics
+from uo.solution.quality_of_solution import QualityOfSolution
+from uo.solution.evaluation_cache_control_statistics import EvaluationCacheControlStatistics
+from uo.solution.distance_calculation_cache_control_statistics import DistanceCalculationCacheControlStatistics
 
 R_co = TypeVar("R_co", covariant=True) 
 A_co = TypeVar("A_co", covariant=True)
 
-class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
+class Solution(Generic[R_co,A_co], metaclass=ABCMeta):
     
     @abstractmethod
     def __init__(self, 
@@ -41,7 +41,7 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
             distance_calculation_cache_max_size:int
     )->None:
         """
-        Create new TargetSolution instance
+        Create new Solution instance
         :param int random_seed: random seed for initialization
         :param fitness_value: fitness value of the target solution
         :type fitness_value: float 
@@ -88,12 +88,12 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         self.__is_feasible:bool = is_feasible
         self.__representation:R_co = None
         #class/static variable evaluation_cache_cs
-        if not hasattr(TargetSolution, 'evaluation_cache_cs'):
-            TargetSolution.evaluation_cache_cs:EvaluationCacheControlStatistics = EvaluationCacheControlStatistics(
+        if not hasattr(Solution, 'evaluation_cache_cs'):
+            Solution.evaluation_cache_cs:EvaluationCacheControlStatistics = EvaluationCacheControlStatistics(
                 evaluation_cache_is_used, evaluation_cache_max_size)  
         #class/static variable representation_distance_cache_cs
-        if not hasattr(TargetSolution, 'representation_distance_cache_cs'):
-            TargetSolution.representation_distance_cache_cs: DistanceCalculationCacheControlStatistics[R_co] = \
+        if not hasattr(Solution, 'representation_distance_cache_cs'):
+            Solution.representation_distance_cache_cs: DistanceCalculationCacheControlStatistics[R_co] = \
                     DistanceCalculationCacheControlStatistics[R_co](distance_calculation_cache_is_used,
                     distance_calculation_cache_max_size)
 
@@ -102,8 +102,8 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         """
         Internal copy of the current target solution
 
-        :return:  new :class:`uo.target_solution.TargetSolution` instance with the same properties
-        :rtype: TargetSolution
+        :return:  new :class:`uo.solution.Solution` instance with the same properties
+        :rtype: Solution
         """
         ts = deepcopy(self)
         return ts
@@ -113,8 +113,8 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         """
         Copy the current target solution
 
-        :return: new :class:`uo.target_solution.TargetSolution` instance with the same properties
-        :rtype: TargetSolution
+        :return: new :class:`uo.solution.Solution` instance with the same properties
+        :rtype: Solution
         """
         return self.__copy__()
 
@@ -374,7 +374,7 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         :return: objective value, fitness value and feasibility of the solution instance 
         :rtype: `QualityOfSolution`
         """
-        eccs:EvaluationCacheControlStatistics = TargetSolution.evaluation_cache_cs 
+        eccs:EvaluationCacheControlStatistics = Solution.evaluation_cache_cs 
         if eccs.is_caching:
             eccs.increment_cache_request_count()
             rep:str = self.string_representation()
@@ -425,7 +425,7 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
         :return: distance 
         :rtype: float
         """
-        rdcs:DistanceCalculationCacheControlStatistics[R_co] = TargetSolution.representation_distance_cache_cs
+        rdcs:DistanceCalculationCacheControlStatistics[R_co] = Solution.representation_distance_cache_cs
         if rdcs.is_caching:
             rdcs.increment_cache_request_count()
             pair:(R_co,R_co) = (representation_1, representation_2)
@@ -483,7 +483,7 @@ class TargetSolution(Generic[R_co,A_co], metaclass=ABCMeta):
                 delimiter, indentation+1, indentation_symbol, '{', '}')  
         for _ in range(0, indentation):
             s += indentation_symbol  
-        s += '__representation_distance_cache_cs(static)=' + TargetSolution.representation_distance_cache_cs.string_rep(
+        s += '__representation_distance_cache_cs(static)=' + Solution.representation_distance_cache_cs.string_rep(
                 delimiter, indentation + 1, indentation_symbol, '{', '}') + delimiter
         for _ in range(0, indentation):
             s += indentation_symbol  

@@ -6,7 +6,7 @@ The :mod:`~uo.algorithm.metaheuristic.variable_neighborhood_search.variable_neig
 
 from pathlib import Path
 
-from uo.target_solution.quality_of_solution import QualityOfSolution
+from uo.solution.quality_of_solution import QualityOfSolution
 directory = Path(__file__).resolve()
 import sys
 sys.path.append(directory.parent)
@@ -29,7 +29,7 @@ from dataclasses import dataclass
 from uo.utils.logger import logger
 
 from uo.problem.problem import Problem
-from uo.target_solution.target_solution import TargetSolution
+from uo.solution.solution import Solution
 
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
@@ -48,7 +48,7 @@ class VnsOptimizerConstructionParameters:
         finish_control: FinishControl = None
         output_control: OutputControl = None
         problem: Problem = None
-        solution_template: TargetSolution = None
+        solution_template: Solution = None
         problem_solution_vns_support: ProblemSolutionVnsSupport = None
         random_seed: Optional[int] = None
         additional_statistics_control: AdditionalStatisticsControl = None
@@ -68,7 +68,7 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
             additional_statistics_control:AdditionalStatisticsControl,
             output_control:OutputControl, 
             problem:Problem, 
-            solution_template:TargetSolution,
+            solution_template:Solution,
             problem_solution_vns_support:ProblemSolutionVnsSupport, 
             k_min:int, 
             k_max:int, 
@@ -83,7 +83,7 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         statistics obtained during population-based metaheuristic execution        
         :param `OutputControl` output_control: structure that controls output
         :param `Problem` problem: problem to be solved
-        :param `TargetSolution` solution_template: initial solution of the problem 
+        :param `Solution` solution_template: initial solution of the problem 
         :param `ProblemSolutionVnsSupport` problem_solution_vns_support: placeholder for additional methods, specific for VNS 
         execution, which depend of precise solution type 
         :param int k_min: `k_min` parameter for VNS
@@ -101,8 +101,8 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
                 raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
         if not isinstance(problem, Problem):
                 raise TypeError('Parameter \'problem\' must be \'Problem\'.')
-        if not isinstance(solution_template, TargetSolution) and solution_template is not None:
-                raise TypeError('Parameter \'solution_template\' must be \'TargetSolution\' or \'None\'.')        
+        if not isinstance(solution_template, Solution) and solution_template is not None:
+                raise TypeError('Parameter \'solution_template\' must be \'Solution\' or \'None\'.')        
         if not isinstance(problem_solution_vns_support, ProblemSolutionVnsSupport):
                 raise TypeError('Parameter \'problem_solution_vns_support\' must be \'ProblemSolutionVnsSupport\'.')        
         if not isinstance(k_min, int):

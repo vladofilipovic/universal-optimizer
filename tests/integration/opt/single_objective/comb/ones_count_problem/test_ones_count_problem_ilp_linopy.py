@@ -13,9 +13,9 @@ from uo.algorithm.output_control import OutputControl
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp_linopy import OnesCountMaxProblemIntegerLinearProgrammingSolver
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp_linopy import OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters
-from uo.target_solution.target_solution import TargetSolution
-from uo.target_solution.target_solution_void import TargetSolutionVoid
-from uo.target_solution.target_solution_void_object_str import TargetSolutionVoidObjectStr
+from uo.solution.solution import Solution
+from uo.solution.solution_void import SolutionVoid
+from uo.solution.solution_void_object_str import SolutionVoidObjectStr
 
 class TestOnesCountMaxProblemIlpLinopy(unittest.TestCase):
     
@@ -82,7 +82,7 @@ class TestOnesCountMaxProblemIlpLinopy(unittest.TestCase):
     def test_different_types(self):
         # Arrange
         output_control = OutputControl()
-        problem = TargetSolutionVoid(42, None, None, False)
+        problem = SolutionVoid(42, None, None, False)
         # Act & Assert
         with self.assertRaises(TypeError):
             OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters(output_control, problem)
@@ -91,7 +91,7 @@ class TestOnesCountMaxProblemIlpLinopy(unittest.TestCase):
     def test_same_types_different_classes(self):
         # Arrange
         output_control = OutputControl()
-        problem = TargetSolutionVoidObjectStr()
+        problem = SolutionVoidObjectStr()
         # Act & Assert
         with self.assertRaises(TypeError):
             OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters(output_control, problem)
@@ -185,7 +185,7 @@ class TestStringRep(unittest.TestCase):
         problem = OnesCountMaxProblem(dim=5)
         solver = OnesCountMaxProblemIntegerLinearProgrammingSolver(output_control, problem)
         solver.execution_started = datetime.now()
-        self.best_solution_mock = mocker.MagicMock(spec=TargetSolution)
+        self.best_solution_mock = mocker.MagicMock(spec=Solution)
         self.best_solution_mock.copy = mocker.Mock(return_value=self.best_solution_mock)
         self.best_solution_mock.string_rep = mocker.Mock(return_value="solution mock")
         solver.best_solution = self.best_solution_mock
@@ -201,7 +201,7 @@ class TestStringRep(unittest.TestCase):
         problem = OnesCountMaxProblem(dim=5)
         solver = OnesCountMaxProblemIntegerLinearProgrammingSolver(output_control, problem)
         solver.execution_started = datetime.now()
-        self.best_solution_mock = mocker.MagicMock(spec=TargetSolution)
+        self.best_solution_mock = mocker.MagicMock(spec=Solution)
         self.best_solution_mock.copy = mocker.Mock(return_value=self.best_solution_mock)
         self.best_solution_mock.string_rep = mocker.Mock(return_value="solution mock")
         solver.best_solution = self.best_solution_mock    
@@ -219,7 +219,7 @@ class TestStringRep(unittest.TestCase):
         problem = OnesCountMaxProblem(dim=5)
         solver = OnesCountMaxProblemIntegerLinearProgrammingSolver(output_control, problem)
         solver.execution_started = datetime.now()
-        self.best_solution_mock = mocker.MagicMock(spec=TargetSolution)
+        self.best_solution_mock = mocker.MagicMock(spec=Solution)
         self.best_solution_mock.copy = mocker.Mock(return_value=self.best_solution_mock)
         self.best_solution_mock.string_rep = mocker.Mock(return_value="solution mock")
         solver.best_solution = self.best_solution_mock    

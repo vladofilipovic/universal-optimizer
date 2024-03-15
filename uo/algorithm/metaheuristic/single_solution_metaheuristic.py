@@ -24,7 +24,7 @@ from typing import Generic
 from uo.utils.logger import logger
 
 from uo.problem.problem import Problem
-from uo.target_solution.target_solution import TargetSolution
+from uo.solution.solution import Solution
 
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
@@ -45,7 +45,7 @@ class SingleSolutionMetaheuristic(Metaheuristic, metaclass=ABCMeta):
             additional_statistics_control:AdditionalStatisticsControl,
             output_control:OutputControl, 
             problem:Problem,
-            solution_template:TargetSolution
+            solution_template:Solution
     )->None:
         """
         Create new SingleSolutionMetaheuristic instance
@@ -57,7 +57,7 @@ class SingleSolutionMetaheuristic(Metaheuristic, metaclass=ABCMeta):
         statistics obtained during population-based metaheuristic execution        
         :param `OutputControl` output_control: structure that controls output
         :param `Problem` problem: problem to be solved
-        :param `Optional[TargetSolution]` solution_template: initial solution of the problem
+        :param `Optional[Solution]` solution_template: initial solution of the problem
         """
         if not isinstance(name, str):
                 raise TypeError('Parameter \'name\' must be \'str\'.')
@@ -71,8 +71,8 @@ class SingleSolutionMetaheuristic(Metaheuristic, metaclass=ABCMeta):
                 raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
         if not isinstance(problem, Problem):
                 raise TypeError('Parameter \'problem\' must be \'Problem\'.')
-        if not isinstance(solution_template, TargetSolution) and solution_template is not None:
-                raise TypeError('Parameter \'solution_template\' must be \'TargetSolution\' or None.')        
+        if not isinstance(solution_template, Solution) and solution_template is not None:
+                raise TypeError('Parameter \'solution_template\' must be \'Solution\' or None.')        
         super().__init__(name=name, 
                 finish_control=finish_control,
                 random_seed=random_seed,
@@ -80,7 +80,7 @@ class SingleSolutionMetaheuristic(Metaheuristic, metaclass=ABCMeta):
                 output_control=output_control, 
                 problem=problem,
                 solution_template=solution_template)
-        self.__current_solution:Optional[TargetSolution] =  None
+        self.__current_solution:Optional[Solution] =  None
 
     @abstractmethod
     def __copy__(self):
@@ -104,24 +104,24 @@ class SingleSolutionMetaheuristic(Metaheuristic, metaclass=ABCMeta):
         return self.__copy__()
 
     @property
-    def current_solution(self)->Optional[TargetSolution]:
+    def current_solution(self)->Optional[Solution]:
         """
         Property getter for the current solution used during single solution metaheuristic execution
 
-        :return: instance of the :class:`uo.target_solution.TargetSolution` class subtype -- current solution of the problem 
-        :rtype: :class:`TargetSolution`        
+        :return: instance of the :class:`uo.solution.Solution` class subtype -- current solution of the problem 
+        :rtype: :class:`Solution`        
         """
         return self.__current_solution
 
     @current_solution.setter
-    def current_solution(self, value:Optional[TargetSolution])->None:
+    def current_solution(self, value:Optional[Solution])->None:
         """
         Property setter for the current solution used during single solution metaheuristic execution
         
         :param datetime value: the current solution used during single solution metaheuristic execution
         """
-        if not isinstance(value, TargetSolution) and value is not None:
-            raise TypeError('Parameter \'current_solution\' must have type \'TargetSolution\' or be None.')
+        if not isinstance(value, Solution) and value is not None:
+            raise TypeError('Parameter \'current_solution\' must have type \'Solution\' or be None.')
         self.__current_solution = value
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 

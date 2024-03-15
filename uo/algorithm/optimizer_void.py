@@ -9,7 +9,7 @@ from datetime import datetime
 from uo.utils.logger import logger
 from uo.algorithm.output_control import OutputControl
 from uo.problem.problem import Problem
-from uo.target_solution.target_solution import TargetSolution
+from uo.solution.solution import Solution
 
 from uo.algorithm.optimizer import Optimizer
 from uo.algorithm.algorithm import Algorithm

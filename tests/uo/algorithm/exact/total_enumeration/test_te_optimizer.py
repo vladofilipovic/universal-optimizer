@@ -4,13 +4,13 @@ import unittest.mock as mocker
 from copy import deepcopy
 from datetime import datetime
 from uo.problem.problem_void import ProblemVoid
-from uo.target_solution.target_solution_void import TargetSolutionVoid
+from uo.solution.solution_void import SolutionVoid
 
 from uo.utils.logger import logger
 
 from uo.problem.problem import Problem
-from uo.target_solution.quality_of_solution import QualityOfSolution 
-from uo.target_solution.target_solution import TargetSolution
+from uo.solution.quality_of_solution import QualityOfSolution 
+from uo.solution.solution import Solution
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.exact.total_enumeration.problem_solution_te_support import ProblemSolutionTeSupport 
 from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizer, TeOptimizerConstructionParameters
@@ -45,7 +45,7 @@ class TestTeOptimizerProperties(unittest.TestCase):
         self.fitness_value = 42.0
         self.objective_value = -42.0
         self.is_feasible = True
-        self.solution_mock = mocker.MagicMock(spec=TargetSolution)
+        self.solution_mock = mocker.MagicMock(spec=Solution)
         type(self.solution_mock).name = self.solution_name, 
         type(self.solution_mock).random_seed = self.random_seed,
         type(self.solution_mock).fitness_value=self.fitness_value,
@@ -131,7 +131,7 @@ class TestTeOptimizerMethodInit(unittest.TestCase):
         self.fitness_value = 42.0
         self.objective_value = -42.0
         self.is_feasible = True
-        self.solution_mock = mocker.MagicMock(spec=TargetSolution)
+        self.solution_mock = mocker.MagicMock(spec=Solution)
         type(self.solution_mock).name = self.solution_name, 
         type(self.solution_mock).random_seed = self.random_seed,
         type(self.solution_mock).fitness_value=self.fitness_value,
@@ -182,7 +182,7 @@ class TestOptimize(unittest.TestCase):
         type(problem_mock).file_path = mocker.PropertyMock(return_value='some .problem_mock file path')
         type(problem_mock).dimension = mocker.PropertyMock(return_value=42)
         problem_mock.copy = mocker.Mock(return_value=problem_mock)
-        solution_mock = mocker.MagicMock(spec=TargetSolution)
+        solution_mock = mocker.MagicMock(spec=Solution)
         type(solution_mock).random_seed = 42,
         type(solution_mock).fitness_value=42.0,
         type(solution_mock).objective_value=42.0,
@@ -210,7 +210,7 @@ class TestOptimize(unittest.TestCase):
     #     type(problem_mock).file_path = mocker.PropertyMock(return_value='some .problem_mock file path')
     #     type(problem_mock).dimension = mocker.PropertyMock(return_value=42)
     #     problem_mock.copy = mocker.Mock(return_value=problem_mock)
-    #     solution_mock = mocker.MagicMock(spec=TargetSolution)
+    #     solution_mock = mocker.MagicMock(spec=Solution)
     #     type(solution_mock).random_seed = 42,
     #     type(solution_mock).fitness_value=42.0,
     #     type(solution_mock).objective_value=42.0,
@@ -240,7 +240,7 @@ class TestOptimize(unittest.TestCase):
         type(problem_mock).file_path = mocker.PropertyMock(return_value='some .problem_mock file path')
         type(problem_mock).dimension = mocker.PropertyMock(return_value=42)
         problem_mock.copy = mocker.Mock(return_value=problem_mock)
-        solution_mock = mocker.MagicMock(spec=TargetSolution)
+        solution_mock = mocker.MagicMock(spec=Solution)
         type(solution_mock).name = "void solution", 
         type(solution_mock).random_seed = 42,
         type(solution_mock).fitness_value=42.0,
@@ -273,7 +273,7 @@ class TestOptimize(unittest.TestCase):
         type(problem_mock).file_path = mocker.PropertyMock(return_value='some .problem_mock file path')
         type(problem_mock).dimension = mocker.PropertyMock(return_value=42)
         problem_mock.copy = mocker.Mock(return_value=problem_mock)
-        solution_mock = mocker.MagicMock(spec=TargetSolution)
+        solution_mock = mocker.MagicMock(spec=Solution)
         type(solution_mock).name = "void solution", 
         type(solution_mock).random_seed = 42,
         type(solution_mock).fitness_value=42.0,
@@ -303,7 +303,7 @@ class TestOptimize(unittest.TestCase):
         type(problem_mock).file_path = mocker.PropertyMock(return_value='some .problem_mock file path')
         type(problem_mock).dimension = mocker.PropertyMock(return_value=42)
         problem_mock.copy = mocker.Mock(return_value=problem_mock)
-        solution_mock = mocker.MagicMock(spec=TargetSolution)
+        solution_mock = mocker.MagicMock(spec=Solution)
         type(solution_mock).name = "void solution", 
         type(solution_mock).random_seed = 42,
         type(solution_mock).fitness_value=42.0,
@@ -324,7 +324,7 @@ class TestOptimize(unittest.TestCase):
         # Arrange
         output_control = OutputControl()
         problem = 'not an instance of Problem'
-        solution_mock = mocker.MagicMock(spec=TargetSolution)
+        solution_mock = mocker.MagicMock(spec=Solution)
         type(solution_mock).name = "void solution", 
         type(solution_mock).random_seed = 42,
         type(solution_mock).fitness_value=42.0,
@@ -340,8 +340,8 @@ class TestOptimize(unittest.TestCase):
         with self.assertRaises(TypeError):
             TeOptimizer(output_control, problem, solution_mock, te_support_mock)
 
-    # solution_template parameter is not an instance of TargetSolution
-    def test_solution_template_parameter_not_instance_of_TargetSolution(self):
+    # solution_template parameter is not an instance of Solution
+    def test_solution_template_parameter_not_instance_of_Solution(self):
         # Arrange
         output_control = OutputControl()
         problem_mock = mocker.MagicMock(spec=Problem)
@@ -350,7 +350,7 @@ class TestOptimize(unittest.TestCase):
         type(problem_mock).file_path = mocker.PropertyMock(return_value='some .problem_mock file path')
         type(problem_mock).dimension = mocker.PropertyMock(return_value=42)
         problem_mock.copy = mocker.Mock(return_value=problem_mock)
-        solution_template = "not an instance of TargetSolution"
+        solution_template = "not an instance of Solution"
         te_support_mock = mocker.MagicMock(spec=ProblemSolutionTeSupport)
         te_support_mock.reset = mocker.Mock(return_value='reset')
         te_support_mock.can_progress = mocker.Mock(return_value=False)
@@ -368,7 +368,7 @@ class TestOptimize(unittest.TestCase):
         type(problem_mock).file_path = mocker.PropertyMock(return_value='some .problem_mock file path')
         type(problem_mock).dimension = mocker.PropertyMock(return_value=42)
         problem_mock.copy = mocker.Mock(return_value=problem_mock)
-        solution_mock = mocker.MagicMock(spec=TargetSolution)
+        solution_mock = mocker.MagicMock(spec=Solution)
         type(solution_mock).name = "void solution", 
         type(solution_mock).random_seed = 42,
         type(solution_mock).fitness_value=42.0,
@@ -390,7 +390,7 @@ class TestStringRep(unittest.TestCase):
         # Arrange
         output_control = OutputControl()
         problem = ProblemVoid("problem name", True)
-        solution_template = TargetSolutionVoid(42, 42.0, 42.0, True)
+        solution_template = SolutionVoid(42, 42.0, 42.0, True)
         te_support_mock = mocker.MagicMock(spec=ProblemSolutionTeSupport)
         te_optimizer = TeOptimizer(output_control, problem, solution_template, te_support_mock)
         # Act
@@ -403,7 +403,7 @@ class TestStringRep(unittest.TestCase):
         # Arrange
         output_control = OutputControl()
         problem = ProblemVoid("problem name", True)
-        solution_template = TargetSolutionVoid(42, 42.0, 42.0, True)
+        solution_template = SolutionVoid(42, 42.0, 42.0, True)
         te_support_mock = mocker.MagicMock(spec=ProblemSolutionTeSupport)
         te_optimizer = TeOptimizer(output_control, problem, solution_template, te_support_mock)
         delimiter = ','
@@ -422,7 +422,7 @@ class TestStringRep(unittest.TestCase):
         # Arrange
         output_control = OutputControl()
         problem = ProblemVoid("problem name", True)
-        solution_template = TargetSolutionVoid(42, 42.0, 42.0, True)
+        solution_template = SolutionVoid(42, 42.0, 42.0, True)
         te_support_mock = mocker.MagicMock(spec=ProblemSolutionTeSupport)
         te_optimizer = TeOptimizer(output_control, problem, solution_template, te_support_mock)
         expected_result = '|solution_template=|'
@@ -436,7 +436,7 @@ class TestStringRep(unittest.TestCase):
         # Arrange
         output_control = OutputControl()
         problem = ProblemVoid("problem name", True)
-        solution_template = TargetSolutionVoid(42, 42.0, 42.0, True)
+        solution_template = SolutionVoid(42, 42.0, 42.0, True)
         te_support_mock = mocker.MagicMock(spec=ProblemSolutionTeSupport)
         te_optimizer = TeOptimizer(output_control, problem, solution_template, te_support_mock)
         delimiter = ','
@@ -454,7 +454,7 @@ class TestFromConstructionTuple(unittest.TestCase):
         construction_tuple = TeOptimizerConstructionParameters()
         construction_tuple.output_control = OutputControl()
         construction_tuple.problem = ProblemVoid("problem name", True)
-        construction_tuple.solution_template = TargetSolutionVoid(42, 42.0, 42.0, True)
+        construction_tuple.solution_template = SolutionVoid(42, 42.0, 42.0, True)
         construction_tuple.problem_solution_te_support = mocker.MagicMock(spec=ProblemSolutionTeSupport)
         # Act
         te_optimizer = TeOptimizer.from_construction_tuple(construction_tuple)
@@ -473,7 +473,7 @@ class TestFromConstructionTuple(unittest.TestCase):
         construction_tuple = TeOptimizerConstructionParameters()
         construction_tuple.output_control = OutputControl()
         construction_tuple.problem = ProblemVoid("problem name", True)
-        construction_tuple.solution_template = TargetSolutionVoid(42, 42.0, 42.0, True)
+        construction_tuple.solution_template = SolutionVoid(42, 42.0, 42.0, True)
         construction_tuple.problem_solution_te_support = mocker.MagicMock(spec=ProblemSolutionTeSupport)
         # Act
         te_optimizer = TeOptimizer.from_construction_tuple(construction_tuple)
@@ -486,7 +486,7 @@ class TestFromConstructionTuple(unittest.TestCase):
         construction_tuple = TeOptimizerConstructionParameters()
         construction_tuple.output_control = "not an instance of OutputControl"
         construction_tuple.problem = ProblemVoid("problem name", True)
-        construction_tuple.solution_template = TargetSolutionVoid(42, 42.0, 42.0, True)
+        construction_tuple.solution_template = SolutionVoid(42, 42.0, 42.0, True)
         construction_tuple.problem_solution_te_support = mocker.MagicMock(spec=ProblemSolutionTeSupport)
         # Act & Assert
         with self.assertRaises(TypeError):
@@ -498,7 +498,7 @@ class TestFromConstructionTuple(unittest.TestCase):
         construction_tuple = TeOptimizerConstructionParameters()
         construction_tuple.output_control = OutputControl()
         construction_tuple.problem = "not an instance of Problem"
-        construction_tuple.solution_template = TargetSolutionVoid(42, 42.0, 42.0, True)
+        construction_tuple.solution_template = SolutionVoid(42, 42.0, 42.0, True)
         construction_tuple.problem_solution_te_support = mocker.MagicMock(spec=ProblemSolutionTeSupport)
         # Act & Assert
         with self.assertRaises(TypeError):
