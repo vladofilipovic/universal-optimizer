@@ -7,7 +7,7 @@ from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem imp
 from opt.single_objective.comb.ones_count_min_problem.ones_count_min_problem import OnesCountMinProblem
 
 from uo.problem.problem import Problem
-from uo.target_solution.target_solution import TargetSolution
+from uo.solution.solution import Solution
 
 from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.algorithm_void import AlgorithmVoid

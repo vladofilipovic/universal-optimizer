@@ -16,9 +16,9 @@ from linopy import Model
 from uo.utils.logger import logger
 
 from uo.problem.problem import Problem
-from uo.target_solution.target_solution import TargetSolution
-from uo.target_solution.target_solution_void_object_str import TargetSolutionVoidObjectStr
-from uo.target_solution.quality_of_solution import QualityOfSolution
+from uo.solution.solution import Solution
+from uo.solution.solution_void_object_str import SolutionVoidObjectStr
+from uo.solution.quality_of_solution import QualityOfSolution
 
 
 from uo.algorithm.optimizer import Optimizer
@@ -59,7 +59,7 @@ class OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters:
         return self.__problem    
 
 
-class OnesCountMaxProblemIntegerLinearProgrammingSolution(TargetSolutionVoidObjectStr):
+class OnesCountMaxProblemIntegerLinearProgrammingSolution(SolutionVoidObjectStr):
     def __init__(self, sol:'OnesCountMaxProblemIntegerLinearProgrammingSolver')->None:
         super().__init__()
         self.__sol = sol

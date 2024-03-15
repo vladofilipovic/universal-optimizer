@@ -9,8 +9,8 @@ from uo.algorithm.output_control import OutputControl
 from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.algorithm_void import AlgorithmVoid
 from uo.problem.problem_void import ProblemVoid
-from uo.target_solution.quality_of_solution import QualityOfSolution
-from uo.target_solution.target_solution_void import TargetSolutionVoid
+from uo.solution.quality_of_solution import QualityOfSolution
+from uo.solution.solution_void import SolutionVoid
 
 class TestAlgorithmProperties(unittest.TestCase):
     

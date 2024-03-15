@@ -1,5 +1,5 @@
 """ 
-The :mod:`~uo.target_solution.target_solution_void_object_str` module describes the class :class:`~uo.target_solution.TargetSolutionVoidObjectStr`.
+The :mod:`~uo.solution.solution_void_object_str` module describes the class :class:`~uo.solution.SolutionVoidObjectStr`.
 """
 
 from pathlib import Path
@@ -12,14 +12,14 @@ from copy import deepcopy
 from uo.utils.logger import logger
 
 from uo.problem.problem import Problem
-from uo.target_solution.target_solution import TargetSolution
-from uo.target_solution.quality_of_solution import QualityOfSolution
+from uo.solution.solution import Solution
+from uo.solution.quality_of_solution import QualityOfSolution
 
 
 from uo.algorithm.optimizer import Optimizer
 from uo.algorithm.output_control import OutputControl
 
-class TargetSolutionVoidObjectStr(TargetSolution[object, str]):
+class SolutionVoidObjectStr(Solution[object, str]):
     def __init__(self)->None:
         super().__init__(random_seed=None, 
         fitness_value=0, fitness_values=None, objective_value=0, objective_values= None,  is_feasible=True,

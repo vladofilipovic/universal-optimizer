@@ -9,7 +9,7 @@ from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp_linopy import OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters
 from uo.problem.problem import Problem
 from uo.problem.problem_void import ProblemVoid
-from uo.target_solution.target_solution import TargetSolution
+from uo.solution.solution import Solution
 from uo.algorithm.output_control import OutputControl
 
 class TestOnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters(unittest.TestCase):

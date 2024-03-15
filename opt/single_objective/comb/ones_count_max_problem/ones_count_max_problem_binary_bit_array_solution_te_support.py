@@ -27,7 +27,7 @@ from uo.utils.complex_counter_bit_array_full import ComplexCounterBitArrayFull
 from uo.utils.logger import logger
 from uo.utils.complex_counter_uniform_ascending import ComplexCounterUniformAscending
 
-from uo.target_solution.quality_of_solution import QualityOfSolution
+from uo.solution.quality_of_solution import QualityOfSolution
 from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.exact.total_enumeration.problem_solution_te_support import ProblemSolutionTeSupport
 

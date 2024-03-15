@@ -24,7 +24,7 @@ from typing import Generic
 from uo.utils.logger import logger
 
 from uo.problem.problem import Problem
-from uo.target_solution.target_solution import TargetSolution
+from uo.solution.solution import Solution
 
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
@@ -45,7 +45,7 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
             additional_statistics_control:AdditionalStatisticsControl,
             output_control:OutputControl, 
             problem:Problem,
-            solution_template:TargetSolution
+            solution_template:Solution
     )->None:
         """
         Create new Metaheuristic instance
@@ -57,7 +57,7 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         statistic to be kept during metaheuristic evaluation        
         :param `OutputControl` output_control: structure that controls output
         :param `Problem` problem: problem to be solved
-        :param `TargetSolution` solution_template: solution template for the problem to be solved
+        :param `Solution` solution_template: solution template for the problem to be solved
         """
         if not isinstance(name, str):
                 raise TypeError('Parameter \'name\' must be \'str\'.')
@@ -143,7 +143,7 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         delta = datetime.now() - self.execution_started
         return delta.total_seconds()
 
-    def update_additional_statistics_if_required(self, solution:TargetSolution)->None:
+    def update_additional_statistics_if_required(self, solution:Solution)->None:
         """
         Updates the additional statistics, if required.
         """

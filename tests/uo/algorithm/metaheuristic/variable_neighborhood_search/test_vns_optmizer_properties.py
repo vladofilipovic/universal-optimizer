@@ -7,7 +7,7 @@ from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer 
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
-from uo.target_solution.target_solution_void import TargetSolutionVoid
+from uo.solution.solution_void import SolutionVoid
 
 class TestVnsOptimizerProperties(unittest.TestCase):
     
@@ -48,7 +48,7 @@ class TestVnsOptimizerProperties(unittest.TestCase):
         self.vns_optimizer = VnsOptimizer(
                 output_control=self.output_control_stub,
                 problem=self.problem_mock, 
-                solution_template=TargetSolutionVoid( 43, 0, 0, False),
+                solution_template=SolutionVoid( 43, 0, 0, False),
                 problem_solution_vns_support=self.problem_solution_vns_support_stub, 
                 finish_control=self.finish_control_mock,
                 random_seed=self.random_seed, 
@@ -100,7 +100,7 @@ class TestVnsOptimizerProperties(unittest.TestCase):
             vns_optimizer:VnsOptimizer = VnsOptimizer(
                 output_control=self.output_control_stub,
                 problem=self.problem_mock, 
-                solution_template=TargetSolutionVoid( 43, 0, 0, False),
+                solution_template=SolutionVoid( 43, 0, 0, False),
                 problem_solution_vns_support=vns_support_stub, 
                 finish_control=self.finish_control_mock,
                 random_seed=self.random_seed, 

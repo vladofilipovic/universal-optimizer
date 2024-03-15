@@ -14,7 +14,7 @@ from io import TextIOWrapper
 from uo.utils.logger import logger
 
 from uo.problem.problem import Problem
-from uo.target_solution.target_solution import TargetSolution
+from uo.solution.solution import Solution
 
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
@@ -30,7 +30,7 @@ class PopulationBasedMetaheuristicVoid(PopulationBasedMetaheuristic):
             additional_statistics_control:AdditionalStatisticsControl,
             output_control:OutputControl, 
             problem:Problem,
-            solution_templates:Optional[list[TargetSolution]]   
+            solution_templates:Optional[list[Solution]]   
     )->None:
         super().__init__(
                 name=name, 

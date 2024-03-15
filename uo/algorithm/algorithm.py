@@ -16,8 +16,8 @@ from typing import Optional
 from uo.utils.logger import logger
 from uo.algorithm.output_control import OutputControl
 from uo.problem.problem import Problem
-from uo.target_solution.quality_of_solution import QualityOfSolution
-from uo.target_solution.target_solution import TargetSolution
+from uo.solution.quality_of_solution import QualityOfSolution
+from uo.solution.solution import Solution
 
 from uo.algorithm.optimizer import Optimizer
     
@@ -29,22 +29,22 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
         name (str): The name of the algorithm.
         output_control (OutputControl): The structure that controls output.
         problem (Problem): The problem to be solved.
-        solution_template (Optional[TargetSolution]): The solution template for the problem to be solved.
+        solution_template (Optional[Solution]): The solution template for the problem to be solved.
 
     Properties:
-        solution_template (Optional[TargetSolution]): The solution template for the problem to be solved.
+        solution_template (Optional[Solution]): The solution template for the problem to be solved.
         evaluation (int): The current number of evaluations during algorithm execution.
         iteration (int): The iteration of metaheuristic execution.
         iteration_best_found (int): The iteration when the best solution is found.
 
     Methods:
-        __init__(name: str, output_control: OutputControl, problem: Problem, solution_template: Optional[TargetSolution] = None) -> None:
+        __init__(name: str, output_control: OutputControl, problem: Problem, solution_template: Optional[Solution] = None) -> None:
             Create a new Algorithm instance.
         __copy__() -> Algorithm:
             Internal copy of the current algorithm.
         copy() -> Algorithm:
             Copy the current algorithm.
-        is_first_better(sol1: TargetSolution, sol2: TargetSolution, problem: Problem) -> Optional[bool]:
+        is_first_better(sol1: Solution, sol2: Solution, problem: Problem) -> Optional[bool]:
             Checks if the first solution is better than the second one, with respect to the problem that is optimized.
         init() -> None:
             Initialization of the algorithm.
@@ -63,7 +63,7 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
                 name:str, 
                 output_control:OutputControl, 
                 problem:Problem,
-                solution_template:Optional[TargetSolution] = None)->None:
+                solution_template:Optional[Solution] = None)->None:
         """
         Create new Algorithm instance
 
@@ -77,10 +77,10 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
                 raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
         if not isinstance(problem, Problem):
                 raise TypeError('Parameter \'problem\' must be \'Problem\'.')
-        if not isinstance(solution_template, TargetSolution) and solution_template is not None:
-                raise TypeError('Parameter \'solution_template\' must be \'TargetSolution\' or None.')
+        if not isinstance(solution_template, Solution) and solution_template is not None:
+                raise TypeError('Parameter \'solution_template\' must be \'Solution\' or None.')
         super().__init__(name=name, output_control=output_control, problem=problem)
-        self.__solution_template:Optional[TargetSolution] = solution_template
+        self.__solution_template:Optional[Solution] = solution_template
         self.__evaluation:int = 0
         self.__iteration:int = 0
         self.__evaluation_best_found:int = 0
@@ -108,23 +108,23 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
         return self.__copy__()
 
     @Optimizer.best_solution.setter
-    def best_solution(self, value:TargetSolution)->None:
+    def best_solution(self, value:Solution)->None:
         """
         Property setter for the best solution so far
         
-        :param TargetSolution value: best solution so far
+        :param Solution value: best solution so far
         """
         super(Algorithm, self.__class__).best_solution.fset(self, value)
         self.__evaluation_best_found = self.evaluation
         self.__iteration_best_found = self.iteration
 
     @property
-    def solution_template(self)->Optional[TargetSolution]:
+    def solution_template(self)->Optional[Solution]:
         """
         Property getter for the solution template for the problem to be solved
         
         :return: solution template for the problem to be solved 
-        :rtype: `TargetSolution`
+        :rtype: `Solution`
         """
         return self.__solution_template
 
@@ -211,12 +211,12 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
         self.__evaluation_best_found = value
 
 
-    def is_first_better(self, sol1:TargetSolution, sol2:TargetSolution, problem: Problem)->Optional[bool]:
+    def is_first_better(self, sol1:Solution, sol2:Solution, problem: Problem)->Optional[bool]:
         """
         Checks if first solution is better than the second one, with respect to problem that is optimized
 
-        :param TargetSolution sol1: first solution
-        :param TargetSolution sol2: second solution
+        :param Solution sol1: first solution
+        :param Solution sol2: second solution
         :param Problem problem: problem to be solved
         :return: `True` if first is better, `False` if first is worse, `None` if quality of both 
                 solutions are equal

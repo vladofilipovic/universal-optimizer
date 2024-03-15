@@ -7,20 +7,20 @@ from copy import deepcopy
 from uo.problem.problem import Problem
 from uo.problem.problem_void import ProblemVoid
 
-from uo.target_solution.quality_of_solution import QualityOfSolution
-from uo.target_solution.target_solution import TargetSolution 
-from uo.target_solution.target_solution_void import TargetSolutionVoid
+from uo.solution.quality_of_solution import QualityOfSolution
+from uo.solution.solution import Solution 
+from uo.solution.solution_void import SolutionVoid
 
 
-class TestTargetSolution(unittest.TestCase):
+class TestSolution(unittest.TestCase):
 
-    # TargetSolution can be instantiated with valid parameters
+    # Solution can be instantiated with valid parameters
     def test_instantiation_with_valid_parameters(self):
         # Arrange
-        if hasattr(TargetSolution, 'evaluation_cache_cs'):
-            del TargetSolution.evaluation_cache_cs
-        if hasattr(TargetSolution, 'representation_distance_cache_cs'):
-            del TargetSolution.representation_distance_cache_cs
+        if hasattr(Solution, 'evaluation_cache_cs'):
+            del Solution.evaluation_cache_cs
+        if hasattr(Solution, 'representation_distance_cache_cs'):
+            del Solution.representation_distance_cache_cs
         random_seed = 123
         fitness_value = 0.5
         objective_value = 100
@@ -30,19 +30,19 @@ class TestTargetSolution(unittest.TestCase):
         distance_calculation_cache_is_used = True
         distance_calculation_cache_max_size = 200
         # Act
-        target_solution = TargetSolutionVoid(random_seed, fitness_value, objective_value, 
+        solution = SolutionVoid(random_seed, fitness_value, objective_value, 
                     is_feasible, evaluation_cache_is_used, evaluation_cache_max_size, 
                     distance_calculation_cache_is_used, distance_calculation_cache_max_size)
         # Assert
-        self.assertEqual(target_solution.random_seed, random_seed)
-        self.assertEqual(target_solution.fitness_value, fitness_value)
-        self.assertEqual(target_solution.objective_value, objective_value)
-        self.assertEqual(target_solution.is_feasible, is_feasible)
-        self.assertIsNone(target_solution.representation)
-        self.assertTrue(target_solution.evaluation_cache_cs.is_caching)
-        self.assertEqual(target_solution.evaluation_cache_cs.max_cache_size, evaluation_cache_max_size)
-        self.assertTrue(target_solution.representation_distance_cache_cs.is_caching)
-        self.assertEqual(target_solution.representation_distance_cache_cs.max_cache_size, distance_calculation_cache_max_size)
+        self.assertEqual(solution.random_seed, random_seed)
+        self.assertEqual(solution.fitness_value, fitness_value)
+        self.assertEqual(solution.objective_value, objective_value)
+        self.assertEqual(solution.is_feasible, is_feasible)
+        self.assertIsNone(solution.representation)
+        self.assertTrue(solution.evaluation_cache_cs.is_caching)
+        self.assertEqual(solution.evaluation_cache_cs.max_cache_size, evaluation_cache_max_size)
+        self.assertTrue(solution.representation_distance_cache_cs.is_caching)
+        self.assertEqual(solution.representation_distance_cache_cs.max_cache_size, distance_calculation_cache_max_size)
 
     # The random_seed, fitness_value, fitness_values, objective_value, objective_values, is_feasible, representation, evaluation_cache_cs, and representation_distance_cache_cs attributes can be accessed and modified
     def test_attribute_access_and_modification(self):
@@ -55,23 +55,23 @@ class TestTargetSolution(unittest.TestCase):
         evaluation_cache_max_size = 100
         distance_calculation_cache_is_used = True
         distance_calculation_cache_max_size = 200
-        target_solution = TargetSolutionVoid(random_seed, fitness_value, objective_value, 
+        solution = SolutionVoid(random_seed, fitness_value, objective_value, 
                     is_feasible, evaluation_cache_is_used, evaluation_cache_max_size, 
                     distance_calculation_cache_is_used, distance_calculation_cache_max_size)
         # Act
-        target_solution.fitness_value = 0.7
-        target_solution.fitness_values = [0.6, 0.7, 0.8]
-        target_solution.objective_value = 200
-        target_solution.objective_values = [150, 175, 200]
-        target_solution.is_feasible = False
-        target_solution.representation = "representation"
+        solution.fitness_value = 0.7
+        solution.fitness_values = [0.6, 0.7, 0.8]
+        solution.objective_value = 200
+        solution.objective_values = [150, 175, 200]
+        solution.is_feasible = False
+        solution.representation = "representation"
         # Assert
-        self.assertEqual(target_solution.fitness_value, 0.7)
-        self.assertEqual(target_solution.fitness_values, [0.6, 0.7, 0.8])
-        self.assertEqual(target_solution.objective_value, 200)
-        self.assertEqual(target_solution.objective_values, [150, 175, 200])
-        self.assertFalse(target_solution.is_feasible)
-        self.assertEqual(target_solution.representation, "representation")
+        self.assertEqual(solution.fitness_value, 0.7)
+        self.assertEqual(solution.fitness_values, [0.6, 0.7, 0.8])
+        self.assertEqual(solution.objective_value, 200)
+        self.assertEqual(solution.objective_values, [150, 175, 200])
+        self.assertFalse(solution.is_feasible)
+        self.assertEqual(solution.representation, "representation")
 
     # The copy, copy_from, argument, string_representation, init_random, native_representation, init_from, calculate_quality_directly, calculate_quality, representation_distance_directly, representation_distance, string_rep, __str__, __repr__, and __format__ methods can be called and return expected results
     def test_method_calls_and_results(self):
@@ -85,27 +85,27 @@ class TestTargetSolution(unittest.TestCase):
         distance_calculation_cache_is_used = True
         distance_calculation_cache_max_size = 200
         problem = ProblemVoid("a", True)
-        target_solution = TargetSolutionVoid(random_seed, fitness_value, objective_value, 
+        solution = SolutionVoid(random_seed, fitness_value, objective_value, 
                     is_feasible, evaluation_cache_is_used, evaluation_cache_max_size, 
                     distance_calculation_cache_is_used, distance_calculation_cache_max_size)
         # Act and Assert
-        self.assertIsNotNone(target_solution.copy())
-        self.assertIsNotNone(target_solution.argument(target_solution.representation))
-        self.assertIsInstance(target_solution.string_representation(), str)
-        self.assertIsNotNone(target_solution.native_representation("representation"))
-        self.assertIsNotNone(target_solution.calculate_quality_directly(target_solution.representation, 
+        self.assertIsNotNone(solution.copy())
+        self.assertIsNotNone(solution.argument(solution.representation))
+        self.assertIsInstance(solution.string_representation(), str)
+        self.assertIsNotNone(solution.native_representation("representation"))
+        self.assertIsNotNone(solution.calculate_quality_directly(solution.representation, 
                     problem))
-        self.assertIsNotNone(target_solution.calculate_quality(problem))
-        self.assertIsNotNone(target_solution.representation_distance_directly(target_solution.representation, 
-                    target_solution.representation))
-        self.assertIsNotNone(target_solution.representation_distance(target_solution.representation, 
-                    target_solution.representation))
-        self.assertIsInstance(target_solution.string_rep("|"), str)
-        self.assertIsInstance(str(target_solution), str)
-        self.assertIsInstance(repr(target_solution), str)
-        self.assertIsInstance(format(target_solution, ""), str)
+        self.assertIsNotNone(solution.calculate_quality(problem))
+        self.assertIsNotNone(solution.representation_distance_directly(solution.representation, 
+                    solution.representation))
+        self.assertIsNotNone(solution.representation_distance(solution.representation, 
+                    solution.representation))
+        self.assertIsInstance(solution.string_rep("|"), str)
+        self.assertIsInstance(str(solution), str)
+        self.assertIsInstance(repr(solution), str)
+        self.assertIsInstance(format(solution, ""), str)
 
-    # TargetSolution raises TypeError if any parameter is of the wrong type
+    # Solution raises TypeError if any parameter is of the wrong type
     def test_type_error_raised(self):
         # Arrange
         random_seed = "seed"
@@ -120,9 +120,9 @@ class TestTargetSolution(unittest.TestCase):
         distance_calculation_cache_max_size = "max_size"
         # Act and Assert
         with self.assertRaises(TypeError):
-            TargetSolution(random_seed, fitness_value, fitness_values, objective_value, objective_values, is_feasible, evaluation_cache_is_used, evaluation_cache_max_size, distance_calculation_cache_is_used, distance_calculation_cache_max_size)
+            Solution(random_seed, fitness_value, fitness_values, objective_value, objective_values, is_feasible, evaluation_cache_is_used, evaluation_cache_max_size, distance_calculation_cache_is_used, distance_calculation_cache_max_size)
 
-    # TargetSolution sets random_seed to a random integer if it is None or 0
+    # Solution sets random_seed to a random integer if it is None or 0
     def test_random_seed_set_to_random_integer(self):
         # Arrange
         random_seed = None
@@ -134,14 +134,14 @@ class TestTargetSolution(unittest.TestCase):
         distance_calculation_cache_is_used = True
         distance_calculation_cache_max_size = 200
         # Act
-        target_solution = TargetSolutionVoid(random_seed, fitness_value, objective_value, 
+        solution = SolutionVoid(random_seed, fitness_value, objective_value, 
                     is_feasible, evaluation_cache_is_used, evaluation_cache_max_size, 
                     distance_calculation_cache_is_used, distance_calculation_cache_max_size)
         # Assert
-        self.assertIsInstance(target_solution.random_seed, int)
-        self.assertNotEqual(target_solution.random_seed, 0)
+        self.assertIsInstance(solution.random_seed, int)
+        self.assertNotEqual(solution.random_seed, 0)
 
-    # TargetSolution sets fitness_value, fitness_values, objective_value, and objective_values to None if they are not provided
+    # Solution sets fitness_value, fitness_values, objective_value, and objective_values to None if they are not provided
     def test_default_values_for_fitness_and_objective(self):
         # Arrange
         random_seed = None
@@ -153,20 +153,20 @@ class TestTargetSolution(unittest.TestCase):
         distance_calculation_cache_is_used = True
         distance_calculation_cache_max_size = 200
         # Act
-        target_solution = TargetSolutionVoid(random_seed, fitness_value, objective_value, 
+        solution = SolutionVoid(random_seed, fitness_value, objective_value, 
                     is_feasible, evaluation_cache_is_used, evaluation_cache_max_size, 
                     distance_calculation_cache_is_used, distance_calculation_cache_max_size)
         # Assert
-        target_solution.fitness_value = None
-        target_solution.fitness_values = None
-        target_solution.objective_value = None
-        target_solution.objective_values = None
-        self.assertIsNone(target_solution.fitness_value)
-        self.assertIsNone(target_solution.fitness_values)
-        self.assertIsNone(target_solution.objective_value)
-        self.assertIsNone(target_solution.objective_values)
+        solution.fitness_value = None
+        solution.fitness_values = None
+        solution.objective_value = None
+        solution.objective_values = None
+        self.assertIsNone(solution.fitness_value)
+        self.assertIsNone(solution.fitness_values)
+        self.assertIsNone(solution.objective_value)
+        self.assertIsNone(solution.objective_values)
 
-    # TargetSolution sets representation to None by default
+    # Solution sets representation to None by default
     def test_default_representation_value(self):
         # Arrange
         random_seed = None
@@ -178,38 +178,38 @@ class TestTargetSolution(unittest.TestCase):
         distance_calculation_cache_is_used = True
         distance_calculation_cache_max_size = 200
         # Act
-        target_solution = TargetSolutionVoid(random_seed, fitness_value, objective_value, 
+        solution = SolutionVoid(random_seed, fitness_value, objective_value, 
                     is_feasible, evaluation_cache_is_used, evaluation_cache_max_size, 
                     distance_calculation_cache_is_used, distance_calculation_cache_max_size)
         # Assert
-        self.assertIsNone(target_solution.representation)
+        self.assertIsNone(solution.representation)
 
-    # TargetSolution sets evaluation_cache_cs and representation_distance_cache_cs to default values if they are not provided
+    # Solution sets evaluation_cache_cs and representation_distance_cache_cs to default values if they are not provided
     def test_default_values_for_caches(self):
         # Arrange
-        if hasattr(TargetSolution, 'evaluation_cache_cs'):
-            del TargetSolution.evaluation_cache_cs
-        if hasattr(TargetSolution, 'representation_distance_cache_cs'):
-            del TargetSolution.representation_distance_cache_cs
+        if hasattr(Solution, 'evaluation_cache_cs'):
+            del Solution.evaluation_cache_cs
+        if hasattr(Solution, 'representation_distance_cache_cs'):
+            del Solution.representation_distance_cache_cs
         random_seed = 123
         fitness_value = 0.5
         objective_value = 100
         is_feasible = True
         # Act
-        target_solution = TargetSolutionVoid(random_seed, fitness_value, objective_value, is_feasible)
+        solution = SolutionVoid(random_seed, fitness_value, objective_value, is_feasible)
         # Assert
-        self.assertFalse(target_solution.evaluation_cache_cs.is_caching)
-        self.assertEqual(target_solution.evaluation_cache_cs.max_cache_size, 0)
-        self.assertFalse(target_solution.representation_distance_cache_cs.is_caching)
-        self.assertEqual(target_solution.representation_distance_cache_cs.max_cache_size, 0)
+        self.assertFalse(solution.evaluation_cache_cs.is_caching)
+        self.assertEqual(solution.evaluation_cache_cs.max_cache_size, 0)
+        self.assertFalse(solution.representation_distance_cache_cs.is_caching)
+        self.assertEqual(solution.representation_distance_cache_cs.max_cache_size, 0)
 
-    # TargetSolution calculates quality of solution and caches it if evaluation_cache_is_used is True
+    # Solution calculates quality of solution and caches it if evaluation_cache_is_used is True
     def test_calculate_quality_with_caching(self):
         # Arrange
-        if hasattr(TargetSolution, 'evaluation_cache_cs'):
-            del TargetSolution.evaluation_cache_cs
-        if hasattr(TargetSolution, 'representation_distance_cache_cs'):
-            del TargetSolution.representation_distance_cache_cs
+        if hasattr(Solution, 'evaluation_cache_cs'):
+            del Solution.evaluation_cache_cs
+        if hasattr(Solution, 'representation_distance_cache_cs'):
+            del Solution.representation_distance_cache_cs
         random_seed = 123
         fitness_value = 0.5
         objective_value = 100
@@ -218,26 +218,26 @@ class TestTargetSolution(unittest.TestCase):
         evaluation_cache_max_size = 100
         distance_calculation_cache_is_used = True
         distance_calculation_cache_max_size = 200
-        target_solution = TargetSolutionVoid(random_seed, fitness_value, objective_value, is_feasible, 
+        solution = SolutionVoid(random_seed, fitness_value, objective_value, is_feasible, 
                     evaluation_cache_is_used, evaluation_cache_max_size, distance_calculation_cache_is_used, 
                     distance_calculation_cache_max_size)
         problem_mock = mocker.Mock()
         # Act
-        target_solution.calculate_quality(problem_mock)
-        qos_c = target_solution.evaluation_cache_cs.cache[target_solution.string_representation()]
-        qos_d = target_solution.calculate_quality_directly(target_solution.representation, problem_mock)
+        solution.calculate_quality(problem_mock)
+        qos_c = solution.evaluation_cache_cs.cache[solution.string_representation()]
+        qos_d = solution.calculate_quality_directly(solution.representation, problem_mock)
         # Assert
         self.assertEqual(qos_c.is_feasible, qos_d.is_feasible)
         self.assertEqual(qos_c.fitness_value, qos_d.fitness_value)
         self.assertEqual(qos_c.objective_value, qos_d.objective_value)
 
-    # TargetSolution caches representation distance if distance_calculation_cache_is_used is True
+    # Solution caches representation distance if distance_calculation_cache_is_used is True
     def test_representation_distance_with_caching(self):
         # Arrange
-        if hasattr(TargetSolution, 'evaluation_cache_cs'):
-            del TargetSolution.evaluation_cache_cs
-        if hasattr(TargetSolution, 'representation_distance_cache_cs'):
-            del TargetSolution.representation_distance_cache_cs
+        if hasattr(Solution, 'evaluation_cache_cs'):
+            del Solution.evaluation_cache_cs
+        if hasattr(Solution, 'representation_distance_cache_cs'):
+            del Solution.representation_distance_cache_cs
         random_seed = 123
         fitness_value = 0.5
         objective_value = 100
@@ -246,19 +246,19 @@ class TestTargetSolution(unittest.TestCase):
         evaluation_cache_max_size = 100
         distance_calculation_cache_is_used = True
         distance_calculation_cache_max_size = 200
-        target_solution = TargetSolutionVoid(random_seed, fitness_value, objective_value, is_feasible, 
+        solution = SolutionVoid(random_seed, fitness_value, objective_value, is_feasible, 
                     evaluation_cache_is_used, evaluation_cache_max_size, distance_calculation_cache_is_used, 
                     distance_calculation_cache_max_size)
         representation_1_mock = mocker.Mock()
         representation_2_mock = mocker.Mock()
         # Act
-        target_solution.representation_distance(representation_1_mock, representation_2_mock)
-        dis_c = target_solution.representation_distance_cache_cs.cache[(representation_1_mock, representation_2_mock)]
-        dis_d = target_solution.representation_distance_directly(representation_1_mock, representation_2_mock)
+        solution.representation_distance(representation_1_mock, representation_2_mock)
+        dis_c = solution.representation_distance_cache_cs.cache[(representation_1_mock, representation_2_mock)]
+        dis_d = solution.representation_distance_directly(representation_1_mock, representation_2_mock)
         # Assert
         self.assertEqual(dis_c, dis_d)
 
-    # TargetSolution can be deep copied
+    # Solution can be deep copied
     def test_deep_copy(self):
         # Arrange
         random_seed = 123
@@ -269,26 +269,26 @@ class TestTargetSolution(unittest.TestCase):
         evaluation_cache_max_size = 100
         distance_calculation_cache_is_used = True
         distance_calculation_cache_max_size = 200
-        target_solution = TargetSolutionVoid(random_seed, fitness_value, objective_value, is_feasible, 
+        solution = SolutionVoid(random_seed, fitness_value, objective_value, is_feasible, 
                     evaluation_cache_is_used, evaluation_cache_max_size, distance_calculation_cache_is_used, 
                     distance_calculation_cache_max_size)
         # Act
-        copied_solution = target_solution.copy()
+        copied_solution = solution.copy()
         # Assert
-        self.assertIsNot(target_solution, copied_solution)
-        self.assertEqual(target_solution.random_seed, copied_solution.random_seed)
-        self.assertEqual(target_solution.fitness_value, copied_solution.fitness_value)
-        self.assertEqual(target_solution.fitness_values, copied_solution.fitness_values)
-        self.assertEqual(target_solution.objective_value, copied_solution.objective_value)
-        self.assertEqual(target_solution.objective_values, copied_solution.objective_values)
-        self.assertEqual(target_solution.is_feasible, copied_solution.is_feasible)
-        self.assertEqual(target_solution.representation, copied_solution.representation)
-        self.assertEqual(target_solution.evaluation_cache_cs.is_caching, copied_solution.evaluation_cache_cs.is_caching)
-        self.assertEqual(target_solution.evaluation_cache_cs.max_cache_size, copied_solution.evaluation_cache_cs.max_cache_size)
-        self.assertEqual(target_solution.representation_distance_cache_cs.is_caching, copied_solution.representation_distance_cache_cs.is_caching)
-        self.assertEqual(target_solution.representation_distance_cache_cs.max_cache_size, copied_solution.representation_distance_cache_cs.max_cache_size)
+        self.assertIsNot(solution, copied_solution)
+        self.assertEqual(solution.random_seed, copied_solution.random_seed)
+        self.assertEqual(solution.fitness_value, copied_solution.fitness_value)
+        self.assertEqual(solution.fitness_values, copied_solution.fitness_values)
+        self.assertEqual(solution.objective_value, copied_solution.objective_value)
+        self.assertEqual(solution.objective_values, copied_solution.objective_values)
+        self.assertEqual(solution.is_feasible, copied_solution.is_feasible)
+        self.assertEqual(solution.representation, copied_solution.representation)
+        self.assertEqual(solution.evaluation_cache_cs.is_caching, copied_solution.evaluation_cache_cs.is_caching)
+        self.assertEqual(solution.evaluation_cache_cs.max_cache_size, copied_solution.evaluation_cache_cs.max_cache_size)
+        self.assertEqual(solution.representation_distance_cache_cs.is_caching, copied_solution.representation_distance_cache_cs.is_caching)
+        self.assertEqual(solution.representation_distance_cache_cs.max_cache_size, copied_solution.representation_distance_cache_cs.max_cache_size)
 
-    # TargetSolution can be evaluated with a Problem object
+    # Solution can be evaluated with a Problem object
     def test_evaluate_with_problem(self):
         # Arrange
         random_seed = 123
@@ -299,21 +299,21 @@ class TestTargetSolution(unittest.TestCase):
         evaluation_cache_max_size = 100
         distance_calculation_cache_is_used = True
         distance_calculation_cache_max_size = 200
-        target_solution = TargetSolutionVoid(random_seed, fitness_value, objective_value, is_feasible, 
+        solution = SolutionVoid(random_seed, fitness_value, objective_value, is_feasible, 
                     evaluation_cache_is_used, evaluation_cache_max_size, distance_calculation_cache_is_used, 
                     distance_calculation_cache_max_size)
         problem_mock = mocker.Mock()
         # Act
-        target_solution.evaluate(problem_mock)
+        solution.evaluate(problem_mock)
         # Assert
-        self.assertEqual(target_solution.objective_value, 
-                    target_solution.calculate_quality_directly(target_solution.representation, problem_mock).objective_value)
-        self.assertEqual(target_solution.fitness_value, 
-                    target_solution.calculate_quality_directly(target_solution.representation, problem_mock).fitness_value)
-        self.assertEqual(target_solution.is_feasible, 
-                    target_solution.calculate_quality_directly(target_solution.representation, problem_mock).is_feasible)
+        self.assertEqual(solution.objective_value, 
+                    solution.calculate_quality_directly(solution.representation, problem_mock).objective_value)
+        self.assertEqual(solution.fitness_value, 
+                    solution.calculate_quality_directly(solution.representation, problem_mock).fitness_value)
+        self.assertEqual(solution.is_feasible, 
+                    solution.calculate_quality_directly(solution.representation, problem_mock).is_feasible)
 
-    # TargetSolution can be represented as a string with a specified delimiter, indentation, and grouping symbols
+    # Solution can be represented as a string with a specified delimiter, indentation, and grouping symbols
     def test_string_representation(self):
         # Arrange
         random_seed = 123
@@ -324,11 +324,11 @@ class TestTargetSolution(unittest.TestCase):
         evaluation_cache_max_size = 100
         distance_calculation_cache_is_used = True
         distance_calculation_cache_max_size = 200
-        target_solution = TargetSolutionVoid(random_seed, fitness_value, objective_value, is_feasible, 
+        solution = SolutionVoid(random_seed, fitness_value, objective_value, is_feasible, 
                     evaluation_cache_is_used, evaluation_cache_max_size, distance_calculation_cache_is_used, 
                     distance_calculation_cache_max_size)
         # Act
-        string_rep = target_solution.string_rep('|')
+        string_rep = solution.string_rep('|')
         # Assert
         expected_string_rep = "|fitness_value=0.5|"
         self.assertIn(expected_string_rep, string_rep)
@@ -339,7 +339,7 @@ class TestTargetSolution(unittest.TestCase):
         expected_string_rep = "|representation()=None|"
         self.assertIn(expected_string_rep, string_rep)
 
-    # TargetSolution can be represented as a string with a specified delimiter, indentation, and grouping symbols
+    # Solution can be represented as a string with a specified delimiter, indentation, and grouping symbols
     def test_string_conversion(self):
         # Arrange
         random_seed = 123
@@ -350,11 +350,11 @@ class TestTargetSolution(unittest.TestCase):
         evaluation_cache_max_size = 100
         distance_calculation_cache_is_used = True
         distance_calculation_cache_max_size = 200
-        target_solution = TargetSolutionVoid(random_seed, fitness_value, objective_value, is_feasible, 
+        solution = SolutionVoid(random_seed, fitness_value, objective_value, is_feasible, 
                     evaluation_cache_is_used, evaluation_cache_max_size, distance_calculation_cache_is_used, 
                     distance_calculation_cache_max_size)
         # Act
-        string_rep = str(target_solution)
+        string_rep = str(solution)
         # Assert
         expected_string_rep = "|fitness_value=0.5|"
         self.assertIn(expected_string_rep, string_rep)
@@ -365,7 +365,7 @@ class TestTargetSolution(unittest.TestCase):
         expected_string_rep = "|representation()=None|"
         self.assertIn(expected_string_rep, string_rep)
 
-    # TargetSolution can be represented as a string with a specified delimiter, indentation, and grouping symbols
+    # Solution can be represented as a string with a specified delimiter, indentation, and grouping symbols
     def test_format_to_string(self):
         # Arrange
         random_seed = 123
@@ -376,11 +376,11 @@ class TestTargetSolution(unittest.TestCase):
         evaluation_cache_max_size = 100
         distance_calculation_cache_is_used = True
         distance_calculation_cache_max_size = 200
-        target_solution = TargetSolutionVoid(random_seed, fitness_value, objective_value, is_feasible, 
+        solution = SolutionVoid(random_seed, fitness_value, objective_value, is_feasible, 
                     evaluation_cache_is_used, evaluation_cache_max_size, distance_calculation_cache_is_used, 
                     distance_calculation_cache_max_size)
         # Act
-        string_rep = format(target_solution)
+        string_rep = format(solution)
         # Assert
         expected_string_rep = "|fitness_value=0.5|"
         self.assertIn(expected_string_rep, string_rep)
@@ -396,29 +396,29 @@ class TestTargetSolution(unittest.TestCase):
         # Arrange
         representation = 42
         problem = ProblemVoid("a", True)
-        solution = TargetSolutionVoid(None, 20, 20, True )
+        solution = SolutionVoid(None, 20, 20, True )
         # Act
         solution.init_from(representation, problem)
         # Assert
-        self.assertEqual(solution._TargetSolution__representation, representation)
+        self.assertEqual(solution._Solution__representation, representation)
 
     # sets the representation of the solution to the given representation
     def test_sets_representation_to_given_representation2(self):
         # Arrange
         representation = 42
         problem = ProblemVoid("a", True)
-        solution = TargetSolutionVoid(None, 20, 20, True )
+        solution = SolutionVoid(None, 20, 20, True )
         # Act
         solution.init_from(representation, problem)
         # Assert
-        self.assertEqual(solution._TargetSolution__representation, representation)
+        self.assertEqual(solution._Solution__representation, representation)
 
     # raises TypeError if the given representation is not of type R_co
     def test_raises_TypeError_if_representation_not_of_type_R_co(self):
         # Arrange
         representation = "invalid representation"
         problem = ProblemVoid("a", True)
-        solution = TargetSolutionVoid(None, 20, 20, True )
+        solution = SolutionVoid(None, 20, 20, True )
         # Act & Assert
         with self.assertRaises(TypeError):
             solution.init_from(representation, problem)
@@ -428,7 +428,7 @@ class TestTargetSolution(unittest.TestCase):
         # Arrange
         representation = "example_representation"
         problem = "example_problem"
-        solution = TargetSolutionVoid(None, 0, 0, True)
+        solution = SolutionVoid(None, 0, 0, True)
         # Act & Assert
         with self.assertRaises(TypeError):
             solution.init_from(representation, problem)

@@ -4,7 +4,7 @@ The :mod:`~uo.algorithm.exact.total_enumeration` module describes the class :cla
 
 from pathlib import Path
 
-from uo.target_solution.quality_of_solution import QualityOfSolution
+from uo.solution.quality_of_solution import QualityOfSolution
 directory = Path(__file__).resolve()
 import sys
 sys.path.append(directory.parent)
@@ -28,7 +28,7 @@ from dataclasses import dataclass
 from uo.utils.logger import logger
 
 from uo.problem.problem import Problem
-from uo.target_solution.target_solution import TargetSolution
+from uo.solution.solution import Solution
 
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.algorithm import Algorithm
@@ -41,7 +41,7 @@ class TeOptimizerConstructionParameters:
     """
     output_control:OutputControl = None
     problem:Optional[Problem] = None
-    solution_template:Optional[TargetSolution] = None
+    solution_template:Optional[Solution] = None
     problem_solution_te_support:ProblemSolutionTeSupport = None
 
 class TeOptimizer(Algorithm):
@@ -52,22 +52,22 @@ class TeOptimizer(Algorithm):
     def __init__(self,   
             output_control:OutputControl, 
             problem:Problem,
-            solution_template:Optional[TargetSolution],
+            solution_template:Optional[Solution],
             problem_solution_te_support:ProblemSolutionTeSupport)->None:
         """
         Create new TeOptimizer instance
 
         :param `OutputControl` output_control: structure that controls output
         :param `Problem` problem: problem to be solved
-        :param `Optional[TargetSolution]` solution_template: solution from which algorithm started
+        :param `Optional[Solution]` solution_template: solution from which algorithm started
         :param `ProblemSolutionTeSupport` problem_solution_te_support: placeholder for additional methods, specific for TE 
         """
         if not isinstance(output_control, OutputControl):
                 raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
         if not isinstance(problem, Problem):
                 raise TypeError('Parameter \'problem\' must be \'Problem\'.')
-        if not isinstance(solution_template, TargetSolution) and solution_template is not None:
-                raise TypeError('Parameter \'solution_template\' must be \'TargetSolution\' or None.')
+        if not isinstance(solution_template, Solution) and solution_template is not None:
+                raise TypeError('Parameter \'solution_template\' must be \'Solution\' or None.')
         if not isinstance(problem_solution_te_support, ProblemSolutionTeSupport):
                 raise TypeError('Parameter \'problem_solution_te_support\' must be \'ProblemSolutionTeSupport\'.')
         super().__init__(name='total_enumerations', 
@@ -86,7 +86,7 @@ class TeOptimizer(Algorithm):
             self.__progress_method = None
             self.__can_progress_method = None
         # current solution
-        self.__current_solution:Optional[TargetSolution] = None
+        self.__current_solution:Optional[Solution] = None
 
     @classmethod
     def from_construction_tuple(cls, construction_tuple:TeOptimizerConstructionParameters):
@@ -120,25 +120,25 @@ class TeOptimizer(Algorithm):
         return self.__copy__()
 
     @property
-    def current_solution(self)->Optional[TargetSolution]:
+    def current_solution(self)->Optional[Solution]:
         """
         Property getter for the current solution used during VNS execution
 
-        :return: instance of the :class:`uo.target_solution.TargetSolution` class subtype -- current solution of the problem 
-        :rtype: :class:`Optional[TargetSolution]`        
+        :return: instance of the :class:`uo.solution.Solution` class subtype -- current solution of the problem 
+        :rtype: :class:`Optional[Solution]`        
         """
         return self.__current_solution
 
     @current_solution.setter
-    def current_solution(self, value:Optional[TargetSolution])->None:
+    def current_solution(self, value:Optional[Solution])->None:
         """
         Property setter for the current solution used during VNS execution
 
         :param value: the current solution
-        :type value: :class:`Optional[TargetSolution]`
+        :type value: :class:`Optional[Solution]`
         """
-        if not isinstance(value, TargetSolution) and value is not None:
-            raise TypeError('Parameter \'current_solution\' must have type \'TargetSolution\' or be None.')
+        if not isinstance(value, Solution) and value is not None:
+            raise TypeError('Parameter \'current_solution\' must have type \'Solution\' or be None.')
         self.__current_solution = value
 
     def init(self):

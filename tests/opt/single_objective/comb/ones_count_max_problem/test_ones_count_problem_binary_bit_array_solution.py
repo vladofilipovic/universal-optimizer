@@ -10,7 +10,7 @@ from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem imp
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution import OnesCountMaxProblemBinaryBitArraySolution
 from uo.problem.problem import Problem
 from uo.problem.problem_void import ProblemVoid
-from uo.target_solution.target_solution import TargetSolution
+from uo.solution.solution import Solution
 
 
 class TestOnesCountMaxProblemBinaryBitArraySolution(unittest.TestCase):
@@ -26,10 +26,10 @@ class TestOnesCountMaxProblemBinaryBitArraySolution(unittest.TestCase):
         self.assertIsNone(solution.objective_value)
         self.assertIsNone(solution.objective_values)
         self.assertFalse(solution.is_feasible)
-        self.assertFalse(TargetSolution.evaluation_cache_cs.is_caching)
-        self.assertEqual(TargetSolution.evaluation_cache_cs.max_cache_size, 0)
-        self.assertFalse(TargetSolution.representation_distance_cache_cs.is_caching)
-        self.assertEqual(TargetSolution.representation_distance_cache_cs.max_cache_size, 0)
+        self.assertFalse(Solution.evaluation_cache_cs.is_caching)
+        self.assertEqual(Solution.evaluation_cache_cs.max_cache_size, 0)
+        self.assertFalse(Solution.representation_distance_cache_cs.is_caching)
+        self.assertEqual(Solution.representation_distance_cache_cs.max_cache_size, 0)
 
     # Call the init_random() method with a Problem instance as an argument and verify that the representation property is set to a BitArray with the correct length.
     def test_init_random_method_with_problem(self):
@@ -118,10 +118,10 @@ class TestOnesCountMaxProblemBinaryBitArraySolution(unittest.TestCase):
         self.assertIsNone(solution.objective_value)
         self.assertIsNone(solution.objective_values)
         self.assertFalse(solution.is_feasible)
-        self.assertFalse(TargetSolution.evaluation_cache_cs.is_caching)
-        self.assertEqual(TargetSolution.evaluation_cache_cs.max_cache_size, 0)
-        self.assertFalse(TargetSolution.representation_distance_cache_cs.is_caching)
-        self.assertEqual(TargetSolution.representation_distance_cache_cs.max_cache_size, 0)
+        self.assertFalse(Solution.evaluation_cache_cs.is_caching)
+        self.assertEqual(Solution.evaluation_cache_cs.max_cache_size, 0)
+        self.assertFalse(Solution.representation_distance_cache_cs.is_caching)
+        self.assertEqual(Solution.representation_distance_cache_cs.max_cache_size, 0)
 
     # Call the init_random() method with a Problem instance as an argument and verify that the representation property is set to a BitArray with the correct length.
     def test_init_random_method_with_problem(self):

@@ -21,12 +21,12 @@ from random import choice
 from random import randint
 
 from uo.problem.problem import Problem
-from uo.target_solution.quality_of_solution import QualityOfSolution
-from uo.target_solution.target_solution import TargetSolution
+from uo.solution.quality_of_solution import QualityOfSolution
+from uo.solution.solution import Solution
 
 from uo.utils.logger import logger
 
-class OnesCountMaxProblemBinaryIntSolution(TargetSolution[int,str]):
+class OnesCountMaxProblemBinaryIntSolution(Solution[int,str]):
     
     def __init__(self,random_seed:Optional[int]=None, 
             evaluation_cache_is_used:bool=False, 
