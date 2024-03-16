@@ -1,5 +1,5 @@
-# RandomSeed is not predefined. Generated seed value:  5886153491216647032
-# variable_neighborhood_search started at: 2024-01-15 10:12:33.912341
+# RandomSeed is not predefined. Generated seed value:  8600533790811546055
+# variable_neighborhood_search started at: 2024-03-16 21:26:27.967304
 # Execution parameters: {'algorithm': 'variable_neighborhood_search', 'writeToOutputFile': True, 'outputFilePath': 'outputs/dimension_10.csv', 'outputFileNameAppendTimeStamp': False, 'outputFields': 'iteration, evaluation, self.best_solution.argument()', 'outputMoments': 'after_algorithm, after_iteration', 'inputFilePath': 'inputs/dimension_10.txt', 'inputFormat': 'txt', 'finishCriteria': 'evaluations', 'finishEvaluationsMax': 500, 'finishIterationsMax': 0, 'finishSecondsMax': 0, 'randomSeed': 0, 'solutionEvaluationCacheIsUsed': True, 'solutionEvaluationCacheMaxSize': 0, 'solutionDistanceCalculationCacheIsUsed': True, 'solutionDistanceCalculationCacheMaxSize': 0, 'additionalStatisticsIsActive': True, 'additionalStatisticsKeep': 'none', 'additionalStatisticsMaxLocalOptimaCount': 5, 'kMin': 1, 'kMax': 3, 'localSearchType': 'localSearchFirstImprovement', 'solutionType': 'BitArray', 'log': 'warning'}
 iteration	evaluation	step_name	best_solution_string_representation	best_solution_fitness_value	best_solution_objective_value	best_solution_is_feasible	self_best_solution_argument	
 1	500	a_i	1111111111	10	10	True	XXX	

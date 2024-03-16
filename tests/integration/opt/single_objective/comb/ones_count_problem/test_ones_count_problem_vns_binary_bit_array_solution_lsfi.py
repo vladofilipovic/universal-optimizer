@@ -50,7 +50,7 @@ class TestOnesCountMaxProblemVnsBinaryBitArraySolutionLsbi(unittest.TestCase):
         vns_construction_params.k_max = 3
         vns_construction_params.local_search_type = 'localSearchBestImprovement'
         self.optimizer:VnsOptimizer = VnsOptimizer.from_construction_tuple(vns_construction_params)
-        self.optimizer.optimize()
+        self.bs = self.optimizer.optimize()
     
     def test_best_solution_after_optimization_should_be_all_optimal(self):
         result:str = '111111111111111111111111'

@@ -178,7 +178,7 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
                     + ', Best solution fitness: ' + str(self.best_solution.fitness_value) 
                     + ', Best solution: ' + str(self.best_solution.string_representation()))
 
-    def optimize(self)->None:
+    def optimize(self)->Solution:
         """
         Executing optimization by the metaheuristic algorithm
         """
@@ -189,6 +189,7 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         self.main_loop()
         self.execution_ended = datetime.now()
         self.write_output_values_if_needed("after_algorithm", "a_a")
+        return self.best_solution
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
             group_end:str ='}')->str:

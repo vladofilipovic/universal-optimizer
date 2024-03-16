@@ -267,7 +267,7 @@ class Optimizer(metaclass=ABCMeta):
             logger.info(line)
 
     @abstractmethod
-    def optimize(self)->None:
+    def optimize(self)->Solution:
         """
         Method for optimization   
         """

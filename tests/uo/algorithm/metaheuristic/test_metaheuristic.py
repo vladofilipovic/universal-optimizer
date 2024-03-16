@@ -110,7 +110,7 @@ class TestMetaheuristic2(unittest.TestCase):
                 problem=problem_mock
         )    
         # Act
-        optimizer.optimize()
+        bs = optimizer.optimize()
         # Assert
         # Add assertions here to verify the expected behavior
         self.assertIsNotNone(optimizer.execution_started)
@@ -302,7 +302,7 @@ class TestMetaheuristic2(unittest.TestCase):
         metaheuristic.write_output_headers_if_needed = mocker.Mock(return_value=None)
         metaheuristic.write_output_values_if_needed = mocker.Mock(return_value=None)
         # Act
-        metaheuristic.optimize()
+        bs = metaheuristic.optimize()
         # Assert
         assert isinstance(metaheuristic.random_seed, int)
 

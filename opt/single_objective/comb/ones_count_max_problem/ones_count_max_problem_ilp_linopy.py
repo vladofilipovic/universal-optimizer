@@ -125,7 +125,7 @@ class OnesCountMaxProblemIntegerLinearProgrammingSolver(Optimizer):
         """
         return self.__model    
 
-    def optimize(self)->None:
+    def optimize(self)->OnesCountMaxProblemIntegerLinearProgrammingSolution:
         """
         Uses ILP model in order to solve OnesCountMaxProblem
         """
@@ -147,6 +147,7 @@ class OnesCountMaxProblemIntegerLinearProgrammingSolver(Optimizer):
         self.write_output_values_if_needed("after_algorithm", "a_a")
         self.best_solution = OnesCountMaxProblemIntegerLinearProgrammingSolution( self.model.solution.x )
         #logger.debug(self.model.solution.x)
+        return self.best_solution
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:

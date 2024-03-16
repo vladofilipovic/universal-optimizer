@@ -28,8 +28,8 @@ class OptimizerVoid(Optimizer):
     def init(self):
         return
 
-    def optimize(self):
-        return
+    def optimize(self)->Solution:
+        return None
         
     def __str__(self)->str:
         return super().__str__()
