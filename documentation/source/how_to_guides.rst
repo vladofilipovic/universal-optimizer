@@ -82,6 +82,11 @@ How-to Guides
 
             /documentation> ./make html
 
+    5. Generated documentation, that is in folder `/documentation/build/html` should be then copied into folder `/docs`.
 
+    .. code-block::
+        :caption: Copy generated HTML documentation 
+
+            /documentation> cp build/html/*.* ../docs
 
 
