@@ -196,7 +196,7 @@ class TestOptimize(unittest.TestCase):
         te_support_mock.can_progress = mocker.Mock(return_value=False)
         te_optimizer = TeOptimizer(output_control, problem_mock, solution_mock, te_support_mock)
         # Act
-        te_optimizer.optimize()
+        bs = te_optimizer.optimize()
         # Assert
         self.assertIsNotNone(te_optimizer.execution_started)
         
@@ -225,7 +225,7 @@ class TestOptimize(unittest.TestCase):
     #     te_optimizer = TeOptimizer(output_control, problem_mock, solution_mock, te_support_mock)
     #     te_optimizer.init = mocker.Mock(return_value='init')
     #     # Act
-    #     te_optimizer.optimize()
+    #     bs = te_optimizer.optimize()
     #     # Assert
     #     te_optimizer.init.assert_called_once()
 
@@ -257,7 +257,7 @@ class TestOptimize(unittest.TestCase):
         te_optimizer.write_output_values_if_needed = mocker.Mock(return_value='write_output_values_if_needed')
         logger.debug = mocker.MagicMock(spec=logger.debug)
         # Act
-        te_optimizer.optimize()
+        bs = te_optimizer.optimize()
         # Assert
         logger.debug.assert_called_once_with('Overall number of evaluations: {}'.format(
             te_support_mock.overall_number_of_evaluations(problem_mock, solution_mock, te_optimizer)))
@@ -289,7 +289,7 @@ class TestOptimize(unittest.TestCase):
         te_optimizer = TeOptimizer(output_control, problem_mock, solution_mock, te_support_mock)       
         te_optimizer.write_output_headers_if_needed = mocker.Mock(return_value='write_output_headers_if_needed')
         # Act
-        te_optimizer.optimize()
+        bs = te_optimizer.optimize()
         # Assert
         te_optimizer.write_output_headers_if_needed.assert_called_once()
 

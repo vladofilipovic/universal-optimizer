@@ -30,7 +30,7 @@ class TestOnesCountMaxProblemIlpLinopy(unittest.TestCase):
             output_control=self.output_control,
             problem=self.problem_to_solve
         )
-        self.optimizer.optimize()
+        self.bs = self.optimizer.optimize()
     
     def test_best_solution_after_optimization_should_be_optimal(self):
         result = ''
@@ -117,7 +117,7 @@ class TestOptimize(unittest.TestCase):
         solver = OnesCountMaxProblemIntegerLinearProgrammingSolver(output_control, problem)
         # Act
         try:
-            solver.optimize()
+            bs = solver.optimize()
         except Exception as e:
             self.fail(f"Unexpected exception occurred: {e}")
         # Assert
@@ -130,7 +130,7 @@ class TestOptimize(unittest.TestCase):
         problem = OnesCountMaxProblem(dim=5)
         solver = OnesCountMaxProblemIntegerLinearProgrammingSolver(output_control, problem)
         # Act
-        solver.optimize()
+        bs = solver.optimize()
         # Assert
         self.assertIsInstance(solver.model, Model)
         self.assertGreater(len(solver.model.variables), 0)
@@ -142,7 +142,7 @@ class TestOptimize(unittest.TestCase):
         problem = OnesCountMaxProblem(dim=5)
         solver = OnesCountMaxProblemIntegerLinearProgrammingSolver(output_control, problem)
         # Act
-        solver.optimize()
+        bs = solver.optimize()
         # Assert
         objective = solver.model.objective
         self.assertIsNotNone(objective)
@@ -156,13 +156,13 @@ class TestOptimize(unittest.TestCase):
         # Act & Assert
         with self.assertRaises(TypeError):
             solver = OnesCountMaxProblemIntegerLinearProgrammingSolver(output_control, problem)
-            solver.optimize()
+            bs = solver.optimize()
         output_control = OutputControl()
         problem = "invalid_problem"
         # Act & Assert
         with self.assertRaises(TypeError):
             solver = OnesCountMaxProblemIntegerLinearProgrammingSolver(output_control, problem)
-            solver.optimize()
+            bs = solver.optimize()
 
     # The method solves the model and sets the best solution to the solution of the model.
     def test_model_solved_and_best_solution_set(self):
@@ -171,8 +171,9 @@ class TestOptimize(unittest.TestCase):
         problem = OnesCountMaxProblem(dim=5)
         solver = OnesCountMaxProblemIntegerLinearProgrammingSolver(output_control, problem)
         # Act
-        solver.optimize()
+        bs = solver.optimize()
         # Assert
+        self.assertIsNotNone(bs)
         self.assertIsNotNone(solver.best_solution)
         
 

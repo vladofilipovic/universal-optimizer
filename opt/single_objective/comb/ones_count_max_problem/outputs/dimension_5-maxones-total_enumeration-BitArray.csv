@@ -1,5 +1,5 @@
-# RandomSeed is not predefined. Generated seed value:  6902749625262068282
-# total_enumeration started at: 2024-01-15 10:12:36.329939
+# RandomSeed is not predefined. Generated seed value:  5322341566595278852
+# total_enumeration started at: 2024-03-16 21:26:30.487327
 # Execution parameters: {'algorithm': 'total_enumeration', 'writeToOutputFile': True, 'outputFilePath': 'outputs/dimension_5.csv', 'outputFileNameAppendTimeStamp': False, 'outputFields': 'iteration, evaluation, self.best_solution.argument()', 'outputMoments': 'after_algorithm, after_iteration', 'inputFilePath': 'inputs/dimension_5.txt', 'inputFormat': 'txt', 'finishCriteria': 'evaluations & seconds', 'finishEvaluationsMax': 300, 'finishIterationsMax': 0, 'finishSecondsMax': 0, 'randomSeed': 0, 'solutionEvaluationCacheIsUsed': False, 'solutionEvaluationCacheMaxSize': 0, 'solutionDistanceCalculationCacheIsUsed': False, 'solutionDistanceCalculationCacheMaxSize': 0, 'additionalStatisticsIsActive': False, 'additionalStatisticsKeep': 'none', 'additionalStatisticsMaxLocalOptimaCount': 7, 'kMin': 1, 'kMax': 3, 'localSearchType': 'localSearchBestImprovement', 'solutionType': 'BitArray', 'log': 'warning'}
 iteration	evaluation	step_name	best_solution_string_representation	best_solution_fitness_value	best_solution_objective_value	best_solution_is_feasible	self_best_solution_argument	
 2	3	a_i	10000	1	1	True	XXX	

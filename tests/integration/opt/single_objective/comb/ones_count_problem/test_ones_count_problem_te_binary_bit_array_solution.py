@@ -38,20 +38,33 @@ class TestOnesCountMaxProblemTeBinaryBitArraySolution(unittest.TestCase):
         construction_params.solution_template = self.solution
         construction_params.problem_solution_te_support = self.te_support
         self.optimizer:TeOptimizer = TeOptimizer.from_construction_tuple(construction_params)
-        self.optimizer.optimize()
-    
+        self.bs = self.optimizer.optimize()
+
     def test_best_solution_after_optimization_should_be_optimal(self):
+        result:str = '111111111111'
+        self.assertEqual(self.bs.string_representation(), result)
+    
+    def test_best_solution_after_optimization_should_be_optimal2(self):
         result:str = '111111111111'
         self.assertEqual(self.optimizer.best_solution.string_representation(), result)
 
-    def test_best_solution_after_optimization_should_be_optimal_2(self):
+    def test_best_solution_after_optimization_should_be_optimal3(self):
         self.assertEqual(len(self.optimizer.best_solution.string_representation()), self.problem_to_solve.dimension)
+
+    def test_best_solution_after_optimization_should_be_optimal4(self):
+        self.assertEqual(len(self.bs.string_representation()), self.problem_to_solve.dimension)
 
     def test_best_solution_after_optimization_should_have_optimal_fitness(self):
         self.assertEqual(self.optimizer.best_solution.fitness_value, self.problem_to_solve.dimension)
 
+    def test_best_solution_after_optimization_should_have_optimal_fitness2(self):
+        self.assertEqual(self.bs.fitness_value, self.problem_to_solve.dimension)
+
     def test_best_solution_after_optimization_should_have_optimal_objective_value(self):
         self.assertEqual(self.optimizer.best_solution.objective_value, self.problem_to_solve.dimension)
+
+    def test_best_solution_after_optimization_should_have_optimal_objective_value2(self):
+        self.assertEqual(self.bs.objective_value, self.problem_to_solve.dimension)
 
     def tearDown(self):
         return

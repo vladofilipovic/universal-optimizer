@@ -154,7 +154,7 @@ class TeOptimizer(Algorithm):
         self.best_solution = self.current_solution
         self.iteration = 1
 
-    def optimize(self):
+    def optimize(self)->Solution:
         self.execution_started = datetime.now()
         self.init()
         logger.debug('Overall number of evaluations: {}'.format(
@@ -174,6 +174,7 @@ class TeOptimizer(Algorithm):
                 break
         self.execution_ended = datetime.now()
         self.write_output_values_if_needed("after_algorithm", "a_a")
+        return self.best_solution
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
