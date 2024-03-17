@@ -90,8 +90,8 @@ class OutputControl:
         field should he header od the csv column
         """
 
-        fields_head:list[str] = fields.split(,)
-        //fields_head:list[str] = fields.replace('.','_').replace(' ', '').replace('()','').split(',')
+        fields_head:list[str] = fields.split(',')
+        #fields_head:list[str] = fields.replace('.','_').replace(' ', '').replace('()','').split(',')
         for f_h in fields_head:
             if f_h != '':
                 if f_h not in self.fields_headings:
