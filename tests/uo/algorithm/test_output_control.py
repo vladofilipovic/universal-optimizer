@@ -71,7 +71,7 @@ class TestOutputControl(unittest.TestCase):
         # Arrange
         write_to_output = True
         output_file = None
-        fields = 'iteration, evaluation, "step_name", best_solution.argument(), best_solution.fitness_value, best_solution.objective_value, best_solution.is_feasible'
+        fields = 'iteration, evaluation, "step_name", best_solution.string_representation(), best_solution.fitness_value, best_solution.objective_value, best_solution.is_feasible'
         moments = 'after_algorithm, before_iteration, after_iteration'
         # Act
         oc = OutputControl(write_to_output, output_file, fields, moments)
@@ -108,7 +108,7 @@ class TestOutputControl(unittest.TestCase):
     def test_update_fields_attribute(self):
         # Arrange
         oc = OutputControl()
-        new_fields = 'iteration, evaluation, "step_name", best_solution.argument(), best_solution.fitness_value'
+        new_fields = 'iteration, evaluation, "step_name", best_solution.string_representation(), best_solution.fitness_value'
         # Act
         oc.fields = new_fields
         # Assert
@@ -120,7 +120,7 @@ class TestOutputControl(unittest.TestCase):
         self.assertIn('self.iteration', oc.fields_definitions)
         self.assertIn('self.evaluation', oc.fields_definitions)
         self.assertIn('"step_name"', oc.fields_definitions)
-        self.assertIn('self.best_solution.argument()', oc.fields_definitions)
+        self.assertIn('self.best_solution.string_representation()', oc.fields_definitions)
         self.assertIn('self.best_solution.fitness_value', oc.fields_definitions)
 
     # OutputControl object raises TypeError if write_to_output parameter is not a boolean

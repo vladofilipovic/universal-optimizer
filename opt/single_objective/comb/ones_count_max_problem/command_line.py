@@ -20,7 +20,7 @@ default_parameters_cl = {
         'writeToOutputFile': True,
         'outputFilePath':'opt/single_objective/comb/ones_count_max_problem/outputs/dimension_77.csv', 
         'outputFileNameAppendTimeStamp': False,
-        'outputFields': "iteration, evaluation, best_solution.fitness_value, best_solution.argument()",
+        'outputFields': "iteration, evaluation, best_solution.fitness_value, best_solution.string_representation()",
         'outputMoments': "after_algorithm, after_evaluation",
         'inputFilePath': 'opt/single_objective/comb/ones_count_max_problem/inputs/dimension_77.txt', 
         'inputFormat': 'txt', 
@@ -60,7 +60,7 @@ def parse_arguments():
         parser_vns.add_argument('--outputFileNameAppendTimeStamp', type=bool, default=False, 
                 help=("Should timestamp be automatically added to the name of the output file.") )        
         parser_vns.add_argument('--outputFields', type=str, 
-                default='iteration, evaluation, self.best_solution.argument()', 
+                default='iteration, evaluation, self.best_solution.string_representation()', 
                 help=("Comma-separated list of fields whose values will be outputted during algorithm execution. " 
                 "Fields 'iteration, evaluation' means that current iterations and current evaluation will be outputted."))
         parser_vns.add_argument('--outputMoments', type=str, default='after_algorithm, after_iteration', 
@@ -131,7 +131,7 @@ def parse_arguments():
         parser_te.add_argument('--outputFileNameAppendTimeStamp', type=bool, default=False, 
                 help=("Should timestamp be automatically added to the name of the output file.") )        
         parser_te.add_argument('--outputFields', type=str, 
-                default='iteration, evaluation, self.best_solution.argument()', 
+                default='iteration, evaluation, self.best_solution.string_representation()', 
                 help=("Comma-separated list of fields whose values will be outputted during algorithm execution. " 
                 "Fields 'iteration, evaluation' means that current iterations and current evaluation will be outputted."))
         parser_te.add_argument('--outputMoments', type=str, default='after_algorithm, after_iteration', 
@@ -160,7 +160,7 @@ def parse_arguments():
         parser_ilp.add_argument('--outputFileNameAppendTimeStamp', type=bool, default=False, 
                 help=("Should timestamp be automatically added to the name of the output file.") )        
         parser_ilp.add_argument('--outputFields', type=str, 
-                default='iteration, evaluation, self.best_solution.argument()', 
+                default='iteration, evaluation, self.best_solution.string_representation()', 
                 help=("Comma-separated list of fields whose values will be outputted during algorithm execution. " 
                 "Fields 'iteration, evaluation' means that current iterations and current evaluation will be outputted."))
         parser_ilp.add_argument('--outputMoments', type=str, default='after_algorithm, after_iteration', 

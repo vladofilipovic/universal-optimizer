@@ -196,8 +196,9 @@ class Optimizer(metaclass=ABCMeta):
                 try:
                     data = eval(f_def)
                     s_data:str = str(data)
-                except:
+                except BaseException as e:
                     s_data:str = 'XXX'
+                    logger.debug(e)
                 fields_val[i] = s_data
         return fields_val
 
@@ -251,18 +252,14 @@ class Optimizer(metaclass=ABCMeta):
         if should_write:
             line:str = ''
             fields_def:list[str] = self.output_control.fields_definitions 
-            for f_def in fields_def:
-                if f_def != "":
-                    try:
-                        data = eval(f_def)
-                        s_data:str = str(data)
-                        if s_data == "step_name":
-                            s_data = step_name_value
-                    except BaseException as e:
-                        s_data:str = 'XXX'
-                        logger.debug(e)
-                    output.write( s_data + '\t')
-                    line += s_data + '\t'
+            fields_val:list[str] = ['XXX'] * len(fields_def)
+            fields_val = self.determine_fields_val(fields_def=fields_def, fields_val=fields_val)
+            for f_val in fields_val:
+                s_data:str = str(f_val)
+                if s_data == "step_name":
+                        s_data = step_name_value
+                output.write( s_data + '\t')
+                line += s_data + '\t'
             output.write('\n')
             logger.info(line)
 

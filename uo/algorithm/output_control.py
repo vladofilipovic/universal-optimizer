@@ -19,7 +19,7 @@ class OutputControl:
     """
 
     def __init__(self, write_to_output:bool=False, output_file:Optional[TextIOWrapper]=None, 
-            fields:str='iteration, evaluation, "step_name", best_solution.argument(), '
+            fields:str='iteration, evaluation, "step_name", best_solution.string_representation(), '
                 'best_solution.fitness_value, best_solution.objective_value, best_solution.is_feasible', 
             moments:str='after_algorithm') -> None:
         """
