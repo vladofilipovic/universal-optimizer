@@ -202,6 +202,8 @@ class Optimizer(metaclass=ABCMeta):
                     s_data = str(self.best_solution.objective_value)
                 elif f_def == "best_solution.objective_values":
                     s_data = str(self.best_solution.objective_values)
+                elif f_def == "best_solution.is_feasible":
+                    s_data = str(self.best_solution.is_feasible)
                 elif f_def == "best_solution.string_representation()":
                     s_data = str(self.best_solution.string_representation())
                 elif f_def == "execution_started":

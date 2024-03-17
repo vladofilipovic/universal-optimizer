@@ -48,10 +48,10 @@ class OutputControl:
         self.__fields_headings:list[str] = ['iteration',
                 'evaluation',
                 'step_name',
-                'best_solution_string_representation',
-                'best_solution_fitness_value',
-                'best_solution_objective_value',
-                'best_solution_is_feasible']
+                'best_solution.string_representation()',
+                'best_solution.fitness_value',
+                'best_solution.objective_value',
+                'best_solution.is_feasible']
         self.__fields_definitions:list[str] = ['self.iteration',
                 'self.evaluation',
                 '"step_name"',
@@ -89,7 +89,9 @@ class OutputControl:
         (e.g. `best_solution.fitness_value`, `iteration`, `evaluation`, `seconds_max` etc.) and last word in specific 
         field should he header od the csv column
         """
-        fields_head:list[str] = fields.replace('.','_').replace(' ', '').replace('()','').split(',')
+
+        fields_head:list[str] = fields.split(,)
+        //fields_head:list[str] = fields.replace('.','_').replace(' ', '').replace('()','').split(',')
         for f_h in fields_head:
             if f_h != '':
                 if f_h not in self.fields_headings:
