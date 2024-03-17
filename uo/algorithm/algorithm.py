@@ -210,6 +210,31 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
             raise TypeError('Parameter \'evaluation_best_found\' must have type \'int\'.')
         self.__evaluation_best_found = value
 
+    def determine_fields_val(self, fields_def:list[str], fields_val:list[str])->list[str]:
+        """
+        Determines fields values upon fields definition and old values 
+
+        :param list[str] fields_def: list of field definitions
+        :param list[str] fields_val: list of old field values
+        :return: list of new field values
+        :rtype: list[str]
+        """ 
+        for i in range(len(fields_def)):
+            f_def = fields_def[i]
+            old_val = fields_val[i]
+            if f_def != "" and old_val == "XXX":
+                s_data = "XXX"
+                if f_def == "evaluation":
+                    s_data = str(self.evaluation)
+                elif f_def == "iteration":
+                    s_data = str(self.iteration)
+                elif f_def == "evaluation_best_found":
+                    s_data = str(self.evaluation_best_found)
+                elif f_def == "iteration_best_found":
+                    s_data = str(self.iteration_best_found)
+                fields_val[i] = s_data
+        fields_val = super().determine_fields_val(fields_def, fields_val)
+        return fields_val
 
     def is_first_better(self, sol1:Solution, sol2:Solution, problem: Problem)->Optional[bool]:
         """

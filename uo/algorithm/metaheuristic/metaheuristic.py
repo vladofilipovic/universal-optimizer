@@ -155,7 +155,40 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         if asc.keep_all_solution_codes:
             asc.add_to_all_solution_codes(solution.string_representation())
         if asc.keep_more_local_optima:
-            asc.add_to_more_local_optima(solution.string_representation(), self.best_solution.fitness_value, self.best_solution.string_representation())
+            asc.add_to_more_local_optima(solution.string_representation(), self.best_solution.fitness_value, 
+                        self.best_solution.string_representation())
+
+    def determine_fields_val(self, fields_def:list[str], fields_val:list[str])->list[str]:
+        """
+        Determines fields values upon fields definition and old values 
+
+        :param list[str] fields_def: list of field definitions
+        :param list[str] fields_val: list of old field values
+        :return: list of new field values
+        :rtype: list[str]
+        """ 
+        for i in range(len(fields_def)):
+            f_def = fields_def[i]
+            old_val = fields_val[i]
+            if f_def != "" and old_val == "XXX":
+                s_data = "XXX"
+                if f_def == "finish_control.criteria":
+                    s_data = str(self.finish_control.criteria)
+                elif f_def == "finish_control.evaluations_max":
+                    s_data = str(self.finish_control.evaluations_max)
+                elif f_def == "finish_control.iterations_max":
+                    s_data = str(self.finish_control.iterations_max)
+                elif f_def == "finish_control.seconds_max":
+                    s_data = str(self.finish_control.seconds_max)
+                elif f_def == "evaluation_best_found":
+                    s_data = str(self.evaluation_best_found)
+                elif f_def == "iteration_best_found":
+                    s_data = str(self.iteration_best_found)
+                elif f_def == "elapsed_seconds()":
+                    s_data = str(self.elapsed_seconds())
+                fields_val[i] = s_data
+        fields_val = super().determine_fields_val(fields_def, fields_val)
+        return fields_val
 
     @abstractmethod
     def main_loop_iteration(self)->None:

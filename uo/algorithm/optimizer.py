@@ -193,12 +193,30 @@ class Optimizer(metaclass=ABCMeta):
             f_def = fields_def[i]
             old_val = fields_val[i]
             if f_def != "" and old_val == "XXX":
-                try:
-                    data = eval(f_def)
-                    s_data:str = str(data)
-                except BaseException as e:
-                    s_data:str = 'XXX'
-                    logger.debug(e)
+                s_data = "XXX"
+                if f_def == "best_solution.fitness_value":
+                    s_data = str(self.best_solution.fitness_value)
+                elif f_def == "best_solution.fitness_values":
+                    s_data = str(self.best_solution.fitness_values)
+                elif f_def == "best_solution.objective_value":
+                    s_data = str(self.best_solution.objective_value)
+                elif f_def == "best_solution.objective_values":
+                    s_data = str(self.best_solution.objective_values)
+                elif f_def == "best_solution.string_representation()":
+                    s_data = str(self.best_solution.string_representation())
+                elif f_def == "execution_started":
+                    s_data = str(self.execution_started)
+                elif f_def == "execution_ended":
+                    s_data = str(self.execution_ended)
+                elif f_def == "time_when_best_found":
+                    s_data = str(self.time_when_best_found)
+                else:
+                    try:
+                        data = eval(f_def)
+                        s_data:str = str(data)
+                    except BaseException as e:
+                        s_data:str = 'XXX'
+                        logger.debug(e)
                 fields_val[i] = s_data
         return fields_val
 
