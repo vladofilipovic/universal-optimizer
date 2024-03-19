@@ -8,7 +8,7 @@ from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp_linopy import OnesCountMaxProblemIntegerLinearProgrammingSolver
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp_linopy import OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters
 from uo.problem.problem import Problem
-from uo.problem.problem_void import ProblemVoid
+from uo.problem.problem_void_min_so import ProblemVoidMinSO
 from uo.solution.solution import Solution
 from uo.algorithm.output_control import OutputControl
 
@@ -19,7 +19,7 @@ class TestOnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameter
         # Arrange
         # Act
         params = OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters(output_control=OutputControl(),
-                                        problem=ProblemVoid("a", True))
+                                        problem=ProblemVoidMinSO("a", True))
         # Assert
         self.assertIsInstance(params, OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters)
 

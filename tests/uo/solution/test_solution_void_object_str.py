@@ -4,7 +4,7 @@ import unittest.mock as mocker
 from copy import deepcopy
 
 from uo.problem.problem import Problem
-from uo.problem.problem_void import ProblemVoid
+from uo.problem.problem_void_min_so import ProblemVoidMinSO
 
 from uo.solution.quality_of_solution import QualityOfSolution
 from uo.solution.solution import Solution 
@@ -44,7 +44,7 @@ class TestSolutionVoidObjectStr(unittest.TestCase):
     # The copy, copy_from, argument, string_representation, init_random, native_representation, init_from, calculate_quality_directly, calculate_quality, representation_distance_directly, representation_distance, string_rep, __str__, __repr__, and __format__ methods can be called and return expected results
     def test_method_calls_and_results(self):
         # Arrange
-        problem = ProblemVoid("a", True)
+        problem = ProblemVoidMinSO("a", True)
         solution = SolutionVoidObjectStr()
         # Act and Assert
         self.assertIsNotNone(solution.copy())
@@ -221,7 +221,7 @@ class TestSolutionVoidObjectStr(unittest.TestCase):
     def test_initialization_with_valid_representation_and_problem(self):
         # Arrange
         representation = 42
-        problem = ProblemVoid("a", True)
+        problem = ProblemVoidMinSO("a", True)
         solution = SolutionVoidObjectStr()
         # Act
         solution.init_from(representation, problem)
@@ -232,7 +232,7 @@ class TestSolutionVoidObjectStr(unittest.TestCase):
     def test_sets_representation_to_given_representation2(self):
         # Arrange
         representation = 42
-        problem = ProblemVoid("a", True)
+        problem = ProblemVoidMinSO("a", True)
         solution = SolutionVoidObjectStr()
         # Act
         solution.init_from(representation, problem)

@@ -10,7 +10,7 @@ from uo.problem.problem import Problem
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.optimizer import Optimizer
 from uo.algorithm.optimizer_void import OptimizerVoid
-from uo.problem.problem_void import ProblemVoid
+from uo.problem.problem_void_min_so import ProblemVoidMinSO
 from uo.solution.quality_of_solution import QualityOfSolution
 from uo.solution.solution_void import SolutionVoid
 from uo.utils import logger
@@ -23,7 +23,7 @@ class Test__Optimizer__(unittest.TestCase):
         # Arrange
         name = "Optimizer1"
         output_control = OutputControl()
-        problem = ProblemVoid("a problem", True)
+        problem = ProblemVoidMinSO("a problem", True)
         # Act
         optimizer = OptimizerVoid(name, output_control, problem)
         # Assert
@@ -41,7 +41,7 @@ class Test__Optimizer__(unittest.TestCase):
         # Arrange
         name = "Optimizer1"
         output_control = OutputControl()
-        problem = ProblemVoid("a problem", True)
+        problem = ProblemVoidMinSO("a problem", True)
         # Act
         optimizer = OptimizerVoid(name, output_control, problem)
         # Assert
@@ -59,7 +59,7 @@ class Test__Optimizer__(unittest.TestCase):
         # Arrange
         name = "Optimizer1"
         output_control = OutputControl()
-        problem = ProblemVoid("a problem", True)
+        problem = ProblemVoidMinSO("a problem", True)
         # Act
         optimizer = OptimizerVoid(name, output_control, problem)
         # Assert
@@ -72,7 +72,7 @@ class Test__Optimizer__(unittest.TestCase):
         # Arrange
         name = 123
         output_control = OutputControl()
-        problem = ProblemVoid("a problem", True)
+        problem = ProblemVoidMinSO("a problem", True)
         # Act & Assert
         with self.assertRaises(TypeError):
             Optimizer(name, output_control, problem)
@@ -82,7 +82,7 @@ class Test__Optimizer__(unittest.TestCase):
         # Arrange
         name = "Optimizer1"
         output_control = "InvalidOutputControl"
-        problem = ProblemVoid("a problem", True)
+        problem = ProblemVoidMinSO("a problem", True)
         # Act & Assert
         with self.assertRaises(TypeError):
             Optimizer(name, output_control, problem)
@@ -102,7 +102,7 @@ class Test__Optimizer__(unittest.TestCase):
         # Arrange
         name = ""
         output_control = OutputControl()
-        problem = ProblemVoid("a problem", True)
+        problem = ProblemVoidMinSO("a problem", True)
         # Act
         try:
             optimizer = OptimizerVoid(name, output_control, problem)
@@ -123,7 +123,7 @@ class Test__Optimizer__(unittest.TestCase):
         # Arrange
         name = "Optimizer1"
         output_control = None
-        problem = ProblemVoid("a problem", True)
+        problem = ProblemVoidMinSO("a problem", True)
         # Act & Assert
         with self.assertRaises(TypeError):
             Optimizer(name, output_control, problem)
@@ -144,7 +144,7 @@ class Test__Optimizer__(unittest.TestCase):
         # Arrange
         name = "Optimizer1"
         output_control = OutputControl()
-        problem = ProblemVoid("a problem", True)
+        problem = ProblemVoidMinSO("a problem", True)
         # Act
         optimizer = OptimizerVoid(name, output_control, problem)
         # Assert
@@ -156,7 +156,7 @@ class Test__Optimizer__(unittest.TestCase):
         # Arrange
         name = "Optimizer1"
         output_control = OutputControl()
-        problem = ProblemVoid("a problem", True)
+        problem = ProblemVoidMinSO("a problem", True)
         # Act
         optimizer = OptimizerVoid(name, output_control, problem)
         # Assert
@@ -167,7 +167,7 @@ class Test__Optimizer__(unittest.TestCase):
         # Arrange
         name = "Optimizer1"
         output_control = OutputControl()
-        problem = ProblemVoid("a problem", True)
+        problem = ProblemVoidMinSO("a problem", True)
         # Act
         optimizer = OptimizerVoid(name, output_control, problem)
         # Assert
@@ -185,7 +185,7 @@ class Test__Optimizer__(unittest.TestCase):
         # Arrange
         name = "Optimizer1"
         output_control = OutputControl()
-        problem = ProblemVoid("a problem", True)
+        problem = ProblemVoidMinSO("a problem", True)
         optimizer = OptimizerVoid(name, output_control, problem)
         # Act
         copied_optimizer = optimizer.copy()
@@ -205,7 +205,7 @@ class Test__Optimizer__(unittest.TestCase):
         # Arrange
         name = "Optimizer1"
         output_control = OutputControl()
-        problem = ProblemVoid("a problem", True)
+        problem = ProblemVoidMinSO("a problem", True)
         optimizer = OptimizerVoid(name, output_control, problem)
         optimizer.execution_started = datetime.now()
         optimizer.best_solution = SolutionVoid(43, 0, 0, True)

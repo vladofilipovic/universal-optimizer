@@ -4,7 +4,7 @@ import unittest.mock as mocker
 from copy import deepcopy
 
 from uo.problem.problem import Problem
-from uo.problem.problem_void import ProblemVoid
+from uo.problem.problem_void_min_so import ProblemVoidMinSO
 
 from uo.solution.quality_of_solution import QualityOfSolution
 from uo.solution.solution import Solution 

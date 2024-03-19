@@ -9,7 +9,7 @@ from bitstring import BitArray
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution import OnesCountMaxProblemBinaryIntSolution
 from uo.problem.problem import Problem
-from uo.problem.problem_void import ProblemVoid
+from uo.problem.problem_void_min_so import ProblemVoidMinSO
 from uo.solution.solution import Solution
 
 

@@ -5,7 +5,7 @@ import unittest.mock as mocker
 from copy import deepcopy
 
 from uo.problem.problem import Problem
-from uo.problem.problem_void import ProblemVoid
+from uo.problem.problem_void_min_so import ProblemVoidMinSO
 
 from uo.solution.quality_of_solution import QualityOfSolution
 from uo.solution.solution import Solution 
@@ -84,7 +84,7 @@ class TestSolution(unittest.TestCase):
         evaluation_cache_max_size = 100
         distance_calculation_cache_is_used = True
         distance_calculation_cache_max_size = 200
-        problem = ProblemVoid("a", True)
+        problem = ProblemVoidMinSO("a", True)
         solution = SolutionVoid(random_seed, fitness_value, objective_value, 
                     is_feasible, evaluation_cache_is_used, evaluation_cache_max_size, 
                     distance_calculation_cache_is_used, distance_calculation_cache_max_size)
@@ -395,7 +395,7 @@ class TestSolution(unittest.TestCase):
     def test_initialization_with_valid_representation_and_problem(self):
         # Arrange
         representation = 42
-        problem = ProblemVoid("a", True)
+        problem = ProblemVoidMinSO("a", True)
         solution = SolutionVoid(None, 20, 20, True )
         # Act
         solution.init_from(representation, problem)
@@ -406,7 +406,7 @@ class TestSolution(unittest.TestCase):
     def test_sets_representation_to_given_representation2(self):
         # Arrange
         representation = 42
-        problem = ProblemVoid("a", True)
+        problem = ProblemVoidMinSO("a", True)
         solution = SolutionVoid(None, 20, 20, True )
         # Act
         solution.init_from(representation, problem)
@@ -417,7 +417,7 @@ class TestSolution(unittest.TestCase):
     def test_raises_TypeError_if_representation_not_of_type_R_co(self):
         # Arrange
         representation = "invalid representation"
-        problem = ProblemVoid("a", True)
+        problem = ProblemVoidMinSO("a", True)
         solution = SolutionVoid(None, 20, 20, True )
         # Act & Assert
         with self.assertRaises(TypeError):

@@ -8,7 +8,7 @@ from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer 
 from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
-from uo.problem.problem_void import ProblemVoid
+from uo.problem.problem_void_min_so import ProblemVoidMinSO
 from uo.solution.solution_void import SolutionVoid
 
 
@@ -21,7 +21,7 @@ class TestVnsOptimizer(unittest.TestCase):
         random_seed = 123
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
-        problem = ProblemVoid("a problem", True)
+        problem = ProblemVoidMinSO("a problem", True)
         solution_template = SolutionVoid( 43, 43, 43, True)
         vns_support_stub = mocker.MagicMock(spec=ProblemSolutionVnsSupport)
         type(vns_support_stub).local_search_best_improvement = mocker.CallableMixin(spec=lambda x: x)
@@ -43,7 +43,7 @@ class TestVnsOptimizer(unittest.TestCase):
         random_seed = 123
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
-        problem = ProblemVoid("a problem", True)
+        problem = ProblemVoidMinSO("a problem", True)
         solution_template = SolutionVoid( 43, 0, 0, False)
         vns_support_stub = mocker.MagicMock(spec=ProblemSolutionVnsSupport)
         type(vns_support_stub).local_search_best_improvement = mocker.CallableMixin(spec=lambda x: x)
@@ -65,7 +65,7 @@ class TestVnsOptimizer(unittest.TestCase):
         random_seed = None
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
-        problem = ProblemVoid("a problem", True)
+        problem = ProblemVoidMinSO("a problem", True)
         solution_template = SolutionVoid( 43, 0, 0, False)
         vns_support_stub = mocker.MagicMock(spec=ProblemSolutionVnsSupport)
         type(vns_support_stub).local_search_best_improvement = mocker.CallableMixin(spec=lambda x: x)
@@ -86,7 +86,7 @@ class TestVnsOptimizer(unittest.TestCase):
         random_seed = 123
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
-        problem = ProblemVoid("a problem", True)
+        problem = ProblemVoidMinSO("a problem", True)
         solution_template = None
         vns_support = None
         k_min = 1
@@ -104,7 +104,7 @@ class TestVnsOptimizer(unittest.TestCase):
         random_seed = None
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
-        problem = ProblemVoid("a problem", True)
+        problem = ProblemVoidMinSO("a problem", True)
         solution_template = SolutionVoid( 43, 43, 43, True)
         vns_support_stub = mocker.MagicMock(spec=ProblemSolutionVnsSupport)
         type(vns_support_stub).local_search_best_improvement = mocker.CallableMixin(spec=lambda x: x)
@@ -129,7 +129,7 @@ class TestVnsOptimizer(unittest.TestCase):
         random_seed = None
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
-        problem = ProblemVoid("a problem", True)
+        problem = ProblemVoidMinSO("a problem", True)
         solution_template = SolutionVoid( 43, 43, 43, True)
         vns_support_stub = mocker.MagicMock(spec=ProblemSolutionVnsSupport)
         type(vns_support_stub).local_search_best_improvement = mocker.CallableMixin(spec=lambda x: x)
@@ -154,7 +154,7 @@ class TestVnsOptimizer(unittest.TestCase):
         random_seed = 123
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
-        problem = ProblemVoid("a problem", True)
+        problem = ProblemVoidMinSO("a problem", True)
         solution_template = SolutionVoid( 43, 43, 43, True)
         vns_support_stub = mocker.MagicMock(spec=ProblemSolutionVnsSupport)
         type(vns_support_stub).local_search_best_improvement = mocker.CallableMixin(spec=lambda x: x)
@@ -197,7 +197,7 @@ class TestVnsOptimizer(unittest.TestCase):
         random_seed = 123
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
-        problem = ProblemVoid("a problem", True)
+        problem = ProblemVoidMinSO("a problem", True)
         solution_template = SolutionVoid( 43, 43, 43, True)
         vns_support_stub = mocker.MagicMock(spec=ProblemSolutionVnsSupport)
         type(vns_support_stub).local_search_best_improvement = mocker.CallableMixin(spec=lambda x: x)
@@ -240,7 +240,7 @@ class TestVnsOptimizer(unittest.TestCase):
         random_seed = 123
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
-        problem = ProblemVoid("a problem", True)
+        problem = ProblemVoidMinSO("a problem", True)
         solution_template = SolutionVoid( 43, 43, 43, True)
         vns_support_stub = mocker.MagicMock(spec=ProblemSolutionVnsSupport)
         type(vns_support_stub).local_search_best_improvement = mocker.CallableMixin(spec=lambda x: x)
@@ -284,7 +284,7 @@ class TestVnsOptimizer(unittest.TestCase):
         random_seed = 123
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
-        problem = ProblemVoid("a problem", True)
+        problem = ProblemVoidMinSO("a problem", True)
         solution_template = SolutionVoid( 43, 43, 43, True)
         vns_support_stub = mocker.MagicMock(spec=ProblemSolutionVnsSupport)
         type(vns_support_stub).local_search_best_improvement = mocker.CallableMixin(spec=lambda x: x)
@@ -306,7 +306,7 @@ class TestVnsOptimizer(unittest.TestCase):
         random_seed = "not an int"
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
-        problem = ProblemVoid("a problem", True)
+        problem = ProblemVoidMinSO("a problem", True)
         solution_template = SolutionVoid( 43, 43, 43, True)
         vns_support_stub = mocker.MagicMock(spec=ProblemSolutionVnsSupport)
         type(vns_support_stub).local_search_best_improvement = mocker.CallableMixin(spec=lambda x: x)
@@ -328,7 +328,7 @@ class TestVnsOptimizer(unittest.TestCase):
         random_seed = 123
         additional_statistics_control = "not a valid type"
         output_control = OutputControl()
-        problem = ProblemVoid("a problem", True)
+        problem = ProblemVoidMinSO("a problem", True)
         solution_template = SolutionVoid( 43, 43, 43, True)
         vns_support_stub = mocker.MagicMock(spec=ProblemSolutionVnsSupport)
         type(vns_support_stub).local_search_best_improvement = mocker.CallableMixin(spec=lambda x: x)
@@ -350,7 +350,7 @@ class TestVnsOptimizer(unittest.TestCase):
         random_seed = 123
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
-        problem = ProblemVoid("a problem", True)
+        problem = ProblemVoidMinSO("a problem", True)
         solution_template = "not a Solution"        
         vns_support_stub = mocker.MagicMock(spec=ProblemSolutionVnsSupport)
         type(vns_support_stub).local_search_best_improvement = mocker.CallableMixin(spec=lambda x: x)
@@ -372,7 +372,7 @@ class TestVnsOptimizer(unittest.TestCase):
         random_seed = 123
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
-        problem = ProblemVoid("a problem", True)
+        problem = ProblemVoidMinSO("a problem", True)
         solution_template = SolutionVoid( 43, 43, 43, True)        
         vns_support = "not appropriate type"       
         k_min = 1
@@ -390,7 +390,7 @@ class TestVnsOptimizer(unittest.TestCase):
         random_seed = 123
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
-        problem = ProblemVoid("a problem", True)
+        problem = ProblemVoidMinSO("a problem", True)
         solution_template = SolutionVoid( 43, 43, 43, True)         
         vns_support_stub = mocker.MagicMock(spec=ProblemSolutionVnsSupport)
         type(vns_support_stub).local_search_best_improvement = mocker.CallableMixin(spec=lambda x: x)
@@ -412,7 +412,7 @@ class TestVnsOptimizer(unittest.TestCase):
         random_seed = 123
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
-        problem = ProblemVoid("a problem", True)
+        problem = ProblemVoidMinSO("a problem", True)
         solution_template = SolutionVoid( 43, 43, 43, True)         
         vns_support_stub = mocker.MagicMock(spec=ProblemSolutionVnsSupport)
         type(vns_support_stub).local_search_best_improvement = mocker.CallableMixin(spec=lambda x: x)

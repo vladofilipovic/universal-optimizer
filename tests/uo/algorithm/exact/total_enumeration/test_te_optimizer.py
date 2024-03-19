@@ -3,7 +3,7 @@ import unittest.mock as mocker
 
 from copy import deepcopy
 from datetime import datetime
-from uo.problem.problem_void import ProblemVoid
+from uo.problem.problem_void_min_so import ProblemVoidMinSO
 from uo.solution.solution_void import SolutionVoid
 
 from uo.utils.logger import logger
@@ -389,7 +389,7 @@ class TestStringRep(unittest.TestCase):
     def test_returns_string_representation_with_current_solution(self):
         # Arrange
         output_control = OutputControl()
-        problem = ProblemVoid("problem name", True)
+        problem = ProblemVoidMinSO("problem name", True)
         solution_template = SolutionVoid(42, 42.0, 42.0, True)
         te_support_mock = mocker.MagicMock(spec=ProblemSolutionTeSupport)
         te_optimizer = TeOptimizer(output_control, problem, solution_template, te_support_mock)
@@ -402,7 +402,7 @@ class TestStringRep(unittest.TestCase):
     def test_uses_specified_parameters(self):
         # Arrange
         output_control = OutputControl()
-        problem = ProblemVoid("problem name", True)
+        problem = ProblemVoidMinSO("problem name", True)
         solution_template = SolutionVoid(42, 42.0, 42.0, True)
         te_support_mock = mocker.MagicMock(spec=ProblemSolutionTeSupport)
         te_optimizer = TeOptimizer(output_control, problem, solution_template, te_support_mock)
@@ -421,7 +421,7 @@ class TestStringRep(unittest.TestCase):
     def test_returns_string_representation_with_default_parameters(self):
         # Arrange
         output_control = OutputControl()
-        problem = ProblemVoid("problem name", True)
+        problem = ProblemVoidMinSO("problem name", True)
         solution_template = SolutionVoid(42, 42.0, 42.0, True)
         te_support_mock = mocker.MagicMock(spec=ProblemSolutionTeSupport)
         te_optimizer = TeOptimizer(output_control, problem, solution_template, te_support_mock)
@@ -435,7 +435,7 @@ class TestStringRep(unittest.TestCase):
     def test_returns_string_representation_with_default_parameters_when_only_delimiter_is_specified(self):
         # Arrange
         output_control = OutputControl()
-        problem = ProblemVoid("problem name", True)
+        problem = ProblemVoidMinSO("problem name", True)
         solution_template = SolutionVoid(42, 42.0, 42.0, True)
         te_support_mock = mocker.MagicMock(spec=ProblemSolutionTeSupport)
         te_optimizer = TeOptimizer(output_control, problem, solution_template, te_support_mock)
@@ -453,7 +453,7 @@ class TestFromConstructionTuple(unittest.TestCase):
         # Arrange
         construction_tuple = TeOptimizerConstructionParameters()
         construction_tuple.output_control = OutputControl()
-        construction_tuple.problem = ProblemVoid("problem name", True)
+        construction_tuple.problem = ProblemVoidMinSO("problem name", True)
         construction_tuple.solution_template = SolutionVoid(42, 42.0, 42.0, True)
         construction_tuple.problem_solution_te_support = mocker.MagicMock(spec=ProblemSolutionTeSupport)
         # Act
@@ -472,7 +472,7 @@ class TestFromConstructionTuple(unittest.TestCase):
         # Arrange
         construction_tuple = TeOptimizerConstructionParameters()
         construction_tuple.output_control = OutputControl()
-        construction_tuple.problem = ProblemVoid("problem name", True)
+        construction_tuple.problem = ProblemVoidMinSO("problem name", True)
         construction_tuple.solution_template = SolutionVoid(42, 42.0, 42.0, True)
         construction_tuple.problem_solution_te_support = mocker.MagicMock(spec=ProblemSolutionTeSupport)
         # Act
@@ -485,7 +485,7 @@ class TestFromConstructionTuple(unittest.TestCase):
         # Arrange
         construction_tuple = TeOptimizerConstructionParameters()
         construction_tuple.output_control = "not an instance of OutputControl"
-        construction_tuple.problem = ProblemVoid("problem name", True)
+        construction_tuple.problem = ProblemVoidMinSO("problem name", True)
         construction_tuple.solution_template = SolutionVoid(42, 42.0, 42.0, True)
         construction_tuple.problem_solution_te_support = mocker.MagicMock(spec=ProblemSolutionTeSupport)
         # Act & Assert

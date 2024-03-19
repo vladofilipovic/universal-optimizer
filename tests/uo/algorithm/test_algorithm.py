@@ -8,7 +8,7 @@ from uo.problem.problem import Problem
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.algorithm_void import AlgorithmVoid
-from uo.problem.problem_void import ProblemVoid
+from uo.problem.problem_void_min_so import ProblemVoidMinSO
 from uo.solution.quality_of_solution import QualityOfSolution
 from uo.solution.solution_void import SolutionVoid
 
@@ -77,7 +77,7 @@ class TestAlgorithm(unittest.TestCase):
     # Algorithm can be initialized with a name, an OutputControl instance, and a Problem instance.
     def test_algorithm_initialization(self):
         # Arrange
-        problem = ProblemVoid("problem", False)
+        problem = ProblemVoidMinSO("problem", False)
         output_control = OutputControl(write_to_output=True, output_file=None, fields='iteration, evaluation', moments='after_algorithm')
         # Act
         algorithm = AlgorithmVoid(name='MyAlgorithm', output_control=output_control, problem=problem)
@@ -92,7 +92,7 @@ class TestAlgorithm(unittest.TestCase):
     # Algorithm can be copied to create a new instance with the same properties.
     def test_algorithm_copy(self):
         # Arrange
-        problem = ProblemVoid("problem", False)
+        problem = ProblemVoidMinSO("problem", False)
         output_control = OutputControl(write_to_output=True, output_file=None, fields='iteration, evaluation', moments='after_algorithm')
         algorithm = AlgorithmVoid(name='MyAlgorithm', output_control=output_control, problem=problem)
         # Act
@@ -109,7 +109,7 @@ class TestAlgorithm(unittest.TestCase):
     # Algorithm has properties for current number of evaluations, iteration, and iteration when the best solution is found.
     def test_algorithm_properties(self):
         # Arrange
-        problem = ProblemVoid("problem", False)
+        problem = ProblemVoidMinSO("problem", False)
         output_control = OutputControl(write_to_output=True, output_file=None, fields='iteration, evaluation', moments='after_algorithm')
         algorithm = AlgorithmVoid(name='MyAlgorithm', output_control=output_control, problem=problem)
         # Act
@@ -132,7 +132,7 @@ class TestAlgorithm(unittest.TestCase):
     # Algorithm can generate a string representation of itself.
     def test_algorithm_string_representation(self):
         # Arrange
-        problem = ProblemVoid("problem", False)
+        problem = ProblemVoidMinSO("problem", False)
         output_control = OutputControl(write_to_output=True, output_file=None, fields='iteration, evaluation', moments='after_algorithm')
         algorithm = AlgorithmVoid(name='MyAlgorithm', output_control=output_control, problem=problem)
         # Act
@@ -149,7 +149,7 @@ class TestEvaluation(unittest.TestCase):
     # Set evaluation to a positive integer value
     def test_set_evaluation_positive_integer(self):
         # Arrange
-        algorithm = AlgorithmVoid("MyAlgorithm", OutputControl(), ProblemVoid("problem", False))
+        algorithm = AlgorithmVoid("MyAlgorithm", OutputControl(), ProblemVoidMinSO("problem", False))
         value = 10
         # Act
         algorithm.evaluation = value
@@ -159,7 +159,7 @@ class TestEvaluation(unittest.TestCase):
     # Set evaluation to zero
     def test_set_evaluation_zero(self):
         # Arrange
-        algorithm = AlgorithmVoid("MyAlgorithm", OutputControl(), ProblemVoid("problem", False))
+        algorithm = AlgorithmVoid("MyAlgorithm", OutputControl(), ProblemVoidMinSO("problem", False))
         value = 0
         # Act
         algorithm.evaluation = value
@@ -169,7 +169,7 @@ class TestEvaluation(unittest.TestCase):
     # Set evaluation to None
     def test_set_evaluation_none(self):
         # Arrange
-        algorithm = AlgorithmVoid("MyAlgorithm", OutputControl(), ProblemVoid("problem", False))
+        algorithm = AlgorithmVoid("MyAlgorithm", OutputControl(), ProblemVoidMinSO("problem", False))
         value = None
         # Act & Assert
         with self.assertRaises(TypeError):
@@ -178,7 +178,7 @@ class TestEvaluation(unittest.TestCase):
     # Set evaluation to a float value
     def test_set_evaluation_float_value(self):
         # Arrange
-        algorithm = AlgorithmVoid("MyAlgorithm", OutputControl(), ProblemVoid("problem", False))
+        algorithm = AlgorithmVoid("MyAlgorithm", OutputControl(), ProblemVoidMinSO("problem", False))
         value = 3.14
         # Act & Assert
         with self.assertRaises(TypeError):

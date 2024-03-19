@@ -13,7 +13,7 @@ from copy import deepcopy
 
 from uo.problem.problem import Problem 
 
-class ProblemVoid(Problem):
+class ProblemVoidMinSO(Problem):
     
     def __init__(self, name:str, is_minimization:bool, is_multi_objective:bool=False)->None:
         if not isinstance(is_minimization, bool):

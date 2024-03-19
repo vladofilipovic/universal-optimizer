@@ -4,7 +4,7 @@ import unittest.mock as mocker
 from uo.algorithm.metaheuristic.single_solution_metaheuristic_void import SingleSolutionMetaheuristicVoid
 
 from uo.problem.problem import Problem
-from uo.problem.problem_void import ProblemVoid
+from uo.problem.problem_void_min_so import ProblemVoidMinSO
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
@@ -24,7 +24,7 @@ class TestSingleSolutionMetaheuristic(unittest.TestCase):
         random_seed = 12345
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
-        problem = ProblemVoid("aaa", True)
+        problem = ProblemVoidMinSO("aaa", True)
         solution_template = SolutionVoid(43, 43, 43, True)
         # Act
         metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
@@ -55,7 +55,7 @@ class TestSingleSolutionMetaheuristic(unittest.TestCase):
         random_seed = 12345
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
-        problem = ProblemVoid("aaa", True)
+        problem = ProblemVoidMinSO("aaa", True)
         solution_template = SolutionVoid(43, 43, 43, True)
         metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
                     output_control, problem, solution_template)
@@ -95,7 +95,7 @@ class TestSingleSolutionMetaheuristic(unittest.TestCase):
         random_seed = 12345
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
-        problem = ProblemVoid("aaa", True)
+        problem = ProblemVoidMinSO("aaa", True)
         solution_template = SolutionVoid(43, 43, 43, True)
         metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
                     output_control, problem, solution_template)
@@ -116,7 +116,7 @@ class TestSingleSolutionMetaheuristic(unittest.TestCase):
         random_seed = 12345
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
-        problem = ProblemVoid("aaa", True)
+        problem = ProblemVoidMinSO("aaa", True)
         solution_template = SolutionVoid(43, 43, 43, True)
         metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
                     output_control, problem, solution_template)
@@ -151,7 +151,7 @@ class TestSingleSolutionMetaheuristic(unittest.TestCase):
         # Arrange Act & Assert
         with self.assertRaises(TypeError):
             SingleSolutionMetaheuristicVoid("Metaheuristic", FinishControl(), 12345, 
-                    AdditionalStatisticsControl(), OutputControl(), ProblemVoid("aaa", True), "invalid solution")
+                    AdditionalStatisticsControl(), OutputControl(), ProblemVoidMinSO("aaa", True), "invalid solution")
         
     # Setting current_solution to an invalid value should raise a TypeError.
     def test_set_invalid_current_solution(self):
@@ -160,7 +160,7 @@ class TestSingleSolutionMetaheuristic(unittest.TestCase):
         # Act & Assert
         with self.assertRaises(TypeError):
             SingleSolutionMetaheuristicVoid("Metaheuristic", FinishControl(), 12345, 
-                    AdditionalStatisticsControl(), OutputControl(), ProblemVoid("aaa", True), 
+                    AdditionalStatisticsControl(), OutputControl(), ProblemVoidMinSO("aaa", True), 
                     invalid_solution)
 
     # SingleSolutionMetaheuristic should be able to handle problems with different types of solutions.
@@ -171,7 +171,7 @@ class TestSingleSolutionMetaheuristic(unittest.TestCase):
         random_seed = 12345
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
-        problem = ProblemVoid("aaa", True)
+        problem = ProblemVoidMinSO("aaa", True)
         solution_template = SolutionVoid(43, 43, 43, True)
         # Act
         metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
@@ -191,7 +191,7 @@ class TestCurrentSolution(unittest.TestCase):
         random_seed = 12345
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
-        problem = ProblemVoid("aaa", True)
+        problem = ProblemVoidMinSO("aaa", True)
         solution_template = SolutionVoid(43, 43, 43, True)
         metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
                     output_control, problem, solution_template)
@@ -211,7 +211,7 @@ class TestCurrentSolution(unittest.TestCase):
         random_seed = 12345
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
-        problem = ProblemVoid("aaa", True)
+        problem = ProblemVoidMinSO("aaa", True)
         solution_template = "invalid solution"
         # Act & Assert
         with self.assertRaises(TypeError):
@@ -226,7 +226,7 @@ class TestCurrentSolution(unittest.TestCase):
         random_seed = 12345
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
-        problem = ProblemVoid("aaa", True)
+        problem = ProblemVoidMinSO("aaa", True)
         invalid_solution = "invalid"    
         # Act & Assert
         with self.assertRaises(TypeError):
@@ -241,8 +241,8 @@ class TestCurrentSolution(unittest.TestCase):
         random_seed = 12345
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
-        problem = ProblemVoid("aaa", True)
-        solution = ProblemVoid("xxx", True)    
+        problem = ProblemVoidMinSO("aaa", True)
+        solution = ProblemVoidMinSO("xxx", True)    
         # Act & Assert
         with self.assertRaises(TypeError):
             SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
@@ -260,7 +260,7 @@ class Test__Str__2(unittest.TestCase):
             random_seed=123,
             additional_statistics_control=AdditionalStatisticsControl(),
             output_control=OutputControl(),
-            problem=ProblemVoid("aaa", True),
+            problem=ProblemVoidMinSO("aaa", True),
             solution_template=SolutionVoid(43, 43, 43, True)
         )
         # Act
@@ -277,7 +277,7 @@ class Test__Str__2(unittest.TestCase):
             random_seed=123,
             additional_statistics_control=AdditionalStatisticsControl(),
             output_control=OutputControl(),
-            problem=ProblemVoid("aaa", True),
+            problem=ProblemVoidMinSO("aaa", True),
             solution_template=SolutionVoid(43, 43, 43, True)
         )
         # Act
@@ -295,7 +295,7 @@ class Test__Str__2(unittest.TestCase):
             random_seed=123,
             additional_statistics_control=AdditionalStatisticsControl(),
             output_control=OutputControl(),
-            problem=ProblemVoid("aaa", True),
+            problem=ProblemVoidMinSO("aaa", True),
             solution_template=current_solution
         )
         # Act
@@ -313,6 +313,6 @@ class Test__Str__2(unittest.TestCase):
                 random_seed=123,
                 additional_statistics_control=AdditionalStatisticsControl(),
                 output_control=OutputControl(),
-                problem=ProblemVoid("aaa", True),
+                problem=ProblemVoidMinSO("aaa", True),
                 solution_template="invalid solution"
             )

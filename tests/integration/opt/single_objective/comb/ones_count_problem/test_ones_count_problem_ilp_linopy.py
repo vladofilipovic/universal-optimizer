@@ -5,7 +5,7 @@ import unittest.mock as mocker
 
 from linopy import Model
 
-from uo.problem.problem_void import ProblemVoid
+from uo.problem.problem_void_min_so import ProblemVoidMinSO
 
 from uo.algorithm.output_control import OutputControl
 
@@ -45,7 +45,7 @@ class TestOnesCountMaxProblemIlpLinopy(unittest.TestCase):
     def test_valid_parameters(self):
         # Arrange
         output_control = OutputControl()
-        problem = ProblemVoid('problem_name', False)
+        problem = ProblemVoidMinSO('problem_name', False)
         # Act
         construction_params = OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters(output_control, problem)
         # Assert
@@ -64,7 +64,7 @@ class TestOnesCountMaxProblemIlpLinopy(unittest.TestCase):
     def test_invalid_output_control(self):
         # Arrange
         output_control = "invalid_output_control"
-        problem = ProblemVoid('problem_name', False)
+        problem = ProblemVoidMinSO('problem_name', False)
         # Act & Assert
         with self.assertRaises(TypeError):
             OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters(output_control, problem)

@@ -2,7 +2,7 @@ import unittest
 import unittest.mock as mocker
 
 from uo.problem.problem import Problem
-from uo.problem.problem_void import ProblemVoid
+from uo.problem.problem_void_min_so import ProblemVoidMinSO
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 

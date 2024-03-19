@@ -5,7 +5,7 @@ import unittest.mock as mocker
 from copy import deepcopy
 
 from uo.problem.problem import Problem 
-from uo.problem.problem_void import ProblemVoid 
+from uo.problem.problem_void_min_so import ProblemVoidMinSO 
 
 class TestProblemProperties(unittest.TestCase):
     
@@ -17,7 +17,7 @@ class TestProblemProperties(unittest.TestCase):
         self.problem_name = 'some problem'
         self.to_minimize = True
 
-        self.problem = ProblemVoid(
+        self.problem = ProblemVoidMinSO(
                 name=self.problem_name,
                 is_minimization = self.to_minimize,
         )
@@ -30,7 +30,7 @@ class TestProblemProperties(unittest.TestCase):
 
     def test_invalid_name_problem_initialization(self):
         invalid_name = 'invalid name'
-        problem = ProblemVoid(
+        problem = ProblemVoidMinSO(
             name=invalid_name,
             is_minimization=self.to_minimize,
         )
@@ -39,7 +39,7 @@ class TestProblemProperties(unittest.TestCase):
     # Test problem initialization with an empty name
     def test_empty_name_problem_initialization(self):
         empty_name = ''
-        problem = ProblemVoid(
+        problem = ProblemVoidMinSO(
             name=empty_name,
             is_minimization=self.to_minimize,
         )
