@@ -247,38 +247,7 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
                 solutions are equal
         :rtype: bool
         """
-        if problem.is_multi_objective is None:
-            raise ValueError('Field \'is_multi_objective\' must not be None.')
-        if problem.is_minimization is None:
-            raise ValueError('Field \'is_minimization\' must not be None.')
-        if not problem.is_multi_objective:
-            fit1:Optional[float] = sol1.fitness_value;
-            fit2:Optional[float] = sol2.fitness_value;
-            # with fitness is better than without fitness
-            if fit1 is None:
-                if fit2 is not None:
-                    return False
-                else:
-                    return None
-            elif fit2 is None:
-                return True
-            # if better, return true
-            if (problem.is_minimization and fit1 < fit2) or (not problem.is_minimization and fit1 > fit2):
-                return True
-            # if same fitness, return None
-            if fit1 == fit2:
-                return None
-            # otherwise, return false
-            return False
-        else:
-            raise RuntimeError('Comparison between solutions for multi objective optimization is not currently supported.')
-        
-    @abstractmethod
-    def init(self)->None:
-        """
-        Initialization of the algorithm
-        """
-        raise NotImplementedError
+        return sol1.is_better(sol2, problem)
     
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:

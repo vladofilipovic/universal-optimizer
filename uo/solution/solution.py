@@ -303,6 +303,42 @@ class Solution(Generic[R_co,A_co], metaclass=ABCMeta):
         """
         raise NotImplementedError
 
+    def is_better(self, other:"Solution", problem: Problem)->Optional[bool]:
+        """
+        Checks if this solution is better than the other, with respect to problem that is optimized
+
+        :param Solution other: other solution
+        :param Problem problem: problem to be solved
+        :return: `True` if first is better, `False` if first is worse, `None` if quality of both 
+                solutions are equal
+        :rtype: bool
+        """
+        if problem.is_multi_objective is None:
+            raise ValueError('Field \'is_multi_objective\' must not be None.')
+        if problem.is_minimization is None:
+            raise ValueError('Field \'is_minimization\' must not be None.')
+        if not problem.is_multi_objective:
+            fit1:Optional[float] = self.fitness_value;
+            fit2:Optional[float] = other.fitness_value;
+            # with fitness is better than without fitness
+            if fit1 is None:
+                if fit2 is not None:
+                    return False
+                else:
+                    return None
+            elif fit2 is None:
+                return True
+            # if better, return true
+            if (problem.is_minimization and fit1 < fit2) or (not problem.is_minimization and fit1 > fit2):
+                return True
+            # if same fitness, return None
+            if fit1 == fit2:
+                return None
+            # otherwise, return false
+            return False
+        else:
+            raise RuntimeError('Comparison between solutions for multi objective optimization is not currently supported.')
+        
     def string_representation(self)->str:
         """
         String representation of the target solution
