@@ -23,7 +23,7 @@ def main():
         nodes = 10
         prob = 0.5
 
-        G: nx.Graph = nx.fast_gnp_random_graph(nodes, prob)
+        G: nx.Graph = nx.fast_gnp_random_graph(nodes, prob, seed=11)
         for edge in G.edges():
                 G.edges[edge]['weight'] = randint(1,10)
 
@@ -53,6 +53,7 @@ def main():
         vns_construction_params.k_min = 1
         vns_construction_params.k_max = 3
         vns_construction_params.local_search_type = 'localSearchBestImprovement'
+        vns_construction_params.problem = problem_to_solve
         optimizer:VnsOptimizer = VnsOptimizer.from_construction_tuple(vns_construction_params)
         optimizer.optimize()
         print('Best solution representation: {}'.format(optimizer.best_solution.representation.bin))            
