@@ -23,11 +23,11 @@ def main():
         nodes = 10
         prob = 0.5
 
-        G: nx.Graph = nx.fast_gnp_random_graph(nodes, prob, seed=11)
-        for edge in G.edges():
-                G.edges[edge]['weight'] = randint(1,10)
+        graph: nx.Graph = nx.fast_gnp_random_graph(nodes, prob, seed=11)
+        for edge in graph.edges():
+                graph.edges[edge]['weight'] = randint(1,10)
 
-        nodes = list(G.nodes())
+        nodes = list(graph.nodes())
         num_pairs = randint(1, max(2,len(nodes)//3))
         source_terminal_pairs = []
 
@@ -37,14 +37,14 @@ def main():
             terminal = choice(terminal_candidates)
             source_terminal_pairs.append((source, terminal))
 
-        problem_to_solve:MinimumMultiCutProblem = MinimumMultiCutProblem(G, source_terminal_pairs)
+        problem_to_solve:MinimumMultiCutProblem = MinimumMultiCutProblem(graph, source_terminal_pairs)
         solution:MinimumMultiCutProblemBinaryBitArraySolution = MinimumMultiCutProblemBinaryBitArraySolution()
-        finish:FinishControl = FinishControl(criteria='iterations', iterations_max=50)
+        finish:FinishControl = FinishControl(criteria='iterations', iterations_max=500)
         additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(is_active=False, keep='')
         vns_support:MinimumMultiCutProblemBinaryBitArraySolutionVnsSupport = MinimumMultiCutProblemBinaryBitArraySolutionVnsSupport()
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
         vns_construction_params.output_control = output_control
-        vns_construction_params.target_problem = problem_to_solve
+        vns_construction_params.problem = problem_to_solve
         vns_construction_params.solution_template = solution
         vns_construction_params.finish_control = finish
         vns_construction_params.problem_solution_vns_support = vns_support
