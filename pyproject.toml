@@ -5,7 +5,7 @@ description = "Universal Optimizer Library"
 authors = ["Vladimir Filipovic <vladofilipovic@hotmail.com>"]
 license = "Apache 2.0"
 readme = "README.md"
-packages = [{include = "uo"},{include = "app"},]
+packages = [{include = "uo"},{include = "opt"},]
 
 [tool.poetry.dependencies]
 python = "^3.11"
