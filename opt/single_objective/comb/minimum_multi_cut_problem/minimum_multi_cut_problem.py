@@ -17,14 +17,14 @@ from copy import deepcopy
 import networkx as nx
 import json
 
-from uo.target_problem.target_problem import TargetProblem
+from uo.problem.problem import Problem
 from uo.utils.logger import logger
 
-class MinimumMultiCutProblem(TargetProblem):
+class MinimumMultiCutProblem(Problem):
     """
     Class representing the Minimum Multi Cut Problem.
 
-    This class inherits from the TargetProblem class and is used to define and solve the Minimum Multi Cut Problem. The problem is defined by a graph and a list of source terminal pairs.
+    This class inherits from the Problem class and is used to define and solve the Minimum Multi Cut Problem. The problem is defined by a graph and a list of source terminal pairs.
 
     Attributes:
         graph (nx.Graph): Graph.
