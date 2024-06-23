@@ -57,7 +57,6 @@ class TestOnesCountMaxProblemBinaryBitArraySolutionVnsSupport(unittest.TestCase)
         type(optimizer_stub).finish_control = mocker.PropertyMock(return_value=finish_control_stub) 
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=4)
         type(optimizer_stub).vns_support = mocker.PropertyMock(return_value=vns_support)
-        optimizer_stub.is_first_better = mocker.Mock(return_value=True)
         # Act
         old_fitness = solution.fitness_value
         result = vns_support.local_search_best_improvement(3, problem, solution, optimizer_stub)

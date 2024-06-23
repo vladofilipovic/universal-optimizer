@@ -44,8 +44,6 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
             Internal copy of the current algorithm.
         copy() -> Algorithm:
             Copy the current algorithm.
-        is_first_better(sol1: Solution, sol2: Solution, problem: Problem) -> Optional[bool]:
-            Checks if the first solution is better than the second one, with respect to the problem that is optimized.
         init() -> None:
             Initialization of the algorithm.
         string_rep(delimiter: str, indentation: int = 0, indentation_symbol: str = '', group_start: str = '{', group_end: str = '}') -> str:
@@ -236,19 +234,6 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
         fields_val = super().determine_fields_val(fields_def, fields_val)
         return fields_val
 
-    def is_first_better(self, sol1:Solution, sol2:Solution, problem: Problem)->Optional[bool]:
-        """
-        Checks if first solution is better than the second one, with respect to problem that is optimized
-
-        :param Solution sol1: first solution
-        :param Solution sol2: second solution
-        :param Problem problem: problem to be solved
-        :return: `True` if first is better, `False` if first is worse, `None` if quality of both 
-                solutions are equal
-        :rtype: bool
-        """
-        return sol1.is_better(sol2, problem)
-    
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
         """

@@ -315,8 +315,6 @@ class Solution(Generic[R_co,A_co], metaclass=ABCMeta):
         """
         if problem.is_multi_objective is None:
             raise ValueError('Field \'is_multi_objective\' must not be None.')
-        if problem.is_minimization is None:
-            raise ValueError('Field \'is_minimization\' must not be None.')
         if not problem.is_multi_objective:
             fit1:Optional[float] = self.fitness_value;
             fit2:Optional[float] = other.fitness_value;
@@ -329,7 +327,7 @@ class Solution(Generic[R_co,A_co], metaclass=ABCMeta):
             elif fit2 is None:
                 return True
             # if better, return true
-            if (problem.is_minimization and fit1 < fit2) or (not problem.is_minimization and fit1 > fit2):
+            if fit1 > fit2:
                 return True
             # if same fitness, return None
             if fit1 == fit2:

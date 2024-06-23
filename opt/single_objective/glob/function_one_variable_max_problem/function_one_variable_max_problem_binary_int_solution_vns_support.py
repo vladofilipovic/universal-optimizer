@@ -102,7 +102,7 @@ class FunctionOneVariableMaxProblemBinaryIntSolutionVnsSupport(ProblemSolutionVn
             optimizer.evaluation += 1
             solution.evaluate(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
-            if optimizer.is_first_better(solution, best_sol, problem):
+            if solution.is_better(best_sol, problem):
                 better_sol_found = True
                 best_sol.copy_from(solution)
             solution.representation ^= mask 
@@ -141,7 +141,7 @@ class FunctionOneVariableMaxProblemBinaryIntSolutionVnsSupport(ProblemSolutionVn
             optimizer.evaluation += 1
             solution.evaluate(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
-            if  QualityOfSolution.is_first_better(solution, start_sol, problem):
+            if solution.is_better(start_sol, problem):
                 return True
             solution.representation ^= mask
             # increment indexes and set in_loop accordingly

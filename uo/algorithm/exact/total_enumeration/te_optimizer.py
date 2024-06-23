@@ -166,7 +166,7 @@ class TeOptimizer(Algorithm):
             self.write_output_values_if_needed("before_iteration", "b_i")
             self.iteration += 1
             self.__progress_method(self.problem, self.current_solution, self)
-            new_is_better:bool = self.is_first_better(self.current_solution, self.best_solution, self.problem)
+            new_is_better:bool = self.current_solution.is_better(self.best_solution, self.problem)
             if new_is_better:
                 self.best_solution = self.current_solution
             self.write_output_values_if_needed("after_iteration", "a_i")

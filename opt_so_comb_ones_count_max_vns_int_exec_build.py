@@ -171,7 +171,7 @@ class OnesCountMaxProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[i
             solution.representation ^= mask 
             optimizer.evaluation +=1 
             solution.evaluate(problem)
-            if optimizer.is_first_better(solution, best_sol, problem):
+            if solution.is_better(best_sol, problem):
                 better_sol_found = True
                 best_sol.copy_from(solution)
             solution.representation ^= mask 
@@ -194,7 +194,7 @@ class OnesCountMaxProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[i
             solution.representation ^= mask 
             optimizer.evaluation += 1
             solution.evaluate(problem)
-            if optimizer.is_first_better(solution, start_sol, problem):
+            if solution.is_better(start_sol, problem):
                 return True
             solution.representation ^= mask
         solution.copy_from(start_sol)
