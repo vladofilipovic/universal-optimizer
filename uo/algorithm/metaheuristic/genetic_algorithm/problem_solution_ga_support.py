@@ -27,7 +27,7 @@ class ProblemSolutionGaSupport(Generic[R_co,A_co], metaclass=ABCMeta):
         """
         GA individual mutation based on some probability
 
-        :param float mutation_probability: float paramater for mutation probability
+        :param float mutation_probability: float parameter for mutation probability
         :param `Problem` problem: problem that is solved
         :param `Solution[R_co,A_co]` solution: individual that should be mutated
         :param `Algorithm` optimizer: optimizer that is executed
@@ -37,10 +37,13 @@ class ProblemSolutionGaSupport(Generic[R_co,A_co], metaclass=ABCMeta):
         raise NotImplementedError
 
     @abstractmethod
-    def crossover(self, problem:Problem, solution1:Solution[R_co,A_co], solution2:Solution[R_co,A_co], child1:Solution[R_co,A_co], child2:Solution[R_co,A_co], optimizer:Algorithm):
+    def crossover(self, crossover_probability:float, problem:Problem, 
+                solution1:Solution[R_co,A_co], solution2:Solution[R_co,A_co], 
+                child1:Solution[R_co,A_co], child2:Solution[R_co,A_co], optimizer:Algorithm):
         """
         GA crossover on two parents
 
+        :param float crossover_probability: float parameter for crossover probability
         :param `Problem` problem: problem that is solved
         :param `Solution[R_co,A_co]` solution1: first parent
         :param `Solution[R_co,A_co]` solution2: second parent
