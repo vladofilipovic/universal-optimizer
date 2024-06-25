@@ -60,30 +60,20 @@ class MinimumMultiCutProblemBinaryBitArraySolutionGaSupport(ProblemSolutionGaSup
 
         return True
 
-    def crossover(self, problem:MinimumMultiCutProblem, solution1:MinimumMultiCutProblemBinaryBitArraySolution, solution2:MinimumMultiCutProblemBinaryBitArraySolution,
-                   child1:MinimumMultiCutProblemBinaryBitArraySolution, child2:MinimumMultiCutProblemBinaryBitArraySolution, optimizer:GaOptimizer):
+    def crossover(self, crossover_probability:float, problem:MinimumMultiCutProblem, solution1:MinimumMultiCutProblemBinaryBitArraySolution, solution2:MinimumMultiCutProblemBinaryBitArraySolution,
+                    child1:MinimumMultiCutProblemBinaryBitArraySolution, child2:MinimumMultiCutProblemBinaryBitArraySolution, optimizer:GaOptimizer) -> None:
+        
         child1.representation = BitArray(solution1.representation.len)
         child2.representation = BitArray(solution2.representation.len)
-
+        if random() > crossover_probability:
+            return
         index:int = randint(0,len(solution1.representation))
-
         for i in range(index):
             child1.representation.set(solution1.representation[i], i)
             child2.representation.set(solution2.representation[i], i)
-
         for i in range(index,solution1.representation.len):
             child1.representation.set(solution2.representation[i], i)
             child2.representation.set(solution1.representation[i], i)
-
-    def selection_roulette(self, problem:MinimumMultiCutProblem, solution:list[MinimumMultiCutProblemBinaryBitArraySolution],
-                            optimizer:GaOptimizer)->MinimumMultiCutProblemBinaryBitArraySolution:
-        return choice(solution)
-
-    def selection_tournament(self, problem:MinimumMultiCutProblem, solution:list[MinimumMultiCutProblemBinaryBitArraySolution], tournament_size:int, optimizer:GaOptimizer)->MinimumMultiCutProblemBinaryBitArraySolution:
-        return None
-
-    def selection_rang_roulette(self, problem:MinimumMultiCutProblem, solution:list[MinimumMultiCutProblemBinaryBitArraySolution], optimizer:GaOptimizer)->MinimumMultiCutProblemBinaryBitArraySolution:
-        return None
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:

@@ -12,13 +12,9 @@ from random import random
 from random import randrange
 from copy import deepcopy
 from datetime import datetime
-from io import TextIOWrapper 
-
-from bitstring import BitArray
 
 from abc import ABCMeta, abstractmethod
-from typing import Optional, TypeVar, Generic
-from typing import Generic
+from typing import Optional
 
 
 from uo.utils.logger import logger

@@ -28,6 +28,7 @@ from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
 from uo.algorithm.metaheuristic.population_based_metaheuristic import PopulationBasedMetaheuristic
+from uo.algorithm.metaheuristic.genetic_algorithm.selection import Selection
 from uo.algorithm.metaheuristic.genetic_algorithm.problem_solution_ga_support import ProblemSolutionGaSupport
 
 @dataclass
@@ -39,15 +40,15 @@ class GaOptimizerConstructionParameters:
         finish_control: FinishControl = None
         output_control: OutputControl = None
         problem: Problem = None
-        solution_template: list[Solution] = None
-        problem_solution_ga_support: ProblemSolutionGaSupport = None
+        solution_template: Solution = None
         random_seed: Optional[int] = None
         additional_statistics_control: AdditionalStatisticsControl = None
+        selection: Selection = None
+        problem_solution_ga_support: ProblemSolutionGaSupport = None
+        crossover_type: Optional[str] = None
+        crossover_probability: Optional[float] = None
+        mutation_type: Optional[str] = None
         mutation_probability: Optional[float] = None
-        selection_type: Optional[str] = None
-        tournament_size: Optional[int] = None
-        population_size: Optional[int] = None
-        elitism_size: Optional[int] = None
 
 class GaOptimizer(PopulationBasedMetaheuristic):
     """

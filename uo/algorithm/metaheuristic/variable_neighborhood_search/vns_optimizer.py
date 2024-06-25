@@ -49,9 +49,9 @@ class VnsOptimizerConstructionParameters:
         output_control: OutputControl = None
         problem: Problem = None
         solution_template: Solution = None
-        problem_solution_vns_support: ProblemSolutionVnsSupport = None
         random_seed: Optional[int] = None
         additional_statistics_control: AdditionalStatisticsControl = None
+        problem_solution_vns_support: ProblemSolutionVnsSupport = None
         k_min: Optional[int] = None
         k_max: Optional[int] = None
         local_search_type: Optional[str] = None
