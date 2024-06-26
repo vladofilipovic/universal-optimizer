@@ -23,17 +23,18 @@ from bitstring import BitArray
 from uo.utils.complex_counter_uniform_ascending import ComplexCounterUniformAscending
 
 from uo.algorithm.algorithm import Algorithm
-from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support import VnsShakingSupport
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_local_search_support import VnsLocalSearchSupport
 
 from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem import MinimumMultiCutProblem
 from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_binary_bit_array_solution import MinimumMultiCutProblemBinaryBitArraySolution
 
 
-class MinimumMultiCutProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsSupport[BitArray,str]):
+class MinimumMultiCutProblemBinaryBitArraySolutionVnsShakingSupport(VnsShakingSupport[BitArray,str]):
     
     def __init__(self)->None:
         """
-        Create new `MinimumMultiCutProblemBinaryBitArraySolutionVnsSupport` instance
+        Create new `MinimumMultiCutProblemBinaryBitArraySolutionVnsShakingSupport` instance
         """
 
     def __copy__(self):
@@ -94,6 +95,82 @@ class MinimumMultiCutProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsS
             return True
         else:
             return False 
+
+    def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
+        group_end:str ='}')->str:
+        """
+        String representation of the vns support structure
+
+        :param delimiter: delimiter between fields
+        :type delimiter: str
+        :param indentation: level of indentation
+        :type indentation: int, optional, default value 0
+        :param indentation_symbol: indentation symbol
+        :type indentation_symbol: str, optional, default value ''
+        :param group_start: group start string 
+        :type group_start: str, optional, default value '{'
+        :param group_end: group end string 
+        :type group_end: str, optional, default value '}'
+        :return: string representation of vns support instance
+        :rtype: str
+        """        
+        return 'MinimumMultiCutProblemBinaryBitArraySolutionVnsShakingSupport'
+
+    def __str__(self)->str:
+        """
+        String representation of the vns support instance
+
+        :return: string representation of the vns support instance
+        :rtype: str
+        """
+        return self.string_rep('|')
+
+    def __repr__(self)->str:
+        """
+        Representation of the vns support instance
+
+        :return: string representation of the vns support instance
+        :rtype: str
+        """
+        return self.string_rep('\n')
+
+
+    def __format__(self, spec:str)->str:
+        """
+        Formatted the vns support instance
+
+        :param str spec: format specification
+        :return: formatted vns support instance
+        :rtype: str
+        """
+        return self.string_rep('|')
+
+
+class MinimumMultiCutProblemBinaryBitArraySolutionVnsLocalSearchSupport(VnsLocalSearchSupport[BitArray,str]):
+    
+    def __init__(self)->None:
+        """
+        Create new `MinimumMultiCutProblemBinaryBitArraySolutionVnsLocalSearchSupport` instance
+        """
+
+    def __copy__(self):
+        """
+        Internal copy of the `MinimumMultiCutProblemBinaryBitArraySolutionVnsSupport`
+
+        :return: new `MinimumMultiCutProblemBinaryBitArraySolutionVnsSupport` instance with the same properties
+        :rtype: `MinimumMultiCutProblemBinaryBitArraySolutionVnsSupport`
+        """
+        sol = deepcopy(self)
+        return sol
+
+    def copy(self):
+        """
+        Copy the `MinimumMultiCutProblemBinaryBitArraySolutionVnsSupport` instance
+
+        :return: new `MinimumMultiCutProblemBinaryBitArraySolutionVnsSupport` instance with the same properties
+        :rtype: `MinimumMultiCutProblemBinaryBitArraySolutionVnsSupport`
+        """
+        return self.__copy__()
 
     def local_search_best_improvement(self, k:int, problem:MinimumMultiCutProblem, solution:MinimumMultiCutProblemBinaryBitArraySolution, 
             optimizer: Algorithm)->bool:
@@ -199,7 +276,7 @@ class MinimumMultiCutProblemBinaryBitArraySolutionVnsSupport(ProblemSolutionVnsS
         :return: string representation of vns support instance
         :rtype: str
         """        
-        return 'MinimumMultiCutProblemBinaryBitArraySolutionVnsSupport'
+        return 'MinimumMultiCutProblemBinaryBitArraySolutionVnsLocalSearchSupport'
 
     def __str__(self)->str:
         """

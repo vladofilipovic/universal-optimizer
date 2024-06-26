@@ -25,12 +25,13 @@ from uo.utils.complex_counter_uniform_ascending import ComplexCounterUniformAsce
 
 from uo.solution.quality_of_solution import QualityOfSolution
 from uo.algorithm.algorithm import Algorithm
-from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support import VnsShakingSupport
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_local_search_support import VnsLocalSearchSupport
 
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution import OnesCountMaxProblemBinaryIntSolution
 
-class OnesCountMaxProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,str]):
+class OnesCountMaxProblemBinaryIntSolutionVnsShakingSupport(VnsShakingSupport[int,str]):
     
     def __init__(self)->None:
         """
@@ -97,6 +98,83 @@ class OnesCountMaxProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[i
             return True
         else:
             return False 
+
+    def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
+        group_end:str ='}')->str:
+        """
+        String representation of the vns support instance
+
+        :param delimiter: delimiter between fields
+        :type delimiter: str
+        :param indentation: level of indentation
+        :type indentation: int, optional, default value 0
+        :param indentation_symbol: indentation symbol
+        :type indentation_symbol: str, optional, default value ''
+        :param group_start: group start string 
+        :type group_start: str, optional, default value '{'
+        :param group_end: group end string 
+        :type group_end: str, optional, default value '}'
+        :return: string representation of vns support instance
+        :rtype: str
+        """        
+        return 'OnesCountMaxProblemBinaryIntSolutionVnsShakingSupport'
+
+    def __str__(self)->str:
+        """
+        String representation of the vns support instance
+
+        :return: string representation of the vns support instance
+        :rtype: str
+        """
+        return self.string_rep('|')
+
+    def __repr__(self)->str:
+        """
+        Representation of the vns support instance
+
+        :return: string representation of the vns support instance
+        :rtype: str
+        """
+        return self.string_rep('\n')
+
+
+    def __format__(self, spec:str)->str:
+        """
+        Formatted the vns support instance
+
+        :param str spec: format specification
+        :return: formatted vns support instance
+        :rtype: str
+        """
+        return self.string_rep('|')
+
+class OnesCountMaxProblemBinaryIntSolutionVnsLocalSearchSupport(VnsLocalSearchSupport[int,str]):
+    
+    def __init__(self)->None:
+        """
+        Create new `OnesCountMaxProblemBinaryIntSolutionVnsSupport` instance
+        """
+        return
+
+    def __copy__(self):
+        """
+        Internal copy of the `OnesCountMaxProblemBinaryIntSolutionVnsSupport`
+
+        :return: new `OnesCountMaxProblemBinaryIntSolutionVnsSupport` instance with the same properties
+        :rtype: OnesCountMaxProblemBinaryIntSolutionVnsSupport
+        """
+        sup = deepcopy(self)
+        return sup
+
+    def copy(self):
+        """
+        Copy the `OnesCountMaxProblemBinaryIntSolutionVnsSupport`
+        
+        :return: new `OnesCountMaxProblemBinaryIntSolutionVnsSupport` instance with the same properties
+        :rtype: `OnesCountMaxProblemBinaryIntSolutionVnsSupport`
+        """        
+        return self.__copy__()
+        
 
     def local_search_best_improvement(self, k:int, problem:OnesCountMaxProblem, solution:OnesCountMaxProblemBinaryIntSolution, 
             optimizer: Algorithm)->bool:

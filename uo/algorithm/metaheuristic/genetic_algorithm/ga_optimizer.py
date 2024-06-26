@@ -29,7 +29,9 @@ from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalS
 
 from uo.algorithm.metaheuristic.population_based_metaheuristic import PopulationBasedMetaheuristic
 from uo.algorithm.metaheuristic.genetic_algorithm.selection import Selection
-from uo.algorithm.metaheuristic.genetic_algorithm.problem_solution_ga_support import ProblemSolutionGaSupport
+from uo.algorithm.metaheuristic.genetic_algorithm.selection_roulette import SelectionRoulette
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support import GaCrossoverSupport
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support import GaMutationSupport
 
 @dataclass
 class GaOptimizerConstructionParameters:
@@ -38,17 +40,16 @@ class GaOptimizerConstructionParameters:
         GaOptimizerConstructionParameters` represents constructor parameters for GA algorithm.
         """
         finish_control: FinishControl = None
+        random_seed: Optional[int] = None
+        additional_statistics_control: AdditionalStatisticsControl = None
         output_control: OutputControl = None
         problem: Problem = None
         solution_template: Solution = None
-        random_seed: Optional[int] = None
-        additional_statistics_control: AdditionalStatisticsControl = None
         selection: Selection = None
-        problem_solution_ga_support: ProblemSolutionGaSupport = None
-        crossover_type: Optional[str] = None
-        crossover_probability: Optional[float] = None
-        mutation_type: Optional[str] = None
-        mutation_probability: Optional[float] = None
+        ga_crossover_support: GaCrossoverSupport = None
+        ga_mutation_support: GaMutationSupport = None
+        population_size: int = None
+        elite_count:Optional[int] = None
 
 class GaOptimizer(PopulationBasedMetaheuristic):
     """
@@ -63,12 +64,12 @@ class GaOptimizer(PopulationBasedMetaheuristic):
             output_control:OutputControl,
             problem:Problem,
             solution_template:Solution,
-            problem_solution_ga_support:ProblemSolutionGaSupport,
-            mutation_probability: Optional[float],
-            selection_type: str,
-            tournament_size: Optional[int],
+            selection: Selection,
+            ga_crossover_support:GaCrossoverSupport,
+            ga_mutation_support:GaMutationSupport,
             population_size: int,
-            elitism_size: Optional[int])->None:
+            elite_count:Optional[int]
+        )->None:
         """
         Create new instance of class :class:`~uo.algorithm.metaheuristic.genetic_algorithm.GaOptimizer`. 
         That instance implements :ref:`GA<Genetic_Algorithm>` algorithm. 
@@ -79,14 +80,13 @@ class GaOptimizer(PopulationBasedMetaheuristic):
         statistics obtained during population-based metaheuristic execution
         :param `OutputControl` output_control: structure that controls output
         :param `Problem` problem: problem to be solved
-        :param `list[Solution]` solution_template: initial solution of the problem
-        :param `ProblemSolutionGaSupport` problem_solution_ga_support: placeholder for additional methods, specific for GA
+        :param `Solution` solution_template: initial solution of the problem
+        :param `GaCrossoverSupport` ga_crossover_support: placeholder for additional methods, specific for GA crossover 
+        execution, which depend of precise solution type 
+        :param `GaMutationSupport` ga_mutation_support: placeholder for additional methods, specific for GA mutation 
         execution, which depend of precise solution type 
         :param `float` mutation_probability: probability of mutation
-        :param `Optional[int]` tournament_size: size of the tournament if tournament selection is implemented
         :param `int` population_size: size of the population
-        :param `Optional[int]` elitism_size: elitism size
-        :param `str` selection_type: str, possible values: 'selectionTournament', 'selectionRoulette', 'selectionRangRoulette' 
         """
         if not isinstance(finish_control, FinishControl):
                 raise TypeError('Parameter \'finish_control\' must be \'FinishControl\'.')
@@ -98,18 +98,12 @@ class GaOptimizer(PopulationBasedMetaheuristic):
                 raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
         if not isinstance(problem, Problem):
                 raise TypeError('Parameter \'problem\' must be \'Problem\'.')
-        if not isinstance(problem_solution_ga_support, ProblemSolutionGaSupport):
-                raise TypeError('Parameter \'problem_solution_ga_support\' must be \'ProblemSolutionGaSupport\'.')
-        if not isinstance(mutation_probability, float) and mutation_probability <= 1 and mutation_probability >=0:
-                raise TypeError('Parameter \'mutation_probability\' must be \'float\' and between 0 and 1.')
-        if not isinstance(selection_type, str):
-                raise TypeError('Parameter \'selection_type\' must be \'str\'.')
-        if not isinstance(tournament_size, Optional[int]) and tournament_size > 0:
-                raise TypeError('Parameter \'tournament_size\' must be \'int\' and greater than 0.')
-        if not isinstance(population_size, int) and tournament_size > 1:
-                raise TypeError('Parameter \'population_size\' must be \'int\' and greater than 1.')
-        if not isinstance(elitism_size, Optional[int]) and elitism_size > 0:
-                raise TypeError('Parameter \'elitism_size\' must be \'int\' and greater than 0.')
+        if not isinstance(selection, Selection):
+                raise TypeError('Parameter \'selection\' must be \'Selection\'.')
+        if not isinstance(ga_crossover_support, GaCrossoverSupport):
+                raise TypeError('Parameter \'ga_crossover_support\' must be \'GaCrossoverSupport\'.')
+        if not isinstance(ga_mutation_support, GaMutationSupport):
+                raise TypeError('Parameter \'ga_mutation_support\' must be \'GaMutationSupport\'.')
         super().__init__( name='ga',
                 finish_control=finish_control,
                 random_seed=random_seed,
@@ -117,23 +111,13 @@ class GaOptimizer(PopulationBasedMetaheuristic):
                 output_control=output_control,
                 problem=problem,
                 solution_template=solution_template)
-        self.__problem_solution_ga_support:ProblemSolutionGaSupport = problem_solution_ga_support
-        self.__mutation_probability:float = mutation_probability
-        self.__tournament_size:int = tournament_size
+        self.__selection = selection 
+        self.__ga_crossover_support:GaCrossoverSupport = ga_crossover_support
+        self.__crossover_method = self.__ga_crossover_support.crossover
+        self.__ga_mutation_support:GaMutationSupport = ga_mutation_support
+        self.__mutation_method = self.__ga_mutation_support.mutation
         self.__population_size:int = population_size
-        self.__elitism_size:int = elitism_size
-        self.__selection_type = selection_type
-        self.__problem_solution_ga_support:ProblemSolutionGaSupport = problem_solution_ga_support
-        self.__implemented_selection_methods:dict[str,function] = {
-            'selectionTournament':  self.__problem_solution_ga_support.selection_tournament,
-            'selectionRoulette':  self.__problem_solution_ga_support.selection_roulette,
-            'selectionRangRoulette':  self.__problem_solution_ga_support.selection_rang_roulette,
-        }
-        if( self.__selection_type not in self.__implemented_selection_methods.keys()):
-            raise ValueError( 'Value \'{}\' for GA selection_type is not supported'.format(self.__selection_type))
-        self.__selection_method = self.__implemented_selection_methods[self.__selection_type]
-        self.__crossover_method = self.__problem_solution_ga_support.crossover
-        self.__mutation_method = self.__problem_solution_ga_support.mutation
+        self.__elite_count:Optional[int] = elite_count
 
     @classmethod
     def from_construction_tuple(cls, construction_tuple:GaOptimizerConstructionParameters):
@@ -149,12 +133,11 @@ class GaOptimizer(PopulationBasedMetaheuristic):
             construction_tuple.output_control,
             construction_tuple.problem,
             construction_tuple.solution_template,
-            construction_tuple.problem_solution_ga_support,
-            construction_tuple.mutation_probability,
-            construction_tuple.selection_type,
-            construction_tuple.tournament_size,
+            construction_tuple.selection,
+            construction_tuple.ga_crossover_support,
+            construction_tuple.ga_mutation_support,
             construction_tuple.population_size,
-            construction_tuple.elitism_size)
+            construction_tuple.elite_count)
 
     def __copy__(self):
         """
@@ -176,123 +159,104 @@ class GaOptimizer(PopulationBasedMetaheuristic):
         return self.__copy__()
 
     @property
-    def mutation_probability(self)->float:
+    def elite_count(self)->Optional[int]:
         """
-        Property getter for the `mutation_probability` parameter for GA
+        Property getter for elitist count in selection 
+        
+        :return: count of elite number
+        :rtype: Optional[int]
+        """
+        return self.__elite_count
 
-        :return: `mutation_probability` parameter for GA
-        :rtype: float
+    @elite_count.setter
+    def elite_count(self, value:Optional[int])->None:
         """
-        return self.__mutation_probability
-    
-    @property
-    def selection_type(self)->str:
+        Property setter for elitist count in selection
         """
-        Property getter for the `selection_type` parameter for GA
+        self.__elite_count = value
 
-        :return: `selection_type` parameter for GA
-        :rtype: str
-        """
-        return self.__selection_type
-    
     @property
     def population_size(self)->int:
         """
-        Property getter for the `population_size` parameter for GA
+        Property getter for the `population_size` of the GA
 
-        :return: `population_size` parameter for GA
+        :return: `population_size` of the GA
         :rtype: int
         """
         return self.__population_size
+
+    @property
+    def current_population(self)->list[Solution]:
+        """
+        Property getter for the `current_population` of the GA
+
+        :return: `current_population` of the GA
+        :rtype: list[Solution]
+        """
+        return self.__current_population
     
     @property
-    def tournament_size(self)->int:
+    def selection(self)->Selection:
         """
-        Property getter for the `tournament_size` parameter for GA
-
-        :return: `tournament_size` parameter for GA
-        :rtype: int
+        Property getter for the selection of GA
+        
+        :return: Selection of the GA 
+        :rtype: `Selection`
         """
-        return self.__tournament_size
-    
-    @property
-    def elitism_size(self)->int:
-        """
-        Property getter for the `elitism_size` parameter for GA
-
-        :return: `elitism_size` parameter for GA
-        :rtype: int
-        """
-        return self.__elitism_size
-    
-    @property
-    def elitism_size(self)->int:
-        """
-        Property getter for the `elitism_size` parameter for GA
-
-        :return: `elitism_size` parameter for GA
-        :rtype: int
-        """
-        return self.__elitism_size
+        return self.__selection
 
     def init(self)->None:
         """
         Initialization of the GA algorithm
         """
-        self.__current_population = [self.solution_template.copy() for _ in range(self.__population_size)]
-        for i in range(self.__population_size):
-            self.__current_population[i].init_random(self.problem)
+        super().init()
+        self.current_population = [self.solution_template.copy() for _ in range(self.population_size)]
+        for i in range(self.population_size):
+            self.current_population[i].init_random(self.problem)
             self.evaluation = 1
-            self.__current_population[i].evaluate(self.problem)
-        self.best_solution = min(self.__current_population, key=lambda individual: individual.objective_value)
-    
+            self.current_population[i].evaluate(self.problem)
+        self.best_solution = max(self.current_population, key=lambda individual: individual.fitness_value)
+        if self.selection.elite_count > 0:
+            for i in range(self.selection.elite_count):
+                sub_range:list[Solution] = self.current_population[i:self.population_size]
+                max_sub_range:Solution = max(sub_range, key=lambda individual: individual.fitness_value)
+                for j, v in enumerate(range):
+                    if v == max_sub_range:
+                        temp:Solution = self.current_population[i]
+                        self.current_population[i] = self.current_population[j]
+                        self.current_population[j] = temp
+
     def main_loop_iteration(self)->None:
         """
         One iteration within main loop of the GA algorithm
         """
         self.iteration += 1
-        new_solution:list[Solution] = [self.solution_template.copy() for _ in range(self.__population_size)]
-        new_solution[:self.__elitism_size] = self.__current_population[:self.__elitism_size].copy()
-        for i in range(0,len(self.__current_population), 2):
+        new_population:list[Solution] = [self.solution_template.copy() for _ in range(self.__population_size)]
+        self.write_output_values_if_needed("before_step_in_iteration", "selection")
+        self.selection.selection(self)
+        self.write_output_values_if_needed("after_step_in_iteration", "selection")
+        n_e:Optional[int] = self.elite_count
+        if n_e is None:
+            l_lim:int = 0
+        else:
+            l_lim:int = n_e
+        self.write_output_values_if_needed("before_step_in_iteration", "crossover")
+        for i in range(l_lim,len(self.current_population), 2):
             if i+1 == len(self.__current_population):
-                 break
-
-            self.write_output_values_if_needed("before_step_in_iteration", "selection")
-            if self.__selection_type == 'selectionTournament':
-                parent1:Solution = self.__selection_method(self.problem, self.__current_population, self.__tournament_size, self)
-                parent2:Solution = self.__selection_method(self.problem, self.__current_population, self.__tournament_size, self)
-                if parent1 is None or parent2 is None:
-                    self.write_output_values_if_needed("after_step_in_iteration", "selection")
-                    return
-            else:
-                parent1:Solution = self.__selection_method(self.problem, self.__current_population, self)
-                parent2:Solution = self.__selection_method(self.problem, self.__current_population, self)
-                if parent1 is None or parent2 is None:
-                    self.write_output_values_if_needed("after_step_in_iteration", "selection")
-                    return
-
-            self.write_output_values_if_needed("after_step_in_iteration", "selection")
-            
-            self.write_output_values_if_needed("before_step_in_iteration", "crossover")
-            self.__crossover_method(self.problem, parent1, parent2, new_solution[i], new_solution[i+1], self)
-            self.write_output_values_if_needed("after_step_in_iteration", "crossover")
-
-            self.write_output_values_if_needed("before_step_in_iteration", "mutation1")
-            self.__mutation_method(self.__mutation_probability, self.problem, new_solution[i], self)
-            self.write_output_values_if_needed("after_step_in_iteration", "mutation1")
-
-            self.write_output_values_if_needed("before_step_in_iteration", "mutation2")
-            self.__mutation_method(self.__mutation_probability, self.problem, new_solution[i+1], self)
-            self.write_output_values_if_needed("after_step_in_iteration", "mutation2")
-
-        self.__current_population = new_solution
-        for i in range(self.__population_size):
-            self.__current_population[i].evaluate(self.problem)
-
-        self.__current_population.sort(key=lambda individual: individual.objective_value)
-        self.best_solution = min(self.best_solution, self.__current_population[0].copy(), key=lambda individual: individual.objective_value)
-
-        self.update_additional_statistics_if_required(self.__current_population)
+                break
+            parent1:Solution = self.current_population[i]
+            parent2:Solution = self.current_population[i+1]
+            self.__crossover_method(self.problem, parent1, parent2, new_population[i], new_population[i+1], self)
+        self.write_output_values_if_needed("after_step_in_iteration", "crossover")
+        self.write_output_values_if_needed("before_step_in_iteration", "mutation")
+        for i in range(l_lim, len(self.current_population)):
+            self.__mutation_method(self.__mutation_probability, self.problem, new_population[i], self)
+        self.write_output_values_if_needed("after_step_in_iteration", "mutation")
+        self.current_population = new_population
+        for i in range(l_lim, self.__population_size):
+            self.current_population[i].evaluate(self.problem)
+        self.best_solution = max(self.current_population, key=lambda individual: individual.fitness_value)
+        self.update_additional_statistics_if_required(self.current_population)
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='',group_start:str ='{', 
         group_end:str ='}')->str:
@@ -341,7 +305,11 @@ class GaOptimizer(PopulationBasedMetaheuristic):
             s += 'tournament_size=' + str(self.tournament_size) + delimiter
             for _ in range(0, indentation):
                 s += indentation_symbol
-        s += '__problem_solution_ga_support=' + self.__problem_solution_ga_support.string_rep(delimiter, 
+        s += '__ga_crossover_support=' + self.__ga_crossover_support.string_rep(delimiter, 
+                indentation + 1, indentation_symbol, group_start, group_end) + delimiter 
+        for _ in range(0, indentation):
+            s += indentation_symbol
+        s += '__ga_mutation_support=' + self.__ga_mutation_support.string_rep(delimiter, 
                 indentation + 1, indentation_symbol, group_start, group_end) + delimiter 
         for _ in range(0, indentation):
             s += indentation_symbol

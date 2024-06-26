@@ -6,7 +6,8 @@ from uo.problem.problem import Problem
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer 
-from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import ProblemSolutionVnsSupport
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support import VnsShakingSupport
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_local_search_support import VnsLocalSearchSupport
 from uo.solution.solution_void import SolutionVoid
 
 class TestVnsOptimizerProperties(unittest.TestCase):
@@ -26,9 +27,10 @@ class TestVnsOptimizerProperties(unittest.TestCase):
         type(self.problem_mock).dimension = mocker.PropertyMock(return_value=42)
         self.problem_mock.copy = mocker.Mock(return_value=self.problem_mock)
 
-        self.problem_solution_vns_support_stub = mocker.MagicMock(spec=ProblemSolutionVnsSupport)
-        self.problem_solution_vns_support_stub.local_search_first_improvement = mocker.Mock(return_value="mocked stuff")
-        type(self.problem_solution_vns_support_stub).copy = mocker.CallableMixin(spec="return self")        
+        self.vns_shaking_support_stub = mocker.MagicMock(spec=VnsShakingSupport)
+        type(self.vns_shaking_support_stub).copy = mocker.CallableMixin(spec="return self")        
+        self.vns_local_search_support_stub.local_search_first_improvement = mocker.Mock(return_value="mocked stuff")
+        type(self.vns_local_search_support_stub).copy = mocker.CallableMixin(spec="return self")        
         
         self.evaluations_max = 42
         self.iterations_max = 42
@@ -93,15 +95,18 @@ class TestVnsOptimizerProperties(unittest.TestCase):
 
     def test_create_with_invalid_local_search_type_should_raise_value_exception_with_proper_message(self):
         with self.assertRaises(ValueError) as context:
-            vns_support_stub = mocker.MagicMock(spec=ProblemSolutionVnsSupport)
-            type(vns_support_stub).local_search_best_improvement = mocker.CallableMixin(spec=lambda x: x)
-            type(vns_support_stub).local_search_first_improvement= mocker.CallableMixin(spec=lambda x: x)
-            type(vns_support_stub).copy = mocker.CallableMixin(spec="return self")
+            vns_support_shaking_stub = mocker.MagicMock(spec=VnsShakingSupport)
+            type(vns_support_shaking_stub).copy = mocker.CallableMixin(spec="return self")
+            vns_support_local_search_stub = mocker.MagicMock(spec=VnsLocalSearchSupport)
+            type(vns_support_local_search_stub).local_search_best_improvement = mocker.CallableMixin(spec=lambda x: x)
+            type(vns_support_local_search_stub).local_search_first_improvement= mocker.CallableMixin(spec=lambda x: x)
+            type(vns_support_local_search_stub).copy = mocker.CallableMixin(spec="return self")
             vns_optimizer:VnsOptimizer = VnsOptimizer(
                 output_control=self.output_control_stub,
                 problem=self.problem_mock, 
                 solution_template=SolutionVoid( 43, 0, 0, False),
-                problem_solution_vns_support=vns_support_stub, 
+                vns_shaking_support=vns_support_shaking_stub, 
+                vns_local_search_support=vns_support_local_search_stub,
                 finish_control=self.finish_control_mock,
                 random_seed=self.random_seed, 
                 k_min=self.k_min, 

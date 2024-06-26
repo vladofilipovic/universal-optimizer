@@ -10,30 +10,37 @@ from abc import ABCMeta, abstractmethod
 from typing import Optional, TypeVar, Generic
 from typing import Generic
 
+from random import randint
+
 from uo.solution.solution import Solution
 
-from uo.algorithm.algorithm import Algorithm
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimizer
 from uo.algorithm.metaheuristic.genetic_algorithm.selection import Selection
 
 class SelectionRoulette(Selection):
     
-    def __init__(self, elite_count:int)->None:
-        super().__init__(elite_count=elite_count)
-        
     
-    def selection(self, optimizer:Algorithm)->None:
+    def selection(self, optimizer:GaOptimizer)->None:
         """
         GA selection
 
         :return: 
         :rtype: None
         """
-        old_pop:Optional[list[Solution]] = optimizer.current_population
-        if old_pop is None:
+        pop:Optional[list[Solution]] = optimizer.current_population
+        if pop is None:
             raise AttributeError("Population should exist!")
-        n:int = old_pop.length()
+        n:int = pop.length()
         if n<=0:
             raise AttributeError("Population should contain at least one individual")
-        elc:int = self.elite_count
-        if elc>=n:
-            return
+        n_e:Optional[int] = optimizer.elite_count
+        if n_e is None:
+            l_lim:int = 0
+        else:
+            l_lim:int = n_e
+        temp:list[Solution] = []
+        for _ in range(l_lim,n):
+            ind:int = randint(0, n-1)
+            temp.append(pop[ind])
+        for i in range(l_lim,n):
+            pop[i] = temp[i]

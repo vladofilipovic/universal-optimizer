@@ -14,7 +14,7 @@ from uo.algorithm.metaheuristic.genetic_algorithm.selection import Selection
 class SelectionIdle(Selection):
     
     def __init__(self)->None:
-        super().__init__(elite_count=0)
+        super().__init__(elite_count=None)
     
     def selection(self, optimizer:Algorithm)->None:
         """

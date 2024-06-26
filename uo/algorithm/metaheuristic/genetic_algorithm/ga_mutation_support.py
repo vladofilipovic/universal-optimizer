@@ -20,7 +20,7 @@ from uo.algorithm.algorithm import Algorithm
 R_co = TypeVar("R_co", covariant=True)
 A_co = TypeVar("A_co", covariant=True)
 
-class ProblemSolutionGaSupport(Generic[R_co,A_co], metaclass=ABCMeta):
+class GaMutationSupport(Generic[R_co,A_co], metaclass=ABCMeta):
     
     @abstractmethod
     def mutation(self, mutation_probability:float, problem:Problem, solution:Solution[R_co,A_co], optimizer:Algorithm)->bool:
@@ -33,23 +33,6 @@ class ProblemSolutionGaSupport(Generic[R_co,A_co], metaclass=ABCMeta):
         :param `Algorithm` optimizer: optimizer that is executed
         :return: if mutation is successful
         :rtype: bool
-        """
-        raise NotImplementedError
-
-    @abstractmethod
-    def crossover(self, crossover_probability:float, problem:Problem, 
-                solution1:Solution[R_co,A_co], solution2:Solution[R_co,A_co], 
-                child1:Solution[R_co,A_co], child2:Solution[R_co,A_co], optimizer:Algorithm):
-        """
-        GA crossover on two parents
-
-        :param float crossover_probability: float parameter for crossover probability
-        :param `Problem` problem: problem that is solved
-        :param `Solution[R_co,A_co]` solution1: first parent
-        :param `Solution[R_co,A_co]` solution2: second parent
-        :param `Solution[R_co,A_co]` child1: first child that is created
-        :param `Solution[R_co,A_co]` child2: second child that is created
-        :param `Algorithm` optimizer: optimizer that is executed
         """
         raise NotImplementedError
     

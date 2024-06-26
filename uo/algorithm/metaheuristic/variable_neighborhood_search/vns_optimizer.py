@@ -36,8 +36,10 @@ from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
 from uo.algorithm.metaheuristic.single_solution_metaheuristic import SingleSolutionMetaheuristic
-from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import \
-        ProblemSolutionVnsSupport
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support import \
+        VnsShakingSupport
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_local_search_support import \
+        VnsLocalSearchSupport
 
 @dataclass
 class VnsOptimizerConstructionParameters:
@@ -46,12 +48,13 @@ class VnsOptimizerConstructionParameters:
         VnsOptimizerConstructionParameters` represents constructor parameters for VNS algorithm.
         """
         finish_control: FinishControl = None
+        random_seed: Optional[int] = None
+        additional_statistics_control: AdditionalStatisticsControl = None
         output_control: OutputControl = None
         problem: Problem = None
         solution_template: Solution = None
-        random_seed: Optional[int] = None
-        additional_statistics_control: AdditionalStatisticsControl = None
-        problem_solution_vns_support: ProblemSolutionVnsSupport = None
+        vns_shaking_support: VnsShakingSupport = None
+        vns_local_search_support: VnsLocalSearchSupport = None
         k_min: Optional[int] = None
         k_max: Optional[int] = None
         local_search_type: Optional[str] = None
@@ -69,7 +72,8 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
             output_control:OutputControl, 
             problem:Problem, 
             solution_template:Solution,
-            problem_solution_vns_support:ProblemSolutionVnsSupport, 
+            vns_shaking_support:VnsShakingSupport, 
+            vns_local_search_support:VnsLocalSearchSupport, 
             k_min:int, 
             k_max:int, 
             local_search_type:str)->None:
@@ -84,7 +88,9 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         :param `OutputControl` output_control: structure that controls output
         :param `Problem` problem: problem to be solved
         :param `Solution` solution_template: initial solution of the problem 
-        :param `ProblemSolutionVnsSupport` problem_solution_vns_support: placeholder for additional methods, specific for VNS 
+        :param `VnsShakingSupport` vns_shaking_support: placeholder for shaking method, specific for VNS 
+        execution, which depend of precise solution type 
+        :param `VnsLocalSearchSupport` vns_local_search_support: placeholder for shaking method, specific for VNS 
         execution, which depend of precise solution type 
         :param int k_min: `k_min` parameter for VNS
         :param int k_max: `k_max` parameter for VNS
@@ -103,8 +109,10 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
                 raise TypeError('Parameter \'problem\' must be \'Problem\'.')
         if not isinstance(solution_template, Solution) and solution_template is not None:
                 raise TypeError('Parameter \'solution_template\' must be \'Solution\' or \'None\'.')        
-        if not isinstance(problem_solution_vns_support, ProblemSolutionVnsSupport):
-                raise TypeError('Parameter \'problem_solution_vns_support\' must be \'ProblemSolutionVnsSupport\'.')        
+        if not isinstance(vns_shaking_support, VnsShakingSupport):
+                raise TypeError('Parameter \'vns_shaking_support\' must be \'VnsShakingSupport\'.')        
+        if not isinstance(vns_local_search_support, VnsLocalSearchSupport):
+                raise TypeError('Parameter \'vns_local_search_support\' must be \'VnsLocalSearchSupport\'.')        
         if not isinstance(k_min, int):
                 raise TypeError('Parameter \'k_min\' must be \'int\'.')        
         if not isinstance(k_max, int):
@@ -119,16 +127,17 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
                 problem=problem,
                 solution_template=solution_template)
         self.__local_search_type:str = local_search_type
-        self.__problem_solution_vns_support:ProblemSolutionVnsSupport = problem_solution_vns_support
+        self.__vns_shaking_support:VnsShakingSupport = vns_shaking_support
+        self.__shaking_method = self.__vns_shaking_support.shaking
+        self.__vns_local_search_support:VnsLocalSearchSupport = vns_local_search_support
         self.__implemented_local_searches:dict[str,function] = {
-            'localSearchBestImprovement':  self.__problem_solution_vns_support.local_search_best_improvement,
-            'localSearchFirstImprovement':  self.__problem_solution_vns_support.local_search_first_improvement,
+            'localSearchBestImprovement':  self.__vns_local_search_support.local_search_best_improvement,
+            'localSearchFirstImprovement':  self.__vns_local_search_support.local_search_first_improvement,
         }
         if( self.__local_search_type not in self.__implemented_local_searches.keys()):
             raise ValueError( 'Value \'{}\' for VNS local_search_type is not supported'.format(
                     self.__local_search_type))
         self.__ls_method = self.__implemented_local_searches[self.__local_search_type]
-        self.__shaking_method = self.__problem_solution_vns_support.shaking
         self.__k_min:int = k_min
         self.__k_max:int = k_max
         # current value of the vns parameter k
@@ -148,7 +157,8 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
             construction_tuple.output_control, 
             construction_tuple.problem, 
             construction_tuple.solution_template,
-            construction_tuple.problem_solution_vns_support, 
+            construction_tuple.vns_shaking_support, 
+            construction_tuple.vns_local_search_support, 
             construction_tuple.k_min, 
             construction_tuple.k_max, 
             construction_tuple.local_search_type)
@@ -262,7 +272,11 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         s += 'k_max=' + str(self.k_max) + delimiter
         for _ in range(0, indentation):
             s += indentation_symbol  
-        s += '__problem_solution_vns_support=' + self.__problem_solution_vns_support.string_rep(delimiter, 
+        s += '__vns_shaking_support=' + self.__vns_shaking_support.string_rep(delimiter, 
+                indentation + 1, indentation_symbol, group_start, group_end) + delimiter 
+        for _ in range(0, indentation):
+            s += indentation_symbol  
+        s += '__vns_local_search_support=' + self.__vns_local_search_support.string_rep(delimiter, 
                 indentation + 1, indentation_symbol, group_start, group_end) + delimiter 
         for _ in range(0, indentation):
             s += indentation_symbol  

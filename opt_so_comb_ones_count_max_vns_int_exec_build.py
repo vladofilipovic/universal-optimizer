@@ -14,8 +14,8 @@ from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalS
 
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
-from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import \
-        ProblemSolutionVnsSupport
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support import VnsShakingSupport
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_local_search_support import VnsLocalSearchSupport
 
 class OnesCountMaxProblem2(Problem):
 
@@ -118,7 +118,7 @@ class OnesCountMaxProblemBinaryIntSolution(Solution[int,str]):
     def __format__(self, spec:str)->str:
         return ''
 
-class OnesCountMaxProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,str]):
+class OnesCountMaxProblemBinaryIntSolutionVnsShakingSupport(VnsShakingSupport[int,str]):
     
     def __init__(self)->None:
         return
@@ -155,6 +155,34 @@ class OnesCountMaxProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[i
             return True
         else:
             return False 
+        
+    def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
+        group_end:str ='}')->str:
+        return 'OnesCountMaxProblemBinaryIntSolutionVnsShakingSupport'
+
+    def __str__(self)->str:
+        return self.string_rep('|')
+
+    def __repr__(self)->str:
+        return self.string_rep('\n')
+
+
+    def __format__(self, spec:str)->str:
+        return self.string_rep('|')
+
+
+class OnesCountMaxProblemBinaryIntSolutionVnsLocalSearchSupport(VnsLocalSearchSupport[int,str]):
+    
+    def __init__(self)->None:
+        return
+
+    def __copy__(self):
+        sup = deepcopy(self)
+        return sup
+
+    def copy(self):
+        return self.__copy__()
+        
 
     def local_search_best_improvement(self, k:int, problem:OnesCountMaxProblem2, solution:OnesCountMaxProblemBinaryIntSolution, 
             optimizer: Algorithm)->bool:
@@ -202,7 +230,7 @@ class OnesCountMaxProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[i
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
-        return 'OnesCountMaxProblemBinaryIntSolutionVnsSupport'
+        return 'OnesCountMaxProblemBinaryIntSolutionVnsLocalSearchSupport'
 
     def __str__(self)->str:
         return self.string_rep('|')

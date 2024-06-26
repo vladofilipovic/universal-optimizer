@@ -21,7 +21,7 @@ from random import choice, random, randint
 from bitstring import BitArray
 
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimizer
-from uo.algorithm.metaheuristic.genetic_algorithm.problem_solution_ga_support import ProblemSolutionGaSupport
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support import ProblemSolutionGaSupport
 
 from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem import MinimumMultiCutProblem
 from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_binary_bit_array_solution import MinimumMultiCutProblemBinaryBitArraySolution

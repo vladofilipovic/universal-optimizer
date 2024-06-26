@@ -19,15 +19,15 @@ from uo.utils.complex_counter_uniform_ascending import ComplexCounterUniformAsce
 
 from uo.solution.quality_of_solution import QualityOfSolution
 from uo.algorithm.algorithm import Algorithm
-from uo.algorithm.metaheuristic.variable_neighborhood_search.problem_solution_vns_support import \
-        ProblemSolutionVnsSupport
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support import VnsShakingSupport
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_local_search_support import VnsLocalSearchSupport
 
 from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem import \
         FunctionOneVariableMaxProblemMax
 from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_binary_int_solution \
         import FunctionOneVariableMaxProblemBinaryIntSolution
 
-class FunctionOneVariableMaxProblemBinaryIntSolutionVnsSupport(ProblemSolutionVnsSupport[int,float]):
+class FunctionOneVariableMaxProblemBinaryIntSolutionVnsShakingSupport(VnsShakingSupport[int,float]):
     
     def __init__(self)->None:
         return
@@ -72,6 +72,33 @@ class FunctionOneVariableMaxProblemBinaryIntSolutionVnsSupport(ProblemSolutionVn
             return True
         else:
             return False 
+
+    def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
+        group_end:str ='}')->str:
+        return 'FunctionOneVariableMaxProblemBinaryIntSolutionVnsShakingSupport'
+
+    def __str__(self)->str:
+        return self.string_rep('|')
+
+    def __repr__(self)->str:
+        return self.string_rep('\n')
+
+
+    def __format__(self, spec:str)->str:
+        return self.string_rep('|')
+
+class FunctionOneVariableMaxProblemBinaryIntSolutionVnsLocalSearchSupport(VnsLocalSearchSupport[int,float]):
+    
+    def __init__(self)->None:
+        return
+
+    def __copy__(self):
+        sup = deepcopy(self)
+        return sup
+
+    def copy(self):
+        return self.__copy__()
+        
 
     def local_search_best_improvement(self, k:int, problem:FunctionOneVariableMaxProblemMax, 
             solution:FunctionOneVariableMaxProblemBinaryIntSolution, 
@@ -151,7 +178,7 @@ class FunctionOneVariableMaxProblemBinaryIntSolutionVnsSupport(ProblemSolutionVn
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
-        return 'FunctionOneVariableMaxProblemBinaryIntSolutionVnsSupport'
+        return 'FunctionOneVariableMaxProblemBinaryIntSolutionVnsLocalSearchSupport'
 
     def __str__(self)->str:
         return self.string_rep('|')

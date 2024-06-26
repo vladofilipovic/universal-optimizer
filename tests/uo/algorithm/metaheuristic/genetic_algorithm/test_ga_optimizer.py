@@ -6,7 +6,7 @@ from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalS
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimizer
-from uo.algorithm.metaheuristic.genetic_algorithm.problem_solution_ga_support import ProblemSolutionGaSupport
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support import ProblemSolutionGaSupport
 from uo.problem.problem_void_min_so import ProblemVoidMinSO
 from uo.solution.solution_void import SolutionVoid
 
