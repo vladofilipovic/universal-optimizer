@@ -14,6 +14,7 @@
         "maxones",
         "metaheuristic",
         "Metaheuristics",
+        "networkx",
         "nlsk",
         "NOSONAR",
         "nsup",

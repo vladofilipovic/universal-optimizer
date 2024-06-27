@@ -22,8 +22,24 @@ A_co = TypeVar("A_co", covariant=True)
 
 class GaMutationSupport(Generic[R_co,A_co], metaclass=ABCMeta):
     
+    def __init__(self, mutation_probability:float)->None:
+        """
+        Create new `GaMutationSupport` instance
+        """
+        self.__mutation_probability:float = mutation_probability
+
+    @property
+    def mutation_probability(self)->float:
+        """
+        Property getter for mutation probability 
+
+        :return: mutation probability 
+        :rtype: float
+        """
+        return self.__mutation_probability    
+    
     @abstractmethod
-    def mutation(self, mutation_probability:float, problem:Problem, solution:Solution[R_co,A_co], optimizer:Algorithm)->bool:
+    def mutation(self, problem:Problem, solution:Solution[R_co,A_co], optimizer:Algorithm)->bool:
         """
         GA individual mutation based on some probability
 

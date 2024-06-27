@@ -44,7 +44,7 @@ class GaOptimizerConstructionParameters:
         output_control: OutputControl = None
         problem: Problem = None
         solution_template: Solution = None
-        selection: Selection = None
+        ga_selection: Selection = None
         ga_crossover_support: GaCrossoverSupport = None
         ga_mutation_support: GaMutationSupport = None
         population_size: int = None
@@ -63,7 +63,7 @@ class GaOptimizer(PopulationBasedMetaheuristic):
             output_control:OutputControl,
             problem:Problem,
             solution_template:Solution,
-            selection: Selection,
+            ga_selection: Selection,
             ga_crossover_support:GaCrossoverSupport,
             ga_mutation_support:GaMutationSupport,
             population_size: int,
@@ -97,8 +97,8 @@ class GaOptimizer(PopulationBasedMetaheuristic):
                 raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
         if not isinstance(problem, Problem):
                 raise TypeError('Parameter \'problem\' must be \'Problem\'.')
-        if not isinstance(selection, Selection):
-                raise TypeError('Parameter \'selection\' must be \'Selection\'.')
+        if not isinstance(ga_selection, Selection):
+                raise TypeError('Parameter \'ga_selection\' must be \'Selection\'.')
         if not isinstance(ga_crossover_support, GaCrossoverSupport):
                 raise TypeError('Parameter \'ga_crossover_support\' must be \'GaCrossoverSupport\'.')
         if not isinstance(ga_mutation_support, GaMutationSupport):
@@ -110,7 +110,7 @@ class GaOptimizer(PopulationBasedMetaheuristic):
                 output_control=output_control,
                 problem=problem,
                 solution_template=solution_template)
-        self.__selection = selection 
+        self.__ga_selection = ga_selection 
         self.__ga_crossover_support:GaCrossoverSupport = ga_crossover_support
         self.__crossover_method = self.__ga_crossover_support.crossover
         self.__ga_mutation_support:GaMutationSupport = ga_mutation_support
@@ -132,7 +132,7 @@ class GaOptimizer(PopulationBasedMetaheuristic):
             construction_tuple.output_control,
             construction_tuple.problem,
             construction_tuple.solution_template,
-            construction_tuple.selection,
+            construction_tuple.ga_selection,
             construction_tuple.ga_crossover_support,
             construction_tuple.ga_mutation_support,
             construction_tuple.population_size,
@@ -160,7 +160,7 @@ class GaOptimizer(PopulationBasedMetaheuristic):
     @property
     def elite_count(self)->Optional[int]:
         """
-        Property getter for elitist count in selection 
+        Property getter for elitist count 
         
         :return: count of elite number
         :rtype: Optional[int]
@@ -170,7 +170,7 @@ class GaOptimizer(PopulationBasedMetaheuristic):
     @elite_count.setter
     def elite_count(self, value:Optional[int])->None:
         """
-        Property setter for elitist count in selection
+        Property setter for elitist count 
         """
         self.__elite_count = value
 
@@ -195,14 +195,14 @@ class GaOptimizer(PopulationBasedMetaheuristic):
         return self.__current_population
     
     @property
-    def selection(self)->Selection:
+    def ga_selection(self)->Selection:
         """
-        Property getter for the selection of GA
+        Property getter for the ga_selection of GA
         
         :return: Selection of the GA 
         :rtype: `Selection`
         """
-        return self.__selection
+        return self.__ga_selection
 
     def init(self)->None:
         """
@@ -235,7 +235,7 @@ class GaOptimizer(PopulationBasedMetaheuristic):
         self.iteration += 1
         new_population:list[Solution] = [self.solution_template.copy() for _ in range(self.__population_size)]
         self.write_output_values_if_needed("before_step_in_iteration", "selection")
-        self.selection.selection(self)
+        self.ga_selection.selection(self)
         self.write_output_values_if_needed("after_step_in_iteration", "selection")
         n_e:Optional[int] = self.elite_count
         if n_e is None or not isinstance(n_e, int):
@@ -248,17 +248,15 @@ class GaOptimizer(PopulationBasedMetaheuristic):
                 break
             parent1:Solution = self.current_population[i]
             parent2:Solution = self.current_population[i+1]
-            self.__crossover_method(1, self.problem, parent1, parent2, new_population[i], new_population[i+1], self)
+            self.__crossover_method(self.problem, parent1, parent2, new_population[i], new_population[i+1], self)
         self.write_output_values_if_needed("after_step_in_iteration", "crossover")
         self.write_output_values_if_needed("before_step_in_iteration", "mutation")
         for i in range(l_lim, len(self.current_population)):
-            self.__mutation_method(self.__mutation_probability, self.problem, new_population[i], self)
+            self.__mutation_method(self.problem, new_population[i], self)
         self.write_output_values_if_needed("after_step_in_iteration", "mutation")
-        self.current_population = new_population
-        for i in range(l_lim, self.__population_size):
-            self.current_population[i].evaluate(self.problem)
-        self.best_solution = max(self.current_population, key=lambda individual: individual.fitness_value)
-        self.update_additional_statistics_if_required(self.current_population)
+        self.__current_population = new_population
+        self.best_solution = max(self.__current_population, key=lambda individual: individual.fitness_value)
+        self.update_additional_statistics_if_required(self.__current_population)
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='',group_start:str ='{', 
         group_end:str ='}')->str:
@@ -292,21 +290,7 @@ class GaOptimizer(PopulationBasedMetaheuristic):
             s += group_end
         else:
             s += 'current_population=None' + delimiter
-        for _ in range(0, indentation):
-            s += indentation_symbol
-        s += 'selection_type=' + self.__selection_type + delimiter
-        for _ in range(0, indentation):
-            s += indentation_symbol
         s += 'population_size=' + str(self.population_size) + delimiter
-        for _ in range(0, indentation):
-            s += indentation_symbol
-        s += 'mutation_probability=' + str(self.mutation_probability) + delimiter
-        for _ in range(0, indentation):
-            s += indentation_symbol
-        if self.__tournament_size is not None:
-            s += 'tournament_size=' + str(self.tournament_size) + delimiter
-            for _ in range(0, indentation):
-                s += indentation_symbol
         s += '__ga_crossover_support=' + self.__ga_crossover_support.string_rep(delimiter, 
                 indentation + 1, indentation_symbol, group_start, group_end) + delimiter 
         for _ in range(0, indentation):
@@ -315,7 +299,7 @@ class GaOptimizer(PopulationBasedMetaheuristic):
                 indentation + 1, indentation_symbol, group_start, group_end) + delimiter 
         for _ in range(0, indentation):
             s += indentation_symbol
-        s += 'elitism_size=' + str(self.__elitism_size) + delimiter
+        s += 'elite_count=' + str(self.__elite_count) + delimiter
         for _ in range(0, indentation):
             s += indentation_symbol
         s += group_end

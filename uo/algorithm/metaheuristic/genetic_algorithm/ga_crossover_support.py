@@ -21,9 +21,25 @@ R_co = TypeVar("R_co", covariant=True)
 A_co = TypeVar("A_co", covariant=True)
 
 class GaCrossoverSupport(Generic[R_co,A_co], metaclass=ABCMeta):
+    
+    def __init__(self, crossover_probability:float)->None:
+        """
+        Create new `GaCrossoverSupport` instance
+        """
+        self.__crossover_probability:float = crossover_probability
+
+    @property
+    def crossover_probability(self)->float:
+        """
+        Property getter for crossover probability 
+
+        :return: crossover probability 
+        :rtype: float
+        """
+        return self.__crossover_probability    
 
     @abstractmethod
-    def crossover(self, crossover_probability:float, problem:Problem, 
+    def crossover(self, problem:Problem, 
                 solution1:Solution[R_co,A_co], solution2:Solution[R_co,A_co], 
                 child1:Solution[R_co,A_co], child2:Solution[R_co,A_co], optimizer:Algorithm):
         """

@@ -26,36 +26,33 @@ def main():
 
         nodes = 10
         prob = 0.5
-
         G: nx.Graph = nx.fast_gnp_random_graph(nodes, prob)
         for edge in G.edges():
                 G.edges[edge]['weight'] = randint(1,10)
-
         nodes = list(G.nodes())
         num_pairs = randint(1, max(2,len(nodes)//3))
         source_terminal_pairs = []
-
         for _ in range(num_pairs):
-            source = choice(nodes)
-            terminal_candidates = [node for node in nodes if node != source]
-            terminal = choice(terminal_candidates)
-            source_terminal_pairs.append((source, terminal))
+                source = choice(nodes)
+                terminal_candidates = [node for node in nodes if node != source]
+                terminal = choice(terminal_candidates)
+                source_terminal_pairs.append((source, terminal))
 
         problem_to_solve:MinimumMultiCutProblem = MinimumMultiCutProblem(G, source_terminal_pairs)
         solution:MinimumMultiCutProblemBinaryBitArraySolution = MinimumMultiCutProblemBinaryBitArraySolution()
-        finish:FinishControl = FinishControl(criteria='iterations', iterations_max=500)
+        finish:FinishControl = FinishControl(criteria='iterations', iterations_max=100)
         select:SelectionRoulette = SelectionRoulette()
         additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(is_active=False, keep='')
         ga_cross_support:MinimumMultiCutProblemBinaryBitArraySolutionGaCrossoverSupport = \
-                MinimumMultiCutProblemBinaryBitArraySolutionGaCrossoverSupport()
+                MinimumMultiCutProblemBinaryBitArraySolutionGaCrossoverSupport(crossover_probability=0.999)
         ga_mut_support:MinimumMultiCutProblemBinaryBitArraySolutionGaMutationSupport = \
-                MinimumMultiCutProblemBinaryBitArraySolutionGaMutationSupport()
+                MinimumMultiCutProblemBinaryBitArraySolutionGaMutationSupport(mutation_probability=0.05)
         ga_construction_params:GaOptimizerConstructionParameters = GaOptimizerConstructionParameters()
         ga_construction_params.output_control = output_control
         ga_construction_params.problem = problem_to_solve
         ga_construction_params.solution_template = solution
         ga_construction_params.finish_control = finish
-        ga_construction_params.selection = select
+        ga_construction_params.ga_selection = select
         ga_construction_params.ga_crossover_support = ga_cross_support
         ga_construction_params.ga_mutation_support = ga_mut_support
         ga_construction_params.additional_statistics_control = additional_statistics_control

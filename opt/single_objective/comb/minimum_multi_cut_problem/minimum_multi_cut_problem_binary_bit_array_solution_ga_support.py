@@ -31,10 +31,11 @@ from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_probl
 
 class MinimumMultiCutProblemBinaryBitArraySolutionGaCrossoverSupport(GaCrossoverSupport[BitArray,str]):
 
-    def __init__(self)->None:
+    def __init__(self, crossover_probability:float)->None:
         """
         Create new `MinimumMultiCutProblemBinaryBitArraySolutionGaCrossoverSupport` instance
         """
+        super().__init__(crossover_probability)
 
     def __copy__(self):
         """
@@ -55,12 +56,12 @@ class MinimumMultiCutProblemBinaryBitArraySolutionGaCrossoverSupport(GaCrossover
         """
         return self.__copy__()
 
-    def crossover(self, crossover_probability:float, problem:MinimumMultiCutProblem, solution1:MinimumMultiCutProblemBinaryBitArraySolution, solution2:MinimumMultiCutProblemBinaryBitArraySolution,
+    def crossover(self, problem:MinimumMultiCutProblem, solution1:MinimumMultiCutProblemBinaryBitArraySolution, solution2:MinimumMultiCutProblemBinaryBitArraySolution,
                     child1:MinimumMultiCutProblemBinaryBitArraySolution, child2:MinimumMultiCutProblemBinaryBitArraySolution, optimizer:GaOptimizer) -> None:
         
         child1.representation = BitArray(solution1.representation.len)
         child2.representation = BitArray(solution2.representation.len)
-        if random() > crossover_probability:
+        if random() > self.crossover_probability:
             return
         index:int = randint(0,len(solution1.representation))
         for i in range(index):
@@ -69,6 +70,8 @@ class MinimumMultiCutProblemBinaryBitArraySolutionGaCrossoverSupport(GaCrossover
         for i in range(index,solution1.representation.len):
             child1.representation.set(solution2.representation[i], i)
             child2.representation.set(solution1.representation[i], i)
+        child1.evaluate(problem)
+        child2.evaluate(problem)        
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
@@ -120,10 +123,11 @@ class MinimumMultiCutProblemBinaryBitArraySolutionGaCrossoverSupport(GaCrossover
 
 class MinimumMultiCutProblemBinaryBitArraySolutionGaMutationSupport(GaMutationSupport[BitArray,str]):
 
-    def __init__(self)->None:
+    def __init__(self, mutation_probability:float)->None:
         """
         Create new `MinimumMultiCutProblemBinaryBitArraySolutionGaMutationSupport` instance
         """
+        super().__init__(mutation_probability)
 
     def __copy__(self):
         """
@@ -144,12 +148,12 @@ class MinimumMultiCutProblemBinaryBitArraySolutionGaMutationSupport(GaMutationSu
         """
         return self.__copy__()
 
-    def mutation(self, mutation_probability:float, problem:MinimumMultiCutProblem, solution:MinimumMultiCutProblemBinaryBitArraySolution, optimizer:GaOptimizer)->bool:
+    def mutation(self, problem:MinimumMultiCutProblem, solution:MinimumMultiCutProblemBinaryBitArraySolution, 
+                    optimizer:GaOptimizer)->None:
         for i in range(len(solution.representation)):
-            if random() < mutation_probability:
+            if random() < self.mutation_probability:
                 solution.representation.invert(i)
-
-        return True
+        solution.evaluate(problem)
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:

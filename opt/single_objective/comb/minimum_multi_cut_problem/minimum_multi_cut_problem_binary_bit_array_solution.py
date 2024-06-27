@@ -120,34 +120,29 @@ class MinimumMultiCutProblemBinaryBitArraySolution(Solution[BitArray,str]):
             raise ValueError('Representation must have positive length.')
         self.representation = BitArray(bin=representation.bin)
 
-    def is_feasable(self, representation:BitArray, graph: nx.Graph, source_terminal_pairs:list[tuple[int,int]]) -> bool:
+    def is_feasible_sol(self, representation:BitArray, graph: nx.Graph, source_terminal_pairs:list[tuple[int,int]]) -> bool:
         edges = list(graph.edges())
         new_graph = nx.Graph()
         nodes_to_insert = graph.nodes()
         new_graph.add_nodes_from(nodes_to_insert)  # to check
-
         for i in range(representation.len):
             if representation[i]:
                 x,y = edges[i]
                 new_graph.add_edge(x,y,weight = graph[x][y]['weight'])
-
         for x,y in source_terminal_pairs:
             if nx.has_path(new_graph,x,y):
                 return False
-
         return True
 
     def calc_fitness(self, representation:BitArray, graph: nx.Graph, source_terminal_pairs:list[tuple[int,int]]) -> tuple[int,float]:
-        if not self.is_feasable(representation, graph, source_terminal_pairs):
+        if not self.is_feasible_sol(representation, graph, source_terminal_pairs):
             return (float('inf'), float('-inf'))
-            
         edges = list(graph.edges())
         value = 0
         for i in range(representation.len):
             if not representation[i]:
                 x,y = edges[i]
                 value += graph[x][y]['weight']
-
         if value == 0:
             return (0, float('inf'))
         return (value, 1/value)
@@ -162,9 +157,9 @@ class MinimumMultiCutProblemBinaryBitArraySolution(Solution[BitArray,str]):
         :return: objective value, fitness value and feasibility of the solution instance
         :rtype: `QualityOfSolution`
         """
-        is_valid = self.is_feasable(representation, problem.graph, problem.source_terminal_pairs)
+        is_valid:bool = self.is_feasible_sol(representation, problem.graph, problem.source_terminal_pairs)
         objective, fitness = self.calc_fitness(representation, problem.graph, problem.source_terminal_pairs)
-        return QualityOfSolution(objective, None, objective, None, is_valid)
+        return QualityOfSolution(objective, None, fitness, None, is_valid)
 
     def native_representation(self, representation_str:str)->BitArray:
         """
