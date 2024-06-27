@@ -1,5 +1,5 @@
 """
-The :mod:`~uo.algorithm.metaheuristic.genetic_algorithm.problem_solution_ga_support` module describes the class :class:`~uo.algorithm.metaheuristic.genetic_algorithm.problem_solution_ga_support.ProblemSolutionGaSupport`.
+The :mod:`~uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support` module describes the class :class:`~uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support.GaMutationSupport`.
 """
 
 from pathlib import Path

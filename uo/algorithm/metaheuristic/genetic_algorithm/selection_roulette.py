@@ -30,7 +30,7 @@ class SelectionRoulette(Selection):
         pop:Optional[list[Solution]] = optimizer.current_population
         if pop is None:
             raise AttributeError("Population should exist!")
-        n:int = pop.length()
+        n:int = len(pop)
         if n<=0:
             raise AttributeError("Population should contain at least one individual")
         n_e:Optional[int] = optimizer.elite_count

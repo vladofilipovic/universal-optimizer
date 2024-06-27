@@ -2,8 +2,11 @@
 .. _py_ones_count_max_problem_int_solution_vns_support:
 
 The :mod:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution_vns_support` contains 
-class :class:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution_vns_support.OnesCountMaxProblemBinaryIntSolutionVnsSupport`, 
+class :class:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution_vns_support.OnesCountMaxProblemBinaryIntSolutionVnsLocalSearchSupport`, 
 that represents solution of the :ref:`Problem_Ones_Count_Max`, where `int` representation of the problem has been used.
+and class :class:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution_vns_support.OnesCountMaxProblemBinaryIntSolutionVnsShakingSupport`, 
+that represents solution of the :ref:`Problem_Ones_Count_Max`, where `int` representation of the problem has been used.
+
 """
 
 import sys
@@ -26,7 +29,7 @@ from uo.utils.complex_counter_uniform_ascending import ComplexCounterUniformAsce
 from uo.solution.quality_of_solution import QualityOfSolution
 from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support import VnsShakingSupport
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_local_search_support import VnsLocalSearchSupport
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support import VnsLocalSearchSupport
 
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution import OnesCountMaxProblemBinaryIntSolution
@@ -35,26 +38,26 @@ class OnesCountMaxProblemBinaryIntSolutionVnsShakingSupport(VnsShakingSupport[in
     
     def __init__(self)->None:
         """
-        Create new `OnesCountMaxProblemBinaryIntSolutionVnsSupport` instance
+        Create new `OnesCountMaxProblemBinaryIntSolutionVnsShakingSupport` instance
         """
         return
 
     def __copy__(self):
         """
-        Internal copy of the `OnesCountMaxProblemBinaryIntSolutionVnsSupport`
+        Internal copy of the `OnesCountMaxProblemBinaryIntSolutionVnsShakingSupport`
 
-        :return: new `OnesCountMaxProblemBinaryIntSolutionVnsSupport` instance with the same properties
-        :rtype: OnesCountMaxProblemBinaryIntSolutionVnsSupport
+        :return: new `OnesCountMaxProblemBinaryIntSolutionVnsShakingSupport` instance with the same properties
+        :rtype: OnesCountMaxProblemBinaryIntSolutionVnsShakingSupport
         """
         sup = deepcopy(self)
         return sup
 
     def copy(self):
         """
-        Copy the `OnesCountMaxProblemBinaryIntSolutionVnsSupport`
+        Copy the `OnesCountMaxProblemBinaryIntSolutionVnsShakingSupport`
         
-        :return: new `OnesCountMaxProblemBinaryIntSolutionVnsSupport` instance with the same properties
-        :rtype: `OnesCountMaxProblemBinaryIntSolutionVnsSupport`
+        :return: new `OnesCountMaxProblemBinaryIntSolutionVnsShakingSupport` instance with the same properties
+        :rtype: `OnesCountMaxProblemBinaryIntSolutionVnsShakingSupport`
         """        
         return self.__copy__()
         
@@ -152,26 +155,26 @@ class OnesCountMaxProblemBinaryIntSolutionVnsLocalSearchSupport(VnsLocalSearchSu
     
     def __init__(self)->None:
         """
-        Create new `OnesCountMaxProblemBinaryIntSolutionVnsSupport` instance
+        Create new `OnesCountMaxProblemBinaryIntSolutionVnsLocalSearchSupport` instance
         """
         return
 
     def __copy__(self):
         """
-        Internal copy of the `OnesCountMaxProblemBinaryIntSolutionVnsSupport`
+        Internal copy of the `OnesCountMaxProblemBinaryIntSolutionVnsLocalSearchSupport`
 
-        :return: new `OnesCountMaxProblemBinaryIntSolutionVnsSupport` instance with the same properties
-        :rtype: OnesCountMaxProblemBinaryIntSolutionVnsSupport
+        :return: new `OnesCountMaxProblemBinaryIntSolutionVnsLocalSearchSupport` instance with the same properties
+        :rtype: OnesCountMaxProblemBinaryIntSolutionVnsLocalSearchSupport
         """
         sup = deepcopy(self)
         return sup
 
     def copy(self):
         """
-        Copy the `OnesCountMaxProblemBinaryIntSolutionVnsSupport`
+        Copy the `OnesCountMaxProblemBinaryIntSolutionVnsLocalSearchSupport`
         
-        :return: new `OnesCountMaxProblemBinaryIntSolutionVnsSupport` instance with the same properties
-        :rtype: `OnesCountMaxProblemBinaryIntSolutionVnsSupport`
+        :return: new `OnesCountMaxProblemBinaryIntSolutionVnsLocalSearchSupport` instance with the same properties
+        :rtype: `OnesCountMaxProblemBinaryIntSolutionVnsLocalSearchSupport`
         """        
         return self.__copy__()
         
@@ -286,7 +289,7 @@ class OnesCountMaxProblemBinaryIntSolutionVnsLocalSearchSupport(VnsLocalSearchSu
         :return: string representation of vns support instance
         :rtype: str
         """        
-        return 'OnesCountMaxProblemBinaryIntSolutionVnsSupport'
+        return 'OnesCountMaxProblemBinaryIntSolutionVnsLocalSearchSupport'
 
     def __str__(self)->str:
         """

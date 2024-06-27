@@ -47,8 +47,11 @@ from opt.single_objective.glob.function_one_variable_max_problem.function_one_va
         import FunctionOneVariableMaxProblemBinaryIntSolution
 from opt.single_objective.glob.function_one_variable_max_problem\
         .function_one_variable_max_problem_binary_int_solution_vns_support import \
-        FunctionOneVariableMaxProblemBinaryIntSolutionVnsSupport
-
+        FunctionOneVariableMaxProblemBinaryIntSolutionVnsShakingSupport
+from opt.single_objective.glob.function_one_variable_max_problem\
+        .function_one_variable_max_problem_binary_int_solution_vns_support import \
+        FunctionOneVariableMaxProblemBinaryIntSolutionVnsLocalSearchSupport
+    
 from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_solver import \
         FunctionOneVariableMaxProblemSolver
 
@@ -177,7 +180,8 @@ def main():
             local_search_type = parameters['localSearchType']
             # initial solution and vns support
             solution_type:str = parameters['solutionType']
-            vns_support = None
+            vns_shaking_support = None
+            vns_ls_support = None
             if solution_type=='int':
                 number_of_intervals:int = parameters['solutionNumberOfIntervals']
                 solution:FunctionOneVariableMaxProblemBinaryIntSolution = \
@@ -190,8 +194,10 @@ def main():
                                 evaluation_cache_max_size=evaluation_cache_max_size,
                                 distance_calculation_cache_is_used=calculation_solution_distance_cache_is_used,
                                 distance_calculation_cache_max_size=calculation_solution_distance_cache_max_size)
-                vns_support:FunctionOneVariableMaxProblemBinaryIntSolutionVnsSupport = \
-                        FunctionOneVariableMaxProblemBinaryIntSolutionVnsSupport()
+                vns_shaking_support:FunctionOneVariableMaxProblemBinaryIntSolutionVnsShakingSupport = \
+                        FunctionOneVariableMaxProblemBinaryIntSolutionVnsShakingSupport()
+                vns_ls_support:FunctionOneVariableMaxProblemBinaryIntSolutionVnsLocalSearchSupport = \
+                        FunctionOneVariableMaxProblemBinaryIntSolutionVnsLocalSearchSupport()
             else:
                 raise ValueError("Invalid solution/representation type is chosen.")
             # solver construction parameters
@@ -199,7 +205,8 @@ def main():
             vns_construction_params.output_control = output_control
             vns_construction_params.problem = problem
             vns_construction_params.solution_template = solution
-            vns_construction_params.problem_solution_vns_support = vns_support
+            vns_construction_params.vns_shaking_support = vns_shaking_support
+            vns_construction_params.vns_ls_support = vns_ls_support
             vns_construction_params.finish_control = finish_control
             vns_construction_params.random_seed = r_seed
             vns_construction_params.additional_statistics_control = additional_statistics_control

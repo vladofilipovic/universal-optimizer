@@ -20,7 +20,7 @@ def main():
         construction_params.output_control = output_control
         construction_params.problem = problem_to_solve
         construction_params.solution_template = solution
-        construction_params.problem_solution_te_support = te_support
+        construction_params.te_operations_support = te_support
         optimizer:TeOptimizer = TeOptimizer.from_construction_tuple(construction_params)
         bs = optimizer.optimize()
         print('Best solution representation: {}'.format(bs.representation.bin))            

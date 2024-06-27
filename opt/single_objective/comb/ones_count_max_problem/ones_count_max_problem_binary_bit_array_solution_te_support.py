@@ -29,12 +29,12 @@ from uo.utils.complex_counter_uniform_ascending import ComplexCounterUniformAsce
 
 from uo.solution.quality_of_solution import QualityOfSolution
 from uo.algorithm.algorithm import Algorithm
-from uo.algorithm.exact.total_enumeration.problem_solution_te_support import ProblemSolutionTeSupport
+from uo.algorithm.exact.total_enumeration.te_operations_support import TeOperationsSupport
 
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution import OnesCountMaxProblemBinaryBitArraySolution
 
-class OnesCountMaxProblemBinaryBitArraySolutionTeSupport(ProblemSolutionTeSupport[BitArray,str]):
+class OnesCountMaxProblemBinaryBitArraySolutionTeSupport(TeOperationsSupport[BitArray,str]):
     
     def __init__(self)->None:
         """

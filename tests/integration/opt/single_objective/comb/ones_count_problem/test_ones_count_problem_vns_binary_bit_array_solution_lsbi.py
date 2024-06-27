@@ -19,7 +19,11 @@ from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem imp
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution import \
     OnesCountMaxProblemBinaryBitArraySolution
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_vns_support import \
-    OnesCountMaxProblemBinaryBitArraySolutionVnsSupport
+    OnesCountMaxProblemBinaryBitArraySolutionVnsShakingSupport
+
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_vns_support import \
+    OnesCountMaxProblemBinaryBitArraySolutionVnsLocalSearchSupport
+
 
 class TestOnesCountMaxProblemVnsBinaryBitArraySolutionLsbi(unittest.TestCase):
     
@@ -34,13 +38,16 @@ class TestOnesCountMaxProblemVnsBinaryBitArraySolutionLsbi(unittest.TestCase):
         self.finish_control:FinishControl = FinishControl(criteria='evaluations', evaluations_max=1000, 
                     iterations_max=0, seconds_max=0)
         self.additional_stat = AdditionalStatisticsControl(keep='')
-        self.vns_support:OnesCountMaxProblemBinaryBitArraySolutionVnsSupport = \
-                OnesCountMaxProblemBinaryBitArraySolutionVnsSupport()
+        self.vns_shaking_support:OnesCountMaxProblemBinaryBitArraySolutionVnsShakingSupport = \
+                OnesCountMaxProblemBinaryBitArraySolutionVnsShakingSupport()
+        self.vns_ls_support:OnesCountMaxProblemBinaryBitArraySolutionVnsShakingSupport = \
+                OnesCountMaxProblemBinaryBitArraySolutionVnsShakingSupport()
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
         vns_construction_params.output_control = self.output_control
         vns_construction_params.problem = self.problem_to_solve
         vns_construction_params.solution_template = self.solution
-        vns_construction_params.problem_solution_vns_support = self.vns_support
+        vns_construction_params.vns_shaking_support = self.vns_shaking_support
+        vns_construction_params.vns_ls_support = self.vns_ls_support
         vns_construction_params.finish_control = self.finish_control
         vns_construction_params.random_seed = 43434343
         vns_construction_params.additional_statistics_control = self.additional_stat
@@ -50,7 +57,6 @@ class TestOnesCountMaxProblemVnsBinaryBitArraySolutionLsbi(unittest.TestCase):
         self.optimizer:VnsOptimizer = VnsOptimizer.from_construction_tuple(vns_construction_params)
         self.bs = self.optimizer.optimize()
 
-    
     def test_best_solution_after_optimization_should_be_optimal(self):
         result:str = '111111111111111111111111'
         self.assertEqual(self.optimizer.best_solution.string_representation(), result)

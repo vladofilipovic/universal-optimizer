@@ -215,7 +215,7 @@ def main():
             te_construction_params.output_control = output_control
             te_construction_params.problem = problem
             te_construction_params.solution_template = solution
-            te_construction_params.problem_solution_te_support = te_support
+            te_construction_params.te_operations_support = te_support
             solver:OnesCountMaxProblemSolver = OnesCountMaxProblemSolver.from_total_enumeration(te_construction_params)
         elif parameters['algorithm'] == 'integer_linear_programming':
             # solver construction parameters

@@ -1,5 +1,5 @@
 """ 
-The :mod:`~uo.algorithm.metaheuristic.variable_neighborhood_search.vns_local_search_support` module describes the class :class:`~uo.algorithm.metaheuristic.variable_neighborhood_search.vns_local_search_support.VnsLocalSearchSupport`.
+The :mod:`~uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support` module describes the class :class:`~uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support.VnsLocalSearchSupport`.
 """
 
 from pathlib import Path

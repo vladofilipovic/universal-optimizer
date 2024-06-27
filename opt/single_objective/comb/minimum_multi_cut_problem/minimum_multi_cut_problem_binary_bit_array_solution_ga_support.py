@@ -21,44 +21,39 @@ from random import choice, random, randint
 from bitstring import BitArray
 
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimizer
-from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support import ProblemSolutionGaSupport
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support import GaCrossoverSupport
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support import GaMutationSupport
 
 from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem import MinimumMultiCutProblem
-from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_binary_bit_array_solution import MinimumMultiCutProblemBinaryBitArraySolution
+from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_binary_bit_array_solution \
+    import MinimumMultiCutProblemBinaryBitArraySolution
 
 
-class MinimumMultiCutProblemBinaryBitArraySolutionGaSupport(ProblemSolutionGaSupport[BitArray,str]):
+class MinimumMultiCutProblemBinaryBitArraySolutionGaCrossoverSupport(GaCrossoverSupport[BitArray,str]):
 
     def __init__(self)->None:
         """
-        Create new `MinimumMultiCutProblemBinaryBitArraySolutionGaSupport` instance
+        Create new `MinimumMultiCutProblemBinaryBitArraySolutionGaCrossoverSupport` instance
         """
 
     def __copy__(self):
         """
-        Internal copy of the `MinimumMultiCutProblemBinaryBitArraySolutionGaSupport`
+        Internal copy of the `MinimumMultiCutProblemBinaryBitArraySolutionGaCrossoverSupport`
 
-        :return: new `MinimumMultiCutProblemBinaryBitArraySolutionGaSupport` instance with the same properties
-        :rtype: `MinimumMultiCutProblemBinaryBitArraySolutionGaSupport`
+        :return: new `MinimumMultiCutProblemBinaryBitArraySolutionGaCrossoverSupport` instance with the same properties
+        :rtype: `MinimumMultiCutProblemBinaryBitArraySolutionGaCrossoverSupport`
         """
         sol = deepcopy(self)
         return sol
 
     def copy(self):
         """
-        Copy the `MinimumMultiCutProblemBinaryBitArraySolutionGaSupport` instance
+        Copy the `MinimumMultiCutProblemBinaryBitArraySolutionGaCrossoverSupport` instance
 
-        :return: new `MinimumMultiCutProblemBinaryBitArraySolutionGaSupport` instance with the same properties
-        :rtype: `MinimumMultiCutProblemBinaryBitArraySolutionGaSupport`
+        :return: new `MinimumMultiCutProblemBinaryBitArraySolutionGaCrossoverSupport` instance with the same properties
+        :rtype: `MinimumMultiCutProblemBinaryBitArraySolutionGaCrossoverSupport`
         """
         return self.__copy__()
-
-    def mutation(self, mutation_probability:float, problem:MinimumMultiCutProblem, solution:MinimumMultiCutProblemBinaryBitArraySolution, optimizer:GaOptimizer)->bool:
-        for i in range(len(solution.representation)):
-            if random() < mutation_probability:
-                solution.representation.invert(i)
-
-        return True
 
     def crossover(self, crossover_probability:float, problem:MinimumMultiCutProblem, solution1:MinimumMultiCutProblemBinaryBitArraySolution, solution2:MinimumMultiCutProblemBinaryBitArraySolution,
                     child1:MinimumMultiCutProblemBinaryBitArraySolution, child2:MinimumMultiCutProblemBinaryBitArraySolution, optimizer:GaOptimizer) -> None:
@@ -93,7 +88,88 @@ class MinimumMultiCutProblemBinaryBitArraySolutionGaSupport(ProblemSolutionGaSup
         :return: string representation of ga support instance
         :rtype: str
         """
-        return 'MinimumMultiCutProblemBinaryBitArraySolutionGaSupport'
+        return 'MinimumMultiCutProblemBinaryBitArraySolutionGaCrossoverSupport'
+
+    def __str__(self)->str:
+        """
+        String representation of the ga support instance
+
+        :return: string representation of the ga support instance
+        :rtype: str
+        """
+        return self.string_rep('|')
+
+    def __repr__(self)->str:
+        """
+        Representation of the ga support instance
+
+        :return: string representation of the ga support instance
+        :rtype: str
+        """
+        return self.string_rep('\n')
+
+    def __format__(self, spec:str)->str:
+        """
+        Formatted the ga support instance
+
+        :param str spec: format specification
+        :return: formatted ga support instance
+        :rtype: str
+        """
+        return self.string_rep('|')
+
+class MinimumMultiCutProblemBinaryBitArraySolutionGaMutationSupport(GaMutationSupport[BitArray,str]):
+
+    def __init__(self)->None:
+        """
+        Create new `MinimumMultiCutProblemBinaryBitArraySolutionGaMutationSupport` instance
+        """
+
+    def __copy__(self):
+        """
+        Internal copy of the `MinimumMultiCutProblemBinaryBitArraySolutionGaMutationSupport`
+
+        :return: new `MinimumMultiCutProblemBinaryBitArraySolutionGaMutationSupport` instance with the same properties
+        :rtype: `MinimumMultiCutProblemBinaryBitArraySolutionGaMutationSupport`
+        """
+        sol = deepcopy(self)
+        return sol
+
+    def copy(self):
+        """
+        Copy the `MinimumMultiCutProblemBinaryBitArraySolutionGaMutationSupport` instance
+
+        :return: new `MinimumMultiCutProblemBinaryBitArraySolutionGaMutationSupport` instance with the same properties
+        :rtype: `MinimumMultiCutProblemBinaryBitArraySolutionGaMutationSupport`
+        """
+        return self.__copy__()
+
+    def mutation(self, mutation_probability:float, problem:MinimumMultiCutProblem, solution:MinimumMultiCutProblemBinaryBitArraySolution, optimizer:GaOptimizer)->bool:
+        for i in range(len(solution.representation)):
+            if random() < mutation_probability:
+                solution.representation.invert(i)
+
+        return True
+
+    def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
+        group_end:str ='}')->str:
+        """
+        String representation of the ga support structure
+
+        :param delimiter: delimiter between fields
+        :type delimiter: str
+        :param indentation: level of indentation
+        :type indentation: int, optional, default value 0
+        :param indentation_symbol: indentation symbol
+        :type indentation_symbol: str, optional, default value ''
+        :param group_start: group start string 
+        :type group_start: str, optional, default value '{'
+        :param group_end: group end string 
+        :type group_end: str, optional, default value '}'
+        :return: string representation of ga support instance
+        :rtype: str
+        """
+        return 'MinimumMultiCutProblemBinaryBitArraySolutionGaMutationSupport'
 
     def __str__(self)->str:
         """

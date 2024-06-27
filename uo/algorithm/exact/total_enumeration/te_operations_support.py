@@ -1,5 +1,5 @@
 """ 
-The :mod:`~uo.algorithm.exact.total_enumeration.problem_solution_te_support` module describes the class :class:`~uo.algorithm.exact.total_enumeration.problem_solution_te_support.ProblemSolutionTeSupport`.
+The :mod:`~uo.algorithm.exact.total_enumeration.te_operations_support` module describes the class :class:`~uo.algorithm.exact.total_enumeration.te_operations_support.TeOperationsSupport`.
 """
 
 from pathlib import Path
@@ -20,7 +20,7 @@ from uo.algorithm.algorithm import Algorithm
 R_co = TypeVar("R_co", covariant=True) 
 A_co = TypeVar("A_co", covariant=True)
 
-class ProblemSolutionTeSupport(Generic[R_co,A_co], metaclass=ABCMeta):
+class TeOperationsSupport(Generic[R_co,A_co], metaclass=ABCMeta):
     
     @abstractmethod
     def reset(self, problem:Problem, solution:Solution[R_co,A_co], optimizer:Algorithm)->None:

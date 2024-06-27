@@ -15,7 +15,7 @@ from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalS
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support import VnsShakingSupport
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_local_search_support import VnsLocalSearchSupport
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support import VnsLocalSearchSupport
 
 class OnesCountMaxProblem2(Problem):
 
@@ -249,12 +249,16 @@ def main():
     finish:FinishControl = FinishControl( criteria='evaluations & seconds', 
             evaluations_max=500, seconds_max=10)
     additional_stat:AdditionalStatisticsControl = AdditionalStatisticsControl(is_active=False, keep='')
-    vns_support:OnesCountMaxProblemBinaryIntSolutionVnsSupport = OnesCountMaxProblemBinaryIntSolutionVnsSupport()
+    vns_shaking_support:OnesCountMaxProblemBinaryIntSolutionVnsShakingSupport = \
+        OnesCountMaxProblemBinaryIntSolutionVnsShakingSupport()
+    vns_ls_support:OnesCountMaxProblemBinaryIntSolutionVnsLocalSearchSupport = \
+        OnesCountMaxProblemBinaryIntSolutionVnsLocalSearchSupport()
     vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
     vns_construction_params.output_control = output_control
     vns_construction_params.problem = problem_to_solve
     vns_construction_params.solution_template = solution
-    vns_construction_params.problem_solution_vns_support = vns_support
+    vns_construction_params.vns_shaking_support = vns_shaking_support
+    vns_construction_params.vns_ls_support = vns_ls_support
     vns_construction_params.finish_control = finish
     vns_construction_params.random_seed = 43434343
     vns_construction_params.additional_statistics_control = additional_stat

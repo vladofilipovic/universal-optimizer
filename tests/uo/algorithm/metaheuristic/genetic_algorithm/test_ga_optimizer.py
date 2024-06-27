@@ -6,7 +6,10 @@ from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalS
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimizer
-from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support import ProblemSolutionGaSupport
+from uo.algorithm.metaheuristic.genetic_algorithm.selection import Selection
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support import GaCrossoverSupport
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support import GaMutationSupport
+
 from uo.problem.problem_void_min_so import ProblemVoidMinSO
 from uo.solution.solution_void import SolutionVoid
 
@@ -22,18 +25,18 @@ class TestGaOptimizer(unittest.TestCase):
         output_control = OutputControl()
         problem = ProblemVoidMinSO("a problem", True)
         solution_template = SolutionVoid( 43, 43, 43, True)
-        ga_support_stub = mocker.MagicMock(spec=ProblemSolutionGaSupport)
-        type(ga_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
-        type(ga_support_stub).crossover = mocker.CallableMixin(spec=lambda x: x)
-        type(ga_support_stub).selection_roulette = mocker.CallableMixin(spec=lambda x: x)
-        mutation_probability = 0.1
-        selection_type = 'selectionRoulette'
-        tournament_size = 10
+        selection_stub = mocker.MagicMock(spec=Selection)
+        type(selection_stub).selection = mocker.CallableMixin(spec=lambda x: x)
+        ga_crossover_support_stub = mocker.MagicMock(spec=GaCrossoverSupport)
+        type(ga_crossover_support_stub).crossover = mocker.CallableMixin(spec=lambda x: x)
+        ga_mutation_support_stub = mocker.MagicMock(spec=GaMutationSupport)
+        type(ga_mutation_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
         population_size = 100
         elitism_size = 10
         # Act
         ga_optimizer = GaOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
-                    problem, solution_template, ga_support_stub,mutation_probability, selection_type, tournament_size, population_size, elitism_size)
+                    problem, solution_template, selection_stub, 
+                    ga_crossover_support_stub, ga_mutation_support_stub, population_size, elitism_size)
         # Assert
         self.assertIsInstance(ga_optimizer, GaOptimizer)
 
@@ -46,18 +49,18 @@ class TestGaOptimizer(unittest.TestCase):
         output_control = OutputControl()
         problem = ProblemVoidMinSO("a problem", True)
         solution_template = SolutionVoid( 43, 0, 0, False)
-        ga_support_stub = mocker.MagicMock(spec=ProblemSolutionGaSupport)
-        type(ga_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
-        type(ga_support_stub).crossover = mocker.CallableMixin(spec=lambda x: x)
-        type(ga_support_stub).selection_roulette = mocker.CallableMixin(spec=lambda x: x)
-        mutation_probability = 0.1
-        selection_type = 'selectionRoulette'
-        tournament_size = 10
+        selection_stub = mocker.MagicMock(spec=Selection)
+        type(selection_stub).selection = mocker.CallableMixin(spec=lambda x: x)
+        ga_crossover_support_stub = mocker.MagicMock(spec=GaCrossoverSupport)
+        type(ga_crossover_support_stub).crossover = mocker.CallableMixin(spec=lambda x: x)
+        ga_mutation_support_stub = mocker.MagicMock(spec=GaMutationSupport)
+        type(ga_mutation_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
         population_size = 100
         elitism_size = 10
         # Act
         ga_optimizer = GaOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
-                    problem, solution_template, ga_support_stub,mutation_probability, selection_type, tournament_size, population_size, elitism_size)
+                    problem, solution_template, selection_stub, 
+                    ga_crossover_support_stub, ga_mutation_support_stub, population_size, elitism_size)
         # Assert
         self.assertIsInstance(ga_optimizer, GaOptimizer)
 
@@ -70,39 +73,41 @@ class TestGaOptimizer(unittest.TestCase):
         output_control = OutputControl()
         problem = ProblemVoidMinSO("a problem", True)
         solution_template = SolutionVoid( 43, 0, 0, False)
-        ga_support_stub = mocker.MagicMock(spec=ProblemSolutionGaSupport)
-        type(ga_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
-        type(ga_support_stub).crossover = mocker.CallableMixin(spec=lambda x: x)
-        type(ga_support_stub).selection_roulette = mocker.CallableMixin(spec=lambda x: x)
-        mutation_probability = 0.1
-        selection_type = 'selectionRoulette'
-        tournament_size = 10
+        selection_stub = mocker.MagicMock(spec=Selection)
+        type(selection_stub).selection = mocker.CallableMixin(spec=lambda x: x)
+        ga_crossover_support_stub = mocker.MagicMock(spec=GaCrossoverSupport)
+        type(ga_crossover_support_stub).crossover = mocker.CallableMixin(spec=lambda x: x)
+        ga_mutation_support_stub = mocker.MagicMock(spec=GaMutationSupport)
+        type(ga_mutation_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
         population_size = 100
         elitism_size = 10
         # Act
         ga_optimizer = GaOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
-                    problem, solution_template, ga_support_stub,mutation_probability, selection_type, tournament_size, population_size, elitism_size)
+                    problem, solution_template, selection_stub, 
+                    ga_crossover_support_stub, ga_mutation_support_stub, population_size, elitism_size)
         # Assert
         self.assertIsInstance(ga_optimizer, GaOptimizer)
 
-    # GaOptimizer can not be initialized without ProblemSolutionGaSupport parameter
-    def test_ga_optimizer_initialized_with_problem_solution_ga_support(self):
+    # GaOptimizer can not be initialized without GaCrossoverSupport parameter
+    def test_ga_optimizer_initialized_without_ga_crossover_support(self):
         finish_control = FinishControl()
         random_seed = 123
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
         problem = ProblemVoidMinSO("a problem", True)
         solution_template = None
-        ga_support = None
-        mutation_probability = 0.1
-        selection_type = 'selectionRoulette'
-        tournament_size = 10
+        selection_stub = mocker.MagicMock(spec=Selection)
+        type(selection_stub).selection = mocker.CallableMixin(spec=lambda x: x)
+        ga_crossover_support_stub = None
+        ga_mutation_support_stub = mocker.MagicMock(spec=GaMutationSupport)
+        type(ga_mutation_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
         population_size = 100
         elitism_size = 10
         # Act & Assert
         with self.assertRaises(TypeError):
             GaOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
-                    problem, solution_template, ga_support, mutation_probability, selection_type, tournament_size, population_size, elitism_size)
+                    problem, solution_template, selection_stub, 
+                    ga_crossover_support_stub, ga_mutation_support_stub, population_size, elitism_size)
 
     # GaOptimizer can successfully execute init
     def test_ga_optimizer_init(self):
@@ -113,17 +118,17 @@ class TestGaOptimizer(unittest.TestCase):
         output_control = OutputControl()
         problem = ProblemVoidMinSO("a problem", True)
         solution_template = SolutionVoid( 43, 43, 43, True)
-        ga_support_stub = mocker.MagicMock(spec=ProblemSolutionGaSupport)
-        type(ga_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
-        type(ga_support_stub).crossover = mocker.CallableMixin(spec=lambda x: x)
-        type(ga_support_stub).selection_roulette = mocker.CallableMixin(spec=lambda x: x)
-        mutation_probability = 0.1
-        selection_type = 'selectionRoulette'
-        tournament_size = 10
+        selection_stub = mocker.MagicMock(spec=Selection)
+        type(selection_stub).selection = mocker.CallableMixin(spec=lambda x: x)
+        ga_crossover_support_stub = mocker.MagicMock(spec=GaCrossoverSupport)
+        type(ga_crossover_support_stub).crossover = mocker.CallableMixin(spec=lambda x: x)
+        ga_mutation_support_stub = mocker.MagicMock(spec=GaMutationSupport)
+        type(ga_mutation_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
         population_size = 100
         elitism_size = 10
         ga_optimizer = GaOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
-                    problem, solution_template, ga_support_stub,mutation_probability, selection_type, tournament_size, population_size, elitism_size)
+                    problem, solution_template, selection_stub, 
+                    ga_crossover_support_stub, ga_mutation_support_stub, population_size, elitism_size)
         # Act
         ga_optimizer.execution_started = datetime.now()
         ga_optimizer.init()
@@ -140,17 +145,17 @@ class TestGaOptimizer(unittest.TestCase):
         output_control = OutputControl()
         problem = ProblemVoidMinSO("a problem", True)
         solution_template = SolutionVoid( 43, 43, 43, True)
-        ga_support_stub = mocker.MagicMock(spec=ProblemSolutionGaSupport)
-        type(ga_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
-        type(ga_support_stub).crossover = mocker.CallableMixin(spec=lambda x: x)
-        type(ga_support_stub).selection_roulette = mocker.CallableMixin(spec=lambda x: x)
-        mutation_probability = 0.1
-        selection_type = 'selectionRoulette'
-        tournament_size = 10
+        selection_stub = mocker.MagicMock(spec=Selection)
+        type(selection_stub).selection = mocker.CallableMixin(spec=lambda x: x)
+        ga_crossover_support_stub = mocker.MagicMock(spec=GaCrossoverSupport)
+        type(ga_crossover_support_stub).crossover = mocker.CallableMixin(spec=lambda x: x)
+        ga_mutation_support_stub = mocker.MagicMock(spec=GaMutationSupport)
+        type(ga_mutation_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
         population_size = 100
         elitism_size = 10
         ga_optimizer = GaOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
-                    problem, solution_template, ga_support_stub,mutation_probability, selection_type, tournament_size, population_size, elitism_size)
+                    problem, solution_template, selection_stub, 
+                    ga_crossover_support_stub, ga_mutation_support_stub, population_size, elitism_size)
         # Act
         copied_optimizer = ga_optimizer.copy()
         # Assert
@@ -167,19 +172,19 @@ class TestGaOptimizer(unittest.TestCase):
         output_control = OutputControl()
         problem = ProblemVoidMinSO("a problem", True)
         solution_template = SolutionVoid( 43, 43, 43, True)
-        ga_support_stub = mocker.MagicMock(spec=ProblemSolutionGaSupport)
-        type(ga_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
-        type(ga_support_stub).crossover = mocker.CallableMixin(spec=lambda x: x)
-        type(ga_support_stub).selection_roulette = mocker.CallableMixin(spec=lambda x: x)
-        mutation_probability = 0.1
-        selection_type = 'selectionRoulette'
-        tournament_size = 10
+        selection_stub = mocker.MagicMock(spec=Selection)
+        type(selection_stub).selection = mocker.CallableMixin(spec=lambda x: x)
+        ga_crossover_support_stub = mocker.MagicMock(spec=GaCrossoverSupport)
+        type(ga_crossover_support_stub).crossover = mocker.CallableMixin(spec=lambda x: x)
+        ga_mutation_support_stub = mocker.MagicMock(spec=GaMutationSupport)
+        type(ga_mutation_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
         population_size = 100
         elitism_size = 10
         # Act & Assert
         with self.assertRaises(TypeError):
             GaOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
-                    problem, solution_template, ga_support_stub,mutation_probability, selection_type, tournament_size, population_size, elitism_size)
+                    problem, solution_template, selection_stub, 
+                    ga_crossover_support_stub, ga_mutation_support_stub, population_size, elitism_size)
 
     # GaOptimizer raises TypeError if random_seed parameter is not of type Optional[int]
     def test_random_seed_type_error(self):
@@ -190,20 +195,19 @@ class TestGaOptimizer(unittest.TestCase):
         output_control = OutputControl()
         problem = ProblemVoidMinSO("a problem", True)
         solution_template = SolutionVoid( 43, 43, 43, True)
-        ga_support_stub = mocker.MagicMock(spec=ProblemSolutionGaSupport)
-        ga_support_stub = mocker.MagicMock(spec=ProblemSolutionGaSupport)
-        type(ga_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
-        type(ga_support_stub).crossover= mocker.CallableMixin(spec=lambda x: x)
-        type(ga_support_stub).selection_roulette = mocker.CallableMixin(spec=lambda x: x)
-        mutation_probability = 0.1
-        selection_type = 'selectionRoulette'
-        tournament_size = 10
+        selection_stub = mocker.MagicMock(spec=Selection)
+        type(selection_stub).selection = mocker.CallableMixin(spec=lambda x: x)
+        ga_crossover_support_stub = mocker.MagicMock(spec=GaCrossoverSupport)
+        type(ga_crossover_support_stub).crossover = mocker.CallableMixin(spec=lambda x: x)
+        ga_mutation_support_stub = mocker.MagicMock(spec=GaMutationSupport)
+        type(ga_mutation_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
         population_size = 100
         elitism_size = 10
         # Act & Assert
         with self.assertRaises(TypeError):
             GaOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
-                    problem, solution_template, ga_support_stub,mutation_probability, selection_type, tournament_size, population_size, elitism_size)
+                    problem, solution_template, selection_stub, 
+                    ga_crossover_support_stub, ga_mutation_support_stub, population_size, elitism_size)
 
     # GaOptimizer raises TypeError if additional_statistics_control parameter is not of type AdditionalStatisticsControl
     def test_additional_statistics_control_type_error(self):
@@ -214,19 +218,19 @@ class TestGaOptimizer(unittest.TestCase):
         output_control = OutputControl()
         problem = ProblemVoidMinSO("a problem", True)
         solution_template = SolutionVoid( 43, 43, 43, True)
-        ga_support_stub = mocker.MagicMock(spec=ProblemSolutionGaSupport)
-        type(ga_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
-        type(ga_support_stub).crossover= mocker.CallableMixin(spec=lambda x: x)
-        type(ga_support_stub).selection_roulette = mocker.CallableMixin(spec=lambda x: x)
-        mutation_probability = 0.1
-        selection_type = 'selectionRoulette'
-        tournament_size = 10
+        selection_stub = mocker.MagicMock(spec=Selection)
+        type(selection_stub).selection = mocker.CallableMixin(spec=lambda x: x)
+        ga_crossover_support_stub = mocker.MagicMock(spec=GaCrossoverSupport)
+        type(ga_crossover_support_stub).crossover = mocker.CallableMixin(spec=lambda x: x)
+        ga_mutation_support_stub = mocker.MagicMock(spec=GaMutationSupport)
+        type(ga_mutation_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
         population_size = 100
         elitism_size = 10
         # Act & Assert
         with self.assertRaises(TypeError):
             GaOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
-                    problem, solution_template, ga_support_stub,mutation_probability, selection_type, tournament_size, population_size, elitism_size)
+                    problem, solution_template, selection_stub, 
+                    ga_crossover_support_stub, ga_mutation_support_stub, population_size, elitism_size)
 
     # GaOptimizer raises TypeError if solution_template parameter is not of type Optional[Solution]
     def test_solution_template_parameter_type_error(self):
@@ -237,22 +241,22 @@ class TestGaOptimizer(unittest.TestCase):
         output_control = OutputControl()
         problem = ProblemVoidMinSO("a problem", True)
         solution_template = "not a Solution"        
-        ga_support_stub = mocker.MagicMock(spec=ProblemSolutionGaSupport)
-        type(ga_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
-        type(ga_support_stub).crossover= mocker.CallableMixin(spec=lambda x: x)
-        type(ga_support_stub).selection_roulette = mocker.CallableMixin(spec=lambda x: x)
-        mutation_probability = 0.1
-        selection_type = 'selectionRoulette'
-        tournament_size = 10
+        selection_stub = mocker.MagicMock(spec=Selection)
+        type(selection_stub).selection = mocker.CallableMixin(spec=lambda x: x)
+        ga_crossover_support_stub = mocker.MagicMock(spec=GaCrossoverSupport)
+        type(ga_crossover_support_stub).crossover = mocker.CallableMixin(spec=lambda x: x)
+        ga_mutation_support_stub = mocker.MagicMock(spec=GaMutationSupport)
+        type(ga_mutation_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
         population_size = 100
         elitism_size = 10
         # Act & Assert
         with self.assertRaises(TypeError):
             GaOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
-                    problem, solution_template, ga_support_stub,mutation_probability, selection_type, tournament_size, population_size, elitism_size)
+                    problem, solution_template, selection_stub, 
+                    ga_crossover_support_stub, ga_mutation_support_stub, population_size, elitism_size)
 
-    # GaOptimizer raises TypeError if problem_solution_ga_support parameter is not of type ProblemSolutionGaSupport
-    def test_problem_solution_ga_support_parameter_type_error(self):
+    # GaOptimizer raises TypeError if ga_crossover_support parameter is not of type GaCrossoverSupport
+    def test_ga_crossover_support_parameter_type_error(self):
         # Arrange
         finish_control = FinishControl()
         random_seed = 123
@@ -260,16 +264,18 @@ class TestGaOptimizer(unittest.TestCase):
         output_control = OutputControl()
         problem = ProblemVoidMinSO("a problem", True)
         solution_template = SolutionVoid( 43, 43, 43, True)        
-        ga_support = "not appropriate type"       
-        mutation_probability = 0.1
-        selection_type = 'selectionRoulette'
-        tournament_size = 10
+        selection_stub = mocker.MagicMock(spec=Selection)
+        type(selection_stub).selection = mocker.CallableMixin(spec=lambda x: x)
+        ga_crossover_support_stub = "not appropriate type"
+        ga_mutation_support_stub = mocker.MagicMock(spec=GaMutationSupport)
+        type(ga_mutation_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
         population_size = 100
         elitism_size = 10
         # Act & Assert
         with self.assertRaises(TypeError):
             GaOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
-                    problem, solution_template, ga_support,mutation_probability, selection_type, tournament_size, population_size, elitism_size)
+                    problem, solution_template, selection_stub, 
+                    ga_crossover_support_stub, ga_mutation_support_stub, population_size, elitism_size)
 
     # GaOptimizer raises TypeError if population_size parameter is not of type int
     def test_population_size_parameter_type_error(self):
@@ -280,19 +286,19 @@ class TestGaOptimizer(unittest.TestCase):
         output_control = OutputControl()
         problem = ProblemVoidMinSO("a problem", True)
         solution_template = SolutionVoid( 43, 43, 43, True)         
-        ga_support_stub = mocker.MagicMock(spec=ProblemSolutionGaSupport)
-        type(ga_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
-        type(ga_support_stub).crossover= mocker.CallableMixin(spec=lambda x: x)
-        type(ga_support_stub).selection_roulette = mocker.CallableMixin(spec=lambda x: x)
-        mutation_probability = 0.1
-        selection_type = 'selectionRoulette'
-        tournament_size = 10
+        selection_stub = mocker.MagicMock(spec=Selection)
+        type(selection_stub).selection = mocker.CallableMixin(spec=lambda x: x)
+        ga_crossover_support_stub = mocker.MagicMock(spec=GaCrossoverSupport)
+        type(ga_crossover_support_stub).crossover = mocker.CallableMixin(spec=lambda x: x)
+        ga_mutation_support_stub = mocker.MagicMock(spec=GaMutationSupport)
+        type(ga_mutation_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
         population_size = 100.2
         elitism_size = 10
         # Act & Assert
         with self.assertRaises(TypeError):
             GaOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
-                    problem, solution_template, ga_support_stub,mutation_probability, selection_type, tournament_size, population_size, elitism_size)
+                    problem, solution_template, selection_stub, 
+                    ga_crossover_support_stub, ga_mutation_support_stub, population_size, elitism_size)
 
     # GaOptimizer raises TypeError if elitism_size parameter is not of type int
     def test_elitism_size_parameter_type_error(self):
@@ -303,16 +309,16 @@ class TestGaOptimizer(unittest.TestCase):
         output_control = OutputControl()
         problem = ProblemVoidMinSO("a problem", True)
         solution_template = SolutionVoid( 43, 43, 43, True)         
-        ga_support_stub = mocker.MagicMock(spec=ProblemSolutionGaSupport)
-        type(ga_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
-        type(ga_support_stub).crossover= mocker.CallableMixin(spec=lambda x: x)
-        type(ga_support_stub).selection_roulette = mocker.CallableMixin(spec=lambda x: x)
-        mutation_probability = 0.1
-        selection_type = 'selectionRoulette'
-        tournament_size = 10
+        selection_stub = mocker.MagicMock(spec=Selection)
+        type(selection_stub).selection = mocker.CallableMixin(spec=lambda x: x)
+        ga_crossover_support_stub = mocker.MagicMock(spec=GaCrossoverSupport)
+        type(ga_crossover_support_stub).crossover = mocker.CallableMixin(spec=lambda x: x)
+        ga_mutation_support_stub = mocker.MagicMock(spec=GaMutationSupport)
+        type(ga_mutation_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
         population_size = 100
         elitism_size = "wrong type"
         # Act & Assert
         with self.assertRaises(TypeError):
             GaOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
-                    problem, solution_template, ga_support_stub,mutation_probability, selection_type, tournament_size, population_size, elitism_size)
+                    problem, solution_template, selection_stub, 
+                    ga_crossover_support_stub, ga_mutation_support_stub, population_size, elitism_size)

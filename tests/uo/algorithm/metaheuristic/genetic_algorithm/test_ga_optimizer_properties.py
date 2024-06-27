@@ -3,10 +3,15 @@ import unittest.mock as mocker
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
 from uo.problem.problem import Problem
+
+
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimizer
-from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support import ProblemSolutionGaSupport
+from uo.algorithm.metaheuristic.genetic_algorithm.selection import Selection
+from uo.algorithm.metaheuristic.genetic_algorithm.selection_roulette import SelectionRoulette
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support import GaCrossoverSupport
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support import GaMutationSupport
 from uo.solution.solution_void import SolutionVoid
 
 class TestGaOptimizerProperties(unittest.TestCase):
@@ -26,9 +31,12 @@ class TestGaOptimizerProperties(unittest.TestCase):
         type(self.problem_mock).dimension = mocker.PropertyMock(return_value=42)
         self.problem_mock.copy = mocker.Mock(return_value=self.problem_mock)
 
-        self.problem_solution_ga_support_stub = mocker.MagicMock(spec=ProblemSolutionGaSupport)
-        self.problem_solution_ga_support_stub.selection_roulette = mocker.Mock(return_value="mocked stuff")
-        type(self.problem_solution_ga_support_stub).copy = mocker.CallableMixin(spec="return self")        
+        self.selection_roulete_mock =  mocker.MagicMock(spec=SelectionRoulette)
+        
+        self.ga_support_crossover_stub = mocker.MagicMock(spec=GaCrossoverSupport)
+        type(self.ga_support_crossover_stub).copy = mocker.CallableMixin(spec="return self")        
+        self.ga_support_mutation_stub = mocker.MagicMock(spec=GaMutationSupport)
+        type(self.ga_support_mutation_stub).copy = mocker.CallableMixin(spec="return self")        
         
         self.evaluations_max = 42
         self.iterations_max = 42
@@ -98,9 +106,9 @@ class TestGaOptimizerProperties(unittest.TestCase):
 
     def test_create_with_invalid_selection_type_should_raise_value_exception_with_proper_message(self):
         with self.assertRaises(ValueError) as context:
-            ga_support_stub = mocker.MagicMock(spec=ProblemSolutionGaSupport)
-            type(ga_support_stub).selection_roulette = mocker.CallableMixin(spec=lambda x: x)
-            type(ga_support_stub).copy = mocker.CallableMixin(spec="return self")
+            selection_stub = mocker.MagicMock(spec=SelectionRoulette)
+            type(selection_stub).selection_roulette = mocker.CallableMixin(spec=lambda x: x)
+            type(selection_stub).copy = mocker.CallableMixin(spec="return self")
             self.ga_optimizer:GaOptimizer = GaOptimizer(
                 output_control=self.output_control_stub,
                 problem=self.problem_mock, 

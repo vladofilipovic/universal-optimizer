@@ -35,12 +35,12 @@ from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalS
 
 from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizerConstructionParameters
 from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizer
-from uo.algorithm.exact.total_enumeration.problem_solution_te_support import ProblemSolutionTeSupport
+from uo.algorithm.exact.total_enumeration.te_operations_support import TeOperationsSupport
 
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support import VnsShakingSupport
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_local_search_support import VnsLocalSearchSupport
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support import VnsLocalSearchSupport
 
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp_linopy import \
         OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters
@@ -72,13 +72,13 @@ class MaxOneProblemSolverConstructionParameters:
         problem: Problem = None
         solution_template: Solution = None
         vns_shaking_support: VnsShakingSupport = None
-        vns_local_search_support: VnsLocalSearchSupport = None
+        vns_ls_support: VnsLocalSearchSupport = None
         vns_random_seed: int = None
         vns_additional_statistics_control: AdditionalStatisticsControl = None
         vns_k_min: int = None
         vns_k_max: int = None
         vns_local_search_type: str = None
-        te_problem_solution_support:ProblemSolutionTeSupport = None
+        te_problem_solution_support:TeOperationsSupport = None
 
 class OnesCountMaxProblemSolver:
     """
@@ -90,13 +90,13 @@ class OnesCountMaxProblemSolver:
             problem:Problem = None,
             solution_template:Solution = None,
             vns_shaking_support:VnsShakingSupport = None,
-            vns_local_search_support:VnsLocalSearchSupport = None,
+            vns_ls_support:VnsLocalSearchSupport = None,
             vns_random_seed:int = None,
             vns_additional_statistics_control:AdditionalStatisticsControl = None,
             vns_k_min:int = None,
             vns_k_max:int = None,
             vns_local_search_type:str = None,
-            te_problem_solution_support:ProblemSolutionTeSupport = None
+            te_problem_solution_support:TeOperationsSupport = None
     )->None:
         """
         Create new `OnesCountMaxProblemSolver` instance
@@ -107,7 +107,7 @@ class OnesCountMaxProblemSolver:
         :param Problem problem: problem that is solved
         :param Solution solution_template: initial solution
         :param VnsShakingSupport vns_shaking_support: Specific VNS support for shaking
-        :param VnsLocalSearchSupport vns_local_search_support: Specific VNS support for local_search
+        :param VnsLocalSearchSupport vns_ls_support: Specific VNS support for local_search
         :param int vns_random_seed: random seed
         :param AdditionalStatisticsControl vns_additional_statistics_control: additional statistics control
         :param int vns_k_min: VNS parameter k_min
@@ -128,8 +128,8 @@ class OnesCountMaxProblemSolver:
                     raise TypeError('Parameter \'solution_template\' must be \'Solution\'.')
             if not isinstance(vns_shaking_support, VnsShakingSupport):
                     raise TypeError('Parameter \'vns_shaking_support\' must be \'VnsShakingSupport\'.')
-            if not isinstance(vns_local_search_support, VnsLocalSearchSupport):
-                    raise TypeError('Parameter \'vns_local_search_support\' must be \'VnsLocalSearchSupport\'.')
+            if not isinstance(vns_ls_support, VnsLocalSearchSupport):
+                    raise TypeError('Parameter \'vns_ls_support\' must be \'VnsLocalSearchSupport\'.')
             if not isinstance(vns_random_seed, int):
                     raise TypeError('Parameter \'vns_random_seed\' must be \'int\'.')
             if not isinstance(vns_additional_statistics_control, AdditionalStatisticsControl):
@@ -146,7 +146,7 @@ class OnesCountMaxProblemSolver:
                     problem= problem,
                     solution_template= solution_template,
                     vns_shaking_support= vns_shaking_support,
-                    vns_local_search_support= vns_local_search_support,
+                    vns_ls_support= vns_ls_support,
                     random_seed= vns_random_seed, 
                     additional_statistics_control= vns_additional_statistics_control,
                     k_min= vns_k_min,
@@ -159,8 +159,8 @@ class OnesCountMaxProblemSolver:
                     raise TypeError('Parameter \'problem\' must be \'Problem\'.')
             if not isinstance(solution_template, Solution):
                     raise TypeError('Parameter \'solution_template\' must be \'Solution\'.')
-            if not isinstance(te_problem_solution_support, ProblemSolutionTeSupport):
-                    raise TypeError('Parameter \'te_problem_solution_support\' must be \'ProblemSolutionTeSupport\'.')
+            if not isinstance(te_problem_solution_support, TeOperationsSupport):
+                    raise TypeError('Parameter \'te_problem_solution_support\' must be \'TeOperationsSupport\'.')
             self.__optimizer = TeOptimizer(
                     output_control = output_control,
                     problem= problem,
@@ -217,7 +217,7 @@ class OnesCountMaxProblemSolver:
         params.problem= vns_construction_params.problem
         params.solution_template = vns_construction_params.solution_template
         params.vns_shaking_support = vns_construction_params.vns_shaking_support
-        params.vns_local_search_support = vns_construction_params.vns_local_search_support
+        params.vns_ls_support = vns_construction_params.vns_ls_support
         params.vns_random_seed = vns_construction_params.random_seed
         params.vns_additional_statistics_control = vns_construction_params.additional_statistics_control
         params.vns_k_min = vns_construction_params.k_min
@@ -237,7 +237,7 @@ class OnesCountMaxProblemSolver:
         params.output_control = te_construction_params.output_control
         params.problem = te_construction_params.problem
         params.solution_template= te_construction_params.solution_template
-        params.te_problem_solution_support= te_construction_params.problem_solution_te_support
+        params.te_problem_solution_support= te_construction_params.te_operations_support
         return cls.from_construction_tuple(params)
 
     @classmethod

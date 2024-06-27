@@ -32,7 +32,7 @@ from uo.solution.solution import Solution
 
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.algorithm import Algorithm
-from uo.algorithm.exact.total_enumeration.problem_solution_te_support import ProblemSolutionTeSupport
+from uo.algorithm.exact.total_enumeration.te_operations_support import TeOperationsSupport
 
 @dataclass
 class TeOptimizerConstructionParameters:
@@ -42,7 +42,7 @@ class TeOptimizerConstructionParameters:
     output_control:OutputControl = None
     problem:Optional[Problem] = None
     solution_template:Optional[Solution] = None
-    problem_solution_te_support:ProblemSolutionTeSupport = None
+    te_operations_support:TeOperationsSupport = None
 
 class TeOptimizer(Algorithm):
     """
@@ -53,14 +53,14 @@ class TeOptimizer(Algorithm):
             output_control:OutputControl, 
             problem:Problem,
             solution_template:Optional[Solution],
-            problem_solution_te_support:ProblemSolutionTeSupport)->None:
+            te_operations_support:TeOperationsSupport)->None:
         """
         Create new TeOptimizer instance
 
         :param `OutputControl` output_control: structure that controls output
         :param `Problem` problem: problem to be solved
         :param `Optional[Solution]` solution_template: solution from which algorithm started
-        :param `ProblemSolutionTeSupport` problem_solution_te_support: placeholder for additional methods, specific for TE 
+        :param `TeOperationsSupport` te_operations_support: placeholder for operations, specific for TE 
         """
         if not isinstance(output_control, OutputControl):
                 raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
@@ -68,23 +68,17 @@ class TeOptimizer(Algorithm):
                 raise TypeError('Parameter \'problem\' must be \'Problem\'.')
         if not isinstance(solution_template, Solution) and solution_template is not None:
                 raise TypeError('Parameter \'solution_template\' must be \'Solution\' or None.')
-        if not isinstance(problem_solution_te_support, ProblemSolutionTeSupport):
-                raise TypeError('Parameter \'problem_solution_te_support\' must be \'ProblemSolutionTeSupport\'.')
+        if not isinstance(te_operations_support, TeOperationsSupport):
+                raise TypeError('Parameter \'te_operations_support\' must be \'TeOperationsSupport\'.')
         super().__init__(name='total_enumerations', 
                 output_control=output_control, 
                 problem=problem,
                 solution_template=solution_template)
         # total enumeration support
-        if problem_solution_te_support is not None:
-            self.__problem_solution_te_support:ProblemSolutionTeSupport = problem_solution_te_support
-            self.__reset_method = problem_solution_te_support.reset
-            self.__progress_method = problem_solution_te_support.progress
-            self.__can_progress_method = problem_solution_te_support.can_progress
-        else:
-            self.__problem_solution_te_support:ProblemSolutionTeSupport = None
-            self.__reset_method = None
-            self.__progress_method = None
-            self.__can_progress_method = None
+        self.__te_operations_support:TeOperationsSupport = te_operations_support
+        self.__reset_method = self.__te_operations_support.reset
+        self.__progress_method = self.__te_operations_support.progress
+        self.__can_progress_method = self.__te_operations_support.can_progress
         # current solution
         self.__current_solution:Optional[Solution] = None
 
@@ -98,7 +92,7 @@ class TeOptimizer(Algorithm):
         return cls(construction_tuple.output_control, 
             construction_tuple.problem, 
             construction_tuple.solution_template,
-            construction_tuple.problem_solution_te_support)
+            construction_tuple.te_operations_support)
 
     def __copy__(self):
         """
@@ -158,7 +152,7 @@ class TeOptimizer(Algorithm):
         self.execution_started = datetime.now()
         self.init()
         logger.debug('Overall number of evaluations: {}'.format(
-            self.__problem_solution_te_support.overall_number_of_evaluations(self.problem, 
+            self.__te_operations_support.overall_number_of_evaluations(self.problem, 
             self.current_solution, self)))
         self.write_output_headers_if_needed()
         self.write_output_values_if_needed("before_algorithm", "b_a")

@@ -35,12 +35,12 @@ from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalS
 
 from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizerConstructionParameters
 from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizer
-from uo.algorithm.exact.total_enumeration.problem_solution_te_support import ProblemSolutionTeSupport
+from uo.algorithm.exact.total_enumeration.te_operations_support import TeOperationsSupport
 
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support import VnsShakingSupport
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_local_search_support import VnsLocalSearchSupport
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support import VnsLocalSearchSupport
 
 from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem import \
         FunctionOneVariableMaxProblemMax
@@ -62,7 +62,7 @@ class FunctionOneVariableMaxProblemSolverConstructionParameters:
         problem: Problem = None
         solution_template: Solution = None
         vns_shaking_support: VnsShakingSupport = None
-        vns_local_search_support: VnsLocalSearchSupport = None
+        vns_ls_support: VnsLocalSearchSupport = None
         vns_random_seed: int = None
         vns_additional_statistics_control: AdditionalStatisticsControl = None
         vns_k_min: int = None
@@ -79,7 +79,7 @@ class FunctionOneVariableMaxProblemSolver:
                 problem:Problem = None,
                 solution_template:Solution = None,
                 vns_shaking_support:VnsShakingSupport = None,
-                vns_local_search_support:VnsLocalSearchSupport = None,
+                vns_ls_support:VnsLocalSearchSupport = None,
                 vns_random_seed:int = None,
                 vns_additional_statistics_control:AdditionalStatisticsControl = None,
                 vns_k_min:int = None,
@@ -95,7 +95,7 @@ class FunctionOneVariableMaxProblemSolver:
                 :param Problem problem: problem that is solved
                 :param Solution solution_template: initial solution
                 :param VnsShakingSupport vns_shaking_support: Specific VNS support for shaking
-                :param VnsLocalSearchSupport vns_local_search_support: Specific VNS support for local search
+                :param VnsLocalSearchSupport vns_ls_support: Specific VNS support for local search
                 :param int vns_random_seed: random seed
                 :param AdditionalStatisticsControl vns_additional_statistics_control: additional statistics control
                 :param int vns_k_min: VNS parameter k_min
@@ -116,8 +116,8 @@ class FunctionOneVariableMaxProblemSolver:
                                 raise TypeError('Parameter \'solution_template\' must be \'Solution\'.')
                         if not isinstance(vns_shaking_support, VnsShakingSupport):
                                 raise TypeError('Parameter \'vns_shaking_support\' must be \'VnsShakingSupport\'.')
-                        if not isinstance(vns_local_search_support, VnsLocalSearchSupport):
-                                raise TypeError('Parameter \'vns_local_search_support\' must be \'VnsLocalSearchSupport\'.')
+                        if not isinstance(vns_ls_support, VnsLocalSearchSupport):
+                                raise TypeError('Parameter \'vns_ls_support\' must be \'VnsLocalSearchSupport\'.')
                         if not isinstance(vns_random_seed, int):
                                 raise TypeError('Parameter \'vns_random_seed\' must be \'int\'.')
                         if not isinstance(vns_additional_statistics_control, AdditionalStatisticsControl):
@@ -134,7 +134,7 @@ class FunctionOneVariableMaxProblemSolver:
                                 problem= problem,
                                 solution_template= solution_template,
                                 vns_shaking_support= vns_shaking_support,
-                                vns_local_search_support= vns_local_search_support,
+                                vns_ls_support= vns_ls_support,
                                 random_seed= vns_random_seed, 
                                 additional_statistics_control= vns_additional_statistics_control,
                                 k_min= vns_k_min,
@@ -180,7 +180,7 @@ class FunctionOneVariableMaxProblemSolver:
                 params.problem = vns_construction_params.problem
                 params.solution_template = vns_construction_params.solution_template
                 params.vns_shaking_support = vns_construction_params.vns_shaking_support
-                params.vns_local_search_support = vns_construction_params.vns_local_search_support
+                params.vns_ls_support = vns_construction_params.vns_ls_support
                 params.vns_random_seed = vns_construction_params.random_seed
                 params.vns_additional_statistics_control = vns_construction_params.additional_statistics_control
                 params.vns_k_min = vns_construction_params.k_min

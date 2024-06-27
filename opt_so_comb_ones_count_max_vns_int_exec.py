@@ -14,20 +14,26 @@ from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem imp
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution import \
                 OnesCountMaxProblemBinaryIntSolution
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution_vns_support import \
-                OnesCountMaxProblemBinaryIntSolutionVnsSupport
+                OnesCountMaxProblemBinaryIntSolutionVnsShakingSupport
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution_vns_support import \
+                OnesCountMaxProblemBinaryIntSolutionVnsLocalSearchSupport
 
 def main():
         problem_to_solve:OnesCountMaxProblem = OnesCountMaxProblem.from_dimension(dimension=24)
         solution:OnesCountMaxProblemBinaryIntSolution = OnesCountMaxProblemBinaryIntSolution()
         finish:FinishControl = FinishControl(criteria='evaluations & seconds', evaluations_max=500, seconds_max=10)
-        vns_support:OnesCountMaxProblemBinaryIntSolutionVnsSupport = OnesCountMaxProblemBinaryIntSolutionVnsSupport()
+        vns_shaking_support:OnesCountMaxProblemBinaryIntSolutionVnsShakingSupport = \
+                OnesCountMaxProblemBinaryIntSolutionVnsShakingSupport()
+        vns_ls_support:OnesCountMaxProblemBinaryIntSolutionVnsLocalSearchSupport = \
+                OnesCountMaxProblemBinaryIntSolutionVnsLocalSearchSupport()
         output_control:OutputControl = OutputControl(write_to_output=False)
         additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(is_active=False, keep='')
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
         vns_construction_params.output_control = output_control
         vns_construction_params.problem = problem_to_solve
         vns_construction_params.solution_template = solution
-        vns_construction_params.problem_solution_vns_support = vns_support
+        vns_construction_params.vns_shaking_support = vns_shaking_support
+        vns_construction_params.vns_ls_support = vns_ls_support
         vns_construction_params.finish_control = finish
         vns_construction_params.random_seed = 43434343
         vns_construction_params.additional_statistics_control = additional_statistics_control

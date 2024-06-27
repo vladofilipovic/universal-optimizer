@@ -29,7 +29,6 @@ from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalS
 
 from uo.algorithm.metaheuristic.population_based_metaheuristic import PopulationBasedMetaheuristic
 from uo.algorithm.metaheuristic.genetic_algorithm.selection import Selection
-from uo.algorithm.metaheuristic.genetic_algorithm.selection_roulette import SelectionRoulette
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support import GaCrossoverSupport
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support import GaMutationSupport
 
@@ -209,15 +208,18 @@ class GaOptimizer(PopulationBasedMetaheuristic):
         """
         Initialization of the GA algorithm
         """
-        super().init()
-        self.current_population = [self.solution_template.copy() for _ in range(self.population_size)]
+        self.__current_population = [self.solution_template.copy() for _ in range(self.population_size)]
         for i in range(self.population_size):
             self.current_population[i].init_random(self.problem)
             self.evaluation = 1
             self.current_population[i].evaluate(self.problem)
-        self.best_solution = max(self.current_population, key=lambda individual: individual.fitness_value)
-        if self.selection.elite_count > 0:
-            for i in range(self.selection.elite_count):
+        self.best_solution = max(self.__current_population, key=lambda individual: individual.fitness_value)
+        if self.elite_count is None:
+            return
+        if not isinstance(self.elite_count, int): 
+            return
+        if self.elite_count > 0:
+            for i in range(self.elite_count):
                 sub_range:list[Solution] = self.current_population[i:self.population_size]
                 max_sub_range:Solution = max(sub_range, key=lambda individual: individual.fitness_value)
                 for j, v in enumerate(range):
@@ -236,7 +238,7 @@ class GaOptimizer(PopulationBasedMetaheuristic):
         self.selection.selection(self)
         self.write_output_values_if_needed("after_step_in_iteration", "selection")
         n_e:Optional[int] = self.elite_count
-        if n_e is None:
+        if n_e is None or not isinstance(n_e, int):
             l_lim:int = 0
         else:
             l_lim:int = n_e
@@ -246,7 +248,7 @@ class GaOptimizer(PopulationBasedMetaheuristic):
                 break
             parent1:Solution = self.current_population[i]
             parent2:Solution = self.current_population[i+1]
-            self.__crossover_method(self.problem, parent1, parent2, new_population[i], new_population[i+1], self)
+            self.__crossover_method(1, self.problem, parent1, parent2, new_population[i], new_population[i+1], self)
         self.write_output_values_if_needed("after_step_in_iteration", "crossover")
         self.write_output_values_if_needed("before_step_in_iteration", "mutation")
         for i in range(l_lim, len(self.current_population)):

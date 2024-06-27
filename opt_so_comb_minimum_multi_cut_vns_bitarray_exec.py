@@ -15,7 +15,9 @@ from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_probl
 from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_binary_bit_array_solution import \
                 MinimumMultiCutProblemBinaryBitArraySolution
 from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_binary_bit_array_solution_vns_support import \
-                MinimumMultiCutProblemBinaryBitArraySolutionVnsSupport
+                MinimumMultiCutProblemBinaryBitArraySolutionVnsShaking
+from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_binary_bit_array_solution_vns_support import \
+                MinimumMultiCutProblemBinaryBitArraySolutionVnsLocalSearchSupport
 
 def main():
         output_control:OutputControl = OutputControl(write_to_output=False)
@@ -41,13 +43,17 @@ def main():
         solution:MinimumMultiCutProblemBinaryBitArraySolution = MinimumMultiCutProblemBinaryBitArraySolution()
         finish:FinishControl = FinishControl(criteria='iterations', iterations_max=500)
         additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(is_active=False, keep='')
-        vns_support:MinimumMultiCutProblemBinaryBitArraySolutionVnsSupport = MinimumMultiCutProblemBinaryBitArraySolutionVnsSupport()
+        vns_shaking_support:MinimumMultiCutProblemBinaryBitArraySolutionVnsShaking = \
+                MinimumMultiCutProblemBinaryBitArraySolutionVnsShaking()
+        vns_ls_support:MinimumMultiCutProblemBinaryBitArraySolutionVnsLocalSearchSupport = \
+                MinimumMultiCutProblemBinaryBitArraySolutionVnsLocalSearchSupport()
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
         vns_construction_params.output_control = output_control
         vns_construction_params.problem = problem_to_solve
         vns_construction_params.solution_template = solution
         vns_construction_params.finish_control = finish
-        vns_construction_params.problem_solution_vns_support = vns_support
+        vns_construction_params.vns_shaking_support = vns_shaking_support
+        vns_construction_params.vns_ls_support = vns_ls_support
         vns_construction_params.additional_statistics_control = additional_statistics_control
         vns_construction_params.random_seed = 43434343
         vns_construction_params.k_min = 1

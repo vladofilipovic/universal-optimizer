@@ -36,7 +36,7 @@ class TestOnesCountMaxProblemTeBinaryBitArraySolution(unittest.TestCase):
         construction_params.output_control = self.output_control
         construction_params.problem = self.problem_to_solve
         construction_params.solution_template = self.solution
-        construction_params.problem_solution_te_support = self.te_support
+        construction_params.te_operations_support = self.te_support
         self.optimizer:TeOptimizer = TeOptimizer.from_construction_tuple(construction_params)
         self.bs = self.optimizer.optimize()
 
