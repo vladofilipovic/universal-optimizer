@@ -26,8 +26,7 @@ from random import randint
 from uo.utils.logger import logger
 from uo.utils.complex_counter_uniform_ascending import ComplexCounterUniformAscending
 
-from uo.solution.quality_of_solution import QualityOfSolution
-from uo.algorithm.algorithm import Algorithm
+from uo.algorithm.metaheuristic.metaheuristic import Metaheuristic
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support import VnsShakingSupport
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support import VnsLocalSearchSupport
 
@@ -62,7 +61,7 @@ class OnesCountMaxProblemBinaryIntSolutionVnsShakingSupport(VnsShakingSupport[in
         return self.__copy__()
         
     def shaking(self, k:int, problem:OnesCountMaxProblem, solution:OnesCountMaxProblemBinaryIntSolution, 
-            optimizer:Algorithm)->bool:
+            optimizer:Metaheuristic)->bool:
         """
         Random VNS shaking of k parts such that new solution code does not differ more than k from all solution codes 
         inside shakingPoints 
@@ -70,11 +69,11 @@ class OnesCountMaxProblemBinaryIntSolutionVnsShakingSupport(VnsShakingSupport[in
         :param int k: int parameter for VNS
         :param `OnesCountMaxProblem` problem: problem that is solved
         :param `OnesCountMaxProblemBinaryIntSolution` solution: solution used for the problem that is solved
-        :param `Algorithm` optimizer: optimizer that is executed
+        :param `Metaheuristic` optimizer: metaheuristic optimizer that is executed
         :return: if shaking is successful
         :rtype: bool
         """    
-        if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
+        if optimizer.should_finish():
             return False
         tries:int = 0
         limit:int = 10000
@@ -92,7 +91,7 @@ class OnesCountMaxProblemBinaryIntSolutionVnsShakingSupport(VnsShakingSupport[in
             if all_ok:
                 break
         if tries < limit:
-            if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
+            if optimizer.should_finish():
                 return solution
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             optimizer.evaluation += 1
@@ -180,18 +179,18 @@ class OnesCountMaxProblemBinaryIntSolutionVnsLocalSearchSupport(VnsLocalSearchSu
         
 
     def local_search_best_improvement(self, k:int, problem:OnesCountMaxProblem, solution:OnesCountMaxProblemBinaryIntSolution, 
-            optimizer: Algorithm)->bool:
+            optimizer:Metaheuristic)->bool:
         """
         Executes "best improvement" variant of the local search procedure 
         
         :param int k: int parameter for VNS
         :param `OnesCountMaxProblem` problem: problem that is solved
         :param `OnesCountMaxProblemBinaryIntSolution` solution: solution used for the problem that is solved
-        :param `Algorithm` optimizer: optimizer that is executed
+        :param `Metaheuristic` optimizer: metaheuristic optimizer that is executed
         :return: result of the local search procedure 
         :rtype: if local search is successful
         """
-        if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
+        if optimizer.should_finish():
             return False
         if k < 1 or k > problem.dimension:
             return False
@@ -209,7 +208,7 @@ class OnesCountMaxProblemBinaryIntSolutionVnsLocalSearchSupport(VnsLocalSearchSu
             for i in positions:
                 mask |= 1 << i
             solution.representation ^= mask 
-            if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
+            if optimizer.should_finish():
                 solution.copy_from(start_sol)
                 return False
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
@@ -229,18 +228,18 @@ class OnesCountMaxProblemBinaryIntSolutionVnsLocalSearchSupport(VnsLocalSearchSu
         return False
 
     def local_search_first_improvement(self, k:int, problem:OnesCountMaxProblem, solution:OnesCountMaxProblemBinaryIntSolution, 
-            optimizer: Algorithm)->bool:
+            optimizer: Metaheuristic)->bool:
         """
         Executes "first improvement" variant of the local search procedure 
         
         :param int k: int parameter for VNS
         :param `OnesCountMaxProblem` problem: problem that is solved
         :param `OnesCountMaxProblemBinaryIntSolution` solution: solution used for the problem that is solved
-        :param `Algorithm` optimizer: optimizer that is executed
+        :param `Metaheuristic` optimizer: metaheuristic optimizer that is executed
         :return: result of the local search procedure 
         :rtype: if local search is successful
         """
-        if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
+        if optimizer.should_finish():
             return False
         if k < 1 or k > problem.dimension:
             return False
@@ -256,7 +255,7 @@ class OnesCountMaxProblemBinaryIntSolutionVnsLocalSearchSupport(VnsLocalSearchSu
             for i in positions:
                 mask |= 1 << i
             solution.representation ^= mask 
-            if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
+            if optimizer.should_finish():
                 solution.copy_from(start_sol)
                 return False
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")

@@ -17,8 +17,7 @@ from random import randint
 from uo.utils.logger import logger
 from uo.utils.complex_counter_uniform_ascending import ComplexCounterUniformAscending
 
-from uo.solution.quality_of_solution import QualityOfSolution
-from uo.algorithm.algorithm import Algorithm
+from uo.algorithm.metaheuristic.metaheuristic import Metaheuristic
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support import VnsShakingSupport
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support import VnsLocalSearchSupport
 
@@ -40,10 +39,10 @@ class FunctionOneVariableMaxProblemBinaryIntSolutionVnsShakingSupport(VnsShaking
         return self.__copy__()
         
     def shaking(self, k:int, problem:FunctionOneVariableMaxProblemMax, solution:FunctionOneVariableMaxProblemBinaryIntSolution, 
-            optimizer:Algorithm)->bool:
+            optimizer:Metaheuristic)->bool:
         if k <= 0:
             return False
-        if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
+        if optimizer.should_finish():
             return False
         tries:int = 0
         limit:int = 10000
@@ -63,7 +62,7 @@ class FunctionOneVariableMaxProblemBinaryIntSolutionVnsShakingSupport(VnsShaking
                 break
         if tries < limit:
             solution.representation = solution.obtain_feasible_representation(problem)
-            if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
+            if optimizer.should_finish():
                 return False
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             optimizer.evaluation += 1
@@ -102,9 +101,9 @@ class FunctionOneVariableMaxProblemBinaryIntSolutionVnsLocalSearchSupport(VnsLoc
 
     def local_search_best_improvement(self, k:int, problem:FunctionOneVariableMaxProblemMax, 
             solution:FunctionOneVariableMaxProblemBinaryIntSolution, 
-            optimizer: Algorithm)->bool:
+            optimizer: Metaheuristic)->bool:
         representation_length:int = 32
-        if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
+        if optimizer.should_finish():
             return False
         if k < 1:
             return False
@@ -122,7 +121,7 @@ class FunctionOneVariableMaxProblemBinaryIntSolutionVnsLocalSearchSupport(VnsLoc
             for i in positions:
                 mask |= 1 << i
             solution.representation ^= mask 
-            if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
+            if optimizer.should_finish():
                 solution.copy_from(best_sol)
                 return False
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
@@ -143,9 +142,9 @@ class FunctionOneVariableMaxProblemBinaryIntSolutionVnsLocalSearchSupport(VnsLoc
 
     def local_search_first_improvement(self, k:int, problem:FunctionOneVariableMaxProblemMax, 
             solution:FunctionOneVariableMaxProblemBinaryIntSolution, 
-            optimizer: Algorithm)->bool:
+            optimizer: Metaheuristic)->bool:
         representation_length:int = 32
-        if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
+        if optimizer.should_finish():
             return False
         if k < 1:
             return False
@@ -161,7 +160,7 @@ class FunctionOneVariableMaxProblemBinaryIntSolutionVnsLocalSearchSupport(VnsLoc
             for i in positions:
                 mask |= 1 << i
             solution.representation ^= mask 
-            if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
+            if optimizer.should_finish():
                 solution.copy_from(start_sol)
                 return False
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")

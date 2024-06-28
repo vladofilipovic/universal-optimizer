@@ -58,7 +58,7 @@ def main():
         ga_construction_params.additional_statistics_control = additional_statistics_control
         ga_construction_params.random_seed = 43434343
         ga_construction_params.population_size = 100
-        ga_construction_params.elitism_size = 10
+        ga_construction_params.elite_count = 5
         optimizer:GaOptimizer = GaOptimizer.from_construction_tuple(ga_construction_params)
         optimizer.optimize()
 

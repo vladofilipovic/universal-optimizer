@@ -70,6 +70,7 @@ class MinimumMultiCutProblemBinaryBitArraySolutionGaCrossoverSupport(GaCrossover
         for i in range(index,solution1.representation.len):
             child1.representation.set(solution2.representation[i], i)
             child2.representation.set(solution1.representation[i], i)
+        optimizer.evaluation += 2
         child1.evaluate(problem)
         child2.evaluate(problem)        
 
@@ -153,6 +154,7 @@ class MinimumMultiCutProblemBinaryBitArraySolutionGaMutationSupport(GaMutationSu
         for i in range(len(solution.representation)):
             if random() < self.mutation_probability:
                 solution.representation.invert(i)
+        optimizer.evaluation += 1
         solution.evaluate(problem)
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 

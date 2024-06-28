@@ -43,4 +43,4 @@ class SelectionRoulette(Selection):
             ind:int = randint(0, n-1)
             temp.append(pop[ind])
         for i in range(l_lim,n):
-            pop[i] = temp[i]
+            pop[i] = temp[i-l_lim]

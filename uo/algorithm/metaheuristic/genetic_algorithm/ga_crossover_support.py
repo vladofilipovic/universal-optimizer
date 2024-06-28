@@ -15,7 +15,7 @@ from typing import Generic
 
 from uo.problem.problem import Problem
 from uo.solution.solution import Solution
-from uo.algorithm.algorithm import Algorithm
+from uo.algorithm.metaheuristic.metaheuristic import Metaheuristic
 
 R_co = TypeVar("R_co", covariant=True)
 A_co = TypeVar("A_co", covariant=True)
@@ -41,7 +41,8 @@ class GaCrossoverSupport(Generic[R_co,A_co], metaclass=ABCMeta):
     @abstractmethod
     def crossover(self, problem:Problem, 
                 solution1:Solution[R_co,A_co], solution2:Solution[R_co,A_co], 
-                child1:Solution[R_co,A_co], child2:Solution[R_co,A_co], optimizer:Algorithm):
+                child1:Solution[R_co,A_co], child2:Solution[R_co,A_co], 
+                optimizer:Metaheuristic):
         """
         GA crossover on two parents
 
@@ -51,7 +52,7 @@ class GaCrossoverSupport(Generic[R_co,A_co], metaclass=ABCMeta):
         :param `Solution[R_co,A_co]` solution2: second parent
         :param `Solution[R_co,A_co]` child1: first child that is created
         :param `Solution[R_co,A_co]` child2: second child that is created
-        :param `Algorithm` optimizer: optimizer that is executed
+        :param `Metaheuristic` optimizer: metaheuristic optimizer that is executed
         """
         raise NotImplementedError
     

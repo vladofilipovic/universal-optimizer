@@ -300,25 +300,3 @@ class TestGaOptimizer(unittest.TestCase):
                     problem, solution_template, selection_stub, 
                     ga_crossover_support_stub, ga_mutation_support_stub, population_size, elitism_size)
 
-    # GaOptimizer raises TypeError if elitism_size parameter is not of type int
-    def test_elitism_size_parameter_type_error(self):
-        # Arrange
-        finish_control = FinishControl()
-        random_seed = 123
-        additional_statistics_control = AdditionalStatisticsControl()
-        output_control = OutputControl()
-        problem = ProblemVoidMinSO("a problem", True)
-        solution_template = SolutionVoid( 43, 43, 43, True)         
-        selection_stub = mocker.MagicMock(spec=Selection)
-        type(selection_stub).selection = mocker.CallableMixin(spec=lambda x: x)
-        ga_crossover_support_stub = mocker.MagicMock(spec=GaCrossoverSupport)
-        type(ga_crossover_support_stub).crossover = mocker.CallableMixin(spec=lambda x: x)
-        ga_mutation_support_stub = mocker.MagicMock(spec=GaMutationSupport)
-        type(ga_mutation_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
-        population_size = 100
-        elitism_size = "wrong type"
-        # Act & Assert
-        with self.assertRaises(TypeError):
-            GaOptimizer(finish_control, random_seed, additional_statistics_control, output_control, 
-                    problem, solution_template, selection_stub, 
-                    ga_crossover_support_stub, ga_mutation_support_stub, population_size, elitism_size)

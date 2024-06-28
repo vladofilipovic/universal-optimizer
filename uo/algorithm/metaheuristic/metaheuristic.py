@@ -139,6 +139,15 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         delta = datetime.now() - self.execution_started
         return delta.total_seconds()
 
+    def should_finish(self)->bool:
+        """
+        Check if execution of the metaheuristic algorithm should finish 
+        
+        :return: Should execution finish
+        :rtype: bool
+        """
+        return self.finish_control.is_finished(self.evaluation, self.iteration, self. elapsed_seconds())
+
     def update_additional_statistics_if_required(self, solution:Solution)->None:
         """
         Updates the additional statistics, if required.
@@ -197,7 +206,7 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         """
         Main loop of the metaheuristic algorithm
         """
-        while (not self.finish_control.is_finished(self.evaluation, self.iteration, self.elapsed_seconds())):
+        while (not self.should_finish()):
             self.write_output_values_if_needed("before_iteration", "b_i")
             self.main_loop_iteration()
             self.write_output_values_if_needed("after_iteration", "a_i")

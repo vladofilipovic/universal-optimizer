@@ -103,6 +103,10 @@ class GaOptimizer(PopulationBasedMetaheuristic):
                 raise TypeError('Parameter \'ga_crossover_support\' must be \'GaCrossoverSupport\'.')
         if not isinstance(ga_mutation_support, GaMutationSupport):
                 raise TypeError('Parameter \'ga_mutation_support\' must be \'GaMutationSupport\'.')
+        if not isinstance(population_size, int):
+                raise TypeError('Parameter \'population_size\' must be \'int\'.')
+        if population_size < 0:
+                raise ValueError('Parameter \'population_size\' must be positive.')
         super().__init__( name='ga',
                 finish_control=finish_control,
                 random_seed=random_seed,
@@ -222,7 +226,7 @@ class GaOptimizer(PopulationBasedMetaheuristic):
             for i in range(self.elite_count):
                 sub_range:list[Solution] = self.current_population[i:self.population_size]
                 max_sub_range:Solution = max(sub_range, key=lambda individual: individual.fitness_value)
-                for j, v in enumerate(range):
+                for j, v in enumerate(sub_range):
                     if v == max_sub_range:
                         temp:Solution = self.current_population[i]
                         self.current_population[i] = self.current_population[j]

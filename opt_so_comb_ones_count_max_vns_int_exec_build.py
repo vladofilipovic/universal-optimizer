@@ -7,7 +7,7 @@ from uo.problem.problem import Problem
 from uo.solution.quality_of_solution import QualityOfSolution
 from uo.solution.solution import Solution
 
-from uo.algorithm.algorithm import Algorithm
+from uo.algorithm.metaheuristic.metaheuristic import Metaheuristic
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
@@ -131,8 +131,8 @@ class OnesCountMaxProblemBinaryIntSolutionVnsShakingSupport(VnsShakingSupport[in
         return self.__copy__()
         
     def shaking(self, k:int, problem:OnesCountMaxProblem2, solution:OnesCountMaxProblemBinaryIntSolution, 
-            optimizer:Algorithm, )->bool:
-        if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
+            optimizer:Metaheuristic )->bool:
+        if optimizer.should_finish():
             return False
         tries:int = 0
         limit:int = 10000
@@ -185,10 +185,10 @@ class OnesCountMaxProblemBinaryIntSolutionVnsLocalSearchSupport(VnsLocalSearchSu
         
 
     def local_search_best_improvement(self, k:int, problem:OnesCountMaxProblem2, solution:OnesCountMaxProblemBinaryIntSolution, 
-            optimizer: Algorithm)->bool:
-        if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
+            optimizer: Metaheuristic)->bool:
+        if optimizer.should_finish():
             return False
-        if k<1:
+        if k < 1:
             return False
         # ls_bi for k==1
         start_sol:OnesCountMaxProblemBinaryIntSolution = solution.copy()
@@ -210,10 +210,10 @@ class OnesCountMaxProblemBinaryIntSolutionVnsLocalSearchSupport(VnsLocalSearchSu
         return False
 
     def local_search_first_improvement(self, k:int, problem:OnesCountMaxProblem2, solution:OnesCountMaxProblemBinaryIntSolution, 
-            optimizer: Algorithm)->bool:
-        if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
+            optimizer: Metaheuristic)->bool:
+        if optimizer.should_finish():
             return False
-        if k<1:
+        if k < 1:
             return False
         # ls_fi for k==1
         start_sol:OnesCountMaxProblemBinaryIntSolution = solution.copy()

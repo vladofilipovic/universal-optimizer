@@ -40,8 +40,8 @@ class TestOnesCountMaxProblemVnsBinaryBitArraySolutionLsbi(unittest.TestCase):
         self.additional_stat = AdditionalStatisticsControl(keep='')
         self.vns_shaking_support:OnesCountMaxProblemBinaryBitArraySolutionVnsShakingSupport = \
                 OnesCountMaxProblemBinaryBitArraySolutionVnsShakingSupport()
-        self.vns_ls_support:OnesCountMaxProblemBinaryBitArraySolutionVnsShakingSupport = \
-                OnesCountMaxProblemBinaryBitArraySolutionVnsShakingSupport()
+        self.vns_ls_support:OnesCountMaxProblemBinaryBitArraySolutionVnsLocalSearchSupport= \
+                OnesCountMaxProblemBinaryBitArraySolutionVnsLocalSearchSupport()
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
         vns_construction_params.output_control = self.output_control
         vns_construction_params.problem = self.problem_to_solve

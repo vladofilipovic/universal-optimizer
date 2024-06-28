@@ -22,7 +22,7 @@ from bitstring import BitArray
 
 from uo.utils.complex_counter_uniform_ascending import ComplexCounterUniformAscending
 
-from uo.algorithm.algorithm import Algorithm
+from uo.algorithm.metaheuristic.metaheuristic import Metaheuristic
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support import VnsShakingSupport
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support import VnsLocalSearchSupport
 
@@ -57,7 +57,7 @@ class MinimumMultiCutProblemBinaryBitArraySolutionVnsShakingSupport(VnsShakingSu
         return self.__copy__()
 
     def shaking(self, k:int, problem:MinimumMultiCutProblem, solution:MinimumMultiCutProblemBinaryBitArraySolution, 
-            optimizer:Algorithm)->bool:
+            optimizer:Metaheuristic)->bool:
         """
         Random shaking of k parts such that new solution code does not differ more than k from all solution codes 
         inside shakingPoints 
@@ -69,7 +69,7 @@ class MinimumMultiCutProblemBinaryBitArraySolutionVnsShakingSupport(VnsShakingSu
         :return: if randomization is successful
         :rtype: bool
         """    
-        if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
+        if optimizer.should_finish():
             return False
         tries:int = 0
         limit:int = 10000
@@ -85,7 +85,7 @@ class MinimumMultiCutProblemBinaryBitArraySolutionVnsShakingSupport(VnsShakingSu
             if all_ok:
                 break
         if tries < limit:
-            if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
+            if optimizer.should_finish():
                 return False
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             optimizer.evaluation += 1
@@ -173,7 +173,7 @@ class MinimumMultiCutProblemBinaryBitArraySolutionVnsLocalSearchSupport(VnsLocal
         return self.__copy__()
 
     def local_search_best_improvement(self, k:int, problem:MinimumMultiCutProblem, solution:MinimumMultiCutProblemBinaryBitArraySolution, 
-            optimizer: Algorithm)->bool:
+            optimizer: Metaheuristic)->bool:
         """
         Executes "best improvement" variant of the local search procedure 
         
@@ -184,7 +184,7 @@ class MinimumMultiCutProblemBinaryBitArraySolutionVnsLocalSearchSupport(VnsLocal
         :return: result of the local search procedure 
         :rtype: if local search is successful
         """
-        if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
+        if optimizer.should_finish():
             return False
         if k < 1 or k > len(problem.graph.edges()):
             return False
@@ -199,7 +199,7 @@ class MinimumMultiCutProblemBinaryBitArraySolutionVnsLocalSearchSupport(VnsLocal
             positions:list[int] = indexes.current_state()
             # invert and compare, switch of new is better
             solution.representation.invert(positions) 
-            if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
+            if optimizer.should_finish():
                 solution.copy_from(start_sol)
                 return False
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
@@ -219,7 +219,7 @@ class MinimumMultiCutProblemBinaryBitArraySolutionVnsLocalSearchSupport(VnsLocal
         return False
     
     def local_search_first_improvement(self, k:int, problem:MinimumMultiCutProblem, solution:MinimumMultiCutProblemBinaryBitArraySolution, 
-            optimizer: Algorithm)->bool:
+            optimizer: Metaheuristic)->bool:
         """
         Executes "first improvement" variant of the local search procedure 
         
@@ -230,7 +230,7 @@ class MinimumMultiCutProblemBinaryBitArraySolutionVnsLocalSearchSupport(VnsLocal
         :return: result of the local search procedure 
         :rtype: if local search is successful
         """
-        if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
+        if optimizer.should_finish():
             return False
         if k < 1 or k > problem.dimension:
             return False
@@ -243,7 +243,7 @@ class MinimumMultiCutProblemBinaryBitArraySolutionVnsLocalSearchSupport(VnsLocal
             positions:list[int] = indexes.current_state()
             # invert and compare, switch and exit if new is better
             solution.representation.invert(positions) 
-            if optimizer.finish_control.is_finished(optimizer.evaluation, optimizer.iteration, optimizer.elapsed_seconds()):
+            if optimizer.should_finish():
                 solution.copy_from(start_sol)
                 return False
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")

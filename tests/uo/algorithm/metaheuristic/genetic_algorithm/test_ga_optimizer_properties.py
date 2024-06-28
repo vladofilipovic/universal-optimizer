@@ -31,7 +31,7 @@ class TestGaOptimizerProperties(unittest.TestCase):
         type(self.problem_mock).dimension = mocker.PropertyMock(return_value=42)
         self.problem_mock.copy = mocker.Mock(return_value=self.problem_mock)
 
-        self.selection_roulete_mock =  mocker.MagicMock(spec=SelectionRoulette)
+        self.selection_roulette_mock =  mocker.MagicMock(spec=SelectionRoulette)
         
         self.ga_support_crossover_stub = mocker.MagicMock(spec=GaCrossoverSupport)
         type(self.ga_support_crossover_stub).copy = mocker.CallableMixin(spec="return self")        
@@ -60,15 +60,14 @@ class TestGaOptimizerProperties(unittest.TestCase):
                 output_control=self.output_control_stub,
                 problem=self.problem_mock, 
                 solution_template=SolutionVoid( 43, 0, 0, False),
-                problem_solution_ga_support=self.problem_solution_ga_support_stub,
+                ga_selection=self.selection_roulette_mock,
+                ga_crossover_support=self.ga_support_crossover_stub,
+                ga_mutation_support=self.ga_support_mutation_stub,
                 finish_control=self.finish_control_mock,
                 random_seed=self.random_seed,
                 additional_statistics_control=self.additional_statistics_control,
-                tournament_size=self.tournament_size,
-                mutation_probability=self.mutation_probability,
-                selection_type=self.selection_type,
                 population_size=self.population_size,
-                elitism_size=self.elitism_size
+                elite_count=self.elitism_size
         )
 
     def test_name_should_be_ga(self):
@@ -86,11 +85,8 @@ class TestGaOptimizerProperties(unittest.TestCase):
     def test_seconds_max_should_be_equal_as_in_constructor(self):
         self.assertEqual(self.ga_optimizer.finish_control.seconds_max, self.finish_control_mock.seconds_max)
 
-    def test_tournament_size_should_be_equal_as_in_constructor(self):
-        self.assertEqual(self.ga_optimizer.tournament_size, self.tournament_size)
-
-    def test_elitism_size_should_be_equal_as_in_constructor(self):
-        self.assertEqual(self.ga_optimizer.elitism_size, self.elitism_size)
+    def test_elite_count_should_be_equal_as_in_constructor(self):
+        self.assertEqual(self.ga_optimizer.elite_count, self.elitism_size)
 
     def test_problem_name_should_be_equal_as_in_constructor(self):
         self.assertEqual(self.ga_optimizer.problem.name, self.problem_mock.name)
@@ -105,7 +101,7 @@ class TestGaOptimizerProperties(unittest.TestCase):
         self.assertEqual(self.ga_optimizer.problem.dimension, self.problem_mock.dimension)
 
     def test_create_with_invalid_selection_type_should_raise_value_exception_with_proper_message(self):
-        with self.assertRaises(ValueError) as context:
+        with self.assertRaises(TypeError) as context:
             selection_stub = mocker.MagicMock(spec=SelectionRoulette)
             type(selection_stub).selection_roulette = mocker.CallableMixin(spec=lambda x: x)
             type(selection_stub).copy = mocker.CallableMixin(spec="return self")
@@ -113,17 +109,16 @@ class TestGaOptimizerProperties(unittest.TestCase):
                 output_control=self.output_control_stub,
                 problem=self.problem_mock, 
                 solution_template=SolutionVoid( 43, 0, 0, False),
-                problem_solution_ga_support=self.problem_solution_ga_support_stub,
+                ga_selection="not appropriate type",
+                ga_crossover_support=self.ga_support_crossover_stub,
+                ga_mutation_support=self.ga_support_mutation_stub,
                 finish_control=self.finish_control_mock,
                 random_seed=self.random_seed,
                 additional_statistics_control=self.additional_statistics_control,
-                tournament_size=self.tournament_size,
-                mutation_probability=self.mutation_probability,
-                selection_type="xxx",
                 population_size=self.population_size,
-                elitism_size=self.elitism_size
+                elite_count=self.elitism_size
             )
-        self.assertEqual("Value 'xxx' for GA selection_type is not supported", context.exception.args[0])
+        self.assertEqual('Parameter \'ga_selection\' must be \'Selection\'.', context.exception.args[0])
 
     def tearDown(self):
         return
