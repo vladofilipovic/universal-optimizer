@@ -34,10 +34,10 @@ def main():
         source_terminal_pairs = []
 
         for _ in range(num_pairs):
-            source = choice(nodes)
-            terminal_candidates = [node for node in nodes if node != source]
-            terminal = choice(terminal_candidates)
-            source_terminal_pairs.append((source, terminal))
+                source = choice(nodes)
+                terminal_candidates = [node for node in nodes if node != source]
+                terminal = choice(terminal_candidates)
+                source_terminal_pairs.append((source, terminal))
 
         problem_to_solve:MinimumMultiCutProblem = MinimumMultiCutProblem(graph, source_terminal_pairs)
         solution:MinimumMultiCutProblemBinaryBitArraySolution = MinimumMultiCutProblemBinaryBitArraySolution()

@@ -1,8 +1,8 @@
 """
-..  _py_minimum_multi_cut_problem_binary_bit_array_solution_ga_support:
+..  _py_ones_count_max_problem_binary_bit_array_solution_ga_support:
 
-The :mod:`~opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_binary_bit_array_solution_ga_support`
-contains class :class:`~opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_binary_bit_array_solution_ga_support.MinimumMultiCutProblemBinaryBitArraySolutionGaSupport`, 
+The :mod:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_ga_support`
+contains class :class:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_ga_support.OnesCountMaxProblemBinaryBitArraySolutionGaSupport`, 
 that represents supporting parts of the `GA` algorithm, where solution of the :ref:`Problem_MinimumMultiCut` have `BitArray` 
 representation.
 """
@@ -24,41 +24,43 @@ from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimize
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support import GaCrossoverSupport
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support import GaMutationSupport
 
-from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem import MinimumMultiCutProblem
-from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_binary_bit_array_solution \
-    import MinimumMultiCutProblemBinaryBitArraySolution
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem 
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution \
+    import OnesCountMaxProblemBinaryBitArraySolution
 
 
-class MinimumMultiCutProblemBinaryBitArraySolutionGaCrossoverSupport(GaCrossoverSupport[BitArray,str]):
+class OnesCountMaxProblemBinaryBitArraySolutionGaCrossoverSupport(GaCrossoverSupport[BitArray,str]):
 
     def __init__(self, crossover_probability:float)->None:
         """
-        Create new `MinimumMultiCutProblemBinaryBitArraySolutionGaCrossoverSupport` instance
+        Create new `OnesCountMaxProblemBinaryBitArraySolutionGaCrossoverSupport` instance
         """
         super().__init__(crossover_probability)
 
     def __copy__(self):
         """
-        Internal copy of the `MinimumMultiCutProblemBinaryBitArraySolutionGaCrossoverSupport`
+        Internal copy of the `OnesCountMaxProblemBinaryBitArraySolutionGaCrossoverSupport`
 
-        :return: new `MinimumMultiCutProblemBinaryBitArraySolutionGaCrossoverSupport` instance with the same properties
-        :rtype: `MinimumMultiCutProblemBinaryBitArraySolutionGaCrossoverSupport`
+        :return: new `OnesCountMaxProblemBinaryBitArraySolutionGaCrossoverSupport` instance with the same properties
+        :rtype: `OnesCountMaxProblemBinaryBitArraySolutionGaCrossoverSupport`
         """
         sol = deepcopy(self)
         return sol
 
     def copy(self):
         """
-        Copy the `MinimumMultiCutProblemBinaryBitArraySolutionGaCrossoverSupport` instance
+        Copy the `OnesCountMaxProblemBinaryBitArraySolutionGaCrossoverSupport` instance
 
-        :return: new `MinimumMultiCutProblemBinaryBitArraySolutionGaCrossoverSupport` instance with the same properties
-        :rtype: `MinimumMultiCutProblemBinaryBitArraySolutionGaCrossoverSupport`
+        :return: new `OnesCountMaxProblemBinaryBitArraySolutionGaCrossoverSupport` instance with the same properties
+        :rtype: `OnesCountMaxProblemBinaryBitArraySolutionGaCrossoverSupport`
         """
         return self.__copy__()
 
-    def crossover(self, problem:MinimumMultiCutProblem, solution1:MinimumMultiCutProblemBinaryBitArraySolution, solution2:MinimumMultiCutProblemBinaryBitArraySolution,
-                    child1:MinimumMultiCutProblemBinaryBitArraySolution, child2:MinimumMultiCutProblemBinaryBitArraySolution, optimizer:GaOptimizer) -> None:
-        if solution1.representation is not None and solution2.representation is not None :        
+    def crossover(self, problem:OnesCountMaxProblem, 
+                solution1:OnesCountMaxProblemBinaryBitArraySolution, solution2:OnesCountMaxProblemBinaryBitArraySolution,
+                child1:OnesCountMaxProblemBinaryBitArraySolution, child2:OnesCountMaxProblemBinaryBitArraySolution, 
+                optimizer:GaOptimizer) -> None:
+        if solution1.representation is not None and solution2.representation is not None :
             child1.representation = BitArray(solution1.representation.len)
             child2.representation = BitArray(solution2.representation.len)
             if random() > self.crossover_probability:
@@ -76,6 +78,7 @@ class MinimumMultiCutProblemBinaryBitArraySolutionGaCrossoverSupport(GaCrossover
         else:
             child1.copy_from(solution1)
             child2.copy_from(solution2)
+        
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
@@ -95,7 +98,7 @@ class MinimumMultiCutProblemBinaryBitArraySolutionGaCrossoverSupport(GaCrossover
         :return: string representation of ga support instance
         :rtype: str
         """
-        return 'MinimumMultiCutProblemBinaryBitArraySolutionGaCrossoverSupport'
+        return 'OnesCountMaxProblemBinaryBitArraySolutionGaCrossoverSupport'
 
     def __str__(self)->str:
         """
@@ -125,34 +128,34 @@ class MinimumMultiCutProblemBinaryBitArraySolutionGaCrossoverSupport(GaCrossover
         """
         return self.string_rep('|')
 
-class MinimumMultiCutProblemBinaryBitArraySolutionGaMutationSupport(GaMutationSupport[BitArray,str]):
+class OnesCountMaxProblemBinaryBitArraySolutionGaMutationSupport(GaMutationSupport[BitArray,str]):
 
     def __init__(self, mutation_probability:float)->None:
         """
-        Create new `MinimumMultiCutProblemBinaryBitArraySolutionGaMutationSupport` instance
+        Create new `OnesCountMaxProblemBinaryBitArraySolutionGaMutationSupport` instance
         """
         super().__init__(mutation_probability)
 
     def __copy__(self):
         """
-        Internal copy of the `MinimumMultiCutProblemBinaryBitArraySolutionGaMutationSupport`
+        Internal copy of the `OnesCountMaxProblemBinaryBitArraySolutionGaMutationSupport`
 
-        :return: new `MinimumMultiCutProblemBinaryBitArraySolutionGaMutationSupport` instance with the same properties
-        :rtype: `MinimumMultiCutProblemBinaryBitArraySolutionGaMutationSupport`
+        :return: new `OnesCountMaxProblemBinaryBitArraySolutionGaMutationSupport` instance with the same properties
+        :rtype: `OnesCountMaxProblemBinaryBitArraySolutionGaMutationSupport`
         """
         sol = deepcopy(self)
         return sol
 
     def copy(self):
         """
-        Copy the `MinimumMultiCutProblemBinaryBitArraySolutionGaMutationSupport` instance
+        Copy the `OnesCountMaxProblemBinaryBitArraySolutionGaMutationSupport` instance
 
-        :return: new `MinimumMultiCutProblemBinaryBitArraySolutionGaMutationSupport` instance with the same properties
-        :rtype: `MinimumMultiCutProblemBinaryBitArraySolutionGaMutationSupport`
+        :return: new `OnesCountMaxProblemBinaryBitArraySolutionGaMutationSupport` instance with the same properties
+        :rtype: `OnesCountMaxProblemBinaryBitArraySolutionGaMutationSupport`
         """
         return self.__copy__()
 
-    def mutation(self, problem:MinimumMultiCutProblem, solution:MinimumMultiCutProblemBinaryBitArraySolution, 
+    def mutation(self, problem:OnesCountMaxProblem, solution:OnesCountMaxProblemBinaryBitArraySolution, 
                     optimizer:GaOptimizer)->None:
         if solution.representation is None:
             return
@@ -180,7 +183,7 @@ class MinimumMultiCutProblemBinaryBitArraySolutionGaMutationSupport(GaMutationSu
         :return: string representation of ga support instance
         :rtype: str
         """
-        return 'MinimumMultiCutProblemBinaryBitArraySolutionGaMutationSupport'
+        return 'OnesCountMaxProblemBinaryBitArraySolutionGaMutationSupport'
 
     def __str__(self)->str:
         """

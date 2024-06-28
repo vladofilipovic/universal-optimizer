@@ -259,7 +259,11 @@ class GaOptimizer(PopulationBasedMetaheuristic):
             self.__mutation_method(self.problem, new_population[i], self)
         self.write_output_values_if_needed("after_step_in_iteration", "mutation")
         self.__current_population = new_population
-        self.best_solution = max(self.__current_population, key=lambda individual: individual.fitness_value)
+        pos:int = 0
+        for i in range(1, self.population_size):
+            if self.current_population[i].is_better(self.current_population[pos], self.problem):
+                pos = i
+        self.best_solution = self.current_population[pos]
         self.update_additional_statistics_if_required(self.__current_population)
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='',group_start:str ='{', 
