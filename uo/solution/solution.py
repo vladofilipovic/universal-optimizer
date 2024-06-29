@@ -13,7 +13,7 @@ from random import choice
 
 from abc import ABCMeta, abstractmethod
 from typing import NamedTuple
-from typing import TypeVar, Generic
+from typing import TypeVar
 from typing import Generic
 from typing import Optional
 
@@ -346,6 +346,8 @@ class Solution(Generic[R_co,A_co], metaclass=ABCMeta):
         :return: string representation of the solution 
         :rtype: str
         """
+        if(self.representation is None):
+            return "None"
         return str(self.argument(self.representation))
 
     @abstractmethod

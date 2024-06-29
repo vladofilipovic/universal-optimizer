@@ -8,15 +8,12 @@ from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
 from uo.algorithm.metaheuristic.genetic_algorithm.selection_roulette import SelectionRoulette
-from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimizer
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support_rep_binary_bit_array import \
+                GaCrossoverSupportRepresentationBinaryBitArray
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support_rep_binary_bit_array import \
+                GaMutationSupportRepresentationBinaryBitArray
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimizerConstructionParameters
-
-from opt.single_objective.comb.minimum_multi_cut_problem.\
-        minimum_multi_cut_problem_binary_bit_array_solution_ga_support \
-        import MinimumMultiCutProblemBinaryBitArraySolutionGaCrossoverSupport
-from opt.single_objective.comb.minimum_multi_cut_problem.\
-        minimum_multi_cut_problem_binary_bit_array_solution_ga_support \
-        import MinimumMultiCutProblemBinaryBitArraySolutionGaMutationSupport
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimizer
 
 from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem import MinimumMultiCutProblem
 from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_binary_bit_array_solution import MinimumMultiCutProblemBinaryBitArraySolution
@@ -43,10 +40,10 @@ def main():
         finish:FinishControl = FinishControl(criteria='iterations', iterations_max=100)
         select:SelectionRoulette = SelectionRoulette()
         additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(is_active=False, keep='')
-        ga_cross_support:MinimumMultiCutProblemBinaryBitArraySolutionGaCrossoverSupport = \
-                MinimumMultiCutProblemBinaryBitArraySolutionGaCrossoverSupport(crossover_probability=0.999)
-        ga_mut_support:MinimumMultiCutProblemBinaryBitArraySolutionGaMutationSupport = \
-                MinimumMultiCutProblemBinaryBitArraySolutionGaMutationSupport(mutation_probability=0.05)
+        ga_cross_support:GaCrossoverSupportRepresentationBinaryBitArray[str] = \
+                GaCrossoverSupportRepresentationBinaryBitArray[str](crossover_probability=0.999)
+        ga_mut_support:GaMutationSupportRepresentationBinaryBitArray[str] = \
+                GaMutationSupportRepresentationBinaryBitArray(mutation_probability=0.05)
         ga_construction_params:GaOptimizerConstructionParameters = GaOptimizerConstructionParameters()
         ga_construction_params.output_control = output_control
         ga_construction_params.problem = problem_to_solve
@@ -62,7 +59,7 @@ def main():
         optimizer:GaOptimizer = GaOptimizer.from_construction_tuple(ga_construction_params)
         optimizer.optimize()
 
-        print('Best solution representation: {}'.format(optimizer.best_solution.representation.bin))
+        #print('Best solution representation: {}'.format(optimizer.best_solution.representation.bin))
         print('Best solution code: {}'.format(optimizer.best_solution.string_representation()))
         print('Best solution objective: {}'.format(optimizer.best_solution.objective_value))
         print('Best solution fitness: {}'.format(optimizer.best_solution.fitness_value))
