@@ -22,28 +22,28 @@ A_co = TypeVar("A_co", covariant=True)
 
 class VnsLocalSearchSupport(Generic[R_co,A_co], metaclass=ABCMeta):
     
-    def __init__(self, k_max:int)->None:
+    def __init__(self, dimension:int)->None:
         """
         Create new `VnsLocalSearchSupportRepresentationInt` instance
 
         :param int inner_dimension: determine neighborhood size where local search is executed
         """
-        if k_max is None:
-            raise ValueError('Parameter \'k_max\' must exists.')
-        if not isinstance( k_max, int):
-            raise TypeError('Parameter \'inner_dimension\' must be int.')
-        self.__k_max = k_max
+        if dimension is None:
+            raise ValueError('Parameter \'dimension\' must exists.')
+        if not isinstance( dimension, int):
+            raise TypeError('Parameter \'dimension\' must be int.')
+        self.__dimension = dimension
 
 
     @property
-    def k_max(self)->int:
+    def dimension(self)->int:
         """
         Property getter for inner dimension of the local search 
 
-        :return: inner dimension of the local search  
+        :return: dimension of the local search  
         :rtype: int
         """
-        return self.__k_max
+        return self.__dimension
 
     @abstractmethod
     def local_search_best_improvement(self, k:int, problem:Problem, solution:Solution[R_co,A_co], 

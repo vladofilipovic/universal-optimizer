@@ -10,6 +10,10 @@ from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_int import \
+        VnsShakingSupportRepresentationInt
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_rep_int import \
+        VnsLocalSearchSupportRepresentationInt
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import \
         VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
@@ -17,10 +21,7 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer impor
 from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem import \
         FunctionOneVariableMaxProblemMax
 from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_int_solution \
-    import FunctionOneVariableMaxProblemIntSolution
-from opt.single_objective.glob.function_one_variable_max_problem.\
-    function_one_variable_max_problem_int_solution_vns_support import \
-        FunctionOneVariableMaxProblemIntSolutionVnsSupport
+        import FunctionOneVariableMaxProblemIntSolution
 
 class TestMaxFunctionOneVariableMaxProblemIntSolutionLsfi(unittest.TestCase):
     
@@ -42,14 +43,17 @@ class TestMaxFunctionOneVariableMaxProblemIntSolutionLsfi(unittest.TestCase):
         self.solution.evaluate(self.problem_to_solve)           
         self.finish_control:FinishControl = FinishControl(criteria='evaluations & seconds', evaluations_max=10000, 
                 seconds_max=100)
-        self.vns_support:FunctionOneVariableMaxProblemIntSolutionVnsSupport = \
-                FunctionOneVariableMaxProblemIntSolutionVnsSupport()
         self.additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(keep='')
+        self.vns_shaking_support:VnsShakingSupportRepresentationInt = \
+                VnsShakingSupportRepresentationInt(self.solution.number_of_intervals)
+        self.vns_ls_support:VnsLocalSearchSupportRepresentationInt = \
+                VnsLocalSearchSupportRepresentationInt(self.solution.number_of_intervals)
         self.vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
         self.vns_construction_params.output_control = self.output_control
         self.vns_construction_params.problem = self.problem_to_solve
         self.vns_construction_params.solution_template = self.solution
-        self.vns_construction_params.problem_solution_vns_support = self.vns_support
+        self.vns_construction_params.vns_shaking_support = self.vns_shaking_support
+        self.vns_construction_params.vns_ls_support = self.vns_ls_support
         self.vns_construction_params.finish_control =self.finish_control
         self.vns_construction_params.random_seed = 43434343
         self.vns_construction_params.additional_statistics_control = self.additional_statistics_control
@@ -58,7 +62,7 @@ class TestMaxFunctionOneVariableMaxProblemIntSolutionLsfi(unittest.TestCase):
         self.vns_construction_params.local_search_type = 'localSearchBestImprovement'
         self.optimizer:VnsOptimizer = VnsOptimizer.from_construction_tuple(self.vns_construction_params)
         self.bs = self.optimizer.optimize()
-    
+
     def test_best_solution_after_optimization_should_be_all_optimal(self):
         # Act
         result = 0.0

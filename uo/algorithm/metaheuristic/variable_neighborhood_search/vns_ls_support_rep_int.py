@@ -34,11 +34,11 @@ A_co = TypeVar("A_co", covariant=True)
 
 class VnsLocalSearchSupportRepresentationInt(VnsLocalSearchSupport[int,A_co]):
     
-    def __init__(self, k_max:int)->None:
+    def __init__(self, dimension:int)->None:
         """
         Create new `VnsLocalSearchSupportRepresentationBitArray` instance
         """
-        super().__init__(k_max=k_max)
+        super().__init__(dimension=dimension)
 
     def __copy__(self):
         """
@@ -74,13 +74,13 @@ class VnsLocalSearchSupportRepresentationInt(VnsLocalSearchSupport[int,A_co]):
         """
         if optimizer.should_finish():
             return False
-        if k < 1 or k > self.k_max:
+        if k < 1 or k > self.dimension:
             return False
         start_sol:Solution = solution.copy()
         best_sol:Solution = solution.copy()
         better_sol_found:bool = False
         # initialize indexes
-        indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k, self.k_max)
+        indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k, self.dimension)
         in_loop:bool = indexes.reset()
         while in_loop:
             # collect positions for inversion from indexes
@@ -123,11 +123,11 @@ class VnsLocalSearchSupportRepresentationInt(VnsLocalSearchSupport[int,A_co]):
         """
         if optimizer.should_finish():
             return False
-        if k < 1 or k > self.k_max:
+        if k < 1 or k > self.dimension:
             return False
         start_sol:Solution = solution.copy()
         # initialize indexes
-        indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k, self.k_max)
+        indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k, self.dimension)
         in_loop:bool = indexes.reset()
         while in_loop:
             # collect positions for inversion from indexes

@@ -43,11 +43,11 @@ def main():
         solution:MinimumMultiCutProblemBitArraySolution = MinimumMultiCutProblemBitArraySolution()
         finish:FinishControl = FinishControl(criteria='iterations', iterations_max=500)
         additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(is_active=False, keep='')
-        k_max:int = len(problem_to_solve.graph.edges())
+        num_edges:int = len(problem_to_solve.graph.edges())
         vns_shaking_support:VnsShakingSupportRepresentationBitArray = \
-                VnsShakingSupportRepresentationBitArray(k_max=k_max)
+                VnsShakingSupportRepresentationBitArray(dimension=num_edges)
         vns_ls_support:VnsLocalSearchSupportRepresentationBitArray = \
-                VnsLocalSearchSupportRepresentationBitArray(k_max=k_max)
+                VnsLocalSearchSupportRepresentationBitArray(dimension=num_edges)
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
         vns_construction_params.output_control = output_control
         vns_construction_params.problem = problem_to_solve

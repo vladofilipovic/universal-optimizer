@@ -1,5 +1,4 @@
 
-
 import unittest   
 import unittest.mock as mocker
 
@@ -11,12 +10,16 @@ from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_int import \
+        VnsShakingSupportRepresentationInt
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_rep_int import \
+        VnsLocalSearchSupportRepresentationInt
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_int_solution import OnesCountMaxProblemIntSolution
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_int_solution_vns_support import OnesCountMaxProblemIntSolutionVnsSupport
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_int_solution import \
+        OnesCountMaxProblemIntSolution
 
 class TestOnesCountMaxProblemVnsIntSolutionLsfi(unittest.TestCase):
     
@@ -29,13 +32,17 @@ class TestOnesCountMaxProblemVnsIntSolutionLsfi(unittest.TestCase):
         self.problem_to_solve:OnesCountMaxProblem = OnesCountMaxProblem.from_dimension(dimension=22)
         self.solution:OnesCountMaxProblemIntSolution = OnesCountMaxProblemIntSolution()
         self.finish_control:FinishControl = FinishControl(criteria='evaluations', evaluations_max=5000)
-        self.vns_support:OnesCountMaxProblemIntSolutionVnsSupport = OnesCountMaxProblemIntSolutionVnsSupport()
+        self.vns_shaking_support:VnsShakingSupportRepresentationInt = \
+                VnsShakingSupportRepresentationInt(self.problem_to_solve.dimension)
+        self.vns_ls_support:VnsLocalSearchSupportRepresentationInt = \
+                VnsLocalSearchSupportRepresentationInt(self.problem_to_solve.dimension)
         self.additional_stat = AdditionalStatisticsControl(keep='')
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
         vns_construction_params.output_control = self.output_control
         vns_construction_params.problem = self.problem_to_solve
         vns_construction_params.solution_template = self.solution
-        vns_construction_params.problem_solution_vns_support = self.vns_support
+        vns_construction_params.vns_shaking_support = self.vns_shaking_support
+        vns_construction_params.vns_ls_support = self.vns_ls_support
         vns_construction_params.finish_control = self.finish_control
         vns_construction_params.random_seed = 43434343
         vns_construction_params.additional_statistics_control = self.additional_stat

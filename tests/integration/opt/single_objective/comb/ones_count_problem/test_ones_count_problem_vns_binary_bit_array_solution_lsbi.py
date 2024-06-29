@@ -12,17 +12,16 @@ from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_bit_array import \
+        VnsShakingSupportRepresentationBitArray
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_rep_bit_array import \
+        VnsLocalSearchSupportRepresentationBitArray
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution import \
     OnesCountMaxProblemBitArraySolution
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution_vns_support import \
-    OnesCountMaxProblemBitArraySolutionVnsShakingSupport
-
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution_vns_support import \
-    OnesCountMaxProblemBitArraySolutionVnsLocalSearchSupport
 
 
 class TestOnesCountMaxProblemVnsBitArraySolutionLsbi(unittest.TestCase):
@@ -33,15 +32,16 @@ class TestOnesCountMaxProblemVnsBitArraySolutionLsbi(unittest.TestCase):
 
     def setUp(self):
         self.output_control = OutputControl(False)
-        self.problem_to_solve:OnesCountMaxProblem = OnesCountMaxProblem.from_dimension(dimension=24)
+        problem_dim:int = 24
+        self.problem_to_solve:OnesCountMaxProblem = OnesCountMaxProblem.from_dimension(dimension=problem_dim)
         self.solution:OnesCountMaxProblemBitArraySolution = OnesCountMaxProblemBitArraySolution(random_seed=43434343)
         self.finish_control:FinishControl = FinishControl(criteria='evaluations', evaluations_max=1000, 
                     iterations_max=0, seconds_max=0)
         self.additional_stat = AdditionalStatisticsControl(keep='')
-        self.vns_shaking_support:OnesCountMaxProblemBitArraySolutionVnsShakingSupport = \
-                OnesCountMaxProblemBitArraySolutionVnsShakingSupport()
-        self.vns_ls_support:OnesCountMaxProblemBitArraySolutionVnsLocalSearchSupport= \
-                OnesCountMaxProblemBitArraySolutionVnsLocalSearchSupport()
+        self.vns_shaking_support:VnsShakingSupportRepresentationBitArray = \
+                VnsShakingSupportRepresentationBitArray(problem_dim)
+        self.vns_ls_support:VnsLocalSearchSupportRepresentationBitArray= \
+                VnsLocalSearchSupportRepresentationBitArray(problem_dim)
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
         vns_construction_params.output_control = self.output_control
         vns_construction_params.problem = self.problem_to_solve

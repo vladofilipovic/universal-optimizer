@@ -8,12 +8,17 @@ import unittest.mock as mocker
 from unittest.mock import patch
 from unittest.mock import mock_open
 
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_bit_array import VnsShakingSupportRepresentationBitArray
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_rep_bit_array import VnsLocalSearchSupportRepresentationBitArray
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_int import \
+    VnsShakingSupportRepresentationInt
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_rep_int import \
+    VnsLocalSearchSupportRepresentationInt
 
-from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem import FunctionOneVariableMaxProblemMax
-from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem import FunctionOneVariableMaxProblemMaxElements
-from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_int_solution import FunctionOneVariableMaxProblemIntSolution
+from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem import \
+    FunctionOneVariableMaxProblemMax
+from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem import \
+    FunctionOneVariableMaxProblemMaxElements
+from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_int_solution import \
+    FunctionOneVariableMaxProblemIntSolution
 
 
 class TestFunctionOneVariableMaxProblemIntSolutionVnsSupport(unittest.TestCase):
@@ -24,11 +29,12 @@ class TestFunctionOneVariableMaxProblemIntSolutionVnsSupport(unittest.TestCase):
         problem = FunctionOneVariableMaxProblemMax("x**2", 0, 10)
         solution = FunctionOneVariableMaxProblemIntSolution(0, 10, 4)
         solution.representation = 3
-        vns_sh_support = VnsShakingSupportRepresentationBitArray(3)
+        vns_sh_support = VnsShakingSupportRepresentationInt(solution.number_of_intervals)
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
         type(optimizer_stub).finish_control = mocker.PropertyMock(return_value=finish_control_stub) 
+        optimizer_stub.should_finish = mocker.Mock(return_value=False)
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
         type(optimizer_stub).vns_shaking_support = mocker.PropertyMock(return_value=vns_sh_support)
         # Act
@@ -43,11 +49,12 @@ class TestFunctionOneVariableMaxProblemIntSolutionVnsSupport(unittest.TestCase):
         solution = FunctionOneVariableMaxProblemIntSolution(0, 10, 4)
         solution.representation = 3
         solution.evaluate(problem)
-        vns_ls_support= VnsLocalSearchSupportRepresentationBitArray(3)
+        vns_ls_support= VnsLocalSearchSupportRepresentationInt(solution.number_of_intervals)
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
         type(optimizer_stub).finish_control = mocker.PropertyMock(return_value=finish_control_stub) 
+        optimizer_stub.should_finish = mocker.Mock(return_value=False)
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
         type(optimizer_stub).vns_ls_support = mocker.PropertyMock(return_value=vns_ls_support)
         # Act
@@ -64,11 +71,12 @@ class TestFunctionOneVariableMaxProblemIntSolutionVnsSupport(unittest.TestCase):
         solution = FunctionOneVariableMaxProblemIntSolution(0, 10, 4)
         solution.representation = 3
         solution.evaluate(problem)
-        vns_ls_support= VnsLocalSearchSupportRepresentationBitArray(3)
+        vns_ls_support= VnsLocalSearchSupportRepresentationInt(solution.number_of_intervals)
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
         type(optimizer_stub).finish_control = mocker.PropertyMock(return_value=finish_control_stub) 
+        optimizer_stub.should_finish = mocker.Mock(return_value=False)
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
         type(optimizer_stub).vns_ls_support = mocker.PropertyMock(return_value=vns_ls_support)
         # Act
@@ -85,12 +93,13 @@ class TestFunctionOneVariableMaxProblemIntSolutionVnsSupport(unittest.TestCase):
         solution = FunctionOneVariableMaxProblemIntSolution(0, 10, 4)
         solution.representation = 3
         solution.evaluate(problem)
-        vns_sh_support = VnsShakingSupportRepresentationBitArray(3)
+        vns_sh_support = VnsShakingSupportRepresentationInt(solution.number_of_intervals)
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).check_evaluations = mocker.PropertyMock(return_value=False)
         type(finish_control_stub).evaluations_max = mocker.PropertyMock(return_value=0)
         optimizer_stub = mocker.MagicMock()
         type(optimizer_stub).finish_control = mocker.PropertyMock(return_value=finish_control_stub) 
+        optimizer_stub.should_finish = mocker.Mock(return_value=False)
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
         type(optimizer_stub).vns_shaking_support = mocker.PropertyMock(return_value=vns_sh_support)
         # Act
@@ -105,12 +114,13 @@ class TestFunctionOneVariableMaxProblemIntSolutionVnsSupport(unittest.TestCase):
         solution = FunctionOneVariableMaxProblemIntSolution(0, 10, 4)
         solution.representation = 3
         solution.evaluate(problem)
-        vns_ls_support = VnsLocalSearchSupportRepresentationBitArray(3)
+        vns_ls_support = VnsLocalSearchSupportRepresentationInt(solution.number_of_intervals)
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).check_evaluations = mocker.PropertyMock(return_value=False)
         type(finish_control_stub).evaluations_max = mocker.PropertyMock(return_value=0)
         optimizer_stub = mocker.MagicMock()
         type(optimizer_stub).finish_control = mocker.PropertyMock(return_value=finish_control_stub) 
+        optimizer_stub.should_finish = mocker.Mock(return_value=False)
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
         type(optimizer_stub).vns_ls_support = mocker.PropertyMock(return_value=vns_ls_support)
         # Act
@@ -118,7 +128,7 @@ class TestFunctionOneVariableMaxProblemIntSolutionVnsSupport(unittest.TestCase):
         # Assert
         self.assertFalse(result)
         # Act
-        result = vns_support.local_search_best_improvement(33, problem, solution, optimizer_stub)
+        result = vns_ls_support.local_search_best_improvement(33, problem, solution, optimizer_stub)
         # Assert
         self.assertFalse(result)
 
@@ -129,99 +139,90 @@ class TestFunctionOneVariableMaxProblemIntSolutionVnsSupport(unittest.TestCase):
         solution = FunctionOneVariableMaxProblemIntSolution(0, 10, 4)
         solution.representation = 3
         solution.evaluate(problem)
-        vns_support = FunctionOneVariableMaxProblemIntSolutionVnsSupport()
+        vns_ls_support:VnsLocalSearchSupportRepresentationInt = \
+            VnsLocalSearchSupportRepresentationInt(solution.number_of_intervals)
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).check_evaluations = mocker.PropertyMock(return_value=False)
         type(finish_control_stub).evaluations_max = mocker.PropertyMock(return_value=0)
         optimizer_stub = mocker.MagicMock()
         type(optimizer_stub).finish_control = mocker.PropertyMock(return_value=finish_control_stub) 
+        optimizer_stub.should_finish = mocker.Mock(return_value=False)
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
-        type(optimizer_stub).vns_support = mocker.PropertyMock(return_value=vns_support)
+        type(optimizer_stub).vns_ls_support = mocker.PropertyMock(return_value=vns_ls_support)
         # Act
-        result = vns_support.local_search_first_improvement(0, problem, solution, optimizer_stub)
+        result = vns_ls_support.local_search_first_improvement(0, problem, solution, optimizer_stub)
         # Assert
         self.assertFalse(result)
         # Act
-        result = vns_support.local_search_first_improvement(33, problem, solution, optimizer_stub)
+        result = vns_ls_support.local_search_first_improvement(33, problem, solution, optimizer_stub)
         # Assert
         self.assertFalse(result)
 
     # should return a string representation of the class name 'FunctionOneVariableMaxProblemIntSolutionVnsSupport'
     def test_string_rep_class_name(self):
         # Arrange
-        solution = FunctionOneVariableMaxProblemIntSolutionVnsSupport()
-    
+        supp = VnsLocalSearchSupportRepresentationInt(42)    
         # Act
-        result = solution.string_rep('|')
-    
+        result = supp.string_rep('|')
         # Assert
-        self.assertEqual(result, 'FunctionOneVariableMaxProblemIntSolutionVnsSupport')
+        self.assertEqual(result, 'VnsLocalSearchSupportRepresentationInt')
 
 
     # should return a string with the delimiter passed as argument
     def test_string_rep_delimiter(self):
         # Arrange
-        solution = FunctionOneVariableMaxProblemIntSolutionVnsSupport()
-    
+        supp = VnsShakingSupportRepresentationInt(42)    
         # Act
-        result = solution.string_rep('|')
-    
+        result = supp.string_rep(delimiter="++")
         # Assert
-        self.assertEqual(result, 'FunctionOneVariableMaxProblemIntSolutionVnsSupport')
+        self.assertEqual(result, 'VnsShakingSupportRepresentationInt')
 
     # should return a string with the indentation passed as argument
     def test_string_rep_indentation(self):
         # Arrange
-        solution = FunctionOneVariableMaxProblemIntSolutionVnsSupport()
-    
+        supp = VnsShakingSupportRepresentationInt(42)    
         # Act
-        result = solution.string_rep('|', indentation=4)
-    
+        result = supp.string_rep('|', indentation=4)
         # Assert
-        self.assertEqual(result, 'FunctionOneVariableMaxProblemIntSolutionVnsSupport')
+        self.assertEqual(result, 'VnsShakingSupportRepresentationInt')
 
     # should return an empty string when all arguments are empty
     def test_string_rep_empty_arguments(self):
         # Arrange
-        solution = FunctionOneVariableMaxProblemIntSolutionVnsSupport()
-    
+        solution = VnsShakingSupportRepresentationInt(42)
         # Act
         result = solution.string_rep('', indentation=0, indentation_symbol='', group_start='', group_end='')
-    
         # Assert
-        self.assertEqual(result, 'FunctionOneVariableMaxProblemIntSolutionVnsSupport')
+        self.assertEqual(result, 'VnsShakingSupportRepresentationInt')
 
     # should return a string with the indentation_symbol passed as argument
     def test_string_rep_indentation_symbol(self):
         # Arrange
-        solution = FunctionOneVariableMaxProblemIntSolutionVnsSupport()
-    
+        solution = VnsShakingSupportRepresentationInt(42)
         # Act
         result = solution.string_rep('|', indentation_symbol=' ')
-    
         # Assert
-        self.assertEqual(result, 'FunctionOneVariableMaxProblemIntSolutionVnsSupport')
-
+        self.assertEqual(result, 'VnsShakingSupportRepresentationInt')
 
 class Test__Copy__(unittest.TestCase):
 
     # Should return a deep copy of the object
     def test_return_deep_copy(self):
-        sup = FunctionOneVariableMaxProblemIntSolutionVnsSupport()
+        sup = VnsShakingSupportRepresentationInt(42)
         copy_sup = sup.__copy__()
         self.assertIsNot(sup, copy_sup)
         self.assertEqual(sup.__dict__, copy_sup.__dict__)
 
     # Should not modify the original object
     def test_not_modify_original_object(self):
-        sup = FunctionOneVariableMaxProblemIntSolutionVnsSupport()
+        sup = VnsShakingSupportRepresentationInt(42)
         original_dict = sup.__dict__.copy()
         copy_sup = sup.__copy__()
         self.assertEqual(sup.__dict__, original_dict)
 
     # Should copy all attributes of the object
     def test_copy_all_attributes(self):
-        sup = FunctionOneVariableMaxProblemIntSolutionVnsSupport()
+        sup = VnsShakingSupportRepresentationInt(42)
         sup.attribute1 = "value1"
         sup.attribute2 = "value2"
         copy_sup = sup.__copy__()
@@ -230,13 +231,13 @@ class Test__Copy__(unittest.TestCase):
 
     # Should return a new object even if the original object is empty
     def test_return_new_object_empty(self):
-        sup = FunctionOneVariableMaxProblemIntSolutionVnsSupport()
+        sup = VnsShakingSupportRepresentationInt(42)
         copy_sup = sup.__copy__()
         self.assertIsNot(sup, copy_sup)
 
     # Should return a new object even if the original object has no mutable attributes
     def test_return_new_object_no_mutable_attributes(self):
-        sup = FunctionOneVariableMaxProblemIntSolutionVnsSupport()
+        sup = VnsShakingSupportRepresentationInt(42)
         sup.attribute1 = "value1"
         sup.attribute2 = 10
         copy_sup = sup.__copy__()
@@ -246,7 +247,7 @@ class Test__Copy__(unittest.TestCase):
 
     # Should return a new object even if the original object has no immutable attributes
     def test_return_new_object_no_immutable_attributes(self):
-        sup = FunctionOneVariableMaxProblemIntSolutionVnsSupport()
+        sup = VnsShakingSupportRepresentationInt(42)
         sup.attribute1 = []
         sup.attribute2 = {}
         copy_sup = sup.__copy__()

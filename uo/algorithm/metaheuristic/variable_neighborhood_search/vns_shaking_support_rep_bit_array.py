@@ -30,11 +30,11 @@ A_co = TypeVar("A_co", covariant=True)
 
 class VnsShakingSupportRepresentationBitArray(VnsShakingSupport[BitArray,A_co]):
     
-    def __init__(self, k_max:int)->None:
+    def __init__(self, dimension:int)->None:
         """
         Create new `VnsLocalSearchSupportRepresentationBitArray` instance
         """
-        super().__init__(k_max=k_max)
+        super().__init__(dimension=dimension)
 
 
     def __copy__(self):
@@ -71,6 +71,8 @@ class VnsShakingSupportRepresentationBitArray(VnsShakingSupport[BitArray,A_co]):
         """    
         if optimizer.should_finish():
             return False
+        if k <= 0:
+            return False
         tries:int = 0
         limit:int = 10000
         while tries < limit:
@@ -82,7 +84,7 @@ class VnsShakingSupportRepresentationBitArray(VnsShakingSupport[BitArray,A_co]):
                 repres.invert(pos)
             solution.representation = repres
             all_ok:bool = True
-            if solution.representation.count(value=1) > self.k_max:
+            if solution.representation.count(value=1) > self.dimension:
                 all_ok = False
             if all_ok:
                 break

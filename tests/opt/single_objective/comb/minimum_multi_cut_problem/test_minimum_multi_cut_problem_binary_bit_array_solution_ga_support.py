@@ -6,9 +6,9 @@ import networkx as nx
 from bitstring import BitArray
 from random import randint, choice
 
-from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support_rep_binary_bit_array import \
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support_rep_bit_array import \
     GaCrossoverSupportRepresentationBitArray
-from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support_rep_binary_bit_array import \
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support_rep_bit_array import \
     GaMutationSupportRepresentationBitArray
 
 from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem import MinimumMultiCutProblem
@@ -23,16 +23,13 @@ class TestMinimumMultiCutProblemBitArraySolutionGaSupport(unittest.TestCase):
         # Arrange
         nodes = 10
         prob = 0.5
-
         graph: nx.Graph = nx.fast_gnp_random_graph(nodes, prob)
         for edge in graph.edges():
                 graph.edges[edge]['weight'] = randint(1,10)
-
         nodes = list(graph.nodes())
         num_pairs = randint(1, max(2,len(nodes)//3))
         source_terminal_pairs = []
         edges = len(graph.edges())
-
         for _ in range(num_pairs):
             source = choice(nodes)
             terminal_candidates = [node for node in nodes if node != source]
@@ -42,7 +39,7 @@ class TestMinimumMultiCutProblemBitArraySolutionGaSupport(unittest.TestCase):
         problem = MinimumMultiCutProblem(graph=graph, source_terminal_pairs=source_terminal_pairs)
         solution = MinimumMultiCutProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray(length=edges), problem)
-        ga_cross_support = GaCrossoverSupportRepresentationBitArray(0,995)
+        ga_cross_support = GaCrossoverSupportRepresentationBitArray(0.995)
         ga_mut_support = GaMutationSupportRepresentationBitArray(0.005)
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)

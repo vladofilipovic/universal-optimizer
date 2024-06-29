@@ -7,8 +7,13 @@ from bitstring import BitArray
 from random import randint, choice
 
 from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem import MinimumMultiCutProblem
-from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_bit_array_solution import MinimumMultiCutProblemBitArraySolution
-from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_bit_array_solution_vns_support import MinimumMultiCutProblemBitArraySolutionVnsSupport
+from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_bit_array_solution import \
+    MinimumMultiCutProblemBitArraySolution
+
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_rep_bit_array import \
+    VnsLocalSearchSupportRepresentationBitArray
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_bit_array import \
+    VnsShakingSupportRepresentationBitArray
 
 
 class TestMinimumMultiCutProblemBitArraySolutionVnsSupport(unittest.TestCase):
@@ -37,15 +42,16 @@ class TestMinimumMultiCutProblemBitArraySolutionVnsSupport(unittest.TestCase):
         problem = MinimumMultiCutProblem(graph=graph, source_terminal_pairs=source_terminal_pairs)
         solution = MinimumMultiCutProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray(length=edges), problem)
-        vns_support = MinimumMultiCutProblemBitArraySolutionVnsSupport()
+        vns_shaking_support = VnsShakingSupportRepresentationBitArray(len(problem.graph.edges))
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
         type(optimizer_stub).finish_control = mocker.PropertyMock(return_value=finish_control_stub)
+        optimizer_stub.should_finish = mocker.Mock(return_value=False)
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
-        type(optimizer_stub).vns_support = mocker.PropertyMock(return_value=vns_support)
+        type(optimizer_stub).vns_shaking_support = mocker.PropertyMock(return_value=vns_shaking_support)
         # Act
-        result = vns_support.shaking(5, problem, solution, optimizer_stub)
+        result = vns_shaking_support.shaking(5, problem, solution, optimizer_stub)
         # Assert
         self.assertTrue(result)
 
@@ -54,16 +60,13 @@ class TestMinimumMultiCutProblemBitArraySolutionVnsSupport(unittest.TestCase):
         # Arrange
         nodes = 10
         prob = 0.5
-
         graph: nx.Graph = nx.fast_gnp_random_graph(nodes, prob)
         for edge in graph.edges():
                 graph.edges[edge]['weight'] = randint(1,10)
-
         nodes = list(graph.nodes())
         num_pairs = randint(1, max(2,len(nodes)//3))
         source_terminal_pairs = []
         edges = len(graph.edges())
-
         for _ in range(num_pairs):
             source = choice(nodes)
             terminal_candidates = [node for node in nodes if node != source]
@@ -74,35 +77,33 @@ class TestMinimumMultiCutProblemBitArraySolutionVnsSupport(unittest.TestCase):
         solution = MinimumMultiCutProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray(length=edges), problem)
         solution.evaluate(problem)
-        vns_support = MinimumMultiCutProblemBitArraySolutionVnsSupport()
+        vns_ls_support = VnsLocalSearchSupportRepresentationBitArray(len(problem.graph.edges))
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
         type(optimizer_stub).finish_control = mocker.PropertyMock(return_value=finish_control_stub) 
+        optimizer_stub.should_finish = mocker.Mock(return_value=False)
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=4)
-        type(optimizer_stub).vns_support = mocker.PropertyMock(return_value=vns_support)
+        type(optimizer_stub).vns_ls_support = mocker.PropertyMock(return_value=vns_ls_support)
         # Act
         old_fitness = solution.fitness_value
-        result = vns_support.local_search_best_improvement(3, problem, solution, optimizer_stub)
+        result = vns_ls_support.local_search_best_improvement(3, problem, solution, optimizer_stub)
         # Assert
         self.assertTrue(result)
-        self.assertLessEqual(solution.fitness_value, old_fitness)
+        self.assertGreaterEqual(solution.fitness_value, old_fitness)
 
     # shaking method modifies the solution representation when the number of ones in the solution representation is less than the problem dimension
     def test_shaking_modifies_solution_representation_when_number_of_ones_is_less_than_problem_dimension8(self):
         # Arrange
         nodes = 10
         prob = 0.5
-
         graph: nx.Graph = nx.fast_gnp_random_graph(nodes, prob)
         for edge in graph.edges():
                 graph.edges[edge]['weight'] = randint(1,10)
-
         nodes = list(graph.nodes())
         num_pairs = randint(1, max(2,len(nodes)//3))
         source_terminal_pairs = []
         edges = len(graph.edges())
-
         for _ in range(num_pairs):
             source = choice(nodes)
             terminal_candidates = [node for node in nodes if node != source]
@@ -112,15 +113,16 @@ class TestMinimumMultiCutProblemBitArraySolutionVnsSupport(unittest.TestCase):
         problem = MinimumMultiCutProblem(graph=graph, source_terminal_pairs=source_terminal_pairs)
         solution = MinimumMultiCutProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray(bin='0' * edges), problem)
-        vns_support = MinimumMultiCutProblemBitArraySolutionVnsSupport()
+        vns_shaking_support = VnsShakingSupportRepresentationBitArray(len(problem.graph.edges))
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
-        type(optimizer_stub).finish_control = mocker.PropertyMock(return_value=finish_control_stub) 
+        type(optimizer_stub).finish_control = mocker.PropertyMock(return_value=finish_control_stub)
+        optimizer_stub.should_finish = mocker.Mock(return_value=False) 
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
-        type(optimizer_stub).vns_support = mocker.PropertyMock(return_value=vns_support)
+        type(optimizer_stub).vns_shaking_support = mocker.PropertyMock(return_value=vns_shaking_support)
         # Act
-        vns_support.shaking(5, problem, solution, optimizer_stub)
+        vns_shaking_support.shaking(5, problem, solution, optimizer_stub)
         # Assert
         self.assertNotEqual(solution.representation.bin, '0' * edges)
 
@@ -129,16 +131,13 @@ class TestMinimumMultiCutProblemBitArraySolutionVnsSupport(unittest.TestCase):
         # Arrange
         nodes = 10
         prob = 0.5
-
         graph: nx.Graph = nx.fast_gnp_random_graph(nodes, prob)
         for edge in graph.edges():
                 graph.edges[edge]['weight'] = randint(1,10)
-
         nodes = list(graph.nodes())
         num_pairs = randint(1, max(2,len(nodes)//3))
         source_terminal_pairs = []
         edges = len(graph.edges())
-
         for _ in range(num_pairs):
             source = choice(nodes)
             terminal_candidates = [node for node in nodes if node != source]
@@ -149,16 +148,17 @@ class TestMinimumMultiCutProblemBitArraySolutionVnsSupport(unittest.TestCase):
         solution = MinimumMultiCutProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray(length=edges), problem)
         solution.evaluate(problem)
-        vns_support = MinimumMultiCutProblemBitArraySolutionVnsSupport()
+        vns_ls_support = VnsLocalSearchSupportRepresentationBitArray(len(problem.graph.edges))
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
         type(optimizer_stub).finish_control = mocker.PropertyMock(return_value=finish_control_stub) 
+        optimizer_stub.should_finish = mocker.Mock(return_value=False)
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
-        type(optimizer_stub).vns_support = mocker.PropertyMock(return_value=vns_support)        
+        type(optimizer_stub).vns_ls_support = mocker.PropertyMock(return_value=vns_ls_support)        
         # Act
         old_fitness = solution.fitness_value
-        result = vns_support.local_search_best_improvement(3, problem, solution, optimizer_stub)
+        result = vns_ls_support.local_search_best_improvement(3, problem, solution, optimizer_stub)
         # Assert
         self.assertTrue(result)
-        self.assertLessEqual(solution.fitness_value, old_fitness)
+        self.assertGreaterEqual(solution.fitness_value, old_fitness)

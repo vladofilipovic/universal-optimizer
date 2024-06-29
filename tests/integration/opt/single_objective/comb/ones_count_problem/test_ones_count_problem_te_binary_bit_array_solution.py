@@ -14,12 +14,13 @@ from random import choice
 from bitstring import Bits, BitArray, BitStream, pack
 
 from uo.algorithm.output_control import OutputControl
+from uo.algorithm.exact.total_enumeration.te_operations_support_rep_bit_array import \
+    TeOperationsSupportRepresentationBitArray
 from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizerConstructionParameters
 from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizer
 
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution import OnesCountMaxProblemBitArraySolution
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution_te_support import OnesCountMaxProblemBitArraySolutionTeSupport
 
 class TestOnesCountMaxProblemTeBitArraySolution(unittest.TestCase):
     
@@ -31,7 +32,7 @@ class TestOnesCountMaxProblemTeBitArraySolution(unittest.TestCase):
         self.output_control = OutputControl(False)
         self.problem_to_solve:OnesCountMaxProblem = OnesCountMaxProblem.from_dimension(dimension=12)
         self.solution:OnesCountMaxProblemBitArraySolution = OnesCountMaxProblemBitArraySolution(random_seed=43434343)
-        self.te_support:OnesCountMaxProblemBitArraySolutionTeSupport = OnesCountMaxProblemBitArraySolutionTeSupport()
+        self.te_support:TeOperationsSupportRepresentationBitArray = TeOperationsSupportRepresentationBitArray()
         construction_params:TeOptimizerConstructionParameters = TeOptimizerConstructionParameters()
         construction_params.output_control = self.output_control
         construction_params.problem = self.problem_to_solve

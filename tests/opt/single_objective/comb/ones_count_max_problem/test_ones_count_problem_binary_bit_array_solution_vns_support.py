@@ -15,13 +15,18 @@ from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_bit_array import VnsShakingSupportRepresentationBitArray
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_rep_bit_array import VnsLocalSearchSupportRepresentationBitArray
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_bit_array import \
+        VnsShakingSupportRepresentationBitArray
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_rep_bit_array import \
+        VnsLocalSearchSupportRepresentationBitArray
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import \
+        VnsOptimizerConstructionParameters
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import \
+        VnsOptimizer
 
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution import OnesCountMaxProblemBitArraySolution
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution import \
+        OnesCountMaxProblemBitArraySolution
 
 
 class TestOnesCountMaxProblemBitArraySolutionVnsSupport(unittest.TestCase):
@@ -32,11 +37,12 @@ class TestOnesCountMaxProblemBitArraySolutionVnsSupport(unittest.TestCase):
         problem = OnesCountMaxProblem(dim=5)
         solution = OnesCountMaxProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray('0b10101'), problem)
-        vns_support = OnesCountMaxProblemBitArraySolutionVnsSupport()
+        vns_support = VnsShakingSupportRepresentationBitArray(problem.dimension)
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
         type(optimizer_stub).finish_control = mocker.PropertyMock(return_value=finish_control_stub) 
+        optimizer_stub.should_finish = mocker.Mock(return_value=False)
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
         type(optimizer_stub).vns_support = mocker.PropertyMock(return_value=vns_support)
         # Act
@@ -51,11 +57,12 @@ class TestOnesCountMaxProblemBitArraySolutionVnsSupport(unittest.TestCase):
         solution = OnesCountMaxProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray('0b00110010'), problem)
         solution.evaluate(problem)
-        vns_support = OnesCountMaxProblemBitArraySolutionVnsSupport()
+        vns_support = VnsLocalSearchSupportRepresentationBitArray(problem.dimension)
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
         type(optimizer_stub).finish_control = mocker.PropertyMock(return_value=finish_control_stub) 
+        optimizer_stub.should_finish = mocker.Mock(return_value=False)
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=4)
         type(optimizer_stub).vns_support = mocker.PropertyMock(return_value=vns_support)
         # Act
@@ -72,11 +79,12 @@ class TestOnesCountMaxProblemBitArraySolutionVnsSupport(unittest.TestCase):
         solution = OnesCountMaxProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray('0b000001'), problem)
         solution.evaluate(problem)
-        vns_support = OnesCountMaxProblemBitArraySolutionVnsSupport()
+        vns_support = VnsLocalSearchSupportRepresentationBitArray(problem.dimension)
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
         type(optimizer_stub).finish_control = mocker.PropertyMock(return_value=finish_control_stub) 
+        optimizer_stub.should_finish = mocker.Mock(return_value=False)
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
         type(optimizer_stub).vns_support = mocker.PropertyMock(return_value=vns_support)
         # Act
@@ -93,11 +101,12 @@ class TestOnesCountMaxProblemBitArraySolutionVnsSupport(unittest.TestCase):
         problem = OnesCountMaxProblem(dim=5)
         solution = OnesCountMaxProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray(bin='0' * problem.dimension), problem)
-        vns_support = OnesCountMaxProblemBitArraySolutionVnsSupport()
+        vns_support = VnsShakingSupportRepresentationBitArray(problem.dimension)
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
-        type(optimizer_stub).finish_control = mocker.PropertyMock(return_value=finish_control_stub) 
+        type(optimizer_stub).finish_control = mocker.PropertyMock(return_value=finish_control_stub)
+        optimizer_stub.should_finish = mocker.Mock(return_value=False) 
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
         type(optimizer_stub).vns_support = mocker.PropertyMock(return_value=vns_support)
         # Act
@@ -112,11 +121,12 @@ class TestOnesCountMaxProblemBitArraySolutionVnsSupport(unittest.TestCase):
         solution = OnesCountMaxProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray('0b00110010'), problem)
         solution.evaluate(problem)
-        vns_support = OnesCountMaxProblemBitArraySolutionVnsSupport()
+        vns_support = VnsLocalSearchSupportRepresentationBitArray(problem.dimension)
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
         type(optimizer_stub).finish_control = mocker.PropertyMock(return_value=finish_control_stub) 
+        optimizer_stub.should_finish = mocker.Mock(return_value=False)
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
         type(optimizer_stub).vns_support = mocker.PropertyMock(return_value=vns_support)        
         # Act
@@ -133,11 +143,12 @@ class TestOnesCountMaxProblemBitArraySolutionVnsSupport(unittest.TestCase):
         solution = OnesCountMaxProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray('0b00110010'), problem)
         solution.evaluate(problem)
-        vns_support = OnesCountMaxProblemBitArraySolutionVnsSupport()
+        vns_support = VnsLocalSearchSupportRepresentationBitArray(problem.dimension)
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
         type(optimizer_stub).finish_control = mocker.PropertyMock(return_value=finish_control_stub) 
+        optimizer_stub.should_finish = mocker.Mock(return_value=False)
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
         type(optimizer_stub).vns_support = mocker.PropertyMock(return_value=vns_support)        
         # Act

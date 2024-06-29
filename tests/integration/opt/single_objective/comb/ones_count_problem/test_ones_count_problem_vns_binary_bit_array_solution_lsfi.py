@@ -17,12 +17,15 @@ from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_bit_array import \
+        VnsShakingSupportRepresentationBitArray
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_rep_bit_array import \
+        VnsLocalSearchSupportRepresentationBitArray
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution import OnesCountMaxProblemBitArraySolution
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution_vns_support import OnesCountMaxProblemBitArraySolutionVnsSupport
 
 class TestOnesCountMaxProblemVnsBitArraySolutionLsbi(unittest.TestCase):
     
@@ -35,14 +38,17 @@ class TestOnesCountMaxProblemVnsBitArraySolutionLsbi(unittest.TestCase):
         self.problem_to_solve:OnesCountMaxProblem = OnesCountMaxProblem.from_dimension(dimension=24)
         self.solution:OnesCountMaxProblemBitArraySolution = OnesCountMaxProblemBitArraySolution(random_seed=43434343)
         self.finish_control:FinishControl = FinishControl(criteria='evaluations', evaluations_max=1000)
-        self.vns_support:OnesCountMaxProblemBitArraySolutionVnsSupport = \
-                OnesCountMaxProblemBitArraySolutionVnsSupport()
+        self.vns_shaking_support:VnsShakingSupportRepresentationBitArray = \
+                VnsShakingSupportRepresentationBitArray(self.problem_to_solve.dimension)
+        self.vns_ls_support:VnsLocalSearchSupportRepresentationBitArray = \
+                VnsLocalSearchSupportRepresentationBitArray(self.problem_to_solve.dimension)
         self.additional_stat = AdditionalStatisticsControl(keep='')
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
         vns_construction_params.output_control = self.output_control
         vns_construction_params.problem = self.problem_to_solve
         vns_construction_params.solution_template = self.solution
-        vns_construction_params.problem_solution_vns_support = self.vns_support
+        vns_construction_params.vns_shaking_support = self.vns_shaking_support
+        vns_construction_params.vns_ls_support = self.vns_ls_support
         vns_construction_params.finish_control = self.finish_control
         vns_construction_params.random_seed = 43434343
         vns_construction_params.additional_statistics_control = self.additional_stat
