@@ -104,7 +104,7 @@ class MinimumMultiCutProblemBitArraySolution(Solution[BitArray,str]):
             raise ValueError('Can not randomly initialize solution with its source_terminal_pairs.')
         self.representation = BitArray(len(problem.graph.edges()))
         for i in range(len(self.representation)):
-            if random() > 0.7:
+            if random() > 0.5:
                 self.representation[i] = True
 
     def init_from(self, representation:BitArray, problem:Problem)->None:

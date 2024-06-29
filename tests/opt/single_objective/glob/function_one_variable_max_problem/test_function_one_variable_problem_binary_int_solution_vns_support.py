@@ -8,10 +8,12 @@ import unittest.mock as mocker
 from unittest.mock import patch
 from unittest.mock import mock_open
 
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_bit_array import VnsShakingSupportRepresentationBitArray
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_rep_bit_array import VnsLocalSearchSupportRepresentationBitArray
+
 from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem import FunctionOneVariableMaxProblemMax
 from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem import FunctionOneVariableMaxProblemMaxElements
 from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_int_solution import FunctionOneVariableMaxProblemIntSolution
-from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_int_solution_vns_support import FunctionOneVariableMaxProblemIntSolutionVnsSupport
 
 
 class TestFunctionOneVariableMaxProblemIntSolutionVnsSupport(unittest.TestCase):
@@ -22,15 +24,15 @@ class TestFunctionOneVariableMaxProblemIntSolutionVnsSupport(unittest.TestCase):
         problem = FunctionOneVariableMaxProblemMax("x**2", 0, 10)
         solution = FunctionOneVariableMaxProblemIntSolution(0, 10, 4)
         solution.representation = 3
-        vns_support = FunctionOneVariableMaxProblemIntSolutionVnsSupport()
+        vns_sh_support = VnsShakingSupportRepresentationBitArray(3)
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
         type(optimizer_stub).finish_control = mocker.PropertyMock(return_value=finish_control_stub) 
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
-        type(optimizer_stub).vns_support = mocker.PropertyMock(return_value=vns_support)
+        type(optimizer_stub).vns_shaking_support = mocker.PropertyMock(return_value=vns_sh_support)
         # Act
-        result = vns_support.shaking(1, problem, solution, optimizer_stub)
+        result = vns_sh_support.shaking(1, problem, solution, optimizer_stub)
         # Assert
         self.assertTrue(result)
 
@@ -41,16 +43,16 @@ class TestFunctionOneVariableMaxProblemIntSolutionVnsSupport(unittest.TestCase):
         solution = FunctionOneVariableMaxProblemIntSolution(0, 10, 4)
         solution.representation = 3
         solution.evaluate(problem)
-        vns_support = FunctionOneVariableMaxProblemIntSolutionVnsSupport()
+        vns_ls_support= VnsLocalSearchSupportRepresentationBitArray(3)
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
         type(optimizer_stub).finish_control = mocker.PropertyMock(return_value=finish_control_stub) 
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
-        type(optimizer_stub).vns_support = mocker.PropertyMock(return_value=vns_support)
+        type(optimizer_stub).vns_ls_support = mocker.PropertyMock(return_value=vns_ls_support)
         # Act
         old_fitness = solution.fitness_value
-        result = vns_support.local_search_best_improvement(1, problem, solution, optimizer_stub)
+        result = vns_ls_support.local_search_best_improvement(1, problem, solution, optimizer_stub)
         # Assert
         self.assertTrue(result)
         self.assertGreaterEqual(solution.fitness_value, old_fitness)
@@ -62,16 +64,16 @@ class TestFunctionOneVariableMaxProblemIntSolutionVnsSupport(unittest.TestCase):
         solution = FunctionOneVariableMaxProblemIntSolution(0, 10, 4)
         solution.representation = 3
         solution.evaluate(problem)
-        vns_support = FunctionOneVariableMaxProblemIntSolutionVnsSupport()
+        vns_ls_support= VnsLocalSearchSupportRepresentationBitArray(3)
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
         type(optimizer_stub).finish_control = mocker.PropertyMock(return_value=finish_control_stub) 
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
-        type(optimizer_stub).vns_support = mocker.PropertyMock(return_value=vns_support)
+        type(optimizer_stub).vns_ls_support = mocker.PropertyMock(return_value=vns_ls_support)
         # Act
         old_fitness = solution.fitness_value
-        result = vns_support.local_search_best_improvement(1, problem, solution, optimizer_stub)
+        result = vns_ls_support.local_search_best_improvement(1, problem, solution, optimizer_stub)
         # Assert
         self.assertTrue(result)
         self.assertGreaterEqual(solution.fitness_value, old_fitness)
@@ -83,16 +85,16 @@ class TestFunctionOneVariableMaxProblemIntSolutionVnsSupport(unittest.TestCase):
         solution = FunctionOneVariableMaxProblemIntSolution(0, 10, 4)
         solution.representation = 3
         solution.evaluate(problem)
-        vns_support = FunctionOneVariableMaxProblemIntSolutionVnsSupport()
+        vns_sh_support = VnsShakingSupportRepresentationBitArray(3)
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).check_evaluations = mocker.PropertyMock(return_value=False)
         type(finish_control_stub).evaluations_max = mocker.PropertyMock(return_value=0)
         optimizer_stub = mocker.MagicMock()
         type(optimizer_stub).finish_control = mocker.PropertyMock(return_value=finish_control_stub) 
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
-        type(optimizer_stub).vns_support = mocker.PropertyMock(return_value=vns_support)
+        type(optimizer_stub).vns_shaking_support = mocker.PropertyMock(return_value=vns_sh_support)
         # Act
-        result = vns_support.shaking(0, problem, solution, optimizer_stub)
+        result = vns_sh_support.shaking(0, problem, solution, optimizer_stub)
         # Assert
         self.assertFalse(result)
 
@@ -103,16 +105,16 @@ class TestFunctionOneVariableMaxProblemIntSolutionVnsSupport(unittest.TestCase):
         solution = FunctionOneVariableMaxProblemIntSolution(0, 10, 4)
         solution.representation = 3
         solution.evaluate(problem)
-        vns_support = FunctionOneVariableMaxProblemIntSolutionVnsSupport()
+        vns_ls_support = VnsLocalSearchSupportRepresentationBitArray(3)
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).check_evaluations = mocker.PropertyMock(return_value=False)
         type(finish_control_stub).evaluations_max = mocker.PropertyMock(return_value=0)
         optimizer_stub = mocker.MagicMock()
         type(optimizer_stub).finish_control = mocker.PropertyMock(return_value=finish_control_stub) 
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
-        type(optimizer_stub).vns_support = mocker.PropertyMock(return_value=vns_support)
+        type(optimizer_stub).vns_ls_support = mocker.PropertyMock(return_value=vns_ls_support)
         # Act
-        result = vns_support.local_search_best_improvement(0, problem, solution, optimizer_stub)
+        result = vns_ls_support.local_search_best_improvement(0, problem, solution, optimizer_stub)
         # Assert
         self.assertFalse(result)
         # Act

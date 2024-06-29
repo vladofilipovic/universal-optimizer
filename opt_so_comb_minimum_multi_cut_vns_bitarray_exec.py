@@ -8,16 +8,16 @@ from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_bit_array import \
+        VnsShakingSupportRepresentationBitArray
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_rep_bit_array import \
+        VnsLocalSearchSupportRepresentationBitArray
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
 from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem import MinimumMultiCutProblem
 from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_bit_array_solution import \
                 MinimumMultiCutProblemBitArraySolution
-from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_bit_array_solution_vns_support import \
-                MinimumMultiCutProblemBitArraySolutionVnsShakingSupport
-from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_bit_array_solution_vns_support import \
-                MinimumMultiCutProblemBitArraySolutionVnsLocalSearchSupport
 
 def main():
         output_control:OutputControl = OutputControl(write_to_output=False)
@@ -43,10 +43,11 @@ def main():
         solution:MinimumMultiCutProblemBitArraySolution = MinimumMultiCutProblemBitArraySolution()
         finish:FinishControl = FinishControl(criteria='iterations', iterations_max=500)
         additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(is_active=False, keep='')
-        vns_shaking_support:MinimumMultiCutProblemBitArraySolutionVnsShakingSupport = \
-                MinimumMultiCutProblemBitArraySolutionVnsShakingSupport()
-        vns_ls_support:MinimumMultiCutProblemBitArraySolutionVnsLocalSearchSupport = \
-                MinimumMultiCutProblemBitArraySolutionVnsLocalSearchSupport()
+        k_max:int = len(problem_to_solve.graph.edges())
+        vns_shaking_support:VnsShakingSupportRepresentationBitArray = \
+                VnsShakingSupportRepresentationBitArray(k_max=k_max)
+        vns_ls_support:VnsLocalSearchSupportRepresentationBitArray = \
+                VnsLocalSearchSupportRepresentationBitArray(k_max=k_max)
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
         vns_construction_params.output_control = output_control
         vns_construction_params.problem = problem_to_solve

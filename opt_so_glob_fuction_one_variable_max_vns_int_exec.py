@@ -6,6 +6,10 @@ from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_int import \
+        VnsShakingSupportRepresentationInt
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_rep_int import \
+        VnsLocalSearchSupportRepresentationInt
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
@@ -13,12 +17,6 @@ from opt.single_objective.glob.function_one_variable_max_problem.function_one_va
                 FunctionOneVariableMaxProblemMax
 from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_int_solution \
                 import FunctionOneVariableMaxProblemIntSolution
-from opt.single_objective.glob.function_one_variable_max_problem.\
-                function_one_variable_max_problem_int_solution_vns_support \
-                import FunctionOneVariableMaxProblemIntSolutionVnsShakingSupport
-from opt.single_objective.glob.function_one_variable_max_problem.\
-                function_one_variable_max_problem_int_solution_vns_support \
-                import FunctionOneVariableMaxProblemIntSolutionVnsLocalSearchSupport
 
 def main():
         problem_to_solve:FunctionOneVariableMaxProblemMax = FunctionOneVariableMaxProblemMax.from_input_file(
@@ -32,10 +30,11 @@ def main():
         solution.evaluate(problem_to_solve)           
         print('Solution: {}'.format(solution))
         finish:FinishControl = FinishControl(criteria='evaluations & seconds', evaluations_max=5000, seconds_max=10)
-        vns_shaking_support:FunctionOneVariableMaxProblemIntSolutionVnsShakingSupport = \
-                FunctionOneVariableMaxProblemIntSolutionVnsShakingSupport()
-        vns_ls_support:FunctionOneVariableMaxProblemIntSolutionVnsLocalSearchSupport = \
-                FunctionOneVariableMaxProblemIntSolutionVnsLocalSearchSupport()
+        repr_length:int = 32
+        vns_shaking_support:VnsShakingSupportRepresentationInt[str] = \
+                VnsShakingSupportRepresentationInt[str](repr_length)
+        vns_ls_support:VnsLocalSearchSupportRepresentationInt[str] = \
+                VnsLocalSearchSupportRepresentationInt[str](repr_length)
         output_control:OutputControl = OutputControl(write_to_output=False)
         additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(is_active=False)
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()

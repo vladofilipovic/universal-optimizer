@@ -14,6 +14,9 @@ from random import randrange
 from random import seed
 from datetime import datetime
 
+from uo.utils.files import ensure_dir 
+from uo.utils.logger import logger
+
 from bitstring import BitArray
 
 import xarray as xr
@@ -23,31 +26,38 @@ from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
+from uo.algorithm.metaheuristic.genetic_algorithm.selection_roulette import SelectionRoulette
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support_rep_bit_array import \
+                GaCrossoverSupportRepresentationBitArray
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support_rep_bit_array import \
+                GaMutationSupportRepresentationBitArray
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimizerConstructionParameters
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimizer
+
 from uo.algorithm.exact.total_enumeration.te_operations_support_rep_bit_array import\
         TeOperationsSupportRepresentationBitArray
 from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizerConstructionParameters
+
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_bit_array import \
+        VnsShakingSupportRepresentationBitArray
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_rep_bit_array import \
+        VnsLocalSearchSupportRepresentationBitArray
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_int import \
+        VnsShakingSupportRepresentationInt
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_rep_int import \
+        VnsLocalSearchSupportRepresentationInt
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp_linopy import \
         OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters
-
-from uo.utils.files import ensure_dir 
-from uo.utils.logger import logger
 
 from opt.single_objective.comb.ones_count_max_problem.command_line import default_parameters_cl
 from opt.single_objective.comb.ones_count_max_problem.command_line import parse_arguments
 
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
-
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_int_solution import \
         OnesCountMaxProblemIntSolution
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_int_solution_vns_support import \
-        OnesCountMaxProblemIntSolutionVnsShakingSupport, OnesCountMaxProblemIntSolutionVnsLocalSearchSupport
-
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution import \
         OnesCountMaxProblemBitArraySolution
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution_vns_support import \
-        OnesCountMaxProblemBitArraySolutionVnsShakingSupport, OnesCountMaxProblemBitArraySolutionVnsLocalSearchSupport
-
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_solver import OnesCountMaxProblemSolver
 
 """ 
@@ -171,16 +181,19 @@ def main():
             k_min:int = parameters['kMin']
             k_max:int = parameters['kMax']
             local_search_type = parameters['localSearchType']
-            # initial solution and vns support
+            # initial solution and VNS support
             solution_type:str = parameters['solutionType']
-            vns_support = None
+            vns_shaking_support = None
+            vns_ls_support = None
             if solution_type=='BitArray':
                 solution:OnesCountMaxProblemBitArraySolution = OnesCountMaxProblemBitArraySolution(
                     random_seed=r_seed)
-                vns_support = OnesCountMaxProblemBitArraySolutionVnsSupport()
+                vns_shaking_support = VnsShakingSupportRepresentationBitArray[str]()
+                vns_ls_support = VnsLocalSearchSupportRepresentationBitArray[str]()
             elif solution_type=='int':
                 solution:OnesCountMaxProblemIntSolution = OnesCountMaxProblemIntSolution(r_seed)
-                vns_support = OnesCountMaxProblemIntSolutionVnsSupport()
+                vns_shaking_support = VnsShakingSupportRepresentationInt[str]()
+                vns_ls_support = VnsLocalSearchSupportRepresentationInt[str]()
             else:
                 raise ValueError("Invalid solution/representation type is chosen.")
             # solver construction parameters
@@ -188,26 +201,59 @@ def main():
             vns_construction_params.output_control = output_control
             vns_construction_params.problem = problem
             vns_construction_params.solution_template = solution
-            vns_construction_params.problem_solution_vns_support = vns_support
             vns_construction_params.finish_control = finish_control
             vns_construction_params.random_seed = r_seed
             vns_construction_params.additional_statistics_control = additional_statistics_control
+            vns_construction_params.vns_shaking_support = vns_shaking_support
+            vns_construction_params.vns_ls_support = vns_ls_support
             vns_construction_params.k_min = k_min
             vns_construction_params.k_max = k_max
             vns_construction_params.local_search_type = local_search_type
-            solver:OnesCountMaxProblem = OnesCountMaxProblemSolver.from_variable_neighborhood_search(
+            solver:OnesCountMaxProblemSolver = OnesCountMaxProblemSolver.from_variable_neighborhood_search(
                     vns_construction_params)
+        elif parameters['algorithm'] == 'genetic_algorithm':
+            # parameters for GA process setup
+            population_size:int = 100
+            elite_count:int = 5
+            selection:SelectionRoulette = SelectionRoulette()
+            crossover_probability:float = 0.995
+            mutation_probability:float = 0.05
+            # initial solution and GA support
+            solution_type:str = parameters['solutionType']
+            ga_crossover_support = None
+            ga_mutation_support = None
+            if solution_type=='BitArray':
+                solution:OnesCountMaxProblemBitArraySolution = OnesCountMaxProblemBitArraySolution(
+                    random_seed=r_seed)
+                ga_crossover_support = GaCrossoverSupportRepresentationBitArray[str](
+                    crossover_probability=crossover_probability)
+                ga_mutation_support = GaMutationSupportRepresentationBitArray[str](
+                    mutation_probability=mutation_probability)
+            else:
+                raise ValueError("Invalid solution/representation type is chosen.")
+            ga_construction_params:GaOptimizerConstructionParameters = GaOptimizerConstructionParameters()
+            ga_construction_params.output_control = output_control
+            ga_construction_params.problem = problem
+            ga_construction_params.solution_template = solution
+            ga_construction_params.finish_control = finish_control
+            ga_construction_params.random_seed = r_seed
+            ga_construction_params.additional_statistics_control = additional_statistics_control
+            ga_construction_params.ga_selection = selection
+            ga_construction_params.ga_crossover_support = ga_crossover_support
+            ga_construction_params.ga_mutation_support = ga_mutation_support
+            ga_construction_params.population_size = population_size
+            ga_construction_params.elite_count = elite_count
         elif parameters['algorithm'] == 'total_enumeration':
             # initial solution and te support
             solution_type:str = parameters['solutionType']
-            te_support = None
+            te_operations_support = None
             if solution_type=='BitArray':
                 solution:OnesCountMaxProblemBitArraySolution = OnesCountMaxProblemBitArraySolution(r_seed, 
                             evaluation_cache_is_used=evaluation_cache_is_used,
                             evaluation_cache_max_size=evaluation_cache_max_size,
                             distance_calculation_cache_is_used=calculation_solution_distance_cache_is_used,
                             distance_calculation_cache_max_size=calculation_solution_distance_cache_max_size)
-                te_support = TeOperationsSupportRepresentationBitArray[str]()
+                te_operations_support = TeOperationsSupportRepresentationBitArray[str]()
             else:
                 raise ValueError("Invalid solution/representation type is chosen.")
             # solver construction parameters
@@ -215,7 +261,7 @@ def main():
             te_construction_params.output_control = output_control
             te_construction_params.problem = problem
             te_construction_params.solution_template = solution
-            te_construction_params.te_operations_support = te_support
+            te_construction_params.te_operations_support = te_operations_support
             solver:OnesCountMaxProblemSolver = OnesCountMaxProblemSolver.from_total_enumeration(te_construction_params)
         elif parameters['algorithm'] == 'integer_linear_programming':
             # solver construction parameters

@@ -33,7 +33,6 @@ from uo.utils.complex_counter_uniform_ascending import ComplexCounterUniformAsce
 
 from uo.problem.problem import Problem
 from uo.solution.solution import Solution
-
 from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.exact.total_enumeration.te_operations_support import TeOperationsSupport
 
@@ -83,14 +82,13 @@ class TeOperationsSupportRepresentationBitArray(TeOperationsSupport[BitArray,A_c
         solution.evaluate(problem)
         optimizer.write_output_values_if_needed("after_evaluation", "a_e")
 
-    def progress(self, problem:Problem, solution:Solution, 
-            optimizer:Algorithm)->None:
+    def progress(self, problem:Problem, solution:Solution, optimizer:Algorithm)->None:
         """
         Progress internal counter of the total enumerator, so next configuration will be taken into consideration. 
         Internal state of the solution will be set to reflect progress operation.  
 
-        :param `OnesCountMaxProblem` problem: problem that is solved
-        :param `OnesCountMaxProblemBitArraySolution` solution: solution used for the problem that is solved
+        :param `Problem` problem: problem that is solved
+        :param `Solution` solution: solution used for the problem that is solved
         :param `Algorithm` optimizer: optimizer that is executed
         """        
         self.__bit_array_counter.progress()
@@ -104,8 +102,8 @@ class TeOperationsSupportRepresentationBitArray(TeOperationsSupport[BitArray,A_c
         """
         Check if total enumeration process is not at end.  
 
-        :param `OnesCountMaxProblem` problem: problem that is solved
-        :param `OnesCountMaxProblemBitArraySolution` solution: solution used for the problem that is solved
+        :param `Problem` problem: problem that is solved
+        :param `Solution` solution: solution used for the problem that is solved
         :param `Algorithm` optimizer: optimizer that is executed
         :return: indicator if total enumeration process is not at end 
         :rtype: bool
@@ -116,8 +114,8 @@ class TeOperationsSupportRepresentationBitArray(TeOperationsSupport[BitArray,A_c
         """
         Returns overall number of evaluations required for finishing total enumeration process.  
 
-        :param `OnesCountMaxProblem` problem: problem that is solved
-        :param `OnesCountMaxProblemBitArraySolution` solution: solution used for the problem that is solved
+        :param `Problem` problem: problem that is solved
+        :param `Solution` solution: solution used for the problem that is solved
         :param `Algorithm` optimizer: optimizer that is executed
         :return: overall number of evaluations required for finishing total enumeration process
         :rtype: int

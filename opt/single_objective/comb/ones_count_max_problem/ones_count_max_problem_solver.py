@@ -39,10 +39,29 @@ from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizerConstru
 from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizer
 from uo.algorithm.exact.total_enumeration.te_operations_support import TeOperationsSupport
 
+
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support import VnsShakingSupport
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_bit_array import \
+        VnsShakingSupportRepresentationBitArray
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_int import \
+        VnsShakingSupportRepresentationInt
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support import VnsLocalSearchSupport
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_rep_bit_array import \
+        VnsLocalSearchSupportRepresentationBitArray
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_rep_int import \
+        VnsLocalSearchSupportRepresentationInt
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support import VnsShakingSupport
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support import VnsLocalSearchSupport
+
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support import GaCrossoverSupport
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support_rep_bit_array import \
+        GaCrossoverSupportRepresentationBitArray
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support import GaMutationSupport
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support_rep_bit_array import \
+        GaMutationSupportRepresentationBitArray
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimizerConstructionParameters
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimizer
+
 
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp_linopy import \
         OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters
@@ -50,16 +69,10 @@ from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp
         OnesCountMaxProblemIntegerLinearProgrammingSolver
 
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
-
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_int_solution import \
         OnesCountMaxProblemIntSolution
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_int_solution_vns_support import \
-        OnesCountMaxProblemIntSolutionVnsShakingSupport, OnesCountMaxProblemIntSolutionVnsLocalSearchSupport
-
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution import \
         OnesCountMaxProblemBitArraySolution
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution_vns_support import \
-        OnesCountMaxProblemBitArraySolutionVnsShakingSupport, OnesCountMaxProblemBitArraySolutionVnsLocalSearchSupport
 
 @dataclass
 class MaxOneProblemSolverConstructionParameters:
@@ -96,7 +109,7 @@ class OnesCountMaxProblemSolver:
             vns_k_min:int = None,
             vns_k_max:int = None,
             vns_local_search_type:str = None,
-            te_problem_solution_support:TeOperationsSupport = None
+            te_operations_support:TeOperationsSupport = None
     )->None:
         """
         Create new `OnesCountMaxProblemSolver` instance
@@ -152,6 +165,15 @@ class OnesCountMaxProblemSolver:
                     k_min= vns_k_min,
                     k_max= vns_k_max,
                     local_search_type= vns_local_search_type)
+        elif method == 'genetic_algorithm':
+            if not isinstance(finish_control, FinishControl):
+                    raise TypeError('Parameter \'finish_control\' must be \'FinishControl\'.')
+            if not isinstance(output_control, OutputControl):
+                    raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
+            if not isinstance(problem, Problem):
+                    raise TypeError('Parameter \'problem\' must be \'Problem\'.')
+            if not isinstance(solution_template, Solution):
+                    raise TypeError('Parameter \'solution_template\' must be \'Solution\'.')
         elif method == 'total_enumeration':
             if not isinstance(output_control, OutputControl):
                     raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
@@ -159,13 +181,13 @@ class OnesCountMaxProblemSolver:
                     raise TypeError('Parameter \'problem\' must be \'Problem\'.')
             if not isinstance(solution_template, Solution):
                     raise TypeError('Parameter \'solution_template\' must be \'Solution\'.')
-            if not isinstance(te_problem_solution_support, TeOperationsSupport):
+            if not isinstance(te_operations_support, TeOperationsSupport):
                     raise TypeError('Parameter \'te_problem_solution_support\' must be \'TeOperationsSupport\'.')
             self.__optimizer = TeOptimizer(
                     output_control = output_control,
                     problem= problem,
                     solution_template= solution_template,
-                    te_operations_support=te_problem_solution_support
+                    te_operations_support=te_operations_support
             )
         elif method == 'integer_linear_programming':
             if not isinstance(output_control, OutputControl):
@@ -225,6 +247,29 @@ class OnesCountMaxProblemSolver:
         params.vns_k_max = vns_construction_params.k_max
         params.vns_local_search_type = vns_construction_params.local_search_type        
         return cls.from_construction_tuple(params)
+
+    @classmethod
+    def from_genetic_algorithm(cls, ga_construction_params:VnsOptimizerConstructionParameters=None):
+        """
+        Additional constructor. Create new `OnesCountMaxProblemSolver` instance when solving method is `Variable Neighborhood Search`
+
+        :param VnsOptimizerConstructionParameters vns_construction_params: construction parameters 
+        """
+        params:MaxOneProblemSolverConstructionParameters = MaxOneProblemSolverConstructionParameters()
+        params.method = 'variable_neighborhood_search'
+        params.finish_control = vns_construction_params.finish_control
+        params.output_control = vns_construction_params.output_control
+        params.problem= vns_construction_params.problem
+        params.solution_template = vns_construction_params.solution_template
+        params.vns_shaking_support = vns_construction_params.vns_shaking_support
+        params.vns_ls_support = vns_construction_params.vns_ls_support
+        params.vns_random_seed = vns_construction_params.random_seed
+        params.vns_additional_statistics_control = vns_construction_params.additional_statistics_control
+        params.vns_k_min = vns_construction_params.k_min
+        params.vns_k_max = vns_construction_params.k_max
+        params.vns_local_search_type = vns_construction_params.local_search_type        
+        return cls.from_construction_tuple(params)
+
 
     @classmethod
     def from_total_enumeration(cls, te_construction_params:TeOptimizerConstructionParameters=None):

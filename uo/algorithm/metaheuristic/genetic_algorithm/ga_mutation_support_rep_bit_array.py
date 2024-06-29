@@ -11,11 +11,15 @@ from pathlib import Path
 directory = Path(__file__).resolve()
 sys.path.append(directory)
 sys.path.append(directory.parent)
-sys.path.append(directory.parent.parent)
+sys.path.append(directory.parent.parent.parent)
+sys.path.append(directory.parent.parent.parent.parent)
+sys.path.append(directory.parent.parent.parent.parent.parent)
 
+from abc import ABCMeta, abstractmethod
+from typing import NamedTuple
 from typing import TypeVar
-
-
+from typing import Generic
+from typing import Optional
 from copy import deepcopy
 from random import choice, random, randint
 
@@ -23,60 +27,54 @@ from bitstring import BitArray
 
 from uo.problem.problem import Problem
 from uo.solution.solution import Solution
-
-from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimizer
-from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support import GaCrossoverSupport
+from uo.algorithm.metaheuristic.population_based_metaheuristic import PopulationBasedMetaheuristic
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support import GaMutationSupport
 
 A_co = TypeVar("A_co", covariant=True)
 
-class GaCrossoverSupportRepresentationBitArray(GaCrossoverSupport[BitArray,A_co]):
+class GaMutationSupportRepresentationBitArray(GaMutationSupport[BitArray,A_co]):
 
-    def __init__(self, crossover_probability:float)->None:
+    def __init__(self, mutation_probability:float)->None:
         """
-        Create new `GaCrossoverSupportRepresentationBitArray` instance
+        Create new `GaMutationSupportRepresentationBitArray` instance
         """
-        super().__init__(crossover_probability)
+        super().__init__(mutation_probability)
 
     def __copy__(self):
         """
-        Internal copy of the `GaCrossoverSupportRepresentationBitArray`
+        Internal copy of the `GaMutationSupportRepresentationBitArray`
 
-        :return: new `GaCrossoverSupportRepresentationBitArray` instance with the same properties
-        :rtype: `GaCrossoverSupportRepresentationBitArray`
+        :return: new `GaMutationSupportRepresentationBitArray` instance with the same properties
+        :rtype: `GaMutationSupportRepresentationBitArray`
         """
         sol = deepcopy(self)
         return sol
 
     def copy(self):
         """
-        Copy the `GaCrossoverSupportRepresentationBitArray` instance
+        Copy the `GaMutationSupportRepresentationBitArray` instance
 
-        :return: new `GaCrossoverSupportRepresentationBitArray` instance with the same properties
-        :rtype: `GaCrossoverSupportRepresentationBitArray`
+        :return: new `GaMutationSupportRepresentationBitArray` instance with the same properties
+        :rtype: `GaMutationSupportRepresentationBitArray`
         """
         return self.__copy__()
 
-    def crossover(self, problem:Problem, solution1:Solution, solution2:Solution,
-                child1:Solution, child2:Solution, optimizer:GaOptimizer) -> None:
-        if solution1.representation is not None and solution2.representation is not None :
-            child1.representation = BitArray(solution1.representation.len)
-            child2.representation = BitArray(solution2.representation.len)
-            if random() > self.crossover_probability:
-                return
-            index:int = randint(0,len(solution1.representation))
-            for i in range(index):
-                child1.representation.set(solution1.representation[i], i)
-                child2.representation.set(solution2.representation[i], i)
-            for i in range(index,solution1.representation.len):
-                child1.representation.set(solution2.representation[i], i)
-                child2.representation.set(solution1.representation[i], i)
-            optimizer.evaluation += 2
-            child1.evaluate(problem)
-            child2.evaluate(problem)        
-        else:
-            child1.copy_from(solution1)
-            child2.copy_from(solution2)
+    def mutation(self, problem:Problem, solution:Solution, optimizer:PopulationBasedMetaheuristic)->None:
+        """
+        Executes mutation within GA 
         
+        :param `Problem` problem: problem that is solved
+        :param `Solution` solution: item tha is mutated 
+        :param `PopulationBasedMetaheuristic` optimizer: optimizer that is executed
+        :rtype: None
+        """
+        if solution.representation is None:
+            return
+        for i in range(len(solution.representation)):
+            if random() < self.mutation_probability:
+                solution.representation.invert(i)
+        optimizer.evaluation += 1
+        solution.evaluate(problem)
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
@@ -96,7 +94,7 @@ class GaCrossoverSupportRepresentationBitArray(GaCrossoverSupport[BitArray,A_co]
         :return: string representation of ga support instance
         :rtype: str
         """
-        return 'GaCrossoverSupportRepresentationBitArray'
+        return 'GaMutationSupportRepresentationBitArray'
 
     def __str__(self)->str:
         """
@@ -125,4 +123,5 @@ class GaCrossoverSupportRepresentationBitArray(GaCrossoverSupport[BitArray,A_co]
         :rtype: str
         """
         return self.string_rep('|')
+
 

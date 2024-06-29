@@ -6,9 +6,14 @@ import networkx as nx
 from bitstring import BitArray
 from random import randint, choice
 
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support_rep_binary_bit_array import \
+    GaCrossoverSupportRepresentationBitArray
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support_rep_binary_bit_array import \
+    GaMutationSupportRepresentationBitArray
+
 from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem import MinimumMultiCutProblem
-from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_bit_array_solution import MinimumMultiCutProblemBitArraySolution
-from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_bit_array_solution_ga_support import MinimumMultiCutProblemBitArraySolutionGaSupport
+from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_bit_array_solution import \
+    MinimumMultiCutProblemBitArraySolution
 
 
 class TestMinimumMultiCutProblemBitArraySolutionGaSupport(unittest.TestCase):
@@ -37,14 +42,15 @@ class TestMinimumMultiCutProblemBitArraySolutionGaSupport(unittest.TestCase):
         problem = MinimumMultiCutProblem(graph=graph, source_terminal_pairs=source_terminal_pairs)
         solution = MinimumMultiCutProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray(length=edges), problem)
-        ga_support = MinimumMultiCutProblemBitArraySolutionGaSupport()
+        ga_cross_support = GaCrossoverSupportRepresentationBitArray(0,995)
+        ga_mut_support = GaMutationSupportRepresentationBitArray(0.005)
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
         type(optimizer_stub).finish_control = mocker.PropertyMock(return_value=finish_control_stub)
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
-        type(optimizer_stub).ga_support = mocker.PropertyMock(return_value=ga_support)
+        type(optimizer_stub).ga_support_crossover = mocker.PropertyMock(return_value=ga_cross_support)
         # Act
-        result = ga_support.mutation(0.1, problem, solution, optimizer_stub)
+        result = ga_mut_support.mutation(problem, solution, optimizer_stub)
         # Assert
         self.assertTrue(result)
