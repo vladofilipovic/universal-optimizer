@@ -1,8 +1,8 @@
 """
-..  _py_ones_count_max_problem_binary_bit_array_solution_ga_support:
+..  _py_ones_count_max_problem_bit_array_solution_ga_support:
 
-The :mod:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_ga_support`
-contains class :class:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_ga_support.OnesCountMaxProblemBinaryBitArraySolutionGaSupport`, 
+The :mod:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution_ga_support`
+contains class :class:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution_ga_support.OnesCountMaxProblemBitArraySolutionGaSupport`, 
 that represents supporting parts of the `GA` algorithm, where solution of the :ref:`Problem_MinimumMultiCut` have `BitArray` 
 representation.
 """
@@ -33,30 +33,30 @@ from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support import GaM
 
 A_co = TypeVar("A_co", covariant=True)
 
-class GaMutationSupportRepresentationBinaryBitArray(GaMutationSupport[BitArray,A_co]):
+class GaMutationSupportRepresentationBitArray(GaMutationSupport[BitArray,A_co]):
 
     def __init__(self, mutation_probability:float)->None:
         """
-        Create new `GaMutationSupportRepresentationBinaryBitArray` instance
+        Create new `GaMutationSupportRepresentationBitArray` instance
         """
         super().__init__(mutation_probability)
 
     def __copy__(self):
         """
-        Internal copy of the `GaMutationSupportRepresentationBinaryBitArray`
+        Internal copy of the `GaMutationSupportRepresentationBitArray`
 
-        :return: new `GaMutationSupportRepresentationBinaryBitArray` instance with the same properties
-        :rtype: `GaMutationSupportRepresentationBinaryBitArray`
+        :return: new `GaMutationSupportRepresentationBitArray` instance with the same properties
+        :rtype: `GaMutationSupportRepresentationBitArray`
         """
         sol = deepcopy(self)
         return sol
 
     def copy(self):
         """
-        Copy the `GaMutationSupportRepresentationBinaryBitArray` instance
+        Copy the `GaMutationSupportRepresentationBitArray` instance
 
-        :return: new `GaMutationSupportRepresentationBinaryBitArray` instance with the same properties
-        :rtype: `GaMutationSupportRepresentationBinaryBitArray`
+        :return: new `GaMutationSupportRepresentationBitArray` instance with the same properties
+        :rtype: `GaMutationSupportRepresentationBitArray`
         """
         return self.__copy__()
 
@@ -87,7 +87,7 @@ class GaMutationSupportRepresentationBinaryBitArray(GaMutationSupport[BitArray,A
         :return: string representation of ga support instance
         :rtype: str
         """
-        return 'GaMutationSupportRepresentationBinaryBitArray'
+        return 'GaMutationSupportRepresentationBitArray'
 
     def __str__(self)->str:
         """

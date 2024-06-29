@@ -8,15 +8,15 @@ from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
 from uo.algorithm.metaheuristic.genetic_algorithm.selection_roulette import SelectionRoulette
-from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support_rep_binary_bit_array import \
-                GaCrossoverSupportRepresentationBinaryBitArray
-from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support_rep_binary_bit_array import \
-                GaMutationSupportRepresentationBinaryBitArray
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support_rep_bit_array import \
+                GaCrossoverSupportRepresentationBitArray
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support_rep_bit_array import \
+                GaMutationSupportRepresentationBitArray
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimizer
 
 from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem import MinimumMultiCutProblem
-from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_binary_bit_array_solution import MinimumMultiCutProblemBinaryBitArraySolution
+from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_bit_array_solution import MinimumMultiCutProblemBitArraySolution
 
 def main():
         output_control:OutputControl = OutputControl(write_to_output=False)
@@ -36,14 +36,14 @@ def main():
                 source_terminal_pairs.append((source, terminal))
 
         problem_to_solve:MinimumMultiCutProblem = MinimumMultiCutProblem(G, source_terminal_pairs)
-        solution:MinimumMultiCutProblemBinaryBitArraySolution = MinimumMultiCutProblemBinaryBitArraySolution()
+        solution:MinimumMultiCutProblemBitArraySolution = MinimumMultiCutProblemBitArraySolution()
         finish:FinishControl = FinishControl(criteria='iterations', iterations_max=100)
         select:SelectionRoulette = SelectionRoulette()
         additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(is_active=False, keep='')
-        ga_cross_support:GaCrossoverSupportRepresentationBinaryBitArray[str] = \
-                GaCrossoverSupportRepresentationBinaryBitArray[str](crossover_probability=0.999)
-        ga_mut_support:GaMutationSupportRepresentationBinaryBitArray[str] = \
-                GaMutationSupportRepresentationBinaryBitArray(mutation_probability=0.05)
+        ga_cross_support:GaCrossoverSupportRepresentationBitArray[str] = \
+                GaCrossoverSupportRepresentationBitArray[str](crossover_probability=0.999)
+        ga_mut_support:GaMutationSupportRepresentationBitArray[str] = \
+                GaMutationSupportRepresentationBitArray(mutation_probability=0.05)
         ga_construction_params:GaOptimizerConstructionParameters = GaOptimizerConstructionParameters()
         ga_construction_params.output_control = output_control
         ga_construction_params.problem = problem_to_solve

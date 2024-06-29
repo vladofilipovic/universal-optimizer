@@ -43,14 +43,14 @@ from opt.single_objective.glob.function_one_variable_max_problem.command_line im
 from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem import \
         FunctionOneVariableMaxProblemMax
 
-from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_binary_int_solution \
-        import FunctionOneVariableMaxProblemBinaryIntSolution
+from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_int_solution \
+        import FunctionOneVariableMaxProblemIntSolution
 from opt.single_objective.glob.function_one_variable_max_problem\
-        .function_one_variable_max_problem_binary_int_solution_vns_support import \
-        FunctionOneVariableMaxProblemBinaryIntSolutionVnsShakingSupport
+        .function_one_variable_max_problem_int_solution_vns_support import \
+        FunctionOneVariableMaxProblemIntSolutionVnsShakingSupport
 from opt.single_objective.glob.function_one_variable_max_problem\
-        .function_one_variable_max_problem_binary_int_solution_vns_support import \
-        FunctionOneVariableMaxProblemBinaryIntSolutionVnsLocalSearchSupport
+        .function_one_variable_max_problem_int_solution_vns_support import \
+        FunctionOneVariableMaxProblemIntSolutionVnsLocalSearchSupport
     
 from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_solver import \
         FunctionOneVariableMaxProblemSolver
@@ -184,8 +184,8 @@ def main():
             vns_ls_support = None
             if solution_type=='int':
                 number_of_intervals:int = parameters['solutionNumberOfIntervals']
-                solution:FunctionOneVariableMaxProblemBinaryIntSolution = \
-                        FunctionOneVariableMaxProblemBinaryIntSolution(
+                solution:FunctionOneVariableMaxProblemIntSolution = \
+                        FunctionOneVariableMaxProblemIntSolution(
                                 domain_from= problem.domain_low, 
                                 domain_to= problem.domain_high,
                                 number_of_intervals= number_of_intervals, 
@@ -194,10 +194,10 @@ def main():
                                 evaluation_cache_max_size=evaluation_cache_max_size,
                                 distance_calculation_cache_is_used=calculation_solution_distance_cache_is_used,
                                 distance_calculation_cache_max_size=calculation_solution_distance_cache_max_size)
-                vns_shaking_support:FunctionOneVariableMaxProblemBinaryIntSolutionVnsShakingSupport = \
-                        FunctionOneVariableMaxProblemBinaryIntSolutionVnsShakingSupport()
-                vns_ls_support:FunctionOneVariableMaxProblemBinaryIntSolutionVnsLocalSearchSupport = \
-                        FunctionOneVariableMaxProblemBinaryIntSolutionVnsLocalSearchSupport()
+                vns_shaking_support:FunctionOneVariableMaxProblemIntSolutionVnsShakingSupport = \
+                        FunctionOneVariableMaxProblemIntSolutionVnsShakingSupport()
+                vns_ls_support:FunctionOneVariableMaxProblemIntSolutionVnsLocalSearchSupport = \
+                        FunctionOneVariableMaxProblemIntSolutionVnsLocalSearchSupport()
             else:
                 raise ValueError("Invalid solution/representation type is chosen.")
             # solver construction parameters

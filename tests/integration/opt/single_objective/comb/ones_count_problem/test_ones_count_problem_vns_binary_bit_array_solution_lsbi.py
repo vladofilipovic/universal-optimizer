@@ -16,32 +16,32 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer impor
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution import \
-    OnesCountMaxProblemBinaryBitArraySolution
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_vns_support import \
-    OnesCountMaxProblemBinaryBitArraySolutionVnsShakingSupport
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution import \
+    OnesCountMaxProblemBitArraySolution
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution_vns_support import \
+    OnesCountMaxProblemBitArraySolutionVnsShakingSupport
 
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_vns_support import \
-    OnesCountMaxProblemBinaryBitArraySolutionVnsLocalSearchSupport
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution_vns_support import \
+    OnesCountMaxProblemBitArraySolutionVnsLocalSearchSupport
 
 
-class TestOnesCountMaxProblemVnsBinaryBitArraySolutionLsbi(unittest.TestCase):
+class TestOnesCountMaxProblemVnsBitArraySolutionLsbi(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
-        print("setUpClass TestIntegrationOnesCountMaxProblemVnsBinaryBitArraySolutionLsbi\n")
+        print("setUpClass TestIntegrationOnesCountMaxProblemVnsBitArraySolutionLsbi\n")
 
     def setUp(self):
         self.output_control = OutputControl(False)
         self.problem_to_solve:OnesCountMaxProblem = OnesCountMaxProblem.from_dimension(dimension=24)
-        self.solution:OnesCountMaxProblemBinaryBitArraySolution = OnesCountMaxProblemBinaryBitArraySolution(random_seed=43434343)
+        self.solution:OnesCountMaxProblemBitArraySolution = OnesCountMaxProblemBitArraySolution(random_seed=43434343)
         self.finish_control:FinishControl = FinishControl(criteria='evaluations', evaluations_max=1000, 
                     iterations_max=0, seconds_max=0)
         self.additional_stat = AdditionalStatisticsControl(keep='')
-        self.vns_shaking_support:OnesCountMaxProblemBinaryBitArraySolutionVnsShakingSupport = \
-                OnesCountMaxProblemBinaryBitArraySolutionVnsShakingSupport()
-        self.vns_ls_support:OnesCountMaxProblemBinaryBitArraySolutionVnsLocalSearchSupport= \
-                OnesCountMaxProblemBinaryBitArraySolutionVnsLocalSearchSupport()
+        self.vns_shaking_support:OnesCountMaxProblemBitArraySolutionVnsShakingSupport = \
+                OnesCountMaxProblemBitArraySolutionVnsShakingSupport()
+        self.vns_ls_support:OnesCountMaxProblemBitArraySolutionVnsLocalSearchSupport= \
+                OnesCountMaxProblemBitArraySolutionVnsLocalSearchSupport()
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
         vns_construction_params.output_control = self.output_control
         vns_construction_params.problem = self.problem_to_solve
@@ -75,7 +75,7 @@ class TestOnesCountMaxProblemVnsBinaryBitArraySolutionLsbi(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        print("\ntearDownClass TestIntegrationOnesCountMaxProblemVnsBinaryBitArraySolutionLsbi")
+        print("\ntearDownClass TestIntegrationOnesCountMaxProblemVnsBitArraySolutionLsbi")
     
 if __name__ == '__main__':
     unittest.main()

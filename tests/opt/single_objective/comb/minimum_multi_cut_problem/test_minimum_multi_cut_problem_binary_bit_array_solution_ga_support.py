@@ -7,11 +7,11 @@ from bitstring import BitArray
 from random import randint, choice
 
 from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem import MinimumMultiCutProblem
-from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_binary_bit_array_solution import MinimumMultiCutProblemBinaryBitArraySolution
-from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_binary_bit_array_solution_ga_support import MinimumMultiCutProblemBinaryBitArraySolutionGaSupport
+from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_bit_array_solution import MinimumMultiCutProblemBitArraySolution
+from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_bit_array_solution_ga_support import MinimumMultiCutProblemBitArraySolutionGaSupport
 
 
-class TestMinimumMultiCutProblemBinaryBitArraySolutionGaSupport(unittest.TestCase):
+class TestMinimumMultiCutProblemBitArraySolutionGaSupport(unittest.TestCase):
 
     # mutation method returns True when mutation is successful
     def test_mutation_returns_true_when_randomization_is_successful(self):
@@ -35,9 +35,9 @@ class TestMinimumMultiCutProblemBinaryBitArraySolutionGaSupport(unittest.TestCas
             source_terminal_pairs.append((source, terminal))
 
         problem = MinimumMultiCutProblem(graph=graph, source_terminal_pairs=source_terminal_pairs)
-        solution = MinimumMultiCutProblemBinaryBitArraySolution(random_seed=434343)
+        solution = MinimumMultiCutProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray(length=edges), problem)
-        ga_support = MinimumMultiCutProblemBinaryBitArraySolutionGaSupport()
+        ga_support = MinimumMultiCutProblemBitArraySolutionGaSupport()
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()

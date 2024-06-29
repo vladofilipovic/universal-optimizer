@@ -49,17 +49,17 @@ from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp
 
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
 
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution import \
-        OnesCountMaxProblemBinaryIntSolution
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution_vns_support import \
-        OnesCountMaxProblemBinaryIntSolutionVnsSupport
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_int_solution import \
+        OnesCountMaxProblemIntSolution
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_int_solution_vns_support import \
+        OnesCountMaxProblemIntSolutionVnsSupport
 
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution import \
-        OnesCountMaxProblemBinaryBitArraySolution
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_vns_support import \
-        OnesCountMaxProblemBinaryBitArraySolutionVnsSupport
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_te_support import\
-        OnesCountMaxProblemBinaryBitArraySolutionTeSupport
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution import \
+        OnesCountMaxProblemBitArraySolution
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution_vns_support import \
+        OnesCountMaxProblemBitArraySolutionVnsSupport
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution_te_support import\
+        OnesCountMaxProblemBitArraySolutionTeSupport
 
 @dataclass
 class MaxOneProblemSolverConstructionParameters:

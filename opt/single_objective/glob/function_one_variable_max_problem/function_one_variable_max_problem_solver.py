@@ -45,11 +45,11 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support impo
 from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem import \
         FunctionOneVariableMaxProblemMax
 
-from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_binary_int_solution \
-        import FunctionOneVariableMaxProblemBinaryIntSolution
+from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_int_solution \
+        import FunctionOneVariableMaxProblemIntSolution
 from opt.single_objective.glob.function_one_variable_max_problem.\
-        function_one_variable_max_problem_binary_int_solution_vns_support import \
-        FunctionOneVariableMaxProblemBinaryIntSolutionVnsSupport
+        function_one_variable_max_problem_int_solution_vns_support import \
+        FunctionOneVariableMaxProblemIntSolutionVnsSupport
 
 @dataclass
 class FunctionOneVariableMaxProblemSolverConstructionParameters:

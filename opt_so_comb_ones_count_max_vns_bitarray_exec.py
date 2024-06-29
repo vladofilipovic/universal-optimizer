@@ -10,25 +10,25 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer impor
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution import \
-                OnesCountMaxProblemBinaryBitArraySolution
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_vns_support import \
-                OnesCountMaxProblemBinaryBitArraySolutionVnsShakingSupport
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_vns_support import \
-                OnesCountMaxProblemBinaryBitArraySolutionVnsLocalSearchSupport
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution import \
+                OnesCountMaxProblemBitArraySolution
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution_vns_support import \
+                OnesCountMaxProblemBitArraySolutionVnsShakingSupport
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution_vns_support import \
+                OnesCountMaxProblemBitArraySolutionVnsLocalSearchSupport
 
 
 
 def main():
         output_control:OutputControl = OutputControl(write_to_output=False)
         problem_to_solve:OnesCountMaxProblem = OnesCountMaxProblem.from_dimension(dimension=7)
-        solution:OnesCountMaxProblemBinaryBitArraySolution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution:OnesCountMaxProblemBitArraySolution = OnesCountMaxProblemBitArraySolution()
         finish:FinishControl = FinishControl(criteria='evaluations', evaluations_max=5000)
         additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(is_active=False, keep='')
-        vns_shaking_support:OnesCountMaxProblemBinaryBitArraySolutionVnsShakingSupport = \
-                OnesCountMaxProblemBinaryBitArraySolutionVnsShakingSupport()
-        vns_ls_support:OnesCountMaxProblemBinaryBitArraySolutionVnsLocalSearchSupport = \
-                OnesCountMaxProblemBinaryBitArraySolutionVnsLocalSearchSupport()
+        vns_shaking_support:OnesCountMaxProblemBitArraySolutionVnsShakingSupport = \
+                OnesCountMaxProblemBitArraySolutionVnsShakingSupport()
+        vns_ls_support:OnesCountMaxProblemBitArraySolutionVnsLocalSearchSupport = \
+                OnesCountMaxProblemBitArraySolutionVnsLocalSearchSupport()
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
         vns_construction_params.output_control = output_control
         vns_construction_params.problem = problem_to_solve

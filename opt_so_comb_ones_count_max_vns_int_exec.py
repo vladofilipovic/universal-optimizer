@@ -11,21 +11,21 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer impor
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution import \
-                OnesCountMaxProblemBinaryIntSolution
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution_vns_support import \
-                OnesCountMaxProblemBinaryIntSolutionVnsShakingSupport
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution_vns_support import \
-                OnesCountMaxProblemBinaryIntSolutionVnsLocalSearchSupport
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_int_solution import \
+                OnesCountMaxProblemIntSolution
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_int_solution_vns_support import \
+                OnesCountMaxProblemIntSolutionVnsShakingSupport
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_int_solution_vns_support import \
+                OnesCountMaxProblemIntSolutionVnsLocalSearchSupport
 
 def main():
         problem_to_solve:OnesCountMaxProblem = OnesCountMaxProblem.from_dimension(dimension=24)
-        solution:OnesCountMaxProblemBinaryIntSolution = OnesCountMaxProblemBinaryIntSolution()
+        solution:OnesCountMaxProblemIntSolution = OnesCountMaxProblemIntSolution()
         finish:FinishControl = FinishControl(criteria='evaluations & seconds', evaluations_max=500, seconds_max=10)
-        vns_shaking_support:OnesCountMaxProblemBinaryIntSolutionVnsShakingSupport = \
-                OnesCountMaxProblemBinaryIntSolutionVnsShakingSupport()
-        vns_ls_support:OnesCountMaxProblemBinaryIntSolutionVnsLocalSearchSupport = \
-                OnesCountMaxProblemBinaryIntSolutionVnsLocalSearchSupport()
+        vns_shaking_support:OnesCountMaxProblemIntSolutionVnsShakingSupport = \
+                OnesCountMaxProblemIntSolutionVnsShakingSupport()
+        vns_ls_support:OnesCountMaxProblemIntSolutionVnsLocalSearchSupport = \
+                OnesCountMaxProblemIntSolutionVnsLocalSearchSupport()
         output_control:OutputControl = OutputControl(write_to_output=False)
         additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(is_active=False, keep='')
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()

@@ -1,8 +1,8 @@
 """ 
 ..  _py_ones_count_max_problem_bit_array_solution_te_support:
 
-The :mod:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_te_support` 
-contains class :class:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_te_support.OnesCountMaxProblemBinaryBitArraySolutionTeSupport`, 
+The :mod:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution_te_support` 
+contains class :class:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution_te_support.OnesCountMaxProblemBitArraySolutionTeSupport`, 
 that represents supporting parts of the `Total enumeration` algorithm, where solution of the :ref:`Problem_Ones_Count_Max` have `BitArray` 
 representation.
 """
@@ -32,42 +32,42 @@ from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.exact.total_enumeration.te_operations_support import TeOperationsSupport
 
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution import OnesCountMaxProblemBinaryBitArraySolution
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution import OnesCountMaxProblemBitArraySolution
 
-class OnesCountMaxProblemBinaryBitArraySolutionTeSupport(TeOperationsSupport[BitArray,str]):
+class TeOperationsSupportRepresentationBitArray(TeOperationsSupport[BitArray,str]):
     
     def __init__(self)->None:
         """
-        Create new `OnesCountMaxProblemBinaryBitArraySolutionTeSupport` instance
+        Create new `OnesCountMaxProblemBitArraySolutionTeSupport` instance
         """
         self.__bit_array_counter = None
 
     def __copy__(self):
         """
-        Internal copy of the `OnesCountMaxProblemBinaryBitArraySolutionTeSupport`
+        Internal copy of the `OnesCountMaxProblemBitArraySolutionTeSupport`
 
-        :return: new `OnesCountMaxProblemBinaryBitArraySolutionTeSupport` instance with the same properties
-        :rtype: `OnesCountMaxProblemBinaryBitArraySolutionTeSupport`
+        :return: new `OnesCountMaxProblemBitArraySolutionTeSupport` instance with the same properties
+        :rtype: `OnesCountMaxProblemBitArraySolutionTeSupport`
         """
         sol = deepcopy(self)
         return sol
 
     def copy(self):
         """
-        Copy the `OnesCountMaxProblemBinaryBitArraySolutionTeSupport` instance
+        Copy the `OnesCountMaxProblemBitArraySolutionTeSupport` instance
 
-        :return: new `OnesCountMaxProblemBinaryBitArraySolutionTeSupport` instance with the same properties
-        :rtype: `OnesCountMaxProblemBinaryBitArraySolutionTeSupport`
+        :return: new `OnesCountMaxProblemBitArraySolutionTeSupport` instance with the same properties
+        :rtype: `OnesCountMaxProblemBitArraySolutionTeSupport`
         """
         return self.__copy__()
 
-    def reset(self, problem:OnesCountMaxProblem, solution:OnesCountMaxProblemBinaryBitArraySolution, optimizer:Algorithm)->None:
+    def reset(self, problem:OnesCountMaxProblem, solution:OnesCountMaxProblemBitArraySolution, optimizer:Algorithm)->None:
         """
         Resets internal counter of the total enumerator, so process will start over. Internal state of the solution 
         will be set to reflect reset operation. 
 
         :param `OnesCountMaxProblem` problem: problem that is solved
-        :param `OnesCountMaxProblemBinaryBitArraySolution` solution: solution used for the problem that is solved
+        :param `OnesCountMaxProblemBitArraySolution` solution: solution used for the problem that is solved
         :param `Algorithm` optimizer: optimizer that is executed
         """        
         self.__bit_array_counter = ComplexCounterBitArrayFull(problem.dimension)
@@ -78,14 +78,14 @@ class OnesCountMaxProblemBinaryBitArraySolutionTeSupport(TeOperationsSupport[Bit
         solution.evaluate(problem)
         optimizer.write_output_values_if_needed("after_evaluation", "a_e")
 
-    def progress(self, problem:OnesCountMaxProblem, solution:OnesCountMaxProblemBinaryBitArraySolution, 
+    def progress(self, problem:OnesCountMaxProblem, solution:OnesCountMaxProblemBitArraySolution, 
             optimizer:Algorithm)->None:
         """
         Progress internal counter of the total enumerator, so next configuration will be taken into consideration. 
         Internal state of the solution will be set to reflect progress operation.  
 
         :param `OnesCountMaxProblem` problem: problem that is solved
-        :param `OnesCountMaxProblemBinaryBitArraySolution` solution: solution used for the problem that is solved
+        :param `OnesCountMaxProblemBitArraySolution` solution: solution used for the problem that is solved
         :param `Algorithm` optimizer: optimizer that is executed
         """        
         self.__bit_array_counter.progress()
@@ -95,26 +95,26 @@ class OnesCountMaxProblemBinaryBitArraySolutionTeSupport(TeOperationsSupport[Bit
         solution.evaluate(problem)
         optimizer.write_output_values_if_needed("after_evaluation", "a_e")
 
-    def can_progress(self, problem:OnesCountMaxProblem, solution:OnesCountMaxProblemBinaryBitArraySolution, 
+    def can_progress(self, problem:OnesCountMaxProblem, solution:OnesCountMaxProblemBitArraySolution, 
             optimizer:Algorithm)->bool:
         """
         Check if total enumeration process is not at end.  
 
         :param `OnesCountMaxProblem` problem: problem that is solved
-        :param `OnesCountMaxProblemBinaryBitArraySolution` solution: solution used for the problem that is solved
+        :param `OnesCountMaxProblemBitArraySolution` solution: solution used for the problem that is solved
         :param `Algorithm` optimizer: optimizer that is executed
         :return: indicator if total enumeration process is not at end 
         :rtype: bool
         """        
         return self.__bit_array_counter.can_progress()
 
-    def overall_number_of_evaluations(self, problem:OnesCountMaxProblem, solution:OnesCountMaxProblemBinaryBitArraySolution, 
+    def overall_number_of_evaluations(self, problem:OnesCountMaxProblem, solution:OnesCountMaxProblemBitArraySolution, 
             optimizer:Algorithm)->int:
         """
         Returns overall number of evaluations required for finishing total enumeration process.  
 
         :param `OnesCountMaxProblem` problem: problem that is solved
-        :param `OnesCountMaxProblemBinaryBitArraySolution` solution: solution used for the problem that is solved
+        :param `OnesCountMaxProblemBitArraySolution` solution: solution used for the problem that is solved
         :param `Algorithm` optimizer: optimizer that is executed
         :return: overall number of evaluations required for finishing total enumeration process
         :rtype: int
@@ -139,7 +139,7 @@ class OnesCountMaxProblemBinaryBitArraySolutionTeSupport(TeOperationsSupport[Bit
         :return: string representation of vns support instance
         :rtype: str
         """        
-        return 'OnesCountMaxProblemBinaryBitArraySolutionTeSupport'
+        return 'OnesCountMaxProblemBitArraySolutionTeSupport'
 
     def __str__(self)->str:
         """

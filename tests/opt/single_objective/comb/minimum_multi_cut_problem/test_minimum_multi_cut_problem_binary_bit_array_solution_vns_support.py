@@ -7,11 +7,11 @@ from bitstring import BitArray
 from random import randint, choice
 
 from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem import MinimumMultiCutProblem
-from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_binary_bit_array_solution import MinimumMultiCutProblemBinaryBitArraySolution
-from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_binary_bit_array_solution_vns_support import MinimumMultiCutProblemBinaryBitArraySolutionVnsSupport
+from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_bit_array_solution import MinimumMultiCutProblemBitArraySolution
+from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_bit_array_solution_vns_support import MinimumMultiCutProblemBitArraySolutionVnsSupport
 
 
-class TestMinimumMultiCutProblemBinaryBitArraySolutionVnsSupport(unittest.TestCase):
+class TestMinimumMultiCutProblemBitArraySolutionVnsSupport(unittest.TestCase):
 
     # shaking method returns True when randomization is successful
     def test_shaking_returns_true_when_randomization_is_successful(self):
@@ -35,9 +35,9 @@ class TestMinimumMultiCutProblemBinaryBitArraySolutionVnsSupport(unittest.TestCa
             source_terminal_pairs.append((source, terminal))
 
         problem = MinimumMultiCutProblem(graph=graph, source_terminal_pairs=source_terminal_pairs)
-        solution = MinimumMultiCutProblemBinaryBitArraySolution(random_seed=434343)
+        solution = MinimumMultiCutProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray(length=edges), problem)
-        vns_support = MinimumMultiCutProblemBinaryBitArraySolutionVnsSupport()
+        vns_support = MinimumMultiCutProblemBitArraySolutionVnsSupport()
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
@@ -71,10 +71,10 @@ class TestMinimumMultiCutProblemBinaryBitArraySolutionVnsSupport(unittest.TestCa
             source_terminal_pairs.append((source, terminal))
 
         problem = MinimumMultiCutProblem(graph=graph, source_terminal_pairs=source_terminal_pairs)
-        solution = MinimumMultiCutProblemBinaryBitArraySolution(random_seed=434343)
+        solution = MinimumMultiCutProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray(length=edges), problem)
         solution.evaluate(problem)
-        vns_support = MinimumMultiCutProblemBinaryBitArraySolutionVnsSupport()
+        vns_support = MinimumMultiCutProblemBitArraySolutionVnsSupport()
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
@@ -110,9 +110,9 @@ class TestMinimumMultiCutProblemBinaryBitArraySolutionVnsSupport(unittest.TestCa
             source_terminal_pairs.append((source, terminal))
 
         problem = MinimumMultiCutProblem(graph=graph, source_terminal_pairs=source_terminal_pairs)
-        solution = MinimumMultiCutProblemBinaryBitArraySolution(random_seed=434343)
+        solution = MinimumMultiCutProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray(bin='0' * edges), problem)
-        vns_support = MinimumMultiCutProblemBinaryBitArraySolutionVnsSupport()
+        vns_support = MinimumMultiCutProblemBitArraySolutionVnsSupport()
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
@@ -146,10 +146,10 @@ class TestMinimumMultiCutProblemBinaryBitArraySolutionVnsSupport(unittest.TestCa
             source_terminal_pairs.append((source, terminal))
 
         problem = MinimumMultiCutProblem(graph=graph, source_terminal_pairs=source_terminal_pairs)
-        solution = MinimumMultiCutProblemBinaryBitArraySolution(random_seed=434343)
+        solution = MinimumMultiCutProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray(length=edges), problem)
         solution.evaluate(problem)
-        vns_support = MinimumMultiCutProblemBinaryBitArraySolutionVnsSupport()
+        vns_support = MinimumMultiCutProblemBitArraySolutionVnsSupport()
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()

@@ -36,17 +36,17 @@ from opt.single_objective.comb.ones_count_max_problem.command_line import parse_
 
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
 
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution import \
-        OnesCountMaxProblemBinaryIntSolution
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution_vns_support import \
-        OnesCountMaxProblemBinaryIntSolutionVnsSupport
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_int_solution import \
+        OnesCountMaxProblemIntSolution
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_int_solution_vns_support import \
+        OnesCountMaxProblemIntSolutionVnsSupport
 
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution import \
-        OnesCountMaxProblemBinaryBitArraySolution
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_vns_support import \
-        OnesCountMaxProblemBinaryBitArraySolutionVnsSupport
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_te_support import\
-        OnesCountMaxProblemBinaryBitArraySolutionTeSupport
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution import \
+        OnesCountMaxProblemBitArraySolution
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution_vns_support import \
+        OnesCountMaxProblemBitArraySolutionVnsSupport
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution_te_support import\
+        OnesCountMaxProblemBitArraySolutionTeSupport
 
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_solver import OnesCountMaxProblemSolver
 
@@ -175,12 +175,12 @@ def main():
             solution_type:str = parameters['solutionType']
             vns_support = None
             if solution_type=='BitArray':
-                solution:OnesCountMaxProblemBinaryBitArraySolution = OnesCountMaxProblemBinaryBitArraySolution(
+                solution:OnesCountMaxProblemBitArraySolution = OnesCountMaxProblemBitArraySolution(
                     random_seed=r_seed)
-                vns_support = OnesCountMaxProblemBinaryBitArraySolutionVnsSupport()
+                vns_support = OnesCountMaxProblemBitArraySolutionVnsSupport()
             elif solution_type=='int':
-                solution:OnesCountMaxProblemBinaryIntSolution = OnesCountMaxProblemBinaryIntSolution(r_seed)
-                vns_support = OnesCountMaxProblemBinaryIntSolutionVnsSupport()
+                solution:OnesCountMaxProblemIntSolution = OnesCountMaxProblemIntSolution(r_seed)
+                vns_support = OnesCountMaxProblemIntSolutionVnsSupport()
             else:
                 raise ValueError("Invalid solution/representation type is chosen.")
             # solver construction parameters
@@ -202,12 +202,12 @@ def main():
             solution_type:str = parameters['solutionType']
             te_support = None
             if solution_type=='BitArray':
-                solution:OnesCountMaxProblemBinaryBitArraySolution = OnesCountMaxProblemBinaryBitArraySolution(r_seed, 
+                solution:OnesCountMaxProblemBitArraySolution = OnesCountMaxProblemBitArraySolution(r_seed, 
                             evaluation_cache_is_used=evaluation_cache_is_used,
                             evaluation_cache_max_size=evaluation_cache_max_size,
                             distance_calculation_cache_is_used=calculation_solution_distance_cache_is_used,
                             distance_calculation_cache_max_size=calculation_solution_distance_cache_max_size)
-                te_support = OnesCountMaxProblemBinaryBitArraySolutionTeSupport()
+                te_support = OnesCountMaxProblemBitArraySolutionTeSupport()
             else:
                 raise ValueError("Invalid solution/representation type is chosen.")
             # solver construction parameters

@@ -22,7 +22,7 @@ from uo.utils.logger import logger
 from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem \
         import FunctionOneVariableMaxProblemMax
 
-class FunctionOneVariableMaxProblemBinaryIntSolution(Solution[int,float]):
+class FunctionOneVariableMaxProblemIntSolution(Solution[int,float]):
     
     def __init__(self, domain_from:float, domain_to:float, number_of_intervals:int, random_seed:int=None, 
             evaluation_cache_is_used:bool=False, 

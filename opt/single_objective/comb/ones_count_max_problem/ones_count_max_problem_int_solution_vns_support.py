@@ -1,72 +1,76 @@
 """ 
-..  _py_minimum_multi_cut_problem_binary_bit_array_solution_vns_support:
+.. _py_ones_count_max_problem_int_solution_vns_support:
 
-The :mod:`~opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_binary_bit_array_solution_vns_support` 
-contains class :class:`~opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_binary_bit_array_solution_vns_support.MinimumMultiCutProblemBinaryBitArraySolutionVnsSupport`, 
-that represents supporting parts of the `VNS` algorithm, where solution of the :ref:`Problem_MinimumMultiCut` have `BitArray` 
-representation.
+The :mod:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_int_solution_vns_support` contains 
+class :class:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_int_solution_vns_support.OnesCountMaxProblemIntSolutionVnsLocalSearchSupport`, 
+that represents solution of the :ref:`Problem_Ones_Count_Max`, where `int` representation of the problem has been used.
+and class :class:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_int_solution_vns_support.OnesCountMaxProblemIntSolutionVnsShakingSupport`, 
+that represents solution of the :ref:`Problem_Ones_Count_Max`, where `int` representation of the problem has been used.
+
 """
+
 import sys
 from pathlib import Path
+from typing import Optional
 directory = Path(__file__).resolve()
-sys.path.append(directory)
 sys.path.append(directory.parent)
+sys.path.append(directory.parent.parent)
 sys.path.append(directory.parent.parent.parent)
 sys.path.append(directory.parent.parent.parent.parent)
 sys.path.append(directory.parent.parent.parent.parent.parent)
 
 from copy import deepcopy
 from random import choice
+from random import randint
 
-from bitstring import BitArray
-
+from uo.utils.logger import logger
 from uo.utils.complex_counter_uniform_ascending import ComplexCounterUniformAscending
 
 from uo.algorithm.metaheuristic.metaheuristic import Metaheuristic
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support import VnsShakingSupport
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support import VnsLocalSearchSupport
 
-from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem import MinimumMultiCutProblem
-from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_binary_bit_array_solution import MinimumMultiCutProblemBinaryBitArraySolution
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_int_solution import OnesCountMaxProblemIntSolution
 
-
-class MinimumMultiCutProblemBinaryBitArraySolutionVnsShakingSupport(VnsShakingSupport[BitArray,str]):
+class OnesCountMaxProblemIntSolutionVnsShakingSupport(VnsShakingSupport[int,str]):
     
     def __init__(self)->None:
         """
-        Create new `MinimumMultiCutProblemBinaryBitArraySolutionVnsShakingSupport` instance
+        Create new `OnesCountMaxProblemIntSolutionVnsShakingSupport` instance
         """
+        return
 
     def __copy__(self):
         """
-        Internal copy of the `MinimumMultiCutProblemBinaryBitArraySolutionVnsSupport`
+        Internal copy of the `OnesCountMaxProblemIntSolutionVnsShakingSupport`
 
-        :return: new `MinimumMultiCutProblemBinaryBitArraySolutionVnsSupport` instance with the same properties
-        :rtype: `MinimumMultiCutProblemBinaryBitArraySolutionVnsSupport`
+        :return: new `OnesCountMaxProblemIntSolutionVnsShakingSupport` instance with the same properties
+        :rtype: OnesCountMaxProblemIntSolutionVnsShakingSupport
         """
-        sol = deepcopy(self)
-        return sol
+        sup = deepcopy(self)
+        return sup
 
     def copy(self):
         """
-        Copy the `MinimumMultiCutProblemBinaryBitArraySolutionVnsSupport` instance
-
-        :return: new `MinimumMultiCutProblemBinaryBitArraySolutionVnsSupport` instance with the same properties
-        :rtype: `MinimumMultiCutProblemBinaryBitArraySolutionVnsSupport`
-        """
+        Copy the `OnesCountMaxProblemIntSolutionVnsShakingSupport`
+        
+        :return: new `OnesCountMaxProblemIntSolutionVnsShakingSupport` instance with the same properties
+        :rtype: `OnesCountMaxProblemIntSolutionVnsShakingSupport`
+        """        
         return self.__copy__()
-
-    def shaking(self, k:int, problem:MinimumMultiCutProblem, solution:MinimumMultiCutProblemBinaryBitArraySolution, 
+        
+    def shaking(self, k:int, problem:OnesCountMaxProblem, solution:OnesCountMaxProblemIntSolution, 
             optimizer:Metaheuristic)->bool:
         """
-        Random shaking of k parts such that new solution code does not differ more than k from all solution codes 
+        Random VNS shaking of k parts such that new solution code does not differ more than k from all solution codes 
         inside shakingPoints 
 
         :param int k: int parameter for VNS
-        :param `MinimumMultiCutProblem` problem: problem that is solved
-        :param `MinimumMultiCutProblemBinaryBitArraySolution` solution: solution used for the problem that is solved
-        :param `Algorithm` optimizer: optimizer that is executed
-        :return: if randomization is successful
+        :param `OnesCountMaxProblem` problem: problem that is solved
+        :param `OnesCountMaxProblemIntSolution` solution: solution used for the problem that is solved
+        :param `Metaheuristic` optimizer: metaheuristic optimizer that is executed
+        :return: if shaking is successful
         :rtype: bool
         """    
         if optimizer.should_finish():
@@ -74,24 +78,25 @@ class MinimumMultiCutProblemBinaryBitArraySolutionVnsShakingSupport(VnsShakingSu
         tries:int = 0
         limit:int = 10000
         while tries < limit:
-            repres:BitArray = BitArray(solution.representation)
             positions:list[int] = []
-            for _ in range(0,k):
-                positions.append(choice(range(len(repres))))
-            for pos in positions:
-                repres.invert(pos)
-            solution.representation = repres
+            for i in range(0,k):
+                positions.append(choice(range(problem.dimension)))
+            mask:int = 0
+            for p in positions:
+                mask |= 1 << p
+            solution.representation ^= mask
             all_ok:bool = True
+            if solution.representation.bit_count() > problem.dimension:
+                all_ok = False
             if all_ok:
                 break
         if tries < limit:
             if optimizer.should_finish():
-                return False
+                return solution
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             optimizer.evaluation += 1
             solution.evaluate(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
-            optimizer.write_output_values_if_needed("after_step_in_iteration", "shaking")
             return True
         else:
             return False 
@@ -99,7 +104,7 @@ class MinimumMultiCutProblemBinaryBitArraySolutionVnsShakingSupport(VnsShakingSu
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
         """
-        String representation of the vns support structure
+        String representation of the vns support instance
 
         :param delimiter: delimiter between fields
         :type delimiter: str
@@ -114,7 +119,7 @@ class MinimumMultiCutProblemBinaryBitArraySolutionVnsShakingSupport(VnsShakingSu
         :return: string representation of vns support instance
         :rtype: str
         """        
-        return 'MinimumMultiCutProblemBinaryBitArraySolutionVnsShakingSupport'
+        return 'OnesCountMaxProblemIntSolutionVnsShakingSupport'
 
     def __str__(self)->str:
         """
@@ -145,60 +150,64 @@ class MinimumMultiCutProblemBinaryBitArraySolutionVnsShakingSupport(VnsShakingSu
         """
         return self.string_rep('|')
 
-
-class MinimumMultiCutProblemBinaryBitArraySolutionVnsLocalSearchSupport(VnsLocalSearchSupport[BitArray,str]):
+class OnesCountMaxProblemIntSolutionVnsLocalSearchSupport(VnsLocalSearchSupport[int,str]):
     
     def __init__(self)->None:
         """
-        Create new `MinimumMultiCutProblemBinaryBitArraySolutionVnsLocalSearchSupport` instance
+        Create new `OnesCountMaxProblemIntSolutionVnsLocalSearchSupport` instance
         """
+        return
 
     def __copy__(self):
         """
-        Internal copy of the `MinimumMultiCutProblemBinaryBitArraySolutionVnsSupport`
+        Internal copy of the `OnesCountMaxProblemIntSolutionVnsLocalSearchSupport`
 
-        :return: new `MinimumMultiCutProblemBinaryBitArraySolutionVnsSupport` instance with the same properties
-        :rtype: `MinimumMultiCutProblemBinaryBitArraySolutionVnsSupport`
+        :return: new `OnesCountMaxProblemIntSolutionVnsLocalSearchSupport` instance with the same properties
+        :rtype: OnesCountMaxProblemIntSolutionVnsLocalSearchSupport
         """
-        sol = deepcopy(self)
-        return sol
+        sup = deepcopy(self)
+        return sup
 
     def copy(self):
         """
-        Copy the `MinimumMultiCutProblemBinaryBitArraySolutionVnsSupport` instance
-
-        :return: new `MinimumMultiCutProblemBinaryBitArraySolutionVnsSupport` instance with the same properties
-        :rtype: `MinimumMultiCutProblemBinaryBitArraySolutionVnsSupport`
-        """
+        Copy the `OnesCountMaxProblemIntSolutionVnsLocalSearchSupport`
+        
+        :return: new `OnesCountMaxProblemIntSolutionVnsLocalSearchSupport` instance with the same properties
+        :rtype: `OnesCountMaxProblemIntSolutionVnsLocalSearchSupport`
+        """        
         return self.__copy__()
+        
 
-    def local_search_best_improvement(self, k:int, problem:MinimumMultiCutProblem, solution:MinimumMultiCutProblemBinaryBitArraySolution, 
-            optimizer: Metaheuristic)->bool:
+    def local_search_best_improvement(self, k:int, problem:OnesCountMaxProblem, solution:OnesCountMaxProblemIntSolution, 
+            optimizer:Metaheuristic)->bool:
         """
         Executes "best improvement" variant of the local search procedure 
         
         :param int k: int parameter for VNS
-        :param `MinimumMultiCutProblem` problem: problem that is solved
-        :param `MinimumMultiCutProblemBinaryBitArraySolution` solution: solution used for the problem that is solved
-        :param `Algorithm` optimizer: optimizer that is executed
+        :param `OnesCountMaxProblem` problem: problem that is solved
+        :param `OnesCountMaxProblemIntSolution` solution: solution used for the problem that is solved
+        :param `Metaheuristic` optimizer: metaheuristic optimizer that is executed
         :return: result of the local search procedure 
         :rtype: if local search is successful
         """
         if optimizer.should_finish():
             return False
-        if k < 1 or k > len(problem.graph.edges()):
+        if k < 1 or k > problem.dimension:
             return False
-        start_sol:MinimumMultiCutProblemBinaryBitArraySolution = solution.copy()
-        best_sol:MinimumMultiCutProblemBinaryBitArraySolution = solution.copy()
+        start_sol:OnesCountMaxProblemIntSolution = solution.copy()
+        best_sol:OnesCountMaxProblemIntSolution = solution.copy()
         better_sol_found:bool = False
         # initialize indexes
-        indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k, len(problem.graph.edges()))
+        indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k,problem.dimension)
         in_loop:bool = indexes.reset()
         while in_loop:
             # collect positions for inversion from indexes
             positions:list[int] = indexes.current_state()
             # invert and compare, switch of new is better
-            solution.representation.invert(positions) 
+            mask:int = 0
+            for i in positions:
+                mask |= 1 << i
+            solution.representation ^= mask 
             if optimizer.should_finish():
                 solution.copy_from(start_sol)
                 return False
@@ -209,24 +218,24 @@ class MinimumMultiCutProblemBinaryBitArraySolutionVnsLocalSearchSupport(VnsLocal
             if solution.is_better(best_sol, problem):
                 better_sol_found = True
                 best_sol.copy_from(solution)
-            solution.representation.invert(positions)
-            # increment indexes and set in_loop according to the state
+            solution.representation ^= mask 
+            # increment indexes and set in_loop accordingly
             in_loop = indexes.progress()
         if better_sol_found:
             solution.copy_from(best_sol)
             return True
         solution.copy_from(start_sol)
         return False
-    
-    def local_search_first_improvement(self, k:int, problem:MinimumMultiCutProblem, solution:MinimumMultiCutProblemBinaryBitArraySolution, 
+
+    def local_search_first_improvement(self, k:int, problem:OnesCountMaxProblem, solution:OnesCountMaxProblemIntSolution, 
             optimizer: Metaheuristic)->bool:
         """
         Executes "first improvement" variant of the local search procedure 
         
         :param int k: int parameter for VNS
-        :param `MinimumMultiCutProblem` problem: problem that is solved
-        :param `MinimumMultiCutProblemBinaryBitArraySolution` solution: solution used for the problem that is solved
-        :param `Algorithm` optimizer: optimizer that is executed
+        :param `OnesCountMaxProblem` problem: problem that is solved
+        :param `OnesCountMaxProblemIntSolution` solution: solution used for the problem that is solved
+        :param `Metaheuristic` optimizer: metaheuristic optimizer that is executed
         :return: result of the local search procedure 
         :rtype: if local search is successful
         """
@@ -234,15 +243,18 @@ class MinimumMultiCutProblemBinaryBitArraySolutionVnsLocalSearchSupport(VnsLocal
             return False
         if k < 1 or k > problem.dimension:
             return False
-        start_sol:MinimumMultiCutProblemBinaryBitArraySolution = solution.copy()
+        start_sol:OnesCountMaxProblemIntSolution = solution.copy()
         # initialize indexes
-        indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k, problem.dimension)
+        indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k,problem.dimension)
         in_loop:bool = indexes.reset()
         while in_loop:
             # collect positions for inversion from indexes
             positions:list[int] = indexes.current_state()
             # invert and compare, switch and exit if new is better
-            solution.representation.invert(positions) 
+            mask:int = 0
+            for i in positions:
+                mask |= 1 << i
+            solution.representation ^= mask 
             if optimizer.should_finish():
                 solution.copy_from(start_sol)
                 return False
@@ -252,7 +264,7 @@ class MinimumMultiCutProblemBinaryBitArraySolutionVnsLocalSearchSupport(VnsLocal
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
             if solution.is_better(start_sol, problem):
                 return True
-            solution.representation.invert(positions)
+            solution.representation ^= mask
             # increment indexes and set in_loop accordingly
             in_loop = indexes.progress()
         solution.copy_from(start_sol)
@@ -261,7 +273,7 @@ class MinimumMultiCutProblemBinaryBitArraySolutionVnsLocalSearchSupport(VnsLocal
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
         """
-        String representation of the vns support structure
+        String representation of the vns support instance
 
         :param delimiter: delimiter between fields
         :type delimiter: str
@@ -276,7 +288,7 @@ class MinimumMultiCutProblemBinaryBitArraySolutionVnsLocalSearchSupport(VnsLocal
         :return: string representation of vns support instance
         :rtype: str
         """        
-        return 'MinimumMultiCutProblemBinaryBitArraySolutionVnsLocalSearchSupport'
+        return 'OnesCountMaxProblemIntSolutionVnsLocalSearchSupport'
 
     def __str__(self)->str:
         """
@@ -306,5 +318,3 @@ class MinimumMultiCutProblemBinaryBitArraySolutionVnsLocalSearchSupport(VnsLocal
         :rtype: str
         """
         return self.string_rep('|')
-
-

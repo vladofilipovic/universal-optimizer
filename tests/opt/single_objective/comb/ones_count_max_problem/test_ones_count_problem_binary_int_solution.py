@@ -7,7 +7,7 @@ from unittest.mock import mock_open
 from bitstring import BitArray
 
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_int_solution import OnesCountMaxProblemBinaryIntSolution
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_int_solution import OnesCountMaxProblemIntSolution
 from uo.problem.problem import Problem
 from uo.problem.problem_void_min_so import ProblemVoidMinSO
 from uo.solution.solution import Solution
@@ -17,13 +17,13 @@ from uo.solution.solution import Solution
 
 import unittest
 
-class TestOnesCountMaxProblemBinaryIntSolution(unittest.TestCase):
+class TestOnesCountMaxProblemIntSolution(unittest.TestCase):
 
-    # Create new instance of OnesCountMaxProblemBinaryIntSolution with default parameters
+    # Create new instance of OnesCountMaxProblemIntSolution with default parameters
     def test_create_new_instance_with_default_parameters(self):
         # Arrange
         # Act
-        solution = OnesCountMaxProblemBinaryIntSolution()
+        solution = OnesCountMaxProblemIntSolution()
         # Assert
         self.assertIsNone(solution.fitness_value)
         self.assertIsNone(solution.fitness_values)
@@ -35,11 +35,11 @@ class TestOnesCountMaxProblemBinaryIntSolution(unittest.TestCase):
         self.assertFalse(Solution.representation_distance_cache_cs.is_caching)
         self.assertEqual(Solution.representation_distance_cache_cs.max_cache_size, 0)
 
-    # Create new instance of OnesCountMaxProblemBinaryIntSolution with custom parameters
+    # Create new instance of OnesCountMaxProblemIntSolution with custom parameters
     def test_create_new_instance_with_custom_parameters(self):
         # Arrange
         # Act
-        solution = OnesCountMaxProblemBinaryIntSolution(random_seed=123, evaluation_cache_is_used=True, 
+        solution = OnesCountMaxProblemIntSolution(random_seed=123, evaluation_cache_is_used=True, 
                             evaluation_cache_max_size=100, distance_calculation_cache_is_used=True, 
                             distance_calculation_cache_max_size=200)
         # Assert
@@ -56,7 +56,7 @@ class TestOnesCountMaxProblemBinaryIntSolution(unittest.TestCase):
         type(problem_mock).name = mocker.PropertyMock(return_value='some_problem')
         type(problem_mock).dimension = mocker.PropertyMock(return_value=12)
         # Act
-        solution = OnesCountMaxProblemBinaryIntSolution()
+        solution = OnesCountMaxProblemIntSolution()
         solution.init_random(problem_mock)
         # Assert
         self.assertIsNotNone(solution.representation)
@@ -71,7 +71,7 @@ class TestOnesCountMaxProblemBinaryIntSolution(unittest.TestCase):
         type(problem_stub).dimension = mocker.PropertyMock(return_value=12)
         representation = 12345
         # Act
-        solution = OnesCountMaxProblemBinaryIntSolution()
+        solution = OnesCountMaxProblemIntSolution()
         solution.init_from(representation, problem_stub)
         # Assert
         self.assertEqual(solution.representation, representation)
@@ -84,7 +84,7 @@ class TestOnesCountMaxProblemBinaryIntSolution(unittest.TestCase):
         type(problem_stub).dimension = mocker.PropertyMock(return_value=12)
         representation = 12345
         # Act
-        solution = OnesCountMaxProblemBinaryIntSolution()
+        solution = OnesCountMaxProblemIntSolution()
         quality = solution.calculate_quality_directly(representation, problem_stub)
         # Assert
         self.assertEqual(quality.fitness_value, representation.bit_count())
@@ -98,39 +98,39 @@ class TestOnesCountMaxProblemBinaryIntSolution(unittest.TestCase):
         # Arrange
         representation_str = "101010"
         # Act
-        solution = OnesCountMaxProblemBinaryIntSolution()
+        solution = OnesCountMaxProblemIntSolution()
         representation = solution.native_representation(representation_str)
         # Assert
         self.assertEqual(representation, int(representation_str, 2))
 
-    # Create new instance of OnesCountMaxProblemBinaryIntSolution with negative random seed
+    # Create new instance of OnesCountMaxProblemIntSolution with negative random seed
     def test_create_new_instance_with_negative_random_seed(self):
         # Arrange
         # Act
-        solution = OnesCountMaxProblemBinaryIntSolution(random_seed=-123)
+        solution = OnesCountMaxProblemIntSolution(random_seed=-123)
         # Assert
         self.assertEqual(solution.random_seed, -123)
 
-    # Create new instance of OnesCountMaxProblemBinaryIntSolution with zero dimension
+    # Create new instance of OnesCountMaxProblemIntSolution with zero dimension
     def test_create_new_instance_with_zero_dimension(self):
         # Arrange
         problem_stub = mocker.MagicMock()
         type(problem_stub).name = mocker.PropertyMock(return_value='some_problem')
         type(problem_stub).dimension = mocker.PropertyMock(return_value=0)
         # Act
-        solution = OnesCountMaxProblemBinaryIntSolution()
+        solution = OnesCountMaxProblemIntSolution()
         # Assert
         with self.assertRaises(ValueError):
             solution.init_random(problem_stub)
 
-    # Create new instance of OnesCountMaxProblemBinaryIntSolution with dimension greater than or equal to 32
+    # Create new instance of OnesCountMaxProblemIntSolution with dimension greater than or equal to 32
     def test_create_new_instance_with_large_dimension(self):
         # Arrange
         problem_stub = mocker.MagicMock()
         type(problem_stub).name = mocker.PropertyMock(return_value='some_problem')
         type(problem_stub).dimension = mocker.PropertyMock(return_value=32)
         # Act
-        solution = OnesCountMaxProblemBinaryIntSolution()
+        solution = OnesCountMaxProblemIntSolution()
         # Assert
         with self.assertRaises(ValueError):
             solution.init_random(problem_stub)
@@ -142,7 +142,7 @@ class TestOnesCountMaxProblemBinaryIntSolution(unittest.TestCase):
         type(problem_stub).name = mocker.PropertyMock(return_value='some_problem')
         type(problem_stub).dimension = mocker.PropertyMock(return_value=None)
         # Act
-        solution = OnesCountMaxProblemBinaryIntSolution()
+        solution = OnesCountMaxProblemIntSolution()
         # Assert
         with self.assertRaises(ValueError):
             solution.init_random(problem_stub)
@@ -155,7 +155,7 @@ class TestNativeRepresentation(unittest.TestCase):
     def test_obtain_int_representation(self):
         # Arrange
         representation_str = "101010"
-        solution = OnesCountMaxProblemBinaryIntSolution()
+        solution = OnesCountMaxProblemIntSolution()
         # Act
         result = solution.native_representation(representation_str)
         # Assert
@@ -165,7 +165,7 @@ class TestNativeRepresentation(unittest.TestCase):
     def test_string_representation_contains_binary_digits(self):
         # Arrange
         representation_str = "101010"
-        solution = OnesCountMaxProblemBinaryIntSolution()
+        solution = OnesCountMaxProblemIntSolution()
         # Act
         result = solution.native_representation(representation_str)
         # Assert
@@ -175,7 +175,7 @@ class TestNativeRepresentation(unittest.TestCase):
     def test_string_representation_not_empty(self):
         # Arrange
         representation_str = "101010"
-        solution = OnesCountMaxProblemBinaryIntSolution()
+        solution = OnesCountMaxProblemIntSolution()
         # Act
         result = solution.native_representation(representation_str)
         # Assert
@@ -185,7 +185,7 @@ class TestNativeRepresentation(unittest.TestCase):
     def test_string_representation_is_zero(self):
         # Arrange
         representation_str = "0"
-        solution = OnesCountMaxProblemBinaryIntSolution()
+        solution = OnesCountMaxProblemIntSolution()
         # Act
         result = solution.native_representation(representation_str)
         # Assert
@@ -195,7 +195,7 @@ class TestNativeRepresentation(unittest.TestCase):
     def test_string_representation_is_one(self):
         # Arrange
         representation_str = "1"
-        solution = OnesCountMaxProblemBinaryIntSolution()
+        solution = OnesCountMaxProblemIntSolution()
         # Act
         result = solution.native_representation(representation_str)
         # Assert
@@ -205,7 +205,7 @@ class TestNativeRepresentation(unittest.TestCase):
     def test_string_representation_is_double_zero(self):
         # Arrange
         representation_str = "00"
-        solution = OnesCountMaxProblemBinaryIntSolution()
+        solution = OnesCountMaxProblemIntSolution()
         # Act
         result = solution.native_representation(representation_str)
         # Assert
@@ -217,7 +217,7 @@ class TestRepresentationDistanceDirectly(unittest.TestCase):
     # Calculate distance between two solutions with different representation codes.
     def test_different_representation_codes(self):
         # Arrange
-        solution = OnesCountMaxProblemBinaryIntSolution()
+        solution = OnesCountMaxProblemIntSolution()
         solution.native_representation = mocker.Mock(side_effect=[10, 15])    
         # Act
         distance = solution.representation_distance_directly("101010", "111000")
@@ -227,7 +227,7 @@ class TestRepresentationDistanceDirectly(unittest.TestCase):
     # Calculate distance between two solutions with same representation codes.
     def test_same_representation_codes(self):
         # Arrange
-        solution = OnesCountMaxProblemBinaryIntSolution()
+        solution = OnesCountMaxProblemIntSolution()
         solution.native_representation = mocker.Mock(return_value=10)
         # Act
         distance = solution.representation_distance_directly("101010", "101010")
@@ -237,7 +237,7 @@ class TestRepresentationDistanceDirectly(unittest.TestCase):
     # Calculate distance between two solutions with different lengths of representation codes.
     def test_different_lengths_of_representation_codes(self):
         # Arrange
-        solution = OnesCountMaxProblemBinaryIntSolution()
+        solution = OnesCountMaxProblemIntSolution()
         solution.native_representation = mocker.Mock(side_effect=[10, 15])
         # Act
         distance = solution.representation_distance_directly("101010", "111")
@@ -247,7 +247,7 @@ class TestRepresentationDistanceDirectly(unittest.TestCase):
     # Calculate distance between two solutions with non-string representation codes.
     def test_non_string_representation_codes(self):
         # Arrange
-        solution = OnesCountMaxProblemBinaryIntSolution()
+        solution = OnesCountMaxProblemIntSolution()
         # Act & Assert
         with self.assertRaises(TypeError):
             solution.representation_distance_directly(101010, 111000)
@@ -257,7 +257,7 @@ class TestRepresentationDistanceDirectly(unittest.TestCase):
     # Calculate distance between two identical solutions
     def test_identical_solutions(self):
         # Arrange
-        solution = OnesCountMaxProblemBinaryIntSolution()
+        solution = OnesCountMaxProblemIntSolution()
         solution_code_1 = "101010"
         solution_code_2 = "101010"
         # Act
@@ -268,7 +268,7 @@ class TestRepresentationDistanceDirectly(unittest.TestCase):
     # Calculate distance between two different solutions
     def test_different_solutions(self):
         # Arrange
-        solution = OnesCountMaxProblemBinaryIntSolution()
+        solution = OnesCountMaxProblemIntSolution()
         solution_code_1 = "101010"
         solution_code_2 = "111000"
         # Act
@@ -279,7 +279,7 @@ class TestRepresentationDistanceDirectly(unittest.TestCase):
     # Calculate distance between two solutions with one bit difference
     def test_one_bit_difference(self):
         # Arrange
-        solution = OnesCountMaxProblemBinaryIntSolution()
+        solution = OnesCountMaxProblemIntSolution()
         solution_code_1 = "101010"
         solution_code_2 = "101011"
         # Act
@@ -290,7 +290,7 @@ class TestRepresentationDistanceDirectly(unittest.TestCase):
     # Calculate distance between two solutions with different lengths
     def test_different_lengths(self):
         # Arrange
-        solution = OnesCountMaxProblemBinaryIntSolution()
+        solution = OnesCountMaxProblemIntSolution()
         solution_code_1 = "101010"
         solution_code_2 = "10101010"
         # Act
@@ -301,7 +301,7 @@ class TestRepresentationDistanceDirectly(unittest.TestCase):
     # Calculate distance between two solutions with non-binary characters
     def test_non_binary_characters(self):
         # Arrange
-        solution = OnesCountMaxProblemBinaryIntSolution()
+        solution = OnesCountMaxProblemIntSolution()
         solution_code_1 = "101010"
         solution_code_2 = "1010A0"
         # Act & Assert
@@ -318,7 +318,7 @@ class TestStringRep(unittest.TestCase):
     # Includes the string representation of the superclass
     def test_includes_superclass_representation(self):
         # Arrange
-        sol = OnesCountMaxProblemBinaryIntSolution()
+        sol = OnesCountMaxProblemIntSolution()
         sol.representation = 123
         # Act
         result = sol.string_rep()
@@ -328,7 +328,7 @@ class TestStringRep(unittest.TestCase):
     # Includes the string representation of the solution's native representation
     def test_includes_native_representation(self):
         # Arrange
-        sol = OnesCountMaxProblemBinaryIntSolution()
+        sol = OnesCountMaxProblemIntSolution()
         sol.representation = 123    
         # Act
         result = sol.string_rep()

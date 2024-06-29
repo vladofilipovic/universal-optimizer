@@ -1,8 +1,8 @@
 """
-..  _py_ones_count_max_problem_binary_bit_array_solution_ga_support:
+..  _py_ones_count_max_problem_bit_array_solution_ga_support:
 
-The :mod:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_ga_support`
-contains class :class:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_ga_support.OnesCountMaxProblemBinaryBitArraySolutionGaSupport`, 
+The :mod:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution_ga_support`
+contains class :class:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution_ga_support.OnesCountMaxProblemBitArraySolutionGaSupport`, 
 that represents supporting parts of the `GA` algorithm, where solution of the :ref:`Problem_MinimumMultiCut` have `BitArray` 
 representation.
 """
@@ -33,30 +33,30 @@ from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support import Ga
 
 A_co = TypeVar("A_co", covariant=True)
 
-class GaCrossoverSupportRepresentationBinaryBitArray(GaCrossoverSupport[BitArray,A_co]):
+class GaCrossoverSupportRepresentationBitArray(GaCrossoverSupport[BitArray,A_co]):
 
     def __init__(self, crossover_probability:float)->None:
         """
-        Create new `GaCrossoverSupportRepresentationBinaryBitArray` instance
+        Create new `GaCrossoverSupportRepresentationBitArray` instance
         """
         super().__init__(crossover_probability)
 
     def __copy__(self):
         """
-        Internal copy of the `GaCrossoverSupportRepresentationBinaryBitArray`
+        Internal copy of the `GaCrossoverSupportRepresentationBitArray`
 
-        :return: new `GaCrossoverSupportRepresentationBinaryBitArray` instance with the same properties
-        :rtype: `GaCrossoverSupportRepresentationBinaryBitArray`
+        :return: new `GaCrossoverSupportRepresentationBitArray` instance with the same properties
+        :rtype: `GaCrossoverSupportRepresentationBitArray`
         """
         sol = deepcopy(self)
         return sol
 
     def copy(self):
         """
-        Copy the `GaCrossoverSupportRepresentationBinaryBitArray` instance
+        Copy the `GaCrossoverSupportRepresentationBitArray` instance
 
-        :return: new `GaCrossoverSupportRepresentationBinaryBitArray` instance with the same properties
-        :rtype: `GaCrossoverSupportRepresentationBinaryBitArray`
+        :return: new `GaCrossoverSupportRepresentationBitArray` instance with the same properties
+        :rtype: `GaCrossoverSupportRepresentationBitArray`
         """
         return self.__copy__()
 
@@ -100,7 +100,7 @@ class GaCrossoverSupportRepresentationBinaryBitArray(GaCrossoverSupport[BitArray
         :return: string representation of ga support instance
         :rtype: str
         """
-        return 'GaCrossoverSupportRepresentationBinaryBitArray'
+        return 'GaCrossoverSupportRepresentationBitArray'
 
     def __str__(self)->str:
         """

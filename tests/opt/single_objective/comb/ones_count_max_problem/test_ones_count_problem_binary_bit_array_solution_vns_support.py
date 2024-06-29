@@ -19,19 +19,19 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer impor
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution import OnesCountMaxProblemBinaryBitArraySolution
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution_vns_support import OnesCountMaxProblemBinaryBitArraySolutionVnsSupport
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution import OnesCountMaxProblemBitArraySolution
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution_vns_support import OnesCountMaxProblemBitArraySolutionVnsSupport
 
 
-class TestOnesCountMaxProblemBinaryBitArraySolutionVnsSupport(unittest.TestCase):
+class TestOnesCountMaxProblemBitArraySolutionVnsSupport(unittest.TestCase):
 
     # shaking method returns True when randomization is successful
     def test_shaking_returns_true_when_randomization_is_successful(self):
         # Arrange
         problem = OnesCountMaxProblem(dim=5)
-        solution = OnesCountMaxProblemBinaryBitArraySolution(random_seed=434343)
+        solution = OnesCountMaxProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray('0b10101'), problem)
-        vns_support = OnesCountMaxProblemBinaryBitArraySolutionVnsSupport()
+        vns_support = OnesCountMaxProblemBitArraySolutionVnsSupport()
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
@@ -47,10 +47,10 @@ class TestOnesCountMaxProblemBinaryBitArraySolutionVnsSupport(unittest.TestCase)
     def test_local_search_best_improvement_returns_solution_with_higher_fitness_value11(self):
         # Arrange
         problem = OnesCountMaxProblem(dim=8)
-        solution = OnesCountMaxProblemBinaryBitArraySolution(random_seed=434343)
+        solution = OnesCountMaxProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray('0b00110010'), problem)
         solution.evaluate(problem)
-        vns_support = OnesCountMaxProblemBinaryBitArraySolutionVnsSupport()
+        vns_support = OnesCountMaxProblemBitArraySolutionVnsSupport()
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
@@ -68,10 +68,10 @@ class TestOnesCountMaxProblemBinaryBitArraySolutionVnsSupport(unittest.TestCase)
     def test_local_search_first_improvement_returns_solution_with_higher_fitness_value10(self):
         # Arrange
         problem = OnesCountMaxProblem(dim=6)
-        solution = OnesCountMaxProblemBinaryBitArraySolution(random_seed=434343)
+        solution = OnesCountMaxProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray('0b000001'), problem)
         solution.evaluate(problem)
-        vns_support = OnesCountMaxProblemBinaryBitArraySolutionVnsSupport()
+        vns_support = OnesCountMaxProblemBitArraySolutionVnsSupport()
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
@@ -90,9 +90,9 @@ class TestOnesCountMaxProblemBinaryBitArraySolutionVnsSupport(unittest.TestCase)
     def test_shaking_modifies_solution_representation_when_number_of_ones_is_less_than_problem_dimension8(self):
         # Arrange
         problem = OnesCountMaxProblem(dim=5)
-        solution = OnesCountMaxProblemBinaryBitArraySolution(random_seed=434343)
+        solution = OnesCountMaxProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray(bin='0' * problem.dimension), problem)
-        vns_support = OnesCountMaxProblemBinaryBitArraySolutionVnsSupport()
+        vns_support = OnesCountMaxProblemBitArraySolutionVnsSupport()
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
@@ -108,10 +108,10 @@ class TestOnesCountMaxProblemBinaryBitArraySolutionVnsSupport(unittest.TestCase)
     def test_local_search_best_improvement_returns_solution_with_higher_fitness_value6(self):
         # Arrange
         problem = OnesCountMaxProblem(dim=8)
-        solution = OnesCountMaxProblemBinaryBitArraySolution(random_seed=434343)
+        solution = OnesCountMaxProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray('0b00110010'), problem)
         solution.evaluate(problem)
-        vns_support = OnesCountMaxProblemBinaryBitArraySolutionVnsSupport()
+        vns_support = OnesCountMaxProblemBitArraySolutionVnsSupport()
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
@@ -129,10 +129,10 @@ class TestOnesCountMaxProblemBinaryBitArraySolutionVnsSupport(unittest.TestCase)
     def test_local_search_first_improvement_returns_solution_with_higher_fitness_value4(self):
         # Arrange
         problem = OnesCountMaxProblem(dim=8)
-        solution = OnesCountMaxProblemBinaryBitArraySolution(random_seed=434343)
+        solution = OnesCountMaxProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray('0b00110010'), problem)
         solution.evaluate(problem)
-        vns_support = OnesCountMaxProblemBinaryBitArraySolutionVnsSupport()
+        vns_support = OnesCountMaxProblemBitArraySolutionVnsSupport()
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()

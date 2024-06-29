@@ -10,7 +10,7 @@ from unittest.mock import mock_open
 
 from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem import FunctionOneVariableMaxProblemMax
 from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem import FunctionOneVariableMaxProblemMaxElements
-from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_binary_int_solution import FunctionOneVariableMaxProblemBinaryIntSolution
+from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_int_solution import FunctionOneVariableMaxProblemIntSolution
 
 from uo.solution.solution import Solution
 
@@ -18,9 +18,9 @@ from uo.solution.solution import Solution
 
 import unittest
 
-class TestFunctionOneVariableMaxProblemBinaryIntSolution(unittest.TestCase):
+class TestFunctionOneVariableMaxProblemIntSolution(unittest.TestCase):
 
-    # Creating an instance of FunctionOneVariableMaxProblemBinaryIntSolution with valid arguments should initialize the object correctly
+    # Creating an instance of FunctionOneVariableMaxProblemIntSolution with valid arguments should initialize the object correctly
     def test_valid_arguments_initialization(self):
         if hasattr(Solution, 'evaluation_cache_cs'):
             del Solution.evaluation_cache_cs
@@ -29,7 +29,7 @@ class TestFunctionOneVariableMaxProblemBinaryIntSolution(unittest.TestCase):
         domain_from = 0.0
         domain_to = 1.0
         number_of_intervals = 10
-        solution = FunctionOneVariableMaxProblemBinaryIntSolution(domain_from, domain_to, number_of_intervals)
+        solution = FunctionOneVariableMaxProblemIntSolution(domain_from, domain_to, number_of_intervals)
         self.assertEqual(solution.domain_from, domain_from)
         self.assertEqual(solution.domain_to, domain_to)
         self.assertEqual(solution.number_of_intervals, number_of_intervals)
@@ -43,13 +43,13 @@ class TestFunctionOneVariableMaxProblemBinaryIntSolution(unittest.TestCase):
         self.assertFalse(Solution.representation_distance_cache_cs.is_caching)
         self.assertEqual(Solution.representation_distance_cache_cs.max_cache_size, 0)
 
-    # Calling copy() method on an instance of FunctionOneVariableMaxProblemBinaryIntSolution should return a deep copy of the object
+    # Calling copy() method on an instance of FunctionOneVariableMaxProblemIntSolution should return a deep copy of the object
     def test_copy_method(self):
         domain_from = 0.0
         domain_to = 1.0
         number_of_intervals = 10
 
-        solution = FunctionOneVariableMaxProblemBinaryIntSolution(domain_from, domain_to, number_of_intervals)
+        solution = FunctionOneVariableMaxProblemIntSolution(domain_from, domain_to, number_of_intervals)
         copy_solution = solution.copy()
 
         self.assertIsNot(solution, copy_solution)
@@ -58,43 +58,43 @@ class TestFunctionOneVariableMaxProblemBinaryIntSolution(unittest.TestCase):
         self.assertEqual(solution.number_of_intervals, copy_solution.number_of_intervals)
         self.assertEqual(solution.representation, copy_solution.representation)
 
-    # Calling domain_from getter on an instance of FunctionOneVariableMaxProblemBinaryIntSolution should return the correct value
+    # Calling domain_from getter on an instance of FunctionOneVariableMaxProblemIntSolution should return the correct value
     def test_domain_from_getter(self):
         domain_from = 0.0
         domain_to = 1.0
         number_of_intervals = 10
 
-        solution = FunctionOneVariableMaxProblemBinaryIntSolution(domain_from, domain_to, number_of_intervals)
+        solution = FunctionOneVariableMaxProblemIntSolution(domain_from, domain_to, number_of_intervals)
 
         self.assertEqual(solution.domain_from, domain_from)
 
-    # Calling domain_to getter on an instance of FunctionOneVariableMaxProblemBinaryIntSolution should return the correct value
+    # Calling domain_to getter on an instance of FunctionOneVariableMaxProblemIntSolution should return the correct value
     def test_domain_to_getter(self):
         domain_from = 0.0
         domain_to = 1.0
         number_of_intervals = 10
 
-        solution = FunctionOneVariableMaxProblemBinaryIntSolution(domain_from, domain_to, number_of_intervals)
+        solution = FunctionOneVariableMaxProblemIntSolution(domain_from, domain_to, number_of_intervals)
 
         self.assertEqual(solution.domain_to, domain_to)
 
-    # Calling number_of_intervals getter on an instance of FunctionOneVariableMaxProblemBinaryIntSolution should return the correct value
+    # Calling number_of_intervals getter on an instance of FunctionOneVariableMaxProblemIntSolution should return the correct value
     def test_number_of_intervals_getter(self):
         domain_from = 0.0
         domain_to = 1.0
         number_of_intervals = 10
 
-        solution = FunctionOneVariableMaxProblemBinaryIntSolution(domain_from, domain_to, number_of_intervals)
+        solution = FunctionOneVariableMaxProblemIntSolution(domain_from, domain_to, number_of_intervals)
 
         self.assertEqual(solution.number_of_intervals, number_of_intervals)
 
-    # Calling argument() method on an instance of FunctionOneVariableMaxProblemBinaryIntSolution should return the correct value
+    # Calling argument() method on an instance of FunctionOneVariableMaxProblemIntSolution should return the correct value
     def test_argument_method(self):
         domain_from = 0.0
         domain_to = 1.0
         number_of_intervals = 10
 
-        solution = FunctionOneVariableMaxProblemBinaryIntSolution(domain_from, domain_to, number_of_intervals)
+        solution = FunctionOneVariableMaxProblemIntSolution(domain_from, domain_to, number_of_intervals)
         representation = 5
 
         expected_argument = domain_from + representation * (domain_to - domain_from) / number_of_intervals
@@ -102,57 +102,57 @@ class TestFunctionOneVariableMaxProblemBinaryIntSolution(unittest.TestCase):
 
         self.assertEqual(actual_argument, expected_argument)
 
-    # Creating an instance of FunctionOneVariableMaxProblemBinaryIntSolution with domain_from equal to domain_to should raise a ValueError
+    # Creating an instance of FunctionOneVariableMaxProblemIntSolution with domain_from equal to domain_to should raise a ValueError
     def test_domain_from_equal_to_domain_to(self):
         domain_from = 1.0
         domain_to = 1.0
         number_of_intervals = 10
 
         with self.assertRaises(ValueError):
-            FunctionOneVariableMaxProblemBinaryIntSolution(domain_from, domain_to, number_of_intervals)
+            FunctionOneVariableMaxProblemIntSolution(domain_from, domain_to, number_of_intervals)
 
-    # Creating an instance of FunctionOneVariableMaxProblemBinaryIntSolution with number_of_intervals equal to 0 should raise a ValueError
+    # Creating an instance of FunctionOneVariableMaxProblemIntSolution with number_of_intervals equal to 0 should raise a ValueError
     def test_number_of_intervals_equal_to_zero(self):
         domain_from = 0.0
         domain_to = 1.0
         number_of_intervals = 0
 
         with self.assertRaises(ValueError):
-            FunctionOneVariableMaxProblemBinaryIntSolution(domain_from, domain_to, number_of_intervals)
+            FunctionOneVariableMaxProblemIntSolution(domain_from, domain_to, number_of_intervals)
 
-    # Calling obtain_feasible_representation() method on an instance of FunctionOneVariableMaxProblemBinaryIntSolution with representation greater than number_of_intervals should set representation to number_of_intervals
+    # Calling obtain_feasible_representation() method on an instance of FunctionOneVariableMaxProblemIntSolution with representation greater than number_of_intervals should set representation to number_of_intervals
     def test_obtain_feasible_representation_greater_than_number_of_intervals(self):
         # Arrange
         domain_from = 0.0
         domain_to = 1.0
         number_of_intervals = 10
-        solution = FunctionOneVariableMaxProblemBinaryIntSolution(domain_from, domain_to, number_of_intervals)
+        solution = FunctionOneVariableMaxProblemIntSolution(domain_from, domain_to, number_of_intervals)
         # Act
         solution.representation = 15
         rep = solution.obtain_feasible_representation(None)
         # Assert
         self.assertLessEqual(rep, number_of_intervals)
 
-    # Calling obtain_feasible_representation() method on an instance of FunctionOneVariableMaxProblemBinaryIntSolution with representation less than 0 should set representation to 0
+    # Calling obtain_feasible_representation() method on an instance of FunctionOneVariableMaxProblemIntSolution with representation less than 0 should set representation to 0
     def test_obtain_feasible_representation_less_than_zero(self):
         # Arrange
         domain_from = 0.0
         domain_to = 1.0
         number_of_intervals = 10
         # Act
-        solution = FunctionOneVariableMaxProblemBinaryIntSolution(domain_from, domain_to, number_of_intervals)
+        solution = FunctionOneVariableMaxProblemIntSolution(domain_from, domain_to, number_of_intervals)
         solution.representation = -5
         rep = solution.obtain_feasible_representation(None)
         # Assert
         self.assertGreaterEqual(rep, 0)
 
-    # Calling native_representation() method on an instance of FunctionOneVariableMaxProblemBinaryIntSolution with a string containing non-binary characters should raise a ValueError
+    # Calling native_representation() method on an instance of FunctionOneVariableMaxProblemIntSolution with a string containing non-binary characters should raise a ValueError
     def test_native_representation_non_binary_characters(self):
         domain_from = 0.0
         domain_to = 1.0
         number_of_intervals = 10
 
-        solution = FunctionOneVariableMaxProblemBinaryIntSolution(domain_from, domain_to, number_of_intervals)
+        solution = FunctionOneVariableMaxProblemIntSolution(domain_from, domain_to, number_of_intervals)
         representation_str = "12345"
 
         with self.assertRaises(ValueError):
@@ -168,7 +168,7 @@ class Test__Init__(unittest.TestCase):
         domain_to = 1.0
         number_of_intervals = 10
         # Act
-        obj = FunctionOneVariableMaxProblemBinaryIntSolution(domain_from, domain_to, number_of_intervals)
+        obj = FunctionOneVariableMaxProblemIntSolution(domain_from, domain_to, number_of_intervals)
         # Assert
         self.assertEqual(obj.domain_from, domain_from)
         self.assertEqual(obj.domain_to, domain_to)
@@ -182,7 +182,7 @@ class Test__Init__(unittest.TestCase):
         number_of_intervals = 1
         # Act & Assert
         with self.assertRaises(ValueError):
-            FunctionOneVariableMaxProblemBinaryIntSolution(domain_from, domain_to, number_of_intervals)
+            FunctionOneVariableMaxProblemIntSolution(domain_from, domain_to, number_of_intervals)
 
     # Initializes the object with the maximum possible values for domain_from, domain_to, and number_of_intervals.
     def test_maximum_values(self):
@@ -192,7 +192,7 @@ class Test__Init__(unittest.TestCase):
         number_of_intervals = sys.maxsize
         # Act & Assert
         with self.assertRaises(ValueError):
-            FunctionOneVariableMaxProblemBinaryIntSolution(domain_from, domain_to, number_of_intervals)
+            FunctionOneVariableMaxProblemIntSolution(domain_from, domain_to, number_of_intervals)
 
     # Initializes the object with the non-integer number_of_intervals.
     def test_non_integer_number_of_intervals(self):
@@ -202,7 +202,7 @@ class Test__Init__(unittest.TestCase):
         number_of_intervals = 5.6
         # Act & Assert
         with self.assertRaises(TypeError):
-            FunctionOneVariableMaxProblemBinaryIntSolution(domain_from, domain_to, number_of_intervals)
+            FunctionOneVariableMaxProblemIntSolution(domain_from, domain_to, number_of_intervals)
 
 
 
@@ -214,7 +214,7 @@ class Test__Init__(unittest.TestCase):
         number_of_intervals = 5
 
         # Act
-        obj = FunctionOneVariableMaxProblemBinaryIntSolution(domain_from, domain_to, number_of_intervals)
+        obj = FunctionOneVariableMaxProblemIntSolution(domain_from, domain_to, number_of_intervals)
 
         # Assert
         self.assertEqual(obj.domain_from, float(domain_from))
@@ -229,7 +229,7 @@ class Test__Init__(unittest.TestCase):
         number_of_intervals = 5
 
         # Act
-        obj = FunctionOneVariableMaxProblemBinaryIntSolution(domain_from, domain_to, number_of_intervals)
+        obj = FunctionOneVariableMaxProblemIntSolution(domain_from, domain_to, number_of_intervals)
 
         # Assert
         self.assertEqual(obj.domain_from, domain_from)
@@ -243,7 +243,7 @@ class Test__ObtainFeasibleHelper__(unittest.TestCase):
     def test_representation_within_range(self):
         # Arrange
         problem = FunctionOneVariableMaxProblemMax("x**2", 0, 10)
-        solution = FunctionOneVariableMaxProblemBinaryIntSolution(0, 10, 5)
+        solution = FunctionOneVariableMaxProblemIntSolution(0, 10, 5)
         # Act
         solution.representation = 3
         rep = solution.obtain_feasible_representation(problem)
@@ -254,7 +254,7 @@ class Test__ObtainFeasibleHelper__(unittest.TestCase):
     def test_representation_equal_to_number_of_intervals(self):
         # Arrange
         problem = FunctionOneVariableMaxProblemMax("x**2", 0, 10)
-        solution = FunctionOneVariableMaxProblemBinaryIntSolution(0, 10, 5)
+        solution = FunctionOneVariableMaxProblemIntSolution(0, 10, 5)
         # Act
         solution.representation = 5
         rep = solution.obtain_feasible_representation(problem)
@@ -265,7 +265,7 @@ class Test__ObtainFeasibleHelper__(unittest.TestCase):
     def test_representation_negative(self):
         # Arrange
         problem = FunctionOneVariableMaxProblemMax("x**2", 0, 10)
-        solution = FunctionOneVariableMaxProblemBinaryIntSolution(0, 10, 5)
+        solution = FunctionOneVariableMaxProblemIntSolution(0, 10, 5)
         # Act
         solution.representation = -2
         rep = solution.obtain_feasible_representation(problem)
@@ -274,11 +274,11 @@ class Test__ObtainFeasibleHelper__(unittest.TestCase):
 
 class TestInitRandom(unittest.TestCase):
 
-    # When called, 'init_random' should set the 'representation' attribute of the 'FunctionOneVariableMaxProblemBinaryIntSolution' instance to a random integer between 0 and 'number_of_intervals'
+    # When called, 'init_random' should set the 'representation' attribute of the 'FunctionOneVariableMaxProblemIntSolution' instance to a random integer between 0 and 'number_of_intervals'
     def test_set_representation_to_random_integer(self):
         # Arrange
         problem = FunctionOneVariableMaxProblemMax("x**2", 0, 10)
-        solution = FunctionOneVariableMaxProblemBinaryIntSolution(0, 10, 5)
+        solution = FunctionOneVariableMaxProblemIntSolution(0, 10, 5)
         # Act
         solution.init_random(problem)
         # Assert
@@ -289,7 +289,7 @@ class TestInitRandom(unittest.TestCase):
     # If the 'representation' attribute is already set, calling 'init_random' should overwrite it with a new random integer between 0 and 'number_of_intervals'
     def test_overwrite_representation_with_random_integer(self):
         problem = FunctionOneVariableMaxProblemMax("x**2", 0, 10)
-        solution = FunctionOneVariableMaxProblemBinaryIntSolution(0, 10, 5)
+        solution = FunctionOneVariableMaxProblemIntSolution(0, 10, 5)
         solution.representation = 3
         solution.init_random(problem)
         self.assertIsInstance(solution.representation, int)
@@ -304,7 +304,7 @@ class TestCalculateQualityDirectly(unittest.TestCase):
     def test_valid_representation_and_problem(self):
         # Arrange
         problem = FunctionOneVariableMaxProblemMax("x**2", 0, 10)
-        solution = FunctionOneVariableMaxProblemBinaryIntSolution(0, 10, 5)
+        solution = FunctionOneVariableMaxProblemIntSolution(0, 10, 5)
         representation = 3
         expected_fitness_value = (0 + 3*((10-0)/5)) ** 2
 
@@ -318,7 +318,7 @@ class TestCalculateQualityDirectly(unittest.TestCase):
     def test_valid_representation_and_problem_is_feasible(self):
         # Arrange
         problem = FunctionOneVariableMaxProblemMax("x**2", 0, 10)
-        solution = FunctionOneVariableMaxProblemBinaryIntSolution(0, 10, 5)
+        solution = FunctionOneVariableMaxProblemIntSolution(0, 10, 5)
         representation = 3
 
         # Act
@@ -331,7 +331,7 @@ class TestCalculateQualityDirectly(unittest.TestCase):
     def test_valid_representation_and_problem_objective_value(self):
         # Arrange
         problem = FunctionOneVariableMaxProblemMax("x", 0, 10)
-        solution = FunctionOneVariableMaxProblemBinaryIntSolution(0, 10, 5)
+        solution = FunctionOneVariableMaxProblemIntSolution(0, 10, 5)
         representation = 3
         expected_objective_value = 6.0
 
@@ -346,7 +346,7 @@ class TestCalculateQualityDirectly(unittest.TestCase):
     def test_minimum_valid_representation_and_problem(self):
         # Arrange
         problem = FunctionOneVariableMaxProblemMax("x**2", 0, 10)
-        solution = FunctionOneVariableMaxProblemBinaryIntSolution(0, 10, 5)
+        solution = FunctionOneVariableMaxProblemIntSolution(0, 10, 5)
         representation = 0
         expected_fitness_value = 0.0
 
@@ -360,7 +360,7 @@ class TestCalculateQualityDirectly(unittest.TestCase):
     def test_maximum_valid_representation_and_problem(self):
         # Arrange
         problem = FunctionOneVariableMaxProblemMax("x**3", 0, 10)
-        solution = FunctionOneVariableMaxProblemBinaryIntSolution(0, 10, 5)
+        solution = FunctionOneVariableMaxProblemIntSolution(0, 10, 5)
         representation = 5
         expected_fitness_value =  (0 + 5*((10-0)/5)) ** 3
 
@@ -379,7 +379,7 @@ class TestNativeRepresentation(unittest.TestCase):
         expected_result = 42
     
         # Act
-        result = FunctionOneVariableMaxProblemBinaryIntSolution(0, 10, 3).native_representation(binary_str)
+        result = FunctionOneVariableMaxProblemIntSolution(0, 10, 3).native_representation(binary_str)
     
         # Assert
         self.assertEqual(result, expected_result)
@@ -391,7 +391,7 @@ class TestNativeRepresentation(unittest.TestCase):
         expected_result = 0
     
         # Act
-        result = FunctionOneVariableMaxProblemBinaryIntSolution(0, 50, 10).native_representation(binary_str)
+        result = FunctionOneVariableMaxProblemIntSolution(0, 50, 10).native_representation(binary_str)
     
         # Assert
         self.assertEqual(result, expected_result)
@@ -403,7 +403,7 @@ class TestNativeRepresentation(unittest.TestCase):
         expected_result = int('111111', 2)
     
         # Act
-        result = FunctionOneVariableMaxProblemBinaryIntSolution(0,20,3).native_representation(binary_str)
+        result = FunctionOneVariableMaxProblemIntSolution(0,20,3).native_representation(binary_str)
     
         # Assert
         self.assertEqual(result, expected_result)
@@ -415,7 +415,7 @@ class TestNativeRepresentation(unittest.TestCase):
     
         # Act & Assert
         with self.assertRaises(ValueError):
-            FunctionOneVariableMaxProblemBinaryIntSolution(0,20,3).native_representation(binary_str)
+            FunctionOneVariableMaxProblemIntSolution(0,20,3).native_representation(binary_str)
 
     # Should raise a ValueError when given a string with non-binary characters
     def test_non_binary_characters(self):
@@ -424,14 +424,14 @@ class TestNativeRepresentation(unittest.TestCase):
     
         # Act & Assert
         with self.assertRaises(ValueError):
-            FunctionOneVariableMaxProblemBinaryIntSolution(0,20,3).native_representation(binary_str)
+            FunctionOneVariableMaxProblemIntSolution(0,20,3).native_representation(binary_str)
 
 class TestRepresentationDistanceDirectly(unittest.TestCase):
 
     # Calculate distance between two binary representations with different lengths
     def test_distance_different_lengths(self):
         # Arrange
-        solution = FunctionOneVariableMaxProblemBinaryIntSolution(0, 10, 10)
+        solution = FunctionOneVariableMaxProblemIntSolution(0, 10, 10)
         solution_code_1 = "101010"
         solution_code_2 = "110"
     
@@ -444,7 +444,7 @@ class TestRepresentationDistanceDirectly(unittest.TestCase):
     # Calculate distance between two identical binary representations
     def test_distance_identical_representations(self):
         # Arrange
-        solution = FunctionOneVariableMaxProblemBinaryIntSolution(0, 10, 10)
+        solution = FunctionOneVariableMaxProblemIntSolution(0, 10, 10)
         solution_code_1 = "101010"
         solution_code_2 = "101010"
     
@@ -457,7 +457,7 @@ class TestRepresentationDistanceDirectly(unittest.TestCase):
     # Calculate distance between two different binary representations
     def test_distance_different_representations(self):
         # Arrange
-        solution = FunctionOneVariableMaxProblemBinaryIntSolution(0, 10, 10)
+        solution = FunctionOneVariableMaxProblemIntSolution(0, 10, 10)
         solution_code_1 = "101010"
         solution_code_2 = "010101"
     
@@ -470,7 +470,7 @@ class TestRepresentationDistanceDirectly(unittest.TestCase):
     # Calculate distance between a binary representation and a non-binary representation
     def test_distance_binary_and_non_binary_representations(self):
         # Arrange
-        solution = FunctionOneVariableMaxProblemBinaryIntSolution(0, 10, 10)
+        solution = FunctionOneVariableMaxProblemIntSolution(0, 10, 10)
         solution_code_1 = "101010"
         solution_code_2 = "12345"
     
@@ -481,7 +481,7 @@ class TestRepresentationDistanceDirectly(unittest.TestCase):
     # Calculate distance between two binary representations with different lengths and values
     def test_distance_different_lengths_and_values(self):
         # Arrange
-        solution = FunctionOneVariableMaxProblemBinaryIntSolution(0, 10, 10)
+        solution = FunctionOneVariableMaxProblemIntSolution(0, 10, 10)
         solution_code_1 = "101010"
         solution_code_2 = "11001100"
     
@@ -497,7 +497,7 @@ class TestStringRep(unittest.TestCase):
     # Returns a string representation of the object, including its superclass string representation and its string representation.
     def test_returns_string_representation(self):
         # Arrange
-        obj = FunctionOneVariableMaxProblemBinaryIntSolution(0, 10, 5)
+        obj = FunctionOneVariableMaxProblemIntSolution(0, 10, 5)
         obj.representation = 3
 
         # Act
@@ -510,7 +510,7 @@ class TestStringRep(unittest.TestCase):
     # The string representation includes the string representation of the object's string representation.
     def test_includes_string_representation(self):
         # Arrange
-        obj = FunctionOneVariableMaxProblemBinaryIntSolution(0, 10, 5)
+        obj = FunctionOneVariableMaxProblemIntSolution(0, 10, 5)
         obj.representation = 3
 
         # Act
@@ -523,7 +523,7 @@ class TestStringRep(unittest.TestCase):
     # The string representation is properly indented and formatted.
     def test_properly_indented_and_formatted(self):
         # Arrange
-        obj = FunctionOneVariableMaxProblemBinaryIntSolution(0, 10, 5)
+        obj = FunctionOneVariableMaxProblemIntSolution(0, 10, 5)
         obj.representation = 3
 
         # Act
@@ -537,7 +537,7 @@ class TestStringRep(unittest.TestCase):
     # The object has string representation.
     def test_no_string_representation(self):
         # Arrange
-        obj = FunctionOneVariableMaxProblemBinaryIntSolution(0, 10, 5)
+        obj = FunctionOneVariableMaxProblemIntSolution(0, 10, 5)
         obj.representation = 3
 
         # Act
@@ -549,7 +549,7 @@ class TestStringRep(unittest.TestCase):
     # The delimiter, indentation, indentation_symbol, group_start, and group_end parameters are empty strings.
     def test_empty_parameters(self):
         # Arrange
-        obj = FunctionOneVariableMaxProblemBinaryIntSolution(0, 10, 5)
+        obj = FunctionOneVariableMaxProblemIntSolution(0, 10, 5)
         obj.representation = 3
 
         # Act

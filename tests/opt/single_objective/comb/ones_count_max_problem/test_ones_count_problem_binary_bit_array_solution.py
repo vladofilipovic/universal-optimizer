@@ -7,19 +7,19 @@ from unittest.mock import mock_open
 from bitstring import BitArray
 
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution import OnesCountMaxProblemBinaryBitArraySolution
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution import OnesCountMaxProblemBitArraySolution
 from uo.problem.problem import Problem
 from uo.problem.problem_void_min_so import ProblemVoidMinSO
 from uo.solution.solution import Solution
 
 
-class TestOnesCountMaxProblemBinaryBitArraySolution(unittest.TestCase):
+class TestOnesCountMaxProblemBitArraySolution(unittest.TestCase):
 
-    # Initialize a new instance of OnesCountMaxProblemBinaryBitArraySolution with default parameters and verify that all properties are set correctly.
+    # Initialize a new instance of OnesCountMaxProblemBitArraySolution with default parameters and verify that all properties are set correctly.
     def test_initialize_instance_with_default_parameters(self):
         # Arrange
         # Act 
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
         # # Assert
         self.assertIsNone(solution.fitness_value)
         self.assertIsNone(solution.fitness_values)
@@ -36,7 +36,7 @@ class TestOnesCountMaxProblemBinaryBitArraySolution(unittest.TestCase):
         # Arrange
         problem = ProblemVoidMinSO('problem name', is_minimization=True)
         problem.dimension = 10
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
         # Act
         solution.init_random(problem)
         # Assert
@@ -49,7 +49,7 @@ class TestOnesCountMaxProblemBinaryBitArraySolution(unittest.TestCase):
         problem = ProblemVoidMinSO('problem name', is_minimization=True)
         problem.dimension = 10
         representation = BitArray(bin="1010101010")
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
         # Act
         solution.init_from(representation, problem)
         # Assert
@@ -60,7 +60,7 @@ class TestOnesCountMaxProblemBinaryBitArraySolution(unittest.TestCase):
         # Arrange
         problem = ProblemVoidMinSO('problem name', is_minimization=True)
         representation = BitArray(bin="1010101010")
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
         solution.representation = representation
         # Act
         quality = solution.calculate_quality_directly(representation, problem)
@@ -75,7 +75,7 @@ class TestOnesCountMaxProblemBinaryBitArraySolution(unittest.TestCase):
     def test_native_representation_method_with_string_representation(self):
         # Arrange
         representation_str = "1010101010"
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
         # Act
         native_representation = solution.native_representation(representation_str)
         # Assert
@@ -86,7 +86,7 @@ class TestOnesCountMaxProblemBinaryBitArraySolution(unittest.TestCase):
         # Arrange
         solution_code_1 = "1010101010"
         solution_code_2 = "1111000011"
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
         # Act
         distance = solution.representation_distance_directly(solution_code_1, solution_code_2)
         # Assert
@@ -97,7 +97,7 @@ class TestOnesCountMaxProblemBinaryBitArraySolution(unittest.TestCase):
         # Arrange
         problem = ProblemVoidMinSO('problem name', is_minimization=True)
         representation = BitArray(bin="0000000000")
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
         # Act
         quality = solution.calculate_quality_directly(representation, problem)
         # Assert
@@ -107,11 +107,11 @@ class TestOnesCountMaxProblemBinaryBitArraySolution(unittest.TestCase):
         self.assertIsNone(quality.objective_values)
         self.assertTrue(quality.is_feasible)
 
-    # Initialize a new instance of OnesCountMaxProblemBinaryBitArraySolution with default parameters and verify that all properties are set correctly.
+    # Initialize a new instance of OnesCountMaxProblemBitArraySolution with default parameters and verify that all properties are set correctly.
     def test_initialize_instance_with_default_parameters(self):
         # Arrange
         # Act
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
         # Assert
         self.assertIsNone(solution.fitness_value)
         self.assertIsNone(solution.fitness_values)
@@ -128,7 +128,7 @@ class TestOnesCountMaxProblemBinaryBitArraySolution(unittest.TestCase):
         # Arrange
         problem = ProblemVoidMinSO('problem name', is_minimization=True)
         problem.dimension = 10
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
         # Act
         solution.init_random(problem)
         # Assert
@@ -141,7 +141,7 @@ class TestOnesCountMaxProblemBinaryBitArraySolution(unittest.TestCase):
         problem = ProblemVoidMinSO('problem name', is_minimization=True)
         problem.dimension = 10
         representation = BitArray(bin="1010101010")
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
         # Act
         solution.init_from(representation, problem)
         # Assert
@@ -152,7 +152,7 @@ class TestOnesCountMaxProblemBinaryBitArraySolution(unittest.TestCase):
         # Arrange
         problem = ProblemVoidMinSO('problem name', is_minimization=True)
         representation = BitArray(bin="1010101010")
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
         # Act
         quality = solution.calculate_quality_directly(representation, problem)
         # Assert
@@ -166,7 +166,7 @@ class TestOnesCountMaxProblemBinaryBitArraySolution(unittest.TestCase):
     def test_native_representation_method_with_string_representation(self):
         # Arrange
         representation_str = "1010101010"
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
         # Act
         native_representation = solution.native_representation(representation_str)
         # Assert
@@ -177,7 +177,7 @@ class TestOnesCountMaxProblemBinaryBitArraySolution(unittest.TestCase):
         # Arrange
         solution_code_1 = "1010101010"
         solution_code_2 = "1111000011"
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
         # Act
         distance = solution.representation_distance_directly(solution_code_1, solution_code_2)
         # Assert
@@ -189,7 +189,7 @@ class TestOnesCountMaxProblemBinaryBitArraySolution(unittest.TestCase):
         # Arrange
         problem = ProblemVoidMinSO('problem name', is_minimization=True)
         representation = BitArray(bin="0000000000")
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
         # Act
         quality = solution.calculate_quality_directly(representation, problem)
         # Assert
@@ -204,7 +204,7 @@ class TestOnesCountMaxProblemBinaryBitArraySolution(unittest.TestCase):
         # Arrange
         problem = ProblemVoidMinSO('problem name', is_minimization=True)
         representation = BitArray(bin="1111111")
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
         # Act
         quality = solution.calculate_quality_directly(representation, problem)
         # Assert
@@ -215,10 +215,10 @@ class TestOnesCountMaxProblemBinaryBitArraySolution(unittest.TestCase):
         self.assertTrue(quality.is_feasible)
 
 
-    # Call the copy() method and verify that the returned OnesCountMaxProblemBinaryBitArraySolution instance is a deep copy of the original instance.
+    # Call the copy() method and verify that the returned OnesCountMaxProblemBitArraySolution instance is a deep copy of the original instance.
     def test_copy_method_returns_deep_copy(self):
         # Arrange
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
         # Act
         copy_solution = solution.copy()
         # Assert
@@ -232,7 +232,7 @@ class TestOnesCountMaxProblemBinaryBitArraySolution(unittest.TestCase):
     # Call the representation_distance_directly() method with two string representations of BitArray instances that have different lengths and verify that the method raises a ValueError.
     def test_representation_distance_directly_raises_value_error(self):
         # Arrange
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
         representation_1 = "101010"
         representation_2 = "10101010"
         # Act & Assert
@@ -242,7 +242,7 @@ class TestOnesCountMaxProblemBinaryBitArraySolution(unittest.TestCase):
     # Call the argument() method with a BitArray instance as an argument and verify that the returned string representation is correct.
     def test_argument_method_returns_correct_string_representation(self):
         # Arrange
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
         representation = BitArray(bin="101010")
         # Act
         argument = solution.argument(representation)
@@ -256,7 +256,7 @@ class TestArgument(unittest.TestCase):
     def test_returns_string_representation(self):
         # Arrange
         representation = BitArray(bin='101010')
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
     
         # Act
         argument = solution.argument(representation)
@@ -268,7 +268,7 @@ class TestArgument(unittest.TestCase):
     def test_returns_binary_string_representation(self):
         # Arrange
         representation = BitArray(bin='101010')
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
     
         # Act
         argument = solution.argument(representation)
@@ -281,7 +281,7 @@ class TestArgument(unittest.TestCase):
     def test_returns_empty_string_for_empty_representation(self):
         # Arrange
         representation = BitArray()
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
     
         # Act
         argument = solution.argument(representation)
@@ -293,7 +293,7 @@ class TestArgument(unittest.TestCase):
     def test_returns_string_representation_with_leading_zeros_for_all_false_bits(self):
         # Arrange
         representation = BitArray(bin='000000')
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
     
         # Act
         argument = solution.argument(representation)
@@ -309,7 +309,7 @@ class TestInitRandom(unittest.TestCase):
         # Arrange
         problem = ProblemVoidMinSO('problem name', is_minimization=True)
         problem.dimension = 10
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
     
         # Act
         solution.init_random(problem)
@@ -322,7 +322,7 @@ class TestInitRandom(unittest.TestCase):
         # Arrange
         problem = ProblemVoidMinSO('problem name', is_minimization=True)
         problem.dimension = 10
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
         
         # Act
         solution.init_random(problem)
@@ -336,7 +336,7 @@ class TestInitRandom(unittest.TestCase):
         # Arrange
         problem = ProblemVoidMinSO('problem name', is_minimization=True)
         problem.dimension = 0
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
     
         # Act
         solution.init_random(problem)
@@ -349,7 +349,7 @@ class TestInitRandom(unittest.TestCase):
         # Arrange
         problem = ProblemVoidMinSO('problem name', is_minimization=True)
         problem.dimension = -1
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
     
         # Act & Assert
         with self.assertRaises(ValueError):
@@ -362,7 +362,7 @@ class TestInitFrom(unittest.TestCase):
         # Arrange
         representation = BitArray(bin='101010')
         problem = ProblemVoidMinSO('problem name', is_minimization=True)
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
 
         # Act
         solution.init_from(representation, problem)
@@ -375,7 +375,7 @@ class TestInitFrom(unittest.TestCase):
         # Arrange
         representation = '101010'
         problem = ProblemVoidMinSO('problem name', is_minimization=True)
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
 
         # Act & Assert
         with self.assertRaises(TypeError):
@@ -388,7 +388,7 @@ class TestCalculateQualityDirectly(unittest.TestCase):
         # Arrange
         representation = BitArray('0b111111')
         problem = OnesCountMaxProblem(dim=6)
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
         solution.init_from(representation, problem)
     
         # Act
@@ -404,7 +404,7 @@ class TestCalculateQualityDirectly(unittest.TestCase):
         # Arrange
         representation = BitArray('0b000000')
         problem = OnesCountMaxProblem(dim=6)
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
         solution.init_from(representation, problem)
     
         # Act
@@ -420,7 +420,7 @@ class TestCalculateQualityDirectly(unittest.TestCase):
         # Arrange
         representation = BitArray('0b101010')
         problem = OnesCountMaxProblem(dim=6)
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
         solution.init_from(representation, problem)
     
         # Act
@@ -436,7 +436,7 @@ class TestCalculateQualityDirectly(unittest.TestCase):
         # Arrange
         representation = None
         problem = OnesCountMaxProblem(dim=6)
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
         
         # Act & Assert
         with self.assertRaises(TypeError):
@@ -447,7 +447,7 @@ class TestCalculateQualityDirectly(unittest.TestCase):
         # Arrange
         representation = "101010"
         problem = OnesCountMaxProblem(dim=6)
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
 
         # Act & Assert
         with self.assertRaises(TypeError):
@@ -458,7 +458,7 @@ class TestCalculateQualityDirectly(unittest.TestCase):
         # Arrange
         representation = BitArray()
         problem = OnesCountMaxProblem(dim=6)
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
 
         # Act & Assert
         with self.assertRaises(ValueError):
@@ -470,7 +470,7 @@ class TestNativeRepresentation(unittest.TestCase):
     def test_valid_binary_string_representation(self):
         # Arrange
         representation_str = "101010"
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
     
         # Act
         native_representation = solution.native_representation(representation_str)
@@ -482,7 +482,7 @@ class TestNativeRepresentation(unittest.TestCase):
     def test_same_binary_representation(self):
         # Arrange
         representation_str = "101010"
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
     
         # Act
         native_representation = solution.native_representation(representation_str)
@@ -494,7 +494,7 @@ class TestNativeRepresentation(unittest.TestCase):
     def test_length_1_representation(self):
         # Arrange
         representation_str = "1"
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
     
         # Act
         native_representation = solution.native_representation(representation_str)
@@ -506,7 +506,7 @@ class TestNativeRepresentation(unittest.TestCase):
     def test_non_string_representation(self):
         # Arrange
         representation_str = 101010
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
     
         # Act & Assert
         with self.assertRaises(TypeError):
@@ -517,7 +517,7 @@ class TestNativeRepresentation(unittest.TestCase):
     def test_invalid_characters_representation(self):
         # Arrange
         representation_str = "10102"
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
     
         # Act & Assert
         with self.assertRaises(ValueError):
@@ -529,7 +529,7 @@ class TestRepresentationDistanceDirectly(unittest.TestCase):
     # Calculate distance between two identical solutions
     def test_identical_solutions(self):
         # Arrange
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
         solution_code_1 = "101010"
         solution_code_2 = "101010"
     
@@ -542,7 +542,7 @@ class TestRepresentationDistanceDirectly(unittest.TestCase):
     # Calculate distance between two completely different solutions
     def test_completely_different_solutions(self):
         # Arrange
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
         solution_code_1 = "101010"
         solution_code_2 = "000000"
     
@@ -555,7 +555,7 @@ class TestRepresentationDistanceDirectly(unittest.TestCase):
     # Calculate distance between two solutions with only one different bit
     def test_one_different_bit(self):
         # Arrange
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
         solution_code_1 = "101010"
         solution_code_2 = "101011"
     
@@ -568,7 +568,7 @@ class TestRepresentationDistanceDirectly(unittest.TestCase):
     # Calculate distance between two empty solutions
     def test_empty_solutions(self):
         # Arrange
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
         solution_code_1 = ""
         solution_code_2 = ""
     
@@ -581,7 +581,7 @@ class TestRepresentationDistanceDirectly(unittest.TestCase):
     # Calculate distance between two solutions with different lengths
     def test_different_lengths(self):
         # Arrange
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
         solution_code_1 = "101010"
         solution_code_2 = "10101010"
     
@@ -592,7 +592,7 @@ class TestRepresentationDistanceDirectly(unittest.TestCase):
     # Calculate distance between two solutions with different types
     def test_different_types(self):
         # Arrange
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
         solution_code_1 = "101010"
         solution_code_2 = 101010
     
@@ -607,7 +607,7 @@ class TestStringRep(unittest.TestCase):
     def test_returns_string_representation(self):
         # Arrange
         problem = ProblemVoidMinSO("x**2", True)
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
         solution.init_from(BitArray('0b1110'), problem)
         # Act
         result = solution.string_rep()
@@ -618,7 +618,7 @@ class TestStringRep(unittest.TestCase):
     def test_includes_super_class_representation(self):
         # Arrange
         problem = ProblemVoidMinSO("x**2", True)
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
         solution.init_from(BitArray('0b1110'), problem)
         # Act
         result = solution.string_rep()
@@ -629,7 +629,7 @@ class TestStringRep(unittest.TestCase):
     def test_includes_string_representation(self):
         # Arrange
         problem = ProblemVoidMinSO("x**2", True)
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
         solution.init_from(BitArray('0b1110'), problem)
     
         # Act
@@ -642,7 +642,7 @@ class TestStringRep(unittest.TestCase):
     def test_optional_parameters(self):
         # Arrange
         problem = ProblemVoidMinSO("x**2", True)
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
         solution.init_from(BitArray('0b1110'), problem)
     
         # Act
@@ -655,7 +655,7 @@ class TestStringRep(unittest.TestCase):
     def test_default_values(self):
         # Arrange
         problem = ProblemVoidMinSO("x**2", True)
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
         solution.init_from(BitArray('0b1110'), problem)
     
         # Act
@@ -668,7 +668,7 @@ class TestStringRep(unittest.TestCase):
     # If delimiter is None, it raises a TypeError.
     def test_delimiter_is_none(self):
         # Arrange
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
     
         # Act & Assert
         with self.assertRaises(TypeError):
@@ -677,7 +677,7 @@ class TestStringRep(unittest.TestCase):
     # If indentation is None, it raises a TypeError.
     def test_indentation_is_none(self):
         # Arrange
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
     
         # Act & Assert
         with self.assertRaises(TypeError):
@@ -686,7 +686,7 @@ class TestStringRep(unittest.TestCase):
     # If indentation_symbol is None, it raises a TypeError.
     def test_indentation_symbol_is_none(self):
         # Arrange
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
     
         # Act & Assert
         with self.assertRaises(TypeError):
@@ -695,7 +695,7 @@ class TestStringRep(unittest.TestCase):
     # If group_start is None, it raises a TypeError.
     def test_group_start_is_none(self):
         # Arrange
-        solution = OnesCountMaxProblemBinaryBitArraySolution()
+        solution = OnesCountMaxProblemBitArraySolution()
     
         # Act & Assert
         with self.assertRaises(TypeError):

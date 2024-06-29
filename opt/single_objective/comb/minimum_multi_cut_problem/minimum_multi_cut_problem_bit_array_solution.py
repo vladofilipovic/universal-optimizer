@@ -1,7 +1,7 @@
 """ 
-..  _py_ones_count_max_problem_bit_array_solution:
+..  _py_minimum_multi_cut_problem_bit_array_solution:
 
-The :mod:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution` contains class :class:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_binary_bit_array_solution.OnesCountMaxProblemBinaryBitArraySolution`, that represents solution of the :ref:`Problem_Ones_Count_Max`, where `BitArray` representation of the problem has been used.
+The :mod:`~opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_bit_array_solution` contains class :class:`~opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_bit_array_solution.MinimumMultiCutProblemBitArraySolution`, that represents solution of the :ref:`Problem_Minimum_Multi_Cut`, where `BitArray` representation of the problem has been used.
 """
 import sys
 from pathlib import Path
@@ -16,6 +16,8 @@ sys.path.append(directory.parent.parent.parent.parent.parent)
 from copy import deepcopy
 from random import choice
 from random import random
+import random as rnd
+import networkx as nx
 
 from bitstring import Bits, BitArray, BitStream, pack
 
@@ -23,9 +25,11 @@ from uo.problem.problem import Problem
 from uo.solution.quality_of_solution import QualityOfSolution
 from uo.solution.solution import Solution
 
+from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem import MinimumMultiCutProblem
+
 from uo.utils.logger import logger
 
-class OnesCountMaxProblemBinaryBitArraySolution(Solution[BitArray,str]):
+class MinimumMultiCutProblemBitArraySolution(Solution[BitArray,str]):
     
     def __init__(self, random_seed:Optional[int]=None, 
             evaluation_cache_is_used:bool=False, 
@@ -33,7 +37,7 @@ class OnesCountMaxProblemBinaryBitArraySolution(Solution[BitArray,str]):
             distance_calculation_cache_is_used:bool=False,
             distance_calculation_cache_max_size:int=0)->None:
         """
-        Create new `OnesCountMaxProblemBinaryBitArraySolution` instance
+        Create new `MinimumMultiCutProblemBitArraySolution` instance
         """
         if not isinstance(random_seed, int) and random_seed is not None:
             raise TypeError('Parameter \'random_seed\' must be \'int\' or \'None\'.')
@@ -43,12 +47,12 @@ class OnesCountMaxProblemBinaryBitArraySolution(Solution[BitArray,str]):
                 distance_calculation_cache_is_used=distance_calculation_cache_is_used,
                 distance_calculation_cache_max_size=distance_calculation_cache_max_size)
 
-    def __copy__(self):
+    def __copy__(self)->'MinimumMultiCutProblemBitArraySolution':
         """
-        Internal copy of the `OnesCountMaxProblemBinaryBitArraySolution`
+        Internal copy of the `MinimumMultiCutProblemBitArraySolution`
 
-        :return: new `OnesCountMaxProblemBinaryBitArraySolution` instance with the same properties
-        :rtype: OnesCountMaxProblemBinaryBitArraySolution
+        :return: new `MinimumMultiCutProblemBitArraySolution` instance with the same properties
+        :rtype: MinimumMultiCutProblemBitArraySolution
         """
         sol = super().__copy__()
         if self.representation is not None:
@@ -57,12 +61,12 @@ class OnesCountMaxProblemBinaryBitArraySolution(Solution[BitArray,str]):
             sol.representation = None
         return sol
 
-    def copy(self):
+    def copy(self)->'MinimumMultiCutProblemBitArraySolution':
         """
-        Copy the `OnesCountMaxProblemBinaryBitArraySolution`
+        Copy the `MinimumMultiCutProblemBitArraySolution`
         
-        :return: new `OnesCountMaxProblemBinaryBitArraySolution` instance with the same properties
-        :rtype: `OnesCountMaxProblemBinaryBitArraySolution`
+        :return: new `MinimumMultiCutProblemBitArraySolution` instance with the same properties
+        :rtype: `MinimumMultiCutProblemBitArraySolution`
         """
         return self.__copy__()
 
@@ -94,13 +98,13 @@ class OnesCountMaxProblemBinaryBitArraySolution(Solution[BitArray,str]):
         :param `Problem` problem: problem which is solved by solution
         """
         #logger.debug('Solution: ' + str(self))
-        if problem.dimension is None:
-            raise ValueError('Can not randomly initialize solution without its dimension.')
-        if problem.dimension <0:
-            raise ValueError('Can not randomly initialize solution with negative dimension.')
-        self.representation = BitArray(problem.dimension)
-        for i in range(problem.dimension):
-            if random() > 0.5:
+        if problem.graph is None:
+            raise ValueError('Can not randomly initialize solution without its graph.')
+        if problem.source_terminal_pairs is None:
+            raise ValueError('Can not randomly initialize solution with its source_terminal_pairs.')
+        self.representation = BitArray(len(problem.graph.edges()))
+        for i in range(len(self.representation)):
+            if random() > 0.7:
                 self.representation[i] = True
 
     def init_from(self, representation:BitArray, problem:Problem)->None:
@@ -116,22 +120,49 @@ class OnesCountMaxProblemBinaryBitArraySolution(Solution[BitArray,str]):
             raise ValueError('Representation must have positive length.')
         self.representation = BitArray(bin=representation.bin)
 
+    def is_feasible_sol(self, representation:BitArray, graph: nx.Graph, source_terminal_pairs:list[tuple[int,int]]) -> bool:
+        edges = list(graph.edges())
+        new_graph = nx.Graph()
+        nodes_to_insert = graph.nodes()
+        new_graph.add_nodes_from(nodes_to_insert)  # to check
+        for i in range(representation.len):
+            if representation[i]:
+                x,y = edges[i]
+                new_graph.add_edge(x,y,weight = graph[x][y]['weight'])
+        for x,y in source_terminal_pairs:
+            if nx.has_path(new_graph,x,y):
+                return False
+        return True
+
+    def calc_fitness(self, representation:BitArray, graph: nx.Graph, source_terminal_pairs:list[tuple[int,int]]) -> tuple[bool,float,float]:
+        if not self.is_feasible_sol(representation, graph, source_terminal_pairs):
+            return (False, float('inf'), float('-inf'))
+        edges = list(graph.edges())
+        value = 0
+        for i in range(representation.len):
+            if not representation[i]:
+                x,y = edges[i]
+                value += graph[x][y]['weight']
+        if value == 0:
+            return (True, 0, float('inf'))
+        return (True, value, 1/value)
+
     def calculate_quality_directly(self, representation:BitArray, 
-            problem:Problem)->QualityOfSolution:
+            problem:MinimumMultiCutProblem)->QualityOfSolution:
         """
-        Fitness calculation of the max ones binary BitArray solution
+        Fitness calculation of the minimum multi cut binary BitArray solution
 
         :param BitArray representation: native representation of solution whose fitness is calculated
         :param Problem problem: problem that is solved
-        :return: objective value, fitness value and feasibility of the solution instance  
+        :return: objective value, fitness value and feasibility of the solution instance
         :rtype: `QualityOfSolution`
         """
-        ones_count = representation.count(True)
-        return QualityOfSolution(ones_count, None, ones_count, None, True)
+        is_valid, objective, fitness = self.calc_fitness(representation, problem.graph, problem.source_terminal_pairs)
+        return QualityOfSolution(objective, None, fitness, None, is_valid)
 
     def native_representation(self, representation_str:str)->BitArray:
         """
-        Obtain `BitArray` representation from string representation of the BitArray binary solution of the Max Ones problem 
+        Obtain `BitArray` representation from string representation of the BitArray binary solution of the Minimum Multi Cut problem 
 
         :param str representation_str: solution's representation as string
         :return: solution's representation as BitArray
@@ -183,7 +214,7 @@ class OnesCountMaxProblemBinaryBitArraySolution(Solution[BitArray,str]):
         s += delimiter
         for _ in range(0, indentation):
             s += indentation_symbol  
-        s += 'string_representation()=' + str(self.string_representation())
+        s += 'string_representation()=' + self.string_representation()
         s += delimiter
         for _ in range(0, indentation):
             s += indentation_symbol  
