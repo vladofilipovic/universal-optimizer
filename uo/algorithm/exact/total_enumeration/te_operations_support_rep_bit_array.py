@@ -12,9 +12,13 @@ from pathlib import Path
 directory = Path(__file__).resolve()
 sys.path.append(directory)
 sys.path.append(directory.parent)
-sys.path.append(directory.parent.parent.parent)
-sys.path.append(directory.parent.parent.parent.parent)
-sys.path.append(directory.parent.parent.parent.parent.parent)
+sys.path.append(directory.parent.parent)
+
+from abc import ABCMeta, abstractmethod
+from typing import NamedTuple
+from typing import TypeVar
+from typing import Generic
+from typing import Optional
 
 from copy import deepcopy
 from random import choice
@@ -27,41 +31,42 @@ from uo.utils.complex_counter_bit_array_full import ComplexCounterBitArrayFull
 from uo.utils.logger import logger
 from uo.utils.complex_counter_uniform_ascending import ComplexCounterUniformAscending
 
-from uo.solution.quality_of_solution import QualityOfSolution
+from uo.problem.problem import Problem
+from uo.solution.solution import Solution
+
 from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.exact.total_enumeration.te_operations_support import TeOperationsSupport
 
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution import OnesCountMaxProblemBitArraySolution
+A_co = TypeVar("A_co", covariant=True)
 
-class TeOperationsSupportRepresentationBitArray(TeOperationsSupport[BitArray,str]):
+class TeOperationsSupportRepresentationBitArray(TeOperationsSupport[BitArray,A_co]):
     
     def __init__(self)->None:
         """
-        Create new `OnesCountMaxProblemBitArraySolutionTeSupport` instance
+        Create new `TeOperationsSupportRepresentationBitArray` instance
         """
         self.__bit_array_counter = None
 
     def __copy__(self):
         """
-        Internal copy of the `OnesCountMaxProblemBitArraySolutionTeSupport`
+        Internal copy of the `TeOperationsSupportRepresentationBitArray`
 
-        :return: new `OnesCountMaxProblemBitArraySolutionTeSupport` instance with the same properties
-        :rtype: `OnesCountMaxProblemBitArraySolutionTeSupport`
+        :return: new `TeOperationsSupportRepresentationBitArray` instance with the same properties
+        :rtype: `TeOperationsSupportRepresentationBitArray`
         """
         sol = deepcopy(self)
         return sol
 
     def copy(self):
         """
-        Copy the `OnesCountMaxProblemBitArraySolutionTeSupport` instance
+        Copy the `TeOperationsSupportRepresentationBitArray` instance
 
         :return: new `OnesCountMaxProblemBitArraySolutionTeSupport` instance with the same properties
-        :rtype: `OnesCountMaxProblemBitArraySolutionTeSupport`
+        :rtype: `TeOperationsSupportRepresentationBitArray`
         """
         return self.__copy__()
 
-    def reset(self, problem:OnesCountMaxProblem, solution:OnesCountMaxProblemBitArraySolution, optimizer:Algorithm)->None:
+    def reset(self, problem:Problem, solution:Solution, optimizer:Algorithm)->None:
         """
         Resets internal counter of the total enumerator, so process will start over. Internal state of the solution 
         will be set to reflect reset operation. 
@@ -78,7 +83,7 @@ class TeOperationsSupportRepresentationBitArray(TeOperationsSupport[BitArray,str
         solution.evaluate(problem)
         optimizer.write_output_values_if_needed("after_evaluation", "a_e")
 
-    def progress(self, problem:OnesCountMaxProblem, solution:OnesCountMaxProblemBitArraySolution, 
+    def progress(self, problem:Problem, solution:Solution, 
             optimizer:Algorithm)->None:
         """
         Progress internal counter of the total enumerator, so next configuration will be taken into consideration. 
@@ -95,8 +100,7 @@ class TeOperationsSupportRepresentationBitArray(TeOperationsSupport[BitArray,str
         solution.evaluate(problem)
         optimizer.write_output_values_if_needed("after_evaluation", "a_e")
 
-    def can_progress(self, problem:OnesCountMaxProblem, solution:OnesCountMaxProblemBitArraySolution, 
-            optimizer:Algorithm)->bool:
+    def can_progress(self, problem:Problem, solution:Solution, optimizer:Algorithm)->bool:
         """
         Check if total enumeration process is not at end.  
 
@@ -108,8 +112,7 @@ class TeOperationsSupportRepresentationBitArray(TeOperationsSupport[BitArray,str
         """        
         return self.__bit_array_counter.can_progress()
 
-    def overall_number_of_evaluations(self, problem:OnesCountMaxProblem, solution:OnesCountMaxProblemBitArraySolution, 
-            optimizer:Algorithm)->int:
+    def overall_number_of_evaluations(self, problem:Problem, solution:Solution, optimizer:Algorithm)->int:
         """
         Returns overall number of evaluations required for finishing total enumeration process.  
 
@@ -139,7 +142,7 @@ class TeOperationsSupportRepresentationBitArray(TeOperationsSupport[BitArray,str
         :return: string representation of vns support instance
         :rtype: str
         """        
-        return 'OnesCountMaxProblemBitArraySolutionTeSupport'
+        return 'TeOperationsSupportRepresentationBitArray'
 
     def __str__(self)->str:
         """

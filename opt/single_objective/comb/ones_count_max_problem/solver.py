@@ -23,6 +23,8 @@ from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
+from uo.algorithm.exact.total_enumeration.te_operations_support_rep_bit_array import\
+        TeOperationsSupportRepresentationBitArray
 from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp_linopy import \
@@ -39,14 +41,12 @@ from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem imp
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_int_solution import \
         OnesCountMaxProblemIntSolution
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_int_solution_vns_support import \
-        OnesCountMaxProblemIntSolutionVnsSupport
+        OnesCountMaxProblemIntSolutionVnsShakingSupport, OnesCountMaxProblemIntSolutionVnsLocalSearchSupport
 
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution import \
         OnesCountMaxProblemBitArraySolution
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution_vns_support import \
-        OnesCountMaxProblemBitArraySolutionVnsSupport
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution_te_support import\
-        OnesCountMaxProblemBitArraySolutionTeSupport
+        OnesCountMaxProblemBitArraySolutionVnsShakingSupport, OnesCountMaxProblemBitArraySolutionVnsLocalSearchSupport
 
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_solver import OnesCountMaxProblemSolver
 
@@ -207,7 +207,7 @@ def main():
                             evaluation_cache_max_size=evaluation_cache_max_size,
                             distance_calculation_cache_is_used=calculation_solution_distance_cache_is_used,
                             distance_calculation_cache_max_size=calculation_solution_distance_cache_max_size)
-                te_support = OnesCountMaxProblemBitArraySolutionTeSupport()
+                te_support = TeOperationsSupportRepresentationBitArray[str]()
             else:
                 raise ValueError("Invalid solution/representation type is chosen.")
             # solver construction parameters

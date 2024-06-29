@@ -33,6 +33,8 @@ from uo.algorithm.optimizer import Optimizer
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
+from uo.algorithm.exact.total_enumeration.te_operations_support_rep_bit_array import\
+        TeOperationsSupportRepresentationBitArray
 from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizerConstructionParameters
 from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizer
 from uo.algorithm.exact.total_enumeration.te_operations_support import TeOperationsSupport
@@ -52,14 +54,12 @@ from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem imp
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_int_solution import \
         OnesCountMaxProblemIntSolution
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_int_solution_vns_support import \
-        OnesCountMaxProblemIntSolutionVnsSupport
+        OnesCountMaxProblemIntSolutionVnsShakingSupport, OnesCountMaxProblemIntSolutionVnsLocalSearchSupport
 
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution import \
         OnesCountMaxProblemBitArraySolution
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution_vns_support import \
-        OnesCountMaxProblemBitArraySolutionVnsSupport
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution_te_support import\
-        OnesCountMaxProblemBitArraySolutionTeSupport
+        OnesCountMaxProblemBitArraySolutionVnsShakingSupport, OnesCountMaxProblemBitArraySolutionVnsLocalSearchSupport
 
 @dataclass
 class MaxOneProblemSolverConstructionParameters:
@@ -165,7 +165,7 @@ class OnesCountMaxProblemSolver:
                     output_control = output_control,
                     problem= problem,
                     solution_template= solution_template,
-                    problem_solution_te_support= te_problem_solution_support
+                    te_operations_support=te_problem_solution_support
             )
         elif method == 'integer_linear_programming':
             if not isinstance(output_control, OutputControl):
@@ -194,7 +194,8 @@ class OnesCountMaxProblemSolver:
             output_control = construction_params.output_control,
             problem = construction_params.problem,
             solution_template = construction_params.solution_template,
-            vns_problem_solution_support = construction_params.vns_problem_solution_support,
+            vns_shaking_support = construction_params.vns_shaking_support,
+            vns_ls_support = construction_params.vns_ls_support,
             vns_random_seed = construction_params.vns_random_seed, 
             vns_additional_statistics_control = construction_params.vns_additional_statistics_control,
             vns_k_min = construction_params.vns_k_min,
