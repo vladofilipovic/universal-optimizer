@@ -198,6 +198,15 @@ class GaOptimizer(PopulationBasedMetaheuristic):
         """
         return self.__current_population
     
+    @current_population.setter
+    def current_population(self, value:list[Solution])->None:
+        """
+        Property setter for the finish criteria property
+        """
+        if not isinstance(value, list):
+            raise TypeError('Parameter \'current_population\' must have type \'list\'.')
+        self.__current_population = value
+        
     @property
     def ga_selection(self)->Selection:
         """
@@ -212,7 +221,7 @@ class GaOptimizer(PopulationBasedMetaheuristic):
         """
         Initialization of the GA algorithm
         """
-        self.__current_population = [self.solution_template.copy() for _ in range(self.population_size)]
+        self.current_population = [self.solution_template.copy() for _ in range(self.population_size)]
         for i in range(self.population_size):
             self.current_population[i].init_random(self.problem)
             self.evaluation = 1
@@ -237,7 +246,6 @@ class GaOptimizer(PopulationBasedMetaheuristic):
         One iteration within main loop of the GA algorithm
         """
         self.iteration += 1
-        new_population:list[Solution] = [self.solution_template.copy() for _ in range(self.__population_size)]
         self.write_output_values_if_needed("before_step_in_iteration", "selection")
         self.ga_selection.selection(self)
         self.write_output_values_if_needed("after_step_in_iteration", "selection")
@@ -247,8 +255,11 @@ class GaOptimizer(PopulationBasedMetaheuristic):
         else:
             l_lim:int = n_e
         self.write_output_values_if_needed("before_step_in_iteration", "crossover")
+        new_population:list[Solution] = [self.solution_template.copy() for _ in range(self.population_size)]
+        for i in range(l_lim):
+            new_population[i] = self.current_population[i]
         for i in range(l_lim,len(self.current_population), 2):
-            if i+1 == len(self.__current_population):
+            if i+1 == len(self.current_population):
                 break
             parent1:Solution = self.current_population[i]
             parent2:Solution = self.current_population[i+1]
@@ -258,13 +269,13 @@ class GaOptimizer(PopulationBasedMetaheuristic):
         for i in range(l_lim, len(self.current_population)):
             self.__mutation_method(self.problem, new_population[i], self)
         self.write_output_values_if_needed("after_step_in_iteration", "mutation")
-        self.__current_population = new_population
+        self.current_population = new_population
         pos:int = 0
         for i in range(1, self.population_size):
             if self.current_population[i].is_better(self.current_population[pos], self.problem):
                 pos = i
         self.best_solution = self.current_population[pos]
-        self.update_additional_statistics_if_required(self.__current_population)
+        self.update_additional_statistics_if_required(self.current_population)
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='',group_start:str ='{', 
         group_end:str ='}')->str:

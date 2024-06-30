@@ -1,6 +1,4 @@
-from copy import deepcopy
-from random import randint
-from random import choice
+from random import seed
 
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
@@ -41,6 +39,7 @@ def main():
         ga_construction_params.random_seed = 43434343
         ga_construction_params.population_size = 100
         ga_construction_params.elite_count = 10
+        seed(ga_construction_params.random_seed)
         optimizer:GaOptimizer = GaOptimizer.from_construction_tuple(ga_construction_params)
         bs = optimizer.optimize()
         print('Best solution representation: {}'.format(bs.representation.bin))            

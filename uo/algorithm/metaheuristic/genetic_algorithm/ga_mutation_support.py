@@ -39,7 +39,8 @@ class GaMutationSupport(Generic[R_co,A_co], metaclass=ABCMeta):
         return self.__mutation_probability    
     
     @abstractmethod
-    def mutation(self, problem:Problem, solution:Solution[R_co,A_co], optimizer:PopulationBasedMetaheuristic)->None:
+    def mutation(self, problem:Problem, solution:Solution[R_co,A_co],  
+                optimizer:PopulationBasedMetaheuristic)->None:
         """
         GA individual mutation based on some probability
 

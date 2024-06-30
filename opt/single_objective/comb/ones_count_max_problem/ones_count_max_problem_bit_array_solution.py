@@ -100,7 +100,8 @@ class OnesCountMaxProblemBitArraySolution(Solution[BitArray,str]):
             raise ValueError('Can not randomly initialize solution with negative dimension.')
         self.representation = BitArray(problem.dimension)
         for i in range(problem.dimension):
-            if random() > 0.5:
+            r:float = random()
+            if r > 0.5:
                 self.representation[i] = True
 
     def init_from(self, representation:BitArray, problem:Problem)->None:

@@ -16,7 +16,8 @@ from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimize
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimizer
 
 from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem import MinimumMultiCutProblem
-from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_bit_array_solution import MinimumMultiCutProblemBitArraySolution
+from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_bit_array_solution import \
+        MinimumMultiCutProblemBitArraySolution
 
 def main():
         output_control:OutputControl = OutputControl(write_to_output=False)
@@ -54,8 +55,8 @@ def main():
         ga_construction_params.ga_mutation_support = ga_mut_support
         ga_construction_params.additional_statistics_control = additional_statistics_control
         ga_construction_params.random_seed = 43434343
-        ga_construction_params.population_size = 150
-        ga_construction_params.elite_count = 10
+        ga_construction_params.population_size = 5
+        ga_construction_params.elite_count = 2
         optimizer:GaOptimizer = GaOptimizer.from_construction_tuple(ga_construction_params)
         optimizer.optimize()
 

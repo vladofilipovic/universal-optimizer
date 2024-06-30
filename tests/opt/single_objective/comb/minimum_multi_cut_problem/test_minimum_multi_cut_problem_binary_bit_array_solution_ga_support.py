@@ -19,7 +19,7 @@ from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_probl
 class TestMinimumMultiCutProblemBitArraySolutionGaSupport(unittest.TestCase):
 
     # mutation method returns True when mutation is successful
-    def test_mutation_returns_true_when_randomization_is_successful(self):
+    def test_mutation_returns_none(self):
         # Arrange
         nodes = 10
         prob = 0.5
@@ -50,4 +50,4 @@ class TestMinimumMultiCutProblemBitArraySolutionGaSupport(unittest.TestCase):
         # Act
         result = ga_mut_support.mutation(problem, solution, optimizer_stub)
         # Assert
-        self.assertTrue(result)
+        self.assertIsNone(result)

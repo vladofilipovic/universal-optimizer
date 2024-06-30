@@ -59,12 +59,14 @@ class GaMutationSupportRepresentationBitArray(GaMutationSupport[BitArray,A_co]):
         """
         return self.__copy__()
 
-    def mutation(self, problem:Problem, solution:Solution, optimizer:PopulationBasedMetaheuristic)->None:
+    def mutation(self, problem:Problem, solution:Solution, 
+                optimizer:PopulationBasedMetaheuristic)->None:
         """
         Executes mutation within GA 
         
         :param `Problem` problem: problem that is solved
-        :param `Solution` solution: item tha is mutated 
+        :param `Solution` solution: item that is mutated 
+        :param `Solution` mutant: outcome of the mutation 
         :param `PopulationBasedMetaheuristic` optimizer: optimizer that is executed
         :rtype: None
         """
