@@ -2,9 +2,7 @@
 import unittest   
 import unittest.mock as mocker
 
-from copy import deepcopy
-from random import randint
-from random import choice
+from random import seed
 
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
@@ -39,6 +37,7 @@ class TestMaxFunctionOneVariableMaxProblemIntSolutionLsfi(unittest.TestCase):
         self.solution:FunctionOneVariableMaxProblemIntSolution = FunctionOneVariableMaxProblemIntSolution(
                 domain_from=self.problem_to_solve.domain_low, domain_to=self.problem_to_solve.domain_high, 
                 number_of_intervals=600, random_seed=43434343)
+        seed(self.solution.random_seed)
         self.solution.init_random(problem=self.problem_to_solve)
         self.solution.evaluate(self.problem_to_solve)           
         self.finish_control:FinishControl = FinishControl(criteria='evaluations & seconds', evaluations_max=10000, 
