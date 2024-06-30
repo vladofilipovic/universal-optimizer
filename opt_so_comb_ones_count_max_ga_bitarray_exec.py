@@ -9,8 +9,8 @@ from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support_one_point
                 GaCrossoverSupportOnePointRepresentationBitArray
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support_one_point_rep_bit_array import \
                 GaMutationSupportOnePointRepresentationBitArray
-from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimizerConstructionParameters
-from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimizer
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer_gen import GaOptimizerGenerationalConstructionParameters
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer_gen import GaOptimizerGenerational
 
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution import \
@@ -27,7 +27,8 @@ def main():
                 GaCrossoverSupportOnePointRepresentationBitArray[str](crossover_probability=0.95)
         ga_mutation_support:GaMutationSupportOnePointRepresentationBitArray = \
                 GaMutationSupportOnePointRepresentationBitArray[str](mutation_probability=0.0005)
-        ga_construction_params:GaOptimizerConstructionParameters = GaOptimizerConstructionParameters()
+        ga_construction_params:GaOptimizerGenerationalConstructionParameters = \
+                GaOptimizerGenerationalConstructionParameters()
         ga_construction_params.output_control = output_control
         ga_construction_params.problem = problem_to_solve
         ga_construction_params.solution_template = solution
@@ -40,7 +41,7 @@ def main():
         ga_construction_params.population_size = 100
         ga_construction_params.elite_count = 10
         seed(ga_construction_params.random_seed)
-        optimizer:GaOptimizer = GaOptimizer.from_construction_tuple(ga_construction_params)
+        optimizer:GaOptimizerGenerational = GaOptimizerGenerational.from_construction_tuple(ga_construction_params)
         bs = optimizer.optimize()
         print('Best solution representation: {}'.format(bs.representation.bin))            
         print('Best solution code: {}'.format(bs.string_representation()))            

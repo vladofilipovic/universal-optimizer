@@ -13,8 +13,8 @@ from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support_one_point
                 GaCrossoverSupportOnePointRepresentationBitArray
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support_one_point_rep_bit_array import \
                 GaMutationSupportOnePointRepresentationBitArray
-from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimizerConstructionParameters
-from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimizer
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer_gen import GaOptimizerGenerationalConstructionParameters
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer_gen import GaOptimizerGenerational
 
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution import \
@@ -39,7 +39,8 @@ class TestOnesCountMaxProblemGaBitArraySolution(unittest.TestCase):
                 GaCrossoverSupportOnePointRepresentationBitArray[str](crossover_probability=0.95)
         self.ga_mutation_support:GaMutationSupportOnePointRepresentationBitArray = \
                 GaMutationSupportOnePointRepresentationBitArray[str](mutation_probability=0.0005)
-        self.ga_construction_params:GaOptimizerConstructionParameters = GaOptimizerConstructionParameters()
+        self.ga_construction_params:GaOptimizerGenerationalConstructionParameters = \
+                GaOptimizerGenerationalConstructionParameters()
         self.ga_construction_params.output_control = self.output_control
         self.ga_construction_params.problem = self.problem_to_solve
         self.ga_construction_params.solution_template = self.solution
@@ -52,7 +53,8 @@ class TestOnesCountMaxProblemGaBitArraySolution(unittest.TestCase):
         self.ga_construction_params.population_size = 100
         self.ga_construction_params.elite_count = 10
         seed(self.ga_construction_params.random_seed)
-        self.optimizer:GaOptimizer = GaOptimizer.from_construction_tuple(self.ga_construction_params)
+        self.optimizer:GaOptimizerGenerational = GaOptimizerGenerational.from_construction_tuple(
+            self.ga_construction_params)
         self.bs = self.optimizer.optimize()
 
     def test_returned_best_solution_is_equal_to_optimizer_best_solution(self):

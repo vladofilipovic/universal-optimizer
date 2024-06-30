@@ -7,18 +7,18 @@ from uo.problem.problem import Problem
 
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
-from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimizer
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer_gen import GaOptimizerGenerational
 from uo.algorithm.metaheuristic.genetic_algorithm.selection import Selection
 from uo.algorithm.metaheuristic.genetic_algorithm.selection_roulette import SelectionRoulette
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support import GaCrossoverSupport
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support import GaMutationSupport
 from uo.solution.solution_void import SolutionVoid
 
-class TestGaOptimizerProperties(unittest.TestCase):
+class TestGaOptimizerGenerationalProperties(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
-        print("setUpClass TestGaOptimizerProperties\n")
+        print("setUpClass TestGaOptimizerGenerationalProperties\n")
 
     def setUp(self):
         self.output_control_stub = mocker.MagicMock(spec=OutputControl)
@@ -56,7 +56,7 @@ class TestGaOptimizerProperties(unittest.TestCase):
 
         self.additional_statistics_control = AdditionalStatisticsControl()
 
-        self.ga_optimizer:GaOptimizer = GaOptimizer(
+        self.ga_optimizer:GaOptimizerGenerational = GaOptimizerGenerational(
                 output_control=self.output_control_stub,
                 problem=self.problem_mock, 
                 solution_template=SolutionVoid( 43, 0, 0, False),
@@ -105,7 +105,7 @@ class TestGaOptimizerProperties(unittest.TestCase):
             selection_stub = mocker.MagicMock(spec=SelectionRoulette)
             type(selection_stub).selection_roulette = mocker.CallableMixin(spec=lambda x: x)
             type(selection_stub).copy = mocker.CallableMixin(spec="return self")
-            self.ga_optimizer:GaOptimizer = GaOptimizer(
+            self.ga_optimizer:GaOptimizerGenerational = GaOptimizerGenerational(
                 output_control=self.output_control_stub,
                 problem=self.problem_mock, 
                 solution_template=SolutionVoid( 43, 0, 0, False),
@@ -125,7 +125,7 @@ class TestGaOptimizerProperties(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        print("\ntearDownClass TestGaOptimizerProperties")
+        print("\ntearDownClass TestGaOptimizerGenerationalProperties")
     
 if __name__ == '__main__':
     unittest.main()

@@ -59,8 +59,8 @@ from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support_one_point
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support import GaMutationSupport
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support_one_point_rep_bit_array import \
         GaMutationSupportOnePointRepresentationBitArray
-from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimizerConstructionParameters
-from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimizer
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer_gen import GaOptimizerGenerationalConstructionParameters
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer_gen import GaOptimizerGenerational
 
 
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp_linopy import \

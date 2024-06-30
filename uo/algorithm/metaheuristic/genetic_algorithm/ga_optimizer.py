@@ -14,9 +14,10 @@ sys.path.append(directory.parent.parent.parent)
 
 from copy import deepcopy
 
-from typing import Optional
+from random import choice
 
-from dataclasses import dataclass
+from abc import ABCMeta, abstractmethod
+from typing import Optional
 
 from uo.utils.logger import logger
 
@@ -32,25 +33,7 @@ from uo.algorithm.metaheuristic.genetic_algorithm.selection import Selection
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support import GaCrossoverSupport
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support import GaMutationSupport
 
-@dataclass
-class GaOptimizerConstructionParameters:
-        """
-        Instance of the class :class:`~uo.algorithm.metaheuristic.genetic_algorithm_constructor_parameters.
-        GaOptimizerConstructionParameters` represents constructor parameters for GA algorithm.
-        """
-        finish_control: FinishControl = None
-        random_seed: Optional[int] = None
-        additional_statistics_control: AdditionalStatisticsControl = None
-        output_control: OutputControl = None
-        problem: Problem = None
-        solution_template: Solution = None
-        ga_selection: Selection = None
-        ga_crossover_support: GaCrossoverSupport = None
-        ga_mutation_support: GaMutationSupport = None
-        population_size: int = None
-        elite_count:Optional[int] = None
-
-class GaOptimizer(PopulationBasedMetaheuristic):
+class GaOptimizer(PopulationBasedMetaheuristic, metaclass=ABCMeta):
     """
     Instance of the class :class:`~uo.algorithm.metaheuristic.genetic_algorithm.GaOptimizer` encapsulate 
     :ref:`Genetic_Algorithm` optimization algorithm.
@@ -121,26 +104,7 @@ class GaOptimizer(PopulationBasedMetaheuristic):
         self.__mutation_method = self.__ga_mutation_support.mutation
         self.__population_size:int = population_size
         self.__elite_count:Optional[int] = elite_count
-
-    @classmethod
-    def from_construction_tuple(cls, construction_tuple:GaOptimizerConstructionParameters):
-        """
-        Additional constructor, that creates new instance of class :class:`~uo.algorithm.metaheuristic.genetic_algorithm.GaOptimizer`. 
-
-        :param `GaOptimizerConstructionParameters` construction_tuple: tuple with all constructor parameters
-        """
-        return cls(
-            construction_tuple.finish_control,
-            construction_tuple.random_seed,
-            construction_tuple.additional_statistics_control,
-            construction_tuple.output_control,
-            construction_tuple.problem,
-            construction_tuple.solution_template,
-            construction_tuple.ga_selection,
-            construction_tuple.ga_crossover_support,
-            construction_tuple.ga_mutation_support,
-            construction_tuple.population_size,
-            construction_tuple.elite_count)
+        self.__current_population = [self.solution_template.copy() for _ in range(self.population_size)]
 
     def __copy__(self):
         """
@@ -205,23 +169,68 @@ class GaOptimizer(PopulationBasedMetaheuristic):
         """
         if not isinstance(value, list):
             raise TypeError('Parameter \'current_population\' must have type \'list\'.')
+        self.__population_size = len(value)
         self.__current_population = value
         
     @property
     def ga_selection(self)->Selection:
         """
-        Property getter for the ga_selection of GA
+        Property getter for the selection of GA
         
         :return: Selection of the GA 
         :rtype: `Selection`
         """
         return self.__ga_selection
 
+    @property
+    def ga_crossover_support(self)->GaCrossoverSupport:
+        """
+        Property getter for the crossover support of GA
+        
+        :return: Crossover support of the GA 
+        :rtype: `GaCrossoverSupport`
+        """
+        return self.__ga_crossover_support
+
+    @property
+    def ga_crossover_method(self):
+        """
+        Property getter for the crossover method of GA
+        
+        :return: Crossover method of the GA 
+        """
+        return self.__crossover_method
+
+    @property
+    def ga_mutation_support(self)->GaMutationSupport:
+        """
+        Property getter for the mutation support of GA
+        
+        :return: Mutation support of the GA 
+        :rtype: `GaMutationSupport`
+        """
+        return self.__ga_crossover_support
+
+    @property
+    def ga_mutation_method(self):
+        """
+        Property getter for the mutation method of GA
+        
+        :return: Mutation method of the GA 
+        """
+        return self.__mutation_method
+    
+    def index_of_best_in_population(self):
+        pos:int = 0
+        for i in range(1, self.population_size):
+            if self.current_population[i].is_better(self.current_population[pos], self.problem):
+                pos = i
+        return pos
+
     def init(self)->None:
         """
         Initialization of the GA algorithm
         """
-        self.current_population = [self.solution_template.copy() for _ in range(self.population_size)]
         for i in range(self.population_size):
             self.current_population[i].init_random(self.problem)
             self.evaluation = 1
@@ -241,42 +250,13 @@ class GaOptimizer(PopulationBasedMetaheuristic):
                         self.current_population[i] = self.current_population[j]
                         self.current_population[j] = temp
 
+    @abstractmethod
     def main_loop_iteration(self)->None:
         """
         One iteration within main loop of the GA algorithm
         """
-        self.iteration += 1
-        self.write_output_values_if_needed("before_step_in_iteration", "selection")
-        self.ga_selection.selection(self)
-        self.write_output_values_if_needed("after_step_in_iteration", "selection")
-        n_e:Optional[int] = self.elite_count
-        if n_e is None or not isinstance(n_e, int):
-            l_lim:int = 0
-        else:
-            l_lim:int = n_e
-        self.write_output_values_if_needed("before_step_in_iteration", "crossover")
-        new_population:list[Solution] = [self.solution_template.copy() for _ in range(self.population_size)]
-        for i in range(l_lim):
-            new_population[i] = self.current_population[i]
-        for i in range(l_lim,len(self.current_population), 2):
-            if i+1 == len(self.current_population):
-                break
-            parent1:Solution = self.current_population[i]
-            parent2:Solution = self.current_population[i+1]
-            self.__crossover_method(self.problem, parent1, parent2, new_population[i], new_population[i+1], self)
-        self.write_output_values_if_needed("after_step_in_iteration", "crossover")
-        self.write_output_values_if_needed("before_step_in_iteration", "mutation")
-        for i in range(l_lim, len(self.current_population)):
-            self.__mutation_method(self.problem, new_population[i], self)
-        self.write_output_values_if_needed("after_step_in_iteration", "mutation")
-        self.current_population = new_population
-        pos:int = 0
-        for i in range(1, self.population_size):
-            if self.current_population[i].is_better(self.current_population[pos], self.problem):
-                pos = i
-        self.best_solution = self.current_population[pos]
-        self.update_additional_statistics_if_required(self.current_population)
-
+        raise NotImplementedError
+    
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='',group_start:str ='{', 
         group_end:str ='}')->str:
         """

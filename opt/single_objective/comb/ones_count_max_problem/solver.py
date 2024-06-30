@@ -31,8 +31,8 @@ from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support_one_point
                 GaCrossoverSupportOnePointRepresentationBitArray
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support_one_point_rep_bit_array import \
                 GaMutationSupportOnePointRepresentationBitArray
-from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimizerConstructionParameters
-from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimizer
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer_gen import GaOptimizerGenerationalConstructionParameters
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer_gen import GaOptimizerGenerational
 
 from uo.algorithm.exact.total_enumeration.te_operations_support_rep_bit_array import\
         TeOperationsSupportRepresentationBitArray
@@ -231,7 +231,8 @@ def main():
                     mutation_probability=mutation_probability)
             else:
                 raise ValueError("Invalid solution/representation type is chosen.")
-            ga_construction_params:GaOptimizerConstructionParameters = GaOptimizerConstructionParameters()
+            ga_construction_params:GaOptimizerGenerationalConstructionParameters = \
+                GaOptimizerGenerationalConstructionParameters()
             ga_construction_params.output_control = output_control
             ga_construction_params.problem = problem
             ga_construction_params.solution_template = solution
