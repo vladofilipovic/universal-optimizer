@@ -27,10 +27,10 @@ from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
 from uo.algorithm.metaheuristic.genetic_algorithm.selection_roulette import SelectionRoulette
-from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support_rep_bit_array import \
-                GaCrossoverSupportRepresentationBitArray
-from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support_rep_bit_array import \
-                GaMutationSupportRepresentationBitArray
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support_one_point_rep_bit_array import \
+                GaCrossoverSupportOnePointRepresentationBitArray
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support_one_point_rep_bit_array import \
+                GaMutationSupportOnePointRepresentationBitArray
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimizer
 
@@ -225,9 +225,9 @@ def main():
             if solution_type=='BitArray':
                 solution:OnesCountMaxProblemBitArraySolution = OnesCountMaxProblemBitArraySolution(
                     random_seed=r_seed)
-                ga_crossover_support = GaCrossoverSupportRepresentationBitArray[str](
+                ga_crossover_support = GaCrossoverSupportOnePointRepresentationBitArray[str](
                     crossover_probability=crossover_probability)
-                ga_mutation_support = GaMutationSupportRepresentationBitArray[str](
+                ga_mutation_support = GaMutationSupportOnePointRepresentationBitArray[str](
                     mutation_probability=mutation_probability)
             else:
                 raise ValueError("Invalid solution/representation type is chosen.")

@@ -5,10 +5,10 @@ from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
 from uo.algorithm.metaheuristic.genetic_algorithm.selection_roulette import SelectionRoulette
-from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support_rep_bit_array import \
-                GaCrossoverSupportRepresentationBitArray
-from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support_rep_bit_array import \
-                GaMutationSupportRepresentationBitArray
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support_one_point_rep_bit_array import \
+                GaCrossoverSupportOnePointRepresentationBitArray
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support_one_point_rep_bit_array import \
+                GaMutationSupportOnePointRepresentationBitArray
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimizer
 
@@ -23,10 +23,10 @@ def main():
         finish:FinishControl = FinishControl(criteria='evaluations', evaluations_max=5000)
         ga_selection:SelectionRoulette = SelectionRoulette()
         additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(is_active=False, keep='')
-        ga_crossover_support:GaCrossoverSupportRepresentationBitArray[str]= \
-                GaCrossoverSupportRepresentationBitArray[str](crossover_probability=0.95)
-        ga_mutation_support:GaMutationSupportRepresentationBitArray = \
-                GaMutationSupportRepresentationBitArray[str](mutation_probability=0.0005)
+        ga_crossover_support:GaCrossoverSupportOnePointRepresentationBitArray[str]= \
+                GaCrossoverSupportOnePointRepresentationBitArray[str](crossover_probability=0.95)
+        ga_mutation_support:GaMutationSupportOnePointRepresentationBitArray = \
+                GaMutationSupportOnePointRepresentationBitArray[str](mutation_probability=0.0005)
         ga_construction_params:GaOptimizerConstructionParameters = GaOptimizerConstructionParameters()
         ga_construction_params.output_control = output_control
         ga_construction_params.problem = problem_to_solve

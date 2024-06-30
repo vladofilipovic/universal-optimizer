@@ -54,11 +54,11 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer impor
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support import GaCrossoverSupport
-from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support_rep_bit_array import \
-        GaCrossoverSupportRepresentationBitArray
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support_one_point_rep_bit_array import \
+        GaCrossoverSupportOnePointRepresentationBitArray
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support import GaMutationSupport
-from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support_rep_bit_array import \
-        GaMutationSupportRepresentationBitArray
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support_one_point_rep_bit_array import \
+        GaMutationSupportOnePointRepresentationBitArray
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimizer
 
