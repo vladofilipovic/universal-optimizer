@@ -22,10 +22,37 @@ from bitstring import BitArray
 import xarray as xr
 from linopy import Model
 
+from opt.single_objective.comb.ones_count_max_problem.command_line import default_parameters_cl
+from opt.single_objective.comb.ones_count_max_problem.command_line import parse_arguments
+
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_int_solution import \
+        OnesCountMaxProblemIntSolution
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution import \
+        OnesCountMaxProblemBitArraySolution
+
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp_linopy import \
+        OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters
+from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp_linopy import \
+    OnesCountMaxProblemIntegerLinearProgrammingSolver
+
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_bit_array import \
+        VnsShakingSupportRepresentationBitArray
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_rep_bit_array import \
+        VnsLocalSearchSupportRepresentationBitArray
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_int import \
+        VnsShakingSupportRepresentationInt
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_rep_int import \
+        VnsLocalSearchSupportRepresentationInt
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
+
+from uo.algorithm.metaheuristic.genetic_algorithm.selection import Selection
+from uo.algorithm.metaheuristic.genetic_algorithm.selection_idle import SelectionIdle
 from uo.algorithm.metaheuristic.genetic_algorithm.selection_roulette import SelectionRoulette
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support_one_point_rep_bit_array import \
                 GaCrossoverSupportOnePointRepresentationBitArray
@@ -37,28 +64,7 @@ from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer_gen import GaOpti
 from uo.algorithm.exact.total_enumeration.te_operations_support_rep_bit_array import\
         TeOperationsSupportRepresentationBitArray
 from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizerConstructionParameters
-
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_bit_array import \
-        VnsShakingSupportRepresentationBitArray
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_rep_bit_array import \
-        VnsLocalSearchSupportRepresentationBitArray
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_int import \
-        VnsShakingSupportRepresentationInt
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_rep_int import \
-        VnsLocalSearchSupportRepresentationInt
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp_linopy import \
-        OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters
-
-from opt.single_objective.comb.ones_count_max_problem.command_line import default_parameters_cl
-from opt.single_objective.comb.ones_count_max_problem.command_line import parse_arguments
-
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_int_solution import \
-        OnesCountMaxProblemIntSolution
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution import \
-        OnesCountMaxProblemBitArraySolution
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_solver import OnesCountMaxProblemSolver
+from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizer
 
 """ 
 Solver.
@@ -175,8 +181,16 @@ def main():
         if write_to_output_file:
             output_file.write("# {} started at: {}\n".format(parameters['algorithm'], str(start_time)) )
             output_file.write('# Execution parameters: {}\n'.format(parameters))
-        # select among algorithm types
-        if parameters['algorithm'] == 'variable_neighborhood_search':
+        # check if ILP is used and finish
+        if parameters['algorithm'] == 'integer_linear_programming':
+            # solver construction parameters
+            ilp_construction_params = OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters(
+                    output_control=output_control,
+                    problem=problem)
+            solver:OnesCountMaxProblemIntegerLinearProgrammingSolver = \
+                OnesCountMaxProblemIntegerLinearProgrammingSolver.from_construction_tuple(
+                    ilp_construction_params)
+        elif parameters['algorithm'] == 'variable_neighborhood_search':
             # parameters for VNS process setup
             k_min:int = parameters['kMin']
             k_max:int = parameters['kMax']
@@ -188,12 +202,12 @@ def main():
             if solution_type=='BitArray':
                 solution:OnesCountMaxProblemBitArraySolution = OnesCountMaxProblemBitArraySolution(
                     random_seed=r_seed)
-                vns_shaking_support = VnsShakingSupportRepresentationBitArray[str]()
-                vns_ls_support = VnsLocalSearchSupportRepresentationBitArray[str]()
+                vns_shaking_support = VnsShakingSupportRepresentationBitArray[str](problem.dimension)
+                vns_ls_support = VnsLocalSearchSupportRepresentationBitArray[str](problem.dimension)
             elif solution_type=='int':
                 solution:OnesCountMaxProblemIntSolution = OnesCountMaxProblemIntSolution(r_seed)
-                vns_shaking_support = VnsShakingSupportRepresentationInt[str]()
-                vns_ls_support = VnsLocalSearchSupportRepresentationInt[str]()
+                vns_shaking_support = VnsShakingSupportRepresentationInt[str](problem.dimension)
+                vns_ls_support = VnsLocalSearchSupportRepresentationInt[str](problem.dimension)
             else:
                 raise ValueError("Invalid solution/representation type is chosen.")
             # solver construction parameters
@@ -209,28 +223,43 @@ def main():
             vns_construction_params.k_min = k_min
             vns_construction_params.k_max = k_max
             vns_construction_params.local_search_type = local_search_type
-            solver:OnesCountMaxProblemSolver = OnesCountMaxProblemSolver.from_variable_neighborhood_search(
-                    vns_construction_params)
+            solver:VnsOptimizer = VnsOptimizer.from_construction_tuple(vns_construction_params)
         elif parameters['algorithm'] == 'genetic_algorithm':
             # parameters for GA process setup
-            population_size:int = 100
-            elite_count:int = 5
-            selection:SelectionRoulette = SelectionRoulette()
-            crossover_probability:float = 0.995
-            mutation_probability:float = 0.05
-            # initial solution and GA support
+            populationReplacement_policy:str = parameters['populationReplacementPolicy']
+            selection_type:str = parameters['selectionType']
+            ga_selection = None
+            if selection_type=='Roulette':
+                ga_selection:Selection = SelectionRoulette()
+            elif selection_type=='Idle':
+                ga_selection:Selection = SelectionIdle()
+            else:
+                raise ValueError("Invalid solution/representation type is chosen.")
+            # initial solution
             solution_type:str = parameters['solutionType']
-            ga_crossover_support = None
-            ga_mutation_support = None
             if solution_type=='BitArray':
                 solution:OnesCountMaxProblemBitArraySolution = OnesCountMaxProblemBitArraySolution(
                     random_seed=r_seed)
+            else:
+                raise ValueError("Invalid solution/representation type is chosen.")
+            ga_crossover_support = None
+            crossover_type:str = parameters['crossoverType']
+            crossover_probability:float = parameters['crossoverProbability']
+            if crossover_type=='OnePoint' and solution_type=='BitArray':
                 ga_crossover_support = GaCrossoverSupportOnePointRepresentationBitArray[str](
                     crossover_probability=crossover_probability)
+            else:
+                raise ValueError("Invalid pair (crossover type, representation type) is chosen.")
+            ga_mutation_support = None
+            mutation_type:str = parameters['mutationType']
+            mutation_probability:float = parameters['mutationProbability']
+            if mutation_type=='OnePoint' and solution_type=='BitArray':
                 ga_mutation_support = GaMutationSupportOnePointRepresentationBitArray[str](
                     mutation_probability=mutation_probability)
             else:
-                raise ValueError("Invalid solution/representation type is chosen.")
+                raise ValueError("Invalid pair (mutation type, representation type) is chosen.")
+            population_size:int = parameters['populationSize']
+            elite_count:int = parameters['eliteCount']
             ga_construction_params:GaOptimizerGenerationalConstructionParameters = \
                 GaOptimizerGenerationalConstructionParameters()
             ga_construction_params.output_control = output_control
@@ -239,11 +268,12 @@ def main():
             ga_construction_params.finish_control = finish_control
             ga_construction_params.random_seed = r_seed
             ga_construction_params.additional_statistics_control = additional_statistics_control
-            ga_construction_params.ga_selection = selection
+            ga_construction_params.ga_selection = ga_selection
             ga_construction_params.ga_crossover_support = ga_crossover_support
             ga_construction_params.ga_mutation_support = ga_mutation_support
             ga_construction_params.population_size = population_size
             ga_construction_params.elite_count = elite_count
+            solver:GaOptimizerGenerational = GaOptimizerGenerational.from_construction_tuple(ga_construction_params) 
         elif parameters['algorithm'] == 'total_enumeration':
             # initial solution and te support
             solution_type:str = parameters['solutionType']
@@ -263,24 +293,17 @@ def main():
             te_construction_params.problem = problem
             te_construction_params.solution_template = solution
             te_construction_params.te_operations_support = te_operations_support
-            solver:OnesCountMaxProblemSolver = OnesCountMaxProblemSolver.from_total_enumeration(te_construction_params)
-        elif parameters['algorithm'] == 'integer_linear_programming':
-            # solver construction parameters
-            ilp_construction_params = OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters(
-                    output_control=output_control,
-                    problem=problem)
-            solver:OnesCountMaxProblemSolver = OnesCountMaxProblemSolver.from_integer_linear_programming(
-                    ilp_construction_params)
+            solver:TeOptimizer = TeOptimizer.from_construction_tuple(te_construction_params)
         else:
             raise ValueError('Invalid optimization algorithm is chosen.')
-        bs = solver.opt.optimize()
-        logger.debug('Method -{}- search finished.'.format(parameters['algorithm'])) 
+        bs = solver.optimize()
+        logger.debug('Method -{}- execution finished.'.format(parameters['algorithm'])) 
         logger.info('Best solution code: {}'.format(bs.string_representation()))            
         logger.info('Best solution objective: {}, fitness: {}'.format(bs.objective_value,
                 bs.fitness_value))
-        logger.info('Number of iterations: {}, evaluations: {}'.format(solver.opt.iteration, 
-                solver.opt.evaluation))  
-        logger.info('Execution: {} - {}'.format(solver.opt.execution_started, solver.opt.execution_ended))          
+        logger.info('Number of iterations: {}, evaluations: {}'.format(solver.iteration, 
+                solver.evaluation))  
+        logger.info('Execution: {} - {}'.format(solver.execution_started, solver.execution_ended))          
         logger.debug('Solver ended.')    
         return
     except Exception as exp:

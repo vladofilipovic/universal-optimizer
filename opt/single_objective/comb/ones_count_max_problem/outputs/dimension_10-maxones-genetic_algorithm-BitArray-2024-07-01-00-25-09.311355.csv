@@ -1,0 +1,22 @@
+# RandomSeed is predefined. Predefined seed value:  123123123
+# genetic_algorithm started at: 2024-07-01 00:25:09.313359
+# Execution parameters: {'algorithm': 'genetic_algorithm', 'writeToOutputFile': True, 'outputFilePath': 'opt/single_objective/comb/ones_count_max_problem/outputs/dimension_10.csv', 'outputFileNameAppendTimeStamp': True, 'outputFields': 'iteration, evaluation, best_solution.string_representation()', 'outputMoments': 'after_algorithm, after_iteration', 'inputFilePath': 'opt/single_objective/comb/ones_count_max_problem/inputs/dimension_10.txt', 'inputFormat': 'txt', 'finishCriteria': 'evaluations & seconds', 'finishEvaluationsMax': 3000, 'finishIterationsMax': 0, 'finishSecondsMax': 0, 'randomSeed': 123123123, 'solutionEvaluationCacheIsUsed': True, 'solutionEvaluationCacheMaxSize': 100000, 'solutionDistanceCalculationCacheIsUsed': True, 'solutionDistanceCalculationCacheMaxSize': 300000, 'additionalStatisticsIsActive': True, 'additionalStatisticsKeep': 'none', 'additionalStatisticsMaxLocalOptimaCount': 5, 'kMin': 1, 'kMax': 3, 'localSearchType': 'localSearchBestImprovement', 'solutionType': 'BitArray', 'populationReplacementPolicy': 'Generational', 'selectionType': 'Roulette', 'crossoverType': 'OnePoint', 'crossoverProbability': 0.95, 'mutationType': 'OnePoint', 'mutationProbability': 0.005, 'populationSize': 100, 'eliteCount': 5, 'log': 'warning'}
+iteration	evaluation	step_name	best_solution.string_representation()	best_solution.fitness_value	best_solution.objective_value	best_solution.is_feasible	 evaluation	 best_solution.string_representation()	
+1	190	a_i	1111111011	9	9	True	
+2	375	a_i	1111111101	9	9	True	
+3	558	a_i	1111111101	9	9	True	
+4	743	a_i	1111111111	10	10	True	
+5	930	a_i	1111111111	10	10	True	
+6	1115	a_i	1111111010	8	8	True	
+7	1304	a_i	1111111010	8	8	True	
+8	1487	a_i	1111111010	8	8	True	
+9	1676	a_i	1111111010	8	8	True	
+10	1861	a_i	1111111010	8	8	True	
+11	2048	a_i	1111111010	8	8	True	
+12	2235	a_i	1111111010	8	8	True	
+13	2418	a_i	1111111010	8	8	True	
+14	2601	a_i	1111111010	8	8	True	
+15	2788	a_i	1111111010	8	8	True	
+16	2975	a_i	1111111011	9	9	True	
+17	3158	a_i	1111111010	8	8	True	
+17	3158	a_a	1111111010	8	8	True	
