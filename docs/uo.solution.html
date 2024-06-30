@@ -582,6 +582,27 @@
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.solution.solution.Solution.is_better">
+<span class="sig-name descname"><span class="pre">is_better</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.target_solution.html#uo.solution.solution.Solution" title="uo.solution.solution.Solution"><span class="pre">Solution</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">problem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.target_problem.html#uo.problem.problem.Problem" title="uo.problem.problem.Problem"><span class="pre">Problem</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#uo.solution.solution.Solution.is_better" title="Link to this definition"></a></dt>
+<dd><p>Checks if this solution is better than the other, with respect to problem that is optimized</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>other</strong> (<a class="reference internal" href="uo.target_solution.html#uo.solution.solution.Solution" title="uo.solution.solution.Solution"><em>Solution</em></a>) – other solution</p></li>
+<li><p><strong>problem</strong> (<a class="reference internal" href="uo.target_problem.html#uo.problem.problem.Problem" title="uo.problem.problem.Problem"><em>Problem</em></a>) – problem to be solved</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><cite>True</cite> if first is better, <cite>False</cite> if first is worse, <cite>None</cite> if quality of both
+solutions are equal</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="uo.solution.solution.Solution.is_feasible">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_feasible</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></em><a class="headerlink" href="#uo.solution.solution.Solution.is_feasible" title="Link to this definition"></a></dt>
