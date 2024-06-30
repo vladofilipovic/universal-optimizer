@@ -117,7 +117,7 @@ def parse_arguments():
                 default='localSearchBestImprovement', 
                 help=("VNS parameter that determines local search type."))
         parser_vns.add_argument('--solutionType', type=str, 
-                choices=['int'],  
+                choices=['int', 'BitArray'],  
                 default='int', 
                 help=("VNS parameter that determines solution (representation) type."))
         parser_vns.add_argument('--solutionNumberOfIntervals', type=int, default=1000, 

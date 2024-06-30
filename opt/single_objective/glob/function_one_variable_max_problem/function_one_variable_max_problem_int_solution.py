@@ -99,7 +99,7 @@ class FunctionOneVariableMaxProblemIntSolution(Solution[int,float]):
         return self.representation
 
     def argument(self, representation:int)->float:
-        x:float = self.domain_from + representation * (self.domain_to - self.domain_from) / self.number_of_intervals
+        x:float = self.domain_from + float(representation) * (self.domain_to - self.domain_from) / self.number_of_intervals
         return x
     
     def init_random(self, problem:FunctionOneVariableMaxProblemMax)->None:

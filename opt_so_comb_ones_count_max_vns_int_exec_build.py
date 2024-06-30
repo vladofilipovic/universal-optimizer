@@ -150,8 +150,10 @@ class OnesCountMaxProblemIntSolutionVnsShakingSupport(VnsShakingSupport[int,str]
             if all_ok:
                 break
         if tries < limit:
+            optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             optimizer.evaluation += 1
             solution.evaluate(problem)
+            optimizer.write_output_values_if_needed("after_evaluation", "a_e")
             return True
         else:
             return False 
@@ -220,8 +222,10 @@ class OnesCountMaxProblemIntSolutionVnsLocalSearchSupport(VnsLocalSearchSupport[
         for i in range(0, problem.dimension):
             mask:int = 1 << i
             solution.representation ^= mask 
+            optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             optimizer.evaluation += 1
             solution.evaluate(problem)
+            optimizer.write_output_values_if_needed("after_evaluation", "a_e")
             if solution.is_better(start_sol, problem):
                 return True
             solution.representation ^= mask

@@ -40,20 +40,29 @@ from uo.utils.logger import logger
 from opt.single_objective.glob.function_one_variable_max_problem.command_line import default_parameters_cl
 from opt.single_objective.glob.function_one_variable_max_problem.command_line import parse_arguments
 
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support import \
+        VnsLocalSearchSupport
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support import \
+        VnsShakingSupport
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_rep_int import \
+        VnsLocalSearchSupportRepresentationInt
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_int import \
+        VnsShakingSupportRepresentationInt
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_rep_bit_array import \
+        VnsLocalSearchSupportRepresentationBitArray
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_bit_array import \
+        VnsShakingSupportRepresentationBitArray
+        
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
+
 from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem import \
         FunctionOneVariableMaxProblemMax
-
 from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_int_solution \
         import FunctionOneVariableMaxProblemIntSolution
-from opt.single_objective.glob.function_one_variable_max_problem\
-        .function_one_variable_max_problem_int_solution_vns_support import \
-        FunctionOneVariableMaxProblemIntSolutionVnsShakingSupport
-from opt.single_objective.glob.function_one_variable_max_problem\
-        .function_one_variable_max_problem_int_solution_vns_support import \
-        FunctionOneVariableMaxProblemIntSolutionVnsLocalSearchSupport
-    
-from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_solver import \
-        FunctionOneVariableMaxProblemSolver
+from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_bit_array_solution \
+        import FunctionOneVariableMaxProblemBitArraySolution
+
 
 """ 
 Solver.
@@ -182,8 +191,8 @@ def main():
             solution_type:str = parameters['solutionType']
             vns_shaking_support = None
             vns_ls_support = None
+            number_of_intervals:int = parameters['solutionNumberOfIntervals']
             if solution_type=='int':
-                number_of_intervals:int = parameters['solutionNumberOfIntervals']
                 solution:FunctionOneVariableMaxProblemIntSolution = \
                         FunctionOneVariableMaxProblemIntSolution(
                                 domain_from= problem.domain_low, 
@@ -194,10 +203,25 @@ def main():
                                 evaluation_cache_max_size=evaluation_cache_max_size,
                                 distance_calculation_cache_is_used=calculation_solution_distance_cache_is_used,
                                 distance_calculation_cache_max_size=calculation_solution_distance_cache_max_size)
-                vns_shaking_support:FunctionOneVariableMaxProblemIntSolutionVnsShakingSupport = \
-                        FunctionOneVariableMaxProblemIntSolutionVnsShakingSupport()
-                vns_ls_support:FunctionOneVariableMaxProblemIntSolutionVnsLocalSearchSupport = \
-                        FunctionOneVariableMaxProblemIntSolutionVnsLocalSearchSupport()
+                vns_shaking_support: VnsShakingSupport = \
+                        VnsShakingSupportRepresentationInt(solution.number_of_intervals)
+                vns_ls_support:VnsLocalSearchSupport = \
+                        VnsLocalSearchSupportRepresentationInt(solution.number_of_intervals)
+            elif solution_type=='BitArray':
+                solution:FunctionOneVariableMaxProblemBitArraySolution = \
+                        FunctionOneVariableMaxProblemBitArraySolution(
+                                domain_from= problem.domain_low, 
+                                domain_to= problem.domain_high,
+                                number_of_intervals= number_of_intervals, 
+                                random_seed= r_seed,
+                                evaluation_cache_is_used=evaluation_cache_is_used,
+                                evaluation_cache_max_size=evaluation_cache_max_size,
+                                distance_calculation_cache_is_used=calculation_solution_distance_cache_is_used,
+                                distance_calculation_cache_max_size=calculation_solution_distance_cache_max_size)
+                vns_shaking_support: VnsShakingSupport = \
+                        VnsShakingSupportRepresentationBitArray(solution.number_of_intervals)
+                vns_ls_support:VnsLocalSearchSupport = \
+                        VnsLocalSearchSupportRepresentationBitArray(solution.number_of_intervals)            
             else:
                 raise ValueError("Invalid solution/representation type is chosen.")
             # solver construction parameters
@@ -213,18 +237,17 @@ def main():
             vns_construction_params.k_min = k_min
             vns_construction_params.k_max = k_max
             vns_construction_params.local_search_type = local_search_type
-            solver:FunctionOneVariableMaxProblemSolver = FunctionOneVariableMaxProblemSolver.\
-                    from_variable_neighborhood_search(vns_construction_params)
+            solver:VnsOptimizer = VnsOptimizer.from_construction_tuple(vns_construction_params)
         else:
             raise ValueError('Invalid optimization algorithm is chosen.')
-        bs = solver.opt.optimize()
-        logger.debug('Method -{}- search finished.'.format(parameters['algorithm'])) 
+        bs = solver.optimize()
+        logger.debug('Method -{}- finished.'.format(parameters['algorithm'])) 
         logger.info('Best solution code: {}'.format(bs.string_representation()))            
         logger.info('Best solution objective: {}, fitness: {}'.format(bs.objective_value,
                 bs.fitness_value))
-        logger.info('Number of iterations: {}, evaluations: {}'.format(solver.opt.iteration, 
-                solver.opt.evaluation))  
-        logger.info('Execution: {} - {}'.format(solver.opt.execution_started, solver.opt.execution_ended))          
+        logger.info('Number of iterations: {}, evaluations: {}'.format(solver.iteration, 
+                solver.evaluation))  
+        logger.info('Execution: {} - {}'.format(solver.execution_started, solver.execution_ended))          
         logger.debug('Solver ended.')    
         return
     except Exception as exp:
@@ -233,8 +256,6 @@ def main():
         else:
             logger.exception('Exception: %s\n' % str(exp))
         
-# This means that if this script is executed, then 
-# main() will be executed
 
 if __name__ == '__main__':
     main()

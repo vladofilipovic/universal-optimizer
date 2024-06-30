@@ -75,8 +75,10 @@ class GaMutationSupportOnePointRepresentationBitArray(GaMutationSupport[BitArray
         for i in range(len(solution.representation)):
             if random() < self.mutation_probability:
                 solution.representation.invert(i)
+        optimizer.write_output_values_if_needed("before_evaluation", "b_e")
         optimizer.evaluation += 1
         solution.evaluate(problem)
+        optimizer.write_output_values_if_needed("after_evaluation", "b_e")
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:

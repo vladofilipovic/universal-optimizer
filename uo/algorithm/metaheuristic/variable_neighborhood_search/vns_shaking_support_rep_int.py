@@ -75,7 +75,7 @@ class VnsShakingSupportRepresentationInt(VnsShakingSupport[int,A_co]):
         """    
         if optimizer.should_finish():
             return False
-        if k <= 0:
+        if k < optimizer.k_min or k > optimizer.k_max:
             return False
         tries:int = 0
         limit:int = 10000

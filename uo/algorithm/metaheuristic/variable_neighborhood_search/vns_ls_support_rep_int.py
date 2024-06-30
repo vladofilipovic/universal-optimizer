@@ -74,7 +74,7 @@ class VnsLocalSearchSupportRepresentationInt(VnsLocalSearchSupport[int,A_co]):
         """
         if optimizer.should_finish():
             return False
-        if k < 1 or k > self.dimension:
+        if k < optimizer.k_min or k > optimizer.k_max:
             return False
         start_sol:Solution = solution.copy()
         best_sol:Solution = solution.copy()
@@ -123,7 +123,7 @@ class VnsLocalSearchSupportRepresentationInt(VnsLocalSearchSupport[int,A_co]):
         """
         if optimizer.should_finish():
             return False
-        if k < 1 or k > self.dimension:
+        if k < optimizer.k_min or k > optimizer.k_max:
             return False
         start_sol:Solution = solution.copy()
         # initialize indexes

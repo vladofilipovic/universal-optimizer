@@ -149,6 +149,41 @@
                 ]        
         },
         {
+            "name": "Pyt: Curr File F1V VNS BA",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "variable_neighborhood_search",
+                "--writeToOutputFile", "True",
+                "--outputFilePath", "opt/single_objective/glob/function_one_variable_max_problem/outputs/(7-x2)[-3,3].csv",
+                "--outputFileNameAppendTimeStamp", "False",
+                "--outputFields", "iteration, evaluation, best_solution.string_representation()",
+                "--outputMoments", "after_algorithm, after_iteration",
+                "--inputFilePath", "opt/single_objective/glob/function_one_variable_max_problem/inputs/(7-x2)[-3,3].txt", 
+                "--inputFormat", "txt",
+                "--finishCriteria", "evaluations & seconds",
+                "--finishEvaluationsMax", "3000",  
+                "--finishIterationsMax", "0",  
+                "--finishSecondsMax", "0",
+                "--randomSeed", "0", 
+                "--solutionEvaluationCacheIsUsed", "False", 
+                "--solutionEvaluationCacheMaxSize", "100000",
+                "--solutionDistanceCalculationCacheIsUsed", "False", 
+                "--solutionDistanceCalculationCacheMaxSize", "300000", 
+                "--additionalStatisticsIsActive", "False",
+                "--additionalStatisticsKeep", "none",
+                "--additionalStatisticsMaxLocalOptimaCount", "5",
+                "--kMin", "1",
+                "--kMax", "3", 
+                "--localSearchType", "localSearchFirstImprovement",
+                "--solutionType", "BitArray",
+                "--solutionNumberOfIntervals", "200"
+                ]        
+        },
+        {
             "name": "Pyt: Curr File F1V VNS I",
             "type": "python",
             "request": "launch",
@@ -180,7 +215,7 @@
                 "--kMax", "3", 
                 "--localSearchType", "localSearchBestImprovement",
                 "--solutionType", "int",
-                "--solutionNumberOfIntervals", "2000"
+                "--solutionNumberOfIntervals", "200"
                 ]        
         }
     ]
