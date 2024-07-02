@@ -37,6 +37,8 @@ class TestFunctionOneVariableMaxProblemIntSolutionVnsSupport(unittest.TestCase):
         optimizer_stub.should_finish = mocker.Mock(return_value=False)
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
         type(optimizer_stub).vns_shaking_support = mocker.PropertyMock(return_value=vns_sh_support)
+        optimizer_stub.k_min = 1
+        optimizer_stub.k_max = 10
         # Act
         result = vns_sh_support.shaking(1, problem, solution, optimizer_stub)
         # Assert
@@ -57,6 +59,8 @@ class TestFunctionOneVariableMaxProblemIntSolutionVnsSupport(unittest.TestCase):
         optimizer_stub.should_finish = mocker.Mock(return_value=False)
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
         type(optimizer_stub).vns_ls_support = mocker.PropertyMock(return_value=vns_ls_support)
+        optimizer_stub.k_min = 1
+        optimizer_stub.k_max = 10
         # Act
         old_fitness = solution.fitness_value
         result = vns_ls_support.local_search_best_improvement(1, problem, solution, optimizer_stub)
@@ -79,6 +83,8 @@ class TestFunctionOneVariableMaxProblemIntSolutionVnsSupport(unittest.TestCase):
         optimizer_stub.should_finish = mocker.Mock(return_value=False)
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
         type(optimizer_stub).vns_ls_support = mocker.PropertyMock(return_value=vns_ls_support)
+        optimizer_stub.k_min = 1
+        optimizer_stub.k_max = 10
         # Act
         old_fitness = solution.fitness_value
         result = vns_ls_support.local_search_best_improvement(1, problem, solution, optimizer_stub)
@@ -102,6 +108,8 @@ class TestFunctionOneVariableMaxProblemIntSolutionVnsSupport(unittest.TestCase):
         optimizer_stub.should_finish = mocker.Mock(return_value=False)
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
         type(optimizer_stub).vns_shaking_support = mocker.PropertyMock(return_value=vns_sh_support)
+        optimizer_stub.k_min = 1
+        optimizer_stub.k_max = 10
         # Act
         result = vns_sh_support.shaking(0, problem, solution, optimizer_stub)
         # Assert
@@ -123,6 +131,8 @@ class TestFunctionOneVariableMaxProblemIntSolutionVnsSupport(unittest.TestCase):
         optimizer_stub.should_finish = mocker.Mock(return_value=False)
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
         type(optimizer_stub).vns_ls_support = mocker.PropertyMock(return_value=vns_ls_support)
+        optimizer_stub.k_min = 1
+        optimizer_stub.k_max = 10
         # Act
         result = vns_ls_support.local_search_best_improvement(0, problem, solution, optimizer_stub)
         # Assert
@@ -149,6 +159,8 @@ class TestFunctionOneVariableMaxProblemIntSolutionVnsSupport(unittest.TestCase):
         optimizer_stub.should_finish = mocker.Mock(return_value=False)
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
         type(optimizer_stub).vns_ls_support = mocker.PropertyMock(return_value=vns_ls_support)
+        optimizer_stub.k_min = 1
+        optimizer_stub.k_max = 10
         # Act
         result = vns_ls_support.local_search_first_improvement(0, problem, solution, optimizer_stub)
         # Assert

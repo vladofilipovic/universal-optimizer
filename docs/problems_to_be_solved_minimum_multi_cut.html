@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Function One Variable Max Problem &mdash; Optimization Algorithms Library 0.1.0 documentation</title>
+  <title>Minimum Multi Cut Problem &mdash; Optimization Algorithms Library 0.1.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
@@ -22,8 +22,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Library" href="modules.html" />
-    <link rel="prev" title="Minimum Multi Cut Problem" href="problems_to_be_solved_minimum_multi_cut.html" /> 
+    <link rel="next" title="Function One Variable Max Problem" href="problems_to_be_solved_function_one_variable_max.html" />
+    <link rel="prev" title="Ones Count Max Problem" href="problems_to_be_solved_ones_count.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -55,8 +55,8 @@
 <li class="toctree-l1"><a class="reference internal" href="implemented_algorithms.html">Implemented algorithms</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="problems_to_be_solved.html">Problems to be solved</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="problems_to_be_solved_ones_count.html">Ones Count Max Problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="problems_to_be_solved_minimum_multi_cut.html">Minimum Multi Cut Problem</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Function One Variable Max Problem</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Minimum Multi Cut Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems_to_be_solved_function_one_variable_max.html">Function One Variable Max Problem</a></li>
 </ul>
 </li>
 </ul>
@@ -87,9 +87,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="problems_to_be_solved.html">Problems to be solved</a></li>
-      <li class="breadcrumb-item active">Function One Variable Max Problem</li>
+      <li class="breadcrumb-item active">Minimum Multi Cut Problem</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/problems_to_be_solved_function_one_variable_max.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/problems_to_be_solved_minimum_multi_cut.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -97,10 +97,23 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="function-one-variable-max-problem">
-<span id="problem-function-one-variable-max"></span><h1>Function One Variable Max Problem<a class="headerlink" href="#function-one-variable-max-problem" title="Link to this heading"></a></h1>
+  <section id="minimum-multi-cut-problem">
+<span id="problem-minimum-multi-cut"></span><h1>Minimum Multi Cut Problem<a class="headerlink" href="#minimum-multi-cut-problem" title="Link to this heading"></a></h1>
+<p>Minimum Multi Cut problem is the NP-hard problem of finding the minimum multi cut in a graph.</p>
+<p>## Problem Definition</p>
 <ul class="simple">
-<li><p>Function One Variable Max Problem. Problem is represented with class <a class="reference internal" href="opt.single_objective.glob.function_one_variable_max_problem.html#py-function-one-variable-max-problem"><span class="std std-ref">FunctionOneVariableMaxProblem</span></a>.</p></li>
+<li><p><strong>Instance:</strong> A graph G(V, E), a set S ⊆ V × V of source-terminal pairs, and a weight function w: E → N.</p></li>
+<li><p><strong>Solution:</strong> Find a multi-cut E’ ⊆ E such that removing E’ disconnects each source s from its corresponding terminal t for every pair (s, t) ∈ S.</p></li>
+<li><p><strong>Measure:</strong> Minimize the weight of the cut, defined as the sum of weights in E’</p></li>
+</ul>
+<ul>
+<li><p>Minimum Multi Cut Problem. Problem is represented with class <a class="reference internal" href="opt.single_objective.comb.minimum_multi_cut_problem.html#py-minimum-multi-cut-problem"><span class="std std-ref">MinimumMultiCutProblemProblem</span></a>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><cite>BitArray</cite> representation for solution of Max Ones Problem. Implementation of the solution with such representation is given with class <span class="xref std std-ref">MinimumMultiCutProblemProblemBitArraySolution</span>.</p></li>
+</ul>
+</div></blockquote>
+</li>
 </ul>
 </section>
 
@@ -108,8 +121,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="problems_to_be_solved_minimum_multi_cut.html" class="btn btn-neutral float-left" title="Minimum Multi Cut Problem" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="modules.html" class="btn btn-neutral float-right" title="Library" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="problems_to_be_solved_ones_count.html" class="btn btn-neutral float-left" title="Ones Count Max Problem" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="problems_to_be_solved_function_one_variable_max.html" class="btn btn-neutral float-right" title="Function One Variable Max Problem" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

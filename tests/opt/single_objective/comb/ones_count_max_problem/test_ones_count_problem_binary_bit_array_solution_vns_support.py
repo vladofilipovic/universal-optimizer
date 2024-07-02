@@ -45,6 +45,8 @@ class TestOnesCountMaxProblemBitArraySolutionVnsSupport(unittest.TestCase):
         optimizer_stub.should_finish = mocker.Mock(return_value=False)
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
         type(optimizer_stub).vns_support = mocker.PropertyMock(return_value=vns_support)
+        optimizer_stub.k_min = 1
+        optimizer_stub.k_max = 10
         # Act
         result = vns_support.shaking(5, problem, solution, optimizer_stub)
         # Assert
@@ -65,6 +67,8 @@ class TestOnesCountMaxProblemBitArraySolutionVnsSupport(unittest.TestCase):
         optimizer_stub.should_finish = mocker.Mock(return_value=False)
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=4)
         type(optimizer_stub).vns_support = mocker.PropertyMock(return_value=vns_support)
+        optimizer_stub.k_min = 1
+        optimizer_stub.k_max = 10
         # Act
         old_fitness = solution.fitness_value
         result = vns_support.local_search_best_improvement(3, problem, solution, optimizer_stub)
@@ -87,6 +91,8 @@ class TestOnesCountMaxProblemBitArraySolutionVnsSupport(unittest.TestCase):
         optimizer_stub.should_finish = mocker.Mock(return_value=False)
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
         type(optimizer_stub).vns_support = mocker.PropertyMock(return_value=vns_support)
+        optimizer_stub.k_min = 1
+        optimizer_stub.k_max = 10
         # Act
         old_fitness = solution.fitness_value
         result = vns_support.local_search_first_improvement(3, problem, solution, optimizer_stub)
@@ -109,6 +115,8 @@ class TestOnesCountMaxProblemBitArraySolutionVnsSupport(unittest.TestCase):
         optimizer_stub.should_finish = mocker.Mock(return_value=False) 
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
         type(optimizer_stub).vns_support = mocker.PropertyMock(return_value=vns_support)
+        optimizer_stub.k_min = 1
+        optimizer_stub.k_max = 10
         # Act
         vns_support.shaking(5, problem, solution, optimizer_stub)
         # Assert
@@ -129,6 +137,8 @@ class TestOnesCountMaxProblemBitArraySolutionVnsSupport(unittest.TestCase):
         optimizer_stub.should_finish = mocker.Mock(return_value=False)
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
         type(optimizer_stub).vns_support = mocker.PropertyMock(return_value=vns_support)        
+        optimizer_stub.k_min = 1
+        optimizer_stub.k_max = 10
         # Act
         old_fitness = solution.fitness_value
         result = vns_support.local_search_best_improvement(3, problem, solution, optimizer_stub)
@@ -151,6 +161,8 @@ class TestOnesCountMaxProblemBitArraySolutionVnsSupport(unittest.TestCase):
         optimizer_stub.should_finish = mocker.Mock(return_value=False)
         type(optimizer_stub).evaluation = mocker.PropertyMock(return_value=0)
         type(optimizer_stub).vns_support = mocker.PropertyMock(return_value=vns_support)        
+        optimizer_stub.k_min = 1
+        optimizer_stub.k_max = 10
         # Act
         old_fitness = solution.fitness_value
         result = vns_support.local_search_first_improvement(3, problem, solution, optimizer_stub)

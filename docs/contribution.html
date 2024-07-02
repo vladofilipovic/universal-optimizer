@@ -98,15 +98,15 @@
 <h1>How to Contribute<a class="headerlink" href="#how-to-contribute" title="Link to this heading"></a></h1>
 <p>This system is developed in <a class="reference external" href="https://www.python.org">Python</a> programming language, using <a class="reference external" href="https://python-poetry.org">poetry</a> as project and package manager, <a class="reference external" href="https://docs.python.org/3/library/unitest.html">unittest</a>  library for unit testing and <a class="reference external" href="https://www.sphinx-doc.org/en/master">Sphinx</a> system for documentation generation. Same tool set should be use for contribution to the project.</p>
 <p>Contribution is encouraged in following four domains:</p>
-<ol class="arabic">
+<ol class="loweralpha">
 <li><p>Designing novel optimization methods. Requirements:</p>
 <blockquote>
 <div><ol class="arabic">
 <li><p>Algorithms should be derived from the specified class.</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Class that implements metaheuristic optimization should be derived either from the <a class="reference internal" href="uo.algorithm.metaheuristic.html#uo.algorithm.metaheuristic.single_solution_metaheuristic.SingleSolutionMetaheuristic" title="uo.algorithm.metaheuristic.single_solution_metaheuristic.SingleSolutionMetaheuristic"><code class="xref py py-class docutils literal notranslate"><span class="pre">uo.algorithm.metaheuristic.single_solution_metaheuristic.SingleSolutionMetaheuristic</span></code></a> class, or from the <a class="reference internal" href="uo.algorithm.metaheuristic.html#uo.algorithm.metaheuristic.population_based_metaheuristic.PopulationBasedMetaheuristic" title="uo.algorithm.metaheuristic.population_based_metaheuristic.PopulationBasedMetaheuristic"><code class="xref py py-class docutils literal notranslate"><span class="pre">uo.algorithm.metaheuristic.population_based_metaheuristic.PopulationBasedMetaheuristic</span></code></a>. It should be placed into separate directory within <cite>uo/algorithm/metaheuristic/</cite> directory.</p></li>
-<li><p>Class that implements exact optimization should be derived from the <code class="xref py py-class docutils literal notranslate"><span class="pre">uo.algorithm.Algorithm</span></code> class. That class should be placed into separate directory within <cite>/uo/algorithm/</cite> directory.</p></li>
+<li><p>Class that implements metaheuristic optimization should be derived either from the <a class="reference internal" href="uo.algorithm.metaheuristic.html#uo.algorithm.metaheuristic.single_solution_metaheuristic.SingleSolutionMetaheuristic" title="uo.algorithm.metaheuristic.single_solution_metaheuristic.SingleSolutionMetaheuristic"><code class="xref py py-class docutils literal notranslate"><span class="pre">uo.algorithm.metaheuristic.single_solution_metaheuristic.SingleSolutionMetaheuristic</span></code></a> class, or from the <a class="reference internal" href="uo.algorithm.metaheuristic.html#uo.algorithm.metaheuristic.population_based_metaheuristic.PopulationBasedMetaheuristic" title="uo.algorithm.metaheuristic.population_based_metaheuristic.PopulationBasedMetaheuristic"><code class="xref py py-class docutils literal notranslate"><span class="pre">uo.algorithm.metaheuristic.population_based_metaheuristic.PopulationBasedMetaheuristic</span></code></a>. It should be placed into separate directory within <code class="file docutils literal notranslate"><span class="pre">/uo/algorithm/metaheuristic/</span></code> directory.</p></li>
+<li><p>Class that implements exact optimization should be derived from the <code class="xref py py-class docutils literal notranslate"><span class="pre">uo.algorithm.Algorithm</span></code> class. That class should be placed into separate directory within <code class="file docutils literal notranslate"><span class="pre">/uo/algorithm/</span></code> directory.</p></li>
 </ul>
 </div></blockquote>
 </li>
@@ -124,7 +124,7 @@
 <div><ul class="simple">
 <li><p>Implemented programming code should be fully covered with unit tests.</p></li>
 <li><p>Here, <cite>unittest</cite> framework  used.</p></li>
-<li><p>Test should be placed into separate directory under directory <cite>/tests/uo/</cite>.</p></li>
+<li><p>Test should be placed into separate sub-directory under <code class="file docutils literal notranslate"><span class="pre">/tests/uo/</span></code> directory.</p></li>
 <li><p>All developed code should be covered with unit test, and test coverage rate should be not less than 80%.</p></li>
 </ul>
 </div></blockquote>
@@ -135,11 +135,29 @@
 <li><p>Building application for solving optimization problems. Requirements:</p>
 <blockquote>
 <div><ol class="arabic">
-<li><p>All parameters that should be set in order to tune application should be accessible to user through command-line parameters. Command-line parameters should have sufficient and adequate help system.</p></li>
+<li><p>Program code for specific problem should to be put into the respective directory.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Each of the problems should have its own directory, with name equals to problem name.</p></li>
+<li><p>Code for multi-objective optimization should be placed under <code class="file docutils literal notranslate"><span class="pre">/opt/multi_objective/</span></code> directory, while code for single-objective optimization should be placed under <code class="file docutils literal notranslate"><span class="pre">/opt/single_objective/</span></code> directory.</p></li>
+<li><p>Code for single-objective combinatorial optimization should be placed under <code class="file docutils literal notranslate"><span class="pre">opt/single_objective/comb/</span></code> directory, for single-objective constraint optimization within the <code class="file docutils literal notranslate"><span class="pre">/opt/single_objective/constraint/</span></code> directory, and code for single-objective global optimization in <code class="file docutils literal notranslate"><span class="pre">/opt/single_objective/global/</span></code> directory.</p></li>
+</ul>
+</div></blockquote>
+</li>
 <li><p>Implemented applications should have examples of use for every approach contained within application.</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Those examples should be placed in root folder, with file name <cite>example-&lt;algorithm&gt;-&lt;problem&gt;.py</cite>.</p></li>
+<li><p>Those examples should be placed in root <code class="file docutils literal notranslate"><span class="pre">/</span></code> directory, and file name for example should be <code class="file docutils literal notranslate"><span class="pre">&lt;problem&gt;_&lt;algorithm&gt;_&lt;representation&gt;_exec.py</span></code>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>For each problem under consideration, there should be one file (named <code class="file docutils literal notranslate"><span class="pre">solver.py</span></code>, within the respective problem directory). That file will be entry point for all the methods aimed at solving the specific problem. All parameters that governs methods execution should be accessible to user through command-line parameters. Command-line parameters should have sufficient and adequate help system.</p></li>
+<li><p>Unit testing coverage.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Implemented programming code should be fully covered with unit tests, and <cite>unittest</cite> framework is used.</p></li>
+<li><p>Test should be placed into separate sub-directory under <code class="file docutils literal notranslate"><span class="pre">/tests/opt/</span></code> directory. Directory structure within <code class="file docutils literal notranslate"><span class="pre">/test/opt/</span></code> directory should mirror directory structure of the <code class="file docutils literal notranslate"><span class="pre">/opt/</span></code> directory.</p></li>
+<li><p>All developed code should be covered with unit test, and test coverage rate should be not less than 80%.</p></li>
 </ul>
 </div></blockquote>
 </li>
@@ -149,14 +167,16 @@
 <li><p>Designing and executing comparison experiments, using previously builded applications. Requirements:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li><p>Experiments should use only previously developed applications, not Python programming constructs. It should be invoked by batch/command file.</p></li>
+<li><p>Experiments should use only previously developed applications, not Python programming constructs. Comparison experiments should be invoked by batch/command file.</p></li>
+<li><p>Comparison experiments should be placed under <code class="file docutils literal notranslate"><span class="pre">/comparison/</span></code> directory.</p></li>
 </ol>
 </div></blockquote>
 </li>
 <li><p>Visualizing experimentally obtained data (either data about comparison, either data about algorithm execution). Requirements:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li><p>Experiments should use only previously developed applications, not Python programming constructs.</p></li>
+<li><p>Developed solution for the problems under consideration should be visualized. Visualizations should be invoked by batch/command file.</p></li>
+<li><p>Visualization efforts should be placed under <code class="file docutils literal notranslate"><span class="pre">/visualization/</span></code> directory.</p></li>
 </ol>
 </div></blockquote>
 </li>
@@ -166,37 +186,77 @@
 <h1>Contributors<a class="headerlink" href="#contributors" title="Link to this heading"></a></h1>
 <section id="contribution-domains">
 <h2>Contribution domains<a class="headerlink" href="#contribution-domains" title="Link to this heading"></a></h2>
-<ol class="arabic">
-<li><p>Contribution in the designing novel optimization methods:</p>
+<ol class="loweralpha">
+<li><p>Contribution in the designing novel <strong>optimization methods</strong>:</p>
+<blockquote>
+<div><p>a.1. Library and application:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li><p>Library structure and organization - <a class="reference internal" href="#vladimirfilipovic" id="id1"><span>[VladimirFilipovic]</span></a></p></li>
-<li><p>Total Enumeration exact algorithm (using binary string structure) - <a class="reference internal" href="#vladimirfilipovic" id="id2"><span>[VladimirFilipovic]</span></a></p></li>
-<li><p>Variable Neighborhood Search <a class="reference internal" href="implemented_algorithms_vns.html#algorithm-variable-neighborhood-search"><span class="std std-ref">Variable Neighborhood Search</span></a> metaheuristics - <a class="reference internal" href="#vladimirfilipovic" id="id3"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Initial overall structure and organization - <a class="reference internal" href="#vladimirfilipovic" id="id1"><span>[VladimirFilipovic]</span></a></p></li>
 </ol>
 </div></blockquote>
-</li>
-<li><p>Contribution in solving optimization problems:</p>
+<p>a.2. Total Enumeration (TE) exact algorithm:</p>
 <blockquote>
-<div><ol class="arabic">
-<li><p>Ones Count Optimization Problem <a class="reference internal" href="problems_to_be_solved_ones_count.html#problem-ones-count-max"><span class="std std-ref">Ones Count Max Problem</span></a>:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>Integer Linear programming method (using <cite>linopy</cite> library) - <a class="reference internal" href="#vladimirfilipovic" id="id4"><span>[VladimirFilipovic]</span></a></p></li>
-<li><p>Total Enumeration method, with solution that has binary representation (using <cite>BitArray</cite> object) - <a class="reference internal" href="#vladimirfilipovic" id="id5"><span>[VladimirFilipovic]</span></a></p></li>
-<li><p>Variable Neighborhood Search method, with solution that has binary representation (using <cite>BitArray</cite> object) - <a class="reference internal" href="#vladimirfilipovic" id="id6"><span>[VladimirFilipovic]</span></a></p></li>
-<li><p>Variable Neighborhood Search method, with solution that has binary representation (using <cite>int</cite>) - <a class="reference internal" href="#vladimirfilipovic" id="id7"><span>[VladimirFilipovic]</span></a></p></li>
-</ul>
-</div></blockquote>
-</li>
-<li><p>Max Function One Variable Problem:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>Total Enumeration method, with solution that has binary representation (using <cite>int</cite> object) - <a class="reference internal" href="#vladimirfilipovic" id="id8"><span>[VladimirFilipovic]</span></a></p></li>
-</ul>
-</div></blockquote>
-</li>
+<div><ol class="arabic simple" start="2">
+<li><p>Structure, organization and main loop implementation - <a class="reference internal" href="#vladimirfilipovic" id="id2"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Implementation with bit-array based complex counters (class <code class="xref py py-class docutils literal notranslate"><span class="pre">ComplexCounterBitArrayFull</span></code>, using <cite>bitstring.BitArray</cite> class) - <a class="reference internal" href="#vladimirfilipovic" id="id3"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Implementation with int based complex counters (classes <code class="xref py py-class docutils literal notranslate"><span class="pre">ComplexCounterUniformFull</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">ComplexCounterUniformAscending</span></code>, using <cite>int</cite> values) - <a class="reference internal" href="#vladimirfilipovic" id="id4"><span>[VladimirFilipovic]</span></a></p></li>
 </ol>
+</div></blockquote>
+<p>a.3. Variable Neighborhood Search <a class="reference internal" href="implemented_algorithms_vns.html#algorithm-variable-neighborhood-search"><span class="std std-ref">Variable Neighborhood Search</span></a> (VNS) metaheuristics:</p>
+<blockquote>
+<div><ol class="arabic simple" start="5">
+<li><p>Structure, organization and main loop implementation - <a class="reference internal" href="#vladimirfilipovic" id="id5"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Implementation of shaking and local searches with binary representation  (in class <code class="xref py py-class docutils literal notranslate"><span class="pre">VnsShakingSupportRepresentationInt</span></code>, using <a href="#id6"><span class="problematic" id="id7">:type:`int`</span></a> predefined type) - <a class="reference internal" href="#vladimirfilipovic" id="id8"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Implementation of shaking and local searches with binary representation (in class <code class="xref py py-class docutils literal notranslate"><span class="pre">VnsShakingSupportRepresentationBitArray</span></code>,using <code class="xref py py-class docutils literal notranslate"><span class="pre">bitstring.BitArray</span></code> class) - <a class="reference internal" href="#vladimirfilipovic" id="id9"><span>[VladimirFilipovic]</span></a></p></li>
+</ol>
+</div></blockquote>
+<p>a.4. Genetic Algorithms <span class="xref std std-ref">Algorithm_Genetic_Algorithms</span> (GA) metaheuristics:</p>
+<blockquote>
+<div><ol class="arabic simple" start="8">
+<li><p>Structure, organization and main loop implementation - <a class="reference internal" href="#markoradosavljevic" id="id10"><span>[MarkoRadosavljevic]</span></a>, <a class="reference internal" href="#vladimirfilipovic" id="id11"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Making class <code class="xref py py-class docutils literal notranslate"><span class="pre">uo.algorithm.metaheuristic.genetic_algorithm.GaOptimizer</span></code> to be abstract and dividing its functionality into non-abstract classes <code class="xref py py-class docutils literal notranslate"><span class="pre">uo.algorithm.metaheuristic.genetic_algorithm.GaOptimizerGenerational</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">uo.algorithm.metaheuristic.genetic_algorithm.GaOptimizerSteadyState</span></code> - <a class="reference internal" href="#vladimirfilipovic" id="id12"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Implementation of GA selection methods (in classes: <code class="xref py py-class docutils literal notranslate"><span class="pre">SelectionIdle</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">SelectionRoulette</span></code>)  - <a class="reference internal" href="#markoradosavljevic" id="id13"><span>[MarkoRadosavljevic]</span></a></p></li>
+<li><p>Implementation of GA crossover one point method (contained within class: <code class="xref py py-class docutils literal notranslate"><span class="pre">GaCrossoverSupportOnePointRepresentationBitArray</span></code>), with binary representation (using <cite>bitstring.BitArray</cite> class) - <a class="reference internal" href="#markoradosavljevic" id="id14"><span>[MarkoRadosavljevic]</span></a></p></li>
+<li><p>Implementation of GA mutation one point method (contained within class: <code class="xref py py-class docutils literal notranslate"><span class="pre">GaMutationSupportOnePointRepresentationBitArray</span></code>), with binary representation (using <cite>bitstring.BitArray</cite> class) - <a class="reference internal" href="#markoradosavljevic" id="id15"><span>[MarkoRadosavljevic]</span></a></p></li>
+</ol>
+</div></blockquote>
+</div></blockquote>
+</li>
+<li><p>Contribution in solving <strong>combinatorial</strong> optimization problems:</p>
+<blockquote>
+<div><p>b.1. Ones Count Max Problem <a class="reference internal" href="problems_to_be_solved_ones_count.html#problem-ones-count-max"><span class="std std-ref">Ones Count Max Problem</span></a>:</p>
+<blockquote>
+<div><ol class="arabic simple" start="13">
+<li><p>Representation of the problem (in class <code class="xref py py-class docutils literal notranslate"><span class="pre">OnesCountMaxProblem</span></code>) and solution (<cite>BitArray</cite>-based in class <code class="xref py py-class docutils literal notranslate"><span class="pre">OnesCountMaxProblemBitArraySolution</span></code> and <cite>int</cite>-based in class <code class="xref py py-class docutils literal notranslate"><span class="pre">OnesCountMaxProblemIntSolution</span></code>) - <a class="reference internal" href="#vladimirfilipovic" id="id16"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Integer Linear Programming method (using <cite>linopy</cite> library) - <a class="reference internal" href="#vladimirfilipovic" id="id17"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Total Enumeration method, with solution that has binary <cite>BitArray</cite> representation - <a class="reference internal" href="#vladimirfilipovic" id="id18"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Variable Neighborhood Search method, with solution that has binary <cite>BitArray</cite> representation - <a class="reference internal" href="#vladimirfilipovic" id="id19"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Variable Neighborhood Search method, with solution that has binary <cite>int</cite> representation - <a class="reference internal" href="#vladimirfilipovic" id="id20"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Genetic Algorithm method, with solution that has binary <cite>BitArray</cite> representation - <a class="reference internal" href="#vladimirfilipovic" id="id21"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Entry point of the all methods for solving this problem, in file <code class="file docutils literal notranslate"><span class="pre">/opt/single_objective/comb/ones_count_max_problem/solver.py</span></code>. All parameters that governs method execution are accessible to user through command-line.  - <a class="reference internal" href="#vladimirfilipovic" id="id22"><span>[VladimirFilipovic]</span></a></p></li>
+</ol>
+</div></blockquote>
+<p>b.2. Minimum Multi Cut Problem <a class="reference internal" href="problems_to_be_solved_minimum_multi_cut.html#problem-minimum-multi-cut"><span class="std std-ref">Minimum Multi Cut Problem</span></a>:</p>
+<blockquote>
+<div><ol class="arabic simple" start="20">
+<li><p>Representation of the problem (in class <code class="xref py py-class docutils literal notranslate"><span class="pre">MinimumMultiCutProblem</span></code>, that uses <cite>ng.Graph</cite> class for class representation) and solution with <cite>BitArray</cite>-based representation (in class <code class="xref py py-class docutils literal notranslate"><span class="pre">MinimumMultiCutProblemBitArraySolution</span></code>) - <a class="reference internal" href="#markoradosavljevic" id="id23"><span>[MarkoRadosavljevic]</span></a></p></li>
+<li><p>Variable Neighborhood Search method, with solution that has binary <cite>BitArray</cite> representation - <a class="reference internal" href="#markoradosavljevic" id="id24"><span>[MarkoRadosavljevic]</span></a></p></li>
+<li><p>Genetic Algorithm method, with solution that has binary <cite>BitArray</cite> representation - <a class="reference internal" href="#markoradosavljevic" id="id25"><span>[MarkoRadosavljevic]</span></a></p></li>
+</ol>
+</div></blockquote>
+</div></blockquote>
+</li>
+<li><p>Contribution in solving <strong>global</strong> optimization problems:</p>
+<blockquote>
+<div><p>c.1. Max Function One Variable Problem:</p>
+<blockquote>
+<div><ol class="arabic simple" start="23">
+<li><p>Variable Neighborhood Search method, with solution that has binary <cite>BitArray</cite> representation - <a class="reference internal" href="#vladimirfilipovic" id="id26"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Variable Neighborhood Search method, with solution that has binary <cite>int</cite> representation - <a class="reference internal" href="#vladimirfilipovic" id="id27"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Entry point of the all methods for solving this problem, in file <code class="file docutils literal notranslate"><span class="pre">/opt/single_objective/glob/function_one_variable_max_problem/solver.py</span></code>. All parameters that governs method execution are accessible to user through command-line.  - <a class="reference internal" href="#vladimirfilipovic" id="id28"><span>[VladimirFilipovic]</span></a></p></li>
+</ol>
+</div></blockquote>
 </div></blockquote>
 </li>
 </ol>
@@ -206,8 +266,13 @@
 <div role="list" class="citation-list">
 <div class="citation" id="vladimirfilipovic" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>VladimirFilipovic<span class="fn-bracket">]</span></span>
-<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id2">2</a>,<a role="doc-backlink" href="#id3">3</a>,<a role="doc-backlink" href="#id4">4</a>,<a role="doc-backlink" href="#id5">5</a>,<a role="doc-backlink" href="#id6">6</a>,<a role="doc-backlink" href="#id7">7</a>,<a role="doc-backlink" href="#id8">8</a>)</span>
-<p>Vladimir Filipović, github: <a class="reference external" href="https://github.com/vladofilipovic">https://github.com/vladofilipovic</a>, www: <a class="reference external" href="https://vladofilipovic.github.io">https://vladofilipovic.github.io</a> e-mail: <a class="reference external" href="mailto:vladofilipovic&#37;&#52;&#48;hotmail&#46;com">vladofilipovic<span>&#64;</span>hotmail<span>&#46;</span>com</a></p>
+<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id2">2</a>,<a role="doc-backlink" href="#id3">3</a>,<a role="doc-backlink" href="#id4">4</a>,<a role="doc-backlink" href="#id5">5</a>,<a role="doc-backlink" href="#id8">6</a>,<a role="doc-backlink" href="#id9">7</a>,<a role="doc-backlink" href="#id11">8</a>,<a role="doc-backlink" href="#id12">9</a>,<a role="doc-backlink" href="#id16">10</a>,<a role="doc-backlink" href="#id17">11</a>,<a role="doc-backlink" href="#id18">12</a>,<a role="doc-backlink" href="#id19">13</a>,<a role="doc-backlink" href="#id20">14</a>,<a role="doc-backlink" href="#id21">15</a>,<a role="doc-backlink" href="#id22">16</a>,<a role="doc-backlink" href="#id26">17</a>,<a role="doc-backlink" href="#id27">18</a>,<a role="doc-backlink" href="#id28">19</a>)</span>
+<p>Vladimir Filipović, <a class="reference external" href="https://github.com/vladofilipovic">Github</a> e-mail: <a class="reference external" href="mailto:vladofilipovic&#37;&#52;&#48;hotmail&#46;com">vladofilipovic<span>&#64;</span>hotmail<span>&#46;</span>com</a></p>
+</div>
+<div class="citation" id="markoradosavljevic" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>MarkoRadosavljevic<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id10">1</a>,<a role="doc-backlink" href="#id13">2</a>,<a role="doc-backlink" href="#id14">3</a>,<a role="doc-backlink" href="#id15">4</a>,<a role="doc-backlink" href="#id23">5</a>,<a role="doc-backlink" href="#id24">6</a>,<a role="doc-backlink" href="#id25">7</a>)</span>
+<p>Marko Radosavljević, <a class="reference external" href="https://github.com/Markic01">Github</a> e-mail: <a class="reference external" href="mailto:mi20079&#37;&#52;&#48;alas&#46;matf&#46;bg&#46;ac&#46;rs">mi20079<span>&#64;</span>alas<span>&#46;</span>matf<span>&#46;</span>bg<span>&#46;</span>ac<span>&#46;</span>rs</a></p>
 </div>
 </div>
 </section>
