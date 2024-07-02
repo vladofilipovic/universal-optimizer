@@ -20,7 +20,7 @@ a. Designing novel optimization methods. Requirements:
         
         - All programming objects (classes, functions, etc.) should be properly documented using the system `Sphinx`, reStructuredText and doc comments within the code.
 
-        - Each of the implemented algorithm should have separate documentation web page, where that algorithm is described and documented. There should be the link from doc comments within implemented functionality toward the web page that explains algorithm and vice versa.  
+        - Each of the implemented algorithm should have separate documentation web page, where that algorithm is described and documented. At least, there should be the link from doc comments within implemented functionality toward the web page that explains algorithm and vice versa.  
 
     3. Unit testing coverage.
     
@@ -51,8 +51,17 @@ b. Building application for solving optimization problems. Requirements:
 
     3. For each problem under consideration, there should be one file (named :file:`solver.py`, within the respective problem directory). That file will be entry point for all the methods aimed at solving the specific problem. All parameters that governs methods execution should be accessible to user through command-line parameters. Command-line parameters should have sufficient and adequate help system.
 
-    
-    4. Unit testing coverage.
+
+    4. Type hints and documentation.
+
+        - All programming objects (classes, functions, variables, parameters, optional parameters etc.) should be `type-hinted <https://www.infoworld.com/article/3630372/get-started-with-python-type-hints.html>`_
+        
+        - All programming objects (classes, functions, etc.) should be properly documented using the system `Sphinx`, reStructuredText and doc comments within the code.
+
+        - Problem that is solved should have separate documentation web page, where that problem is described and documented. At least, there should be the link from problem web page toward the web page that explains method that is used and vice versa.  
+
+
+    5. Unit testing coverage.
     
         - Implemented programming code should be fully covered with unit tests, and `unittest` framework is used. 
         

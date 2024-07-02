@@ -115,7 +115,7 @@
 <div><ul class="simple">
 <li><p>All programming objects (classes, functions, variables, parameters, optional parameters etc.) should be <a class="reference external" href="https://www.infoworld.com/article/3630372/get-started-with-python-type-hints.html">type-hinted</a></p></li>
 <li><p>All programming objects (classes, functions, etc.) should be properly documented using the system <cite>Sphinx</cite>, reStructuredText and doc comments within the code.</p></li>
-<li><p>Each of the implemented algorithm should have separate documentation web page, where that algorithm is described and documented. There should be the link from doc comments within implemented functionality toward the web page that explains algorithm and vice versa.</p></li>
+<li><p>Each of the implemented algorithm should have separate documentation web page, where that algorithm is described and documented. At least, there should be the link from doc comments within implemented functionality toward the web page that explains algorithm and vice versa.</p></li>
 </ul>
 </div></blockquote>
 </li>
@@ -152,6 +152,15 @@
 </div></blockquote>
 </li>
 <li><p>For each problem under consideration, there should be one file (named <code class="file docutils literal notranslate"><span class="pre">solver.py</span></code>, within the respective problem directory). That file will be entry point for all the methods aimed at solving the specific problem. All parameters that governs methods execution should be accessible to user through command-line parameters. Command-line parameters should have sufficient and adequate help system.</p></li>
+<li><p>Type hints and documentation.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>All programming objects (classes, functions, variables, parameters, optional parameters etc.) should be <a class="reference external" href="https://www.infoworld.com/article/3630372/get-started-with-python-type-hints.html">type-hinted</a></p></li>
+<li><p>All programming objects (classes, functions, etc.) should be properly documented using the system <cite>Sphinx</cite>, reStructuredText and doc comments within the code.</p></li>
+<li><p>Problem that is solved should have separate documentation web page, where that problem is described and documented. At least, there should be the link from problem web page toward the web page that explains method that is used and vice versa.</p></li>
+</ul>
+</div></blockquote>
+</li>
 <li><p>Unit testing coverage.</p>
 <blockquote>
 <div><ul class="simple">
@@ -192,33 +201,33 @@
 <div><p>a.1. Library and application:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li><p>Initial overall structure and organization - <a class="reference internal" href="#vladimirfilipovic" id="id1"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Initial overall structure and organization - <a class="reference internal" href="#vladimirfilipovic" id="id2"><span>[VladimirFilipovic]</span></a></p></li>
 </ol>
 </div></blockquote>
 <p>a.2. Total Enumeration (TE) exact algorithm:</p>
 <blockquote>
 <div><ol class="arabic simple" start="2">
-<li><p>Structure, organization and main loop implementation - <a class="reference internal" href="#vladimirfilipovic" id="id2"><span>[VladimirFilipovic]</span></a></p></li>
-<li><p>Implementation with bit-array based complex counters (class <code class="xref py py-class docutils literal notranslate"><span class="pre">ComplexCounterBitArrayFull</span></code>, using <cite>bitstring.BitArray</cite> class) - <a class="reference internal" href="#vladimirfilipovic" id="id3"><span>[VladimirFilipovic]</span></a></p></li>
-<li><p>Implementation with int based complex counters (classes <code class="xref py py-class docutils literal notranslate"><span class="pre">ComplexCounterUniformFull</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">ComplexCounterUniformAscending</span></code>, using <cite>int</cite> values) - <a class="reference internal" href="#vladimirfilipovic" id="id4"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Structure, organization and main loop implementation - <a class="reference internal" href="#vladimirfilipovic" id="id3"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Implementation with bit-array based complex counters (class <code class="xref py py-class docutils literal notranslate"><span class="pre">ComplexCounterBitArrayFull</span></code>, using <cite>bitstring.BitArray</cite> class) - <a class="reference internal" href="#vladimirfilipovic" id="id4"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Implementation with int based complex counters (classes <code class="xref py py-class docutils literal notranslate"><span class="pre">ComplexCounterUniformFull</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">ComplexCounterUniformAscending</span></code>, using <cite>int</cite> values) - <a class="reference internal" href="#vladimirfilipovic" id="id5"><span>[VladimirFilipovic]</span></a></p></li>
 </ol>
 </div></blockquote>
 <p>a.3. Variable Neighborhood Search <a class="reference internal" href="implemented_algorithms_vns.html#algorithm-variable-neighborhood-search"><span class="std std-ref">Variable Neighborhood Search</span></a> (VNS) metaheuristics:</p>
 <blockquote>
 <div><ol class="arabic simple" start="5">
-<li><p>Structure, organization and main loop implementation - <a class="reference internal" href="#vladimirfilipovic" id="id5"><span>[VladimirFilipovic]</span></a></p></li>
-<li><p>Implementation of shaking and local searches with binary representation  (in class <code class="xref py py-class docutils literal notranslate"><span class="pre">VnsShakingSupportRepresentationInt</span></code>, using <a href="#id6"><span class="problematic" id="id7">:type:`int`</span></a> predefined type) - <a class="reference internal" href="#vladimirfilipovic" id="id8"><span>[VladimirFilipovic]</span></a></p></li>
-<li><p>Implementation of shaking and local searches with binary representation (in class <code class="xref py py-class docutils literal notranslate"><span class="pre">VnsShakingSupportRepresentationBitArray</span></code>,using <code class="xref py py-class docutils literal notranslate"><span class="pre">bitstring.BitArray</span></code> class) - <a class="reference internal" href="#vladimirfilipovic" id="id9"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Structure, organization and main loop implementation - <a class="reference internal" href="#vladimirfilipovic" id="id6"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Implementation of shaking and local searches with binary representation  (in class <code class="xref py py-class docutils literal notranslate"><span class="pre">VnsShakingSupportRepresentationInt</span></code>, using <a href="#id7"><span class="problematic" id="id8">:type:`int`</span></a> predefined type) - <a class="reference internal" href="#vladimirfilipovic" id="id9"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Implementation of shaking and local searches with binary representation (in class <code class="xref py py-class docutils literal notranslate"><span class="pre">VnsShakingSupportRepresentationBitArray</span></code>,using <code class="xref py py-class docutils literal notranslate"><span class="pre">bitstring.BitArray</span></code> class) - <a class="reference internal" href="#vladimirfilipovic" id="id10"><span>[VladimirFilipovic]</span></a></p></li>
 </ol>
 </div></blockquote>
 <p>a.4. Genetic Algorithms <span class="xref std std-ref">Algorithm_Genetic_Algorithms</span> (GA) metaheuristics:</p>
 <blockquote>
 <div><ol class="arabic simple" start="8">
-<li><p>Structure, organization and main loop implementation - <a class="reference internal" href="#markoradosavljevic" id="id10"><span>[MarkoRadosavljevic]</span></a>, <a class="reference internal" href="#vladimirfilipovic" id="id11"><span>[VladimirFilipovic]</span></a></p></li>
-<li><p>Making class <code class="xref py py-class docutils literal notranslate"><span class="pre">uo.algorithm.metaheuristic.genetic_algorithm.GaOptimizer</span></code> to be abstract and dividing its functionality into non-abstract classes <code class="xref py py-class docutils literal notranslate"><span class="pre">uo.algorithm.metaheuristic.genetic_algorithm.GaOptimizerGenerational</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">uo.algorithm.metaheuristic.genetic_algorithm.GaOptimizerSteadyState</span></code> - <a class="reference internal" href="#vladimirfilipovic" id="id12"><span>[VladimirFilipovic]</span></a></p></li>
-<li><p>Implementation of GA selection methods (in classes: <code class="xref py py-class docutils literal notranslate"><span class="pre">SelectionIdle</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">SelectionRoulette</span></code>)  - <a class="reference internal" href="#markoradosavljevic" id="id13"><span>[MarkoRadosavljevic]</span></a></p></li>
-<li><p>Implementation of GA crossover one point method (contained within class: <code class="xref py py-class docutils literal notranslate"><span class="pre">GaCrossoverSupportOnePointRepresentationBitArray</span></code>), with binary representation (using <cite>bitstring.BitArray</cite> class) - <a class="reference internal" href="#markoradosavljevic" id="id14"><span>[MarkoRadosavljevic]</span></a></p></li>
-<li><p>Implementation of GA mutation one point method (contained within class: <code class="xref py py-class docutils literal notranslate"><span class="pre">GaMutationSupportOnePointRepresentationBitArray</span></code>), with binary representation (using <cite>bitstring.BitArray</cite> class) - <a class="reference internal" href="#markoradosavljevic" id="id15"><span>[MarkoRadosavljevic]</span></a></p></li>
+<li><p>Structure, organization and main loop implementation - <a class="reference internal" href="#markoradosavljevic" id="id11"><span>[MarkoRadosavljevic]</span></a>, <a class="reference internal" href="#vladimirfilipovic" id="id12"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Making class <code class="xref py py-class docutils literal notranslate"><span class="pre">uo.algorithm.metaheuristic.genetic_algorithm.GaOptimizer</span></code> to be abstract and dividing its functionality into non-abstract classes <code class="xref py py-class docutils literal notranslate"><span class="pre">uo.algorithm.metaheuristic.genetic_algorithm.GaOptimizerGenerational</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">uo.algorithm.metaheuristic.genetic_algorithm.GaOptimizerSteadyState</span></code> - <a class="reference internal" href="#vladimirfilipovic" id="id13"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Implementation of GA selection methods (in classes: <code class="xref py py-class docutils literal notranslate"><span class="pre">SelectionIdle</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">SelectionRoulette</span></code>)  - <a class="reference internal" href="#markoradosavljevic" id="id14"><span>[MarkoRadosavljevic]</span></a></p></li>
+<li><p>Implementation of GA crossover one point method (contained within class: <code class="xref py py-class docutils literal notranslate"><span class="pre">GaCrossoverSupportOnePointRepresentationBitArray</span></code>), with binary representation (using <cite>bitstring.BitArray</cite> class) - <a class="reference internal" href="#markoradosavljevic" id="id15"><span>[MarkoRadosavljevic]</span></a></p></li>
+<li><p>Implementation of GA mutation one point method (contained within class: <code class="xref py py-class docutils literal notranslate"><span class="pre">GaMutationSupportOnePointRepresentationBitArray</span></code>), with binary representation (using <cite>bitstring.BitArray</cite> class) - <a class="reference internal" href="#markoradosavljevic" id="id16"><span>[MarkoRadosavljevic]</span></a></p></li>
 </ol>
 </div></blockquote>
 </div></blockquote>
@@ -228,21 +237,21 @@
 <div><p>b.1. Ones Count Max Problem <a class="reference internal" href="problems_to_be_solved_ones_count.html#problem-ones-count-max"><span class="std std-ref">Ones Count Max Problem</span></a>:</p>
 <blockquote>
 <div><ol class="arabic simple" start="13">
-<li><p>Representation of the problem (in class <code class="xref py py-class docutils literal notranslate"><span class="pre">OnesCountMaxProblem</span></code>) and solution (<cite>BitArray</cite>-based in class <code class="xref py py-class docutils literal notranslate"><span class="pre">OnesCountMaxProblemBitArraySolution</span></code> and <cite>int</cite>-based in class <code class="xref py py-class docutils literal notranslate"><span class="pre">OnesCountMaxProblemIntSolution</span></code>) - <a class="reference internal" href="#vladimirfilipovic" id="id16"><span>[VladimirFilipovic]</span></a></p></li>
-<li><p>Integer Linear Programming method (using <cite>linopy</cite> library) - <a class="reference internal" href="#vladimirfilipovic" id="id17"><span>[VladimirFilipovic]</span></a></p></li>
-<li><p>Total Enumeration method, with solution that has binary <cite>BitArray</cite> representation - <a class="reference internal" href="#vladimirfilipovic" id="id18"><span>[VladimirFilipovic]</span></a></p></li>
-<li><p>Variable Neighborhood Search method, with solution that has binary <cite>BitArray</cite> representation - <a class="reference internal" href="#vladimirfilipovic" id="id19"><span>[VladimirFilipovic]</span></a></p></li>
-<li><p>Variable Neighborhood Search method, with solution that has binary <cite>int</cite> representation - <a class="reference internal" href="#vladimirfilipovic" id="id20"><span>[VladimirFilipovic]</span></a></p></li>
-<li><p>Genetic Algorithm method, with solution that has binary <cite>BitArray</cite> representation - <a class="reference internal" href="#vladimirfilipovic" id="id21"><span>[VladimirFilipovic]</span></a></p></li>
-<li><p>Entry point of the all methods for solving this problem, in file <code class="file docutils literal notranslate"><span class="pre">/opt/single_objective/comb/ones_count_max_problem/solver.py</span></code>. All parameters that governs method execution are accessible to user through command-line.  - <a class="reference internal" href="#vladimirfilipovic" id="id22"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Representation of the problem (in class <code class="xref py py-class docutils literal notranslate"><span class="pre">OnesCountMaxProblem</span></code>) and solution (<cite>BitArray</cite>-based in class <code class="xref py py-class docutils literal notranslate"><span class="pre">OnesCountMaxProblemBitArraySolution</span></code> and <cite>int</cite>-based in class <code class="xref py py-class docutils literal notranslate"><span class="pre">OnesCountMaxProblemIntSolution</span></code>) - <a class="reference internal" href="#vladimirfilipovic" id="id17"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Integer Linear Programming method (using <cite>linopy</cite> library) - <a class="reference internal" href="#vladimirfilipovic" id="id18"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Total Enumeration method, with solution that has binary <cite>BitArray</cite> representation - <a class="reference internal" href="#vladimirfilipovic" id="id19"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Variable Neighborhood Search method, with solution that has binary <cite>BitArray</cite> representation - <a class="reference internal" href="#vladimirfilipovic" id="id20"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Variable Neighborhood Search method, with solution that has binary <cite>int</cite> representation - <a class="reference internal" href="#vladimirfilipovic" id="id21"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Genetic Algorithm method, with solution that has binary <cite>BitArray</cite> representation - <a class="reference internal" href="#vladimirfilipovic" id="id22"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Entry point of the all methods for solving this problem, in file <code class="file docutils literal notranslate"><span class="pre">/opt/single_objective/comb/ones_count_max_problem/solver.py</span></code>. All parameters that governs method execution are accessible to user through command-line.  - <a class="reference internal" href="#vladimirfilipovic" id="id23"><span>[VladimirFilipovic]</span></a></p></li>
 </ol>
 </div></blockquote>
 <p>b.2. Minimum Multi Cut Problem <a class="reference internal" href="problems_to_be_solved_minimum_multi_cut.html#problem-minimum-multi-cut"><span class="std std-ref">Minimum Multi Cut Problem</span></a>:</p>
 <blockquote>
 <div><ol class="arabic simple" start="20">
-<li><p>Representation of the problem (in class <code class="xref py py-class docutils literal notranslate"><span class="pre">MinimumMultiCutProblem</span></code>, that uses <cite>ng.Graph</cite> class for class representation) and solution with <cite>BitArray</cite>-based representation (in class <code class="xref py py-class docutils literal notranslate"><span class="pre">MinimumMultiCutProblemBitArraySolution</span></code>) - <a class="reference internal" href="#markoradosavljevic" id="id23"><span>[MarkoRadosavljevic]</span></a></p></li>
-<li><p>Variable Neighborhood Search method, with solution that has binary <cite>BitArray</cite> representation - <a class="reference internal" href="#markoradosavljevic" id="id24"><span>[MarkoRadosavljevic]</span></a></p></li>
-<li><p>Genetic Algorithm method, with solution that has binary <cite>BitArray</cite> representation - <a class="reference internal" href="#markoradosavljevic" id="id25"><span>[MarkoRadosavljevic]</span></a></p></li>
+<li><p>Representation of the problem (in class <code class="xref py py-class docutils literal notranslate"><span class="pre">MinimumMultiCutProblem</span></code>, that uses <cite>ng.Graph</cite> class for class representation) and solution with <cite>BitArray</cite>-based representation (in class <code class="xref py py-class docutils literal notranslate"><span class="pre">MinimumMultiCutProblemBitArraySolution</span></code>) - <a class="reference internal" href="#markoradosavljevic" id="id24"><span>[MarkoRadosavljevic]</span></a></p></li>
+<li><p>Variable Neighborhood Search method, with solution that has binary <cite>BitArray</cite> representation - <a class="reference internal" href="#markoradosavljevic" id="id25"><span>[MarkoRadosavljevic]</span></a></p></li>
+<li><p>Genetic Algorithm method, with solution that has binary <cite>BitArray</cite> representation - <a class="reference internal" href="#markoradosavljevic" id="id26"><span>[MarkoRadosavljevic]</span></a></p></li>
 </ol>
 </div></blockquote>
 </div></blockquote>
@@ -252,9 +261,9 @@
 <div><p>c.1. Max Function One Variable Problem:</p>
 <blockquote>
 <div><ol class="arabic simple" start="23">
-<li><p>Variable Neighborhood Search method, with solution that has binary <cite>BitArray</cite> representation - <a class="reference internal" href="#vladimirfilipovic" id="id26"><span>[VladimirFilipovic]</span></a></p></li>
-<li><p>Variable Neighborhood Search method, with solution that has binary <cite>int</cite> representation - <a class="reference internal" href="#vladimirfilipovic" id="id27"><span>[VladimirFilipovic]</span></a></p></li>
-<li><p>Entry point of the all methods for solving this problem, in file <code class="file docutils literal notranslate"><span class="pre">/opt/single_objective/glob/function_one_variable_max_problem/solver.py</span></code>. All parameters that governs method execution are accessible to user through command-line.  - <a class="reference internal" href="#vladimirfilipovic" id="id28"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Variable Neighborhood Search method, with solution that has binary <cite>BitArray</cite> representation - <a class="reference internal" href="#vladimirfilipovic" id="id27"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Variable Neighborhood Search method, with solution that has binary <cite>int</cite> representation - <a class="reference internal" href="#vladimirfilipovic" id="id28"><span>[VladimirFilipovic]</span></a></p></li>
+<li><p>Entry point of the all methods for solving this problem, in file <code class="file docutils literal notranslate"><span class="pre">/opt/single_objective/glob/function_one_variable_max_problem/solver.py</span></code>. All parameters that governs method execution are accessible to user through command-line.  - <a class="reference internal" href="#vladimirfilipovic" id="id29"><span>[VladimirFilipovic]</span></a></p></li>
 </ol>
 </div></blockquote>
 </div></blockquote>
@@ -266,12 +275,12 @@
 <div role="list" class="citation-list">
 <div class="citation" id="vladimirfilipovic" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>VladimirFilipovic<span class="fn-bracket">]</span></span>
-<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id2">2</a>,<a role="doc-backlink" href="#id3">3</a>,<a role="doc-backlink" href="#id4">4</a>,<a role="doc-backlink" href="#id5">5</a>,<a role="doc-backlink" href="#id8">6</a>,<a role="doc-backlink" href="#id9">7</a>,<a role="doc-backlink" href="#id11">8</a>,<a role="doc-backlink" href="#id12">9</a>,<a role="doc-backlink" href="#id16">10</a>,<a role="doc-backlink" href="#id17">11</a>,<a role="doc-backlink" href="#id18">12</a>,<a role="doc-backlink" href="#id19">13</a>,<a role="doc-backlink" href="#id20">14</a>,<a role="doc-backlink" href="#id21">15</a>,<a role="doc-backlink" href="#id22">16</a>,<a role="doc-backlink" href="#id26">17</a>,<a role="doc-backlink" href="#id27">18</a>,<a role="doc-backlink" href="#id28">19</a>)</span>
+<span class="backrefs">(<a role="doc-backlink" href="#id2">1</a>,<a role="doc-backlink" href="#id3">2</a>,<a role="doc-backlink" href="#id4">3</a>,<a role="doc-backlink" href="#id5">4</a>,<a role="doc-backlink" href="#id6">5</a>,<a role="doc-backlink" href="#id9">6</a>,<a role="doc-backlink" href="#id10">7</a>,<a role="doc-backlink" href="#id12">8</a>,<a role="doc-backlink" href="#id13">9</a>,<a role="doc-backlink" href="#id17">10</a>,<a role="doc-backlink" href="#id18">11</a>,<a role="doc-backlink" href="#id19">12</a>,<a role="doc-backlink" href="#id20">13</a>,<a role="doc-backlink" href="#id21">14</a>,<a role="doc-backlink" href="#id22">15</a>,<a role="doc-backlink" href="#id23">16</a>,<a role="doc-backlink" href="#id27">17</a>,<a role="doc-backlink" href="#id28">18</a>,<a role="doc-backlink" href="#id29">19</a>)</span>
 <p>Vladimir Filipović, <a class="reference external" href="https://github.com/vladofilipovic">Github</a> e-mail: <a class="reference external" href="mailto:vladofilipovic&#37;&#52;&#48;hotmail&#46;com">vladofilipovic<span>&#64;</span>hotmail<span>&#46;</span>com</a></p>
 </div>
 <div class="citation" id="markoradosavljevic" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>MarkoRadosavljevic<span class="fn-bracket">]</span></span>
-<span class="backrefs">(<a role="doc-backlink" href="#id10">1</a>,<a role="doc-backlink" href="#id13">2</a>,<a role="doc-backlink" href="#id14">3</a>,<a role="doc-backlink" href="#id15">4</a>,<a role="doc-backlink" href="#id23">5</a>,<a role="doc-backlink" href="#id24">6</a>,<a role="doc-backlink" href="#id25">7</a>)</span>
+<span class="backrefs">(<a role="doc-backlink" href="#id11">1</a>,<a role="doc-backlink" href="#id14">2</a>,<a role="doc-backlink" href="#id15">3</a>,<a role="doc-backlink" href="#id16">4</a>,<a role="doc-backlink" href="#id24">5</a>,<a role="doc-backlink" href="#id25">6</a>,<a role="doc-backlink" href="#id26">7</a>)</span>
 <p>Marko Radosavljević, <a class="reference external" href="https://github.com/Markic01">Github</a> e-mail: <a class="reference external" href="mailto:mi20079&#37;&#52;&#48;alas&#46;matf&#46;bg&#46;ac&#46;rs">mi20079<span>&#64;</span>alas<span>&#46;</span>matf<span>&#46;</span>bg<span>&#46;</span>ac<span>&#46;</span>rs</a></p>
 </div>
 </div>
