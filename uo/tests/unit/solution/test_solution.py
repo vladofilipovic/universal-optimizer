@@ -8,7 +8,7 @@ from uo.problem.problem import Problem
 
 from uo.solution.quality_of_solution import QualityOfSolution
 from uo.solution.solution import Solution 
-from uo.solution.solution_void import SolutionVoid
+from uo.solution.solution_void_representation_int import SolutionVoidRepresentationInt
 
 class TestSolutionProperties(unittest.TestCase):
     
@@ -21,7 +21,7 @@ class TestSolutionProperties(unittest.TestCase):
         self.fitness_value = 42.0
         self.objective_value = -42.0
         self.is_feasible = True
-        self.solution = SolutionVoid( random_seed=self.random_seed,
+        self.solution = SolutionVoidRepresentationInt( random_seed=self.random_seed,
                 fitness_value=self.fitness_value,
                 objective_value=self.objective_value,
                 is_feasible= self.is_feasible

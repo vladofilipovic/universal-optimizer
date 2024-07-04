@@ -8,7 +8,7 @@ from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer 
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support import VnsShakingSupport
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support import VnsLocalSearchSupport
-from uo.solution.solution_void import SolutionVoid
+from uo.solution.solution_void_representation_int import SolutionVoidRepresentationInt
 
 class TestVnsOptimizerProperties(unittest.TestCase):
     
@@ -51,7 +51,7 @@ class TestVnsOptimizerProperties(unittest.TestCase):
         self.vns_optimizer = VnsOptimizer(
                 output_control=self.output_control_stub,
                 problem=self.problem_mock, 
-                solution_template=SolutionVoid( 43, 0, 0, False),
+                solution_template=SolutionVoidRepresentationInt( 43, 0, 0, False),
                 vns_shaking_support=self.vns_shaking_support_stub, 
                 vns_ls_support=self.vns_ls_support_stub, 
                 finish_control=self.finish_control_mock,
@@ -106,7 +106,7 @@ class TestVnsOptimizerProperties(unittest.TestCase):
             vns_optimizer:VnsOptimizer = VnsOptimizer(
                 output_control=self.output_control_stub,
                 problem=self.problem_mock, 
-                solution_template=SolutionVoid( 43, 0, 0, False),
+                solution_template=SolutionVoidRepresentationInt( 43, 0, 0, False),
                 vns_shaking_support=vns_support_shaking_stub, 
                 vns_ls_support=vns_support_local_search_stub,
                 finish_control=self.finish_control_mock,

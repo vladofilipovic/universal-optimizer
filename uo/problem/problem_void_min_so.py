@@ -15,7 +15,9 @@ from uo.problem.problem import Problem
 
 class ProblemVoidMinSO(Problem):
     
-    def __init__(self, name:str, is_minimization:bool, is_multi_objective:bool=False)->None:
+    def __init__(self, name:str="problem_void_minimization_single_optimization", 
+                is_minimization:bool = True, 
+                is_multi_objective:bool=False)->None:
         if not isinstance(is_minimization, bool):
                 raise TypeError('Parameter \'is_minimization\' must be \'bool\'.')        
         if not isinstance(is_multi_objective, bool):

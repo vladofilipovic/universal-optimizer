@@ -12,7 +12,7 @@ from uo.algorithm.metaheuristic.genetic_algorithm.selection import Selection
 from uo.algorithm.metaheuristic.genetic_algorithm.selection_roulette import SelectionRoulette
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support import GaCrossoverSupport
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support import GaMutationSupport
-from uo.solution.solution_void import SolutionVoid
+from uo.solution.solution_void_representation_int import SolutionVoidRepresentationInt
 
 class TestGaOptimizerGenerationalProperties(unittest.TestCase):
     
@@ -59,7 +59,7 @@ class TestGaOptimizerGenerationalProperties(unittest.TestCase):
         self.ga_optimizer:GaOptimizerGenerational = GaOptimizerGenerational(
                 output_control=self.output_control_stub,
                 problem=self.problem_mock, 
-                solution_template=SolutionVoid( 43, 0, 0, False),
+                solution_template=SolutionVoidRepresentationInt( 43, 0, 0, False),
                 ga_selection=self.selection_roulette_mock,
                 ga_crossover_support=self.ga_support_crossover_stub,
                 ga_mutation_support=self.ga_support_mutation_stub,
@@ -108,7 +108,7 @@ class TestGaOptimizerGenerationalProperties(unittest.TestCase):
             self.ga_optimizer:GaOptimizerGenerational = GaOptimizerGenerational(
                 output_control=self.output_control_stub,
                 problem=self.problem_mock, 
-                solution_template=SolutionVoid( 43, 0, 0, False),
+                solution_template=SolutionVoidRepresentationInt( 43, 0, 0, False),
                 ga_selection="not appropriate type",
                 ga_crossover_support=self.ga_support_crossover_stub,
                 ga_mutation_support=self.ga_support_mutation_stub,

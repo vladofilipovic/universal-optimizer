@@ -9,15 +9,23 @@ from datetime import datetime
 from uo.utils.logger import logger
 from uo.algorithm.output_control import OutputControl
 from uo.problem.problem import Problem
+from uo.problem.problem_void_min_so import ProblemVoidMinSO
 from uo.solution.solution import Solution
+from uo.solution.solution_void_representation_int import SolutionVoidRepresentationInt
+
 
 from uo.algorithm.optimizer import Optimizer
 from uo.algorithm.algorithm import Algorithm
 
 class AlgorithmVoid(Algorithm):
-    def __init__(self, name:str, output_control:OutputControl,
-            problem:Problem)->None:
-        super().__init__(name, output_control, problem)
+    def __init__(self, name:str, 
+            output_control:OutputControl,
+            problem:Problem=ProblemVoidMinSO(), 
+            solution_template:Solution=SolutionVoidRepresentationInt())->None:
+        super().__init__(name=name, 
+                    output_control=output_control, 
+                    problem=problem, 
+                    solution_template=solution_template)
 
     def __copy__(self):
         return super().__copy__()

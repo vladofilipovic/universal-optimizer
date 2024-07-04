@@ -28,7 +28,7 @@ class MetaheuristicVoid(Metaheuristic):
             random_seed:int, 
             additional_statistics_control:AdditionalStatisticsControl,
             output_control:OutputControl, 
-            problem:Problem ,
+            problem:Problem,
             solution_template:Solution = None
     )->None:
         super().__init__(

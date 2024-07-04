@@ -19,7 +19,7 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support impo
 
 class OnesCountMaxProblem2(Problem):
 
-    def __init__(self, dim:int)->None:
+    def __init__(self, dim:int=10)->None:
         if not isinstance(dim, int):
             raise TypeError('Parameter \'dim\' have not valid type.')
         if dim <= 0:

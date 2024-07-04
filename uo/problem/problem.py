@@ -53,31 +53,26 @@ class Problem(metaclass=ABCMeta):
     """
 
     @abstractmethod
-    def __init__(self, name:str = "", 
-                is_minimization:Optional[bool]=None, 
-                is_multi_objective:Optional[bool]=None)->None:
+    def __init__(self, name:str, 
+                is_minimization:bool, 
+                is_multi_objective:bool)->None:
         """
         Create a new Problem instance.
 
-        Parameters:
-            name (str): The name of the target problem.
-            is_minimization (bool, optional): Indicates whether the problem is a minimization problem. Defaults to None.
-            is_multi_objective (bool, optional): Indicates whether the problem is a multi-objective optimization problem. Defaults to None.
-
-        Raises:
-            TypeError: If the 'name' parameter is not of type 'str'.
-            TypeError: If the 'is_minimization' parameter is not of type 'bool' or None.
-            TypeError: If the 'is_multi_objective' parameter is not of type 'bool' or None.
+        :param str name: name of the problem
+        :param bool is_minimization: if problem is minimization
+        :param bool is_multi_objective: if problem is multi-objective
+        
         """
         if not isinstance(name, str):
                 raise TypeError('Parameter \'name\' must be \'str\'.')
-        if not isinstance(is_minimization, bool) and is_minimization is not None:
-                raise TypeError('Parameter \'is_minimization\' must be \'bool\' or have value None.')        
-        if not isinstance(is_multi_objective, bool) and is_multi_objective is not None:
-                raise TypeError('Parameter \'is_multi_objective\' must be \'bool\' or have value None.')        
+        if not isinstance(is_minimization, bool):
+                raise TypeError('Parameter \'is_minimization\' must be \'bool\'.')        
+        if not isinstance(is_multi_objective, bool):
+                raise TypeError('Parameter \'is_multi_objective\' must be \'bool\'.')        
         self.__name:str = name
-        self.__is_minimization:Optional[bool] = is_minimization
-        self.__is_multi_objective:Optional[bool] = is_multi_objective
+        self.__is_minimization:bool = is_minimization
+        self.__is_multi_objective:bool = is_multi_objective
 
     @abstractmethod
     def __copy__(self):

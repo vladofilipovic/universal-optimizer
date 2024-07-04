@@ -12,7 +12,7 @@ from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.metaheuristic import Metaheuristic 
 from uo.algorithm.metaheuristic.single_solution_metaheuristic import SingleSolutionMetaheuristic
 from uo.solution.solution import Solution
-from uo.solution.solution_void import SolutionVoid
+from uo.solution.solution_void_representation_int import SolutionVoidRepresentationInt
 
 class TestSingleSolutionMetaheuristic(unittest.TestCase):
 
@@ -25,7 +25,7 @@ class TestSingleSolutionMetaheuristic(unittest.TestCase):
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
         problem = ProblemVoidMinSO("aaa", True)
-        solution_template = SolutionVoid(43, 43, 43, True)
+        solution_template = SolutionVoidRepresentationInt(43, 43, 43, True)
         # Act
         metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
                     output_control, problem, solution_template)
@@ -56,7 +56,7 @@ class TestSingleSolutionMetaheuristic(unittest.TestCase):
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
         problem = ProblemVoidMinSO("aaa", True)
-        solution_template = SolutionVoid(43, 43, 43, True)
+        solution_template = SolutionVoidRepresentationInt(43, 43, 43, True)
         metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
                     output_control, problem, solution_template)
         # Act
@@ -96,7 +96,7 @@ class TestSingleSolutionMetaheuristic(unittest.TestCase):
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
         problem = ProblemVoidMinSO("aaa", True)
-        solution_template = SolutionVoid(43, 43, 43, True)
+        solution_template = SolutionVoidRepresentationInt(43, 43, 43, True)
         metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
                     output_control, problem, solution_template)
         # Act
@@ -117,7 +117,7 @@ class TestSingleSolutionMetaheuristic(unittest.TestCase):
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
         problem = ProblemVoidMinSO("aaa", True)
-        solution_template = SolutionVoid(43, 43, 43, True)
+        solution_template = SolutionVoidRepresentationInt(43, 43, 43, True)
         metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
                     output_control, problem, solution_template)
         spec = "|"
@@ -172,7 +172,7 @@ class TestSingleSolutionMetaheuristic(unittest.TestCase):
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
         problem = ProblemVoidMinSO("aaa", True)
-        solution_template = SolutionVoid(43, 43, 43, True)
+        solution_template = SolutionVoidRepresentationInt(43, 43, 43, True)
         # Act
         metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
                     output_control, problem, solution_template)
@@ -192,7 +192,7 @@ class TestCurrentSolution(unittest.TestCase):
         additional_statistics_control = AdditionalStatisticsControl()
         output_control = OutputControl()
         problem = ProblemVoidMinSO("aaa", True)
-        solution_template = SolutionVoid(43, 43, 43, True)
+        solution_template = SolutionVoidRepresentationInt(43, 43, 43, True)
         metaheuristic = SingleSolutionMetaheuristicVoid(name, finish_control, random_seed, additional_statistics_control, 
                     output_control, problem, solution_template)
         # Act
@@ -261,7 +261,7 @@ class Test__Str__2(unittest.TestCase):
             additional_statistics_control=AdditionalStatisticsControl(),
             output_control=OutputControl(),
             problem=ProblemVoidMinSO("aaa", True),
-            solution_template=SolutionVoid(43, 43, 43, True)
+            solution_template=SolutionVoidRepresentationInt(43, 43, 43, True)
         )
         # Act
         result = str(metaheuristic)   
@@ -278,7 +278,7 @@ class Test__Str__2(unittest.TestCase):
             additional_statistics_control=AdditionalStatisticsControl(),
             output_control=OutputControl(),
             problem=ProblemVoidMinSO("aaa", True),
-            solution_template=SolutionVoid(43, 43, 43, True)
+            solution_template=SolutionVoidRepresentationInt(43, 43, 43, True)
         )
         # Act
         result = str(metaheuristic)    
@@ -288,7 +288,7 @@ class Test__Str__2(unittest.TestCase):
     # Should include the string representation of the current solution
     def test_include_current_solution_representation(self):
         # Arrange
-        current_solution = SolutionVoid(43, 0, 0, False)
+        current_solution = SolutionVoidRepresentationInt(43, 0, 0, False)
         metaheuristic = SingleSolutionMetaheuristicVoid(
             name="MyMetaheuristic",
             finish_control=FinishControl(),
