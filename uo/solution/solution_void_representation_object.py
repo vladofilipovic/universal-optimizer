@@ -1,5 +1,5 @@
 """ 
-The :mod:`~uo.solution.solution_void_object_str` module describes the class :class:`~uo.solution.SolutionVoidRepresentationIntObjectStr`.
+The :mod:`~uo.solution.solution_void_object_str` module describes the class :class:`~uo.solution.SolutionVoidRepresentationIntObject`.
 """
 
 from pathlib import Path
@@ -19,7 +19,7 @@ from uo.solution.quality_of_solution import QualityOfSolution
 from uo.algorithm.optimizer import Optimizer
 from uo.algorithm.output_control import OutputControl
 
-class SolutionVoidRepresentationIntObjectStr(Solution[object, str]):
+class SolutionVoidRepresentationIntObject(Solution[object, str]):
     def __init__(self, random_seed=None, 
         fitness_value=0, fitness_values=None, objective_value=0, objective_values= None,  is_feasible=True,
         evaluation_cache_is_used=False, evaluation_cache_max_size=0, 

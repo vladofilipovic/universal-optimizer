@@ -8,24 +8,24 @@ from uo.problem.problem_void_min_so import ProblemVoidMinSO
 
 from uo.solution.quality_of_solution import QualityOfSolution
 from uo.solution.solution import Solution 
-from uo.solution.solution_void_object_str import SolutionVoidRepresentationIntObjectStr
+from uo.solution.solution_void_representation_object import SolutionVoidRepresentationIntObject
 
 
-class TestSolutionVoidRepresentationIntObjectStr(unittest.TestCase):
+class TestSolutionVoidRepresentationIntObject(unittest.TestCase):
 
     # Solution can be instantiated with valid parameters
     def test_instantiation_with_valid_parameters(self):
         # Arrange
         # Act
-        solution = SolutionVoidRepresentationIntObjectStr()
+        solution = SolutionVoidRepresentationIntObject()
         # Assert
         self.assertIsInstance(solution, Solution)
-        self.assertIsInstance(solution, SolutionVoidRepresentationIntObjectStr)
+        self.assertIsInstance(solution, SolutionVoidRepresentationIntObject)
 
     # The name, random_seed, fitness_value, fitness_values, objective_value, objective_values, is_feasible, representation, evaluation_cache_cs, and representation_distance_cache_cs attributes can be accessed and modified
     def test_attribute_access_and_modification(self):
         # Arrange
-        solution = SolutionVoidRepresentationIntObjectStr()
+        solution = SolutionVoidRepresentationIntObject()
         # Act
         solution.fitness_value = 0.7
         solution.fitness_values = [0.6, 0.7, 0.8]
@@ -45,7 +45,7 @@ class TestSolutionVoidRepresentationIntObjectStr(unittest.TestCase):
     def test_method_calls_and_results(self):
         # Arrange
         problem = ProblemVoidMinSO("a", True)
-        solution = SolutionVoidRepresentationIntObjectStr()
+        solution = SolutionVoidRepresentationIntObject()
         # Act and Assert
         self.assertIsNotNone(solution.copy())
         self.assertIsNotNone(solution.argument(solution.representation))
@@ -80,7 +80,7 @@ class TestSolutionVoidRepresentationIntObjectStr(unittest.TestCase):
     def test_random_seed_set_to_random_integer(self):
         # Arrange
         # Act
-        solution = SolutionVoidRepresentationIntObjectStr()
+        solution = SolutionVoidRepresentationIntObject()
         # Assert
         self.assertIsInstance(solution.random_seed, int)
         self.assertNotEqual(solution.random_seed, 0)
@@ -89,7 +89,7 @@ class TestSolutionVoidRepresentationIntObjectStr(unittest.TestCase):
     def test_default_values_for_fitness_and_objective(self):
         # Arrange
         # Act
-        solution = SolutionVoidRepresentationIntObjectStr()
+        solution = SolutionVoidRepresentationIntObject()
         # Assert
         solution.fitness_value = None
         solution.fitness_values = None
@@ -104,7 +104,7 @@ class TestSolutionVoidRepresentationIntObjectStr(unittest.TestCase):
     def test_default_representation_value(self):
         # Arrange
         # Act
-        solution = SolutionVoidRepresentationIntObjectStr()
+        solution = SolutionVoidRepresentationIntObject()
         # Assert
         self.assertIsNone(solution.representation)
 
@@ -112,7 +112,7 @@ class TestSolutionVoidRepresentationIntObjectStr(unittest.TestCase):
     def test_default_values_for_caches(self):
         # Arrange
         # Act
-        solution = SolutionVoidRepresentationIntObjectStr(evaluation_cache_is_used=True, 
+        solution = SolutionVoidRepresentationIntObject(evaluation_cache_is_used=True, 
                                             distance_calculation_cache_is_used=True)
         # Assert
         self.assertEqual(solution.evaluation_cache_cs.max_cache_size, 0)
@@ -121,7 +121,7 @@ class TestSolutionVoidRepresentationIntObjectStr(unittest.TestCase):
     # Solution can be deep copied
     def test_deep_copy(self):
         # Arrange
-        solution = SolutionVoidRepresentationIntObjectStr()
+        solution = SolutionVoidRepresentationIntObject()
         solution.fitness_value = 23
         solution.objective_value = 23
         # Act
@@ -142,7 +142,7 @@ class TestSolutionVoidRepresentationIntObjectStr(unittest.TestCase):
     # Solution can be evaluated with a Problem object
     def test_evaluate_with_problem(self):
         # Arrange
-        solution = SolutionVoidRepresentationIntObjectStr()
+        solution = SolutionVoidRepresentationIntObject()
         problem_mock = mocker.Mock()
         # Act
         solution.evaluate(problem_mock)
@@ -157,7 +157,7 @@ class TestSolutionVoidRepresentationIntObjectStr(unittest.TestCase):
     # Solution can be represented as a string with a specified delimiter, indentation, and grouping symbols
     def test_string_representation(self):
         # Arrange
-        solution = SolutionVoidRepresentationIntObjectStr()
+        solution = SolutionVoidRepresentationIntObject()
         solution.fitness_value = 0.5
         solution.objective_value = 100
         solution.is_feasible =  True
@@ -176,7 +176,7 @@ class TestSolutionVoidRepresentationIntObjectStr(unittest.TestCase):
     # Solution can be represented as a string with a specified delimiter, indentation, and grouping symbols
     def test_string_conversion(self):
         # Arrange
-        solution = SolutionVoidRepresentationIntObjectStr()
+        solution = SolutionVoidRepresentationIntObject()
         solution.fitness_value = 0.5
         solution.objective_value = 100
         solution.is_feasible =  True
@@ -195,7 +195,7 @@ class TestSolutionVoidRepresentationIntObjectStr(unittest.TestCase):
     # Solution can be represented as a string with a specified delimiter, indentation, and grouping symbols
     def test_format_to_string(self):
         # Arrange
-        solution = SolutionVoidRepresentationIntObjectStr()
+        solution = SolutionVoidRepresentationIntObject()
         solution.fitness_value = 0.5
         solution.objective_value = 100
         solution.is_feasible =  True
@@ -216,7 +216,7 @@ class TestSolutionVoidRepresentationIntObjectStr(unittest.TestCase):
         # Arrange
         representation = 42
         problem = ProblemVoidMinSO("a", True)
-        solution = SolutionVoidRepresentationIntObjectStr()
+        solution = SolutionVoidRepresentationIntObject()
         # Act
         solution.init_from(representation, problem)
         # Assert
@@ -227,7 +227,7 @@ class TestSolutionVoidRepresentationIntObjectStr(unittest.TestCase):
         # Arrange
         representation = 42
         problem = ProblemVoidMinSO("a", True)
-        solution = SolutionVoidRepresentationIntObjectStr()
+        solution = SolutionVoidRepresentationIntObject()
         # Act
         solution.init_from(representation, problem)
         # Assert
@@ -238,7 +238,7 @@ class TestSolutionVoidRepresentationIntObjectStr(unittest.TestCase):
         # Arrange
         representation = "example_representation"
         problem = "example_problem"
-        solution = SolutionVoidRepresentationIntObjectStr()
+        solution = SolutionVoidRepresentationIntObject()
         # Act & Assert
         with self.assertRaises(TypeError):
             solution.init_from(representation, problem)

@@ -15,7 +15,7 @@ from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp_linopy import OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters
 from uo.solution.solution import Solution
 from uo.solution.solution_void_representation_int import SolutionVoidRepresentationInt
-from uo.solution.solution_void_object_str import SolutionVoidRepresentationIntObjectStr
+from uo.solution.solution_void_representation_object import SolutionVoidRepresentationIntObject
 
 class TestOnesCountMaxProblemIlpLinopy(unittest.TestCase):
     
@@ -91,7 +91,7 @@ class TestOnesCountMaxProblemIlpLinopy(unittest.TestCase):
     def test_same_types_different_classes(self):
         # Arrange
         output_control = OutputControl()
-        problem = SolutionVoidRepresentationIntObjectStr()
+        problem = SolutionVoidRepresentationIntObject()
         # Act & Assert
         with self.assertRaises(TypeError):
             OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters(output_control, problem)

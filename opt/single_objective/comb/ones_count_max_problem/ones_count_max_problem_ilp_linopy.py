@@ -17,7 +17,7 @@ from uo.utils.logger import logger
 
 from uo.problem.problem import Problem
 from uo.solution.solution import Solution
-from uo.solution.solution_void_object_str import SolutionVoidRepresentationIntObjectStr
+from uo.solution.solution_void_representation_object import SolutionVoidRepresentationIntObject
 from uo.solution.quality_of_solution import QualityOfSolution
 
 
@@ -59,7 +59,7 @@ class OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters:
         return self.__problem    
 
 
-class OnesCountMaxProblemIntegerLinearProgrammingSolution(SolutionVoidRepresentationIntObjectStr):
+class OnesCountMaxProblemIntegerLinearProgrammingSolution(SolutionVoidRepresentationIntObject):
     def __init__(self, sol:'OnesCountMaxProblemIntegerLinearProgrammingSolver')->None:
         super().__init__()
         self.__sol = sol
