@@ -140,8 +140,10 @@ class TestSolution2(unittest.TestCase):
         self.assertEqual(solution.objective_values, copied_solution.objective_values)
         self.assertEqual(solution.is_feasible, copied_solution.is_feasible)
         self.assertEqual(solution.representation, copied_solution.representation)
-        self.assertEqual(solution.evaluation_cache_cs, copied_solution.evaluation_cache_cs)
-        self.assertEqual(solution.representation_distance_cache_cs, copied_solution.representation_distance_cache_cs)
+        self.assertEqual(solution.evaluation_cache_cs.string_rep(''), 
+                        copied_solution.evaluation_cache_cs.string_rep(''))
+        self.assertEqual(solution.representation_distance_cache_cs.string_rep(''), 
+                        copied_solution.representation_distance_cache_cs.string_rep(''))
 
     # The copy_from() method should copy all attributes from another Solution instance to the current instance.
     def test_copy_from_method(self):

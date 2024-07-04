@@ -20,11 +20,14 @@ from uo.algorithm.optimizer import Optimizer
 from uo.algorithm.output_control import OutputControl
 
 class SolutionVoidRepresentationIntObjectStr(Solution[object, str]):
-    def __init__(self)->None:
-        super().__init__(random_seed=None, 
+    def __init__(self, random_seed=None, 
         fitness_value=0, fitness_values=None, objective_value=0, objective_values= None,  is_feasible=True,
         evaluation_cache_is_used=False, evaluation_cache_max_size=0, 
-        distance_calculation_cache_is_used=False, distance_calculation_cache_max_size=0)
+        distance_calculation_cache_is_used=False, distance_calculation_cache_max_size=0)->None:
+        super().__init__(random_seed, 
+        fitness_value, fitness_values, objective_value, objective_values, is_feasible,
+        evaluation_cache_is_used, evaluation_cache_max_size, 
+        distance_calculation_cache_is_used, distance_calculation_cache_max_size)
 
     def __copy__(self):
         pr = deepcopy(self)

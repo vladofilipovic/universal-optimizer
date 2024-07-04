@@ -9,66 +9,24 @@ directory = Path(__file__).resolve()
 import sys
 sys.path.append(directory.parent)
 
-class EvaluationCacheControlStatistics:
+from uo.utils.singleton_meta import SingletonMeta
+
+class EvaluationCacheControlStatistics(metaclass=SingletonMeta):
     """
     Class that represents control statistics for evaluation caching.
     """
     
-    def __init__(self, is_caching:bool=False, max_cache_size:Optional[int]=0)->None:
+    def __init__(self, max_cache_size:int=0)->None:
         """
         Create new `EvaluationCacheControlStatistics` instance
-        :param Optional[bool] is_caching: determine if caching is activated
-        :param Optional[int] max_cache_size: maximum size of the cache - if 0 cache is with unlimited size
+        :param int max_cache_size: maximum size of the cache - if 0 cache is with unlimited size
         """
-        if not isinstance(is_caching, bool):
-                raise TypeError('Parameter \'is_caching\' must be \'bool\'.')        
         if not isinstance(max_cache_size, int) and max_cache_size is not None:
                 raise TypeError('Parameter \'is_caching\' must be \'int\' or \'None\'.')        
-        self.__is_caching:bool = is_caching
         self.__max_cache_size:int = max_cache_size
         self.__cache:dict[str] = {}
         self.__cache_hit_count:int = 0
         self.__cache_request_count:int = 0
-
-    def __copy__(self):
-        """
-        Internal copy of the `EvaluationCacheControlStatistics` instance
-
-        :return: new `EvaluationCacheControlStatistics` instance with the same properties
-        :rtype: `EvaluationCacheControlStatistics`
-        """
-        pr = deepcopy(self)
-        return pr
-
-    def copy(self):
-        """
-        Copy the `EvaluationCacheControlStatistics` instance
-
-        :return: new `EvaluationCacheControlStatistics` instance with the same properties
-        :rtype: `EvaluationCacheControlStatistics`
-        """
-        return self.__copy__()
-
-    @property
-    def is_caching(self)->bool:
-        """
-        Property getter for is_caching 
-
-        :return: if caching is used during evaluation, or not 
-        :rtype: bool
-        """
-        return self.__is_caching
-
-    @is_caching.setter
-    def is_caching(self, value:bool)->None:
-        """
-        Property setter for is_caching
-
-        :param bool value: value for determining if caching is activated
-        """
-        if not isinstance(value, bool):
-            raise TypeError('Parameter \'is_caching\' must have type \'bool\'.')
-        self.__is_caching = value
 
     @property
     def max_cache_size(self)->int:
@@ -155,9 +113,6 @@ class EvaluationCacheControlStatistics:
         for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_start + delimiter
-        for _ in range(0, indentation):
-            s += indentation_symbol      
-        s += '__is_caching=' + str(self.__is_caching) + delimiter
         for _ in range(0, indentation):
             s += indentation_symbol      
         s += '__cache_hit_count=' + str(self.__cache_hit_count) + delimiter

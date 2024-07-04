@@ -17,10 +17,6 @@ class TestSolution(unittest.TestCase):
     # Solution can be instantiated with valid parameters
     def test_instantiation_with_valid_parameters(self):
         # Arrange
-        if hasattr(Solution, 'evaluation_cache_cs'):
-            del Solution.evaluation_cache_cs
-        if hasattr(Solution, 'representation_distance_cache_cs'):
-            del Solution.representation_distance_cache_cs
         random_seed = 123
         fitness_value = 0.5
         objective_value = 100
@@ -39,9 +35,7 @@ class TestSolution(unittest.TestCase):
         self.assertEqual(solution.objective_value, objective_value)
         self.assertEqual(solution.is_feasible, is_feasible)
         self.assertIsNone(solution.representation)
-        self.assertTrue(solution.evaluation_cache_cs.is_caching)
         self.assertEqual(solution.evaluation_cache_cs.max_cache_size, evaluation_cache_max_size)
-        self.assertTrue(solution.representation_distance_cache_cs.is_caching)
         self.assertEqual(solution.representation_distance_cache_cs.max_cache_size, distance_calculation_cache_max_size)
 
     # The random_seed, fitness_value, fitness_values, objective_value, objective_values, is_feasible, representation, evaluation_cache_cs, and representation_distance_cache_cs attributes can be accessed and modified
@@ -53,7 +47,7 @@ class TestSolution(unittest.TestCase):
         is_feasible = True
         evaluation_cache_is_used = True
         evaluation_cache_max_size = 100
-        distance_calculation_cache_is_used = True
+        distance_calculation_cache_is_used = False
         distance_calculation_cache_max_size = 200
         solution = SolutionVoidRepresentationInt(random_seed, fitness_value, objective_value, 
                     is_feasible, evaluation_cache_is_used, evaluation_cache_max_size, 
@@ -187,10 +181,6 @@ class TestSolution(unittest.TestCase):
     # Solution sets evaluation_cache_cs and representation_distance_cache_cs to default values if they are not provided
     def test_default_values_for_caches(self):
         # Arrange
-        if hasattr(Solution, 'evaluation_cache_cs'):
-            del Solution.evaluation_cache_cs
-        if hasattr(Solution, 'representation_distance_cache_cs'):
-            del Solution.representation_distance_cache_cs
         random_seed = 123
         fitness_value = 0.5
         objective_value = 100
@@ -198,18 +188,12 @@ class TestSolution(unittest.TestCase):
         # Act
         solution = SolutionVoidRepresentationInt(random_seed, fitness_value, objective_value, is_feasible)
         # Assert
-        self.assertFalse(solution.evaluation_cache_cs.is_caching)
-        self.assertEqual(solution.evaluation_cache_cs.max_cache_size, 0)
-        self.assertFalse(solution.representation_distance_cache_cs.is_caching)
-        self.assertEqual(solution.representation_distance_cache_cs.max_cache_size, 0)
+        self.assertIsNone(solution.evaluation_cache_cs)
+        self.assertIsNone(solution.representation_distance_cache_cs)
 
     # Solution calculates quality of solution and caches it if evaluation_cache_is_used is True
     def test_calculate_quality_with_caching(self):
         # Arrange
-        if hasattr(Solution, 'evaluation_cache_cs'):
-            del Solution.evaluation_cache_cs
-        if hasattr(Solution, 'representation_distance_cache_cs'):
-            del Solution.representation_distance_cache_cs
         random_seed = 123
         fitness_value = 0.5
         objective_value = 100
@@ -234,10 +218,6 @@ class TestSolution(unittest.TestCase):
     # Solution caches representation distance if distance_calculation_cache_is_used is True
     def test_representation_distance_with_caching(self):
         # Arrange
-        if hasattr(Solution, 'evaluation_cache_cs'):
-            del Solution.evaluation_cache_cs
-        if hasattr(Solution, 'representation_distance_cache_cs'):
-            del Solution.representation_distance_cache_cs
         random_seed = 123
         fitness_value = 0.5
         objective_value = 100
@@ -283,9 +263,7 @@ class TestSolution(unittest.TestCase):
         self.assertEqual(solution.objective_values, copied_solution.objective_values)
         self.assertEqual(solution.is_feasible, copied_solution.is_feasible)
         self.assertEqual(solution.representation, copied_solution.representation)
-        self.assertEqual(solution.evaluation_cache_cs.is_caching, copied_solution.evaluation_cache_cs.is_caching)
         self.assertEqual(solution.evaluation_cache_cs.max_cache_size, copied_solution.evaluation_cache_cs.max_cache_size)
-        self.assertEqual(solution.representation_distance_cache_cs.is_caching, copied_solution.representation_distance_cache_cs.is_caching)
         self.assertEqual(solution.representation_distance_cache_cs.max_cache_size, copied_solution.representation_distance_cache_cs.max_cache_size)
 
     # Solution can be evaluated with a Problem object

@@ -24,7 +24,9 @@ class TestSolutionProperties(unittest.TestCase):
         self.solution = SolutionVoidRepresentationInt( random_seed=self.random_seed,
                 fitness_value=self.fitness_value,
                 objective_value=self.objective_value,
-                is_feasible= self.is_feasible
+                is_feasible= self.is_feasible, 
+                evaluation_cache_is_used=True,
+                distance_calculation_cache_is_used=True
         )
     
     def test_fitness_value_should_be_equal_as_in_constructor(self):

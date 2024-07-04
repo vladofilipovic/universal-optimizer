@@ -16,14 +16,6 @@ class TestEvaluationCacheControlStatisticsProperties(unittest.TestCase):
         self.eccs = EvaluationCacheControlStatistics()
         return
 
-    def test_is_caching_should_be_true_as_it_is_set(self):
-        self.eccs.is_caching = True
-        self.assertTrue(self.eccs.is_caching)
-
-    def test_is_caching_should_be_false_as_it_is_set(self):
-        self.eccs.is_caching = False
-        self.assertFalse(self.eccs.is_caching)
-
     def test_cache_hit_count_should_be_zero_after_construction(self):
         self.assertEqual(self.eccs.cache_hit_count, 0)
 

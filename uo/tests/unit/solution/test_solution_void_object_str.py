@@ -111,16 +111,11 @@ class TestSolutionVoidRepresentationIntObjectStr(unittest.TestCase):
     # Solution sets evaluation_cache_cs and representation_distance_cache_cs to default values if they are not provided
     def test_default_values_for_caches(self):
         # Arrange
-        if hasattr(Solution, 'evaluation_cache_cs'):
-            del Solution.evaluation_cache_cs
-        if hasattr(Solution, 'representation_distance_cache_cs'):
-            del Solution.representation_distance_cache_cs
         # Act
-        solution = SolutionVoidRepresentationIntObjectStr()
+        solution = SolutionVoidRepresentationIntObjectStr(evaluation_cache_is_used=True, 
+                                            distance_calculation_cache_is_used=True)
         # Assert
-        self.assertFalse(solution.evaluation_cache_cs.is_caching)
         self.assertEqual(solution.evaluation_cache_cs.max_cache_size, 0)
-        self.assertFalse(solution.representation_distance_cache_cs.is_caching)
         self.assertEqual(solution.representation_distance_cache_cs.max_cache_size, 0)
 
     # Solution can be deep copied
@@ -140,10 +135,9 @@ class TestSolutionVoidRepresentationIntObjectStr(unittest.TestCase):
         self.assertEqual(solution.objective_values, copied_solution.objective_values)
         self.assertEqual(solution.is_feasible, copied_solution.is_feasible)
         self.assertEqual(solution.representation, copied_solution.representation)
-        self.assertEqual(solution.evaluation_cache_cs.is_caching, copied_solution.evaluation_cache_cs.is_caching)
-        self.assertEqual(solution.evaluation_cache_cs.max_cache_size, copied_solution.evaluation_cache_cs.max_cache_size)
-        self.assertEqual(solution.representation_distance_cache_cs.is_caching, copied_solution.representation_distance_cache_cs.is_caching)
-        self.assertEqual(solution.representation_distance_cache_cs.max_cache_size, copied_solution.representation_distance_cache_cs.max_cache_size)
+        self.assertEqual(solution.evaluation_cache_cs, copied_solution.evaluation_cache_cs)
+        self.assertEqual(solution.representation_distance_cache_cs, 
+                        copied_solution.representation_distance_cache_cs)
 
     # Solution can be evaluated with a Problem object
     def test_evaluate_with_problem(self):

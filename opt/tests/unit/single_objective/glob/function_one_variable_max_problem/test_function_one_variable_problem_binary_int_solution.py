@@ -22,10 +22,6 @@ class TestFunctionOneVariableMaxProblemIntSolution(unittest.TestCase):
 
     # Creating an instance of FunctionOneVariableMaxProblemIntSolution with valid arguments should initialize the object correctly
     def test_valid_arguments_initialization(self):
-        if hasattr(Solution, 'evaluation_cache_cs'):
-            del Solution.evaluation_cache_cs
-        if hasattr(Solution, 'representation_distance_cache_cs'):
-            del Solution.representation_distance_cache_cs
         domain_from = 0.0
         domain_to = 1.0
         number_of_intervals = 10
@@ -38,10 +34,6 @@ class TestFunctionOneVariableMaxProblemIntSolution(unittest.TestCase):
         self.assertIsNone(solution.objective_value)
         self.assertIsNone(solution.objective_values)
         self.assertFalse(solution.is_feasible)
-        self.assertFalse(Solution.evaluation_cache_cs.is_caching)
-        self.assertEqual(Solution.evaluation_cache_cs.max_cache_size, 0)
-        self.assertFalse(Solution.representation_distance_cache_cs.is_caching)
-        self.assertEqual(Solution.representation_distance_cache_cs.max_cache_size, 0)
 
     # Calling copy() method on an instance of FunctionOneVariableMaxProblemIntSolution should return a deep copy of the object
     def test_copy_method(self):

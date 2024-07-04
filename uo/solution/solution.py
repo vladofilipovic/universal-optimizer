@@ -9,10 +9,8 @@ sys.path.append(directory.parent)
 
 from copy import deepcopy
 from random import random, randrange
-from random import choice
 
 from abc import ABCMeta, abstractmethod
-from typing import NamedTuple
 from typing import TypeVar
 from typing import Generic
 from typing import Optional
@@ -35,10 +33,10 @@ class Solution(Generic[R_co,A_co], metaclass=ABCMeta):
             objective_value:Optional[float|int], 
             objective_values:Optional[list[float]|tuple[float]], 
             is_feasible:bool,
-            evaluation_cache_is_used:bool,
-            evaluation_cache_max_size:int,
-            distance_calculation_cache_is_used:bool,
-            distance_calculation_cache_max_size:int
+            evaluation_cache_is_used:bool=False,
+            evaluation_cache_max_size:Optional[int]=None,
+            distance_calculation_cache_is_used:bool=False,
+            distance_calculation_cache_max_size:Optional[int]=None
     )->None:
         """
         Create new Solution instance
@@ -58,7 +56,7 @@ class Solution(Generic[R_co,A_co], metaclass=ABCMeta):
         size is unlimited
         """
         if not isinstance(random_seed, Optional[int]):
-                raise TypeError('Parameter \'random_seed\' must be \'inr\' or \'None\'.')        
+                raise TypeError('Parameter \'random_seed\' must be \'int\' or \'None\'.')        
         if not isinstance(objective_value, Optional[float|int]):
                 raise TypeError('Parameter \'objective_value\' must be \'float\' or \'int\' or \'None\'.')        
         if not isinstance(objective_values, Optional[list]) and not isinstance(objective_values, Optional[tuple]):
@@ -71,12 +69,12 @@ class Solution(Generic[R_co,A_co], metaclass=ABCMeta):
                 raise TypeError('Parameter \'is_feasible\' must be \'bool\'.')        
         if not isinstance(evaluation_cache_is_used, bool):
                 raise TypeError('Parameter \'evaluation_cache_is_used\' must be \'bool\'.')        
-        if not isinstance(evaluation_cache_max_size, int):
-                raise TypeError('Parameter \'evaluation_cache_max_size\' must be \'int\'.')        
+        if not isinstance(evaluation_cache_max_size, int) and evaluation_cache_max_size is not None:
+                raise TypeError('Parameter \'evaluation_cache_max_size\' must be \'int\' or None.')        
         if not isinstance(distance_calculation_cache_is_used, bool):
                 raise TypeError('Parameter \'distance_calculation_cache_is_used\' must be \'bool\'.')        
-        if not isinstance(distance_calculation_cache_max_size, int):
-                raise TypeError('Parameter \'distance_calculation_cache_max_size\' must be \'int\'.')        
+        if not isinstance(distance_calculation_cache_max_size, int) and distance_calculation_cache_max_size is not None:
+                raise TypeError('Parameter \'distance_calculation_cache_max_size\' must be \'int\' or None.')        
         if random_seed is not None and isinstance(random_seed, int) and random_seed != 0:
             self.__random_seed:int = random_seed
         else:
@@ -86,16 +84,15 @@ class Solution(Generic[R_co,A_co], metaclass=ABCMeta):
         self.__objective_value:float = objective_value
         self.__objective_values:list[float]|tuple[float] = objective_values
         self.__is_feasible:bool = is_feasible
+        self.__evaluation_cache_cs:Optional[EvaluationCacheControlStatistics] = None
+        if evaluation_cache_is_used:
+            self.__evaluation_cache_cs:Optional[EvaluationCacheControlStatistics] = \
+                EvaluationCacheControlStatistics(evaluation_cache_max_size)  
+        self.__representation_distance_cache_cs:Optional[DistanceCalculationCacheControlStatistics[R_co]] = None
+        if distance_calculation_cache_is_used:
+            self.__representation_distance_cache_cs = \
+                DistanceCalculationCacheControlStatistics[R_co](distance_calculation_cache_max_size)
         self.__representation:R_co = None
-        #class/static variable evaluation_cache_cs
-        if not hasattr(Solution, 'evaluation_cache_cs'):
-            Solution.evaluation_cache_cs:EvaluationCacheControlStatistics = EvaluationCacheControlStatistics(
-                evaluation_cache_is_used, evaluation_cache_max_size)  
-        #class/static variable representation_distance_cache_cs
-        if not hasattr(Solution, 'representation_distance_cache_cs'):
-            Solution.representation_distance_cache_cs: DistanceCalculationCacheControlStatistics[R_co] = \
-                    DistanceCalculationCacheControlStatistics[R_co](distance_calculation_cache_is_used,
-                    distance_calculation_cache_max_size)
 
     @abstractmethod
     def __copy__(self):
@@ -117,7 +114,6 @@ class Solution(Generic[R_co,A_co], metaclass=ABCMeta):
         :rtype: Solution
         """
         return self.__copy__()
-
 
     def obtain_feasible_representation(self, problem:Problem)->R_co:
         if self.representation is None:
@@ -272,6 +268,30 @@ class Solution(Generic[R_co,A_co], metaclass=ABCMeta):
                     is_feasible=self.is_feasible) 
 
     @property
+    def evaluation_cache_cs(self)->Optional[EvaluationCacheControlStatistics]:
+        """
+        Property getter that returns cache for evaluation control and statistics
+
+        :return: cache for evaluation control and statistics 
+        :rtype: EvaluationCacheControlStatistics
+        """
+        if self.__evaluation_cache_cs is None:
+            return None
+        return self.__evaluation_cache_cs
+
+    @property
+    def representation_distance_cache_cs(self)->Optional[DistanceCalculationCacheControlStatistics]:
+        """
+        Property getter that returns cache for distance calculation control and statistics
+
+        :return: cache for distance calculation control and statistics
+        :rtype: DistanceCalculationCacheControlStatistics
+        """
+        if self.__representation_distance_cache_cs is None:
+            return None
+        return self.__representation_distance_cache_cs
+
+    @property
     def representation(self)->R_co:
         """
         Property getter for representation of the target solution
@@ -410,8 +430,8 @@ class Solution(Generic[R_co,A_co], metaclass=ABCMeta):
         :return: objective value, fitness value and feasibility of the solution instance 
         :rtype: `QualityOfSolution`
         """
-        eccs:EvaluationCacheControlStatistics = Solution.evaluation_cache_cs 
-        if eccs.is_caching:
+        eccs:Optional[EvaluationCacheControlStatistics] = self.evaluation_cache_cs 
+        if eccs is not None:
             eccs.increment_cache_request_count()
             rep:str = self.string_representation()
             if rep in eccs.cache:
@@ -461,8 +481,8 @@ class Solution(Generic[R_co,A_co], metaclass=ABCMeta):
         :return: distance 
         :rtype: float
         """
-        rdcs:DistanceCalculationCacheControlStatistics[R_co] = Solution.representation_distance_cache_cs
-        if rdcs.is_caching:
+        rdcs:Optional[DistanceCalculationCacheControlStatistics[R_co]] = self.representation_distance_cache_cs
+        if rdcs is not None:
             rdcs.increment_cache_request_count()
             pair:(R_co,R_co) = (representation_1, representation_2)
             if pair in rdcs.cache:
@@ -515,12 +535,18 @@ class Solution(Generic[R_co,A_co], metaclass=ABCMeta):
         s += 'representation()=' + str(self.representation) + delimiter
         for _ in range(0, indentation):
             s += indentation_symbol     
-        s += 'evaluation_cache_cs=' + self.evaluation_cache_cs.string_rep(
-                delimiter, indentation+1, indentation_symbol, '{', '}')  
+        if self.evaluation_cache_cs is not None: 
+            s += 'evaluation_cache_cs=' + self.evaluation_cache_cs.string_rep(
+                    delimiter, indentation+1, indentation_symbol, '{', '}') 
+        else:
+            s += 'evaluation_cache_cs=' + 'None'
         for _ in range(0, indentation):
             s += indentation_symbol  
-        s += '__representation_distance_cache_cs(static)=' + Solution.representation_distance_cache_cs.string_rep(
-                delimiter, indentation + 1, indentation_symbol, '{', '}') + delimiter
+        if self.representation_distance_cache_cs is not None: 
+            s += 'representation_distance_cache_cs=' + self.representation_distance_cache_cs.string_rep(
+                    delimiter, indentation + 1, indentation_symbol, '{', '}') + delimiter
+        else:
+            s += 'representation_distance_cache_cs=' + 'None'
         for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_end 
