@@ -35,10 +35,8 @@ def main():
                 VnsShakingSupportRepresentationInt[str](repr_length)
         vns_ls_support:VnsLocalSearchSupportRepresentationInt[str] = \
                 VnsLocalSearchSupportRepresentationInt[str](repr_length)
-        output_control:OutputControl = OutputControl(write_to_output=False)
         additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(is_active=False)
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
-        vns_construction_params.output_control = output_control
         vns_construction_params.problem = problem_to_solve
         vns_construction_params.solution_template = solution
         vns_construction_params.vns_shaking_support = vns_shaking_support

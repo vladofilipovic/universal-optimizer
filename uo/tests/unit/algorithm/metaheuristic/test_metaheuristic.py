@@ -38,8 +38,7 @@ class TestMetaheuristicProperties(unittest.TestCase):
         self.additional_statistics_control_stub = mocker.MagicMock(spec=AdditionalStatisticsControl)
         
         self.output_control_stub = mocker.MagicMock(spec=OutputControl)
-        type(self.output_control_stub).write_to_output = False
-
+  
         self.problem_mock = mocker.MagicMock(spec=ProblemVoidMinSO)
         type(self.problem_mock).name = 'some_problem'
         type(self.problem_mock).is_minimization = True
@@ -104,7 +103,6 @@ class TestMetaheuristic2(unittest.TestCase):
         random_seed = 42
         additional_statistics_control_stub = mocker.MagicMock(spec=AdditionalStatisticsControl)
         output_control_stub = mocker.MagicMock(spec=OutputControl)
-        type(output_control_stub).write_to_output = False
         problem_mock = mocker.MagicMock(spec=ProblemVoidMinSO)
         type(problem_mock).name = 'some_problem'
         type(problem_mock).is_minimization = True
@@ -143,7 +141,6 @@ class TestMetaheuristic2(unittest.TestCase):
         random_seed = 42
         additional_statistics_control_stub = mocker.MagicMock(spec=AdditionalStatisticsControl)
         output_control_stub = mocker.MagicMock(spec=OutputControl)
-        type(output_control_stub).write_to_output = False
         problem_mock = mocker.MagicMock(spec=ProblemVoidMinSO)
         type(problem_mock).name = 'some_problem'
         type(problem_mock).is_minimization = True

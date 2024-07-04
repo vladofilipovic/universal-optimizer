@@ -7,6 +7,9 @@ from copy import deepcopy
 from uo.problem.problem import Problem
 from uo.problem.problem_void_min_so import ProblemVoidMinSO
 
+from uo.solution.distance_calculation_cache_control_statistics import DistanceCalculationCacheControlStatistics
+from uo.solution.evaluation_cache_control_statistics import EvaluationCacheControlStatistics
+
 from uo.solution.quality_of_solution import QualityOfSolution
 from uo.solution.solution import Solution 
 from uo.solution.solution_void_representation_int import SolutionVoidRepresentationInt
@@ -17,6 +20,8 @@ class TestSolution(unittest.TestCase):
     # Solution can be instantiated with valid parameters
     def test_instantiation_with_valid_parameters(self):
         # Arrange
+        EvaluationCacheControlStatistics._instances = {} # reset singleton
+        DistanceCalculationCacheControlStatistics._instances = {} # reset singleton
         random_seed = 123
         fitness_value = 0.5
         objective_value = 100
@@ -70,6 +75,8 @@ class TestSolution(unittest.TestCase):
     # The copy, copy_from, argument, string_representation, init_random, native_representation, init_from, calculate_quality_directly, calculate_quality, representation_distance_directly, representation_distance, string_rep, __str__, __repr__, and __format__ methods can be called and return expected results
     def test_method_calls_and_results(self):
         # Arrange
+        EvaluationCacheControlStatistics._instances = {} # reset singleton
+        DistanceCalculationCacheControlStatistics._instances = {} # reset singleton
         random_seed = 123
         fitness_value = 0.5
         objective_value = 100
@@ -186,7 +193,8 @@ class TestSolution(unittest.TestCase):
         objective_value = 100
         is_feasible = True
         # Act
-        solution = SolutionVoidRepresentationInt(random_seed, fitness_value, objective_value, is_feasible)
+        solution = SolutionVoidRepresentationInt(random_seed, fitness_value, objective_value, is_feasible,
+                    evaluation_cache_is_used=False)
         # Assert
         self.assertIsNone(solution.evaluation_cache_cs)
         self.assertIsNone(solution.representation_distance_cache_cs)
@@ -194,6 +202,8 @@ class TestSolution(unittest.TestCase):
     # Solution calculates quality of solution and caches it if evaluation_cache_is_used is True
     def test_calculate_quality_with_caching(self):
         # Arrange
+        EvaluationCacheControlStatistics._instances = {}
+        DistanceCalculationCacheControlStatistics._instances = {}
         random_seed = 123
         fitness_value = 0.5
         objective_value = 100
@@ -269,6 +279,8 @@ class TestSolution(unittest.TestCase):
     # Solution can be evaluated with a Problem object
     def test_evaluate_with_problem(self):
         # Arrange
+        EvaluationCacheControlStatistics._instances = {} # reset singleton
+        DistanceCalculationCacheControlStatistics._instances = {} # reset singleton
         random_seed = 123
         fitness_value = 0.5
         objective_value = 100

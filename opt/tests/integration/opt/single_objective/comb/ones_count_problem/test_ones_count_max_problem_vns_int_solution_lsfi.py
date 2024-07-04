@@ -28,7 +28,6 @@ class TestOnesCountMaxProblemVnsIntSolutionLsfi(unittest.TestCase):
         print("setUpClass TestIntegrationOnesCountMaxProblemVnsIntSolutionLsfi\n")
 
     def setUp(self):
-        self.output_control = OutputControl(False)
         self.problem_to_solve:OnesCountMaxProblem = OnesCountMaxProblem.from_dimension(dimension=22)
         self.solution:OnesCountMaxProblemIntSolution = OnesCountMaxProblemIntSolution()
         self.finish_control:FinishControl = FinishControl(criteria='evaluations', evaluations_max=5000)
@@ -38,7 +37,6 @@ class TestOnesCountMaxProblemVnsIntSolutionLsfi(unittest.TestCase):
                 VnsLocalSearchSupportRepresentationInt(self.problem_to_solve.dimension)
         self.additional_stat = AdditionalStatisticsControl(keep='')
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
-        vns_construction_params.output_control = self.output_control
         vns_construction_params.problem = self.problem_to_solve
         vns_construction_params.solution_template = self.solution
         vns_construction_params.vns_shaking_support = self.vns_shaking_support

@@ -29,7 +29,6 @@ class TestMaxFunctionOneVariableMaxProblemIntSolutionLsfi(unittest.TestCase):
 
     def setUp(self):
         # Arrange
-        self.output_control:OutputControl = OutputControl(write_to_output=False)
         self.problem_to_solve:FunctionOneVariableMaxProblemMax = FunctionOneVariableMaxProblemMax(
                 expression='7-x*x',
                 domain_low=-3,
@@ -48,7 +47,7 @@ class TestMaxFunctionOneVariableMaxProblemIntSolutionLsfi(unittest.TestCase):
         self.vns_ls_support:VnsLocalSearchSupportRepresentationInt = \
                 VnsLocalSearchSupportRepresentationInt(self.solution.number_of_intervals)
         self.vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
-        self.vns_construction_params.output_control = self.output_control
+        self.vns_construction_params.output_control = None
         self.vns_construction_params.problem = self.problem_to_solve
         self.vns_construction_params.solution_template = self.solution
         self.vns_construction_params.vns_shaking_support = self.vns_shaking_support

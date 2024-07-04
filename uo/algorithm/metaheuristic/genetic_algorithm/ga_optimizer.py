@@ -43,7 +43,7 @@ class GaOptimizer(PopulationBasedMetaheuristic, metaclass=ABCMeta):
             finish_control:FinishControl,
             random_seed:Optional[int],
             additional_statistics_control:AdditionalStatisticsControl,
-            output_control:OutputControl,
+            output_control:Optional[OutputControl],
             problem:Problem,
             solution_template:Solution,
             ga_selection: Selection,
@@ -60,7 +60,7 @@ class GaOptimizer(PopulationBasedMetaheuristic, metaclass=ABCMeta):
         :param int random_seed: random seed for metaheuristic execution
         :param `AdditionalStatisticsControl` additional_statistics_control: structure that controls additional
         statistics obtained during population-based metaheuristic execution
-        :param `OutputControl` output_control: structure that controls output
+        :param `Optional[OutputControl]` output_control: structure that controls output
         :param `Problem` problem: problem to be solved
         :param `Solution` solution_template: initial solution of the problem
         :param `GaCrossoverSupport` ga_crossover_support: placeholder for additional methods, specific for GA crossover 
@@ -76,8 +76,8 @@ class GaOptimizer(PopulationBasedMetaheuristic, metaclass=ABCMeta):
                 raise TypeError('Parameter \'random_seed\' must be \'int\' or \'None\'.')
         if not isinstance(additional_statistics_control, AdditionalStatisticsControl):
                 raise TypeError('Parameter \'additional_statistics_control\' must be \'AdditionalStatisticsControl\'.')
-        if not isinstance(output_control, OutputControl):
-                raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
+        if not isinstance(output_control, OutputControl) and output_control is not None:
+                raise TypeError('Parameter \'output_control\' must be \'OutputControl\' or have value None.')
         if not isinstance(problem, Problem):
                 raise TypeError('Parameter \'problem\' must be \'Problem\'.')
         if not isinstance(ga_selection, Selection):

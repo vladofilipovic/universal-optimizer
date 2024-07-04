@@ -24,7 +24,6 @@ def main():
                 input_format='txt')
         print('Problem: {}'.format(problem_to_solve))            
         finish:FinishControl = FinishControl(criteria='evaluations & seconds', evaluations_max=5000, seconds_max=10)
-        output_control:OutputControl = OutputControl(write_to_output=False)
         additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(is_active=False)
         solution:FunctionOneVariableMaxProblemBitArraySolution = FunctionOneVariableMaxProblemBitArraySolution(
                 domain_from=problem_to_solve.domain_low, domain_to=problem_to_solve.domain_high, 

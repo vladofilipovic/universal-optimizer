@@ -17,7 +17,6 @@ from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit
                 OnesCountMaxProblemBitArraySolution
 
 def main():
-        output_control:OutputControl = OutputControl(write_to_output=False)
         problem_to_solve:OnesCountMaxProblem = OnesCountMaxProblem.from_dimension(dimension=7)
         solution:OnesCountMaxProblemBitArraySolution = OnesCountMaxProblemBitArraySolution()
         finish:FinishControl = FinishControl(criteria='evaluations', evaluations_max=5000)
@@ -29,7 +28,6 @@ def main():
                 GaMutationSupportOnePointRepresentationBitArray[str](mutation_probability=0.0005)
         ga_construction_params:GaOptimizerGenerationalConstructionParameters = \
                 GaOptimizerGenerationalConstructionParameters()
-        ga_construction_params.output_control = output_control
         ga_construction_params.problem = problem_to_solve
         ga_construction_params.solution_template = solution
         ga_construction_params.finish_control = finish

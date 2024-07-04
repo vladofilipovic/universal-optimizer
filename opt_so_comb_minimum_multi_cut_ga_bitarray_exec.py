@@ -20,8 +20,6 @@ from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_probl
         MinimumMultiCutProblemBitArraySolution
 
 def main():
-        output_control:OutputControl = OutputControl(write_to_output=False)
-
         nodes = 10
         prob = 0.5
         G: nx.Graph = nx.fast_gnp_random_graph(nodes, prob)
@@ -47,7 +45,6 @@ def main():
                 GaMutationSupportOnePointRepresentationBitArray(mutation_probability=0.05)
         ga_construction_params:GaOptimizerGenerationalConstructionParameters = \
                 GaOptimizerGenerationalConstructionParameters()
-        ga_construction_params.output_control = output_control
         ga_construction_params.problem = problem_to_solve
         ga_construction_params.solution_template = solution
         ga_construction_params.finish_control = finish

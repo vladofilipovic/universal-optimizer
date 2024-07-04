@@ -130,12 +130,11 @@ def main():
         if write_to_output_file:    
             output_fields:str = parameters['outputFields']
             output_moments:str = parameters['outputMoments']
-            output_control:OutputControl = OutputControl(write_to_output=True,
-                    output_file=output_file,
+            output_control:OutputControl = OutputControl(output_file=output_file,
                     fields=output_fields,
                     moments=output_moments)
         else:
-            output_control:OutputControl = OutputControl(write_to_output=False)
+            output_control:OutputControl = None
         # input file setup
         input_file_path:str = parameters['inputFilePath']
         input_format:str = parameters['inputFormat']

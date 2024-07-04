@@ -6,6 +6,9 @@ from copy import deepcopy
 from uo.problem.problem import Problem
 from uo.problem.problem_void_min_so import ProblemVoidMinSO
 
+from uo.solution.evaluation_cache_control_statistics import EvaluationCacheControlStatistics
+from uo.solution.distance_calculation_cache_control_statistics import DistanceCalculationCacheControlStatistics
+
 from uo.solution.quality_of_solution import QualityOfSolution
 from uo.solution.solution import Solution 
 from uo.solution.solution_void_representation_object import SolutionVoidRepresentationIntObject
@@ -111,6 +114,8 @@ class TestSolutionVoidRepresentationIntObject(unittest.TestCase):
     # Solution sets evaluation_cache_cs and representation_distance_cache_cs to default values if they are not provided
     def test_default_values_for_caches(self):
         # Arrange
+        EvaluationCacheControlStatistics._instances = {} # reset cache
+        DistanceCalculationCacheControlStatistics._instances = {} # reset cache
         # Act
         solution = SolutionVoidRepresentationIntObject(evaluation_cache_is_used=True, 
                                             distance_calculation_cache_is_used=True)

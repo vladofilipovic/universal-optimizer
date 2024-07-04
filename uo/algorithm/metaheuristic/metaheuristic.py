@@ -39,7 +39,7 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
             finish_control:FinishControl,
             random_seed:Optional[int], 
             additional_statistics_control:AdditionalStatisticsControl,
-            output_control:OutputControl, 
+            output_control:Optional[OutputControl], 
             problem:Problem,
             solution_template:Solution
     )->None:
@@ -51,7 +51,7 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         :param int random_seed: random seed for metaheuristic execution
         :param `AdditionalStatisticsControl` additional_statistics_control: structure that controls additional 
         statistic to be kept during metaheuristic evaluation        
-        :param `OutputControl` output_control: structure that controls output
+        :param `Optional[OutputControl]` output_control: structure that controls output
         :param `Problem` problem: problem to be solved
         :param `Solution` solution_template: solution template for the problem to be solved
         """
@@ -63,8 +63,8 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
                 raise TypeError('Parameter \'random_seed\' must be \'int\' or \'None\'.')
         if not isinstance(additional_statistics_control, AdditionalStatisticsControl):
                 raise TypeError('Parameter \'additional_statistics_control\' must be \'AdditionalStatisticsControl\'.')
-        if not isinstance(output_control, OutputControl):
-                raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
+        if not isinstance(output_control, OutputControl) and output_control is not None:
+                raise TypeError('Parameter \'output_control\' must be \'OutputControl\' or have value None.')
         if not isinstance(problem, Problem):
                 raise TypeError('Parameter \'problem\' must be \'Problem\'.')
         super().__init__(name=name, 

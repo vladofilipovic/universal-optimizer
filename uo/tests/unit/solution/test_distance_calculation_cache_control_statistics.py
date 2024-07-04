@@ -62,7 +62,8 @@ class TestDistanceCalculationCacheControlStatistics(unittest.TestCase):
     # Creating a new instance of DistanceCalculationCacheControlStatistics with invalid parameters raises a TypeError
     def test_invalid_parameters_raises_type_error(self):
         # Arrange
-        invalid_max_cache_size = "100"
+        DistanceCalculationCacheControlStatistics._instances ={}
+        invalid_max_cache_size = "abc"
         # Act & Assert
         with self.assertRaises(TypeError):
             DistanceCalculationCacheControlStatistics(invalid_max_cache_size)
@@ -70,6 +71,7 @@ class TestDistanceCalculationCacheControlStatistics(unittest.TestCase):
     # Setting the cache property with an invalid value raises a TypeError
     def test_setting_invalid_cache_raises_type_error(self):
         # Arrange
+        DistanceCalculationCacheControlStatistics._instances ={}
         cache_control_stats = DistanceCalculationCacheControlStatistics(100)
         invalid_cache = "cache"
         # Act & Assert

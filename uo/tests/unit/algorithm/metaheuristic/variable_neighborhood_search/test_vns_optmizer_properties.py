@@ -18,7 +18,6 @@ class TestVnsOptimizerProperties(unittest.TestCase):
 
     def setUp(self):
         self.output_control_stub = mocker.MagicMock(spec=OutputControl)
-        type(self.output_control_stub).write_to_output = False
 
         self.problem_mock = mocker.MagicMock(spec=Problem)
         type(self.problem_mock).name = mocker.PropertyMock(return_value='some_problem')

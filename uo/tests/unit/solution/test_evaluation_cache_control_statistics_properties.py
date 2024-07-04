@@ -13,14 +13,23 @@ class TestEvaluationCacheControlStatisticsProperties(unittest.TestCase):
         print("setUpClass TestEvaluationCacheControlStatisticsProperties\n")
 
     def setUp(self):
-        self.eccs = EvaluationCacheControlStatistics()
         return
 
     def test_cache_hit_count_should_be_zero_after_construction(self):
-        self.assertEqual(self.eccs.cache_hit_count, 0)
+        # Arrange
+        EvaluationCacheControlStatistics._instances = {}
+        # Act
+        eccs = EvaluationCacheControlStatistics()
+        # Assert
+        self.assertEqual(eccs.cache_hit_count, 0)
 
     def test_cache_request_count_should_be_zero_after_construction(self):
-        self.assertEqual(self.eccs.cache_request_count, 0)
+        # Arrange
+        EvaluationCacheControlStatistics._instances = {}
+        # Act
+        eccs = EvaluationCacheControlStatistics()
+        # Assert
+        self.assertEqual(eccs.cache_request_count, 0)
 
     def tearDown(self):
         return

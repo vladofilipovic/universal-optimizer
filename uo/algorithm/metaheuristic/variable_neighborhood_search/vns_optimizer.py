@@ -50,7 +50,7 @@ class VnsOptimizerConstructionParameters:
         finish_control: FinishControl = None
         random_seed: Optional[int] = None
         additional_statistics_control: AdditionalStatisticsControl = None
-        output_control: OutputControl = None
+        output_control: Optional[OutputControl] = None
         problem: Problem = None
         solution_template: Solution = None
         vns_shaking_support: VnsShakingSupport = None
@@ -69,7 +69,7 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
             finish_control:FinishControl, 
             random_seed:Optional[int], 
             additional_statistics_control:AdditionalStatisticsControl,
-            output_control:OutputControl, 
+            output_control:Optional[OutputControl], 
             problem:Problem, 
             solution_template:Solution,
             vns_shaking_support:VnsShakingSupport, 
@@ -103,8 +103,8 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
                 raise TypeError('Parameter \'random_seed\' must be \'int\' or \'None\'.')
         if not isinstance(additional_statistics_control, AdditionalStatisticsControl):
                 raise TypeError('Parameter \'additional_statistics_control\' must be \'AdditionalStatisticsControl\'.')
-        if not isinstance(output_control, OutputControl):
-                raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
+        if not isinstance(output_control, OutputControl) and output_control is not None:
+                raise TypeError('Parameter \'output_control\' must be \'OutputControl\' or be None.')
         if not isinstance(problem, Problem):
                 raise TypeError('Parameter \'problem\' must be \'Problem\'.')
         if not isinstance(solution_template, Solution) and solution_template is not None:

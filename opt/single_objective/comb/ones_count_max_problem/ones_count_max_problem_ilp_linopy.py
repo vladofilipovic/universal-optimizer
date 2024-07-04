@@ -15,6 +15,8 @@ from linopy import Model
 
 from uo.utils.logger import logger
 
+from typing import Optional
+
 from uo.problem.problem import Problem
 from uo.solution.solution import Solution
 from uo.solution.solution_void_representation_object import SolutionVoidRepresentationIntObject
@@ -30,9 +32,9 @@ class OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters:
     """
     Instance of the class :class:`OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters` represents constructor parameters for max ones problem ILP solver.
     """
-    def __init__(self, output_control: OutputControl = None, problem: Problem = None)->None:
-        if not isinstance(output_control, OutputControl):
-            raise TypeError('Parameter \'output_control\' must have type \'OutputControl\'.')
+    def __init__(self, output_control: Optional[OutputControl] = None, problem: Problem = None)->None:
+        if not isinstance(output_control, OutputControl) and output_control is not None:
+            raise TypeError('Parameter \'output_control\' must have type \'OutputControl\' or be None.')
         if not isinstance(problem, Problem):
             raise TypeError('Parameter \'problem\' must have type \'Problem\'.')
         self.__output_control = output_control
@@ -69,15 +71,15 @@ class OnesCountMaxProblemIntegerLinearProgrammingSolution(SolutionVoidRepresenta
 
 class OnesCountMaxProblemIntegerLinearProgrammingSolver(Optimizer):
 
-    def __init__(self, output_control:OutputControl,  problem:OnesCountMaxProblem)->None:
+    def __init__(self, output_control:OutputControl=None,  problem:OnesCountMaxProblem=None)->None:
         """
         Create new `OnesCountMaxProblemIntegerLinearProgrammingSolver` instance
 
         :param `OutputControls` output_control: object that control output
         :param `OnesCountMaxProblem` problem: problem to be solved
         """
-        if not isinstance(output_control, OutputControl):
-            raise TypeError('Parameter \'output_control\' must have type \'OutputControl\'.')
+        if not isinstance(output_control, OutputControl) and output_control is not None:
+            raise TypeError('Parameter \'output_control\' must have type \'OutputControl\' or be None.')
         if not isinstance(problem, OnesCountMaxProblem):
             raise TypeError('Parameter \'problem\' must have type \'OnesCountMaxProblem\'.')
         super().__init__("OnesCountMaxProblemIntegerLinearProgrammingSolver", output_control=output_control, 

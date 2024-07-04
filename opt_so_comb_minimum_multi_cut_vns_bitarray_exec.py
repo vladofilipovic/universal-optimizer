@@ -20,8 +20,6 @@ from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_probl
                 MinimumMultiCutProblemBitArraySolution
 
 def main():
-        output_control:OutputControl = OutputControl(write_to_output=False)
-
         nodes = 10
         prob = 0.5
 
@@ -49,7 +47,6 @@ def main():
         vns_ls_support:VnsLocalSearchSupportRepresentationBitArray = \
                 VnsLocalSearchSupportRepresentationBitArray(dimension=num_edges)
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
-        vns_construction_params.output_control = output_control
         vns_construction_params.problem = problem_to_solve
         vns_construction_params.solution_template = solution
         vns_construction_params.finish_control = finish

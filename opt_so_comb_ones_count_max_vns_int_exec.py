@@ -26,7 +26,6 @@ def main():
                 OnesCountMaxProblemIntSolutionVnsShakingSupport()
         vns_ls_support:OnesCountMaxProblemIntSolutionVnsLocalSearchSupport = \
                 OnesCountMaxProblemIntSolutionVnsLocalSearchSupport()
-        output_control:OutputControl = OutputControl(write_to_output=False)
         additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(is_active=False, keep='')
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
         vns_construction_params.output_control = output_control

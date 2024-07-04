@@ -23,10 +23,8 @@ class TestAlgorithmProperties(unittest.TestCase):
         self.evaluations_max = 42
         self.seconds_max = 42
 
-        self.oc_write_to_output = True
         self.oc_output_file = "some file path..."
         self.output_control_stub = mocker.MagicMock(spec=OutputControl)
-        type(self.output_control_stub).write_to_output = self.oc_write_to_output
         type(self.output_control_stub).output_file = self.oc_output_file
 
         self.pr_name = 'some_problem'
@@ -80,12 +78,11 @@ class TestAlgorithm(unittest.TestCase):
     def test_algorithm_initialization(self):
         # Arrange
         problem = ProblemVoidMinSO()
-        output_control = OutputControl(write_to_output=True, output_file=None, fields='iteration, evaluation', moments='after_algorithm')
+        output_control = OutputControl(output_file=None, fields='iteration, evaluation', moments='after_algorithm')
         # Act
         algorithm = AlgorithmVoid(name='MyAlgorithm', output_control=output_control, problem=problem)
         # Assert
         self.assertEqual(algorithm.name, 'MyAlgorithm')
-        self.assertEqual(algorithm.output_control.write_to_output, output_control.write_to_output)
         self.assertEqual(algorithm.output_control.output_file, output_control.output_file)
         self.assertEqual(algorithm.output_control.moments, output_control.moments)
         self.assertEqual(algorithm.problem.name, problem.name)
@@ -95,14 +92,13 @@ class TestAlgorithm(unittest.TestCase):
     def test_algorithm_copy(self):
         # Arrange
         problem = ProblemVoidMinSO()
-        output_control = OutputControl(write_to_output=True, output_file=None, fields='iteration, evaluation', moments='after_algorithm')
+        output_control = OutputControl(output_file=None, fields='iteration, evaluation', moments='after_algorithm')
         algorithm = AlgorithmVoid(name='MyAlgorithm', output_control=output_control, problem=problem)
         # Act
         algorithm_copy = algorithm.copy()
         # Assert
         self.assertIsNot(algorithm, algorithm_copy)
         self.assertEqual(algorithm.name, algorithm_copy.name)
-        self.assertEqual(algorithm.output_control.write_to_output, output_control.write_to_output)
         self.assertEqual(algorithm.output_control.output_file, output_control.output_file)
         self.assertEqual(algorithm.output_control.moments, output_control.moments)
         self.assertEqual(algorithm.problem.name, problem.name)
@@ -112,7 +108,7 @@ class TestAlgorithm(unittest.TestCase):
     def test_algorithm_properties(self):
         # Arrange
         problem = ProblemVoidMinSO()
-        output_control = OutputControl(write_to_output=True, output_file=None, fields='iteration, evaluation', moments='after_algorithm')
+        output_control = OutputControl(output_file=None, fields='iteration, evaluation', moments='after_algorithm')
         algorithm = AlgorithmVoid(name='MyAlgorithm', output_control=output_control, problem=problem)
         # Act
         algorithm.evaluation = 100
@@ -136,7 +132,7 @@ class TestAlgorithm(unittest.TestCase):
         # Arrange
         problem = ProblemVoidMinSO()
         solution = SolutionVoidRepresentationInt()
-        output_control = OutputControl(write_to_output=True, output_file=None, fields='iteration, evaluation', moments='after_algorithm')
+        output_control = OutputControl(output_file=None, fields='iteration, evaluation', moments='after_algorithm')
         algorithm = AlgorithmVoid(name='MyAlgorithm', output_control=output_control, problem=problem, solution_template=solution)
         # Act
         string_rep = str(algorithm)

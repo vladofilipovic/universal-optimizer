@@ -34,7 +34,6 @@ class TestOnesCountMaxProblemVnsBitArraySolutionLsbi(unittest.TestCase):
         print("setUpClass TestIntegrationOnesCountMaxProblemVnsBitArraySolutionLsbi\n")
 
     def setUp(self):
-        self.output_control = OutputControl(False)
         self.problem_to_solve:OnesCountMaxProblem = OnesCountMaxProblem.from_dimension(dimension=24)
         self.solution:OnesCountMaxProblemBitArraySolution = OnesCountMaxProblemBitArraySolution(random_seed=43434343)
         self.finish_control:FinishControl = FinishControl(criteria='evaluations', evaluations_max=1000)
@@ -44,7 +43,6 @@ class TestOnesCountMaxProblemVnsBitArraySolutionLsbi(unittest.TestCase):
                 VnsLocalSearchSupportRepresentationBitArray(self.problem_to_solve.dimension)
         self.additional_stat = AdditionalStatisticsControl(keep='')
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
-        vns_construction_params.output_control = self.output_control
         vns_construction_params.problem = self.problem_to_solve
         vns_construction_params.solution_template = self.solution
         vns_construction_params.vns_shaking_support = self.vns_shaking_support

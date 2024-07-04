@@ -247,7 +247,6 @@ class OnesCountMaxProblemIntSolutionVnsLocalSearchSupport(VnsLocalSearchSupport[
         return self.string_rep('|')
 
 def main():
-    output_control:OutputControl = OutputControl(write_to_output=False)
     problem_to_solve:OnesCountMaxProblem2 = OnesCountMaxProblem2(dim=24)
     solution:OnesCountMaxProblemIntSolution = OnesCountMaxProblemIntSolution()
     finish:FinishControl = FinishControl( criteria='evaluations & seconds', 
@@ -258,7 +257,6 @@ def main():
     vns_ls_support:OnesCountMaxProblemIntSolutionVnsLocalSearchSupport = \
         OnesCountMaxProblemIntSolutionVnsLocalSearchSupport()
     vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
-    vns_construction_params.output_control = output_control
     vns_construction_params.problem = problem_to_solve
     vns_construction_params.solution_template = solution
     vns_construction_params.vns_shaking_support = vns_shaking_support

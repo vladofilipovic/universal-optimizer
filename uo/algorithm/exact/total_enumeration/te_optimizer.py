@@ -39,7 +39,7 @@ class TeOptimizerConstructionParameters:
     """
     Instance of the class :class:`~uo.algorithm.exact.total_enumerations.TotalEnumerationConstructorParameters` represents constructor parameters for total enumeration algorithm.
     """
-    output_control:OutputControl = None
+    output_control:Optional[OutputControl] = None
     problem:Optional[Problem] = None
     solution_template:Optional[Solution] = None
     te_operations_support:TeOperationsSupport = None
@@ -50,20 +50,21 @@ class TeOptimizer(Algorithm):
     """
 
     def __init__(self,   
-            output_control:OutputControl, 
             problem:Problem,
             solution_template:Optional[Solution],
-            te_operations_support:TeOperationsSupport)->None:
+            te_operations_support:TeOperationsSupport,
+            output_control:Optional[OutputControl]=None
+            )->None:
         """
         Create new TeOptimizer instance
 
-        :param `OutputControl` output_control: structure that controls output
+        :param `Optional[OutputControl]` output_control: structure that controls output
         :param `Problem` problem: problem to be solved
-        :param `Optional[Solution]` solution_template: solution from which algorithm started
         :param `TeOperationsSupport` te_operations_support: placeholder for operations, specific for TE 
+        :param `Optional[Solution]` solution_template: solution from which algorithm started
         """
-        if not isinstance(output_control, OutputControl):
-                raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
+        if not isinstance(output_control, OutputControl) and output_control is not None:
+                raise TypeError('Parameter \'output_control\' must be \'OutputControl\'. or None')
         if not isinstance(problem, Problem):
                 raise TypeError('Parameter \'problem\' must be \'Problem\'.')
         if not isinstance(solution_template, Solution) and solution_template is not None:
@@ -89,10 +90,10 @@ class TeOptimizer(Algorithm):
 
         :param `TeOptimizerConstructionParameters` construction_tuple: tuple with all constructor parameters
         """
-        return cls(construction_tuple.output_control, 
-            construction_tuple.problem, 
+        return cls(construction_tuple.problem, 
             construction_tuple.solution_template,
-            construction_tuple.te_operations_support)
+            construction_tuple.te_operations_support,
+            construction_tuple.output_control)
 
     def __copy__(self):
         """

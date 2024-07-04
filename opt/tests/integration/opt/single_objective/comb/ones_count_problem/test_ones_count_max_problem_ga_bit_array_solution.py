@@ -28,7 +28,6 @@ class TestOnesCountMaxProblemGaBitArraySolution(unittest.TestCase):
         print("setUpClass TestOnesCountMaxProblemGaBitArraySolution\n")
 
     def setUp(self):
-        self.output_control:OutputControl = OutputControl(write_to_output=False)
         self.problem_to_solve:OnesCountMaxProblem = OnesCountMaxProblem.from_dimension(dimension=7)
         self.solution:OnesCountMaxProblemBitArraySolution = OnesCountMaxProblemBitArraySolution()
         self.finish:FinishControl = FinishControl(criteria='evaluations', evaluations_max=5000)
@@ -41,7 +40,7 @@ class TestOnesCountMaxProblemGaBitArraySolution(unittest.TestCase):
                 GaMutationSupportOnePointRepresentationBitArray[str](mutation_probability=0.0005)
         self.ga_construction_params:GaOptimizerGenerationalConstructionParameters = \
                 GaOptimizerGenerationalConstructionParameters()
-        self.ga_construction_params.output_control = self.output_control
+        self.ga_construction_params.output_control = None
         self.ga_construction_params.problem = self.problem_to_solve
         self.ga_construction_params.solution_template = self.solution
         self.ga_construction_params.finish_control = self.finish

@@ -19,7 +19,6 @@ from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit
 
 
 def main():
-        output_control:OutputControl = OutputControl(write_to_output=False)
         problem_dimension:int = 7
         problem_to_solve:OnesCountMaxProblem = OnesCountMaxProblem.from_dimension(dimension=problem_dimension)
         solution:OnesCountMaxProblemBitArraySolution = OnesCountMaxProblemBitArraySolution()
@@ -30,7 +29,6 @@ def main():
         vns_ls_support:VnsLocalSearchSupportRepresentationBitArray[str] = \
                 VnsLocalSearchSupportRepresentationBitArray[str](k_max=problem_dimension)
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
-        vns_construction_params.output_control = output_control
         vns_construction_params.problem = problem_to_solve
         vns_construction_params.solution_template = solution
         vns_construction_params.finish_control = finish

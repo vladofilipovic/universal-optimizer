@@ -18,14 +18,13 @@ class OutputControl:
     :class:`uo.algorithm.Algorithm` instance will be written 
     """
 
-    def __init__(self, write_to_output:bool=False, output_file:Optional[TextIOWrapper]=None, 
+    def __init__(self, output_file:Optional[TextIOWrapper]=None, 
             fields:str='iteration, evaluation, "step_name", best_solution.string_representation(), '
                 'best_solution.fitness_value, best_solution.objective_value, best_solution.is_feasible', 
             moments:str='after_algorithm') -> None:
         """
         Creates new :class:`uo.algorithm.OutputControl` instance
 
-        :param bool write_to_output: if algorithm will write to output, or not
         :param output_file: output file to which algorithm will write
         :type output_file: TextIOWrapper
         :param str fields: comma-separated list of fields for output - basically fields of the optimizer object 
@@ -35,15 +34,12 @@ class OutputControl:
         `before_algorithm`, `after_algorithm`, `before_iteration`, `after_iteration`, 
         `before_evaluation`, `after_evaluation`, `before_step_in_iteration`, `after_step_in_iteration`
         """
-        if not isinstance(write_to_output, bool):
-            raise TypeError('Parameter \'write_to_output\' must have type \'bool\'.')
         if not isinstance(output_file, Optional[TextIOWrapper]):
             raise TypeError('Parameter \'output_file\' must have type \'TextIOWrapper\' or be \'None\'.')
         if not isinstance(fields, str):
             raise TypeError('Parameter \'fields\' must have type \'str\'.')
         if not isinstance(moments, str):
             raise TypeError('Parameter \'moments\' must have type \'str\'.')
-        self.__write_to_output:bool = write_to_output
         self.__output_file:TextIOWrapper = output_file
         self.__fields_headings:list[str] = ['iteration',
                 'evaluation',
@@ -145,16 +141,6 @@ class OutputControl:
                 raise ValueError("Invalid value for moment {}. Should be one of:{}.".format( m, 
                     "before_algorithm, after_algorithm, before_iteration, after_iteration," + 
                     "before_evaluation`, after_evaluation, before_step_in_iteration, after_step_in_iteration"))
-
-    @property
-    def write_to_output(self)->bool:
-        """
-        Property getter for determining if write to output 
-
-        :return: if write to output during algorithm execution, or not 
-        :rtype: bool
-        """
-        return self.__write_to_output
 
     @property
     def output_file(self)->TextIOWrapper:
@@ -350,9 +336,6 @@ class OutputControl:
         for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_start + delimiter
-        for _ in range(0, indentation):
-            s += indentation_symbol  
-        s += 'write_to_output=' + str(self.write_to_output) + delimiter
         for _ in range(0, indentation):
             s += indentation_symbol  
         s += 'output_file=' + str(self.output_file) + delimiter

@@ -9,6 +9,7 @@ sys.path.append(directory.parent)
 
 from copy import deepcopy
 from datetime import datetime
+
 from abc import ABCMeta, abstractmethod
 
 from typing import Optional
@@ -59,7 +60,7 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
     @abstractmethod
     def __init__(self, 
                 name:str, 
-                output_control:OutputControl, 
+                output_control:Optional[OutputControl], 
                 problem:Problem,
                 solution_template:Solution)->None:
         """
@@ -72,8 +73,8 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
         """
         if not isinstance(name, str):
                 raise TypeError('Parameter \'name\' must be \'str\'.')
-        if not isinstance(output_control, OutputControl):
-                raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
+        if not isinstance(output_control, OutputControl) and output_control is not None:
+                raise TypeError('Parameter \'output_control\' must be \'OutputControl\' or None.')
         if not isinstance(problem, Problem):
                 raise TypeError('Parameter \'problem\' must be \'Problem\'.')
         if not isinstance(solution_template, Solution):

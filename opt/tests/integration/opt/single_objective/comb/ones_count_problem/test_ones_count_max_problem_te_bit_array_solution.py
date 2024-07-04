@@ -29,12 +29,10 @@ class TestOnesCountMaxProblemTeBitArraySolution(unittest.TestCase):
         print("setUpClass TestIntegrationOnesCountMaxProblemTeBitArraySolution\n")
 
     def setUp(self):
-        self.output_control = OutputControl(False)
         self.problem_to_solve:OnesCountMaxProblem = OnesCountMaxProblem.from_dimension(dimension=12)
         self.solution:OnesCountMaxProblemBitArraySolution = OnesCountMaxProblemBitArraySolution(random_seed=43434343)
         self.te_support:TeOperationsSupportRepresentationBitArray = TeOperationsSupportRepresentationBitArray()
         construction_params:TeOptimizerConstructionParameters = TeOptimizerConstructionParameters()
-        construction_params.output_control = self.output_control
         construction_params.problem = self.problem_to_solve
         construction_params.solution_template = self.solution
         construction_params.te_operations_support = self.te_support
