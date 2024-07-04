@@ -28,7 +28,7 @@ a. Designing novel optimization methods. Requirements:
     
         - Here, `unittest` framework  used. 
         
-        - Test should be placed into separate sub-directory under :file:`/tests/uo/` directory. 
+        - Test should be placed into separate sub-directory under :file:`/uo/tests/` directory. Directory structure within :file:`/uo/tests/` directory should mirror directory structure of the :file:`/uo/` directory.  
 
         - All developed code should be covered with unit test, and test coverage rate should be not less than 80%. 
 
@@ -65,7 +65,7 @@ b. Building application for solving optimization problems. Requirements:
     
         - Implemented programming code should be fully covered with unit tests, and `unittest` framework is used. 
         
-        - Test should be placed into separate sub-directory under :file:`/tests/opt/` directory. Directory structure within :file:`/test/opt/` directory should mirror directory structure of the :file:`/opt/` directory.  
+        - Test should be placed into separate sub-directory under :file:`/opt/tests/` directory. Directory structure within :file:`/opt/tests/` directory should mirror directory structure of the :file:`/opt/` directory.  
 
         - All developed code should be covered with unit test, and test coverage rate should be not less than 80%. 
 

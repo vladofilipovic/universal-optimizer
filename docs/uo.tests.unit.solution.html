@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>uo.tests.unit.solution package &mdash; Optimization Algorithms Library 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=01f34227"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Optimization Algorithms Library
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Tutorials and How-To Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how_to_guides.html">How-to Guides</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">In-depth Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="implemented_algorithms.html">Implemented algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="problems_to_be_solved.html">Problems to be solved</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Program code</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html#optimization">Optimization</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Changelog and Contribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribution.html">How to Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribution.html#contributors">Contributors</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Optimization Algorithms Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">uo.tests.unit.solution package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/uo.tests.unit.solution.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="uo-tests-unit-solution-package">
+<h1>uo.tests.unit.solution package<a class="headerlink" href="#uo-tests-unit-solution-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-uo.tests.unit.solution.test_distance_calculation_cache_control_statistics">
+<span id="uo-tests-unit-solution-test-distance-calculation-cache-control-statistics-module"></span><h2>uo.tests.unit.solution.test_distance_calculation_cache_control_statistics module<a class="headerlink" href="#module-uo.tests.unit.solution.test_distance_calculation_cache_control_statistics" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_distance_calculation_cache_control_statistics.TestDistanceCalculationCacheControlStatistics">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">uo.tests.unit.solution.test_distance_calculation_cache_control_statistics.</span></span><span class="sig-name descname"><span class="pre">TestDistanceCalculationCacheControlStatistics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_distance_calculation_cache_control_statistics.TestDistanceCalculationCacheControlStatistics" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_distance_calculation_cache_control_statistics.TestDistanceCalculationCacheControlStatistics.test_cache_property_returns_empty_dictionary_when_no_cache_set">
+<span class="sig-name descname"><span class="pre">test_cache_property_returns_empty_dictionary_when_no_cache_set</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_distance_calculation_cache_control_statistics.TestDistanceCalculationCacheControlStatistics.test_cache_property_returns_empty_dictionary_when_no_cache_set" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_distance_calculation_cache_control_statistics.TestDistanceCalculationCacheControlStatistics.test_cache_property_returns_set_dictionary">
+<span class="sig-name descname"><span class="pre">test_cache_property_returns_set_dictionary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_distance_calculation_cache_control_statistics.TestDistanceCalculationCacheControlStatistics.test_cache_property_returns_set_dictionary" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_distance_calculation_cache_control_statistics.TestDistanceCalculationCacheControlStatistics.test_format_returns_formatted_string_representation_with_specified_format_specification2">
+<span class="sig-name descname"><span class="pre">test_format_returns_formatted_string_representation_with_specified_format_specification2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_distance_calculation_cache_control_statistics.TestDistanceCalculationCacheControlStatistics.test_format_returns_formatted_string_representation_with_specified_format_specification2" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_distance_calculation_cache_control_statistics.TestDistanceCalculationCacheControlStatistics.test_increment_cache_hit_count_increments_cache_hit_count_property">
+<span class="sig-name descname"><span class="pre">test_increment_cache_hit_count_increments_cache_hit_count_property</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_distance_calculation_cache_control_statistics.TestDistanceCalculationCacheControlStatistics.test_increment_cache_hit_count_increments_cache_hit_count_property" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_distance_calculation_cache_control_statistics.TestDistanceCalculationCacheControlStatistics.test_increment_cache_request_count_increments_cache_request_count_property">
+<span class="sig-name descname"><span class="pre">test_increment_cache_request_count_increments_cache_request_count_property</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_distance_calculation_cache_control_statistics.TestDistanceCalculationCacheControlStatistics.test_increment_cache_request_count_increments_cache_request_count_property" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_distance_calculation_cache_control_statistics.TestDistanceCalculationCacheControlStatistics.test_invalid_parameters_raises_type_error">
+<span class="sig-name descname"><span class="pre">test_invalid_parameters_raises_type_error</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_distance_calculation_cache_control_statistics.TestDistanceCalculationCacheControlStatistics.test_invalid_parameters_raises_type_error" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_distance_calculation_cache_control_statistics.TestDistanceCalculationCacheControlStatistics.test_setting_invalid_cache_raises_type_error">
+<span class="sig-name descname"><span class="pre">test_setting_invalid_cache_raises_type_error</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_distance_calculation_cache_control_statistics.TestDistanceCalculationCacheControlStatistics.test_setting_invalid_cache_raises_type_error" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_distance_calculation_cache_control_statistics.TestDistanceCalculationCacheControlStatistics.test_setting_invalid_is_caching_raises_type_error">
+<span class="sig-name descname"><span class="pre">test_setting_invalid_is_caching_raises_type_error</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_distance_calculation_cache_control_statistics.TestDistanceCalculationCacheControlStatistics.test_setting_invalid_is_caching_raises_type_error" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_distance_calculation_cache_control_statistics.TestDistanceCalculationCacheControlStatistics.test_valid_parameters_set_properties_correctly">
+<span class="sig-name descname"><span class="pre">test_valid_parameters_set_properties_correctly</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_distance_calculation_cache_control_statistics.TestDistanceCalculationCacheControlStatistics.test_valid_parameters_set_properties_correctly" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-uo.tests.unit.solution.test_evaluation_cache_control_statistics_operations">
+<span id="uo-tests-unit-solution-test-evaluation-cache-control-statistics-operations-module"></span><h2>uo.tests.unit.solution.test_evaluation_cache_control_statistics_operations module<a class="headerlink" href="#module-uo.tests.unit.solution.test_evaluation_cache_control_statistics_operations" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_evaluation_cache_control_statistics_operations.TestEvaluationCacheControlStatisticsOperations">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">uo.tests.unit.solution.test_evaluation_cache_control_statistics_operations.</span></span><span class="sig-name descname"><span class="pre">TestEvaluationCacheControlStatisticsOperations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_evaluation_cache_control_statistics_operations.TestEvaluationCacheControlStatisticsOperations" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_evaluation_cache_control_statistics_operations.TestEvaluationCacheControlStatisticsOperations.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_evaluation_cache_control_statistics_operations.TestEvaluationCacheControlStatisticsOperations.setUp" title="Link to this definition"></a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_evaluation_cache_control_statistics_operations.TestEvaluationCacheControlStatisticsOperations.setUpClass">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setUpClass</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_evaluation_cache_control_statistics_operations.TestEvaluationCacheControlStatisticsOperations.setUpClass" title="Link to this definition"></a></dt>
+<dd><p>Hook method for setting up class fixture before running tests in the class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_evaluation_cache_control_statistics_operations.TestEvaluationCacheControlStatisticsOperations.tearDown">
+<span class="sig-name descname"><span class="pre">tearDown</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_evaluation_cache_control_statistics_operations.TestEvaluationCacheControlStatisticsOperations.tearDown" title="Link to this definition"></a></dt>
+<dd><p>Hook method for deconstructing the test fixture after testing it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_evaluation_cache_control_statistics_operations.TestEvaluationCacheControlStatisticsOperations.tearDownClass">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tearDownClass</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_evaluation_cache_control_statistics_operations.TestEvaluationCacheControlStatisticsOperations.tearDownClass" title="Link to this definition"></a></dt>
+<dd><p>Hook method for deconstructing the class fixture after running all tests in the class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_evaluation_cache_control_statistics_operations.TestEvaluationCacheControlStatisticsOperations.test_add_to_cache_should_work_1">
+<span class="sig-name descname"><span class="pre">test_add_to_cache_should_work_1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_evaluation_cache_control_statistics_operations.TestEvaluationCacheControlStatisticsOperations.test_add_to_cache_should_work_1" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_evaluation_cache_control_statistics_operations.TestEvaluationCacheControlStatisticsOperations.test_add_to_cache_should_work_1a">
+<span class="sig-name descname"><span class="pre">test_add_to_cache_should_work_1a</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_evaluation_cache_control_statistics_operations.TestEvaluationCacheControlStatisticsOperations.test_add_to_cache_should_work_1a" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_evaluation_cache_control_statistics_operations.TestEvaluationCacheControlStatisticsOperations.test_add_to_cache_should_work_2">
+<span class="sig-name descname"><span class="pre">test_add_to_cache_should_work_2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_evaluation_cache_control_statistics_operations.TestEvaluationCacheControlStatisticsOperations.test_add_to_cache_should_work_2" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_evaluation_cache_control_statistics_operations.TestEvaluationCacheControlStatisticsOperations.test_add_to_cache_should_work_2a">
+<span class="sig-name descname"><span class="pre">test_add_to_cache_should_work_2a</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_evaluation_cache_control_statistics_operations.TestEvaluationCacheControlStatisticsOperations.test_add_to_cache_should_work_2a" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_evaluation_cache_control_statistics_operations.TestEvaluationCacheControlStatisticsOperations.test_cache_hit_count_should_be_one_after_increment">
+<span class="sig-name descname"><span class="pre">test_cache_hit_count_should_be_one_after_increment</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_evaluation_cache_control_statistics_operations.TestEvaluationCacheControlStatisticsOperations.test_cache_hit_count_should_be_one_after_increment" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_evaluation_cache_control_statistics_operations.TestEvaluationCacheControlStatisticsOperations.test_cache_request_count_should_be_one_after_increment">
+<span class="sig-name descname"><span class="pre">test_cache_request_count_should_be_one_after_increment</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_evaluation_cache_control_statistics_operations.TestEvaluationCacheControlStatisticsOperations.test_cache_request_count_should_be_one_after_increment" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_evaluation_cache_control_statistics_operations.TestEvaluationCacheControlStatisticsOperations.test_clear_cache_should_work_0">
+<span class="sig-name descname"><span class="pre">test_clear_cache_should_work_0</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_evaluation_cache_control_statistics_operations.TestEvaluationCacheControlStatisticsOperations.test_clear_cache_should_work_0" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_evaluation_cache_control_statistics_operations.TestEvaluationCacheControlStatisticsOperations.test_clear_cache_should_work_0a">
+<span class="sig-name descname"><span class="pre">test_clear_cache_should_work_0a</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_evaluation_cache_control_statistics_operations.TestEvaluationCacheControlStatisticsOperations.test_clear_cache_should_work_0a" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-uo.tests.unit.solution.test_evaluation_cache_control_statistics_properties">
+<span id="uo-tests-unit-solution-test-evaluation-cache-control-statistics-properties-module"></span><h2>uo.tests.unit.solution.test_evaluation_cache_control_statistics_properties module<a class="headerlink" href="#module-uo.tests.unit.solution.test_evaluation_cache_control_statistics_properties" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_evaluation_cache_control_statistics_properties.TestEvaluationCacheControlStatisticsProperties">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">uo.tests.unit.solution.test_evaluation_cache_control_statistics_properties.</span></span><span class="sig-name descname"><span class="pre">TestEvaluationCacheControlStatisticsProperties</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_evaluation_cache_control_statistics_properties.TestEvaluationCacheControlStatisticsProperties" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_evaluation_cache_control_statistics_properties.TestEvaluationCacheControlStatisticsProperties.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_evaluation_cache_control_statistics_properties.TestEvaluationCacheControlStatisticsProperties.setUp" title="Link to this definition"></a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_evaluation_cache_control_statistics_properties.TestEvaluationCacheControlStatisticsProperties.setUpClass">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setUpClass</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_evaluation_cache_control_statistics_properties.TestEvaluationCacheControlStatisticsProperties.setUpClass" title="Link to this definition"></a></dt>
+<dd><p>Hook method for setting up class fixture before running tests in the class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_evaluation_cache_control_statistics_properties.TestEvaluationCacheControlStatisticsProperties.tearDown">
+<span class="sig-name descname"><span class="pre">tearDown</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_evaluation_cache_control_statistics_properties.TestEvaluationCacheControlStatisticsProperties.tearDown" title="Link to this definition"></a></dt>
+<dd><p>Hook method for deconstructing the test fixture after testing it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_evaluation_cache_control_statistics_properties.TestEvaluationCacheControlStatisticsProperties.tearDownClass">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tearDownClass</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_evaluation_cache_control_statistics_properties.TestEvaluationCacheControlStatisticsProperties.tearDownClass" title="Link to this definition"></a></dt>
+<dd><p>Hook method for deconstructing the class fixture after running all tests in the class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_evaluation_cache_control_statistics_properties.TestEvaluationCacheControlStatisticsProperties.test_cache_hit_count_should_be_zero_after_construction">
+<span class="sig-name descname"><span class="pre">test_cache_hit_count_should_be_zero_after_construction</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_evaluation_cache_control_statistics_properties.TestEvaluationCacheControlStatisticsProperties.test_cache_hit_count_should_be_zero_after_construction" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_evaluation_cache_control_statistics_properties.TestEvaluationCacheControlStatisticsProperties.test_cache_request_count_should_be_zero_after_construction">
+<span class="sig-name descname"><span class="pre">test_cache_request_count_should_be_zero_after_construction</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_evaluation_cache_control_statistics_properties.TestEvaluationCacheControlStatisticsProperties.test_cache_request_count_should_be_zero_after_construction" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_evaluation_cache_control_statistics_properties.TestEvaluationCacheControlStatisticsProperties.test_is_caching_should_be_false_as_it_is_set">
+<span class="sig-name descname"><span class="pre">test_is_caching_should_be_false_as_it_is_set</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_evaluation_cache_control_statistics_properties.TestEvaluationCacheControlStatisticsProperties.test_is_caching_should_be_false_as_it_is_set" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_evaluation_cache_control_statistics_properties.TestEvaluationCacheControlStatisticsProperties.test_is_caching_should_be_true_as_it_is_set">
+<span class="sig-name descname"><span class="pre">test_is_caching_should_be_true_as_it_is_set</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_evaluation_cache_control_statistics_properties.TestEvaluationCacheControlStatisticsProperties.test_is_caching_should_be_true_as_it_is_set" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-uo.tests.unit.solution.test_solution">
+<span id="uo-tests-unit-solution-test-solution-module"></span><h2>uo.tests.unit.solution.test_solution module<a class="headerlink" href="#module-uo.tests.unit.solution.test_solution" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution.TestSolutionProperties">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">uo.tests.unit.solution.test_solution.</span></span><span class="sig-name descname"><span class="pre">TestSolutionProperties</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution.TestSolutionProperties" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution.TestSolutionProperties.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution.TestSolutionProperties.setUp" title="Link to this definition"></a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution.TestSolutionProperties.setUpClass">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setUpClass</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution.TestSolutionProperties.setUpClass" title="Link to this definition"></a></dt>
+<dd><p>Hook method for setting up class fixture before running tests in the class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution.TestSolutionProperties.tearDown">
+<span class="sig-name descname"><span class="pre">tearDown</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution.TestSolutionProperties.tearDown" title="Link to this definition"></a></dt>
+<dd><p>Hook method for deconstructing the test fixture after testing it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution.TestSolutionProperties.tearDownClass">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tearDownClass</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution.TestSolutionProperties.tearDownClass" title="Link to this definition"></a></dt>
+<dd><p>Hook method for deconstructing the class fixture after running all tests in the class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution.TestSolutionProperties.test_evaluation_cache_cs__request_count_should_be_zero_after_constructor">
+<span class="sig-name descname"><span class="pre">test_evaluation_cache_cs__request_count_should_be_zero_after_constructor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution.TestSolutionProperties.test_evaluation_cache_cs__request_count_should_be_zero_after_constructor" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution.TestSolutionProperties.test_evaluation_cache_cs_hit_count_should_be_zero_after_constructor">
+<span class="sig-name descname"><span class="pre">test_evaluation_cache_cs_hit_count_should_be_zero_after_constructor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution.TestSolutionProperties.test_evaluation_cache_cs_hit_count_should_be_zero_after_constructor" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution.TestSolutionProperties.test_fitness_value_should_be_equal_as_in_constructor">
+<span class="sig-name descname"><span class="pre">test_fitness_value_should_be_equal_as_in_constructor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution.TestSolutionProperties.test_fitness_value_should_be_equal_as_in_constructor" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution.TestSolutionProperties.test_fitness_value_should_be_equal_as_value_set_by_property_setter">
+<span class="sig-name descname"><span class="pre">test_fitness_value_should_be_equal_as_value_set_by_property_setter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution.TestSolutionProperties.test_fitness_value_should_be_equal_as_value_set_by_property_setter" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution.TestSolutionProperties.test_fitness_value_should_be_equal_as_value_set_by_property_setter_2">
+<span class="sig-name descname"><span class="pre">test_fitness_value_should_be_equal_as_value_set_by_property_setter_2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution.TestSolutionProperties.test_fitness_value_should_be_equal_as_value_set_by_property_setter_2" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution.TestSolutionProperties.test_is_feasible_should_be_equal_as_in_constructor">
+<span class="sig-name descname"><span class="pre">test_is_feasible_should_be_equal_as_in_constructor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution.TestSolutionProperties.test_is_feasible_should_be_equal_as_in_constructor" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution.TestSolutionProperties.test_is_feasible_should_be_equal_as_value_set_by_property_setter">
+<span class="sig-name descname"><span class="pre">test_is_feasible_should_be_equal_as_value_set_by_property_setter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution.TestSolutionProperties.test_is_feasible_should_be_equal_as_value_set_by_property_setter" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution.TestSolutionProperties.test_is_feasible_should_be_equal_as_value_set_by_property_setter_2">
+<span class="sig-name descname"><span class="pre">test_is_feasible_should_be_equal_as_value_set_by_property_setter_2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution.TestSolutionProperties.test_is_feasible_should_be_equal_as_value_set_by_property_setter_2" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution.TestSolutionProperties.test_objective_value_should_be_equal_as_in_constructor">
+<span class="sig-name descname"><span class="pre">test_objective_value_should_be_equal_as_in_constructor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution.TestSolutionProperties.test_objective_value_should_be_equal_as_in_constructor" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution.TestSolutionProperties.test_objective_value_should_be_equal_as_value_set_by_property_setter">
+<span class="sig-name descname"><span class="pre">test_objective_value_should_be_equal_as_value_set_by_property_setter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution.TestSolutionProperties.test_objective_value_should_be_equal_as_value_set_by_property_setter" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution.TestSolutionProperties.test_representation_should_be_equal_as_value_set_by_property_setter">
+<span class="sig-name descname"><span class="pre">test_representation_should_be_equal_as_value_set_by_property_setter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution.TestSolutionProperties.test_representation_should_be_equal_as_value_set_by_property_setter" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution.TestSolutionProperties.test_representation_should_be_equal_as_value_set_by_property_setter_2">
+<span class="sig-name descname"><span class="pre">test_representation_should_be_equal_as_value_set_by_property_setter_2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution.TestSolutionProperties.test_representation_should_be_equal_as_value_set_by_property_setter_2" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-uo.tests.unit.solution.test_solution1">
+<span id="uo-tests-unit-solution-test-solution1-module"></span><h2>uo.tests.unit.solution.test_solution1 module<a class="headerlink" href="#module-uo.tests.unit.solution.test_solution1" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution1.TestSolution">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">uo.tests.unit.solution.test_solution1.</span></span><span class="sig-name descname"><span class="pre">TestSolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution1.TestSolution" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution1.TestSolution.test_attribute_access_and_modification">
+<span class="sig-name descname"><span class="pre">test_attribute_access_and_modification</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution1.TestSolution.test_attribute_access_and_modification" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution1.TestSolution.test_calculate_quality_with_caching">
+<span class="sig-name descname"><span class="pre">test_calculate_quality_with_caching</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution1.TestSolution.test_calculate_quality_with_caching" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution1.TestSolution.test_deep_copy">
+<span class="sig-name descname"><span class="pre">test_deep_copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution1.TestSolution.test_deep_copy" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution1.TestSolution.test_default_representation_value">
+<span class="sig-name descname"><span class="pre">test_default_representation_value</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution1.TestSolution.test_default_representation_value" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution1.TestSolution.test_default_values_for_caches">
+<span class="sig-name descname"><span class="pre">test_default_values_for_caches</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution1.TestSolution.test_default_values_for_caches" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution1.TestSolution.test_default_values_for_fitness_and_objective">
+<span class="sig-name descname"><span class="pre">test_default_values_for_fitness_and_objective</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution1.TestSolution.test_default_values_for_fitness_and_objective" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution1.TestSolution.test_evaluate_with_problem">
+<span class="sig-name descname"><span class="pre">test_evaluate_with_problem</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution1.TestSolution.test_evaluate_with_problem" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution1.TestSolution.test_format_to_string">
+<span class="sig-name descname"><span class="pre">test_format_to_string</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution1.TestSolution.test_format_to_string" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution1.TestSolution.test_initialization_with_valid_representation_and_problem">
+<span class="sig-name descname"><span class="pre">test_initialization_with_valid_representation_and_problem</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution1.TestSolution.test_initialization_with_valid_representation_and_problem" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution1.TestSolution.test_instantiation_with_valid_parameters">
+<span class="sig-name descname"><span class="pre">test_instantiation_with_valid_parameters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution1.TestSolution.test_instantiation_with_valid_parameters" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution1.TestSolution.test_method_calls_and_results">
+<span class="sig-name descname"><span class="pre">test_method_calls_and_results</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution1.TestSolution.test_method_calls_and_results" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution1.TestSolution.test_raises_TypeError_if_problem_not_of_type_Problem">
+<span class="sig-name descname"><span class="pre">test_raises_TypeError_if_problem_not_of_type_Problem</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution1.TestSolution.test_raises_TypeError_if_problem_not_of_type_Problem" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution1.TestSolution.test_raises_TypeError_if_representation_not_of_type_R_co">
+<span class="sig-name descname"><span class="pre">test_raises_TypeError_if_representation_not_of_type_R_co</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution1.TestSolution.test_raises_TypeError_if_representation_not_of_type_R_co" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution1.TestSolution.test_random_seed_set_to_random_integer">
+<span class="sig-name descname"><span class="pre">test_random_seed_set_to_random_integer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution1.TestSolution.test_random_seed_set_to_random_integer" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution1.TestSolution.test_representation_distance_with_caching">
+<span class="sig-name descname"><span class="pre">test_representation_distance_with_caching</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution1.TestSolution.test_representation_distance_with_caching" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution1.TestSolution.test_sets_representation_to_given_representation2">
+<span class="sig-name descname"><span class="pre">test_sets_representation_to_given_representation2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution1.TestSolution.test_sets_representation_to_given_representation2" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution1.TestSolution.test_string_conversion">
+<span class="sig-name descname"><span class="pre">test_string_conversion</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution1.TestSolution.test_string_conversion" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution1.TestSolution.test_string_representation">
+<span class="sig-name descname"><span class="pre">test_string_representation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution1.TestSolution.test_string_representation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution1.TestSolution.test_type_error_raised">
+<span class="sig-name descname"><span class="pre">test_type_error_raised</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution1.TestSolution.test_type_error_raised" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-uo.tests.unit.solution.test_solution2">
+<span id="uo-tests-unit-solution-test-solution2-module"></span><h2>uo.tests.unit.solution.test_solution2 module<a class="headerlink" href="#module-uo.tests.unit.solution.test_solution2" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution2.TestSolution2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">uo.tests.unit.solution.test_solution2.</span></span><span class="sig-name descname"><span class="pre">TestSolution2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution2.TestSolution2" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution2.TestSolution2.test_copy_from_method">
+<span class="sig-name descname"><span class="pre">test_copy_from_method</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution2.TestSolution2.test_copy_from_method" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution2.TestSolution2.test_copy_method">
+<span class="sig-name descname"><span class="pre">test_copy_method</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution2.TestSolution2.test_copy_method" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution2.TestSolution2.test_create_instance_with_invalid_parameters">
+<span class="sig-name descname"><span class="pre">test_create_instance_with_invalid_parameters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution2.TestSolution2.test_create_instance_with_invalid_parameters" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution2.TestSolution2.test_set_and_get_is_feasible">
+<span class="sig-name descname"><span class="pre">test_set_and_get_is_feasible</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution2.TestSolution2.test_set_and_get_is_feasible" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution2.TestSolution2.test_set_fitness_value_with_invalid_type">
+<span class="sig-name descname"><span class="pre">test_set_fitness_value_with_invalid_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution2.TestSolution2.test_set_fitness_value_with_invalid_type" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution2.TestSolution2.test_set_fitness_values_with_invalid_type">
+<span class="sig-name descname"><span class="pre">test_set_fitness_values_with_invalid_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution2.TestSolution2.test_set_fitness_values_with_invalid_type" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution2.TestSolution2.test_set_get_fitness_value_attribute">
+<span class="sig-name descname"><span class="pre">test_set_get_fitness_value_attribute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution2.TestSolution2.test_set_get_fitness_value_attribute" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution2.TestSolution2.test_set_get_fitness_values_attribute">
+<span class="sig-name descname"><span class="pre">test_set_get_fitness_values_attribute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution2.TestSolution2.test_set_get_fitness_values_attribute" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution2.TestSolution2.test_set_get_objective_value_attribute">
+<span class="sig-name descname"><span class="pre">test_set_get_objective_value_attribute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution2.TestSolution2.test_set_get_objective_value_attribute" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution2.TestSolution2.test_set_get_objective_values_attribute">
+<span class="sig-name descname"><span class="pre">test_set_get_objective_values_attribute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution2.TestSolution2.test_set_get_objective_values_attribute" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution2.TestSolution2.test_set_is_feasible_with_invalid_type">
+<span class="sig-name descname"><span class="pre">test_set_is_feasible_with_invalid_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution2.TestSolution2.test_set_is_feasible_with_invalid_type" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution2.TestSolution2.test_set_objective_value_with_invalid_type">
+<span class="sig-name descname"><span class="pre">test_set_objective_value_with_invalid_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution2.TestSolution2.test_set_objective_value_with_invalid_type" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution2.TestSolution2.test_set_objective_values_with_invalid_type">
+<span class="sig-name descname"><span class="pre">test_set_objective_values_with_invalid_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution2.TestSolution2.test_set_objective_values_with_invalid_type" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution2.TestSolution2.test_string_rep">
+<span class="sig-name descname"><span class="pre">test_string_rep</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution2.TestSolution2.test_string_rep" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution2.TestSolution2.test_string_representation">
+<span class="sig-name descname"><span class="pre">test_string_representation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution2.TestSolution2.test_string_representation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-uo.tests.unit.solution.test_solution_void_object_str">
+<span id="uo-tests-unit-solution-test-solution-void-object-str-module"></span><h2>uo.tests.unit.solution.test_solution_void_object_str module<a class="headerlink" href="#module-uo.tests.unit.solution.test_solution_void_object_str" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution_void_object_str.TestSolutionVoidObjectStr">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">uo.tests.unit.solution.test_solution_void_object_str.</span></span><span class="sig-name descname"><span class="pre">TestSolutionVoidObjectStr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution_void_object_str.TestSolutionVoidObjectStr" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution_void_object_str.TestSolutionVoidObjectStr.test_attribute_access_and_modification">
+<span class="sig-name descname"><span class="pre">test_attribute_access_and_modification</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution_void_object_str.TestSolutionVoidObjectStr.test_attribute_access_and_modification" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution_void_object_str.TestSolutionVoidObjectStr.test_deep_copy">
+<span class="sig-name descname"><span class="pre">test_deep_copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution_void_object_str.TestSolutionVoidObjectStr.test_deep_copy" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution_void_object_str.TestSolutionVoidObjectStr.test_default_representation_value">
+<span class="sig-name descname"><span class="pre">test_default_representation_value</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution_void_object_str.TestSolutionVoidObjectStr.test_default_representation_value" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution_void_object_str.TestSolutionVoidObjectStr.test_default_values_for_caches">
+<span class="sig-name descname"><span class="pre">test_default_values_for_caches</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution_void_object_str.TestSolutionVoidObjectStr.test_default_values_for_caches" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution_void_object_str.TestSolutionVoidObjectStr.test_default_values_for_fitness_and_objective">
+<span class="sig-name descname"><span class="pre">test_default_values_for_fitness_and_objective</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution_void_object_str.TestSolutionVoidObjectStr.test_default_values_for_fitness_and_objective" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution_void_object_str.TestSolutionVoidObjectStr.test_evaluate_with_problem">
+<span class="sig-name descname"><span class="pre">test_evaluate_with_problem</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution_void_object_str.TestSolutionVoidObjectStr.test_evaluate_with_problem" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution_void_object_str.TestSolutionVoidObjectStr.test_format_to_string">
+<span class="sig-name descname"><span class="pre">test_format_to_string</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution_void_object_str.TestSolutionVoidObjectStr.test_format_to_string" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution_void_object_str.TestSolutionVoidObjectStr.test_initialization_with_valid_representation_and_problem">
+<span class="sig-name descname"><span class="pre">test_initialization_with_valid_representation_and_problem</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution_void_object_str.TestSolutionVoidObjectStr.test_initialization_with_valid_representation_and_problem" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution_void_object_str.TestSolutionVoidObjectStr.test_instantiation_with_valid_parameters">
+<span class="sig-name descname"><span class="pre">test_instantiation_with_valid_parameters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution_void_object_str.TestSolutionVoidObjectStr.test_instantiation_with_valid_parameters" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution_void_object_str.TestSolutionVoidObjectStr.test_method_calls_and_results">
+<span class="sig-name descname"><span class="pre">test_method_calls_and_results</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution_void_object_str.TestSolutionVoidObjectStr.test_method_calls_and_results" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution_void_object_str.TestSolutionVoidObjectStr.test_raises_TypeError_if_problem_not_of_type_Problem">
+<span class="sig-name descname"><span class="pre">test_raises_TypeError_if_problem_not_of_type_Problem</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution_void_object_str.TestSolutionVoidObjectStr.test_raises_TypeError_if_problem_not_of_type_Problem" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution_void_object_str.TestSolutionVoidObjectStr.test_random_seed_set_to_random_integer">
+<span class="sig-name descname"><span class="pre">test_random_seed_set_to_random_integer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution_void_object_str.TestSolutionVoidObjectStr.test_random_seed_set_to_random_integer" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution_void_object_str.TestSolutionVoidObjectStr.test_sets_representation_to_given_representation2">
+<span class="sig-name descname"><span class="pre">test_sets_representation_to_given_representation2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution_void_object_str.TestSolutionVoidObjectStr.test_sets_representation_to_given_representation2" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution_void_object_str.TestSolutionVoidObjectStr.test_string_conversion">
+<span class="sig-name descname"><span class="pre">test_string_conversion</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution_void_object_str.TestSolutionVoidObjectStr.test_string_conversion" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution_void_object_str.TestSolutionVoidObjectStr.test_string_representation">
+<span class="sig-name descname"><span class="pre">test_string_representation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution_void_object_str.TestSolutionVoidObjectStr.test_string_representation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.solution.test_solution_void_object_str.TestSolutionVoidObjectStr.test_type_error_raised">
+<span class="sig-name descname"><span class="pre">test_type_error_raised</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.solution.test_solution_void_object_str.TestSolutionVoidObjectStr.test_type_error_raised" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-uo.tests.unit.solution">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-uo.tests.unit.solution" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Vladimir Filipovic.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

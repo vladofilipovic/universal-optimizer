@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>opt.tests.unit.single_objective.comb.minimum_multi_cut_problem package &mdash; Optimization Algorithms Library 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=01f34227"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Optimization Algorithms Library
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Tutorials and How-To Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how_to_guides.html">How-to Guides</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">In-depth Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="implemented_algorithms.html">Implemented algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="problems_to_be_solved.html">Problems to be solved</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Program code</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html#optimization">Optimization</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Changelog and Contribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribution.html">How to Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribution.html#contributors">Contributors</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Optimization Algorithms Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">opt.tests.unit.single_objective.comb.minimum_multi_cut_problem package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="opt-tests-unit-single-objective-comb-minimum-multi-cut-problem-package">
+<h1>opt.tests.unit.single_objective.comb.minimum_multi_cut_problem package<a class="headerlink" href="#opt-tests-unit-single-objective-comb-minimum-multi-cut-problem-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem">
+<span id="opt-tests-unit-single-objective-comb-minimum-multi-cut-problem-test-minimum-multi-cut-problem-module"></span><h2>opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem module<a class="headerlink" href="#module-opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem.TestMinimumMultiCutProblem">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem.</span></span><span class="sig-name descname"><span class="pre">TestMinimumMultiCutProblem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem.TestMinimumMultiCutProblem" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem.TestMinimumMultiCutProblem.test_copy_creates_new_instance_with_same_properties">
+<span class="sig-name descname"><span class="pre">test_copy_creates_new_instance_with_same_properties</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem.TestMinimumMultiCutProblem.test_copy_creates_new_instance_with_same_properties" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem.TestMinimumMultiCutProblem.test_from_graph_and_st_pairs_creates_new_instance_with_specified_parameteres">
+<span class="sig-name descname"><span class="pre">test_from_graph_and_st_pairs_creates_new_instance_with_specified_parameteres</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem.TestMinimumMultiCutProblem.test_from_graph_and_st_pairs_creates_new_instance_with_specified_parameteres" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem.TestMinimumMultiCutProblem.test_instantiation_without_st_parameter">
+<span class="sig-name descname"><span class="pre">test_instantiation_without_st_parameter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem.TestMinimumMultiCutProblem.test_instantiation_without_st_parameter" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem.TestMinimumMultiCutProblem.test_new_instance_with_graph_and_st_pairs_sets_both_properties">
+<span class="sig-name descname"><span class="pre">test_new_instance_with_graph_and_st_pairs_sets_both_properties</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem.TestMinimumMultiCutProblem.test_new_instance_with_graph_and_st_pairs_sets_both_properties" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem.TestMinimumMultiCutProblem.test_string_representation_includes_st_pairs">
+<span class="sig-name descname"><span class="pre">test_string_representation_includes_st_pairs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem.TestMinimumMultiCutProblem.test_string_representation_includes_st_pairs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution">
+<span id="opt-tests-unit-single-objective-comb-minimum-multi-cut-problem-test-minimum-multi-cut-problem-binary-bit-array-solution-module"></span><h2>opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution module<a class="headerlink" href="#module-opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestArgument">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.</span></span><span class="sig-name descname"><span class="pre">TestArgument</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestArgument" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestArgument.test_returns_binary_string_representation">
+<span class="sig-name descname"><span class="pre">test_returns_binary_string_representation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestArgument.test_returns_binary_string_representation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestArgument.test_returns_empty_string_for_empty_representation">
+<span class="sig-name descname"><span class="pre">test_returns_empty_string_for_empty_representation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestArgument.test_returns_empty_string_for_empty_representation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestArgument.test_returns_string_representation">
+<span class="sig-name descname"><span class="pre">test_returns_string_representation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestArgument.test_returns_string_representation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestArgument.test_returns_string_representation_with_leading_zeros_for_all_false_bits">
+<span class="sig-name descname"><span class="pre">test_returns_string_representation_with_leading_zeros_for_all_false_bits</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestArgument.test_returns_string_representation_with_leading_zeros_for_all_false_bits" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestInitFrom">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.</span></span><span class="sig-name descname"><span class="pre">TestInitFrom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestInitFrom" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestInitFrom.test_raises_type_error_for_invalid_representation">
+<span class="sig-name descname"><span class="pre">test_raises_type_error_for_invalid_representation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestInitFrom.test_raises_type_error_for_invalid_representation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestInitFrom.test_sets_internal_representation">
+<span class="sig-name descname"><span class="pre">test_sets_internal_representation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestInitFrom.test_sets_internal_representation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestMinimumMultiCutProblemBitArraySolution">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.</span></span><span class="sig-name descname"><span class="pre">TestMinimumMultiCutProblemBitArraySolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestMinimumMultiCutProblemBitArraySolution" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestMinimumMultiCutProblemBitArraySolution.test_argument_method_returns_correct_string_representation">
+<span class="sig-name descname"><span class="pre">test_argument_method_returns_correct_string_representation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestMinimumMultiCutProblemBitArraySolution.test_argument_method_returns_correct_string_representation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestMinimumMultiCutProblemBitArraySolution.test_calculate_quality_directly_method_with_all_bits_True">
+<span class="sig-name descname"><span class="pre">test_calculate_quality_directly_method_with_all_bits_True</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestMinimumMultiCutProblemBitArraySolution.test_calculate_quality_directly_method_with_all_bits_True" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestMinimumMultiCutProblemBitArraySolution.test_copy_method_returns_deep_copy">
+<span class="sig-name descname"><span class="pre">test_copy_method_returns_deep_copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestMinimumMultiCutProblemBitArraySolution.test_copy_method_returns_deep_copy" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestMinimumMultiCutProblemBitArraySolution.test_init_from_method_with_bitarray_and_problem">
+<span class="sig-name descname"><span class="pre">test_init_from_method_with_bitarray_and_problem</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestMinimumMultiCutProblemBitArraySolution.test_init_from_method_with_bitarray_and_problem" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestMinimumMultiCutProblemBitArraySolution.test_init_random_method_with_problem">
+<span class="sig-name descname"><span class="pre">test_init_random_method_with_problem</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestMinimumMultiCutProblemBitArraySolution.test_init_random_method_with_problem" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestMinimumMultiCutProblemBitArraySolution.test_initialize_instance_with_default_parameters">
+<span class="sig-name descname"><span class="pre">test_initialize_instance_with_default_parameters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestMinimumMultiCutProblemBitArraySolution.test_initialize_instance_with_default_parameters" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestMinimumMultiCutProblemBitArraySolution.test_native_representation_method_with_string_representation">
+<span class="sig-name descname"><span class="pre">test_native_representation_method_with_string_representation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestMinimumMultiCutProblemBitArraySolution.test_native_representation_method_with_string_representation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestMinimumMultiCutProblemBitArraySolution.test_representation_distance_directly_method_with_string_representations">
+<span class="sig-name descname"><span class="pre">test_representation_distance_directly_method_with_string_representations</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestMinimumMultiCutProblemBitArraySolution.test_representation_distance_directly_method_with_string_representations" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestMinimumMultiCutProblemBitArraySolution.test_representation_distance_directly_raises_value_error">
+<span class="sig-name descname"><span class="pre">test_representation_distance_directly_raises_value_error</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestMinimumMultiCutProblemBitArraySolution.test_representation_distance_directly_raises_value_error" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestNativeRepresentation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.</span></span><span class="sig-name descname"><span class="pre">TestNativeRepresentation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestNativeRepresentation" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestNativeRepresentation.test_invalid_characters_representation">
+<span class="sig-name descname"><span class="pre">test_invalid_characters_representation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestNativeRepresentation.test_invalid_characters_representation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestNativeRepresentation.test_length_1_representation">
+<span class="sig-name descname"><span class="pre">test_length_1_representation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestNativeRepresentation.test_length_1_representation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestNativeRepresentation.test_non_string_representation">
+<span class="sig-name descname"><span class="pre">test_non_string_representation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestNativeRepresentation.test_non_string_representation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestNativeRepresentation.test_same_binary_representation">
+<span class="sig-name descname"><span class="pre">test_same_binary_representation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestNativeRepresentation.test_same_binary_representation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestNativeRepresentation.test_valid_binary_string_representation">
+<span class="sig-name descname"><span class="pre">test_valid_binary_string_representation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestNativeRepresentation.test_valid_binary_string_representation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestRepresentationDistanceDirectly">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.</span></span><span class="sig-name descname"><span class="pre">TestRepresentationDistanceDirectly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestRepresentationDistanceDirectly" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestRepresentationDistanceDirectly.test_completely_different_solutions">
+<span class="sig-name descname"><span class="pre">test_completely_different_solutions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestRepresentationDistanceDirectly.test_completely_different_solutions" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestRepresentationDistanceDirectly.test_different_lengths">
+<span class="sig-name descname"><span class="pre">test_different_lengths</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestRepresentationDistanceDirectly.test_different_lengths" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestRepresentationDistanceDirectly.test_different_types">
+<span class="sig-name descname"><span class="pre">test_different_types</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestRepresentationDistanceDirectly.test_different_types" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestRepresentationDistanceDirectly.test_empty_solutions">
+<span class="sig-name descname"><span class="pre">test_empty_solutions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestRepresentationDistanceDirectly.test_empty_solutions" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestRepresentationDistanceDirectly.test_identical_solutions">
+<span class="sig-name descname"><span class="pre">test_identical_solutions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestRepresentationDistanceDirectly.test_identical_solutions" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestRepresentationDistanceDirectly.test_one_different_bit">
+<span class="sig-name descname"><span class="pre">test_one_different_bit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestRepresentationDistanceDirectly.test_one_different_bit" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestStringRep">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.</span></span><span class="sig-name descname"><span class="pre">TestStringRep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestStringRep" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestStringRep.test_default_values">
+<span class="sig-name descname"><span class="pre">test_default_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestStringRep.test_default_values" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestStringRep.test_delimiter_is_none">
+<span class="sig-name descname"><span class="pre">test_delimiter_is_none</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestStringRep.test_delimiter_is_none" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestStringRep.test_group_start_is_none">
+<span class="sig-name descname"><span class="pre">test_group_start_is_none</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestStringRep.test_group_start_is_none" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestStringRep.test_includes_string_representation">
+<span class="sig-name descname"><span class="pre">test_includes_string_representation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestStringRep.test_includes_string_representation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestStringRep.test_includes_super_class_representation">
+<span class="sig-name descname"><span class="pre">test_includes_super_class_representation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestStringRep.test_includes_super_class_representation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestStringRep.test_indentation_is_none">
+<span class="sig-name descname"><span class="pre">test_indentation_is_none</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestStringRep.test_indentation_is_none" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestStringRep.test_indentation_symbol_is_none">
+<span class="sig-name descname"><span class="pre">test_indentation_symbol_is_none</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestStringRep.test_indentation_symbol_is_none" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestStringRep.test_optional_parameters">
+<span class="sig-name descname"><span class="pre">test_optional_parameters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestStringRep.test_optional_parameters" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestStringRep.test_returns_string_representation">
+<span class="sig-name descname"><span class="pre">test_returns_string_representation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution.TestStringRep.test_returns_string_representation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution_ga_support">
+<span id="opt-tests-unit-single-objective-comb-minimum-multi-cut-problem-test-minimum-multi-cut-problem-binary-bit-array-solution-ga-support-module"></span><h2>opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution_ga_support module<a class="headerlink" href="#module-opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution_ga_support" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution_ga_support.TestMinimumMultiCutProblemBitArraySolutionGaSupport">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution_ga_support.</span></span><span class="sig-name descname"><span class="pre">TestMinimumMultiCutProblemBitArraySolutionGaSupport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution_ga_support.TestMinimumMultiCutProblemBitArraySolutionGaSupport" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution_ga_support.TestMinimumMultiCutProblemBitArraySolutionGaSupport.test_mutation_returns_none">
+<span class="sig-name descname"><span class="pre">test_mutation_returns_none</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution_ga_support.TestMinimumMultiCutProblemBitArraySolutionGaSupport.test_mutation_returns_none" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution_vns_support">
+<span id="opt-tests-unit-single-objective-comb-minimum-multi-cut-problem-test-minimum-multi-cut-problem-binary-bit-array-solution-vns-support-module"></span><h2>opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution_vns_support module<a class="headerlink" href="#module-opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution_vns_support" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution_vns_support.TestMinimumMultiCutProblemBitArraySolutionVnsSupport">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution_vns_support.</span></span><span class="sig-name descname"><span class="pre">TestMinimumMultiCutProblemBitArraySolutionVnsSupport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution_vns_support.TestMinimumMultiCutProblemBitArraySolutionVnsSupport" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution_vns_support.TestMinimumMultiCutProblemBitArraySolutionVnsSupport.test_local_search_best_improvement_returns_solution_with_lower_fitness_value11">
+<span class="sig-name descname"><span class="pre">test_local_search_best_improvement_returns_solution_with_lower_fitness_value11</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution_vns_support.TestMinimumMultiCutProblemBitArraySolutionVnsSupport.test_local_search_best_improvement_returns_solution_with_lower_fitness_value11" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution_vns_support.TestMinimumMultiCutProblemBitArraySolutionVnsSupport.test_local_search_best_improvement_returns_solution_with_lower_fitness_value6">
+<span class="sig-name descname"><span class="pre">test_local_search_best_improvement_returns_solution_with_lower_fitness_value6</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution_vns_support.TestMinimumMultiCutProblemBitArraySolutionVnsSupport.test_local_search_best_improvement_returns_solution_with_lower_fitness_value6" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution_vns_support.TestMinimumMultiCutProblemBitArraySolutionVnsSupport.test_shaking_modifies_solution_representation_when_number_of_ones_is_less_than_problem_dimension8">
+<span class="sig-name descname"><span class="pre">test_shaking_modifies_solution_representation_when_number_of_ones_is_less_than_problem_dimension8</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution_vns_support.TestMinimumMultiCutProblemBitArraySolutionVnsSupport.test_shaking_modifies_solution_representation_when_number_of_ones_is_less_than_problem_dimension8" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution_vns_support.TestMinimumMultiCutProblemBitArraySolutionVnsSupport.test_shaking_returns_true_when_randomization_is_successful">
+<span class="sig-name descname"><span class="pre">test_shaking_returns_true_when_randomization_is_successful</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.comb.minimum_multi_cut_problem.test_minimum_multi_cut_problem_binary_bit_array_solution_vns_support.TestMinimumMultiCutProblemBitArraySolutionVnsSupport.test_shaking_returns_true_when_randomization_is_successful" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-opt.tests.unit.single_objective.comb.minimum_multi_cut_problem">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-opt.tests.unit.single_objective.comb.minimum_multi_cut_problem" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Vladimir Filipovic.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

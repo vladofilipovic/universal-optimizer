@@ -28,7 +28,7 @@ a. Designing novel optimization methods. Requirements:
     
         - Here, `unittest` framework  used. 
         
-        - Test should be placed into separate sub-directory under :file:`/tests/uo/` directory. 
+        - Test should be placed into separate sub-directory under :file:`/uo/tests/` directory. Directory structure within :file:`/uo/tests/` directory should mirror directory structure of the :file:`/uo/` directory.  
 
         - All developed code should be covered with unit test, and test coverage rate should be not less than 80%. 
 
@@ -65,7 +65,7 @@ b. Building application for solving optimization problems. Requirements:
     
         - Implemented programming code should be fully covered with unit tests, and `unittest` framework is used. 
         
-        - Test should be placed into separate sub-directory under :file:`/tests/opt/` directory. Directory structure within :file:`/test/opt/` directory should mirror directory structure of the :file:`/opt/` directory.  
+        - Test should be placed into separate sub-directory under :file:`/opt/tests/` directory. Directory structure within :file:`/opt/tests/` directory should mirror directory structure of the :file:`/opt/` directory.  
 
         - All developed code should be covered with unit test, and test coverage rate should be not less than 80%. 
 
@@ -105,7 +105,7 @@ a. Contribution in the designing novel **optimization methods**:
         
         5. Structure, organization and main loop implementation - [VladimirFilipovic]_ 
 
-        6. Implementation of shaking and local searches with binary representation  (in class :class:`~uo.algorithm.variable_neighborhood_search.VnsShakingSupportRepresentationInt`, using :type:`int` predefined type) - [VladimirFilipovic]_ 
+        6. Implementation of shaking and local searches with binary representation  (in class :class:`~uo.algorithm.variable_neighborhood_search.VnsShakingSupportRepresentationInt`, using `int` predefined type) - [VladimirFilipovic]_ 
 
         7. Implementation of shaking and local searches with binary representation (in class :class:`~uo.algorithm.variable_neighborhood_search.VnsShakingSupportRepresentationBitArray`,using :class:`bitstring.BitArray` class) - [VladimirFilipovic]_ 
 
@@ -162,6 +162,6 @@ c. Contribution in solving **global** optimization problems:
 Contributor List
 ----------------
 
-.. [VladimirFilipovic] Vladimir Filipović, `Github <https://github.com/vladofilipovic>`_ e-mail: vladofilipovic@hotmail.com
+.. [VladimirFilipovic] Vladimir Filipović, `<https://github.com/vladofilipovic>`_ e-mail: vladofilipovic@hotmail.com
 
-.. [MarkoRadosavljevic] Marko Radosavljević, `Github <https://github.com/Markic01>`_ e-mail: mi20079@alas.matf.bg.ac.rs
+.. [MarkoRadosavljevic] Marko Radosavljević, `<https://github.com/Markic01>`_ e-mail: mi20079@alas.matf.bg.ac.rs

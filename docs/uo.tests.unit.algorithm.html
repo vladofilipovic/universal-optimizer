@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>uo.tests.unit.algorithm package &mdash; Optimization Algorithms Library 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=01f34227"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Optimization Algorithms Library
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Tutorials and How-To Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how_to_guides.html">How-to Guides</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">In-depth Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="implemented_algorithms.html">Implemented algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="problems_to_be_solved.html">Problems to be solved</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Program code</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html#optimization">Optimization</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Changelog and Contribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribution.html">How to Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribution.html#contributors">Contributors</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Optimization Algorithms Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">uo.tests.unit.algorithm package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/uo.tests.unit.algorithm.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="uo-tests-unit-algorithm-package">
+<h1>uo.tests.unit.algorithm package<a class="headerlink" href="#uo-tests-unit-algorithm-package" title="Link to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="uo.tests.unit.algorithm.exact.html">uo.tests.unit.algorithm.exact package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="uo.tests.unit.algorithm.exact.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="uo.tests.unit.algorithm.exact.total_enumeration.html">uo.tests.unit.algorithm.exact.total_enumeration package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.exact.total_enumeration.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.exact.total_enumeration.html#module-uo.tests.unit.algorithm.exact.total_enumeration.test_te_optimizer">uo.tests.unit.algorithm.exact.total_enumeration.test_te_optimizer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.exact.total_enumeration.html#module-uo.tests.unit.algorithm.exact.total_enumeration">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="uo.tests.unit.algorithm.exact.html#module-uo.tests.unit.algorithm.exact">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html">uo.tests.unit.algorithm.metaheuristic package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.genetic_algorithm.html">uo.tests.unit.algorithm.metaheuristic.genetic_algorithm package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.genetic_algorithm.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.genetic_algorithm.html#module-uo.tests.unit.algorithm.metaheuristic.genetic_algorithm.test_ga_optimizer">uo.tests.unit.algorithm.metaheuristic.genetic_algorithm.test_ga_optimizer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.genetic_algorithm.html#module-uo.tests.unit.algorithm.metaheuristic.genetic_algorithm.test_ga_optimizer_properties">uo.tests.unit.algorithm.metaheuristic.genetic_algorithm.test_ga_optimizer_properties module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.genetic_algorithm.html#module-uo.tests.unit.algorithm.metaheuristic.genetic_algorithm">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.variable_neighborhood_search.html">uo.tests.unit.algorithm.metaheuristic.variable_neighborhood_search package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.variable_neighborhood_search.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.variable_neighborhood_search.html#module-uo.tests.unit.algorithm.metaheuristic.variable_neighborhood_search.test_vns_optimizer">uo.tests.unit.algorithm.metaheuristic.variable_neighborhood_search.test_vns_optimizer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.variable_neighborhood_search.html#module-uo.tests.unit.algorithm.metaheuristic.variable_neighborhood_search.test_vns_optmizer_properties">uo.tests.unit.algorithm.metaheuristic.variable_neighborhood_search.test_vns_optmizer_properties module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.variable_neighborhood_search.html#module-uo.tests.unit.algorithm.metaheuristic.variable_neighborhood_search">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#module-uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control">uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.TestAddToAllSolutionCodesIfRequired"><code class="docutils literal notranslate"><span class="pre">TestAddToAllSolutionCodesIfRequired</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.TestAddToAllSolutionCodesIfRequired.test_all_solution_codes_empty2"><code class="docutils literal notranslate"><span class="pre">TestAddToAllSolutionCodesIfRequired.test_all_solution_codes_empty2()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.TestAddToAllSolutionCodesIfRequired.test_all_solution_codes_not_set"><code class="docutils literal notranslate"><span class="pre">TestAddToAllSolutionCodesIfRequired.test_all_solution_codes_not_set()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.TestAddToAllSolutionCodesIfRequired.test_keep_all_solution_codes_false"><code class="docutils literal notranslate"><span class="pre">TestAddToAllSolutionCodesIfRequired.test_keep_all_solution_codes_false()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.TestAddToAllSolutionCodesIfRequired.test_keep_all_solution_codes_true"><code class="docutils literal notranslate"><span class="pre">TestAddToAllSolutionCodesIfRequired.test_keep_all_solution_codes_true()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.TestAddToAllSolutionCodesIfRequired.test_representation_already_in_all_solution_codes"><code class="docutils literal notranslate"><span class="pre">TestAddToAllSolutionCodesIfRequired.test_representation_already_in_all_solution_codes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.TestAddToAllSolutionCodesIfRequired.test_representation_not_string"><code class="docutils literal notranslate"><span class="pre">TestAddToAllSolutionCodesIfRequired.test_representation_not_string()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.TestAddToMoreLocalOptimaIfRequired"><code class="docutils literal notranslate"><span class="pre">TestAddToMoreLocalOptimaIfRequired</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.TestAddToMoreLocalOptimaIfRequired.test_add_to_more_local_optima_empty_structure"><code class="docutils literal notranslate"><span class="pre">TestAddToMoreLocalOptimaIfRequired.test_add_to_more_local_optima_empty_structure()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.TestAddToMoreLocalOptimaIfRequired.test_add_to_more_local_optima_full_structure_new_solution_better"><code class="docutils literal notranslate"><span class="pre">TestAddToMoreLocalOptimaIfRequired.test_add_to_more_local_optima_full_structure_new_solution_better()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.TestAddToMoreLocalOptimaIfRequired.test_add_to_more_local_optima_keep_more_local_optima_false"><code class="docutils literal notranslate"><span class="pre">TestAddToMoreLocalOptimaIfRequired.test_add_to_more_local_optima_keep_more_local_optima_false()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.TestAddToMoreLocalOptimaIfRequired.test_add_to_more_local_optima_keep_more_local_optima_false2"><code class="docutils literal notranslate"><span class="pre">TestAddToMoreLocalOptimaIfRequired.test_add_to_more_local_optima_keep_more_local_optima_false2()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.TestAddToMoreLocalOptimaIfRequired.test_add_to_more_local_optima_not_full_structure"><code class="docutils literal notranslate"><span class="pre">TestAddToMoreLocalOptimaIfRequired.test_add_to_more_local_optima_not_full_structure()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.TestAddToMoreLocalOptimaIfRequired.test_add_to_more_local_optima_solution_to_add_rep_not_string"><code class="docutils literal notranslate"><span class="pre">TestAddToMoreLocalOptimaIfRequired.test_add_to_more_local_optima_solution_to_add_rep_not_string()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.TestAdditionalStatisticsControl"><code class="docutils literal notranslate"><span class="pre">TestAdditionalStatisticsControl</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.TestAdditionalStatisticsControl.test_add_to_all_solution_codes_if_required"><code class="docutils literal notranslate"><span class="pre">TestAdditionalStatisticsControl.test_add_to_all_solution_codes_if_required()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.TestAdditionalStatisticsControl.test_add_to_more_local_optima_existing_solution"><code class="docutils literal notranslate"><span class="pre">TestAdditionalStatisticsControl.test_add_to_more_local_optima_existing_solution()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.TestAdditionalStatisticsControl.test_add_to_more_local_optima_new_solution"><code class="docutils literal notranslate"><span class="pre">TestAdditionalStatisticsControl.test_add_to_more_local_optima_new_solution()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.TestAdditionalStatisticsControl.test_invalid_keep_parameter_type"><code class="docutils literal notranslate"><span class="pre">TestAdditionalStatisticsControl.test_invalid_keep_parameter_type()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.TestAdditionalStatisticsControl.test_invalid_keep_property_value"><code class="docutils literal notranslate"><span class="pre">TestAdditionalStatisticsControl.test_invalid_keep_property_value()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.TestAdditionalStatisticsControl.test_invalid_max_local_optima_parameter_type"><code class="docutils literal notranslate"><span class="pre">TestAdditionalStatisticsControl.test_invalid_max_local_optima_parameter_type()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.TestAdditionalStatisticsControl.test_valid_keep_property_update"><code class="docutils literal notranslate"><span class="pre">TestAdditionalStatisticsControl.test_valid_keep_property_update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.TestAdditionalStatisticsControl.test_valid_parameters_initialization"><code class="docutils literal notranslate"><span class="pre">TestAdditionalStatisticsControl.test_valid_parameters_initialization()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.TestMaxLocalOptima"><code class="docutils literal notranslate"><span class="pre">TestMaxLocalOptima</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.TestMaxLocalOptima.test_max_local_optima_can_be_zero"><code class="docutils literal notranslate"><span class="pre">TestMaxLocalOptima.test_max_local_optima_can_be_zero()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.TestMaxLocalOptima.test_max_local_optima_can_not_be_negative"><code class="docutils literal notranslate"><span class="pre">TestMaxLocalOptima.test_max_local_optima_can_not_be_negative()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.TestMaxLocalOptima.test_raises_type_error_if_max_local_optima_not_integer"><code class="docutils literal notranslate"><span class="pre">TestMaxLocalOptima.test_raises_type_error_if_max_local_optima_not_integer()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.TestMaxLocalOptima.test_returns_integer_value"><code class="docutils literal notranslate"><span class="pre">TestMaxLocalOptima.test_returns_integer_value()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.TestMaxLocalOptima.test_returns_max_local_optima_value2"><code class="docutils literal notranslate"><span class="pre">TestMaxLocalOptima.test_returns_max_local_optima_value2()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.TestMaxLocalOptima.test_returns_maximum_number_of_local_optima"><code class="docutils literal notranslate"><span class="pre">TestMaxLocalOptima.test_returns_maximum_number_of_local_optima()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.Test__DetermineKeepHelper__"><code class="docutils literal notranslate"><span class="pre">Test__DetermineKeepHelper__</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.Test__DetermineKeepHelper__.test_determine_keep_helper_criteria_checked"><code class="docutils literal notranslate"><span class="pre">Test__DetermineKeepHelper__.test_determine_keep_helper_criteria_checked()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.Test__DetermineKeepHelper__.test_determine_keep_helper_flags_default"><code class="docutils literal notranslate"><span class="pre">Test__DetermineKeepHelper__.test_determine_keep_helper_flags_default()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.Test__DetermineKeepHelper__.test_determine_keep_helper_invalid_value"><code class="docutils literal notranslate"><span class="pre">Test__DetermineKeepHelper__.test_determine_keep_helper_invalid_value()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.Test__DetermineKeepHelper__.test_determine_keep_helper_keep_not_string"><code class="docutils literal notranslate"><span class="pre">Test__DetermineKeepHelper__.test_determine_keep_helper_keep_not_string()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.Test__DetermineKeepHelper__.test_determine_keep_helper_max_local_optima_not_integer"><code class="docutils literal notranslate"><span class="pre">Test__DetermineKeepHelper__.test_determine_keep_helper_max_local_optima_not_integer()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control.Test__DetermineKeepHelper__.test_determine_keep_helper_parse_keep_parameter3"><code class="docutils literal notranslate"><span class="pre">Test__DetermineKeepHelper__.test_determine_keep_helper_parse_keep_parameter3()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#module-uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2">uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2 module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestAddToAllSolutionCodesIfRequired"><code class="docutils literal notranslate"><span class="pre">TestAddToAllSolutionCodesIfRequired</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestAddToAllSolutionCodesIfRequired.test_all_solution_codes_not_set"><code class="docutils literal notranslate"><span class="pre">TestAddToAllSolutionCodesIfRequired.test_all_solution_codes_not_set()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestAddToAllSolutionCodesIfRequired.test_keep_all_solution_codes_false"><code class="docutils literal notranslate"><span class="pre">TestAddToAllSolutionCodesIfRequired.test_keep_all_solution_codes_false()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestAddToAllSolutionCodesIfRequired.test_keep_all_solution_codes_not_boolean"><code class="docutils literal notranslate"><span class="pre">TestAddToAllSolutionCodesIfRequired.test_keep_all_solution_codes_not_boolean()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestAddToAllSolutionCodesIfRequired.test_keep_all_solution_codes_true"><code class="docutils literal notranslate"><span class="pre">TestAddToAllSolutionCodesIfRequired.test_keep_all_solution_codes_true()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestAddToAllSolutionCodesIfRequired.test_representation_already_in_all_solution_codes"><code class="docutils literal notranslate"><span class="pre">TestAddToAllSolutionCodesIfRequired.test_representation_already_in_all_solution_codes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestAddToAllSolutionCodesIfRequired.test_representation_empty_string"><code class="docutils literal notranslate"><span class="pre">TestAddToAllSolutionCodesIfRequired.test_representation_empty_string()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestAddToAllSolutionCodesIfRequired.test_representation_non_empty_string"><code class="docutils literal notranslate"><span class="pre">TestAddToAllSolutionCodesIfRequired.test_representation_non_empty_string()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestAddToAllSolutionCodesIfRequired.test_representation_not_string"><code class="docutils literal notranslate"><span class="pre">TestAddToAllSolutionCodesIfRequired.test_representation_not_string()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestAddToMoreLocalOptimaIfRequired"><code class="docutils literal notranslate"><span class="pre">TestAddToMoreLocalOptimaIfRequired</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestAddToMoreLocalOptimaIfRequired.test_add_new_solution_to_local_optima_structure"><code class="docutils literal notranslate"><span class="pre">TestAddToMoreLocalOptimaIfRequired.test_add_new_solution_to_local_optima_structure()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestAddToMoreLocalOptimaIfRequired.test_raise_type_error_if_best_solution_rep_not_string"><code class="docutils literal notranslate"><span class="pre">TestAddToMoreLocalOptimaIfRequired.test_raise_type_error_if_best_solution_rep_not_string()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestAddToMoreLocalOptimaIfRequired.test_raise_type_error_if_solution_to_add_fitness_not_int_float_list"><code class="docutils literal notranslate"><span class="pre">TestAddToMoreLocalOptimaIfRequired.test_raise_type_error_if_solution_to_add_fitness_not_int_float_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestAddToMoreLocalOptimaIfRequired.test_raise_type_error_if_solution_to_add_rep_not_string"><code class="docutils literal notranslate"><span class="pre">TestAddToMoreLocalOptimaIfRequired.test_raise_type_error_if_solution_to_add_rep_not_string()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestAddToMoreLocalOptimaIfRequired.test_remove_random_local_optima_when_max_reached"><code class="docutils literal notranslate"><span class="pre">TestAddToMoreLocalOptimaIfRequired.test_remove_random_local_optima_when_max_reached()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestAddToMoreLocalOptimaIfRequired.test_return_true_when_new_solution_added"><code class="docutils literal notranslate"><span class="pre">TestAddToMoreLocalOptimaIfRequired.test_return_true_when_new_solution_added()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestAllSolutionCodes"><code class="docutils literal notranslate"><span class="pre">TestAllSolutionCodes</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestAllSolutionCodes.test_set_all_solution_codes_with_non_set_value"><code class="docutils literal notranslate"><span class="pre">TestAllSolutionCodes.test_set_all_solution_codes_with_non_set_value()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestAllSolutionCodes.test_set_all_solution_codes_with_none_value"><code class="docutils literal notranslate"><span class="pre">TestAllSolutionCodes.test_set_all_solution_codes_with_none_value()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestAllSolutionCodes.test_set_duplicate_solution_codes"><code class="docutils literal notranslate"><span class="pre">TestAllSolutionCodes.test_set_duplicate_solution_codes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestAllSolutionCodes.test_set_empty_solution_codes"><code class="docutils literal notranslate"><span class="pre">TestAllSolutionCodes.test_set_empty_solution_codes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestAllSolutionCodes.test_set_non_empty_solution_codes"><code class="docutils literal notranslate"><span class="pre">TestAllSolutionCodes.test_set_non_empty_solution_codes()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestKeepAllSolutionCodes"><code class="docutils literal notranslate"><span class="pre">TestKeepAllSolutionCodes</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestKeepAllSolutionCodes.test_raises_attribute_error_if_keep_all_solution_codes_property_is_not_boolean"><code class="docutils literal notranslate"><span class="pre">TestKeepAllSolutionCodes.test_raises_attribute_error_if_keep_all_solution_codes_property_is_not_boolean()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestKeepAllSolutionCodes.test_raises_type_error_if_representation_parameter_is_not_string"><code class="docutils literal notranslate"><span class="pre">TestKeepAllSolutionCodes.test_raises_type_error_if_representation_parameter_is_not_string()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestKeepAllSolutionCodes.test_returns_boolean_indicating_if_all_solution_codes_should_be_kept"><code class="docutils literal notranslate"><span class="pre">TestKeepAllSolutionCodes.test_returns_boolean_indicating_if_all_solution_codes_should_be_kept()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestKeepAllSolutionCodes.test_returns_true_if_all_solution_codes_should_be_kept"><code class="docutils literal notranslate"><span class="pre">TestKeepAllSolutionCodes.test_returns_true_if_all_solution_codes_should_be_kept()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestKeepMoreLocalOptima"><code class="docutils literal notranslate"><span class="pre">TestKeepMoreLocalOptima</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestKeepMoreLocalOptima.test_raises_type_error_if_best_solution_rep_is_not_a_string"><code class="docutils literal notranslate"><span class="pre">TestKeepMoreLocalOptima.test_raises_type_error_if_best_solution_rep_is_not_a_string()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestKeepMoreLocalOptima.test_raises_type_error_if_solution_to_add_fitness_is_not_a_float_or_float_list"><code class="docutils literal notranslate"><span class="pre">TestKeepMoreLocalOptima.test_raises_type_error_if_solution_to_add_fitness_is_not_a_float_or_float_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestKeepMoreLocalOptima.test_raises_type_error_if_solution_to_add_rep_is_not_a_string"><code class="docutils literal notranslate"><span class="pre">TestKeepMoreLocalOptima.test_raises_type_error_if_solution_to_add_rep_is_not_a_string()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestKeepMoreLocalOptima.test_returns_false_if_keep_more_local_optima_is_false"><code class="docutils literal notranslate"><span class="pre">TestKeepMoreLocalOptima.test_returns_false_if_keep_more_local_optima_is_false()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestKeepMoreLocalOptima.test_returns_false_if_solution_to_add_rep_is_already_in_more_local_optima"><code class="docutils literal notranslate"><span class="pre">TestKeepMoreLocalOptima.test_returns_false_if_solution_to_add_rep_is_already_in_more_local_optima()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestMaxLocalOptima"><code class="docutils literal notranslate"><span class="pre">TestMaxLocalOptima</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestMaxLocalOptima.test_raises_type_error_when_max_local_optima_not_integer"><code class="docutils literal notranslate"><span class="pre">TestMaxLocalOptima.test_raises_type_error_when_max_local_optima_not_integer()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestMaxLocalOptima.test_returns_integer_value"><code class="docutils literal notranslate"><span class="pre">TestMaxLocalOptima.test_returns_integer_value()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestMaxLocalOptima.test_returns_max_local_optima_value"><code class="docutils literal notranslate"><span class="pre">TestMaxLocalOptima.test_returns_max_local_optima_value()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestMoreLocalOptima"><code class="docutils literal notranslate"><span class="pre">TestMoreLocalOptima</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestMoreLocalOptima.test_max_local_optima_elements_removes_oldest_element"><code class="docutils literal notranslate"><span class="pre">TestMoreLocalOptima.test_max_local_optima_elements_removes_oldest_element()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestMoreLocalOptima.test_none_input_updates_attribute"><code class="docutils literal notranslate"><span class="pre">TestMoreLocalOptima.test_none_input_updates_attribute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.TestMoreLocalOptima.test_valid_input_updates_attribute"><code class="docutils literal notranslate"><span class="pre">TestMoreLocalOptima.test_valid_input_updates_attribute()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.Test__Init_22"><code class="docutils literal notranslate"><span class="pre">Test__Init_22</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.Test__Init_22.test_default_values"><code class="docutils literal notranslate"><span class="pre">Test__Init_22.test_default_values()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.Test__Init_22.test_empty_string_keep"><code class="docutils literal notranslate"><span class="pre">Test__Init_22.test_empty_string_keep()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.Test__Init_22.test_invalid_keep"><code class="docutils literal notranslate"><span class="pre">Test__Init_22.test_invalid_keep()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.Test__Init_22.test_keep_all_solution_code_and_more_local_optima"><code class="docutils literal notranslate"><span class="pre">Test__Init_22.test_keep_all_solution_code_and_more_local_optima()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.Test__Init_22.test_keep_more_local_optima"><code class="docutils literal notranslate"><span class="pre">Test__Init_22.test_keep_more_local_optima()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.Test__Init_22.test_keep_not_string"><code class="docutils literal notranslate"><span class="pre">Test__Init_22.test_keep_not_string()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.Test__Init_22.test_large_value_for_max_local_optima"><code class="docutils literal notranslate"><span class="pre">Test__Init_22.test_large_value_for_max_local_optima()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.Test__Init_22.test_max_local_optima_less_than_zero"><code class="docutils literal notranslate"><span class="pre">Test__Init_22.test_max_local_optima_less_than_zero()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.Test__Init_22.test_max_local_optima_not_integer"><code class="docutils literal notranslate"><span class="pre">Test__Init_22.test_max_local_optima_not_integer()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.Test__Init_22.test_max_local_optima_zero"><code class="docutils literal notranslate"><span class="pre">Test__Init_22.test_max_local_optima_zero()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.Test__Init_22.test_maximum_max_local_optima_count"><code class="docutils literal notranslate"><span class="pre">Test__Init_22.test_maximum_max_local_optima_count()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.Test__Init_22.test_minimum_max_local_optima_count"><code class="docutils literal notranslate"><span class="pre">Test__Init_22.test_minimum_max_local_optima_count()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.Test__Init_22.test_multiple_valid_keep"><code class="docutils literal notranslate"><span class="pre">Test__Init_22.test_multiple_valid_keep()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.Test__Init_22.test_small_value_for_max_local_optima"><code class="docutils literal notranslate"><span class="pre">Test__Init_22.test_small_value_for_max_local_optima()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.Test__Init_22.test_valid_and_invalid_values_for_keep"><code class="docutils literal notranslate"><span class="pre">Test__Init_22.test_valid_and_invalid_values_for_keep()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.Test__Init_22.test_valid_input_values"><code class="docutils literal notranslate"><span class="pre">Test__Init_22.test_valid_input_values()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.Test__Init_22.test_valid_string_keep"><code class="docutils literal notranslate"><span class="pre">Test__Init_22.test_valid_string_keep()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.Test__Init_22.test_whitespace_keep"><code class="docutils literal notranslate"><span class="pre">Test__Init_22.test_whitespace_keep()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.Test__Str__P1"><code class="docutils literal notranslate"><span class="pre">Test__Str__P1</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.Test__Str__P1.test_contain_relevant_keep_property_when_keep_is_blank"><code class="docutils literal notranslate"><span class="pre">Test__Str__P1.test_contain_relevant_keep_property_when_keep_is_blank()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.Test__Str__P1.test_contains_keep_and_use_cache_properties"><code class="docutils literal notranslate"><span class="pre">Test__Str__P1.test_contains_keep_and_use_cache_properties()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_additional_statistics_control_2.Test__Str__P1.test_returns_string_representation"><code class="docutils literal notranslate"><span class="pre">Test__Str__P1.test_returns_string_representation()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#module-uo.tests.unit.algorithm.metaheuristic.test_finish_control">uo.tests.unit.algorithm.metaheuristic.test_finish_control module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_finish_control.TestFinishControl"><code class="docutils literal notranslate"><span class="pre">TestFinishControl</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_finish_control.TestFinishControl.test_change_criteria"><code class="docutils literal notranslate"><span class="pre">TestFinishControl.test_change_criteria()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_finish_control.TestFinishControl.test_copy"><code class="docutils literal notranslate"><span class="pre">TestFinishControl.test_copy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_finish_control.TestFinishControl.test_copy_instance"><code class="docutils literal notranslate"><span class="pre">TestFinishControl.test_copy_instance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_finish_control.TestFinishControl.test_duplicate_criteria"><code class="docutils literal notranslate"><span class="pre">TestFinishControl.test_duplicate_criteria()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_finish_control.TestFinishControl.test_invalid_criteria"><code class="docutils literal notranslate"><span class="pre">TestFinishControl.test_invalid_criteria()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_finish_control.TestFinishControl.test_invalid_parameters"><code class="docutils literal notranslate"><span class="pre">TestFinishControl.test_invalid_parameters()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_finish_control.TestFinishControl.test_is_finished_outside_criteria"><code class="docutils literal notranslate"><span class="pre">TestFinishControl.test_is_finished_outside_criteria()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_finish_control.TestFinishControl.test_is_finished_within_criteria"><code class="docutils literal notranslate"><span class="pre">TestFinishControl.test_is_finished_within_criteria()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_finish_control.TestFinishControl.test_no_criteria_specified"><code class="docutils literal notranslate"><span class="pre">TestFinishControl.test_no_criteria_specified()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_finish_control.TestFinishControl.test_single_criteria"><code class="docutils literal notranslate"><span class="pre">TestFinishControl.test_single_criteria()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_finish_control.TestFinishControl.test_string_representation"><code class="docutils literal notranslate"><span class="pre">TestFinishControl.test_string_representation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_finish_control.TestFinishControl.test_valid_parameters"><code class="docutils literal notranslate"><span class="pre">TestFinishControl.test_valid_parameters()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#module-uo.tests.unit.algorithm.metaheuristic.test_metaheuristic">uo.tests.unit.algorithm.metaheuristic.test_metaheuristic module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestAdditionalStatisticsControl"><code class="docutils literal notranslate"><span class="pre">TestAdditionalStatisticsControl</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestAdditionalStatisticsControl.test_returns_additional_statistics_control"><code class="docutils literal notranslate"><span class="pre">TestAdditionalStatisticsControl.test_returns_additional_statistics_control()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestAdditionalStatisticsControl.test_returns_instance_of_additional_statistics_control"><code class="docutils literal notranslate"><span class="pre">TestAdditionalStatisticsControl.test_returns_instance_of_additional_statistics_control()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestAdditionalStatisticsControl.test_returns_same_instance_as_passed_in_constructor"><code class="docutils literal notranslate"><span class="pre">TestAdditionalStatisticsControl.test_returns_same_instance_as_passed_in_constructor()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestAdditionalStatisticsControl.test_returns_unmodified_instance2"><code class="docutils literal notranslate"><span class="pre">TestAdditionalStatisticsControl.test_returns_unmodified_instance2()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestFinishControl"><code class="docutils literal notranslate"><span class="pre">TestFinishControl</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestFinishControl.test_raises_type_error_if_finish_control_not_of_type_finish_control"><code class="docutils literal notranslate"><span class="pre">TestFinishControl.test_raises_type_error_if_finish_control_not_of_type_finish_control()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestFinishControl.test_returns_finish_control_structure"><code class="docutils literal notranslate"><span class="pre">TestFinishControl.test_returns_finish_control_structure()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestFinishControl.test_returns_identical_finish_control"><code class="docutils literal notranslate"><span class="pre">TestFinishControl.test_returns_identical_finish_control()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestFinishControl.test_returns_same_instance_of_finish_control"><code class="docutils literal notranslate"><span class="pre">TestFinishControl.test_returns_same_instance_of_finish_control()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestMainLoopIteration"><code class="docutils literal notranslate"><span class="pre">TestMainLoopIteration</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestMainLoopIteration.test_executes_one_iteration"><code class="docutils literal notranslate"><span class="pre">TestMainLoopIteration.test_executes_one_iteration()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestMainLoopIteration.test_finish_control_indicates_algorithm_finished"><code class="docutils literal notranslate"><span class="pre">TestMainLoopIteration.test_finish_control_indicates_algorithm_finished()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestMetaheuristic2"><code class="docutils literal notranslate"><span class="pre">TestMetaheuristic2</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestMetaheuristic2.test_copy_method"><code class="docutils literal notranslate"><span class="pre">TestMetaheuristic2.test_copy_method()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestMetaheuristic2.test_elapsed_seconds_method"><code class="docutils literal notranslate"><span class="pre">TestMetaheuristic2.test_elapsed_seconds_method()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestMetaheuristic2.test_invalid_additional_statistics_control"><code class="docutils literal notranslate"><span class="pre">TestMetaheuristic2.test_invalid_additional_statistics_control()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestMetaheuristic2.test_invalid_finish_control_parameter"><code class="docutils literal notranslate"><span class="pre">TestMetaheuristic2.test_invalid_finish_control_parameter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestMetaheuristic2.test_invalid_name_parameter"><code class="docutils literal notranslate"><span class="pre">TestMetaheuristic2.test_invalid_name_parameter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestMetaheuristic2.test_invalid_output_control"><code class="docutils literal notranslate"><span class="pre">TestMetaheuristic2.test_invalid_output_control()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestMetaheuristic2.test_invalid_problem_parameter"><code class="docutils literal notranslate"><span class="pre">TestMetaheuristic2.test_invalid_problem_parameter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestMetaheuristic2.test_invalid_random_seed"><code class="docutils literal notranslate"><span class="pre">TestMetaheuristic2.test_invalid_random_seed()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestMetaheuristic2.test_main_loop_finished"><code class="docutils literal notranslate"><span class="pre">TestMetaheuristic2.test_main_loop_finished()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestMetaheuristic2.test_main_loop_method"><code class="docutils literal notranslate"><span class="pre">TestMetaheuristic2.test_main_loop_method()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestMetaheuristic2.test_optimize_method"><code class="docutils literal notranslate"><span class="pre">TestMetaheuristic2.test_optimize_method()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestMetaheuristic2.test_optimize_random_seed"><code class="docutils literal notranslate"><span class="pre">TestMetaheuristic2.test_optimize_random_seed()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestMetaheuristic2.test_string_rep_method"><code class="docutils literal notranslate"><span class="pre">TestMetaheuristic2.test_string_rep_method()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestMetaheuristicProperties"><code class="docutils literal notranslate"><span class="pre">TestMetaheuristicProperties</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestMetaheuristicProperties.setUp"><code class="docutils literal notranslate"><span class="pre">TestMetaheuristicProperties.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestMetaheuristicProperties.setUpClass"><code class="docutils literal notranslate"><span class="pre">TestMetaheuristicProperties.setUpClass()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestMetaheuristicProperties.tearDown"><code class="docutils literal notranslate"><span class="pre">TestMetaheuristicProperties.tearDown()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestMetaheuristicProperties.tearDownClass"><code class="docutils literal notranslate"><span class="pre">TestMetaheuristicProperties.tearDownClass()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestMetaheuristicProperties.test_evaluations_max_should_be_equal_as_in_constructor"><code class="docutils literal notranslate"><span class="pre">TestMetaheuristicProperties.test_evaluations_max_should_be_equal_as_in_constructor()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestMetaheuristicProperties.test_iterations_max_should_be_equal_as_in_constructor"><code class="docutils literal notranslate"><span class="pre">TestMetaheuristicProperties.test_iterations_max_should_be_equal_as_in_constructor()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestMetaheuristicProperties.test_name_should_be_equal_as_in_constructor"><code class="docutils literal notranslate"><span class="pre">TestMetaheuristicProperties.test_name_should_be_equal_as_in_constructor()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestMetaheuristicProperties.test_problem_is_minimization_should_be_equal_as_in_constructor"><code class="docutils literal notranslate"><span class="pre">TestMetaheuristicProperties.test_problem_is_minimization_should_be_equal_as_in_constructor()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestMetaheuristicProperties.test_problem_name_should_be_equal_as_in_constructor"><code class="docutils literal notranslate"><span class="pre">TestMetaheuristicProperties.test_problem_name_should_be_equal_as_in_constructor()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestMetaheuristicProperties.test_random_seed_should_be_equal_as_in_constructor"><code class="docutils literal notranslate"><span class="pre">TestMetaheuristicProperties.test_random_seed_should_be_equal_as_in_constructor()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestMetaheuristicProperties.test_seconds_max_should_be_equal_as_in_constructor"><code class="docutils literal notranslate"><span class="pre">TestMetaheuristicProperties.test_seconds_max_should_be_equal_as_in_constructor()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestRandomSeed"><code class="docutils literal notranslate"><span class="pre">TestRandomSeed</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestRandomSeed.test_raises_no_errors_when_random_seed_is_zero"><code class="docutils literal notranslate"><span class="pre">TestRandomSeed.test_raises_no_errors_when_random_seed_is_zero()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestRandomSeed.test_raises_type_error_when_random_seed_not_integer_or_none"><code class="docutils literal notranslate"><span class="pre">TestRandomSeed.test_raises_type_error_when_random_seed_not_integer_or_none()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestRandomSeed.test_returns_correct_random_seed_value"><code class="docutils literal notranslate"><span class="pre">TestRandomSeed.test_returns_correct_random_seed_value()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestRandomSeed.test_returns_random_seed"><code class="docutils literal notranslate"><span class="pre">TestRandomSeed.test_returns_random_seed()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestStringRep"><code class="docutils literal notranslate"><span class="pre">TestStringRep</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestStringRep.test_empty_delimiter"><code class="docutils literal notranslate"><span class="pre">TestStringRep.test_empty_delimiter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestStringRep.test_includes_properties"><code class="docutils literal notranslate"><span class="pre">TestStringRep.test_includes_properties()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestStringRep.test_returns_string_representation"><code class="docutils literal notranslate"><span class="pre">TestStringRep.test_returns_string_representation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_metaheuristic.TestStringRep.test_uses_formatting_parameters"><code class="docutils literal notranslate"><span class="pre">TestStringRep.test_uses_formatting_parameters()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#module-uo.tests.unit.algorithm.metaheuristic.test_single_solution_metaheuristic">uo.tests.unit.algorithm.metaheuristic.test_single_solution_metaheuristic module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_single_solution_metaheuristic.TestCurrentSolution"><code class="docutils literal notranslate"><span class="pre">TestCurrentSolution</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_single_solution_metaheuristic.TestCurrentSolution.test_create_with_invalid_current_solution_raises_type_error"><code class="docutils literal notranslate"><span class="pre">TestCurrentSolution.test_create_with_invalid_current_solution_raises_type_error()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_single_solution_metaheuristic.TestCurrentSolution.test_create_with_invalid_current_solution_raises_type_error2"><code class="docutils literal notranslate"><span class="pre">TestCurrentSolution.test_create_with_invalid_current_solution_raises_type_error2()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_single_solution_metaheuristic.TestCurrentSolution.test_get_current_solution_returns_value"><code class="docutils literal notranslate"><span class="pre">TestCurrentSolution.test_get_current_solution_returns_value()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_single_solution_metaheuristic.TestCurrentSolution.test_set_solution_template_to_not_Target_solution"><code class="docutils literal notranslate"><span class="pre">TestCurrentSolution.test_set_solution_template_to_not_Target_solution()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_single_solution_metaheuristic.TestSingleSolutionMetaheuristic"><code class="docutils literal notranslate"><span class="pre">TestSingleSolutionMetaheuristic</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_single_solution_metaheuristic.TestSingleSolutionMetaheuristic.test_copy"><code class="docutils literal notranslate"><span class="pre">TestSingleSolutionMetaheuristic.test_copy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_single_solution_metaheuristic.TestSingleSolutionMetaheuristic.test_different_solution_types"><code class="docutils literal notranslate"><span class="pre">TestSingleSolutionMetaheuristic.test_different_solution_types()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_single_solution_metaheuristic.TestSingleSolutionMetaheuristic.test_formatted_representation"><code class="docutils literal notranslate"><span class="pre">TestSingleSolutionMetaheuristic.test_formatted_representation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_single_solution_metaheuristic.TestSingleSolutionMetaheuristic.test_invalid_parameters_initialization"><code class="docutils literal notranslate"><span class="pre">TestSingleSolutionMetaheuristic.test_invalid_parameters_initialization()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_single_solution_metaheuristic.TestSingleSolutionMetaheuristic.test_set_invalid_current_solution"><code class="docutils literal notranslate"><span class="pre">TestSingleSolutionMetaheuristic.test_set_invalid_current_solution()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_single_solution_metaheuristic.TestSingleSolutionMetaheuristic.test_solution_template_not_solution"><code class="docutils literal notranslate"><span class="pre">TestSingleSolutionMetaheuristic.test_solution_template_not_solution()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_single_solution_metaheuristic.TestSingleSolutionMetaheuristic.test_string_representation"><code class="docutils literal notranslate"><span class="pre">TestSingleSolutionMetaheuristic.test_string_representation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_single_solution_metaheuristic.TestSingleSolutionMetaheuristic.test_valid_parameters_initialization"><code class="docutils literal notranslate"><span class="pre">TestSingleSolutionMetaheuristic.test_valid_parameters_initialization()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_single_solution_metaheuristic.Test__Str__2"><code class="docutils literal notranslate"><span class="pre">Test__Str__2</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_single_solution_metaheuristic.Test__Str__2.test_include_current_solution_representation"><code class="docutils literal notranslate"><span class="pre">Test__Str__2.test_include_current_solution_representation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_single_solution_metaheuristic.Test__Str__2.test_include_metaheuristic_representation"><code class="docutils literal notranslate"><span class="pre">Test__Str__2.test_include_metaheuristic_representation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_single_solution_metaheuristic.Test__Str__2.test_raise_typeerror_if_solution_template_is_not_solution"><code class="docutils literal notranslate"><span class="pre">Test__Str__2.test_raise_typeerror_if_solution_template_is_not_solution()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#uo.tests.unit.algorithm.metaheuristic.test_single_solution_metaheuristic.Test__Str__2.test_return_string_representation"><code class="docutils literal notranslate"><span class="pre">Test__Str__2.test_return_string_representation()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="uo.tests.unit.algorithm.metaheuristic.html#module-uo.tests.unit.algorithm.metaheuristic">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-uo.tests.unit.algorithm.test_algorithm">
+<span id="uo-tests-unit-algorithm-test-algorithm-module"></span><h2>uo.tests.unit.algorithm.test_algorithm module<a class="headerlink" href="#module-uo.tests.unit.algorithm.test_algorithm" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_algorithm.TestAlgorithm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">uo.tests.unit.algorithm.test_algorithm.</span></span><span class="sig-name descname"><span class="pre">TestAlgorithm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_algorithm.TestAlgorithm" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_algorithm.TestAlgorithm.test_algorithm_copy">
+<span class="sig-name descname"><span class="pre">test_algorithm_copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_algorithm.TestAlgorithm.test_algorithm_copy" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_algorithm.TestAlgorithm.test_algorithm_initialization">
+<span class="sig-name descname"><span class="pre">test_algorithm_initialization</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_algorithm.TestAlgorithm.test_algorithm_initialization" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_algorithm.TestAlgorithm.test_algorithm_properties">
+<span class="sig-name descname"><span class="pre">test_algorithm_properties</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_algorithm.TestAlgorithm.test_algorithm_properties" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_algorithm.TestAlgorithm.test_algorithm_string_representation">
+<span class="sig-name descname"><span class="pre">test_algorithm_string_representation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_algorithm.TestAlgorithm.test_algorithm_string_representation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_algorithm.TestAlgorithm.test_problem_not_defined">
+<span class="sig-name descname"><span class="pre">test_problem_not_defined</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_algorithm.TestAlgorithm.test_problem_not_defined" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_algorithm.TestAlgorithmProperties">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">uo.tests.unit.algorithm.test_algorithm.</span></span><span class="sig-name descname"><span class="pre">TestAlgorithmProperties</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_algorithm.TestAlgorithmProperties" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_algorithm.TestAlgorithmProperties.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_algorithm.TestAlgorithmProperties.setUp" title="Link to this definition"></a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_algorithm.TestAlgorithmProperties.setUpClass">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setUpClass</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_algorithm.TestAlgorithmProperties.setUpClass" title="Link to this definition"></a></dt>
+<dd><p>Hook method for setting up class fixture before running tests in the class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_algorithm.TestAlgorithmProperties.tearDown">
+<span class="sig-name descname"><span class="pre">tearDown</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_algorithm.TestAlgorithmProperties.tearDown" title="Link to this definition"></a></dt>
+<dd><p>Hook method for deconstructing the test fixture after testing it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_algorithm.TestAlgorithmProperties.tearDownClass">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tearDownClass</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_algorithm.TestAlgorithmProperties.tearDownClass" title="Link to this definition"></a></dt>
+<dd><p>Hook method for deconstructing the class fixture after running all tests in the class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_algorithm.TestAlgorithmProperties.test_name_should_be_as_it_is_in_constructor">
+<span class="sig-name descname"><span class="pre">test_name_should_be_as_it_is_in_constructor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_algorithm.TestAlgorithmProperties.test_name_should_be_as_it_is_in_constructor" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_algorithm.TestAlgorithmProperties.test_problem_dimension_should_be_same_that_it_is_in_constructor">
+<span class="sig-name descname"><span class="pre">test_problem_dimension_should_be_same_that_it_is_in_constructor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_algorithm.TestAlgorithmProperties.test_problem_dimension_should_be_same_that_it_is_in_constructor" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_algorithm.TestAlgorithmProperties.test_problem_file_path_should_be_same_that_it_is_in_constructor">
+<span class="sig-name descname"><span class="pre">test_problem_file_path_should_be_same_that_it_is_in_constructor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_algorithm.TestAlgorithmProperties.test_problem_file_path_should_be_same_that_it_is_in_constructor" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_algorithm.TestAlgorithmProperties.test_problem_is_minimization_should_be_same_that_it_is_in_constructor">
+<span class="sig-name descname"><span class="pre">test_problem_is_minimization_should_be_same_that_it_is_in_constructor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_algorithm.TestAlgorithmProperties.test_problem_is_minimization_should_be_same_that_it_is_in_constructor" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_algorithm.TestAlgorithmProperties.test_problem_name_should_be_same_that_it_is_in_constructor">
+<span class="sig-name descname"><span class="pre">test_problem_name_should_be_same_that_it_is_in_constructor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_algorithm.TestAlgorithmProperties.test_problem_name_should_be_same_that_it_is_in_constructor" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_algorithm.TestEvaluation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">uo.tests.unit.algorithm.test_algorithm.</span></span><span class="sig-name descname"><span class="pre">TestEvaluation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_algorithm.TestEvaluation" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_algorithm.TestEvaluation.test_set_evaluation_float_value">
+<span class="sig-name descname"><span class="pre">test_set_evaluation_float_value</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_algorithm.TestEvaluation.test_set_evaluation_float_value" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_algorithm.TestEvaluation.test_set_evaluation_none">
+<span class="sig-name descname"><span class="pre">test_set_evaluation_none</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_algorithm.TestEvaluation.test_set_evaluation_none" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_algorithm.TestEvaluation.test_set_evaluation_positive_integer">
+<span class="sig-name descname"><span class="pre">test_set_evaluation_positive_integer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_algorithm.TestEvaluation.test_set_evaluation_positive_integer" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_algorithm.TestEvaluation.test_set_evaluation_zero">
+<span class="sig-name descname"><span class="pre">test_set_evaluation_zero</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_algorithm.TestEvaluation.test_set_evaluation_zero" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-uo.tests.unit.algorithm.test_optimizer">
+<span id="uo-tests-unit-algorithm-test-optimizer-module"></span><h2>uo.tests.unit.algorithm.test_optimizer module<a class="headerlink" href="#module-uo.tests.unit.algorithm.test_optimizer" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_optimizer.Test__Optimizer__">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">uo.tests.unit.algorithm.test_optimizer.</span></span><span class="sig-name descname"><span class="pre">Test__Optimizer__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_optimizer.Test__Optimizer__" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_optimizer.Test__Optimizer__.test_best_solution_set_to_none">
+<span class="sig-name descname"><span class="pre">test_best_solution_set_to_none</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_optimizer.Test__Optimizer__.test_best_solution_set_to_none" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_optimizer.Test__Optimizer__.test_copy_method">
+<span class="sig-name descname"><span class="pre">test_copy_method</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_optimizer.Test__Optimizer__.test_copy_method" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_optimizer.Test__Optimizer__.test_empty_name_parameter">
+<span class="sig-name descname"><span class="pre">test_empty_name_parameter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_optimizer.Test__Optimizer__.test_empty_name_parameter" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_optimizer.Test__Optimizer__.test_execution_variables_set_to_none">
+<span class="sig-name descname"><span class="pre">test_execution_variables_set_to_none</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_optimizer.Test__Optimizer__.test_execution_variables_set_to_none" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_optimizer.Test__Optimizer__.test_name_parameter_not_string">
+<span class="sig-name descname"><span class="pre">test_name_parameter_not_string</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_optimizer.Test__Optimizer__.test_name_parameter_not_string" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_optimizer.Test__Optimizer__.test_none_output_control_parameter">
+<span class="sig-name descname"><span class="pre">test_none_output_control_parameter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_optimizer.Test__Optimizer__.test_none_output_control_parameter" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_optimizer.Test__Optimizer__.test_none_problem_parameter">
+<span class="sig-name descname"><span class="pre">test_none_problem_parameter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_optimizer.Test__Optimizer__.test_none_problem_parameter" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_optimizer.Test__Optimizer__.test_other_instance_variables_none_or_default">
+<span class="sig-name descname"><span class="pre">test_other_instance_variables_none_or_default</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_optimizer.Test__Optimizer__.test_other_instance_variables_none_or_default" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_optimizer.Test__Optimizer__.test_output_control_parameter_not_instance_of_OutputControl">
+<span class="sig-name descname"><span class="pre">test_output_control_parameter_not_instance_of_OutputControl</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_optimizer.Test__Optimizer__.test_output_control_parameter_not_instance_of_OutputControl" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_optimizer.Test__Optimizer__.test_problem_parameter_not_instance_of_Problem">
+<span class="sig-name descname"><span class="pre">test_problem_parameter_not_instance_of_Problem</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_optimizer.Test__Optimizer__.test_problem_parameter_not_instance_of_Problem" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_optimizer.Test__Optimizer__.test_string_rep_method">
+<span class="sig-name descname"><span class="pre">test_string_rep_method</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_optimizer.Test__Optimizer__.test_string_rep_method" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_optimizer.Test__Optimizer__.test_valid_instance_variables9">
+<span class="sig-name descname"><span class="pre">test_valid_instance_variables9</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_optimizer.Test__Optimizer__.test_valid_instance_variables9" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_optimizer.Test__Optimizer__.test_valid_parameters">
+<span class="sig-name descname"><span class="pre">test_valid_parameters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_optimizer.Test__Optimizer__.test_valid_parameters" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_optimizer.Test__Optimizer__.test_valid_parameters2">
+<span class="sig-name descname"><span class="pre">test_valid_parameters2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_optimizer.Test__Optimizer__.test_valid_parameters2" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-uo.tests.unit.algorithm.test_output_control">
+<span id="uo-tests-unit-algorithm-test-output-control-module"></span><h2>uo.tests.unit.algorithm.test_output_control module<a class="headerlink" href="#module-uo.tests.unit.algorithm.test_output_control" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_output_control.TestOutputControl">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">uo.tests.unit.algorithm.test_output_control.</span></span><span class="sig-name descname"><span class="pre">TestOutputControl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_output_control.TestOutputControl" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_output_control.TestOutputControl.test_fields_type_error">
+<span class="sig-name descname"><span class="pre">test_fields_type_error</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_output_control.TestOutputControl.test_fields_type_error" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_output_control.TestOutputControl.test_initialized_with_custom_parameters">
+<span class="sig-name descname"><span class="pre">test_initialized_with_custom_parameters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_output_control.TestOutputControl.test_initialized_with_custom_parameters" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_output_control.TestOutputControl.test_initialized_with_default_parameters">
+<span class="sig-name descname"><span class="pre">test_initialized_with_default_parameters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_output_control.TestOutputControl.test_initialized_with_default_parameters" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_output_control.TestOutputControl.test_invalid_moment_value_error">
+<span class="sig-name descname"><span class="pre">test_invalid_moment_value_error</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_output_control.TestOutputControl.test_invalid_moment_value_error" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_output_control.TestOutputControl.test_moments_type_error">
+<span class="sig-name descname"><span class="pre">test_moments_type_error</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_output_control.TestOutputControl.test_moments_type_error" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_output_control.TestOutputControl.test_update_fields_attribute">
+<span class="sig-name descname"><span class="pre">test_update_fields_attribute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_output_control.TestOutputControl.test_update_fields_attribute" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_output_control.TestOutputControl.test_update_output_file_attribute">
+<span class="sig-name descname"><span class="pre">test_update_output_file_attribute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_output_control.TestOutputControl.test_update_output_file_attribute" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_output_control.TestOutputControl.test_write_to_output_type_error">
+<span class="sig-name descname"><span class="pre">test_write_to_output_type_error</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_output_control.TestOutputControl.test_write_to_output_type_error" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_output_control.TestOutputControlProperties">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">uo.tests.unit.algorithm.test_output_control.</span></span><span class="sig-name descname"><span class="pre">TestOutputControlProperties</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_output_control.TestOutputControlProperties" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_output_control.TestOutputControlProperties.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_output_control.TestOutputControlProperties.setUp" title="Link to this definition"></a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_output_control.TestOutputControlProperties.setUpClass">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setUpClass</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_output_control.TestOutputControlProperties.setUpClass" title="Link to this definition"></a></dt>
+<dd><p>Hook method for setting up class fixture before running tests in the class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_output_control.TestOutputControlProperties.tearDown">
+<span class="sig-name descname"><span class="pre">tearDown</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_output_control.TestOutputControlProperties.tearDown" title="Link to this definition"></a></dt>
+<dd><p>Hook method for deconstructing the test fixture after testing it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_output_control.TestOutputControlProperties.tearDownClass">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tearDownClass</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_output_control.TestOutputControlProperties.tearDownClass" title="Link to this definition"></a></dt>
+<dd><p>Hook method for deconstructing the class fixture after running all tests in the class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_output_control.TestOutputControlProperties.test_is_output_file_should_be_same_that_it_is_set">
+<span class="sig-name descname"><span class="pre">test_is_output_file_should_be_same_that_it_is_set</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_output_control.TestOutputControlProperties.test_is_output_file_should_be_same_that_it_is_set" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_output_control.TestOutputControlProperties.test_output_file_should_be_as_it_is_in_constructor">
+<span class="sig-name descname"><span class="pre">test_output_file_should_be_as_it_is_in_constructor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_output_control.TestOutputControlProperties.test_output_file_should_be_as_it_is_in_constructor" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uo.tests.unit.algorithm.test_output_control.TestOutputControlProperties.test_write_to_output_should_be_as_it_is_in_constructor">
+<span class="sig-name descname"><span class="pre">test_write_to_output_should_be_as_it_is_in_constructor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#uo.tests.unit.algorithm.test_output_control.TestOutputControlProperties.test_write_to_output_should_be_as_it_is_in_constructor" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-uo.tests.unit.algorithm">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-uo.tests.unit.algorithm" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Vladimir Filipovic.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

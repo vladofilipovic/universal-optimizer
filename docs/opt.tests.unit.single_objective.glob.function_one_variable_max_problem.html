@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>opt.tests.unit.single_objective.glob.function_one_variable_max_problem package &mdash; Optimization Algorithms Library 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=01f34227"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Optimization Algorithms Library
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Tutorials and How-To Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how_to_guides.html">How-to Guides</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">In-depth Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="implemented_algorithms.html">Implemented algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="problems_to_be_solved.html">Problems to be solved</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Program code</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html#optimization">Optimization</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Changelog and Contribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribution.html">How to Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribution.html#contributors">Contributors</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Optimization Algorithms Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">opt.tests.unit.single_objective.glob.function_one_variable_max_problem package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/opt.tests.unit.single_objective.glob.function_one_variable_max_problem.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="opt-tests-unit-single-objective-glob-function-one-variable-max-problem-package">
+<h1>opt.tests.unit.single_objective.glob.function_one_variable_max_problem package<a class="headerlink" href="#opt-tests-unit-single-objective-glob-function-one-variable-max-problem-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem">
+<span id="opt-tests-unit-single-objective-glob-function-one-variable-max-problem-test-funcion-one-variable-problem-module"></span><h2>opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem module<a class="headerlink" href="#module-opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestExpression">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.</span></span><span class="sig-name descname"><span class="pre">TestExpression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestExpression" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestExpression.test_raises_value_error_when_domain_low_is_not_a_number">
+<span class="sig-name descname"><span class="pre">test_raises_value_error_when_domain_low_is_not_a_number</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestExpression.test_raises_value_error_when_domain_low_is_not_a_number" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestExpression.test_raises_value_error_when_expression_is_none">
+<span class="sig-name descname"><span class="pre">test_raises_value_error_when_expression_is_none</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestExpression.test_raises_value_error_when_expression_is_none" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestExpression.test_returns_expression_string">
+<span class="sig-name descname"><span class="pre">test_returns_expression_string</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestExpression.test_returns_expression_string" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestExpression.test_returns_non_empty_string">
+<span class="sig-name descname"><span class="pre">test_returns_non_empty_string</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestExpression.test_returns_non_empty_string" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestExpression.test_returns_string_with_valid_characters">
+<span class="sig-name descname"><span class="pre">test_returns_string_with_valid_characters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestExpression.test_returns_string_with_valid_characters" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestFunctionOneVariableMaxProblem">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.</span></span><span class="sig-name descname"><span class="pre">TestFunctionOneVariableMaxProblem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestFunctionOneVariableMaxProblem" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestFunctionOneVariableMaxProblem.test_expression_is_empty_string">
+<span class="sig-name descname"><span class="pre">test_expression_is_empty_string</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestFunctionOneVariableMaxProblem.test_expression_is_empty_string" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestFunctionOneVariableMaxProblem.test_expression_is_none">
+<span class="sig-name descname"><span class="pre">test_expression_is_none</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestFunctionOneVariableMaxProblem.test_expression_is_none" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestFunctionOneVariableMaxProblem.test_invalid_domain_high_parameter">
+<span class="sig-name descname"><span class="pre">test_invalid_domain_high_parameter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestFunctionOneVariableMaxProblem.test_invalid_domain_high_parameter" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestFunctionOneVariableMaxProblem.test_invalid_domain_low_parameter">
+<span class="sig-name descname"><span class="pre">test_invalid_domain_low_parameter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestFunctionOneVariableMaxProblem.test_invalid_domain_low_parameter" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestFunctionOneVariableMaxProblem.test_invalid_expression_parameter">
+<span class="sig-name descname"><span class="pre">test_invalid_expression_parameter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestFunctionOneVariableMaxProblem.test_invalid_expression_parameter" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestFunctionOneVariableMaxProblem.test_minimum_values">
+<span class="sig-name descname"><span class="pre">test_minimum_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestFunctionOneVariableMaxProblem.test_minimum_values" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestFunctionOneVariableMaxProblem.test_valid_expression_domain_low_domain_high">
+<span class="sig-name descname"><span class="pre">test_valid_expression_domain_low_domain_high</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestFunctionOneVariableMaxProblem.test_valid_expression_domain_low_domain_high" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestFunctionOneVariableMaxProblem.test_valid_expression_domain_low_equal_domain_high">
+<span class="sig-name descname"><span class="pre">test_valid_expression_domain_low_equal_domain_high</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestFunctionOneVariableMaxProblem.test_valid_expression_domain_low_equal_domain_high" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestFunctionOneVariableMaxProblem.test_valid_instance_creation">
+<span class="sig-name descname"><span class="pre">test_valid_instance_creation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestFunctionOneVariableMaxProblem.test_valid_instance_creation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestStringRep">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.</span></span><span class="sig-name descname"><span class="pre">TestStringRep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestStringRep" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestStringRep.test_properly_indents_and_groups_string_representation">
+<span class="sig-name descname"><span class="pre">test_properly_indents_and_groups_string_representation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestStringRep.test_properly_indents_and_groups_string_representation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestStringRep.test_repr_representation">
+<span class="sig-name descname"><span class="pre">test_repr_representation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestStringRep.test_repr_representation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestStringRep.test_returns_empty_string_if_delimiter_is_none">
+<span class="sig-name descname"><span class="pre">test_returns_empty_string_if_delimiter_is_none</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestStringRep.test_returns_empty_string_if_delimiter_is_none" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestStringRep.test_returns_empty_string_if_indentation_is_negative">
+<span class="sig-name descname"><span class="pre">test_returns_empty_string_if_indentation_is_negative</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestStringRep.test_returns_empty_string_if_indentation_is_negative" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestStringRep.test_returns_empty_string_if_indentation_symbol_is_none">
+<span class="sig-name descname"><span class="pre">test_returns_empty_string_if_indentation_symbol_is_none</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestStringRep.test_returns_empty_string_if_indentation_symbol_is_none" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestStringRep.test_returns_string_representation_with_specified_parameters">
+<span class="sig-name descname"><span class="pre">test_returns_string_representation_with_specified_parameters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestStringRep.test_returns_string_representation_with_specified_parameters" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestStringRep.test_str_representation">
+<span class="sig-name descname"><span class="pre">test_str_representation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.TestStringRep.test_str_representation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.Test__Copy__">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.</span></span><span class="sig-name descname"><span class="pre">Test__Copy__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.Test__Copy__" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.Test__Copy__.test_deep_copy">
+<span class="sig-name descname"><span class="pre">test_deep_copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.Test__Copy__.test_deep_copy" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.Test__Copy__.test_return_new_instance">
+<span class="sig-name descname"><span class="pre">test_return_new_instance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.Test__Copy__.test_return_new_instance" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.Test__Copy__.test_same_attribute_values">
+<span class="sig-name descname"><span class="pre">test_same_attribute_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.Test__Copy__.test_same_attribute_values" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.Test__Copy__.test_subclass_instance">
+<span class="sig-name descname"><span class="pre">test_subclass_instance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.Test__Copy__.test_subclass_instance" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.Test__FromInputFile__">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.</span></span><span class="sig-name descname"><span class="pre">Test__FromInputFile__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.Test__FromInputFile__" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.Test__FromInputFile__.test_empty_input_file">
+<span class="sig-name descname"><span class="pre">test_empty_input_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.Test__FromInputFile__.test_empty_input_file" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.Test__FromInputFile__.test_handle_comments_in_input_file">
+<span class="sig-name descname"><span class="pre">test_handle_comments_in_input_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.Test__FromInputFile__.test_handle_comments_in_input_file" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.Test__FromInputFile__.test_invalid_input_file_path">
+<span class="sig-name descname"><span class="pre">test_invalid_input_file_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.Test__FromInputFile__.test_invalid_input_file_path" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.Test__FromInputFile__.test_invalid_input_format">
+<span class="sig-name descname"><span class="pre">test_invalid_input_format</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.Test__FromInputFile__.test_invalid_input_format" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.Test__LoadFromFile__">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.</span></span><span class="sig-name descname"><span class="pre">Test__LoadFromFile__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.Test__LoadFromFile__" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.Test__LoadFromFile__.test_empty_file">
+<span class="sig-name descname"><span class="pre">test_empty_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.Test__LoadFromFile__.test_empty_file" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.Test__LoadFromFile__.test_invalid_data_format">
+<span class="sig-name descname"><span class="pre">test_invalid_data_format</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.Test__LoadFromFile__.test_invalid_data_format" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.Test__LoadFromFile__.test_invalid_file_path">
+<span class="sig-name descname"><span class="pre">test_invalid_file_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.Test__LoadFromFile__.test_invalid_file_path" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.Test__LoadFromFile__.test_load_from_valid_txt_file">
+<span class="sig-name descname"><span class="pre">test_load_from_valid_txt_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.Test__LoadFromFile__.test_load_from_valid_txt_file" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.Test__LoadFromFile__.test_skip_comments">
+<span class="sig-name descname"><span class="pre">test_skip_comments</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.Test__LoadFromFile__.test_skip_comments" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.Test__LoadFromFile__.test_valid_txt_file">
+<span class="sig-name descname"><span class="pre">test_valid_txt_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_funcion_one_variable_problem.Test__LoadFromFile__.test_valid_txt_file" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution">
+<span id="opt-tests-unit-single-objective-glob-function-one-variable-max-problem-test-function-one-variable-problem-binary-int-solution-module"></span><h2>opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution module<a class="headerlink" href="#module-opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestCalculateQualityDirectly">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.</span></span><span class="sig-name descname"><span class="pre">TestCalculateQualityDirectly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestCalculateQualityDirectly" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestCalculateQualityDirectly.test_maximum_valid_representation_and_problem">
+<span class="sig-name descname"><span class="pre">test_maximum_valid_representation_and_problem</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestCalculateQualityDirectly.test_maximum_valid_representation_and_problem" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestCalculateQualityDirectly.test_minimum_valid_representation_and_problem">
+<span class="sig-name descname"><span class="pre">test_minimum_valid_representation_and_problem</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestCalculateQualityDirectly.test_minimum_valid_representation_and_problem" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestCalculateQualityDirectly.test_valid_representation_and_problem">
+<span class="sig-name descname"><span class="pre">test_valid_representation_and_problem</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestCalculateQualityDirectly.test_valid_representation_and_problem" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestCalculateQualityDirectly.test_valid_representation_and_problem_is_feasible">
+<span class="sig-name descname"><span class="pre">test_valid_representation_and_problem_is_feasible</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestCalculateQualityDirectly.test_valid_representation_and_problem_is_feasible" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestCalculateQualityDirectly.test_valid_representation_and_problem_objective_value">
+<span class="sig-name descname"><span class="pre">test_valid_representation_and_problem_objective_value</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestCalculateQualityDirectly.test_valid_representation_and_problem_objective_value" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestFunctionOneVariableMaxProblemIntSolution">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.</span></span><span class="sig-name descname"><span class="pre">TestFunctionOneVariableMaxProblemIntSolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestFunctionOneVariableMaxProblemIntSolution" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestFunctionOneVariableMaxProblemIntSolution.test_argument_method">
+<span class="sig-name descname"><span class="pre">test_argument_method</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestFunctionOneVariableMaxProblemIntSolution.test_argument_method" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestFunctionOneVariableMaxProblemIntSolution.test_copy_method">
+<span class="sig-name descname"><span class="pre">test_copy_method</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestFunctionOneVariableMaxProblemIntSolution.test_copy_method" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestFunctionOneVariableMaxProblemIntSolution.test_domain_from_equal_to_domain_to">
+<span class="sig-name descname"><span class="pre">test_domain_from_equal_to_domain_to</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestFunctionOneVariableMaxProblemIntSolution.test_domain_from_equal_to_domain_to" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestFunctionOneVariableMaxProblemIntSolution.test_domain_from_getter">
+<span class="sig-name descname"><span class="pre">test_domain_from_getter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestFunctionOneVariableMaxProblemIntSolution.test_domain_from_getter" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestFunctionOneVariableMaxProblemIntSolution.test_domain_to_getter">
+<span class="sig-name descname"><span class="pre">test_domain_to_getter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestFunctionOneVariableMaxProblemIntSolution.test_domain_to_getter" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestFunctionOneVariableMaxProblemIntSolution.test_native_representation_non_binary_characters">
+<span class="sig-name descname"><span class="pre">test_native_representation_non_binary_characters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestFunctionOneVariableMaxProblemIntSolution.test_native_representation_non_binary_characters" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestFunctionOneVariableMaxProblemIntSolution.test_number_of_intervals_equal_to_zero">
+<span class="sig-name descname"><span class="pre">test_number_of_intervals_equal_to_zero</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestFunctionOneVariableMaxProblemIntSolution.test_number_of_intervals_equal_to_zero" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestFunctionOneVariableMaxProblemIntSolution.test_number_of_intervals_getter">
+<span class="sig-name descname"><span class="pre">test_number_of_intervals_getter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestFunctionOneVariableMaxProblemIntSolution.test_number_of_intervals_getter" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestFunctionOneVariableMaxProblemIntSolution.test_obtain_feasible_representation_greater_than_number_of_intervals">
+<span class="sig-name descname"><span class="pre">test_obtain_feasible_representation_greater_than_number_of_intervals</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestFunctionOneVariableMaxProblemIntSolution.test_obtain_feasible_representation_greater_than_number_of_intervals" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestFunctionOneVariableMaxProblemIntSolution.test_obtain_feasible_representation_less_than_zero">
+<span class="sig-name descname"><span class="pre">test_obtain_feasible_representation_less_than_zero</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestFunctionOneVariableMaxProblemIntSolution.test_obtain_feasible_representation_less_than_zero" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestFunctionOneVariableMaxProblemIntSolution.test_valid_arguments_initialization">
+<span class="sig-name descname"><span class="pre">test_valid_arguments_initialization</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestFunctionOneVariableMaxProblemIntSolution.test_valid_arguments_initialization" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestInitRandom">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.</span></span><span class="sig-name descname"><span class="pre">TestInitRandom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestInitRandom" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestInitRandom.test_overwrite_representation_with_random_integer">
+<span class="sig-name descname"><span class="pre">test_overwrite_representation_with_random_integer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestInitRandom.test_overwrite_representation_with_random_integer" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestInitRandom.test_set_representation_to_random_integer">
+<span class="sig-name descname"><span class="pre">test_set_representation_to_random_integer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestInitRandom.test_set_representation_to_random_integer" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestNativeRepresentation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.</span></span><span class="sig-name descname"><span class="pre">TestNativeRepresentation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestNativeRepresentation" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestNativeRepresentation.test_all_ones">
+<span class="sig-name descname"><span class="pre">test_all_ones</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestNativeRepresentation.test_all_ones" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestNativeRepresentation.test_all_zeros">
+<span class="sig-name descname"><span class="pre">test_all_zeros</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestNativeRepresentation.test_all_zeros" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestNativeRepresentation.test_correct_conversion">
+<span class="sig-name descname"><span class="pre">test_correct_conversion</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestNativeRepresentation.test_correct_conversion" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestNativeRepresentation.test_empty_string">
+<span class="sig-name descname"><span class="pre">test_empty_string</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestNativeRepresentation.test_empty_string" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestNativeRepresentation.test_non_binary_characters">
+<span class="sig-name descname"><span class="pre">test_non_binary_characters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestNativeRepresentation.test_non_binary_characters" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestRepresentationDistanceDirectly">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.</span></span><span class="sig-name descname"><span class="pre">TestRepresentationDistanceDirectly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestRepresentationDistanceDirectly" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestRepresentationDistanceDirectly.test_distance_binary_and_non_binary_representations">
+<span class="sig-name descname"><span class="pre">test_distance_binary_and_non_binary_representations</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestRepresentationDistanceDirectly.test_distance_binary_and_non_binary_representations" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestRepresentationDistanceDirectly.test_distance_different_lengths">
+<span class="sig-name descname"><span class="pre">test_distance_different_lengths</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestRepresentationDistanceDirectly.test_distance_different_lengths" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestRepresentationDistanceDirectly.test_distance_different_lengths_and_values">
+<span class="sig-name descname"><span class="pre">test_distance_different_lengths_and_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestRepresentationDistanceDirectly.test_distance_different_lengths_and_values" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestRepresentationDistanceDirectly.test_distance_different_representations">
+<span class="sig-name descname"><span class="pre">test_distance_different_representations</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestRepresentationDistanceDirectly.test_distance_different_representations" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestRepresentationDistanceDirectly.test_distance_identical_representations">
+<span class="sig-name descname"><span class="pre">test_distance_identical_representations</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestRepresentationDistanceDirectly.test_distance_identical_representations" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestStringRep">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.</span></span><span class="sig-name descname"><span class="pre">TestStringRep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestStringRep" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestStringRep.test_empty_parameters">
+<span class="sig-name descname"><span class="pre">test_empty_parameters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestStringRep.test_empty_parameters" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestStringRep.test_includes_string_representation">
+<span class="sig-name descname"><span class="pre">test_includes_string_representation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestStringRep.test_includes_string_representation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestStringRep.test_no_string_representation">
+<span class="sig-name descname"><span class="pre">test_no_string_representation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestStringRep.test_no_string_representation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestStringRep.test_properly_indented_and_formatted">
+<span class="sig-name descname"><span class="pre">test_properly_indented_and_formatted</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestStringRep.test_properly_indented_and_formatted" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestStringRep.test_returns_string_representation">
+<span class="sig-name descname"><span class="pre">test_returns_string_representation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.TestStringRep.test_returns_string_representation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.Test__Init__">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.</span></span><span class="sig-name descname"><span class="pre">Test__Init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.Test__Init__" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.Test__Init__.test_float_domain">
+<span class="sig-name descname"><span class="pre">test_float_domain</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.Test__Init__.test_float_domain" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.Test__Init__.test_integer_domain">
+<span class="sig-name descname"><span class="pre">test_integer_domain</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.Test__Init__.test_integer_domain" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.Test__Init__.test_maximum_values">
+<span class="sig-name descname"><span class="pre">test_maximum_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.Test__Init__.test_maximum_values" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.Test__Init__.test_minimum_values">
+<span class="sig-name descname"><span class="pre">test_minimum_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.Test__Init__.test_minimum_values" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.Test__Init__.test_non_integer_number_of_intervals">
+<span class="sig-name descname"><span class="pre">test_non_integer_number_of_intervals</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.Test__Init__.test_non_integer_number_of_intervals" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.Test__Init__.test_valid_input_parameters">
+<span class="sig-name descname"><span class="pre">test_valid_input_parameters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.Test__Init__.test_valid_input_parameters" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.Test__ObtainFeasibleHelper__">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.</span></span><span class="sig-name descname"><span class="pre">Test__ObtainFeasibleHelper__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.Test__ObtainFeasibleHelper__" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.Test__ObtainFeasibleHelper__.test_representation_equal_to_number_of_intervals">
+<span class="sig-name descname"><span class="pre">test_representation_equal_to_number_of_intervals</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.Test__ObtainFeasibleHelper__.test_representation_equal_to_number_of_intervals" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.Test__ObtainFeasibleHelper__.test_representation_negative">
+<span class="sig-name descname"><span class="pre">test_representation_negative</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.Test__ObtainFeasibleHelper__.test_representation_negative" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.Test__ObtainFeasibleHelper__.test_representation_within_range">
+<span class="sig-name descname"><span class="pre">test_representation_within_range</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution.Test__ObtainFeasibleHelper__.test_representation_within_range" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support">
+<span id="opt-tests-unit-single-objective-glob-function-one-variable-max-problem-test-function-one-variable-problem-binary-int-solution-vns-support-module"></span><h2>opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support module<a class="headerlink" href="#module-opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.TestFunctionOneVariableMaxProblemIntSolutionVnsSupport">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.</span></span><span class="sig-name descname"><span class="pre">TestFunctionOneVariableMaxProblemIntSolutionVnsSupport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.TestFunctionOneVariableMaxProblemIntSolutionVnsSupport" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.TestFunctionOneVariableMaxProblemIntSolutionVnsSupport.test_local_search_best_improvement_returns_new_solution_with_better_fitness_value">
+<span class="sig-name descname"><span class="pre">test_local_search_best_improvement_returns_new_solution_with_better_fitness_value</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.TestFunctionOneVariableMaxProblemIntSolutionVnsSupport.test_local_search_best_improvement_returns_new_solution_with_better_fitness_value" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.TestFunctionOneVariableMaxProblemIntSolutionVnsSupport.test_local_search_best_improvement_returns_same_solution_when_k_is_less_than_1_or_greater_than_representation_length">
+<span class="sig-name descname"><span class="pre">test_local_search_best_improvement_returns_same_solution_when_k_is_less_than_1_or_greater_than_representation_length</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.TestFunctionOneVariableMaxProblemIntSolutionVnsSupport.test_local_search_best_improvement_returns_same_solution_when_k_is_less_than_1_or_greater_than_representation_length" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.TestFunctionOneVariableMaxProblemIntSolutionVnsSupport.test_local_search_first_improvement_returns_new_solution_with_better_fitness_value">
+<span class="sig-name descname"><span class="pre">test_local_search_first_improvement_returns_new_solution_with_better_fitness_value</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.TestFunctionOneVariableMaxProblemIntSolutionVnsSupport.test_local_search_first_improvement_returns_new_solution_with_better_fitness_value" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.TestFunctionOneVariableMaxProblemIntSolutionVnsSupport.test_local_search_first_improvement_returns_same_solution_when_k_is_less_than_1_or_greater_than_representation_length">
+<span class="sig-name descname"><span class="pre">test_local_search_first_improvement_returns_same_solution_when_k_is_less_than_1_or_greater_than_representation_length</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.TestFunctionOneVariableMaxProblemIntSolutionVnsSupport.test_local_search_first_improvement_returns_same_solution_when_k_is_less_than_1_or_greater_than_representation_length" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.TestFunctionOneVariableMaxProblemIntSolutionVnsSupport.test_shaking_returns_false_when_k_is_less_than_or_equal_to_0">
+<span class="sig-name descname"><span class="pre">test_shaking_returns_false_when_k_is_less_than_or_equal_to_0</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.TestFunctionOneVariableMaxProblemIntSolutionVnsSupport.test_shaking_returns_false_when_k_is_less_than_or_equal_to_0" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.TestFunctionOneVariableMaxProblemIntSolutionVnsSupport.test_shaking_returns_true_when_k_is_greater_than_0_and_solution_is_valid">
+<span class="sig-name descname"><span class="pre">test_shaking_returns_true_when_k_is_greater_than_0_and_solution_is_valid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.TestFunctionOneVariableMaxProblemIntSolutionVnsSupport.test_shaking_returns_true_when_k_is_greater_than_0_and_solution_is_valid" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.TestFunctionOneVariableMaxProblemIntSolutionVnsSupport.test_string_rep_class_name">
+<span class="sig-name descname"><span class="pre">test_string_rep_class_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.TestFunctionOneVariableMaxProblemIntSolutionVnsSupport.test_string_rep_class_name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.TestFunctionOneVariableMaxProblemIntSolutionVnsSupport.test_string_rep_delimiter">
+<span class="sig-name descname"><span class="pre">test_string_rep_delimiter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.TestFunctionOneVariableMaxProblemIntSolutionVnsSupport.test_string_rep_delimiter" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.TestFunctionOneVariableMaxProblemIntSolutionVnsSupport.test_string_rep_empty_arguments">
+<span class="sig-name descname"><span class="pre">test_string_rep_empty_arguments</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.TestFunctionOneVariableMaxProblemIntSolutionVnsSupport.test_string_rep_empty_arguments" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.TestFunctionOneVariableMaxProblemIntSolutionVnsSupport.test_string_rep_indentation">
+<span class="sig-name descname"><span class="pre">test_string_rep_indentation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.TestFunctionOneVariableMaxProblemIntSolutionVnsSupport.test_string_rep_indentation" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.TestFunctionOneVariableMaxProblemIntSolutionVnsSupport.test_string_rep_indentation_symbol">
+<span class="sig-name descname"><span class="pre">test_string_rep_indentation_symbol</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.TestFunctionOneVariableMaxProblemIntSolutionVnsSupport.test_string_rep_indentation_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.Test__Copy__">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.</span></span><span class="sig-name descname"><span class="pre">Test__Copy__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.Test__Copy__" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.Test__Copy__.test_copy_all_attributes">
+<span class="sig-name descname"><span class="pre">test_copy_all_attributes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.Test__Copy__.test_copy_all_attributes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.Test__Copy__.test_not_modify_original_object">
+<span class="sig-name descname"><span class="pre">test_not_modify_original_object</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.Test__Copy__.test_not_modify_original_object" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.Test__Copy__.test_return_deep_copy">
+<span class="sig-name descname"><span class="pre">test_return_deep_copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.Test__Copy__.test_return_deep_copy" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.Test__Copy__.test_return_new_object_empty">
+<span class="sig-name descname"><span class="pre">test_return_new_object_empty</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.Test__Copy__.test_return_new_object_empty" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.Test__Copy__.test_return_new_object_no_immutable_attributes">
+<span class="sig-name descname"><span class="pre">test_return_new_object_no_immutable_attributes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.Test__Copy__.test_return_new_object_no_immutable_attributes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.Test__Copy__.test_return_new_object_no_mutable_attributes">
+<span class="sig-name descname"><span class="pre">test_return_new_object_no_mutable_attributes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.tests.unit.single_objective.glob.function_one_variable_max_problem.test_function_one_variable_problem_binary_int_solution_vns_support.Test__Copy__.test_return_new_object_no_mutable_attributes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-opt.tests.unit.single_objective.glob.function_one_variable_max_problem">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-opt.tests.unit.single_objective.glob.function_one_variable_max_problem" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Vladimir Filipovic.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
