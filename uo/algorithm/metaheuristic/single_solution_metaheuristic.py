@@ -39,13 +39,13 @@ class SingleSolutionMetaheuristic(Metaheuristic, metaclass=ABCMeta):
 
     @abstractmethod
     def __init__(self, 
-            name:str, 
             finish_control:FinishControl,
-            random_seed:Optional[int], 
-            additional_statistics_control:AdditionalStatisticsControl,
-            output_control:Optional[OutputControl], 
             problem:Problem,
-            solution_template:Solution
+            solution_template:Optional[Solution],
+            name:str, 
+            output_control:Optional[OutputControl], 
+            random_seed:Optional[int], 
+            additional_statistics_control:Optional[AdditionalStatisticsControl]
     )->None:
         """
         Create new SingleSolutionMetaheuristic instance
@@ -53,33 +53,20 @@ class SingleSolutionMetaheuristic(Metaheuristic, metaclass=ABCMeta):
         :param str name: name of the metaheuristic
         :param `FinishControl` finish_control: structure that control finish criteria for metaheuristic execution
         :param int random_seed: random seed for metaheuristic execution
-        :param `AdditionalStatisticsControl` additional_statistics_control: structure that controls additional 
+        :param `Optional[AdditionalStatisticsControl]` additional_statistics_control: structure that controls additional 
         statistics obtained during population-based metaheuristic execution        
-        :param `OutputControl` output_control: structure that controls output
+        :param `Optional[OutputControl]` output_control: structure that controls output
         :param `Problem` problem: problem to be solved
         :param `Optional[Solution]` solution_template: initial solution of the problem
         """
-        if not isinstance(name, str):
-                raise TypeError('Parameter \'name\' must be \'str\'.')
-        if not isinstance(finish_control, FinishControl):
-                raise TypeError('Parameter \'finish_control\' must be \'FinishControl\'.')
-        if not isinstance(random_seed, int) and random_seed is not None:
-                raise TypeError('Parameter \'random_seed\' must be \'int\' or \'None\'.')
-        if not isinstance(additional_statistics_control, AdditionalStatisticsControl):
-                raise TypeError('Parameter \'additional_statistics_control\' must be \'AdditionalStatisticsControl\'.')
-        if not isinstance(output_control, OutputControl) and output_control is not None:
-                raise TypeError('Parameter \'output_control\' must be \'OutputControl\' or have value None.')
-        if not isinstance(problem, Problem):
-                raise TypeError('Parameter \'problem\' must be \'Problem\'.')
-        if not isinstance(solution_template, Solution) and solution_template is not None:
-                raise TypeError('Parameter \'solution_template\' must be \'Solution\' or None.')        
-        super().__init__(name=name, 
+        super().__init__(
                 finish_control=finish_control,
-                random_seed=random_seed,
-                additional_statistics_control=additional_statistics_control,
-                output_control=output_control, 
                 problem=problem,
-                solution_template=solution_template)
+                solution_template=solution_template,
+                name=name, 
+                output_control=output_control,
+                random_seed=random_seed,
+                additional_statistics_control=additional_statistics_control)
         self.__current_solution:Optional[Solution] =  None
 
     @abstractmethod

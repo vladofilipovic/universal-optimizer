@@ -21,7 +21,8 @@ class TestTeOperationsSupportRepresentationBitArray(unittest.TestCase):
         problem = OnesCountMaxProblem(dim=len(result))
         solution = OnesCountMaxProblemBitArraySolution()
         solution.init_from(BitArray(bin=result), problem)
-        optimizer = AlgorithmVoid("test", problem=problem)
+        optimizer = AlgorithmVoid(name="test", 
+                            problem=problem)
         te_support = TeOperationsSupportRepresentationBitArray()
     
         te_support.reset(problem, solution, optimizer)
@@ -36,7 +37,8 @@ class TestTeOperationsSupportRepresentationBitArray(unittest.TestCase):
         problem = OnesCountMaxProblem(dim=len(result))
         solution = OnesCountMaxProblemBitArraySolution()
         solution.init_from(BitArray(bin=result), problem)
-        optimizer = AlgorithmVoid("test", problem=problem)
+        optimizer = AlgorithmVoid(name="test", 
+                            problem=problem)
         te_support = TeOperationsSupportRepresentationBitArray()
     
         te_support.reset(problem, solution, optimizer)

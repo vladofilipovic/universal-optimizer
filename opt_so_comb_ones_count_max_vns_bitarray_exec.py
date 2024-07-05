@@ -4,7 +4,6 @@ from random import choice
 
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
-from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_bit_array import \
         VnsShakingSupportRepresentationBitArray
@@ -23,7 +22,6 @@ def main():
         problem_to_solve:OnesCountMaxProblem = OnesCountMaxProblem.from_dimension(dimension=problem_dimension)
         solution:OnesCountMaxProblemBitArraySolution = OnesCountMaxProblemBitArraySolution()
         finish:FinishControl = FinishControl(criteria='evaluations', evaluations_max=5000)
-        additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(is_active=False, keep='')
         vns_shaking_support:VnsShakingSupportRepresentationBitArray[str] = \
                 VnsShakingSupportRepresentationBitArray[str](k_max=problem_dimension)
         vns_ls_support:VnsLocalSearchSupportRepresentationBitArray[str] = \
@@ -34,7 +32,6 @@ def main():
         vns_construction_params.finish_control = finish
         vns_construction_params.vns_shaking_support = vns_shaking_support
         vns_construction_params.vns_ls_support = vns_ls_support
-        vns_construction_params.additional_statistics_control = additional_statistics_control
         vns_construction_params.random_seed = 43434343
         vns_construction_params.k_min = 1
         vns_construction_params.k_max = 3

@@ -4,9 +4,7 @@ import unittest.mock as mocker
 
 from random import seed
 
-from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
-from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_int import \
         VnsShakingSupportRepresentationInt
@@ -41,20 +39,17 @@ class TestMaxFunctionOneVariableMaxProblemIntSolutionLsfi(unittest.TestCase):
         self.solution.evaluate(self.problem_to_solve)           
         self.finish_control:FinishControl = FinishControl(criteria='evaluations & seconds', evaluations_max=10000, 
                 seconds_max=100)
-        self.additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(keep='')
         self.vns_shaking_support:VnsShakingSupportRepresentationInt = \
                 VnsShakingSupportRepresentationInt(self.solution.number_of_intervals)
         self.vns_ls_support:VnsLocalSearchSupportRepresentationInt = \
                 VnsLocalSearchSupportRepresentationInt(self.solution.number_of_intervals)
         self.vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
-        self.vns_construction_params.output_control = None
         self.vns_construction_params.problem = self.problem_to_solve
         self.vns_construction_params.solution_template = self.solution
         self.vns_construction_params.vns_shaking_support = self.vns_shaking_support
         self.vns_construction_params.vns_ls_support = self.vns_ls_support
         self.vns_construction_params.finish_control =self.finish_control
         self.vns_construction_params.random_seed = 43434343
-        self.vns_construction_params.additional_statistics_control = self.additional_statistics_control
         self.vns_construction_params.k_min = 1
         self.vns_construction_params.k_max = 3
         self.vns_construction_params.local_search_type = 'localSearchBestImprovement'

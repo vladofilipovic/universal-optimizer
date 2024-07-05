@@ -138,9 +138,10 @@ class TestTeOptimizerMethodInit(unittest.TestCase):
         self.te_support = mocker.MagicMock(spec=TeOperationsSupport)
         self.te_support.reset = mocker.Mock(return_value='reset')
         self.te_optimizer = TeOptimizer(output_control=self.output_control_stub,
-                problem=self.problem_mock,
-                solution_template= self.solution_mock,
-                te_operations_support=self.te_support )
+                                problem=self.problem_mock,
+                                solution_template= self.solution_mock,
+                                te_operations_support=self.te_support 
+                            )
         self.te_optimizer.write_output_headers_if_needed = mocker.Mock(return_value='write_output_headers_if_needed')
         self.te_optimizer.write_output_values_if_needed = mocker.Mock(return_value='write_output_values_if_needed')
     
@@ -191,7 +192,10 @@ class TestOptimize(unittest.TestCase):
         te_support_mock = mocker.MagicMock(spec=TeOperationsSupport)
         te_support_mock.reset = mocker.Mock(return_value='reset')
         te_support_mock.can_progress = mocker.Mock(return_value=False)
-        te_optimizer = TeOptimizer(problem_mock, solution_mock, te_support_mock)
+        te_optimizer = TeOptimizer(problem=problem_mock,
+                                solution_template= solution_mock,
+                                te_operations_support=te_support_mock 
+                            )
         # Act
         bs = te_optimizer.optimize()
         # Assert
@@ -221,7 +225,10 @@ class TestOptimize(unittest.TestCase):
         te_support_mock = mocker.MagicMock(spec=TeOperationsSupport)
         te_support_mock.reset = mocker.Mock(return_value='reset')
         te_support_mock.can_progress = mocker.Mock(return_value=False)
-        te_optimizer = TeOptimizer(problem_mock, solution_mock, te_support_mock)       
+        te_optimizer = TeOptimizer(problem=problem_mock,
+                                solution_template= solution_mock,
+                                te_operations_support=te_support_mock 
+                            )      
         te_optimizer.write_output_values_if_needed = mocker.Mock(return_value='write_output_values_if_needed')
         logger.debug = mocker.MagicMock(spec=logger.debug)
         # Act
@@ -253,7 +260,10 @@ class TestOptimize(unittest.TestCase):
         te_support_mock = mocker.MagicMock(spec=TeOperationsSupport)
         te_support_mock.reset = mocker.Mock(return_value='reset')
         te_support_mock.can_progress = mocker.Mock(return_value=False)
-        te_optimizer = TeOptimizer(problem_mock, solution_mock, te_support_mock)       
+        te_optimizer = TeOptimizer(problem=problem_mock,
+                                solution_template= solution_mock,
+                                te_operations_support=te_support_mock 
+                            )       
         te_optimizer.write_output_headers_if_needed = mocker.Mock(return_value='write_output_headers_if_needed')
         # Act
         bs = te_optimizer.optimize()
@@ -284,12 +294,15 @@ class TestOptimize(unittest.TestCase):
         te_support_mock.can_progress = mocker.Mock(return_value=False)
         # Act & Assert
         with self.assertRaises(TypeError):
-            TeOptimizer(output_control, problem_mock, solution_mock, te_support_mock)
+            TeOptimizer(problem=problem_mock,
+                        solution_template= solution_mock,
+                        te_operations_support=te_support_mock,
+                        output_control=output_control
+                    )
 
     # problem parameter is not an instance of Problem
     def test_problem_parameter_not_instance_of_Problem(self):
         # Arrange
-        output_control = OutputControl()
         problem = 'not an instance of Problem'
         solution_mock = mocker.MagicMock(spec=Solution)
         type(solution_mock).name = "void solution", 
@@ -305,12 +318,14 @@ class TestOptimize(unittest.TestCase):
         te_support_mock.can_progress = mocker.Mock(return_value=False)
         # Act & Assert
         with self.assertRaises(TypeError):
-            TeOptimizer(output_control, problem, solution_mock, te_support_mock)
+            TeOptimizer(problem=problem,
+                                solution_template= solution_mock,
+                                te_operations_support=te_support_mock 
+                            )
 
     # solution_template parameter is not an instance of Solution
     def test_solution_template_parameter_not_instance_of_Solution(self):
         # Arrange
-        output_control = OutputControl()
         problem_mock = mocker.MagicMock(spec=Problem)
         type(problem_mock).name = mocker.PropertyMock(return_value='some_problem')
         type(problem_mock).is_minimization = mocker.PropertyMock(return_value=True)
@@ -323,7 +338,10 @@ class TestOptimize(unittest.TestCase):
         te_support_mock.can_progress = mocker.Mock(return_value=False)
         # Act & Assert
         with self.assertRaises(TypeError):
-            TeOptimizer(output_control, problem_mock, solution_template, te_support_mock)
+            TeOptimizer(problem=problem_mock,
+                                solution_template= solution_template,
+                                te_operations_support=te_support_mock 
+                            )
 
     # problem_solution_te_support parameter is not an instance of TeOperationsSupport
     def test_problem_solution_te_support_parameter_not_instance_of_TeOperationsSupport(self):
@@ -346,8 +364,10 @@ class TestOptimize(unittest.TestCase):
         problem_solution_te_support = "not an instance of TeOperationsSupport"
         # Act & Assert
         with self.assertRaises(TypeError):
-            TeOptimizer(problem=problem_mock, solution_template=solution_mock, 
-                        te_operations_support=problem_solution_te_support)
+            TeOptimizer(problem=problem_mock, 
+                        solution_template=solution_mock, 
+                        te_operations_support=problem_solution_te_support
+                    )
 
 
 class TestStringRep(unittest.TestCase):
@@ -360,7 +380,8 @@ class TestStringRep(unittest.TestCase):
         te_support_mock = mocker.MagicMock(spec=TeOperationsSupport)
         te_optimizer = TeOptimizer(problem=problem, 
                             solution_template=solution_template, 
-                            te_operations_support=te_support_mock)
+                            te_operations_support=te_support_mock
+                        )
         # Act
         result = te_optimizer.string_rep('|')
         # Assert
@@ -372,7 +393,10 @@ class TestStringRep(unittest.TestCase):
         problem = ProblemVoidMinSO("problem name", True)
         solution_template = SolutionVoidRepresentationInt(42, 42.0, 42.0, True)
         te_support_mock = mocker.MagicMock(spec=TeOperationsSupport)
-        te_optimizer = TeOptimizer(problem, solution_template, te_support_mock)
+        te_optimizer = TeOptimizer(problem=problem, 
+                            solution_template=solution_template, 
+                            te_operations_support=te_support_mock
+                        )
         delimiter = ','
         indentation = 2
         indentation_symbol = '-'
@@ -390,7 +414,10 @@ class TestStringRep(unittest.TestCase):
         problem = ProblemVoidMinSO("problem name", True)
         solution_template = SolutionVoidRepresentationInt(42, 42.0, 42.0, True)
         te_support_mock = mocker.MagicMock(spec=TeOperationsSupport)
-        te_optimizer = TeOptimizer(problem, solution_template, te_support_mock)
+        te_optimizer = TeOptimizer(problem=problem, 
+                            solution_template=solution_template, 
+                            te_operations_support=te_support_mock
+                        )
         expected_result = '|solution_template=|'
         # Act
         result = te_optimizer.string_rep('|')
@@ -403,7 +430,10 @@ class TestStringRep(unittest.TestCase):
         problem = ProblemVoidMinSO("problem name", True)
         solution_template = SolutionVoidRepresentationInt(42, 42.0, 42.0, True)
         te_support_mock = mocker.MagicMock(spec=TeOperationsSupport)
-        te_optimizer = TeOptimizer(problem, solution_template, te_support_mock)
+        te_optimizer = TeOptimizer(problem=problem, 
+                            solution_template=solution_template, 
+                            te_operations_support=te_support_mock
+                        )
         delimiter = ','
         # Act
         result = te_optimizer.string_rep(delimiter)

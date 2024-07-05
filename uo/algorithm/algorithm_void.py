@@ -18,10 +18,12 @@ from uo.algorithm.optimizer import Optimizer
 from uo.algorithm.algorithm import Algorithm
 
 class AlgorithmVoid(Algorithm):
-    def __init__(self, name:str="algorithm_void", 
-            output_control:OutputControl=None,
+    def __init__(self, 
             problem:Problem=ProblemVoidMinSO(), 
-            solution_template:Solution=SolutionVoidRepresentationInt())->None:
+            solution_template:Solution=SolutionVoidRepresentationInt(),            
+            name:str="algorithm_void", 
+            output_control:OutputControl=None
+            )->None:
         super().__init__(name=name, 
                     output_control=output_control, 
                     problem=problem, 

@@ -35,42 +35,39 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
 
     @abstractmethod
     def __init__(self, 
-            name:str, 
             finish_control:FinishControl,
-            random_seed:Optional[int], 
-            additional_statistics_control:AdditionalStatisticsControl,
-            output_control:Optional[OutputControl], 
             problem:Problem,
-            solution_template:Solution
+            solution_template:Optional[Solution],
+            name:str, 
+            output_control:Optional[OutputControl], 
+            random_seed:Optional[int], 
+            additional_statistics_control:Optional[AdditionalStatisticsControl],
     )->None:
         """
         Create new Metaheuristic instance
 
-        :param str name: name of the metaheuristic
         :param `FinishControl` finish_control: structure that control finish criteria for metaheuristic execution
-        :param int random_seed: random seed for metaheuristic execution
-        :param `AdditionalStatisticsControl` additional_statistics_control: structure that controls additional 
-        statistic to be kept during metaheuristic evaluation        
-        :param `Optional[OutputControl]` output_control: structure that controls output
         :param `Problem` problem: problem to be solved
-        :param `Solution` solution_template: solution template for the problem to be solved
+        :param `Optional[Solution]` solution_template: solution template for the problem to be solved
+        :param str name: name of the metaheuristic
+        :param `Optional[OutputControl]` output_control: structure that controls output
+        :param Optional[int] random_seed: random seed for metaheuristic execution
+        :param `Optional[AdditionalStatisticsControl]` additional_statistics_control: structure that controls additional 
+        statistic to be kept during metaheuristic evaluation        
         """
-        if not isinstance(name, str):
-                raise TypeError('Parameter \'name\' must be \'str\'.')
         if not isinstance(finish_control, FinishControl):
                 raise TypeError('Parameter \'finish_control\' must be \'FinishControl\'.')
-        if not isinstance(random_seed, Optional[int]):
+        if not isinstance(random_seed, int) and random_seed is not None:
                 raise TypeError('Parameter \'random_seed\' must be \'int\' or \'None\'.')
-        if not isinstance(additional_statistics_control, AdditionalStatisticsControl):
-                raise TypeError('Parameter \'additional_statistics_control\' must be \'AdditionalStatisticsControl\'.')
-        if not isinstance(output_control, OutputControl) and output_control is not None:
-                raise TypeError('Parameter \'output_control\' must be \'OutputControl\' or have value None.')
-        if not isinstance(problem, Problem):
-                raise TypeError('Parameter \'problem\' must be \'Problem\'.')
-        super().__init__(name=name, 
-                output_control=output_control, 
+        if not isinstance(additional_statistics_control, AdditionalStatisticsControl) \
+                        and additional_statistics_control is not None:
+                raise TypeError('Parameter \'additional_statistics_control\' must be \'AdditionalStatisticsControl\' '
+                                + 'or have value None.')
+        super().__init__(
                 problem=problem,
-                solution_template=solution_template)
+                solution_template=solution_template,
+                name=name, 
+                output_control=output_control)
         self.__finish_control = finish_control.copy()
         if random_seed is not None and isinstance(random_seed, int) and random_seed != 0:
             self.__random_seed:int = random_seed
@@ -120,12 +117,12 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         return self.__random_seed
 
     @property
-    def additional_statistics_control(self)->AdditionalStatisticsControl:
+    def additional_statistics_control(self)->Optional[AdditionalStatisticsControl]:
         """
         Property getter for the structure that controls keeping of the statistic during metaheuristic execution
         
         :return: structure that controls that controls keeping of the statistic during metaheuristic execution 
-        :rtype: `AdditionalStatisticsControl`
+        :rtype: `Optional[AdditionalStatisticsControl]`
         """
         return self.__additional_statistics_control
 
@@ -152,10 +149,8 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         """
         Updates the additional statistics, if required.
         """
-        if not isinstance(self.additional_statistics_control, AdditionalStatisticsControl):
-            raise ValueError('Field \'additional_statistics_control\' must have type \'AdditionalStatisticsControl\'.')
         asc:AdditionalStatisticsControl = self.additional_statistics_control
-        if not asc.is_active:
+        if asc is None:
             return
         if asc.keep_all_solution_codes:
             asc.add_to_all_solution_codes(solution.string_representation())
@@ -261,7 +256,10 @@ class Metaheuristic(Algorithm, metaclass=ABCMeta):
         s += 'finish_control=' + str(self.finish_control) + delimiter
         for _ in range(0, indentation):
             s += indentation_symbol  
-        s += 'additional_statistics_control=' + str(self.additional_statistics_control) + delimiter
+        if self.additional_statistics_control is not None:
+            s += 'additional_statistics_control=' + str(self.additional_statistics_control) + delimiter
+        else:
+            s += 'additional_statistics_control=' + 'None' + delimiter
         if self.execution_ended is not None and self.execution_started is not None:
             for _ in range(0, indentation):
                 s += indentation_symbol  

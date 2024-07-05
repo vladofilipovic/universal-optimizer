@@ -2,7 +2,6 @@ from random import seed
 
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
-from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
 from uo.algorithm.metaheuristic.genetic_algorithm.selection_roulette import SelectionRoulette
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support_one_point_rep_bit_array import \
@@ -21,7 +20,6 @@ def main():
         solution:OnesCountMaxProblemBitArraySolution = OnesCountMaxProblemBitArraySolution()
         finish:FinishControl = FinishControl(criteria='evaluations', evaluations_max=5000)
         ga_selection:SelectionRoulette = SelectionRoulette()
-        additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(is_active=False, keep='')
         ga_crossover_support:GaCrossoverSupportOnePointRepresentationBitArray[str]= \
                 GaCrossoverSupportOnePointRepresentationBitArray[str](crossover_probability=0.95)
         ga_mutation_support:GaMutationSupportOnePointRepresentationBitArray = \
@@ -34,7 +32,6 @@ def main():
         ga_construction_params.ga_selection = ga_selection
         ga_construction_params.ga_crossover_support = ga_crossover_support
         ga_construction_params.ga_mutation_support = ga_mutation_support
-        ga_construction_params.additional_statistics_control = additional_statistics_control
         ga_construction_params.random_seed = 43434343
         ga_construction_params.population_size = 100
         ga_construction_params.elite_count = 10

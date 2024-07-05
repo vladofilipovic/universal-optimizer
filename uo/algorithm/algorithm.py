@@ -59,28 +59,24 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
 
     @abstractmethod
     def __init__(self, 
-                name:str, 
-                output_control:Optional[OutputControl], 
                 problem:Problem,
-                solution_template:Solution)->None:
+                solution_template:Optional[Solution],
+                name:str, 
+                output_control:Optional[OutputControl])->None:
         """
         Create new Algorithm instance
 
-        :param str name: name of the algorithm
-        :param `OutputControl` output_control: structure that controls output
         :param `Problem` problem: problem to be solved
-        :param `Solution` solution_template: solution for the problem that is solved
+        :param `Optional[Solution]` solution_template: solution for the problem that is solved
+        :param str name: name of the algorithm
+        :param `Optional[OutputControl]` output_control: structure that controls output
         """
-        if not isinstance(name, str):
-                raise TypeError('Parameter \'name\' must be \'str\'.')
-        if not isinstance(output_control, OutputControl) and output_control is not None:
-                raise TypeError('Parameter \'output_control\' must be \'OutputControl\' or None.')
-        if not isinstance(problem, Problem):
-                raise TypeError('Parameter \'problem\' must be \'Problem\'.')
-        if not isinstance(solution_template, Solution):
-                raise TypeError('Parameter \'solution_template\' must be \'Solution\'.')
-        super().__init__(name=name, output_control=output_control, problem=problem)
-        self.__solution_template:Solution = solution_template
+        if not isinstance(solution_template, Solution) and solution_template is not None:
+                raise TypeError('Parameter \'solution_template\' must be \'Solution\' or None.')        
+        super().__init__(problem=problem, 
+                        name=name, 
+                        output_control=output_control)
+        self.__solution_template:Optional[Solution]= solution_template
         self.__evaluation:int = 0
         self.__iteration:int = 0
         self.__evaluation_best_found:int = 0
@@ -119,7 +115,7 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
         self.__iteration_best_found = self.iteration
 
     @property
-    def solution_template(self)->Solution:
+    def solution_template(self)->Optional[Solution]:
         """
         Property getter for the solution template for the problem to be solved
         

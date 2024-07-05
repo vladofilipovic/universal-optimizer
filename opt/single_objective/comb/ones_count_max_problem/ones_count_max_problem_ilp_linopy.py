@@ -32,13 +32,13 @@ class OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters:
     """
     Instance of the class :class:`OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters` represents constructor parameters for max ones problem ILP solver.
     """
-    def __init__(self, output_control: Optional[OutputControl] = None, problem: Problem = None)->None:
+    def __init__(self, problem: Problem = None, output_control: Optional[OutputControl] = None)->None:
         if not isinstance(output_control, OutputControl) and output_control is not None:
             raise TypeError('Parameter \'output_control\' must have type \'OutputControl\' or be None.')
         if not isinstance(problem, Problem):
             raise TypeError('Parameter \'problem\' must have type \'Problem\'.')
-        self.__output_control = output_control
         self.__problem = problem
+        self.__output_control = output_control
 
     @property
     def output_control(self)->OutputControl:
@@ -82,8 +82,8 @@ class OnesCountMaxProblemIntegerLinearProgrammingSolver(Optimizer):
             raise TypeError('Parameter \'output_control\' must have type \'OutputControl\' or be None.')
         if not isinstance(problem, OnesCountMaxProblem):
             raise TypeError('Parameter \'problem\' must have type \'OnesCountMaxProblem\'.')
-        super().__init__("OnesCountMaxProblemIntegerLinearProgrammingSolver", output_control=output_control, 
-                problem=problem)
+        super().__init__(name="OnesCountMaxProblemIntegerLinearProgrammingSolver",
+                problem=problem,  output_control=output_control )
         self.__model = Model()
 
     @classmethod

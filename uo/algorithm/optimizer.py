@@ -28,7 +28,11 @@ class Optimizer(metaclass=ABCMeta):
     """
 
     @abstractmethod
-    def __init__(self, name:str, output_control:Optional[OutputControl], problem:Problem)->None:
+    def __init__(self, 
+                problem:Problem, 
+                name:str, 
+                output_control:Optional[OutputControl]
+    )->None:
         """
         Create new `Optimizer` instance
 
@@ -36,15 +40,15 @@ class Optimizer(metaclass=ABCMeta):
         :param `Optional[OutputControl]` output_control: structure that controls output
         :param `Problem` problem: problem to be solved
         """
+        if not isinstance(problem, Problem):
+                raise TypeError('Parameter \'problem\' must be \'Problem\'.')
         if not isinstance(name, str):
                 raise TypeError('Parameter \'name\' must be \'str\'.')
         if not isinstance(output_control, OutputControl) and output_control is not None:
-                raise TypeError('Parameter \'output_control\' must be \'OutputControl\'. or None')
-        if not isinstance(problem, Problem):
-                raise TypeError('Parameter \'problem\' must be \'Problem\'.')
+                raise TypeError('Parameter \'output_control\' must be \'OutputControl\' or None.')
+        self.__problem:Problem = problem
         self.__name:str = name
         self.__output_control:Optional[OutputControl] = output_control
-        self.__problem:Problem = problem
         self.__execution_started:Optional[datetime] = None
         self.__execution_ended:Optional[datetime] = None
         self.__best_solution:Optional[Solution] = None

@@ -1,6 +1,5 @@
 import unittest   
 import unittest.mock as mocker
-from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
 from uo.problem.problem import Problem
 from uo.algorithm.output_control import OutputControl
@@ -44,9 +43,7 @@ class TestVnsOptimizerProperties(unittest.TestCase):
         self.random_seed = 42
         self.k_min = 3
         self.k_max = 42
-        
-        self.additional_statistics_control = AdditionalStatisticsControl()
-        
+                
         self.vns_optimizer = VnsOptimizer(
                 output_control=self.output_control_stub,
                 problem=self.problem_mock, 
@@ -57,7 +54,6 @@ class TestVnsOptimizerProperties(unittest.TestCase):
                 random_seed=self.random_seed, 
                 k_min=self.k_min, 
                 k_max=self.k_max, 
-                additional_statistics_control=self.additional_statistics_control,
                 local_search_type='localSearchFirstImprovement'
         )
     
@@ -112,7 +108,6 @@ class TestVnsOptimizerProperties(unittest.TestCase):
                 random_seed=self.random_seed, 
                 k_min=self.k_min, 
                 k_max=self.k_max, 
-                additional_statistics_control=AdditionalStatisticsControl(),
                 local_search_type='xxx'
             )            
         self.assertEqual("Value 'xxx' for VNS local_search_type is not supported", context.exception.args[0])

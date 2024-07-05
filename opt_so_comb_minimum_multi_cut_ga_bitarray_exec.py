@@ -5,7 +5,6 @@ import networkx as nx
 
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
-from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
 from uo.algorithm.metaheuristic.genetic_algorithm.selection_roulette import SelectionRoulette
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support_one_point_rep_bit_array import \
@@ -38,7 +37,6 @@ def main():
         solution:MinimumMultiCutProblemBitArraySolution = MinimumMultiCutProblemBitArraySolution()
         finish:FinishControl = FinishControl(criteria='iterations', iterations_max=100)
         select:SelectionRoulette = SelectionRoulette()
-        additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(is_active=False, keep='')
         ga_cross_support:GaCrossoverSupportOnePointRepresentationBitArray[str] = \
                 GaCrossoverSupportOnePointRepresentationBitArray[str](crossover_probability=0.999)
         ga_mut_support:GaMutationSupportOnePointRepresentationBitArray[str] = \
@@ -51,7 +49,6 @@ def main():
         ga_construction_params.ga_selection = select
         ga_construction_params.ga_crossover_support = ga_cross_support
         ga_construction_params.ga_mutation_support = ga_mut_support
-        ga_construction_params.additional_statistics_control = additional_statistics_control
         ga_construction_params.random_seed = 43434343
         ga_construction_params.population_size = 5
         ga_construction_params.elite_count = 2

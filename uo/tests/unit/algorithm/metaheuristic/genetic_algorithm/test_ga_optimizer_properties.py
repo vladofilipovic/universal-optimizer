@@ -1,6 +1,5 @@
 import unittest   
 import unittest.mock as mocker
-from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
 from uo.problem.problem import Problem
 
@@ -53,8 +52,6 @@ class TestGaOptimizerGenerationalProperties(unittest.TestCase):
         self.population_size = 100
         self.elitism_size = 10
 
-        self.additional_statistics_control = AdditionalStatisticsControl()
-
         self.ga_optimizer:GaOptimizerGenerational = GaOptimizerGenerational(
                 output_control=self.output_control_stub,
                 problem=self.problem_mock, 
@@ -64,7 +61,6 @@ class TestGaOptimizerGenerationalProperties(unittest.TestCase):
                 ga_mutation_support=self.ga_support_mutation_stub,
                 finish_control=self.finish_control_mock,
                 random_seed=self.random_seed,
-                additional_statistics_control=self.additional_statistics_control,
                 population_size=self.population_size,
                 elite_count=self.elitism_size
         )
@@ -113,7 +109,6 @@ class TestGaOptimizerGenerationalProperties(unittest.TestCase):
                 ga_mutation_support=self.ga_support_mutation_stub,
                 finish_control=self.finish_control_mock,
                 random_seed=self.random_seed,
-                additional_statistics_control=self.additional_statistics_control,
                 population_size=self.population_size,
                 elite_count=self.elitism_size
             )

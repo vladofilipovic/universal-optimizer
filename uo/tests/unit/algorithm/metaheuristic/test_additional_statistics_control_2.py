@@ -23,7 +23,7 @@ class Test__Init_22(unittest.TestCase):
         keep = "all_solution_code, more_local_optima"
         max_local_optima_count = 5
         # Act
-        statistics_control = AdditionalStatisticsControl(True, keep, max_local_optima_count)
+        statistics_control = AdditionalStatisticsControl(keep, max_local_optima_count)
         # Assert
         self.assertEqual(statistics_control.keep, "all_solution_code, more_local_optima")
         self.assertEqual(statistics_control.max_local_optima_count, 5)
@@ -34,7 +34,7 @@ class Test__Init_22(unittest.TestCase):
         keep = "all_solution_code, more_local_optima"
         max_local_optima_count = sys.maxsize
         # Act
-        statistics_control = AdditionalStatisticsControl(True, keep, max_local_optima_count)
+        statistics_control = AdditionalStatisticsControl(keep, max_local_optima_count)
         # Assert
         self.assertEqual(statistics_control.keep, "all_solution_code, more_local_optima")
         self.assertEqual(statistics_control.max_local_optima_count, sys.maxsize)
@@ -45,7 +45,7 @@ class Test__Init_22(unittest.TestCase):
         keep = "all_solution_code, more_local_optima"
         max_local_optima_count = 0
         # Act
-        statistics_control = AdditionalStatisticsControl(True, keep, max_local_optima_count)
+        statistics_control = AdditionalStatisticsControl(keep, max_local_optima_count)
         # Assert
         self.assertEqual(statistics_control.keep, "all_solution_code, more_local_optima")
         self.assertEqual(statistics_control.max_local_optima_count, 0)
@@ -56,7 +56,7 @@ class Test__Init_22(unittest.TestCase):
         keep = "all_solution_code"
         max_local_optima_count = 5
         # Act
-        statistics_control = AdditionalStatisticsControl(True, keep, max_local_optima_count)
+        statistics_control = AdditionalStatisticsControl(keep, max_local_optima_count)
         # Assert
         self.assertEqual(statistics_control.keep, "all_solution_code")
         self.assertEqual(statistics_control.max_local_optima_count, 5)
@@ -67,7 +67,7 @@ class Test__Init_22(unittest.TestCase):
         keep = ""
         max_local_optima_count = 5
         # Act
-        statistics_control = AdditionalStatisticsControl(True, keep, max_local_optima_count)
+        statistics_control = AdditionalStatisticsControl(keep, max_local_optima_count)
         # Assert
         self.assertEqual(statistics_control.keep, "")
         self.assertEqual(statistics_control.max_local_optima_count, 5)
@@ -79,7 +79,7 @@ class Test__Init_22(unittest.TestCase):
         max_local_optima_count = 5
         # Act & Assert
         with self.assertRaises(TypeError):
-            AdditionalStatisticsControl(True, keep, max_local_optima_count)
+            AdditionalStatisticsControl(keep, max_local_optima_count)
 
     # Raises a TypeError if max_local_optima_count is not an integer.
     def test_max_local_optima_not_integer(self):
@@ -88,7 +88,7 @@ class Test__Init_22(unittest.TestCase):
         max_local_optima_count = 5.5
         # Act & Assert
         with self.assertRaises(TypeError):
-            AdditionalStatisticsControl(True, keep, max_local_optima_count)
+            AdditionalStatisticsControl(keep, max_local_optima_count)
 
     # Raises a ValueError if max_local_optima_count is less than zero.
     def test_max_local_optima_less_than_zero(self):
@@ -97,7 +97,7 @@ class Test__Init_22(unittest.TestCase):
         max_local_optima_count = -1
         # Act & Assert
         with self.assertRaises(ValueError):
-            AdditionalStatisticsControl(True, keep, max_local_optima_count)
+            AdditionalStatisticsControl(keep, max_local_optima_count)
 
     # Creates a new instance of AdditionalStatisticsControl with valid parameters and keep parameter set to 'more_local_optima'.
     def test_keep_more_local_optima(self):
@@ -105,7 +105,7 @@ class Test__Init_22(unittest.TestCase):
         keep = 'more_local_optima'
         max_local_optima_count = 10
         # Act
-        statistics_control = AdditionalStatisticsControl(True, keep, max_local_optima_count)
+        statistics_control = AdditionalStatisticsControl(keep, max_local_optima_count)
         # Assert
         self.assertEqual(statistics_control.keep, 'more_local_optima')
         self.assertEqual(statistics_control.max_local_optima_count, 10)
@@ -116,7 +116,7 @@ class Test__Init_22(unittest.TestCase):
         keep = 'all_solution_code, more_local_optima'
         max_local_optima_count = 10
         # Act
-        statistics_control = AdditionalStatisticsControl(True, keep, max_local_optima_count)
+        statistics_control = AdditionalStatisticsControl(keep, max_local_optima_count)
         # Assert
         self.assertEqual(statistics_control.keep, 'all_solution_code, more_local_optima')
         self.assertEqual(statistics_control.max_local_optima_count, 10)
@@ -127,7 +127,7 @@ class Test__Init_22(unittest.TestCase):
         keep = ''
         max_local_optima_count = 0
         # Act
-        statistics_control = AdditionalStatisticsControl(True, keep, max_local_optima_count)
+        statistics_control = AdditionalStatisticsControl(keep, max_local_optima_count)
         # Assert
         self.assertEqual(statistics_control.keep, '')
         self.assertEqual(statistics_control.max_local_optima_count, 0)
@@ -167,7 +167,7 @@ class Test__Init_22(unittest.TestCase):
         max_local_optima_count = 10
         # Act
         with self.assertRaises(ValueError):
-            statistics_control = AdditionalStatisticsControl(True, keep, max_local_optima_count)
+            statistics_control = AdditionalStatisticsControl(keep, max_local_optima_count)
 
     # Creates a new instance of AdditionalStatisticsControl with a very large value for max_local_optima_count.
     def test_large_value_for_max_local_optima(self):
@@ -175,7 +175,7 @@ class Test__Init_22(unittest.TestCase):
         keep = "all_solution_code, more_local_optima"
         max_local_optima_count = sys.maxsize
         # Act
-        statistics_control = AdditionalStatisticsControl(True, keep, max_local_optima_count)
+        statistics_control = AdditionalStatisticsControl(keep, max_local_optima_count)
         # Assert
         self.assertEqual(statistics_control.keep, "all_solution_code, more_local_optima")
         self.assertEqual(statistics_control.max_local_optima_count, sys.maxsize)
@@ -186,7 +186,7 @@ class Test__Init_22(unittest.TestCase):
         keep = "all_solution_code, more_local_optima"
         max_local_optima_count = 5
         # Act
-        statistics_control = AdditionalStatisticsControl(True, keep, max_local_optima_count)
+        statistics_control = AdditionalStatisticsControl(keep, max_local_optima_count)
         # Assert
         self.assertEqual(statistics_control.keep, "all_solution_code, more_local_optima")
         self.assertEqual(statistics_control.max_local_optima_count, max_local_optima_count)
@@ -269,7 +269,7 @@ class TestKeepMoreLocalOptima(unittest.TestCase):
     # Returns False if solution_to_add_rep is already in more_local_optima.
     def test_returns_false_if_solution_to_add_rep_is_already_in_more_local_optima(self):
         # Arrange
-        statistics_control = AdditionalStatisticsControl(True, 'more_local_optima')
+        statistics_control = AdditionalStatisticsControl('more_local_optima')
         solution_to_add_rep = "solution1"
         solution_to_add_fitness = 0.5
         best_solution_rep = "best_solution"
@@ -283,7 +283,7 @@ class TestKeepMoreLocalOptima(unittest.TestCase):
     # Raises TypeError if solution_to_add_rep is not a string.
     def test_raises_type_error_if_solution_to_add_rep_is_not_a_string(self):
         # Arrange
-        statistics_control = AdditionalStatisticsControl(True, 'more_local_optima')
+        statistics_control = AdditionalStatisticsControl('more_local_optima')
         solution_to_add_rep = 123
         solution_to_add_fitness = 0.5
         best_solution_rep = "best_solution"
@@ -294,7 +294,7 @@ class TestKeepMoreLocalOptima(unittest.TestCase):
     # Raises TypeError if best_solution_rep is not a string.
     def test_raises_type_error_if_best_solution_rep_is_not_a_string(self):
         # Arrange
-        statistics_control = AdditionalStatisticsControl(True, 'more_local_optima')
+        statistics_control = AdditionalStatisticsControl('more_local_optima')
         solution_to_add_rep = "solution1"
         solution_to_add_fitness = "fitness"
         best_solution_rep = "best_solution"
@@ -305,7 +305,7 @@ class TestKeepMoreLocalOptima(unittest.TestCase):
     # Raises TypeError if solution_to_add_fitness is not a float or list of floats.
     def test_raises_type_error_if_solution_to_add_fitness_is_not_a_float_or_float_list(self):
         # Arrange
-        statistics_control = AdditionalStatisticsControl(True, 'more_local_optima')
+        statistics_control = AdditionalStatisticsControl('more_local_optima')
         solution_to_add_rep = "solution1"
         solution_to_add_fitness = "fitness"
         best_solution_rep = 42
@@ -319,7 +319,7 @@ class TestAllSolutionCodes(unittest.TestCase):
     # Setting a non-empty set of solution codes should update the __all_solution_codes attribute
     def test_set_non_empty_solution_codes(self):
         # Arrange
-        statistics_control = AdditionalStatisticsControl(True, "all_solution_code")
+        statistics_control = AdditionalStatisticsControl("all_solution_code")
         solution_codes = {'code1', 'code2', 'code3'}
         # Act
         for sc in solution_codes:
@@ -330,14 +330,14 @@ class TestAllSolutionCodes(unittest.TestCase):
     # Setting an empty set of solution codes should not update the __all_solution_codes attribute
     def test_set_empty_solution_codes(self):
         # Arrange
-        statistics_control = AdditionalStatisticsControl(True, "all_solution_code")
+        statistics_control = AdditionalStatisticsControl("all_solution_code")
         # Act & Assert
         self.assertEqual(statistics_control.all_solution_codes, set())
 
     # Setting a set of solution codes with duplicate values should update the __all_solution_codes attribute with only unique values
     def test_set_duplicate_solution_codes(self):
         # Arrange
-        statistics_control = AdditionalStatisticsControl(True, "all_solution_code")
+        statistics_control = AdditionalStatisticsControl("all_solution_code")
         solution_codes = {'code1', 'code2', 'code2', 'code3'}
         # Act
         for sc in solution_codes:
@@ -366,7 +366,7 @@ class TestMoreLocalOptima(unittest.TestCase):
     # Setting a new dictionary of local optima with valid input should update the __more_local_optima attribute
     def test_valid_input_updates_attribute(self):
         # Arrange
-        additional_stats = AdditionalStatisticsControl(True, "more_local_optima")
+        additional_stats = AdditionalStatisticsControl("more_local_optima")
         new_local_optima = {'solution1': 0.5, 'solution2': 12}
         # Act
         for nlsk in new_local_optima.keys():
@@ -385,7 +385,7 @@ class TestMoreLocalOptima(unittest.TestCase):
     # Setting a new dictionary of local optima with more than max_local_optima_count elements should remove the oldest element
     def test_max_local_optima_elements_removes_oldest_element(self):
         # Arrange
-        additional_stats = AdditionalStatisticsControl(True, 'more_local_optima', max_local_optima_count=2)
+        additional_stats = AdditionalStatisticsControl('more_local_optima', max_local_optima_count=2)
         local_optimas = {'solution1': 0.5, 'solution2': 7}
         for nlsk in local_optimas.keys():
             additional_stats.add_to_more_local_optima(nlsk, local_optimas[nlsk], "solution1") 
@@ -483,7 +483,7 @@ class TestAddToMoreLocalOptimaIfRequired(unittest.TestCase):
         solution_to_add_rep = "solution1"
         solution_to_add_fitness = 10.5
         best_solution_rep = "best_solution"
-        statistics_control = AdditionalStatisticsControl(True, "more_local_optima")
+        statistics_control = AdditionalStatisticsControl("more_local_optima")
         # Act
         result = statistics_control.add_to_more_local_optima(solution_to_add_rep, solution_to_add_fitness, best_solution_rep)
         # Assert
@@ -496,7 +496,7 @@ class TestAddToMoreLocalOptimaIfRequired(unittest.TestCase):
         solution_to_add_rep = "solution1"
         solution_to_add_fitness = 10.5
         best_solution_rep = "best_solution"
-        statistics_control = AdditionalStatisticsControl(True, "more_local_optima", max_local_optima_count=2)
+        statistics_control = AdditionalStatisticsControl("more_local_optima", max_local_optima_count=2)
         statistics_control.add_to_more_local_optima("solution2", 5.0, "solution2")
         statistics_control.add_to_more_local_optima("solution3", 7.0, "solution2")
         mocker.patch('random.choice', return_value=1)
@@ -512,7 +512,7 @@ class TestAddToMoreLocalOptimaIfRequired(unittest.TestCase):
         solution_to_add_rep = "solution1"
         solution_to_add_fitness = 10.5
         best_solution_rep = "best_solution"
-        statistics_control = AdditionalStatisticsControl(True, "more_local_optima")
+        statistics_control = AdditionalStatisticsControl("more_local_optima")
         # Act
         result = statistics_control.add_to_more_local_optima(solution_to_add_rep, solution_to_add_fitness, best_solution_rep)
         # Assert
@@ -524,7 +524,7 @@ class TestAddToMoreLocalOptimaIfRequired(unittest.TestCase):
         solution_to_add_rep = 123
         solution_to_add_fitness = 10.5
         best_solution_rep = "best_solution"
-        statistics_control = AdditionalStatisticsControl(True, "more_local_optima")
+        statistics_control = AdditionalStatisticsControl("more_local_optima")
         # Act & Assert
         with self.assertRaises(TypeError):
             statistics_control.add_to_more_local_optima(solution_to_add_rep, solution_to_add_fitness, best_solution_rep)
@@ -535,7 +535,7 @@ class TestAddToMoreLocalOptimaIfRequired(unittest.TestCase):
         solution_to_add_rep = "solution1"
         solution_to_add_fitness = "fitness"
         best_solution_rep = "best_solution"
-        statistics_control = AdditionalStatisticsControl(True, "more_local_optima")
+        statistics_control = AdditionalStatisticsControl("more_local_optima")
         # Act & Assert
         with self.assertRaises(TypeError):
             statistics_control.add_to_more_local_optima(solution_to_add_rep, solution_to_add_fitness, best_solution_rep)
@@ -546,7 +546,7 @@ class TestAddToMoreLocalOptimaIfRequired(unittest.TestCase):
         solution_to_add_rep = "solution1"
         solution_to_add_fitness = 10.5
         best_solution_rep = 123
-        statistics_control = AdditionalStatisticsControl(True, "more_local_optima")
+        statistics_control = AdditionalStatisticsControl("more_local_optima")
         # Act & Assert
         with self.assertRaises(TypeError):
             statistics_control.add_to_more_local_optima(solution_to_add_rep, solution_to_add_fitness, best_solution_rep)

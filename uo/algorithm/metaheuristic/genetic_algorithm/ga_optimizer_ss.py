@@ -41,19 +41,17 @@ class GaOptimizerSteadyStateConstructionParameters:
         Instance of the class :class:`~uo.algorithm.metaheuristic.genetic_algorithm_constructor_parameters.
         GaOptimizerConstructionParameters` represents constructor parameters for GA algorithm.
         """
-        finish_control: FinishControl = None
-        random_seed: Optional[int] = None
-        additional_statistics_control: AdditionalStatisticsControl = None
-        output_control: OutputControl = None
-        problem: Problem = None
-        solution_template: Solution = None
-        ga_selection: Selection = None
         ga_crossover_support: GaCrossoverSupport = None
         ga_mutation_support: GaMutationSupport = None
-        population_size: int = None
+        ga_selection: Selection = None
+        population_size: Optional[int] = None
         elite_count:Optional[int] = None
-
-
+        finish_control: Optional[FinishControl] = None
+        problem: Problem = None
+        solution_template: Optional[Solution] = None
+        output_control: Optional[OutputControl] = None
+        random_seed: Optional[int] = None
+        additional_statistics_control: Optional[AdditionalStatisticsControl] = None
 
 class GaOptimizerSteadyState(GaOptimizer):
     """
@@ -62,37 +60,39 @@ class GaOptimizerSteadyState(GaOptimizer):
     """
     
     def __init__(self,
-            finish_control:FinishControl,
-            random_seed:Optional[int],
-            additional_statistics_control:AdditionalStatisticsControl,
-            output_control:OutputControl,
-            problem:Problem,
-            solution_template:Solution,
-            ga_selection: Selection,
             ga_crossover_support:GaCrossoverSupport,
             ga_mutation_support:GaMutationSupport,
+            ga_selection: Selection,
             population_size: int,
-            elite_count:Optional[int]
+            elite_count:int,
+            finish_control:FinishControl,
+            problem:Problem,
+            solution_template:Optional[Solution],
+            output_control:Optional[OutputControl]=None,
+            random_seed:Optional[int]=None,
+            additional_statistics_control:AdditionalStatisticsControl=None,
         )->None:
         """
         Create new instance of class :class:`~uo.algorithm.metaheuristic.genetic_algorithm.GaOptimizerSteadyState`. 
         That instance implements :ref:`GA<Genetic_Algorithm>` algorithm. 
 
-        :param `FinishControl` finish_control: structure that control finish criteria for metaheuristic execution
-        :param int random_seed: random seed for metaheuristic execution
-        :param `AdditionalStatisticsControl` additional_statistics_control: structure that controls additional
-        statistics obtained during population-based metaheuristic execution
-        :param `OutputControl` output_control: structure that controls output
-        :param `Problem` problem: problem to be solved
-        :param `Solution` solution_template: initial solution of the problem
         :param `GaCrossoverSupport` ga_crossover_support: placeholder for additional methods, specific for GA crossover 
         execution, which depend of precise solution type 
         :param `GaMutationSupport` ga_mutation_support: placeholder for additional methods, specific for GA mutation 
         execution, which depend of precise solution type 
-        :param `float` mutation_probability: probability of mutation
+        :param `Selection` ga_selection: structure that controls GA selection
         :param `int` population_size: size of the population
+        :param `int` elite_count: Count of the elite individuals within population
+        :param `FinishControl` finish_control: structure that control finish criteria for metaheuristic execution
+        :param `Problem` problem: problem to be solved
+        :param `Optional[Solution]` solution_template: initial solution of the problem
+        :param `Optional[OutputControl]` output_control: structure that controls output
+        :param Optional[int] random_seed: random seed for metaheuristic execution
+        :param `Optional[AdditionalStatisticsControl]` additional_statistics_control: structure that controls additional
+        statistics obtained during population-based metaheuristic execution
         """
-        super().__init__( finish_control=finish_control,
+        super().__init__( 
+                finish_control=finish_control,
                 random_seed=random_seed,
                 additional_statistics_control=additional_statistics_control,
                 output_control=output_control,
@@ -102,7 +102,8 @@ class GaOptimizerSteadyState(GaOptimizer):
                 ga_crossover_support=ga_crossover_support,
                 ga_mutation_support=ga_mutation_support,
                 population_size=population_size,
-                elite_count=elite_count)
+                elite_count=elite_count
+        )
 
     @classmethod
     def from_construction_tuple(cls, construction_tuple:GaOptimizerSteadyStateConstructionParameters):
@@ -112,17 +113,18 @@ class GaOptimizerSteadyState(GaOptimizer):
         :param `GaOptimizerConstructionParameters` construction_tuple: tuple with all constructor parameters
         """
         return cls(
-            construction_tuple.finish_control,
-            construction_tuple.random_seed,
-            construction_tuple.additional_statistics_control,
-            construction_tuple.output_control,
-            construction_tuple.problem,
-            construction_tuple.solution_template,
-            construction_tuple.ga_selection,
             construction_tuple.ga_crossover_support,
             construction_tuple.ga_mutation_support,
+            construction_tuple.ga_selection,
             construction_tuple.population_size,
-            construction_tuple.elite_count)
+            construction_tuple.elite_count,
+            construction_tuple.finish_control,
+            construction_tuple.problem,
+            construction_tuple.solution_template,
+            construction_tuple.output_control,
+            construction_tuple.random_seed,
+            construction_tuple.additional_statistics_control
+        )
 
     def __copy__(self):
         """

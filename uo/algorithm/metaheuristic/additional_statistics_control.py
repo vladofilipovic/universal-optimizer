@@ -18,27 +18,22 @@ class AdditionalStatisticsControl:
     """
 
     def __init__(self, 
-            is_active:bool=False,
             keep:str='', 
             max_local_optima_count:int = 10,
         ) -> None:
         """
         Creates new :class:`uo.algorithm.metaheuristic.AdditionalStatisticsControl` instance
 
-        :param bool is_active: indicator if statistic control is active
         :param str keep: list of comma-separated strings that describes what to be kept during metaheuristic execution 
         (currently it contains strings `all_solution_code`, `more_local_optima`) 
         :param int max_local_optima_count: number of local optima to be kept
         """
-        if not isinstance(is_active, bool):
-                raise TypeError('Parameter \'is_active\' must be \'bool\'.')
         if not isinstance(keep, str):
                 raise TypeError('Parameter \'keep\' must be \'str\'.')
         if not isinstance(max_local_optima_count, int):
                 raise TypeError('Parameter \'max_local_optima_count\' must be \'int\'.')
         if max_local_optima_count < 0:
                 raise ValueError('Parameter \'max_local_optima_count\' must be greater or equal to zero.')
-        self.__is_active:bool = is_active
         self.__max_local_optima_count:int = max_local_optima_count
         self.__all_solution_codes:set[str] = set()
         self.__more_local_optima:dict[str, float|list[float]] = {}
@@ -70,16 +65,6 @@ class AdditionalStatisticsControl:
                 self.__keep_more_local_optima = True
             else:
                 raise ValueError("Invalid value for keep \'{}\'. Should be either empty string or 'none', either comma-separated sequence of: 'all_solution_code', 'more_local_optima'.".format(k))
-
-    @property
-    def is_active(self)->bool:
-        """
-        Property getter for for indicator if additional statistics is active.
-
-        :return: indicator if additional statistics is active.
-        :rtype: bool
-        """
-        return self.__is_active
 
     @property
     def keep_all_solution_codes(self)->bool:

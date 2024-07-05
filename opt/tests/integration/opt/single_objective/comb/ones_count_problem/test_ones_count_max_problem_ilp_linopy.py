@@ -45,7 +45,8 @@ class TestOnesCountMaxProblemIlpLinopy(unittest.TestCase):
         output_control = OutputControl(moments="after_algorithm")
         problem = ProblemVoidMinSO('problem_name', False)
         # Act
-        construction_params = OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters(output_control, problem)
+        construction_params = OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters(
+            output_control=output_control, problem=problem)
         # Assert
         self.assertIsInstance(construction_params, OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters)
         self.assertEqual(construction_params.output_control, output_control)

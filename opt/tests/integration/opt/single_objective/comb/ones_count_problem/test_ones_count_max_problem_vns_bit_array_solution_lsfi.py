@@ -11,11 +11,7 @@ from copy import deepcopy
 from random import randint
 from random import choice
 
-from bitstring import Bits, BitArray, BitStream, pack
-
-from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
-from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_bit_array import \
         VnsShakingSupportRepresentationBitArray
@@ -41,7 +37,6 @@ class TestOnesCountMaxProblemVnsBitArraySolutionLsbi(unittest.TestCase):
                 VnsShakingSupportRepresentationBitArray(self.problem_to_solve.dimension)
         self.vns_ls_support:VnsLocalSearchSupportRepresentationBitArray = \
                 VnsLocalSearchSupportRepresentationBitArray(self.problem_to_solve.dimension)
-        self.additional_stat = AdditionalStatisticsControl(keep='')
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
         vns_construction_params.problem = self.problem_to_solve
         vns_construction_params.solution_template = self.solution
@@ -49,7 +44,6 @@ class TestOnesCountMaxProblemVnsBitArraySolutionLsbi(unittest.TestCase):
         vns_construction_params.vns_ls_support = self.vns_ls_support
         vns_construction_params.finish_control = self.finish_control
         vns_construction_params.random_seed = 43434343
-        vns_construction_params.additional_statistics_control = self.additional_stat
         vns_construction_params.k_min = 1
         vns_construction_params.k_max = 3
         vns_construction_params.local_search_type = 'localSearchBestImprovement'

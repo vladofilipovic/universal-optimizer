@@ -36,40 +36,26 @@ class PopulationBasedMetaheuristic(Metaheuristic, metaclass=ABCMeta):
 
     @abstractmethod
     def __init__(self, 
-            name:str, 
             finish_control:FinishControl,
-            random_seed:Optional[int], 
-            additional_statistics_control:AdditionalStatisticsControl,
-            output_control:Optional[OutputControl], 
             problem:Problem,
-            solution_template:Optional[Solution]
+            solution_template:Optional[Solution],
+            name:str, 
+            output_control:Optional[OutputControl], 
+            random_seed:Optional[int], 
+            additional_statistics_control:Optional[AdditionalStatisticsControl],
     )->None:
         """
         Create new PopulationBasedMetaheuristic instance
 
-        :param str name: name of the metaheuristic
         :param `FinishControl` finish_control: structure that control finish criteria for metaheuristic execution
-        :param int random_seed: random seed for metaheuristic execution
-        :param `AdditionalStatisticsControl` additional_statistics_control: structure that controls additional 
-        statistics obtained during population-based metaheuristic execution        
-        :param `OutputControl` output_control: structure that controls output
         :param `Problem` problem: problem to be solved
         :param `Optional[Solution]` solution_template: template for solution of the problem
+        :param str name: name of the metaheuristic
+        :param `Optional[OutputControl]` output_control: structure that controls output
+        :param Optional[int] random_seed: random seed for metaheuristic execution
+        :param `Optional[AdditionalStatisticsControl]` additional_statistics_control: structure that controls additional 
+        statistics obtained during population-based metaheuristic execution        
         """
-        if not isinstance(name, str):
-                raise TypeError('Parameter \'name\' must be \'str\'.')
-        if not isinstance(finish_control, FinishControl):
-                raise TypeError('Parameter \'finish_control\' must be \'FinishControl\'.')
-        if not isinstance(random_seed, int) and random_seed is not None:
-                raise TypeError('Parameter \'random_seed\' must be \'int\' or \'None\'.')
-        if not isinstance(additional_statistics_control, AdditionalStatisticsControl):
-                raise TypeError('Parameter \'additional_statistics_control\' must be \'AdditionalStatisticsControl\'.')
-        if not isinstance(output_control, OutputControl) and output_control is not None:
-                raise TypeError('Parameter \'output_control\' must be \'OutputControl\' or have value None.')
-        if not isinstance(problem, Problem):
-                raise TypeError('Parameter \'problem\' must be \'Problem\'.')
-        if not isinstance(solution_template, Solution) and solution_template is not None:
-                raise TypeError('Parameter \'solution_template\' must be \'Solution\' or None.')
         super().__init__(name=name, 
                 finish_control=finish_control,
                 random_seed=random_seed,

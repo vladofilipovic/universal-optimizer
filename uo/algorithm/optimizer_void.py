@@ -6,18 +6,25 @@ sys.path.append(directory.parent)
 from copy import deepcopy
 from datetime import datetime
 
+from typing import Optional
+
 from uo.utils.logger import logger
 from uo.algorithm.output_control import OutputControl
 from uo.problem.problem import Problem
+from uo.problem.problem_void_min_so import ProblemVoidMinSO
 from uo.solution.solution import Solution
 
 from uo.algorithm.optimizer import Optimizer
 from uo.algorithm.algorithm import Algorithm
 
 class OptimizerVoid(Optimizer):
-    def __init__(self, name:str, output_control:OutputControl,
-            problem:Problem)->None:
-        super().__init__(name, output_control, problem)
+    def __init__(self, problem:Problem = ProblemVoidMinSO(),
+            name:str="optimizer_void", 
+            output_control:Optional[OutputControl] = None,
+    )->None:
+        super().__init__(problem=problem,
+                    name=name,
+                    output_control=output_control)
 
     def __copy__(self):
         return super().__copy__()

@@ -148,7 +148,9 @@ class TestEvaluation(unittest.TestCase):
     # Set evaluation to a positive integer value
     def test_set_evaluation_positive_integer(self):
         # Arrange
-        algorithm = AlgorithmVoid("MyAlgorithm", OutputControl(), ProblemVoidMinSO())
+        algorithm = AlgorithmVoid(name="MyAlgorithm", 
+                        problem=ProblemVoidMinSO()
+                    )
         value = 10
         # Act
         algorithm.evaluation = value
@@ -158,7 +160,9 @@ class TestEvaluation(unittest.TestCase):
     # Set evaluation to zero
     def test_set_evaluation_zero(self):
         # Arrange
-        algorithm = AlgorithmVoid("MyAlgorithm", OutputControl(), ProblemVoidMinSO())
+        algorithm = AlgorithmVoid(name="MyAlgorithm", 
+                        problem=ProblemVoidMinSO()
+                    )
         value = 0
         # Act
         algorithm.evaluation = value
@@ -168,7 +172,9 @@ class TestEvaluation(unittest.TestCase):
     # Set evaluation to None
     def test_set_evaluation_none(self):
         # Arrange
-        algorithm = AlgorithmVoid("MyAlgorithm", OutputControl(), ProblemVoidMinSO())
+        algorithm = AlgorithmVoid(name="MyAlgorithm", 
+                        problem=ProblemVoidMinSO()
+                    )
         value = None
         # Act & Assert
         with self.assertRaises(TypeError):
@@ -177,7 +183,9 @@ class TestEvaluation(unittest.TestCase):
     # Set evaluation to a float value
     def test_set_evaluation_float_value(self):
         # Arrange
-        algorithm = AlgorithmVoid("MyAlgorithm", OutputControl(), ProblemVoidMinSO())
+        algorithm = AlgorithmVoid(name="MyAlgorithm", 
+                        problem=ProblemVoidMinSO()
+                    )
         value = 3.14
         # Act & Assert
         with self.assertRaises(TypeError):

@@ -22,10 +22,12 @@ class Test__Optimizer__(unittest.TestCase):
     def test_valid_parameters2(self):
         # Arrange
         name = "Optimizer1"
+        problem = ProblemVoidMinSO()
         output_control = OutputControl()
-        problem = ProblemVoidMinSO("a problem", True)
         # Act
-        optimizer = OptimizerVoid(name, output_control, problem)
+        optimizer = OptimizerVoid(name=name,
+            problem=problem,
+            output_control=output_control)
         # Assert
         self.assertEqual(optimizer.name, name)
         self.assertEqual(optimizer.output_control.fields, output_control.fields)
@@ -43,7 +45,9 @@ class Test__Optimizer__(unittest.TestCase):
         output_control = OutputControl()
         problem = ProblemVoidMinSO("a problem", True)
         # Act
-        optimizer = OptimizerVoid(name, output_control, problem)
+        optimizer = OptimizerVoid(name=name,
+            problem=problem,
+            output_control=output_control)
         # Assert
         self.assertEqual(optimizer.name, name)
         self.assertEqual(optimizer.output_control.fields, output_control.fields)
@@ -61,7 +65,9 @@ class Test__Optimizer__(unittest.TestCase):
         output_control = OutputControl()
         problem = ProblemVoidMinSO("a problem", True)
         # Act
-        optimizer = OptimizerVoid(name, output_control, problem)
+        optimizer = OptimizerVoid(name=name,
+            problem=problem,
+            output_control=output_control)
         # Assert
         self.assertIsNone(optimizer.execution_started)
         self.assertIsNone(optimizer.execution_ended)
@@ -75,7 +81,9 @@ class Test__Optimizer__(unittest.TestCase):
         problem = ProblemVoidMinSO("a problem", True)
         # Act & Assert
         with self.assertRaises(TypeError):
-            Optimizer(name, output_control, problem)
+            Optimizer(name=name,
+                    problem=problem,
+                    output_control=output_control)
 
     # Raises a TypeError if the output_control parameter is not an instance of OutputControl.
     def test_output_control_parameter_not_instance_of_OutputControl(self):
@@ -85,7 +93,9 @@ class Test__Optimizer__(unittest.TestCase):
         problem = ProblemVoidMinSO("a problem", True)
         # Act & Assert
         with self.assertRaises(TypeError):
-            Optimizer(name, output_control, problem)
+            Optimizer(name=name,
+                problem=problem,
+                output_control=output_control)
 
     # Raises a TypeError if the problem parameter is not an instance of Problem.
     def test_problem_parameter_not_instance_of_Problem(self):
@@ -95,7 +105,9 @@ class Test__Optimizer__(unittest.TestCase):
         problem = "InvalidProblem"
         # Act & Assert
         with self.assertRaises(TypeError):
-            Optimizer(name, output_control, problem)
+            Optimizer(name=name,
+                problem=problem,
+                output_control=output_control)
 
     # Does not raise an exception if the name parameter is an empty string.
     def test_empty_name_parameter(self):
@@ -105,7 +117,10 @@ class Test__Optimizer__(unittest.TestCase):
         problem = ProblemVoidMinSO("a problem", True)
         # Act
         try:
-            optimizer = OptimizerVoid(name, output_control, problem)
+            optimizer = OptimizerVoid(name=name,
+                    problem=problem,
+                    output_control=output_control
+            )
         except Exception as e:
             self.fail(f"Unexpected exception: {e}")
         # Assert
@@ -122,11 +137,12 @@ class Test__Optimizer__(unittest.TestCase):
     def test_none_output_control_parameter(self):
         # Arrange
         name = "Optimizer1"
-        output_control = None
         problem = ProblemVoidMinSO("a problem", True)
         # Act & Assert
         with self.assertRaises(TypeError):
-            Optimizer(name, output_control, problem)
+            Optimizer(name=name,
+                    problem=problem
+            )
 
 
     # Does not raise an exception if the problem parameter is None.
@@ -137,7 +153,10 @@ class Test__Optimizer__(unittest.TestCase):
         problem = None
         # Act & Assert
         with self.assertRaises(TypeError):
-            Optimizer(name, output_control, problem)
+            Optimizer(name=name,
+                    problem=problem,
+                    output_control=output_control
+            )
 
     # The execution_started and execution_ended instance variables are set to None.
     def test_execution_variables_set_to_none(self):
@@ -146,7 +165,10 @@ class Test__Optimizer__(unittest.TestCase):
         output_control = OutputControl()
         problem = ProblemVoidMinSO("a problem", True)
         # Act
-        optimizer = OptimizerVoid(name, output_control, problem)
+        optimizer = OptimizerVoid(name=name,
+                    problem=problem,
+                    output_control=output_control
+            )
         # Assert
         self.assertIsNone(optimizer.execution_started)
         self.assertIsNone(optimizer.execution_ended)
@@ -158,7 +180,10 @@ class Test__Optimizer__(unittest.TestCase):
         output_control = OutputControl()
         problem = ProblemVoidMinSO("a problem", True)
         # Act
-        optimizer = OptimizerVoid(name, output_control, problem)
+        optimizer = OptimizerVoid(name=name,
+                    problem=problem,
+                    output_control=output_control
+            )
         # Assert
         self.assertIsNone(optimizer.best_solution)
 
@@ -169,7 +194,10 @@ class Test__Optimizer__(unittest.TestCase):
         output_control = OutputControl()
         problem = ProblemVoidMinSO("a problem", True)
         # Act
-        optimizer = OptimizerVoid(name, output_control, problem)
+        optimizer = OptimizerVoid(name=name,
+                    problem=problem,
+                    output_control=output_control
+            )
         # Assert
         self.assertEqual(optimizer.name, name)
         self.assertEqual(optimizer.output_control.fields, output_control.fields)
@@ -186,7 +214,10 @@ class Test__Optimizer__(unittest.TestCase):
         name = "Optimizer1"
         output_control = OutputControl()
         problem = ProblemVoidMinSO("a problem", True)
-        optimizer = OptimizerVoid(name, output_control, problem)
+        optimizer = OptimizerVoid(name=name,
+                    problem=problem,
+                    output_control=output_control
+            )
         # Act
         copied_optimizer = optimizer.copy()
         # Assert
@@ -206,7 +237,10 @@ class Test__Optimizer__(unittest.TestCase):
         name = "Optimizer1"
         output_control = OutputControl()
         problem = ProblemVoidMinSO("a problem", True)
-        optimizer = OptimizerVoid(name, output_control, problem)
+        optimizer = OptimizerVoid(name=name,
+                    problem=problem,
+                    output_control=output_control
+            )
         optimizer.execution_started = datetime.now()
         optimizer.best_solution = SolutionVoidRepresentationInt(43, 0, 0, True)
         # Act

@@ -22,10 +22,7 @@ from random import random, randrange
 from random import seed
 from datetime import datetime
 
-from bitstring import BitArray
-
-import xarray as xr
-from linopy import Model
+from typing import Optional
 
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
@@ -126,14 +123,13 @@ def main():
             ensure_dir(output_file_dir)
             output_file = open(output_file_path, "w", encoding="utf-8")
         # output control setup
+        output_control:Optional[OutputControl] = None
         if write_to_output_file:    
             output_fields:str = parameters['outputFields']
             output_moments:str = parameters['outputMoments']
-            output_control:OutputControl = OutputControl(output_file=output_file,
+            output_control = OutputControl(output_file=output_file,
                     fields=output_fields,
                     moments=output_moments)
-        else:
-            output_control:OutputControl = None
         # input file setup
         input_file_path:str = parameters['inputFilePath']
         input_format:str = parameters['inputFormat']
@@ -166,13 +162,16 @@ def main():
         calculation_solution_distance_cache_is_used:bool = parameters['solutionDistanceCalculationCacheIsUsed']
         calculation_solution_distance_cache_max_size:int = parameters['solutionDistanceCalculationCacheMaxSize']
         # additional statistic control setup
+        additional_statistics_control:Optional[AdditionalStatisticsControl] = None
         additional_statistics_is_active:bool = parameters['additionalStatisticsIsActive']
-        additional_statistics_keep:str =  parameters['additionalStatisticsKeep']
-        max_local_optima_count = parameters['additionalStatisticsMaxLocalOptimaCount']
-        additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(
-                is_active=additional_statistics_is_active,
-                keep=additional_statistics_keep, 
-                max_local_optima_count=max_local_optima_count)
+        if additional_statistics_is_active:
+            additional_statistics_keep:str =  parameters['additionalStatisticsKeep']
+            max_local_optima_count = parameters['additionalStatisticsMaxLocalOptimaCount']
+            additional_statistics_control = AdditionalStatisticsControl(
+                    is_active=additional_statistics_is_active,
+                    keep=additional_statistics_keep, 
+                    max_local_optima_count=max_local_optima_count
+            )
         # problem to be solved
         problem = FunctionOneVariableMaxProblemMax.from_input_file(input_file_path=input_file_path,
                 input_format=input_format)
