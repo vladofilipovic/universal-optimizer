@@ -8,9 +8,7 @@ from uo.solution.quality_of_solution import QualityOfSolution
 from uo.solution.solution import Solution
 
 from uo.algorithm.metaheuristic.metaheuristic import Metaheuristic
-from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
-from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
@@ -19,7 +17,7 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support impo
 
 class OnesCountMaxProblem2(Problem):
 
-    def __init__(self, dim:int)->None:
+    def __init__(self, dim:int=10)->None:
         if not isinstance(dim, int):
             raise TypeError('Parameter \'dim\' have not valid type.')
         if dim <= 0:
@@ -247,25 +245,21 @@ class OnesCountMaxProblemIntSolutionVnsLocalSearchSupport(VnsLocalSearchSupport[
         return self.string_rep('|')
 
 def main():
-    output_control:OutputControl = OutputControl(write_to_output=False)
     problem_to_solve:OnesCountMaxProblem2 = OnesCountMaxProblem2(dim=24)
     solution:OnesCountMaxProblemIntSolution = OnesCountMaxProblemIntSolution()
     finish:FinishControl = FinishControl( criteria='evaluations & seconds', 
             evaluations_max=500, seconds_max=10)
-    additional_stat:AdditionalStatisticsControl = AdditionalStatisticsControl(is_active=False, keep='')
     vns_shaking_support:OnesCountMaxProblemIntSolutionVnsShakingSupport = \
         OnesCountMaxProblemIntSolutionVnsShakingSupport()
     vns_ls_support:OnesCountMaxProblemIntSolutionVnsLocalSearchSupport = \
         OnesCountMaxProblemIntSolutionVnsLocalSearchSupport()
     vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
-    vns_construction_params.output_control = output_control
     vns_construction_params.problem = problem_to_solve
     vns_construction_params.solution_template = solution
     vns_construction_params.vns_shaking_support = vns_shaking_support
     vns_construction_params.vns_ls_support = vns_ls_support
     vns_construction_params.finish_control = finish
     vns_construction_params.random_seed = 43434343
-    vns_construction_params.additional_statistics_control = additional_stat
     vns_construction_params.k_min = 1
     vns_construction_params.k_max = 3
     vns_construction_params.local_search_type = 'localSearchFirstImprovement'

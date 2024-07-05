@@ -13,12 +13,10 @@ from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem imp
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution import OnesCountMaxProblemBitArraySolution
 
 def main():
-        output_control:OutputControl = OutputControl(write_to_output=False)
         problem_to_solve:OnesCountMaxProblem = OnesCountMaxProblem.from_dimension(dimension=10)
         solution:OnesCountMaxProblemBitArraySolution = OnesCountMaxProblemBitArraySolution()
         te_support:TeOperationsSupportRepresentationBitArray[str] = TeOperationsSupportRepresentationBitArray[str]()
         construction_params:TeOptimizerConstructionParameters = TeOptimizerConstructionParameters()
-        construction_params.output_control = output_control
         construction_params.problem = problem_to_solve
         construction_params.solution_template = solution
         construction_params.te_operations_support = te_support

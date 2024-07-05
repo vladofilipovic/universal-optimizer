@@ -1,6 +1,5 @@
 import unittest   
 import unittest.mock as mocker
-from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
 from uo.problem.problem import Problem
 
@@ -12,7 +11,7 @@ from uo.algorithm.metaheuristic.genetic_algorithm.selection import Selection
 from uo.algorithm.metaheuristic.genetic_algorithm.selection_roulette import SelectionRoulette
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support import GaCrossoverSupport
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support import GaMutationSupport
-from uo.solution.solution_void import SolutionVoid
+from uo.solution.solution_void_representation_int import SolutionVoidRepresentationInt
 
 class TestGaOptimizerGenerationalProperties(unittest.TestCase):
     
@@ -22,7 +21,6 @@ class TestGaOptimizerGenerationalProperties(unittest.TestCase):
 
     def setUp(self):
         self.output_control_stub = mocker.MagicMock(spec=OutputControl)
-        type(self.output_control_stub).write_to_output = False
 
         self.problem_mock = mocker.MagicMock(spec=Problem)
         type(self.problem_mock).name = mocker.PropertyMock(return_value='some_problem')
@@ -54,18 +52,15 @@ class TestGaOptimizerGenerationalProperties(unittest.TestCase):
         self.population_size = 100
         self.elitism_size = 10
 
-        self.additional_statistics_control = AdditionalStatisticsControl()
-
         self.ga_optimizer:GaOptimizerGenerational = GaOptimizerGenerational(
                 output_control=self.output_control_stub,
                 problem=self.problem_mock, 
-                solution_template=SolutionVoid( 43, 0, 0, False),
+                solution_template=SolutionVoidRepresentationInt( 43, 0, 0, False),
                 ga_selection=self.selection_roulette_mock,
                 ga_crossover_support=self.ga_support_crossover_stub,
                 ga_mutation_support=self.ga_support_mutation_stub,
                 finish_control=self.finish_control_mock,
                 random_seed=self.random_seed,
-                additional_statistics_control=self.additional_statistics_control,
                 population_size=self.population_size,
                 elite_count=self.elitism_size
         )
@@ -108,13 +103,12 @@ class TestGaOptimizerGenerationalProperties(unittest.TestCase):
             self.ga_optimizer:GaOptimizerGenerational = GaOptimizerGenerational(
                 output_control=self.output_control_stub,
                 problem=self.problem_mock, 
-                solution_template=SolutionVoid( 43, 0, 0, False),
+                solution_template=SolutionVoidRepresentationInt( 43, 0, 0, False),
                 ga_selection="not appropriate type",
                 ga_crossover_support=self.ga_support_crossover_stub,
                 ga_mutation_support=self.ga_support_mutation_stub,
                 finish_control=self.finish_control_mock,
                 random_seed=self.random_seed,
-                additional_statistics_control=self.additional_statistics_control,
                 population_size=self.population_size,
                 elite_count=self.elitism_size
             )

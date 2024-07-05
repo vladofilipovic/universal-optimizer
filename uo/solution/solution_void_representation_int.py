@@ -1,3 +1,5 @@
+import math
+
 from pathlib import Path
 directory = Path(__file__).resolve()
 import sys
@@ -16,12 +18,12 @@ from uo.solution.solution import Solution
 from uo.solution.evaluation_cache_control_statistics import EvaluationCacheControlStatistics
 from uo.solution.distance_calculation_cache_control_statistics import DistanceCalculationCacheControlStatistics
 
-class SolutionVoid(Solution[int, str]):
+class SolutionVoidRepresentationInt(Solution[int, str]):
     
-    def __init__(self, random_seed:int, 
-            fitness_value:float, 
-            objective_value:float, 
-            is_feasible:bool, 
+    def __init__(self, random_seed:int=None, 
+            fitness_value:float=-math.inf, 
+            objective_value:float=-math.inf, 
+            is_feasible:bool=False, 
             evaluation_cache_is_used:bool=False, 
             evaluation_cache_max_size:int=0,
             distance_calculation_cache_is_used:bool=False,

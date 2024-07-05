@@ -9,6 +9,7 @@ sys.path.append(directory.parent)
 
 from copy import deepcopy
 from datetime import datetime
+
 from abc import ABCMeta, abstractmethod
 
 from typing import Optional
@@ -58,27 +59,24 @@ class Algorithm(Optimizer, metaclass=ABCMeta):
 
     @abstractmethod
     def __init__(self, 
-                name:str, 
-                output_control:OutputControl, 
                 problem:Problem,
-                solution_template:Optional[Solution] = None)->None:
+                solution_template:Optional[Solution],
+                name:str, 
+                output_control:Optional[OutputControl])->None:
         """
         Create new Algorithm instance
 
-        :param str name: name of the algorithm
-        :param `OutputControl` output_control: structure that controls output
         :param `Problem` problem: problem to be solved
+        :param `Optional[Solution]` solution_template: solution for the problem that is solved
+        :param str name: name of the algorithm
+        :param `Optional[OutputControl]` output_control: structure that controls output
         """
-        if not isinstance(name, str):
-                raise TypeError('Parameter \'name\' must be \'str\'.')
-        if not isinstance(output_control, OutputControl):
-                raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
-        if not isinstance(problem, Problem):
-                raise TypeError('Parameter \'problem\' must be \'Problem\'.')
         if not isinstance(solution_template, Solution) and solution_template is not None:
-                raise TypeError('Parameter \'solution_template\' must be \'Solution\' or None.')
-        super().__init__(name=name, output_control=output_control, problem=problem)
-        self.__solution_template:Optional[Solution] = solution_template
+                raise TypeError('Parameter \'solution_template\' must be \'Solution\' or None.')        
+        super().__init__(problem=problem, 
+                        name=name, 
+                        output_control=output_control)
+        self.__solution_template:Optional[Solution]= solution_template
         self.__evaluation:int = 0
         self.__iteration:int = 0
         self.__evaluation_best_found:int = 0

@@ -14,15 +14,10 @@ class TestOutputControlProperties(unittest.TestCase):
         print("setUpClass TestOutputControlProperties\n")
 
     def setUp(self):
-        self.write_to_output = True
         self.output_file = None
         self.output_control = OutputControl(
-                write_to_output=self.write_to_output,
                 output_file=self.output_file 
         )
-
-    def test_write_to_output_should_be_as_it_is_in_constructor(self):
-        self.assertEqual(self.output_control.write_to_output, self.write_to_output)
 
     def test_output_file_should_be_as_it_is_in_constructor(self):
         self.assertEqual(self.output_control.output_file, self.output_file)
@@ -48,7 +43,6 @@ class TestOutputControl(unittest.TestCase):
         # Act
         oc = OutputControl()
         # Assert
-        self.assertFalse(oc.write_to_output)
         self.assertIsNone(oc.output_file)
         self.assertIn('iteration', oc.fields_headings)
         self.assertIn('evaluation', oc.fields_headings)
@@ -69,14 +63,12 @@ class TestOutputControl(unittest.TestCase):
     # OutputControl object can be initialized with custom parameters
     def test_initialized_with_custom_parameters(self):
         # Arrange
-        write_to_output = True
         output_file = None
         fields = 'iteration, evaluation, "step_name", best_solution.string_representation(), best_solution.fitness_value, best_solution.objective_value, best_solution.is_feasible'
         moments = 'after_algorithm, before_iteration, after_iteration'
         # Act
-        oc = OutputControl(write_to_output, output_file, fields, moments)
+        oc = OutputControl(output_file, fields, moments)
         # Assert
-        self.assertTrue(oc.write_to_output)
         self.assertEqual(oc.output_file, output_file)
         self.assertIn('iteration', oc.fields_headings)
         self.assertIn('evaluation', oc.fields_headings)
@@ -122,14 +114,6 @@ class TestOutputControl(unittest.TestCase):
         self.assertIn('"step_name"', oc.fields_definitions)
         self.assertIn('self.best_solution.string_representation()', oc.fields_definitions)
         self.assertIn('self.best_solution.fitness_value', oc.fields_definitions)
-
-    # OutputControl object raises TypeError if write_to_output parameter is not a boolean
-    def test_write_to_output_type_error(self):
-        # Arrange
-        write_to_output = "True"
-        # Act & Assert
-        with self.assertRaises(TypeError):
-            OutputControl(write_to_output)
 
     # OutputControl object raises TypeError if fields parameter is not a string
     def test_fields_type_error(self):

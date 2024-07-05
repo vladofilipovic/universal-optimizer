@@ -18,7 +18,7 @@ class TestOnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameter
     def test_default_parameters_no_exceptions(self):
         # Arrange
         # Act
-        params = OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters(output_control=OutputControl(),
+        params = OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters(output_control=None,
                                         problem=ProblemVoidMinSO("a", True))
         # Assert
         self.assertIsInstance(params, OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters)
@@ -26,10 +26,9 @@ class TestOnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameter
     # Creating an instance of the class with valid OutputControl and Problem parameters should not raise any exceptions
     def test_valid_parameters_no_exceptions(self):
         # Arrange
-        output_control = OutputControl(write_to_output=True)
         problem = OnesCountMaxProblem(dim=3)
         # Act
-        params = OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters(output_control=output_control, 
+        params = OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters(output_control=None, 
                                         problem=problem)
         # Assert
         self.assertIsInstance(params, OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters)
@@ -48,7 +47,7 @@ class TestOnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameter
     # Creating an instance of the class with invalid Problem parameter should raise a TypeError
     def test_invalid_problem_type(self):
         # Arrange
-        output_control = OutputControl(write_to_output=True)
+        output_control = OutputControl()
         invalid_problem = "invalid"
     
         # Act & Assert

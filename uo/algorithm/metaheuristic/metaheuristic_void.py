@@ -12,6 +12,8 @@ from io import TextIOWrapper
 
 from uo.utils.logger import logger
 
+from typing import Optional
+
 from uo.problem.problem import Problem
 from uo.solution.solution import Solution
 
@@ -23,13 +25,13 @@ from uo.algorithm.metaheuristic.metaheuristic import Metaheuristic
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 class MetaheuristicVoid(Metaheuristic):
     def __init__(self, 
-            name:str, 
             finish_control:FinishControl,
-            random_seed:int, 
-            additional_statistics_control:AdditionalStatisticsControl,
-            output_control:OutputControl, 
-            problem:Problem ,
-            solution_template:Solution = None
+            problem:Problem,
+            solution_template:Optional[Solution]=None,
+            name:str='metaheuristic-void', 
+            output_control:Optional[OutputControl]=None,
+            random_seed:Optional[int]=None, 
+            additional_statistics_control:Optional[AdditionalStatisticsControl]=None
     )->None:
         super().__init__(
                 name=name, 

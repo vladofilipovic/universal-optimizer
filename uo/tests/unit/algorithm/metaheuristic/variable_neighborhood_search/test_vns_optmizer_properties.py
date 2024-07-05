@@ -1,6 +1,5 @@
 import unittest   
 import unittest.mock as mocker
-from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
 from uo.problem.problem import Problem
 from uo.algorithm.output_control import OutputControl
@@ -8,7 +7,7 @@ from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer 
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support import VnsShakingSupport
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support import VnsLocalSearchSupport
-from uo.solution.solution_void import SolutionVoid
+from uo.solution.solution_void_representation_int import SolutionVoidRepresentationInt
 
 class TestVnsOptimizerProperties(unittest.TestCase):
     
@@ -18,7 +17,6 @@ class TestVnsOptimizerProperties(unittest.TestCase):
 
     def setUp(self):
         self.output_control_stub = mocker.MagicMock(spec=OutputControl)
-        type(self.output_control_stub).write_to_output = False
 
         self.problem_mock = mocker.MagicMock(spec=Problem)
         type(self.problem_mock).name = mocker.PropertyMock(return_value='some_problem')
@@ -45,20 +43,17 @@ class TestVnsOptimizerProperties(unittest.TestCase):
         self.random_seed = 42
         self.k_min = 3
         self.k_max = 42
-        
-        self.additional_statistics_control = AdditionalStatisticsControl()
-        
+                
         self.vns_optimizer = VnsOptimizer(
                 output_control=self.output_control_stub,
                 problem=self.problem_mock, 
-                solution_template=SolutionVoid( 43, 0, 0, False),
+                solution_template=SolutionVoidRepresentationInt( 43, 0, 0, False),
                 vns_shaking_support=self.vns_shaking_support_stub, 
                 vns_ls_support=self.vns_ls_support_stub, 
                 finish_control=self.finish_control_mock,
                 random_seed=self.random_seed, 
                 k_min=self.k_min, 
                 k_max=self.k_max, 
-                additional_statistics_control=self.additional_statistics_control,
                 local_search_type='localSearchFirstImprovement'
         )
     
@@ -106,14 +101,13 @@ class TestVnsOptimizerProperties(unittest.TestCase):
             vns_optimizer:VnsOptimizer = VnsOptimizer(
                 output_control=self.output_control_stub,
                 problem=self.problem_mock, 
-                solution_template=SolutionVoid( 43, 0, 0, False),
+                solution_template=SolutionVoidRepresentationInt( 43, 0, 0, False),
                 vns_shaking_support=vns_support_shaking_stub, 
                 vns_ls_support=vns_support_local_search_stub,
                 finish_control=self.finish_control_mock,
                 random_seed=self.random_seed, 
                 k_min=self.k_min, 
                 k_max=self.k_max, 
-                additional_statistics_control=AdditionalStatisticsControl(),
                 local_search_type='xxx'
             )            
         self.assertEqual("Value 'xxx' for VNS local_search_type is not supported", context.exception.args[0])

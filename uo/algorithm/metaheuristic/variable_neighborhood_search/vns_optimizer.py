@@ -18,15 +18,11 @@ from copy import deepcopy
 from random import choice
 from random import random
 
-from bitstring import Bits, BitArray, BitStream, pack
-
-from typing import Optional, TypeVar, Generic
-from typing import Generic
-from typing import NamedTuple
-
 from dataclasses import dataclass
 
 from uo.utils.logger import logger
+
+from typing import Optional
 
 from uo.problem.problem import Problem
 from uo.solution.solution import Solution
@@ -47,17 +43,17 @@ class VnsOptimizerConstructionParameters:
         Instance of the class :class:`~uo.algorithm.metaheuristic.variable_neighborhood_search_constructor_parameters.
         VnsOptimizerConstructionParameters` represents constructor parameters for VNS algorithm.
         """
-        finish_control: FinishControl = None
-        random_seed: Optional[int] = None
-        additional_statistics_control: AdditionalStatisticsControl = None
-        output_control: OutputControl = None
-        problem: Problem = None
-        solution_template: Solution = None
         vns_shaking_support: VnsShakingSupport = None
         vns_ls_support: VnsLocalSearchSupport = None
+        local_search_type: Optional[str] = None
         k_min: Optional[int] = None
         k_max: Optional[int] = None
-        local_search_type: Optional[str] = None
+        finish_control: Optional[FinishControl] = None
+        problem: Problem = None
+        solution_template: Optional[Solution] = None
+        output_control: Optional[OutputControl] = None
+        random_seed: Optional[int] = None
+        additional_statistics_control: Optional[AdditionalStatisticsControl] = None
 
 class VnsOptimizer(SingleSolutionMetaheuristic):
     """
@@ -66,17 +62,18 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
     """
     
     def __init__(self, 
-            finish_control:FinishControl, 
-            random_seed:Optional[int], 
-            additional_statistics_control:AdditionalStatisticsControl,
-            output_control:OutputControl, 
-            problem:Problem, 
-            solution_template:Solution,
             vns_shaking_support:VnsShakingSupport, 
             vns_ls_support:VnsLocalSearchSupport, 
+            local_search_type:str,
             k_min:int, 
             k_max:int, 
-            local_search_type:str)->None:
+            finish_control:FinishControl, 
+            problem:Problem, 
+            solution_template:Optional[Solution],
+            output_control:Optional[OutputControl]=None, 
+            random_seed:Optional[int]=None, 
+            additional_statistics_control:Optional[AdditionalStatisticsControl]=None
+        )->None:
         """
         Create new instance of class :class:`~uo.algorithm.metaheuristic.variable_neighborhood_search.VnsOptimizer`. 
         That instance implements :ref:`VNS<Algorithm_Variable_Neighborhood_Search>` algorithm. 
@@ -97,28 +94,16 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         :param local_search_type: type of the local search
         :type local_search_type: str, possible values: 'localSearchBestImprovement', 'localSearchFirstImprovement' 
         """
-        if not isinstance(finish_control, FinishControl):
-                raise TypeError('Parameter \'finish_control\' must be \'FinishControl\'.')
-        if not isinstance(random_seed, Optional[int]):
-                raise TypeError('Parameter \'random_seed\' must be \'int\' or \'None\'.')
-        if not isinstance(additional_statistics_control, AdditionalStatisticsControl):
-                raise TypeError('Parameter \'additional_statistics_control\' must be \'AdditionalStatisticsControl\'.')
-        if not isinstance(output_control, OutputControl):
-                raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
-        if not isinstance(problem, Problem):
-                raise TypeError('Parameter \'problem\' must be \'Problem\'.')
-        if not isinstance(solution_template, Solution) and solution_template is not None:
-                raise TypeError('Parameter \'solution_template\' must be \'Solution\' or \'None\'.')        
         if not isinstance(vns_shaking_support, VnsShakingSupport):
                 raise TypeError('Parameter \'vns_shaking_support\' must be \'VnsShakingSupport\'.')        
         if not isinstance(vns_ls_support, VnsLocalSearchSupport):
                 raise TypeError('Parameter \'vns_ls_support\' must be \'VnsLocalSearchSupport\'.')        
+        if not isinstance(local_search_type, str):
+                raise TypeError('Parameter \'local_search_type\' must be \'str\'.')        
         if not isinstance(k_min, int):
                 raise TypeError('Parameter \'k_min\' must be \'int\'.')        
         if not isinstance(k_max, int):
                 raise TypeError('Parameter \'k_max\' must be \'int\'.')        
-        if not isinstance(local_search_type, str):
-                raise TypeError('Parameter \'local_search_type\' must be \'str\'.')        
         super().__init__( name='vns', 
                 finish_control=finish_control, 
                 random_seed=random_seed, 
@@ -151,17 +136,18 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         :param `VnsOptimizerConstructionParameters` construction_tuple: tuple with all constructor parameters
         """
         return cls( 
-            construction_tuple.finish_control,
-            construction_tuple.random_seed, 
-            construction_tuple.additional_statistics_control,
-            construction_tuple.output_control, 
-            construction_tuple.problem, 
-            construction_tuple.solution_template,
             construction_tuple.vns_shaking_support, 
             construction_tuple.vns_ls_support, 
+            construction_tuple.local_search_type,
             construction_tuple.k_min, 
             construction_tuple.k_max, 
-            construction_tuple.local_search_type)
+            construction_tuple.finish_control,
+            construction_tuple.problem, 
+            construction_tuple.solution_template,
+            construction_tuple.output_control, 
+            construction_tuple.random_seed, 
+            construction_tuple.additional_statistics_control
+        )
 
     def __copy__(self):
         """

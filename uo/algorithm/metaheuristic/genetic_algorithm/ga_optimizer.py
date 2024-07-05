@@ -40,70 +40,66 @@ class GaOptimizer(PopulationBasedMetaheuristic, metaclass=ABCMeta):
     """
     
     def __init__(self,
-            finish_control:FinishControl,
-            random_seed:Optional[int],
-            additional_statistics_control:AdditionalStatisticsControl,
-            output_control:OutputControl,
-            problem:Problem,
-            solution_template:Solution,
-            ga_selection: Selection,
             ga_crossover_support:GaCrossoverSupport,
             ga_mutation_support:GaMutationSupport,
+            ga_selection: Selection,
             population_size: int,
-            elite_count:Optional[int]
+            elite_count:int,
+            finish_control:FinishControl,
+            problem:Problem,
+            solution_template:Optional[Solution],
+            output_control:Optional[OutputControl],
+            random_seed:Optional[int],
+            additional_statistics_control:AdditionalStatisticsControl
         )->None:
         """
         Create new instance of class :class:`~uo.algorithm.metaheuristic.genetic_algorithm.GaOptimizer`. 
         That instance implements :ref:`GA<Genetic_Algorithm>` algorithm. 
 
-        :param `FinishControl` finish_control: structure that control finish criteria for metaheuristic execution
-        :param int random_seed: random seed for metaheuristic execution
-        :param `AdditionalStatisticsControl` additional_statistics_control: structure that controls additional
-        statistics obtained during population-based metaheuristic execution
-        :param `OutputControl` output_control: structure that controls output
-        :param `Problem` problem: problem to be solved
-        :param `Solution` solution_template: initial solution of the problem
         :param `GaCrossoverSupport` ga_crossover_support: placeholder for additional methods, specific for GA crossover 
         execution, which depend of precise solution type 
         :param `GaMutationSupport` ga_mutation_support: placeholder for additional methods, specific for GA mutation 
         execution, which depend of precise solution type 
-        :param `float` mutation_probability: probability of mutation
+        :param `Selection` ga_selection: structure that controls GA selection
         :param `int` population_size: size of the population
+        :param `int` elite_count: Count of the elite individuals within population
+        :param `FinishControl` finish_control: structure that control finish criteria for metaheuristic execution
+        :param `Problem` problem: problem to be solved
+        :param `Optional[Solution]` solution_template: initial solution of the problem
+        :param `Optional[OutputControl]` output_control: structure that controls output
+        :param Optional[int] random_seed: random seed for metaheuristic execution
+        :param `Optional[AdditionalStatisticsControl]` additional_statistics_control: structure that controls additional
+        statistics obtained during population-based metaheuristic execution
         """
-        if not isinstance(finish_control, FinishControl):
-                raise TypeError('Parameter \'finish_control\' must be \'FinishControl\'.')
-        if not isinstance(random_seed, Optional[int]):
-                raise TypeError('Parameter \'random_seed\' must be \'int\' or \'None\'.')
-        if not isinstance(additional_statistics_control, AdditionalStatisticsControl):
-                raise TypeError('Parameter \'additional_statistics_control\' must be \'AdditionalStatisticsControl\'.')
-        if not isinstance(output_control, OutputControl):
-                raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
-        if not isinstance(problem, Problem):
-                raise TypeError('Parameter \'problem\' must be \'Problem\'.')
-        if not isinstance(ga_selection, Selection):
-                raise TypeError('Parameter \'ga_selection\' must be \'Selection\'.')
         if not isinstance(ga_crossover_support, GaCrossoverSupport):
                 raise TypeError('Parameter \'ga_crossover_support\' must be \'GaCrossoverSupport\'.')
         if not isinstance(ga_mutation_support, GaMutationSupport):
                 raise TypeError('Parameter \'ga_mutation_support\' must be \'GaMutationSupport\'.')
+        if not isinstance(ga_selection, Selection):
+                raise TypeError('Parameter \'ga_selection\' must be \'Selection\'.')
         if not isinstance(population_size, int):
                 raise TypeError('Parameter \'population_size\' must be \'int\'.')
-        if population_size < 0:
+        if population_size <= 0:
                 raise ValueError('Parameter \'population_size\' must be positive.')
-        super().__init__( name='ga',
+        if not isinstance(elite_count, int):
+                raise TypeError('Parameter \'elite_count\' must be \'int\'.')
+        if elite_count < 0:
+                raise ValueError('Parameter \'elite_count\' can not be negative.')
+        super().__init__( 
                 finish_control=finish_control,
-                random_seed=random_seed,
-                additional_statistics_control=additional_statistics_control,
-                output_control=output_control,
                 problem=problem,
-                solution_template=solution_template)
-        self.__ga_selection = ga_selection 
+                solution_template=solution_template,                
+                name='ga',
+                output_control=output_control,
+                random_seed=random_seed,
+                additional_statistics_control=additional_statistics_control)
         self.__ga_crossover_support:GaCrossoverSupport = ga_crossover_support
         self.__crossover_method = self.__ga_crossover_support.crossover
         self.__ga_mutation_support:GaMutationSupport = ga_mutation_support
         self.__mutation_method = self.__ga_mutation_support.mutation
+        self.__ga_selection = ga_selection 
         self.__population_size:int = population_size
-        self.__elite_count:Optional[int] = elite_count
+        self.__elite_count:int = elite_count
         self.__current_population = [self.solution_template.copy() for _ in range(self.population_size)]
 
     def __copy__(self):
@@ -126,7 +122,7 @@ class GaOptimizer(PopulationBasedMetaheuristic, metaclass=ABCMeta):
         return self.__copy__()
 
     @property
-    def elite_count(self)->Optional[int]:
+    def elite_count(self)->int:
         """
         Property getter for elitist count 
         

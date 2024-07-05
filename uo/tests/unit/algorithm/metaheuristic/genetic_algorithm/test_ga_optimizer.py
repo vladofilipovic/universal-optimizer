@@ -11,7 +11,7 @@ from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support import Ga
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support import GaMutationSupport
 
 from uo.problem.problem_void_min_so import ProblemVoidMinSO
-from uo.solution.solution_void import SolutionVoid
+from uo.solution.solution_void_representation_int import SolutionVoidRepresentationInt
 
 
 class TestGaOptimizerGenerational(unittest.TestCase):
@@ -21,10 +21,8 @@ class TestGaOptimizerGenerational(unittest.TestCase):
         # Arrange
         finish_control = FinishControl()
         random_seed = 123
-        additional_statistics_control = AdditionalStatisticsControl()
-        output_control = OutputControl()
         problem = ProblemVoidMinSO("a problem", True)
-        solution_template = SolutionVoid( 43, 43, 43, True)
+        solution_template = SolutionVoidRepresentationInt( 43, 43, 43, True)
         selection_stub = mocker.MagicMock(spec=Selection)
         type(selection_stub).selection = mocker.CallableMixin(spec=lambda x: x)
         ga_crossover_support_stub = mocker.MagicMock(spec=GaCrossoverSupport)
@@ -34,9 +32,16 @@ class TestGaOptimizerGenerational(unittest.TestCase):
         population_size = 100
         elitism_size = 10
         # Act
-        ga_optimizer = GaOptimizerGenerational(finish_control, random_seed, additional_statistics_control, output_control, 
-                    problem, solution_template, selection_stub, 
-                    ga_crossover_support_stub, ga_mutation_support_stub, population_size, elitism_size)
+        ga_optimizer = GaOptimizerGenerational( ga_crossover_support=ga_crossover_support_stub, 
+                                ga_mutation_support=ga_mutation_support_stub, 
+                                ga_selection=selection_stub, 
+                                population_size=population_size, 
+                                elite_count=elitism_size,
+                                finish_control=finish_control, 
+                                problem=problem, 
+                                solution_template=solution_template,
+                                random_seed=random_seed   
+                    )
         # Assert
         self.assertIsInstance(ga_optimizer, GaOptimizerGenerational)
 
@@ -45,10 +50,8 @@ class TestGaOptimizerGenerational(unittest.TestCase):
         # Arrange
         finish_control = FinishControl()
         random_seed = 123
-        additional_statistics_control = AdditionalStatisticsControl()
-        output_control = OutputControl()
         problem = ProblemVoidMinSO("a problem", True)
-        solution_template = SolutionVoid( 43, 0, 0, False)
+        solution_template = SolutionVoidRepresentationInt( 43, 0, 0, False)
         selection_stub = mocker.MagicMock(spec=Selection)
         type(selection_stub).selection = mocker.CallableMixin(spec=lambda x: x)
         ga_crossover_support_stub = mocker.MagicMock(spec=GaCrossoverSupport)
@@ -58,9 +61,15 @@ class TestGaOptimizerGenerational(unittest.TestCase):
         population_size = 100
         elitism_size = 10
         # Act
-        ga_optimizer = GaOptimizerGenerational(finish_control, random_seed, additional_statistics_control, output_control, 
-                    problem, solution_template, selection_stub, 
-                    ga_crossover_support_stub, ga_mutation_support_stub, population_size, elitism_size)
+        ga_optimizer = GaOptimizerGenerational(ga_crossover_support=ga_crossover_support_stub, 
+                                ga_mutation_support=ga_mutation_support_stub, 
+                                ga_selection=selection_stub, 
+                                population_size=population_size, 
+                                elite_count=elitism_size,
+                                finish_control=finish_control, 
+                                problem=problem, 
+                                solution_template=solution_template,
+                                random_seed=random_seed)
         # Assert
         self.assertIsInstance(ga_optimizer, GaOptimizerGenerational)
 
@@ -69,10 +78,8 @@ class TestGaOptimizerGenerational(unittest.TestCase):
         # Arrange
         finish_control = FinishControl()
         random_seed = None
-        additional_statistics_control = AdditionalStatisticsControl()
-        output_control = OutputControl()
         problem = ProblemVoidMinSO("a problem", True)
-        solution_template = SolutionVoid( 43, 0, 0, False)
+        solution_template = SolutionVoidRepresentationInt( 43, 0, 0, False)
         selection_stub = mocker.MagicMock(spec=Selection)
         type(selection_stub).selection = mocker.CallableMixin(spec=lambda x: x)
         ga_crossover_support_stub = mocker.MagicMock(spec=GaCrossoverSupport)
@@ -82,9 +89,15 @@ class TestGaOptimizerGenerational(unittest.TestCase):
         population_size = 100
         elitism_size = 10
         # Act
-        ga_optimizer = GaOptimizerGenerational(finish_control, random_seed, additional_statistics_control, output_control, 
-                    problem, solution_template, selection_stub, 
-                    ga_crossover_support_stub, ga_mutation_support_stub, population_size, elitism_size)
+        ga_optimizer = GaOptimizerGenerational(ga_crossover_support=ga_crossover_support_stub, 
+                                ga_mutation_support=ga_mutation_support_stub, 
+                                ga_selection=selection_stub, 
+                                population_size=population_size, 
+                                elite_count=elitism_size,
+                                finish_control=finish_control, 
+                                problem=problem, 
+                                solution_template=solution_template,
+                                random_seed=random_seed)
         # Assert
         self.assertIsInstance(ga_optimizer, GaOptimizerGenerational)
 
@@ -92,8 +105,6 @@ class TestGaOptimizerGenerational(unittest.TestCase):
     def test_ga_optimizer_initialized_without_ga_crossover_support(self):
         finish_control = FinishControl()
         random_seed = 123
-        additional_statistics_control = AdditionalStatisticsControl()
-        output_control = OutputControl()
         problem = ProblemVoidMinSO("a problem", True)
         solution_template = None
         selection_stub = mocker.MagicMock(spec=Selection)
@@ -105,19 +116,23 @@ class TestGaOptimizerGenerational(unittest.TestCase):
         elitism_size = 10
         # Act & Assert
         with self.assertRaises(TypeError):
-            GaOptimizerGenerational(finish_control, random_seed, additional_statistics_control, output_control, 
-                    problem, solution_template, selection_stub, 
-                    ga_crossover_support_stub, ga_mutation_support_stub, population_size, elitism_size)
+            GaOptimizerGenerational(ga_crossover_support=ga_crossover_support_stub, 
+                                ga_mutation_support=ga_mutation_support_stub, 
+                                ga_selection=selection_stub, 
+                                population_size=population_size, 
+                                elite_count=elitism_size,
+                                finish_control=finish_control, 
+                                problem=problem, 
+                                solution_template=solution_template,
+                                random_seed=random_seed)
 
     # GaOptimizerGenerational can successfully execute init
     def test_ga_optimizer_init(self):
         # Arrange
         finish_control = FinishControl()
         random_seed = None
-        additional_statistics_control = AdditionalStatisticsControl()
-        output_control = OutputControl()
         problem = ProblemVoidMinSO("a problem", True)
-        solution_template = SolutionVoid( 43, 43, 43, True)
+        solution_template = SolutionVoidRepresentationInt( 43, 43, 43, True)
         selection_stub = mocker.MagicMock(spec=Selection)
         type(selection_stub).selection = mocker.CallableMixin(spec=lambda x: x)
         ga_crossover_support_stub = mocker.MagicMock(spec=GaCrossoverSupport)
@@ -126,9 +141,15 @@ class TestGaOptimizerGenerational(unittest.TestCase):
         type(ga_mutation_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
         population_size = 100
         elitism_size = 10
-        ga_optimizer = GaOptimizerGenerational(finish_control, random_seed, additional_statistics_control, output_control, 
-                    problem, solution_template, selection_stub, 
-                    ga_crossover_support_stub, ga_mutation_support_stub, population_size, elitism_size)
+        ga_optimizer = GaOptimizerGenerational(ga_crossover_support=ga_crossover_support_stub, 
+                                ga_mutation_support=ga_mutation_support_stub, 
+                                ga_selection=selection_stub, 
+                                population_size=population_size, 
+                                elite_count=elitism_size,
+                                finish_control=finish_control, 
+                                problem=problem, 
+                                solution_template=solution_template,
+                                random_seed=random_seed)
         # Act
         ga_optimizer.execution_started = datetime.now()
         ga_optimizer.init()
@@ -141,10 +162,8 @@ class TestGaOptimizerGenerational(unittest.TestCase):
         # Arrange
         finish_control = FinishControl()
         random_seed = None
-        additional_statistics_control = AdditionalStatisticsControl()
-        output_control = OutputControl()
         problem = ProblemVoidMinSO("a problem", True)
-        solution_template = SolutionVoid( 43, 43, 43, True)
+        solution_template = SolutionVoidRepresentationInt( 43, 43, 43, True)
         selection_stub = mocker.MagicMock(spec=Selection)
         type(selection_stub).selection = mocker.CallableMixin(spec=lambda x: x)
         ga_crossover_support_stub = mocker.MagicMock(spec=GaCrossoverSupport)
@@ -153,9 +172,15 @@ class TestGaOptimizerGenerational(unittest.TestCase):
         type(ga_mutation_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
         population_size = 100
         elitism_size = 10
-        ga_optimizer = GaOptimizerGenerational(finish_control, random_seed, additional_statistics_control, output_control, 
-                    problem, solution_template, selection_stub, 
-                    ga_crossover_support_stub, ga_mutation_support_stub, population_size, elitism_size)
+        ga_optimizer = GaOptimizerGenerational(ga_crossover_support=ga_crossover_support_stub, 
+                                ga_mutation_support=ga_mutation_support_stub, 
+                                ga_selection=selection_stub, 
+                                population_size=population_size, 
+                                elite_count=elitism_size,
+                                finish_control=finish_control, 
+                                problem=problem, 
+                                solution_template=solution_template,
+                                random_seed=random_seed)
         # Act
         copied_optimizer = ga_optimizer.copy()
         # Assert
@@ -168,10 +193,8 @@ class TestGaOptimizerGenerational(unittest.TestCase):
         # Arrange
         finish_control = "not a FinishControl"
         random_seed = 123
-        additional_statistics_control = AdditionalStatisticsControl()
-        output_control = OutputControl()
         problem = ProblemVoidMinSO("a problem", True)
-        solution_template = SolutionVoid( 43, 43, 43, True)
+        solution_template = SolutionVoidRepresentationInt( 43, 43, 43, True)
         selection_stub = mocker.MagicMock(spec=Selection)
         type(selection_stub).selection = mocker.CallableMixin(spec=lambda x: x)
         ga_crossover_support_stub = mocker.MagicMock(spec=GaCrossoverSupport)
@@ -182,19 +205,23 @@ class TestGaOptimizerGenerational(unittest.TestCase):
         elitism_size = 10
         # Act & Assert
         with self.assertRaises(TypeError):
-            GaOptimizerGenerational(finish_control, random_seed, additional_statistics_control, output_control, 
-                    problem, solution_template, selection_stub, 
-                    ga_crossover_support_stub, ga_mutation_support_stub, population_size, elitism_size)
+            GaOptimizerGenerational(ga_crossover_support=ga_crossover_support_stub, 
+                                ga_mutation_support=ga_mutation_support_stub, 
+                                ga_selection=selection_stub, 
+                                population_size=population_size, 
+                                elite_count=elitism_size,
+                                finish_control=finish_control, 
+                                problem=problem, 
+                                solution_template=solution_template,
+                                random_seed=random_seed)
 
     # GaOptimizerGenerational raises TypeError if random_seed parameter is not of type Optional[int]
     def test_random_seed_type_error(self):
         # Arrange
         finish_control = FinishControl()
         random_seed = "not an int"
-        additional_statistics_control = AdditionalStatisticsControl()
-        output_control = OutputControl()
         problem = ProblemVoidMinSO("a problem", True)
-        solution_template = SolutionVoid( 43, 43, 43, True)
+        solution_template = SolutionVoidRepresentationInt( 43, 43, 43, True)
         selection_stub = mocker.MagicMock(spec=Selection)
         type(selection_stub).selection = mocker.CallableMixin(spec=lambda x: x)
         ga_crossover_support_stub = mocker.MagicMock(spec=GaCrossoverSupport)
@@ -205,9 +232,15 @@ class TestGaOptimizerGenerational(unittest.TestCase):
         elitism_size = 10
         # Act & Assert
         with self.assertRaises(TypeError):
-            GaOptimizerGenerational(finish_control, random_seed, additional_statistics_control, output_control, 
-                    problem, solution_template, selection_stub, 
-                    ga_crossover_support_stub, ga_mutation_support_stub, population_size, elitism_size)
+            GaOptimizerGenerational(ga_crossover_support=ga_crossover_support_stub, 
+                                ga_mutation_support=ga_mutation_support_stub, 
+                                ga_selection=selection_stub, 
+                                population_size=population_size, 
+                                elite_count=elitism_size,
+                                finish_control=finish_control, 
+                                problem=problem, 
+                                solution_template=solution_template,
+                                random_seed=random_seed)
 
     # GaOptimizerGenerational raises TypeError if additional_statistics_control parameter is not of type AdditionalStatisticsControl
     def test_additional_statistics_control_type_error(self):
@@ -215,9 +248,8 @@ class TestGaOptimizerGenerational(unittest.TestCase):
         finish_control = FinishControl()
         random_seed = 123
         additional_statistics_control = "not a valid type"
-        output_control = OutputControl()
         problem = ProblemVoidMinSO("a problem", True)
-        solution_template = SolutionVoid( 43, 43, 43, True)
+        solution_template = SolutionVoidRepresentationInt( 43, 43, 43, True)
         selection_stub = mocker.MagicMock(spec=Selection)
         type(selection_stub).selection = mocker.CallableMixin(spec=lambda x: x)
         ga_crossover_support_stub = mocker.MagicMock(spec=GaCrossoverSupport)
@@ -228,17 +260,22 @@ class TestGaOptimizerGenerational(unittest.TestCase):
         elitism_size = 10
         # Act & Assert
         with self.assertRaises(TypeError):
-            GaOptimizerGenerational(finish_control, random_seed, additional_statistics_control, output_control, 
-                    problem, solution_template, selection_stub, 
-                    ga_crossover_support_stub, ga_mutation_support_stub, population_size, elitism_size)
+            GaOptimizerGenerational(ga_crossover_support=ga_crossover_support_stub, 
+                                ga_mutation_support=ga_mutation_support_stub, 
+                                ga_selection=selection_stub, 
+                                population_size=population_size, 
+                                elite_count=elitism_size,
+                                finish_control=finish_control, 
+                                problem=problem, 
+                                solution_template=solution_template,
+                                random_seed=random_seed, 
+                                additional_statistics_control=additional_statistics_control)
 
     # GaOptimizerGenerational raises TypeError if solution_template parameter is not of type Optional[Solution]
     def test_solution_template_parameter_type_error(self):
         # Arrange
         finish_control = FinishControl()
         random_seed = 123
-        additional_statistics_control = AdditionalStatisticsControl()
-        output_control = OutputControl()
         problem = ProblemVoidMinSO("a problem", True)
         solution_template = "not a Solution"        
         selection_stub = mocker.MagicMock(spec=Selection)
@@ -251,19 +288,23 @@ class TestGaOptimizerGenerational(unittest.TestCase):
         elitism_size = 10
         # Act & Assert
         with self.assertRaises(TypeError):
-            GaOptimizerGenerational(finish_control, random_seed, additional_statistics_control, output_control, 
-                    problem, solution_template, selection_stub, 
-                    ga_crossover_support_stub, ga_mutation_support_stub, population_size, elitism_size)
+            GaOptimizerGenerational(ga_crossover_support=ga_crossover_support_stub, 
+                                ga_mutation_support=ga_mutation_support_stub, 
+                                ga_selection=selection_stub, 
+                                population_size=population_size, 
+                                elite_count=elitism_size,
+                                finish_control=finish_control, 
+                                problem=problem, 
+                                solution_template=solution_template,
+                                random_seed=random_seed)
 
     # GaOptimizerGenerational raises TypeError if ga_crossover_support parameter is not of type GaCrossoverSupport
     def test_ga_crossover_support_parameter_type_error(self):
         # Arrange
         finish_control = FinishControl()
         random_seed = 123
-        additional_statistics_control = AdditionalStatisticsControl()
-        output_control = OutputControl()
         problem = ProblemVoidMinSO("a problem", True)
-        solution_template = SolutionVoid( 43, 43, 43, True)        
+        solution_template = SolutionVoidRepresentationInt( 43, 43, 43, True)        
         selection_stub = mocker.MagicMock(spec=Selection)
         type(selection_stub).selection = mocker.CallableMixin(spec=lambda x: x)
         ga_crossover_support_stub = "not appropriate type"
@@ -273,19 +314,23 @@ class TestGaOptimizerGenerational(unittest.TestCase):
         elitism_size = 10
         # Act & Assert
         with self.assertRaises(TypeError):
-            GaOptimizerGenerational(finish_control, random_seed, additional_statistics_control, output_control, 
-                    problem, solution_template, selection_stub, 
-                    ga_crossover_support_stub, ga_mutation_support_stub, population_size, elitism_size)
+            GaOptimizerGenerational(ga_crossover_support=ga_crossover_support_stub, 
+                                ga_mutation_support=ga_mutation_support_stub, 
+                                ga_selection=selection_stub, 
+                                population_size=population_size, 
+                                elite_count=elitism_size,
+                                finish_control=finish_control, 
+                                problem=problem, 
+                                solution_template=solution_template,
+                                random_seed=random_seed)
 
     # GaOptimizerGenerational raises TypeError if population_size parameter is not of type int
     def test_population_size_parameter_type_error(self):
         # Arrange
         finish_control = FinishControl()
         random_seed = 123
-        additional_statistics_control = AdditionalStatisticsControl()
-        output_control = OutputControl()
         problem = ProblemVoidMinSO("a problem", True)
-        solution_template = SolutionVoid( 43, 43, 43, True)         
+        solution_template = SolutionVoidRepresentationInt( 43, 43, 43, True)         
         selection_stub = mocker.MagicMock(spec=Selection)
         type(selection_stub).selection = mocker.CallableMixin(spec=lambda x: x)
         ga_crossover_support_stub = mocker.MagicMock(spec=GaCrossoverSupport)
@@ -296,7 +341,13 @@ class TestGaOptimizerGenerational(unittest.TestCase):
         elitism_size = 10
         # Act & Assert
         with self.assertRaises(TypeError):
-            GaOptimizerGenerational(finish_control, random_seed, additional_statistics_control, output_control, 
-                    problem, solution_template, selection_stub, 
-                    ga_crossover_support_stub, ga_mutation_support_stub, population_size, elitism_size)
+            GaOptimizerGenerational(ga_crossover_support=ga_crossover_support_stub, 
+                                ga_mutation_support=ga_mutation_support_stub, 
+                                ga_selection=selection_stub, 
+                                population_size=population_size, 
+                                elite_count=elitism_size,
+                                finish_control=finish_control, 
+                                problem=problem, 
+                                solution_template=solution_template,
+                                random_seed=random_seed)
 

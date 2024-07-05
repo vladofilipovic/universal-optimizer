@@ -8,7 +8,7 @@ from uo.problem.problem import Problem
 
 from uo.solution.quality_of_solution import QualityOfSolution
 from uo.solution.solution import Solution 
-from uo.solution.solution_void import SolutionVoid
+from uo.solution.solution_void_representation_int import SolutionVoidRepresentationInt
 
 class TestSolutionProperties(unittest.TestCase):
     
@@ -21,10 +21,12 @@ class TestSolutionProperties(unittest.TestCase):
         self.fitness_value = 42.0
         self.objective_value = -42.0
         self.is_feasible = True
-        self.solution = SolutionVoid( random_seed=self.random_seed,
+        self.solution = SolutionVoidRepresentationInt( random_seed=self.random_seed,
                 fitness_value=self.fitness_value,
                 objective_value=self.objective_value,
-                is_feasible= self.is_feasible
+                is_feasible= self.is_feasible, 
+                evaluation_cache_is_used=True,
+                distance_calculation_cache_is_used=True
         )
     
     def test_fitness_value_should_be_equal_as_in_constructor(self):
@@ -72,10 +74,58 @@ class TestSolutionProperties(unittest.TestCase):
         self.assertEqual(self.solution.representation, val)
 
     def test_evaluation_cache_cs_hit_count_should_be_zero_after_constructor(self):
-        self.assertEqual(self.solution.evaluation_cache_cs.cache_hit_count, 0)
+        random_seed = 42
+        fitness_value = 42.0
+        objective_value = -42.0
+        is_feasible = True
+        solution = SolutionVoidRepresentationInt( random_seed=random_seed,
+                fitness_value=fitness_value,
+                objective_value=objective_value,
+                is_feasible= is_feasible, 
+                evaluation_cache_is_used=True,
+                distance_calculation_cache_is_used=True
+        )
+        self.assertEqual(solution.evaluation_cache_cs.cache_hit_count, 0)
 
     def test_evaluation_cache_cs__request_count_should_be_zero_after_constructor(self):
-        self.assertEqual(self.solution.evaluation_cache_cs.cache_request_count, 0)
+        random_seed = 42
+        fitness_value = 42.0
+        objective_value = -42.0
+        is_feasible = True
+        solution = SolutionVoidRepresentationInt( random_seed=random_seed,
+                fitness_value=fitness_value,
+                objective_value=objective_value,
+                is_feasible= is_feasible, 
+                evaluation_cache_is_used=True,
+                distance_calculation_cache_is_used=True
+        )
+        self.assertEqual(solution.evaluation_cache_cs.cache_request_count, 0)
+
+    def test_distance_calculation_cache_hit_count_should_be_zero_after_constructor(self):
+        random_seed = 42
+        fitness_value = 42.0
+        objective_value = -42.0
+        is_feasible = True
+        solution = SolutionVoidRepresentationInt( random_seed=random_seed,
+                fitness_value=fitness_value,
+                objective_value=objective_value,
+                is_feasible= is_feasible, 
+                distance_calculation_cache_is_used=True
+        )
+        self.assertEqual(solution.representation_distance_cache_cs.cache_hit_count, 0)
+
+    def test_distance_calculation_cache_cs__request_count_should_be_zero_after_constructor(self):
+        random_seed = 42
+        fitness_value = 42.0
+        objective_value = -42.0
+        is_feasible = True
+        solution = SolutionVoidRepresentationInt( random_seed=random_seed,
+                fitness_value=fitness_value,
+                objective_value=objective_value,
+                is_feasible= is_feasible, 
+                distance_calculation_cache_is_used=True
+        )
+        self.assertEqual(solution.representation_distance_cache_cs.cache_request_count, 0)
 
     def tearDown(self):
         return

@@ -11,7 +11,10 @@ sys.path.append(directory.parent)
 
 from copy import deepcopy
 from datetime import datetime
+
 from abc import ABCMeta, abstractmethod
+
+from typing import Optional
 
 from uo.utils.logger import logger
 from uo.algorithm.output_control import OutputControl
@@ -25,23 +28,27 @@ class Optimizer(metaclass=ABCMeta):
     """
 
     @abstractmethod
-    def __init__(self, name:str, output_control:OutputControl, problem:Problem)->None:
+    def __init__(self, 
+                problem:Problem, 
+                name:str, 
+                output_control:Optional[OutputControl]
+    )->None:
         """
         Create new `Optimizer` instance
 
         :param str name: name of the optimizer
-        :param `OutputControl` output_control: structure that controls output
+        :param `Optional[OutputControl]` output_control: structure that controls output
         :param `Problem` problem: problem to be solved
         """
-        if not isinstance(name, str):
-                raise TypeError('Parameter \'name\' must be \'str\'.')
-        if not isinstance(output_control, OutputControl):
-                raise TypeError('Parameter \'output_control\' must be \'OutputControl\'.')
         if not isinstance(problem, Problem):
                 raise TypeError('Parameter \'problem\' must be \'Problem\'.')
+        if not isinstance(name, str):
+                raise TypeError('Parameter \'name\' must be \'str\'.')
+        if not isinstance(output_control, OutputControl) and output_control is not None:
+                raise TypeError('Parameter \'output_control\' must be \'OutputControl\' or None.')
+        self.__problem:Problem = problem
         self.__name:str = name
-        self.__output_control:OutputControl = output_control.copy()
-        self.__problem:Problem = problem.copy()
+        self.__output_control:Optional[OutputControl] = output_control
         self.__execution_started:Optional[datetime] = None
         self.__execution_ended:Optional[datetime] = None
         self.__best_solution:Optional[Solution] = None
@@ -160,24 +167,24 @@ class Optimizer(metaclass=ABCMeta):
         self.__time_when_best_found = (datetime.now() - self.execution_started).total_seconds()
 
     @property
-    def output_control(self)->OutputControl:
+    def output_control(self)->Optional[OutputControl]:
         """
         Property getter for the output control of the executing algorithm
         
         :return: output control of the executing algorithm
-        :rtype: `OutputControl`
+        :rtype: `Optional[OutputControl]`
         """
         return self.__output_control
 
     @output_control.setter
-    def output_control(self, value:OutputControl)->None:
+    def output_control(self, value:Optional[OutputControl])->None:
         """
         Property setter for the output control of the executing algorithm
         
-        :param int value: `OutputControl`
+        :param int value: `Optional[OutputControl]`
         """
-        if not isinstance(value, OutputControl):
-            raise TypeError('Parameter \'output_control\' must have type \'OutputControl\'.')
+        if not isinstance(value, OutputControl) and value is not None:
+            raise TypeError('Parameter \'output_control\' must have type \'OutputControl\' or None.')
         self.__output_control = value
 
     def determine_fields_val(self, fields_def:list[str], fields_val:list[str])->list[str]:
@@ -226,7 +233,7 @@ class Optimizer(metaclass=ABCMeta):
         """
         Write headers(with field names) to output file, if necessary 
         """            
-        if self.output_control.write_to_output:
+        if self.output_control is not None:
             output:TextIOWrapper = self.output_control.output_file
             if output is None:
                 return
@@ -247,7 +254,7 @@ class Optimizer(metaclass=ABCMeta):
         :param str step_name: name of the step when data should be written to output - have to be one of the following values: 'after_algorithm', 'before_algorithm', 'after_iteration', 'before_iteration', 'after_evaluation', 'before_evaluation', 'after_step_in_iteration', 'before_step_in_iteration'
         :param str step_name_value: what should be written to the output instead of step_name
         """            
-        if not self.output_control.write_to_output:
+        if self.output_control is None:
             return
         output:'TextIOWrapper' = self.output_control.output_file
         should_write:bool = False
@@ -320,8 +327,11 @@ class Optimizer(metaclass=ABCMeta):
             s += indentation_symbol  
         s += 'problem=' + self.problem.string_rep(delimiter, indentation + 1, 
                 indentation_symbol, '{', '}')  + delimiter 
-        s += '__output_control=' + self.__output_control.string_rep(
-                delimiter, indentation + 1, indentation_symbol, '{', '}') + delimiter
+        if self.__output_control is not None:
+            s += '__output_control=' + self.__output_control.string_rep(
+                    delimiter, indentation + 1, indentation_symbol, '{', '}') + delimiter
+        else:
+            s += '__output_control=' + 'None' + delimiter
         s += 'execution_started=' + str(self.execution_started) + delimiter
         for _ in range(0, indentation):
             s += indentation_symbol  

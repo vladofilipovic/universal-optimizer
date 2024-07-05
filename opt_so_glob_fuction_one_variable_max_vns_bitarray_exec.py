@@ -2,9 +2,7 @@ from copy import deepcopy
 from random import randint
 from random import choice
 
-from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
-from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_bit_array import \
         VnsShakingSupportRepresentationBitArray
@@ -24,8 +22,6 @@ def main():
                 input_format='txt')
         print('Problem: {}'.format(problem_to_solve))            
         finish:FinishControl = FinishControl(criteria='evaluations & seconds', evaluations_max=5000, seconds_max=10)
-        output_control:OutputControl = OutputControl(write_to_output=False)
-        additional_statistics_control:AdditionalStatisticsControl = AdditionalStatisticsControl(is_active=False)
         solution:FunctionOneVariableMaxProblemBitArraySolution = FunctionOneVariableMaxProblemBitArraySolution(
                 domain_from=problem_to_solve.domain_low, domain_to=problem_to_solve.domain_high, 
                 number_of_intervals=3000, random_seed=43434343)
@@ -37,14 +33,12 @@ def main():
         vns_ls_support:VnsLocalSearchSupportRepresentationBitArray[str] = \
                 VnsLocalSearchSupportRepresentationBitArray[str](solution.bit_array_len)
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
-        vns_construction_params.output_control = output_control
         vns_construction_params.problem = problem_to_solve
         vns_construction_params.solution_template = solution
         vns_construction_params.vns_shaking_support = vns_shaking_support
         vns_construction_params.vns_ls_support = vns_ls_support
         vns_construction_params.finish_control = finish
         vns_construction_params.random_seed = 43434343
-        vns_construction_params.additional_statistics_control = additional_statistics_control
         vns_construction_params.k_min = 1
         vns_construction_params.k_max = 3
         vns_construction_params.local_search_type = 'localSearchBestImprovement'

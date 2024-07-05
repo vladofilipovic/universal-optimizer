@@ -30,10 +30,8 @@ class TestOnesCountMaxProblemIntSolution(unittest.TestCase):
         self.assertIsNone(solution.objective_value)
         self.assertIsNone(solution.objective_values)
         self.assertFalse(solution.is_feasible)
-        self.assertFalse(Solution.evaluation_cache_cs.is_caching)
-        self.assertEqual(Solution.evaluation_cache_cs.max_cache_size, 0)
-        self.assertFalse(Solution.representation_distance_cache_cs.is_caching)
-        self.assertEqual(Solution.representation_distance_cache_cs.max_cache_size, 0)
+        self.assertIsNone(solution.evaluation_cache_cs)
+        self.assertIsNone(solution.representation_distance_cache_cs)
 
     # Create new instance of OnesCountMaxProblemIntSolution with custom parameters
     def test_create_new_instance_with_custom_parameters(self):

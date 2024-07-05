@@ -4,16 +4,6 @@ import unittest.mock as mocker
 
 from bitstring import BitArray
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
-from opt.single_objective.comb.ones_count_min_problem.ones_count_min_problem import OnesCountMinProblem
-
-from uo.problem.problem import Problem
-from uo.solution.solution import Solution
-
-from uo.algorithm.algorithm import Algorithm
-from uo.algorithm.algorithm_void import AlgorithmVoid
-from uo.algorithm.output_control import OutputControl
-from uo.algorithm.metaheuristic.finish_control import FinishControl
-from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_bit_array import \
         VnsShakingSupportRepresentationBitArray
