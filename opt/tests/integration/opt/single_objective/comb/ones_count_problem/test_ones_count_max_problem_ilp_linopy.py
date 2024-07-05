@@ -38,7 +38,6 @@ class TestOnesCountMaxProblemIlpLinopy(unittest.TestCase):
             expected += '1'
         self.assertEqual(expected, result)
 
-
     # creating an instance of OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters with valid OutputControl and Problem parameters should return an instance of the class with the same parameters
     def test_valid_parameters(self):
         # Arrange
