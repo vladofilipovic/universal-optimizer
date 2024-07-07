@@ -11,15 +11,11 @@ from pathlib import Path
 directory = Path(__file__).resolve()
 sys.path.append(directory)
 sys.path.append(directory.parent)
-sys.path.append(directory.parent.parent.parent)
-sys.path.append(directory.parent.parent.parent.parent)
-sys.path.append(directory.parent.parent.parent.parent.parent)
+sys.path.append(directory.parent.parent)
 
-from abc import ABCMeta, abstractmethod
-from typing import NamedTuple
 from typing import TypeVar
-from typing import Generic
-from typing import Optional
+
+
 from copy import deepcopy
 from random import choice, random, randint
 
@@ -28,67 +24,52 @@ from bitstring import BitArray
 from uo.problem.problem import Problem
 from uo.solution.solution import Solution
 from uo.algorithm.metaheuristic.population_based_metaheuristic import PopulationBasedMetaheuristic
-from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support import GaMutationSupport
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support import GaCrossoverSupport
 
 A_co = TypeVar("A_co", covariant=True)
 
-class GaMutationSupportOnePointRepresentationBitArray(GaMutationSupport[BitArray,A_co]):
+class GaCrossoverSupportIdleRepresentationBitArray(GaCrossoverSupport[BitArray,A_co]):
 
-    def __init__(self, mutation_probability:float)->None:
+    def __init__(self, crossover_probability:float)->None:
         """
-        Create new `GaMutationSupport` instance
+        Create new `GaCrossoverSupportIdleRepresentationBitArray` instance
         """
-        self.__mutation_probability:float = mutation_probability
-
-    @property
-    def mutation_probability(self)->float:
-        """
-        Property getter for mutation probability 
-
-        :return: mutation probability 
-        :rtype: float
-        """
-        return self.__mutation_probability    
+        pass
 
     def __copy__(self):
         """
-        Internal copy of the `GaMutationSupportOnePointRepresentationBitArray`
+        Internal copy of the `GaCrossoverSupportIdleRepresentationBitArray`
 
-        :return: new `GaMutationSupportOnePointRepresentationBitArray` instance with the same properties
-        :rtype: `GaMutationSupportOnePointRepresentationBitArray`
+        :return: new `GaCrossoverSupportIdleRepresentationBitArray` instance with the same properties
+        :rtype: `GaCrossoverSupportIdleRepresentationBitArray`
         """
         sol = deepcopy(self)
         return sol
 
     def copy(self):
         """
-        Copy the `GaMutationSupportOnePointRepresentationBitArray` instance
+        Copy the `GaCrossoverSupportIdleRepresentationBitArray` instance
 
-        :return: new `GaMutationSupportOnePointRepresentationBitArray` instance with the same properties
-        :rtype: `GaMutationSupportOnePointRepresentationBitArray`
+        :return: new `GaCrossoverSupportIdleRepresentationBitArray` instance with the same properties
+        :rtype: `GaCrossoverSupportIdleRepresentationBitArray`
         """
         return self.__copy__()
 
-    def mutation(self, problem:Problem, solution:Solution, 
-                optimizer:PopulationBasedMetaheuristic)->None:
+    def crossover(self, problem:Problem, solution1:Solution, solution2:Solution,
+                child1:Solution, child2:Solution, optimizer:PopulationBasedMetaheuristic) -> None:
         """
-        Executes mutation within GA 
+        Executes crossover within GA 
         
         :param `Problem` problem: problem that is solved
-        :param `Solution` solution: item that is mutated 
-        :param `Solution` mutant: outcome of the mutation 
+        :param `Solution` solution1: first parent 
+        :param `Solution` solution2: second parent
+        :param `Solution` child1: first child 
+        :param `Solution` child2: second child
         :param `PopulationBasedMetaheuristic` optimizer: optimizer that is executed
         :rtype: None
         """
-        if solution.representation is None:
-            return
-        for i in range(len(solution.representation)):
-            if random() < self.mutation_probability:
-                solution.representation.invert(i)
-        optimizer.write_output_values_if_needed("before_evaluation", "b_e")
-        optimizer.evaluation += 1
-        solution.evaluate(problem)
-        optimizer.write_output_values_if_needed("after_evaluation", "b_e")
+        pass
+        
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
@@ -108,7 +89,7 @@ class GaMutationSupportOnePointRepresentationBitArray(GaMutationSupport[BitArray
         :return: string representation of ga support instance
         :rtype: str
         """
-        return 'GaMutationSupportOnePointRepresentationBitArray'
+        return 'GaCrossoverSupportIdleRepresentationBitArray'
 
     def __str__(self)->str:
         """
@@ -137,5 +118,4 @@ class GaMutationSupportOnePointRepresentationBitArray(GaMutationSupport[BitArray
         :rtype: str
         """
         return self.string_rep('|')
-
 

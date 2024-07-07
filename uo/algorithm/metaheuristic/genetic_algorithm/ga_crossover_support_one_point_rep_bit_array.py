@@ -32,9 +32,19 @@ class GaCrossoverSupportOnePointRepresentationBitArray(GaCrossoverSupport[BitArr
 
     def __init__(self, crossover_probability:float)->None:
         """
-        Create new `GaCrossoverSupportOnePointRepresentationBitArray` instance
+        Create new `GaCrossoverSupport` instance
         """
-        super().__init__(crossover_probability)
+        self.__crossover_probability:float = crossover_probability
+
+    @property
+    def crossover_probability(self)->float:
+        """
+        Property getter for crossover probability 
+
+        :return: crossover probability 
+        :rtype: float
+        """
+        return self.__crossover_probability    
 
     def __copy__(self):
         """

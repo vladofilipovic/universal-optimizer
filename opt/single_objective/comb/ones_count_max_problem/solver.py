@@ -52,12 +52,18 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer impor
 from uo.algorithm.metaheuristic.genetic_algorithm.selection import Selection
 from uo.algorithm.metaheuristic.genetic_algorithm.selection_idle import SelectionIdle
 from uo.algorithm.metaheuristic.genetic_algorithm.selection_roulette import SelectionRoulette
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support_idle_rep_bit_array import \
+                GaCrossoverSupportIdleRepresentationBitArray
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support_one_point_rep_bit_array import \
                 GaCrossoverSupportOnePointRepresentationBitArray
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support_idle_rep_bit_array import \
+                GaMutationSupportIdleRepresentationBitArray
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support_one_point_rep_bit_array import \
                 GaMutationSupportOnePointRepresentationBitArray
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer_gen import GaOptimizerGenerationalConstructionParameters
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer_gen import GaOptimizerGenerational
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer_ss import GaOptimizerSteadyStateConstructionParameters
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer_ss import GaOptimizerSteadyState
 
 from uo.algorithm.exact.total_enumeration.te_operations_support_rep_bit_array import\
         TeOperationsSupportRepresentationBitArray
@@ -170,7 +176,6 @@ def main():
             additional_statistics_keep:str =  parameters['additionalStatisticsKeep']
             max_local_optima_count = parameters['additionalStatisticsMaxLocalOptimaCount']
             additional_statistics_control = AdditionalStatisticsControl(
-                is_active=additional_statistics_is_active,
                 keep=additional_statistics_keep, 
                 max_local_optima_count=max_local_optima_count
             )
@@ -208,7 +213,7 @@ def main():
                 vns_shaking_support = VnsShakingSupportRepresentationInt[str](problem.dimension)
                 vns_ls_support = VnsLocalSearchSupportRepresentationInt[str](problem.dimension)
             else:
-                raise ValueError("Invalid solution/representation type is chosen.")
+                raise ValueError("Invalid solution/representation type is chosen for VNS.")
             # solver construction parameters
             vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
             vns_construction_params.output_control = output_control
@@ -225,7 +230,6 @@ def main():
             solver:VnsOptimizer = VnsOptimizer.from_construction_tuple(vns_construction_params)
         elif parameters['algorithm'] == 'genetic_algorithm':
             # parameters for GA process setup
-            populationReplacement_policy:str = parameters['populationReplacementPolicy']
             selection_type:str = parameters['selectionType']
             ga_selection = None
             if selection_type=='Roulette':
@@ -233,46 +237,69 @@ def main():
             elif selection_type=='Idle':
                 ga_selection:Selection = SelectionIdle()
             else:
-                raise ValueError("Invalid solution/representation type is chosen.")
+                raise ValueError("Invalid solution/representation type is chosen for GA.")
             # initial solution
             solution_type:str = parameters['solutionType']
             if solution_type=='BitArray':
                 solution:OnesCountMaxProblemBitArraySolution = OnesCountMaxProblemBitArraySolution(
                     random_seed=r_seed)
             else:
-                raise ValueError("Invalid solution/representation type is chosen.")
+                raise ValueError("Invalid solution/representation type is chosen for GA.")
             ga_crossover_support = None
             crossover_type:str = parameters['crossoverType']
-            crossover_probability:float = parameters['crossoverProbability']
             if crossover_type=='OnePoint' and solution_type=='BitArray':
+                crossover_probability:float = parameters['crossoverProbability']
                 ga_crossover_support = GaCrossoverSupportOnePointRepresentationBitArray[str](
                     crossover_probability=crossover_probability)
+            elif crossover_type=='Idle':
+                ga_crossover_support = GaCrossoverSupportIdleRepresentationBitArray[str]()
             else:
-                raise ValueError("Invalid pair (crossover type, representation type) is chosen.")
+                raise ValueError("Invalid pair (crossover type, representation type) is chosen for GA.")
             ga_mutation_support = None
             mutation_type:str = parameters['mutationType']
-            mutation_probability:float = parameters['mutationProbability']
             if mutation_type=='OnePoint' and solution_type=='BitArray':
+                mutation_probability:float = parameters['mutationProbability']
                 ga_mutation_support = GaMutationSupportOnePointRepresentationBitArray[str](
                     mutation_probability=mutation_probability)
+            elif mutation_type=='Idle':
+                ga_mutation_support = GaMutationSupportIdleRepresentationBitArray[str]()
             else:
-                raise ValueError("Invalid pair (mutation type, representation type) is chosen.")
+                raise ValueError("Invalid pair (mutation type, representation type) is chosen for GA.")
             population_size:int = parameters['populationSize']
             elite_count:int = parameters['eliteCount']
-            ga_construction_params:GaOptimizerGenerationalConstructionParameters = \
-                GaOptimizerGenerationalConstructionParameters()
-            ga_construction_params.output_control = output_control
-            ga_construction_params.problem = problem
-            ga_construction_params.solution_template = solution
-            ga_construction_params.finish_control = finish_control
-            ga_construction_params.random_seed = r_seed
-            ga_construction_params.additional_statistics_control = additional_statistics_control
-            ga_construction_params.ga_selection = ga_selection
-            ga_construction_params.ga_crossover_support = ga_crossover_support
-            ga_construction_params.ga_mutation_support = ga_mutation_support
-            ga_construction_params.population_size = population_size
-            ga_construction_params.elite_count = elite_count
-            solver:GaOptimizerGenerational = GaOptimizerGenerational.from_construction_tuple(ga_construction_params) 
+            population_replacement_policy:str = parameters['populationReplacementPolicy']
+            if population_replacement_policy=='Generational':
+                ga_construction_params:GaOptimizerGenerationalConstructionParameters = \
+                    GaOptimizerGenerationalConstructionParameters()
+                ga_construction_params.output_control = output_control
+                ga_construction_params.problem = problem
+                ga_construction_params.solution_template = solution
+                ga_construction_params.finish_control = finish_control
+                ga_construction_params.random_seed = r_seed
+                ga_construction_params.additional_statistics_control = additional_statistics_control
+                ga_construction_params.ga_selection = ga_selection
+                ga_construction_params.ga_crossover_support = ga_crossover_support
+                ga_construction_params.ga_mutation_support = ga_mutation_support
+                ga_construction_params.population_size = population_size
+                ga_construction_params.elite_count = elite_count
+                solver:GaOptimizerGenerational = GaOptimizerGenerational.from_construction_tuple(ga_construction_params) 
+            elif population_replacement_policy=='SteadyState':
+                ga_construction_params:GaOptimizerSteadyStateConstructionParameters = \
+                    GaOptimizerSteadyStateConstructionParameters()
+                ga_construction_params.output_control = output_control
+                ga_construction_params.problem = problem
+                ga_construction_params.solution_template = solution
+                ga_construction_params.finish_control = finish_control
+                ga_construction_params.random_seed = r_seed
+                ga_construction_params.additional_statistics_control = additional_statistics_control
+                ga_construction_params.ga_selection = ga_selection
+                ga_construction_params.ga_crossover_support = ga_crossover_support
+                ga_construction_params.ga_mutation_support = ga_mutation_support
+                ga_construction_params.population_size = population_size
+                ga_construction_params.elite_count = elite_count
+                solver:GaOptimizerSteadyState = GaOptimizerSteadyState.from_construction_tuple(ga_construction_params) 
+            else:
+                raise ValueError("Invalid population replacement policy is chosen for GA.")
         elif parameters['algorithm'] == 'total_enumeration':
             # initial solution and te support
             solution_type:str = parameters['solutionType']
@@ -285,7 +312,7 @@ def main():
                             distance_calculation_cache_max_size=calculation_solution_distance_cache_max_size)
                 te_operations_support = TeOperationsSupportRepresentationBitArray[str]()
             else:
-                raise ValueError("Invalid solution/representation type is chosen.")
+                raise ValueError("Invalid solution/representation type is chosen for TE.")
             # solver construction parameters
             te_construction_params:TeOptimizerConstructionParameters = TeOptimizerConstructionParameters()
             te_construction_params.output_control = output_control

@@ -21,15 +21,12 @@ from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_probl
 def main():
         nodes = 10
         prob = 0.5
-
         graph: nx.Graph = nx.fast_gnp_random_graph(nodes, prob, seed=11)
         for edge in graph.edges():
                 graph.edges[edge]['weight'] = randint(1,10)
-
         nodes = list(graph.nodes())
         num_pairs = randint(1, max(2,len(nodes)//3))
         source_terminal_pairs = []
-
         for _ in range(num_pairs):
                 source = choice(nodes)
                 terminal_candidates = [node for node in nodes if node != source]
@@ -38,7 +35,7 @@ def main():
 
         problem_to_solve:MinimumMultiCutProblem = MinimumMultiCutProblem(graph, source_terminal_pairs)
         solution:MinimumMultiCutProblemBitArraySolution = MinimumMultiCutProblemBitArraySolution()
-        finish:FinishControl = FinishControl(criteria='iterations', iterations_max=500)
+        finish:FinishControl = FinishControl(criteria='evaluations', evaluations_max=500)
         num_edges:int = len(problem_to_solve.graph.edges())
         vns_shaking_support:VnsShakingSupportRepresentationBitArray = \
                 VnsShakingSupportRepresentationBitArray(dimension=num_edges)

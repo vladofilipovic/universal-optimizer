@@ -166,7 +166,7 @@ class GaOptimizerSteadyState(GaOptimizer):
             l_lim:int = n_e
         self.write_output_values_if_needed("before_step_in_iteration", "crossover")
         indices_for_selection:list[int] = [sel_ind for sel_ind in range(l_lim, len(self.current_population))]
-        for _ in range(0, len(indices_for_selection)/2):
+        for _ in range(0, int(len(indices_for_selection)/2)):
             sel_ind1:int = choice(indices_for_selection)
             sel_ind2:int = choice(indices_for_selection)
             child1:Solution = self.solution_template.copy()

@@ -32,40 +32,30 @@ from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support import GaM
 
 A_co = TypeVar("A_co", covariant=True)
 
-class GaMutationSupportOnePointRepresentationBitArray(GaMutationSupport[BitArray,A_co]):
+class GaMutationSupportIdleRepresentationBitArray(GaMutationSupport[BitArray,A_co]):
 
     def __init__(self, mutation_probability:float)->None:
         """
-        Create new `GaMutationSupport` instance
+        Create new `GaMutationSupportIdleRepresentationBitArray` instance
         """
-        self.__mutation_probability:float = mutation_probability
-
-    @property
-    def mutation_probability(self)->float:
-        """
-        Property getter for mutation probability 
-
-        :return: mutation probability 
-        :rtype: float
-        """
-        return self.__mutation_probability    
+        pass
 
     def __copy__(self):
         """
-        Internal copy of the `GaMutationSupportOnePointRepresentationBitArray`
+        Internal copy of the `GaMutationSupportIdleRepresentationBitArray`
 
-        :return: new `GaMutationSupportOnePointRepresentationBitArray` instance with the same properties
-        :rtype: `GaMutationSupportOnePointRepresentationBitArray`
+        :return: new `GaMutationSupportIdleRepresentationBitArray` instance with the same properties
+        :rtype: `GaMutationSupportIdleRepresentationBitArray`
         """
         sol = deepcopy(self)
         return sol
 
     def copy(self):
         """
-        Copy the `GaMutationSupportOnePointRepresentationBitArray` instance
+        Copy the `GaMutationSupportIdleRepresentationBitArray` instance
 
-        :return: new `GaMutationSupportOnePointRepresentationBitArray` instance with the same properties
-        :rtype: `GaMutationSupportOnePointRepresentationBitArray`
+        :return: new `GaMutationSupportIdleRepresentationBitArray` instance with the same properties
+        :rtype: `GaMutationSupportIdleRepresentationBitArray`
         """
         return self.__copy__()
 
@@ -80,15 +70,7 @@ class GaMutationSupportOnePointRepresentationBitArray(GaMutationSupport[BitArray
         :param `PopulationBasedMetaheuristic` optimizer: optimizer that is executed
         :rtype: None
         """
-        if solution.representation is None:
-            return
-        for i in range(len(solution.representation)):
-            if random() < self.mutation_probability:
-                solution.representation.invert(i)
-        optimizer.write_output_values_if_needed("before_evaluation", "b_e")
-        optimizer.evaluation += 1
-        solution.evaluate(problem)
-        optimizer.write_output_values_if_needed("after_evaluation", "b_e")
+        pass
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
@@ -108,7 +90,7 @@ class GaMutationSupportOnePointRepresentationBitArray(GaMutationSupport[BitArray
         :return: string representation of ga support instance
         :rtype: str
         """
-        return 'GaMutationSupportOnePointRepresentationBitArray'
+        return 'GaMutationSupportIdleRepresentationBitArray'
 
     def __str__(self)->str:
         """
