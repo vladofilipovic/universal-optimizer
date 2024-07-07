@@ -15,9 +15,9 @@ from random import randint
 from uo.solution.solution import Solution
 
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimizer
-from uo.algorithm.metaheuristic.genetic_algorithm.selection import Selection
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_selection import GaSelection
 
-class SelectionRoulette(Selection):
+class GaSelectionRoulette(GaSelection):
     
     
     def selection(self, optimizer:GaOptimizer)->None:

@@ -29,7 +29,7 @@ from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
-from uo.algorithm.metaheuristic.genetic_algorithm.selection import Selection
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_selection import GaSelection
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support import GaCrossoverSupport
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support import GaMutationSupport
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer import GaOptimizer
@@ -43,7 +43,7 @@ class GaOptimizerSteadyStateConstructionParameters:
         """
         ga_crossover_support: GaCrossoverSupport = None
         ga_mutation_support: GaMutationSupport = None
-        ga_selection: Selection = None
+        ga_selection: GaSelection = None
         population_size: Optional[int] = None
         elite_count:Optional[int] = None
         finish_control: Optional[FinishControl] = None
@@ -62,7 +62,7 @@ class GaOptimizerSteadyState(GaOptimizer):
     def __init__(self,
             ga_crossover_support:GaCrossoverSupport,
             ga_mutation_support:GaMutationSupport,
-            ga_selection: Selection,
+            ga_selection: GaSelection,
             population_size: int,
             elite_count:int,
             finish_control:FinishControl,
@@ -80,7 +80,7 @@ class GaOptimizerSteadyState(GaOptimizer):
         execution, which depend of precise solution type 
         :param `GaMutationSupport` ga_mutation_support: placeholder for additional methods, specific for GA mutation 
         execution, which depend of precise solution type 
-        :param `Selection` ga_selection: structure that controls GA selection
+        :param `GaSelection` ga_selection: structure that controls GA selection
         :param `int` population_size: size of the population
         :param `int` elite_count: Count of the elite individuals within population
         :param `FinishControl` finish_control: structure that control finish criteria for metaheuristic execution

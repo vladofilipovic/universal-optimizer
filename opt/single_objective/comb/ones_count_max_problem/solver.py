@@ -49,9 +49,9 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_rep_
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
-from uo.algorithm.metaheuristic.genetic_algorithm.selection import Selection
-from uo.algorithm.metaheuristic.genetic_algorithm.selection_idle import SelectionIdle
-from uo.algorithm.metaheuristic.genetic_algorithm.selection_roulette import SelectionRoulette
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_selection import GaSelection
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_selection_idle import GaSelectionIdle
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_selection_roulette import GaSelectionRoulette
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support_idle_rep_bit_array import \
                 GaCrossoverSupportIdleRepresentationBitArray
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support_one_point_rep_bit_array import \
@@ -233,9 +233,9 @@ def main():
             selection_type:str = parameters['selectionType']
             ga_selection = None
             if selection_type=='Roulette':
-                ga_selection:Selection = SelectionRoulette()
+                ga_selection:GaSelection = GaSelectionRoulette()
             elif selection_type=='Idle':
-                ga_selection:Selection = SelectionIdle()
+                ga_selection:GaSelection = GaSelectionIdle()
             else:
                 raise ValueError("Invalid solution/representation type is chosen for GA.")
             # initial solution

@@ -29,7 +29,7 @@ from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
 
 from uo.algorithm.metaheuristic.population_based_metaheuristic import PopulationBasedMetaheuristic
-from uo.algorithm.metaheuristic.genetic_algorithm.selection import Selection
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_selection import GaSelection
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support import GaCrossoverSupport
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support import GaMutationSupport
 
@@ -42,7 +42,7 @@ class GaOptimizer(PopulationBasedMetaheuristic, metaclass=ABCMeta):
     def __init__(self,
             ga_crossover_support:GaCrossoverSupport,
             ga_mutation_support:GaMutationSupport,
-            ga_selection: Selection,
+            ga_selection: GaSelection,
             population_size: int,
             elite_count:int,
             finish_control:FinishControl,
@@ -60,7 +60,7 @@ class GaOptimizer(PopulationBasedMetaheuristic, metaclass=ABCMeta):
         execution, which depend of precise solution type 
         :param `GaMutationSupport` ga_mutation_support: placeholder for additional methods, specific for GA mutation 
         execution, which depend of precise solution type 
-        :param `Selection` ga_selection: structure that controls GA selection
+        :param `GaSelection` ga_selection: structure that controls GA selection
         :param `int` population_size: size of the population
         :param `int` elite_count: Count of the elite individuals within population
         :param `FinishControl` finish_control: structure that control finish criteria for metaheuristic execution
@@ -75,8 +75,8 @@ class GaOptimizer(PopulationBasedMetaheuristic, metaclass=ABCMeta):
                 raise TypeError('Parameter \'ga_crossover_support\' must be \'GaCrossoverSupport\'.')
         if not isinstance(ga_mutation_support, GaMutationSupport):
                 raise TypeError('Parameter \'ga_mutation_support\' must be \'GaMutationSupport\'.')
-        if not isinstance(ga_selection, Selection):
-                raise TypeError('Parameter \'ga_selection\' must be \'Selection\'.')
+        if not isinstance(ga_selection, GaSelection):
+                raise TypeError('Parameter \'ga_selection\' must be \'GaSelection\'.')
         if not isinstance(population_size, int):
                 raise TypeError('Parameter \'population_size\' must be \'int\'.')
         if population_size <= 0:
@@ -169,12 +169,12 @@ class GaOptimizer(PopulationBasedMetaheuristic, metaclass=ABCMeta):
         self.__current_population = value
         
     @property
-    def ga_selection(self)->Selection:
+    def ga_selection(self)->GaSelection:
         """
         Property getter for the selection of GA
         
-        :return: Selection of the GA 
-        :rtype: `Selection`
+        :return: GaSelection of the GA 
+        :rtype: `GaSelection`
         """
         return self.__ga_selection
 

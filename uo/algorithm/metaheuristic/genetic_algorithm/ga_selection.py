@@ -7,15 +7,18 @@ sys.path.append(directory.parent.parent)
 sys.path.append(directory.parent.parent.parent)
 
 from abc import ABCMeta, abstractmethod
+from typing import Optional, TypeVar, Generic
+from typing import Generic
+
+from uo.problem.problem import Problem
+from uo.solution.solution import Solution
 
 from uo.algorithm.algorithm import Algorithm
-from uo.algorithm.metaheuristic.genetic_algorithm.selection import Selection
 
-class SelectionIdle(Selection):
+class GaSelection(metaclass=ABCMeta):
     
-    def __init__(self)->None:
-        super().__init__(elite_count=None)
-    
+
+    @abstractmethod
     def selection(self, optimizer:Algorithm)->None:
         """
         GA selection
@@ -23,4 +26,4 @@ class SelectionIdle(Selection):
         :return: 
         :rtype: None
         """
-        return None
+        raise NotImplementedError

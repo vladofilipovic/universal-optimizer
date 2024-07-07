@@ -7,8 +7,8 @@ from uo.problem.problem import Problem
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer_gen import GaOptimizerGenerational
-from uo.algorithm.metaheuristic.genetic_algorithm.selection import Selection
-from uo.algorithm.metaheuristic.genetic_algorithm.selection_roulette import SelectionRoulette
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_selection import GaSelection
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_selection_roulette import GaSelectionRoulette
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support import GaCrossoverSupport
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support import GaMutationSupport
 from uo.solution.solution_void_representation_int import SolutionVoidRepresentationInt
@@ -29,7 +29,7 @@ class TestGaOptimizerGenerationalProperties(unittest.TestCase):
         type(self.problem_mock).dimension = mocker.PropertyMock(return_value=42)
         self.problem_mock.copy = mocker.Mock(return_value=self.problem_mock)
 
-        self.selection_roulette_mock =  mocker.MagicMock(spec=SelectionRoulette)
+        self.selection_roulette_mock =  mocker.MagicMock(spec=GaSelectionRoulette)
         
         self.ga_support_crossover_stub = mocker.MagicMock(spec=GaCrossoverSupport)
         type(self.ga_support_crossover_stub).copy = mocker.CallableMixin(spec="return self")        
@@ -97,7 +97,7 @@ class TestGaOptimizerGenerationalProperties(unittest.TestCase):
 
     def test_create_with_invalid_selection_type_should_raise_value_exception_with_proper_message(self):
         with self.assertRaises(TypeError) as context:
-            selection_stub = mocker.MagicMock(spec=SelectionRoulette)
+            selection_stub = mocker.MagicMock(spec=GaSelectionRoulette)
             type(selection_stub).selection_roulette = mocker.CallableMixin(spec=lambda x: x)
             type(selection_stub).copy = mocker.CallableMixin(spec="return self")
             self.ga_optimizer:GaOptimizerGenerational = GaOptimizerGenerational(
@@ -112,7 +112,7 @@ class TestGaOptimizerGenerationalProperties(unittest.TestCase):
                 population_size=self.population_size,
                 elite_count=self.elitism_size
             )
-        self.assertEqual('Parameter \'ga_selection\' must be \'Selection\'.', context.exception.args[0])
+        self.assertEqual('Parameter \'ga_selection\' must be \'GaSelection\'.', context.exception.args[0])
 
     def tearDown(self):
         return

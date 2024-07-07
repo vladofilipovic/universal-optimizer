@@ -7,7 +7,7 @@ from random import seed
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 
-from uo.algorithm.metaheuristic.genetic_algorithm.selection_roulette import SelectionRoulette
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_selection_roulette import GaSelectionRoulette
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support_one_point_rep_bit_array import \
                 GaCrossoverSupportOnePointRepresentationBitArray
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support_one_point_rep_bit_array import \
@@ -30,7 +30,7 @@ class TestOnesCountMaxProblemGaBitArraySolution(unittest.TestCase):
         self.problem_to_solve:OnesCountMaxProblem = OnesCountMaxProblem.from_dimension(dimension=7)
         self.solution:OnesCountMaxProblemBitArraySolution = OnesCountMaxProblemBitArraySolution()
         self.finish:FinishControl = FinishControl(criteria='evaluations', evaluations_max=5000)
-        self.ga_selection:SelectionRoulette = SelectionRoulette()
+        self.ga_selection:GaSelectionRoulette = GaSelectionRoulette()
         self.ga_crossover_support:GaCrossoverSupportOnePointRepresentationBitArray[str]= \
                 GaCrossoverSupportOnePointRepresentationBitArray[str](crossover_probability=0.95)
         self.ga_mutation_support:GaMutationSupportOnePointRepresentationBitArray = \

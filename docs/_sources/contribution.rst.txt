@@ -115,7 +115,7 @@ a. Contribution in the designing novel **optimization methods**:
 
         9. Making class :class:`uo.algorithm.metaheuristic.genetic_algorithm.GaOptimizer` to be abstract and dividing its functionality into non-abstract classes :class:`uo.algorithm.metaheuristic.genetic_algorithm.GaOptimizerGenerational` and :class:`uo.algorithm.metaheuristic.genetic_algorithm.GaOptimizerSteadyState` - [VladimirFilipovic]_ 
 
-        10. Implementation of GA selection methods (in classes: :class:`~uo.algorithm.metaheuristic.genetic_algorithm.SelectionIdle`, :class:`~uo.algorithm.metaheuristic.genetic_algorithm.SelectionRoulette`)  - [MarkoRadosavljevic]_
+        10. Implementation of GA selection methods (in classes: :class:`~uo.algorithm.metaheuristic.genetic_algorithm.GaSelectionIdle`, :class:`~uo.algorithm.metaheuristic.genetic_algorithm.GaSelectionRoulette`)  - [MarkoRadosavljevic]_
 
         11. Implementation of GA crossover one point method (contained within class: :class:`~uo.algorithm.metaheuristic.genetic_algorithm.GaCrossoverSupportOnePointRepresentationBitArray`), with binary representation (using `bitstring.BitArray` class) - [MarkoRadosavljevic]_ 
 

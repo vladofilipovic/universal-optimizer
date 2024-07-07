@@ -3,7 +3,7 @@ from random import seed
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 
-from uo.algorithm.metaheuristic.genetic_algorithm.selection_roulette import SelectionRoulette
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_selection_roulette import GaSelectionRoulette
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support_one_point_rep_bit_array import \
                 GaCrossoverSupportOnePointRepresentationBitArray
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support_one_point_rep_bit_array import \
@@ -19,7 +19,7 @@ def main():
         problem_to_solve:OnesCountMaxProblem = OnesCountMaxProblem.from_dimension(dimension=7)
         solution:OnesCountMaxProblemBitArraySolution = OnesCountMaxProblemBitArraySolution()
         finish:FinishControl = FinishControl(criteria='evaluations', evaluations_max=5000)
-        ga_selection:SelectionRoulette = SelectionRoulette()
+        ga_selection:GaSelectionRoulette = GaSelectionRoulette()
         ga_crossover_support:GaCrossoverSupportOnePointRepresentationBitArray[str]= \
                 GaCrossoverSupportOnePointRepresentationBitArray[str](crossover_probability=0.95)
         ga_mutation_support:GaMutationSupportOnePointRepresentationBitArray = \
