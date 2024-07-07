@@ -191,13 +191,13 @@ def parse_arguments():
                 default='BitArray', 
                 help=("GA parameter that determines solution (representation) type."))
         parser_ga.add_argument('--crossoverType', type=str, 
-                choices=['OnePoint'],  
+                choices=['OnePoint','Idle'],  
                 default='OnePoint', 
                 help=("GA crossover type."))
         parser_ga.add_argument('--crossoverProbability', type=float, default=1, 
                 help=("GA crossover probability.") )    
         parser_ga.add_argument('--mutationType', type=str, 
-                choices=['OnePoint'],  
+                choices=['OnePoint','Idle'],  
                 default='OnePoint', 
                 help=("GA mutation type."))
         parser_ga.add_argument('--mutationProbability', type=float, default=1, 
