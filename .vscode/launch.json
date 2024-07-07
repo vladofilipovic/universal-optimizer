@@ -101,7 +101,7 @@
                 "--finishCriteria", "evaluations & seconds",
                 "--finishEvaluationsMax", "3000",  
                 "--finishIterationsMax", "0",  
-                "--finishSecondsMax", "0",
+                "--finishSecondsMax", "5",
                 "--randomSeed", "0", 
                 "--solutionEvaluationCacheIsUsed", "False", 
                 "--solutionEvaluationCacheMaxSize", "100000",
@@ -112,7 +112,8 @@
                 "--additionalStatisticsMaxLocalOptimaCount", "5",
                 "--kMin", "1",
                 "--kMax", "3", 
-                "--localSearchType", "localSearchBestImprovement",
+                "--shakingType", "standard",
+                "--localSearchType", "standardBestImprovement",
                 "--solutionType", "BitArray"
                 ]        
         },
@@ -135,7 +136,7 @@
                 "--finishCriteria", "evaluations & seconds",
                 "--finishEvaluationsMax", "3000",  
                 "--finishIterationsMax", "0",  
-                "--finishSecondsMax", "0",
+                "--finishSecondsMax", "3",
                 "--randomSeed", "0", 
                 "--solutionEvaluationCacheIsUsed", "False", 
                 "--solutionEvaluationCacheMaxSize", "100000",
@@ -146,7 +147,8 @@
                 "--additionalStatisticsMaxLocalOptimaCount", "5",
                 "--kMin", "1",
                 "--kMax", "3", 
-                "--localSearchType", "localSearchBestImprovement",
+                "--shakingType", "standard",
+                "--localSearchType", "standardBestImprovement",
                 "--solutionType", "int"
                 ]        
         },
@@ -217,9 +219,10 @@
                 "--additionalStatisticsMaxLocalOptimaCount", "5",
                 "--kMin", "1",
                 "--kMax", "3", 
-                "--localSearchType", "localSearchFirstImprovement",
+                "--shakingType", "standard",
+                "--localSearchType", "standardFirstImprovement",
                 "--solutionType", "BitArray",
-                "--solutionNumberOfIntervals", "200"
+                "--solutionNumberOfIntervals", "20"
                 ]        
         },
         {
@@ -252,9 +255,10 @@
                 "--additionalStatisticsMaxLocalOptimaCount", "5",
                 "--kMin", "1",
                 "--kMax", "3", 
-                "--localSearchType", "localSearchBestImprovement",
+                "--shakingType", "standard",
+                "--localSearchType", "standardBestImprovement",
                 "--solutionType", "int",
-                "--solutionNumberOfIntervals", "200"
+                "--solutionNumberOfIntervals", "20"
                 ]        
         }
     ]

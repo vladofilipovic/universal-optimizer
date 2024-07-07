@@ -38,14 +38,26 @@ from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp_linopy import \
     OnesCountMaxProblemIntegerLinearProgrammingSolver
 
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support import \
+        VnsShakingSupport
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_idle import \
+        VnsShakingSupportIdle
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_standard_bit_array import \
         VnsShakingSupportStandardBitArray
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_standard_bi_bit_array import \
-        VnsLocalSearchSupportStandardBestImprovementBitArray
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_standard_int import \
         VnsShakingSupportStandardInt
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support import \
+        VnsLocalSearchSupport
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_idle import \
+        VnsLocalSearchSupportIdle
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_standard_bi_bit_array import \
+        VnsLocalSearchSupportStandardBestImprovementBitArray
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_standard_fi_bit_array import \
+        VnsLocalSearchSupportStandardFirstImprovementBitArray
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_standard_bi_int import \
         VnsLocalSearchSupportStandardBestImprovementInt
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_standard_fi_int import \
+        VnsLocalSearchSupportStandardFirstImprovementInt
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
@@ -201,17 +213,43 @@ def main():
             local_search_type = parameters['localSearchType']
             # initial solution and VNS support
             solution_type:str = parameters['solutionType']
-            vns_shaking_support = None
-            vns_ls_support = None
+            shaking_type:str = parameters['shakingType']
+            local_search_type:str = parameters['localSearchType']
+            vns_shaking_support:VnsShakingSupport = None
+            vns_ls_support:VnsLocalSearchSupport = None
             if solution_type=='BitArray':
                 solution:OnesCountMaxProblemBitArraySolution = OnesCountMaxProblemBitArraySolution(
                     random_seed=r_seed)
-                vns_shaking_support = VnsShakingSupportStandardBitArray[str](problem.dimension)
-                vns_ls_support = VnsLocalSearchSupportStandardBestImprovementBitArray[str](problem.dimension)
+                if shaking_type == 'standard':
+                    vns_shaking_support =  VnsShakingSupportStandardBitArray[str](problem.dimension)
+                elif shaking_type == 'idle':
+                    vns_shaking_support =  VnsShakingSupportIdle[BitArray,str]() 
+                else:
+                    raise ValueError(("Invalid pair (solution type, shaking type) is chosen for VNS."))
+                if local_search_type == 'standardBestImprovement':
+                    vns_ls_support =   VnsLocalSearchSupportStandardBestImprovementBitArray[str](problem.dimension)
+                elif local_search_type == 'standardFirstImprovement':
+                    vns_ls_support =   VnsLocalSearchSupportStandardFirstImprovementBitArray[str](problem.dimension)
+                elif local_search_type == 'idle':
+                    vns_ls_support =  VnsLocalSearchSupportIdle[BitArray,str]() 
+                else:
+                    raise ValueError(("Invalid pair (solution type, local search type) is chosen for VNS."))                
             elif solution_type=='int':
                 solution:OnesCountMaxProblemIntSolution = OnesCountMaxProblemIntSolution(r_seed)
-                vns_shaking_support = VnsShakingSupportStandardInt[str](problem.dimension)
-                vns_ls_support = VnsLocalSearchSupportStandardBestImprovementInt[str](problem.dimension)
+                if shaking_type == 'standard':
+                    vns_shaking_support =  VnsShakingSupportStandardInt[str](problem.dimension)
+                elif shaking_type == 'idle':
+                    vns_shaking_support =  VnsShakingSupportIdle[int,str]() 
+                else:
+                    raise ValueError(("Invalid pair (solution type, shaking type) is chosen for VNS."))
+                if local_search_type == 'standardBestImprovement':
+                    vns_ls_support =   VnsLocalSearchSupportStandardBestImprovementInt[str](problem.dimension)
+                elif local_search_type == 'standardFirstImprovement':
+                    vns_ls_support =   VnsLocalSearchSupportStandardFirstImprovementInt[str](problem.dimension)
+                elif local_search_type == 'idle':
+                    vns_ls_support =  VnsLocalSearchSupportIdle[int,str]() 
+                else:
+                    raise ValueError(("Invalid pair (solution type, local search type) is chosen for VNS."))                
             else:
                 raise ValueError("Invalid solution/representation type is chosen for VNS.")
             # solver construction parameters

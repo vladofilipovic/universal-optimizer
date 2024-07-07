@@ -14,6 +14,8 @@ sys.path.append(directory.parent)
 sys.path.append(directory.parent.parent)
 sys.path.append(directory.parent.parent.parent)
 
+import math
+
 from copy import deepcopy
 from random import choice
 
@@ -75,13 +77,15 @@ class VnsLocalSearchSupportStandardFirstImprovementBitArray(VnsLocalSearchSuppor
             return False
         start_sol:Solution = solution.copy()
         # initialize indexes
-        indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k, self.dimension)
+        dim:int = int(math.ceil(math.log2(self.dimension)))
+        indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k, dim)
         in_loop:bool = indexes.reset()
         while in_loop:
             # collect positions for inversion from indexes
             positions:list[int] = indexes.current_state()
             # invert and compare, switch and exit if new is better
-            solution.representation.invert(positions) 
+            for pos in positions:
+                solution.representation.invert(pos)
             if optimizer.should_finish():
                 solution.copy_from(start_sol)
                 return False
@@ -91,7 +95,8 @@ class VnsLocalSearchSupportStandardFirstImprovementBitArray(VnsLocalSearchSuppor
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
             if solution.is_better(start_sol, problem):
                 return True
-            solution.representation.invert(positions)
+            for pos in positions:
+                solution.representation.invert(pos)
             # increment indexes and set in_loop accordingly
             in_loop = indexes.progress()
         solution.copy_from(start_sol)

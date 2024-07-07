@@ -12,6 +12,8 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support
         VnsShakingSupportStandardInt
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_standard_bi_int import \
         VnsLocalSearchSupportStandardBestImprovementInt
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_standard_fi_int import \
+        VnsLocalSearchSupportStandardFirstImprovementInt
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
@@ -31,8 +33,8 @@ class TestOnesCountMaxProblemVnsIntSolutionLsfi(unittest.TestCase):
         self.finish_control:FinishControl = FinishControl(criteria='evaluations', evaluations_max=5000)
         self.vns_shaking_support:VnsShakingSupportStandardInt = \
                 VnsShakingSupportStandardInt(self.problem_to_solve.dimension)
-        self.vns_ls_support:VnsLocalSearchSupportStandardBestImprovementInt = \
-                VnsLocalSearchSupportStandardBestImprovementInt(self.problem_to_solve.dimension)
+        self.vns_ls_support:VnsLocalSearchSupportStandardFirstImprovementInt = \
+                VnsLocalSearchSupportStandardFirstImprovementInt(self.problem_to_solve.dimension)
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
         vns_construction_params.problem = self.problem_to_solve
         vns_construction_params.solution_template = self.solution
@@ -42,7 +44,6 @@ class TestOnesCountMaxProblemVnsIntSolutionLsfi(unittest.TestCase):
         vns_construction_params.random_seed = 43434343
         vns_construction_params.k_min = 1
         vns_construction_params.k_max = 3
-        vns_construction_params.local_search_type = 'localSearchFirstImprovement'
         self.optimizer:VnsOptimizer = VnsOptimizer.from_construction_tuple(vns_construction_params)
         self.bs = self.optimizer.optimize()
     

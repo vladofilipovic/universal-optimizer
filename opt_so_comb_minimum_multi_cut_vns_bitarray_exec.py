@@ -48,7 +48,6 @@ def main():
         vns_construction_params.random_seed = 43434343
         vns_construction_params.vns_shaking_support = vns_shaking_support
         vns_construction_params.vns_ls_support = vns_ls_support
-        vns_construction_params.local_search_type = 'localSearchBestImprovement'
         vns_construction_params.k_min = 1
         vns_construction_params.k_max = 3
         optimizer:VnsOptimizer = VnsOptimizer.from_construction_tuple(vns_construction_params)

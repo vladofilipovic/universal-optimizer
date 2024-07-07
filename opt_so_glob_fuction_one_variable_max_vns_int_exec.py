@@ -42,7 +42,6 @@ def main():
         vns_construction_params.random_seed = 43434343
         vns_construction_params.k_min = 1
         vns_construction_params.k_max = 3
-        vns_construction_params.local_search_type = 'localSearchBestImprovement'
         optimizer:VnsOptimizer = VnsOptimizer.from_construction_tuple(vns_construction_params)
         bs = optimizer.optimize()
         print('Best solution representation: {}'.format(bs.representation))            

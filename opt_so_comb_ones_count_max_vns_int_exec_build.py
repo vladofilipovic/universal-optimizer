@@ -184,7 +184,7 @@ class OnesCountMaxProblemIntSolutionVnsLocalSearchSupport(VnsLocalSearchSupport[
         return self.__copy__()
         
 
-    def local_search_best_improvement(self, k:int, problem:OnesCountMaxProblem2, solution:OnesCountMaxProblemIntSolution, 
+    def local_search(self, k:int, problem:OnesCountMaxProblem2, solution:OnesCountMaxProblemIntSolution, 
             optimizer: Metaheuristic)->bool:
         if optimizer.should_finish():
             return False
@@ -262,7 +262,6 @@ def main():
     vns_construction_params.random_seed = 43434343
     vns_construction_params.k_min = 1
     vns_construction_params.k_max = 3
-    vns_construction_params.local_search_type = 'localSearchFirstImprovement'
     optimizer:VnsOptimizer = VnsOptimizer.from_construction_tuple(vns_construction_params)
     bs = optimizer.optimize()
     print('Best solution representation: {}'.format(bs.representation))            

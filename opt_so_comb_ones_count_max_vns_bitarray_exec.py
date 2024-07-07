@@ -21,11 +21,11 @@ def main():
         problem_dimension:int = 7
         problem_to_solve:OnesCountMaxProblem = OnesCountMaxProblem.from_dimension(dimension=problem_dimension)
         solution:OnesCountMaxProblemBitArraySolution = OnesCountMaxProblemBitArraySolution()
-        finish:FinishControl = FinishControl(criteria='evaluations', evaluations_max=5000)
+        finish:FinishControl = FinishControl(criteria='evaluations & seconds', evaluations_max=1000, seconds_max=3)
         vns_shaking_support:VnsShakingSupportStandardBitArray[str] = \
-                VnsShakingSupportStandardBitArray[str](k_max=problem_dimension)
+                VnsShakingSupportStandardBitArray[str](dimension=problem_dimension)
         vns_ls_support:VnsLocalSearchSupportStandardBestImprovementBitArray[str] = \
-                VnsLocalSearchSupportStandardBestImprovementBitArray[str](k_max=problem_dimension)
+                VnsLocalSearchSupportStandardBestImprovementBitArray[str](dimension=problem_dimension)
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
         vns_construction_params.problem = problem_to_solve
         vns_construction_params.solution_template = solution
@@ -35,7 +35,6 @@ def main():
         vns_construction_params.random_seed = 43434343
         vns_construction_params.k_min = 1
         vns_construction_params.k_max = 3
-        vns_construction_params.local_search_type = 'localSearchBestImprovement'
         optimizer:VnsOptimizer = VnsOptimizer.from_construction_tuple(vns_construction_params)
         bs = optimizer.optimize()
         print('Best solution representation: {}'.format(bs.representation.bin))            

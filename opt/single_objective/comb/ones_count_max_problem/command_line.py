@@ -38,7 +38,8 @@ default_parameters_cl = {
         'additionalStatisticsMaxLocalOptimaCount':7,
         'kMin': 1,
         'kMax': 3,
-        'localSearchType': 'localSearchBestImprovement',
+        "shakingType":'standard',
+        "localSearchType":'standardBestImprovement',
         'solutionType': ''
 }
 
@@ -111,9 +112,13 @@ def parse_arguments():
                 help=("VNS parameter k min.") )    
         parser_vns.add_argument('--kMax', type=int, default=3, 
                 help=("VNS parameter k max.") )    
+        parser_vns.add_argument('--shakingType', type=str, 
+                choices=['standard', 'idle'],  
+                default='standard', 
+                help=("VNS parameter that determines shaking type."))
         parser_vns.add_argument('--localSearchType', type=str, 
-                choices=['localSearchBestImprovement', 'localSearchFirstImprovement'],  
-                default='localSearchBestImprovement', 
+                choices=['standardBestImprovement', 'standardFirstImprovement', 'idle'],  
+                default='standardBestImprovement', 
                 help=("VNS parameter that determines local search type."))
         parser_vns.add_argument('--solutionType', type=str, 
                 choices=['BitArray', 'int'],  

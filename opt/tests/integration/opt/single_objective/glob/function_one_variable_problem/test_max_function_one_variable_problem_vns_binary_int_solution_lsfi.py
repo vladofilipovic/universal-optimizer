@@ -52,7 +52,6 @@ class TestMaxFunctionOneVariableMaxProblemIntSolutionLsfi(unittest.TestCase):
         self.vns_construction_params.random_seed = 43434343
         self.vns_construction_params.k_min = 1
         self.vns_construction_params.k_max = 3
-        self.vns_construction_params.local_search_type = 'localSearchBestImprovement'
         self.optimizer:VnsOptimizer = VnsOptimizer.from_construction_tuple(self.vns_construction_params)
         self.bs = self.optimizer.optimize()
 
