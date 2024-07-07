@@ -7,10 +7,10 @@ from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_selection_roulette import GaSelectionRoulette
-from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support_one_point_rep_bit_array import \
-                GaCrossoverSupportOnePointRepresentationBitArray
-from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support_one_point_rep_bit_array import \
-                GaMutationSupportOnePointRepresentationBitArray
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support_one_point_bit_array import \
+                GaCrossoverSupportOnePointBitArray
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support_one_point_bit_array import \
+                GaMutationSupportOnePointBitArray
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer_gen import GaOptimizerGenerationalConstructionParameters
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer_gen import GaOptimizerGenerational
 
@@ -37,10 +37,10 @@ def main():
         solution:MinimumMultiCutProblemBitArraySolution = MinimumMultiCutProblemBitArraySolution()
         finish:FinishControl = FinishControl(criteria='iterations', iterations_max=100)
         select:GaSelectionRoulette = GaSelectionRoulette()
-        ga_cross_support:GaCrossoverSupportOnePointRepresentationBitArray[str] = \
-                GaCrossoverSupportOnePointRepresentationBitArray[str](crossover_probability=0.999)
-        ga_mut_support:GaMutationSupportOnePointRepresentationBitArray[str] = \
-                GaMutationSupportOnePointRepresentationBitArray(mutation_probability=0.05)
+        ga_cross_support:GaCrossoverSupportOnePointBitArray[str] = \
+                GaCrossoverSupportOnePointBitArray[str](crossover_probability=0.999)
+        ga_mut_support:GaMutationSupportOnePointBitArray[str] = \
+                GaMutationSupportOnePointBitArray(mutation_probability=0.05)
         ga_construction_params:GaOptimizerGenerationalConstructionParameters = \
                 GaOptimizerGenerationalConstructionParameters()
         ga_construction_params.problem = problem_to_solve

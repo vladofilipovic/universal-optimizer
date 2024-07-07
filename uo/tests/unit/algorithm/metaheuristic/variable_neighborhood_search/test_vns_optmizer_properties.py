@@ -7,7 +7,7 @@ from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer 
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support import VnsShakingSupport
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support import VnsLocalSearchSupport
-from uo.solution.solution_void_representation_int import SolutionVoidRepresentationInt
+from uo.solution.solution_void_representation_int import SolutionVoidInt
 
 class TestVnsOptimizerProperties(unittest.TestCase):
     
@@ -47,14 +47,13 @@ class TestVnsOptimizerProperties(unittest.TestCase):
         self.vns_optimizer = VnsOptimizer(
                 output_control=self.output_control_stub,
                 problem=self.problem_mock, 
-                solution_template=SolutionVoidRepresentationInt( 43, 0, 0, False),
+                solution_template=SolutionVoidInt( 43, 0, 0, False),
                 vns_shaking_support=self.vns_shaking_support_stub, 
                 vns_ls_support=self.vns_ls_support_stub, 
                 finish_control=self.finish_control_mock,
                 random_seed=self.random_seed, 
                 k_min=self.k_min, 
-                k_max=self.k_max, 
-                local_search_type='localSearchFirstImprovement'
+                k_max=self.k_max
         )
     
     def test_name_should_be_vns(self):
@@ -90,8 +89,9 @@ class TestVnsOptimizerProperties(unittest.TestCase):
     def test_problem_dimension_should_be_equal_as_in_constructor(self):
         self.assertEqual(self.vns_optimizer.problem.dimension, self.problem_mock.dimension)
 
-    def test_create_with_invalid_local_search_type_should_raise_value_exception_with_proper_message(self):
-        with self.assertRaises(ValueError) as context:
+    def test_create_with_invalid_problem_type_should_raise_value_exception_with_proper_message(self):
+        with self.assertRaises(TypeError) as context:
+            problem = "invalid"
             vns_support_shaking_stub = mocker.MagicMock(spec=VnsShakingSupport)
             type(vns_support_shaking_stub).copy = mocker.CallableMixin(spec="return self")
             vns_support_local_search_stub = mocker.MagicMock(spec=VnsLocalSearchSupport)
@@ -100,17 +100,16 @@ class TestVnsOptimizerProperties(unittest.TestCase):
             type(vns_support_local_search_stub).copy = mocker.CallableMixin(spec="return self")
             vns_optimizer:VnsOptimizer = VnsOptimizer(
                 output_control=self.output_control_stub,
-                problem=self.problem_mock, 
-                solution_template=SolutionVoidRepresentationInt( 43, 0, 0, False),
+                problem=problem, 
+                solution_template=SolutionVoidInt( 43, 0, 0, False),
                 vns_shaking_support=vns_support_shaking_stub, 
                 vns_ls_support=vns_support_local_search_stub,
                 finish_control=self.finish_control_mock,
                 random_seed=self.random_seed, 
                 k_min=self.k_min, 
-                k_max=self.k_max, 
-                local_search_type='xxx'
+                k_max=self.k_max
             )            
-        self.assertEqual("Value 'xxx' for VNS local_search_type is not supported", context.exception.args[0])
+        self.assertEqual("Parameter 'problem' must be 'Problem'.", context.exception.args[0])
 
     def tearDown(self):
         return

@@ -7,10 +7,10 @@ import networkx as nx
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_bit_array import \
-        VnsShakingSupportRepresentationBitArray
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_rep_bit_array import \
-        VnsLocalSearchSupportRepresentationBitArray
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_standard_bit_array import \
+        VnsShakingSupportStandardBitArray
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_standard_bi_bit_array import \
+        VnsLocalSearchSupportStandardBestImprovementBitArray
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
@@ -37,10 +37,10 @@ def main():
         solution:MinimumMultiCutProblemBitArraySolution = MinimumMultiCutProblemBitArraySolution()
         finish:FinishControl = FinishControl(criteria='evaluations', evaluations_max=500)
         num_edges:int = len(problem_to_solve.graph.edges())
-        vns_shaking_support:VnsShakingSupportRepresentationBitArray = \
-                VnsShakingSupportRepresentationBitArray(dimension=num_edges)
-        vns_ls_support:VnsLocalSearchSupportRepresentationBitArray = \
-                VnsLocalSearchSupportRepresentationBitArray(dimension=num_edges)
+        vns_shaking_support:VnsShakingSupportStandardBitArray = \
+                VnsShakingSupportStandardBitArray(dimension=num_edges)
+        vns_ls_support:VnsLocalSearchSupportStandardBestImprovementBitArray = \
+                VnsLocalSearchSupportStandardBestImprovementBitArray(dimension=num_edges)
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
         vns_construction_params.problem = problem_to_solve
         vns_construction_params.solution_template = solution

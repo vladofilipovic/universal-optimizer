@@ -8,10 +8,10 @@ from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_selection_roulette import GaSelectionRoulette
-from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support_one_point_rep_bit_array import \
-                GaCrossoverSupportOnePointRepresentationBitArray
-from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support_one_point_rep_bit_array import \
-                GaMutationSupportOnePointRepresentationBitArray
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support_one_point_bit_array import \
+                GaCrossoverSupportOnePointBitArray
+from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support_one_point_bit_array import \
+                GaMutationSupportOnePointBitArray
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer_gen import GaOptimizerGenerationalConstructionParameters
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer_gen import GaOptimizerGenerational
 
@@ -31,10 +31,10 @@ class TestOnesCountMaxProblemGaBitArraySolution(unittest.TestCase):
         self.solution:OnesCountMaxProblemBitArraySolution = OnesCountMaxProblemBitArraySolution()
         self.finish:FinishControl = FinishControl(criteria='evaluations', evaluations_max=5000)
         self.ga_selection:GaSelectionRoulette = GaSelectionRoulette()
-        self.ga_crossover_support:GaCrossoverSupportOnePointRepresentationBitArray[str]= \
-                GaCrossoverSupportOnePointRepresentationBitArray[str](crossover_probability=0.95)
-        self.ga_mutation_support:GaMutationSupportOnePointRepresentationBitArray = \
-                GaMutationSupportOnePointRepresentationBitArray[str](mutation_probability=0.0005)
+        self.ga_crossover_support:GaCrossoverSupportOnePointBitArray[str]= \
+                GaCrossoverSupportOnePointBitArray[str](crossover_probability=0.95)
+        self.ga_mutation_support:GaMutationSupportOnePointBitArray = \
+                GaMutationSupportOnePointBitArray[str](mutation_probability=0.0005)
         self.ga_construction_params:GaOptimizerGenerationalConstructionParameters = \
                 GaOptimizerGenerationalConstructionParameters()
         self.ga_construction_params.problem = self.problem_to_solve

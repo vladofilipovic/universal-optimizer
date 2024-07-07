@@ -38,30 +38,30 @@ from uo.algorithm.exact.total_enumeration.te_operations_support import TeOperati
 
 A_co = TypeVar("A_co", covariant=True)
 
-class TeOperationsSupportRepresentationBitArray(TeOperationsSupport[BitArray,A_co]):
+class TeOperationsSupportBitArray(TeOperationsSupport[BitArray,A_co]):
     
     def __init__(self)->None:
         """
-        Create new `TeOperationsSupportRepresentationBitArray` instance
+        Create new `TeOperationsSupportBitArray` instance
         """
         self.__bit_array_counter = None
 
     def __copy__(self):
         """
-        Internal copy of the `TeOperationsSupportRepresentationBitArray`
+        Internal copy of the `TeOperationsSupportBitArray`
 
-        :return: new `TeOperationsSupportRepresentationBitArray` instance with the same properties
-        :rtype: `TeOperationsSupportRepresentationBitArray`
+        :return: new `TeOperationsSupportBitArray` instance with the same properties
+        :rtype: `TeOperationsSupportBitArray`
         """
         sol = deepcopy(self)
         return sol
 
     def copy(self):
         """
-        Copy the `TeOperationsSupportRepresentationBitArray` instance
+        Copy the `TeOperationsSupportBitArray` instance
 
         :return: new `OnesCountMaxProblemBitArraySolutionTeSupport` instance with the same properties
-        :rtype: `TeOperationsSupportRepresentationBitArray`
+        :rtype: `TeOperationsSupportBitArray`
         """
         return self.__copy__()
 
@@ -140,7 +140,7 @@ class TeOperationsSupportRepresentationBitArray(TeOperationsSupport[BitArray,A_c
         :return: string representation of vns support instance
         :rtype: str
         """        
-        return 'TeOperationsSupportRepresentationBitArray'
+        return 'TeOperationsSupportBitArray'
 
     def __str__(self)->str:
         """

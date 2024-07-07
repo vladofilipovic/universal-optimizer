@@ -4,10 +4,10 @@ from random import choice
 
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_bit_array import \
-        VnsShakingSupportRepresentationBitArray
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_rep_bit_array import \
-        VnsLocalSearchSupportRepresentationBitArray
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_standard_bit_array import \
+        VnsShakingSupportStandardBitArray
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_standard_bi_bit_array import \
+        VnsLocalSearchSupportStandardBestImprovementBitArray
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
@@ -28,10 +28,10 @@ def main():
         solution.init_random(problem=problem_to_solve)
         solution.evaluate(problem_to_solve)           
         print('Solution: {}'.format(solution))
-        vns_shaking_support:VnsShakingSupportRepresentationBitArray[str] = \
-                VnsShakingSupportRepresentationBitArray[str](solution.bit_array_len)
-        vns_ls_support:VnsLocalSearchSupportRepresentationBitArray[str] = \
-                VnsLocalSearchSupportRepresentationBitArray[str](solution.bit_array_len)
+        vns_shaking_support:VnsShakingSupportStandardBitArray[str] = \
+                VnsShakingSupportStandardBitArray[str](solution.bit_array_len)
+        vns_ls_support:VnsLocalSearchSupportStandardBestImprovementBitArray[str] = \
+                VnsLocalSearchSupportStandardBestImprovementBitArray[str](solution.bit_array_len)
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
         vns_construction_params.problem = problem_to_solve
         vns_construction_params.solution_template = solution

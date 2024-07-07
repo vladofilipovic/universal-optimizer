@@ -12,7 +12,7 @@ from uo.solution.evaluation_cache_control_statistics import EvaluationCacheContr
 
 from uo.solution.quality_of_solution import QualityOfSolution
 from uo.solution.solution import Solution 
-from uo.solution.solution_void_representation_int import SolutionVoidRepresentationInt
+from uo.solution.solution_void_representation_int import SolutionVoidInt
 
 
 class TestSolution(unittest.TestCase):
@@ -31,7 +31,7 @@ class TestSolution(unittest.TestCase):
         distance_calculation_cache_is_used = True
         distance_calculation_cache_max_size = 200
         # Act
-        solution = SolutionVoidRepresentationInt(random_seed, fitness_value, objective_value, 
+        solution = SolutionVoidInt(random_seed, fitness_value, objective_value, 
                     is_feasible, evaluation_cache_is_used, evaluation_cache_max_size, 
                     distance_calculation_cache_is_used, distance_calculation_cache_max_size)
         # Assert
@@ -54,7 +54,7 @@ class TestSolution(unittest.TestCase):
         evaluation_cache_max_size = 100
         distance_calculation_cache_is_used = False
         distance_calculation_cache_max_size = 200
-        solution = SolutionVoidRepresentationInt(random_seed, fitness_value, objective_value, 
+        solution = SolutionVoidInt(random_seed, fitness_value, objective_value, 
                     is_feasible, evaluation_cache_is_used, evaluation_cache_max_size, 
                     distance_calculation_cache_is_used, distance_calculation_cache_max_size)
         # Act
@@ -86,7 +86,7 @@ class TestSolution(unittest.TestCase):
         distance_calculation_cache_is_used = True
         distance_calculation_cache_max_size = 200
         problem = ProblemVoidMinSO("a", True)
-        solution = SolutionVoidRepresentationInt(random_seed, fitness_value, objective_value, 
+        solution = SolutionVoidInt(random_seed, fitness_value, objective_value, 
                     is_feasible, evaluation_cache_is_used, evaluation_cache_max_size, 
                     distance_calculation_cache_is_used, distance_calculation_cache_max_size)
         # Act and Assert
@@ -135,7 +135,7 @@ class TestSolution(unittest.TestCase):
         distance_calculation_cache_is_used = True
         distance_calculation_cache_max_size = 200
         # Act
-        solution = SolutionVoidRepresentationInt(random_seed, fitness_value, objective_value, 
+        solution = SolutionVoidInt(random_seed, fitness_value, objective_value, 
                     is_feasible, evaluation_cache_is_used, evaluation_cache_max_size, 
                     distance_calculation_cache_is_used, distance_calculation_cache_max_size)
         # Assert
@@ -154,7 +154,7 @@ class TestSolution(unittest.TestCase):
         distance_calculation_cache_is_used = True
         distance_calculation_cache_max_size = 200
         # Act
-        solution = SolutionVoidRepresentationInt(random_seed, fitness_value, objective_value, 
+        solution = SolutionVoidInt(random_seed, fitness_value, objective_value, 
                     is_feasible, evaluation_cache_is_used, evaluation_cache_max_size, 
                     distance_calculation_cache_is_used, distance_calculation_cache_max_size)
         # Assert
@@ -179,7 +179,7 @@ class TestSolution(unittest.TestCase):
         distance_calculation_cache_is_used = True
         distance_calculation_cache_max_size = 200
         # Act
-        solution = SolutionVoidRepresentationInt(random_seed, fitness_value, objective_value, 
+        solution = SolutionVoidInt(random_seed, fitness_value, objective_value, 
                     is_feasible, evaluation_cache_is_used, evaluation_cache_max_size, 
                     distance_calculation_cache_is_used, distance_calculation_cache_max_size)
         # Assert
@@ -193,7 +193,7 @@ class TestSolution(unittest.TestCase):
         objective_value = 100
         is_feasible = True
         # Act
-        solution = SolutionVoidRepresentationInt(random_seed, fitness_value, objective_value, is_feasible,
+        solution = SolutionVoidInt(random_seed, fitness_value, objective_value, is_feasible,
                     evaluation_cache_is_used=False)
         # Assert
         self.assertIsNone(solution.evaluation_cache_cs)
@@ -212,7 +212,7 @@ class TestSolution(unittest.TestCase):
         evaluation_cache_max_size = 100
         distance_calculation_cache_is_used = True
         distance_calculation_cache_max_size = 200
-        solution = SolutionVoidRepresentationInt(random_seed, fitness_value, objective_value, is_feasible, 
+        solution = SolutionVoidInt(random_seed, fitness_value, objective_value, is_feasible, 
                     evaluation_cache_is_used, evaluation_cache_max_size, distance_calculation_cache_is_used, 
                     distance_calculation_cache_max_size)
         problem_mock = mocker.Mock()
@@ -236,7 +236,7 @@ class TestSolution(unittest.TestCase):
         evaluation_cache_max_size = 100
         distance_calculation_cache_is_used = True
         distance_calculation_cache_max_size = 200
-        solution = SolutionVoidRepresentationInt(random_seed, fitness_value, objective_value, is_feasible, 
+        solution = SolutionVoidInt(random_seed, fitness_value, objective_value, is_feasible, 
                     evaluation_cache_is_used, evaluation_cache_max_size, distance_calculation_cache_is_used, 
                     distance_calculation_cache_max_size)
         representation_1_mock = mocker.Mock()
@@ -259,7 +259,7 @@ class TestSolution(unittest.TestCase):
         evaluation_cache_max_size = 100
         distance_calculation_cache_is_used = True
         distance_calculation_cache_max_size = 200
-        solution = SolutionVoidRepresentationInt(random_seed, fitness_value, objective_value, is_feasible, 
+        solution = SolutionVoidInt(random_seed, fitness_value, objective_value, is_feasible, 
                     evaluation_cache_is_used, evaluation_cache_max_size, distance_calculation_cache_is_used, 
                     distance_calculation_cache_max_size)
         # Act
@@ -289,7 +289,7 @@ class TestSolution(unittest.TestCase):
         evaluation_cache_max_size = 100
         distance_calculation_cache_is_used = True
         distance_calculation_cache_max_size = 200
-        solution = SolutionVoidRepresentationInt(random_seed, fitness_value, objective_value, is_feasible, 
+        solution = SolutionVoidInt(random_seed, fitness_value, objective_value, is_feasible, 
                     evaluation_cache_is_used, evaluation_cache_max_size, distance_calculation_cache_is_used, 
                     distance_calculation_cache_max_size)
         problem_mock = mocker.Mock()
@@ -314,7 +314,7 @@ class TestSolution(unittest.TestCase):
         evaluation_cache_max_size = 100
         distance_calculation_cache_is_used = True
         distance_calculation_cache_max_size = 200
-        solution = SolutionVoidRepresentationInt(random_seed, fitness_value, objective_value, is_feasible, 
+        solution = SolutionVoidInt(random_seed, fitness_value, objective_value, is_feasible, 
                     evaluation_cache_is_used, evaluation_cache_max_size, distance_calculation_cache_is_used, 
                     distance_calculation_cache_max_size)
         # Act
@@ -340,7 +340,7 @@ class TestSolution(unittest.TestCase):
         evaluation_cache_max_size = 100
         distance_calculation_cache_is_used = True
         distance_calculation_cache_max_size = 200
-        solution = SolutionVoidRepresentationInt(random_seed, fitness_value, objective_value, is_feasible, 
+        solution = SolutionVoidInt(random_seed, fitness_value, objective_value, is_feasible, 
                     evaluation_cache_is_used, evaluation_cache_max_size, distance_calculation_cache_is_used, 
                     distance_calculation_cache_max_size)
         # Act
@@ -366,7 +366,7 @@ class TestSolution(unittest.TestCase):
         evaluation_cache_max_size = 100
         distance_calculation_cache_is_used = True
         distance_calculation_cache_max_size = 200
-        solution = SolutionVoidRepresentationInt(random_seed, fitness_value, objective_value, is_feasible, 
+        solution = SolutionVoidInt(random_seed, fitness_value, objective_value, is_feasible, 
                     evaluation_cache_is_used, evaluation_cache_max_size, distance_calculation_cache_is_used, 
                     distance_calculation_cache_max_size)
         # Act
@@ -386,7 +386,7 @@ class TestSolution(unittest.TestCase):
         # Arrange
         representation = 42
         problem = ProblemVoidMinSO("a", True)
-        solution = SolutionVoidRepresentationInt(None, 20, 20, True )
+        solution = SolutionVoidInt(None, 20, 20, True )
         # Act
         solution.init_from(representation, problem)
         # Assert
@@ -397,7 +397,7 @@ class TestSolution(unittest.TestCase):
         # Arrange
         representation = 42
         problem = ProblemVoidMinSO("a", True)
-        solution = SolutionVoidRepresentationInt(None, 20, 20, True )
+        solution = SolutionVoidInt(None, 20, 20, True )
         # Act
         solution.init_from(representation, problem)
         # Assert
@@ -408,7 +408,7 @@ class TestSolution(unittest.TestCase):
         # Arrange
         representation = "invalid representation"
         problem = ProblemVoidMinSO("a", True)
-        solution = SolutionVoidRepresentationInt(None, 20, 20, True )
+        solution = SolutionVoidInt(None, 20, 20, True )
         # Act & Assert
         with self.assertRaises(TypeError):
             solution.init_from(representation, problem)
@@ -418,7 +418,7 @@ class TestSolution(unittest.TestCase):
         # Arrange
         representation = "example_representation"
         problem = "example_problem"
-        solution = SolutionVoidRepresentationInt(None, 0, 0, True)
+        solution = SolutionVoidInt(None, 0, 0, True)
         # Act & Assert
         with self.assertRaises(TypeError):
             solution.init_from(representation, problem)

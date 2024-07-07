@@ -4,7 +4,7 @@ import unittest.mock as mocker
 from copy import deepcopy
 from datetime import datetime
 from uo.problem.problem_void_min_so import ProblemVoidMinSO
-from uo.solution.solution_void_representation_int import SolutionVoidRepresentationInt
+from uo.solution.solution_void_representation_int import SolutionVoidInt
 
 from uo.utils.logger import logger
 
@@ -376,7 +376,7 @@ class TestStringRep(unittest.TestCase):
     def test_returns_string_representation_with_current_solution(self):
         # Arrange
         problem = ProblemVoidMinSO("problem name", True)
-        solution_template = SolutionVoidRepresentationInt(42, 42.0, 42.0, True)
+        solution_template = SolutionVoidInt(42, 42.0, 42.0, True)
         te_support_mock = mocker.MagicMock(spec=TeOperationsSupport)
         te_optimizer = TeOptimizer(problem=problem, 
                             solution_template=solution_template, 
@@ -391,7 +391,7 @@ class TestStringRep(unittest.TestCase):
     def test_uses_specified_parameters(self):
         # Arrange
         problem = ProblemVoidMinSO("problem name", True)
-        solution_template = SolutionVoidRepresentationInt(42, 42.0, 42.0, True)
+        solution_template = SolutionVoidInt(42, 42.0, 42.0, True)
         te_support_mock = mocker.MagicMock(spec=TeOperationsSupport)
         te_optimizer = TeOptimizer(problem=problem, 
                             solution_template=solution_template, 
@@ -412,7 +412,7 @@ class TestStringRep(unittest.TestCase):
     def test_returns_string_representation_with_default_parameters(self):
         # Arrange
         problem = ProblemVoidMinSO("problem name", True)
-        solution_template = SolutionVoidRepresentationInt(42, 42.0, 42.0, True)
+        solution_template = SolutionVoidInt(42, 42.0, 42.0, True)
         te_support_mock = mocker.MagicMock(spec=TeOperationsSupport)
         te_optimizer = TeOptimizer(problem=problem, 
                             solution_template=solution_template, 
@@ -428,7 +428,7 @@ class TestStringRep(unittest.TestCase):
     def test_returns_string_representation_with_default_parameters_when_only_delimiter_is_specified(self):
         # Arrange
         problem = ProblemVoidMinSO("problem name", True)
-        solution_template = SolutionVoidRepresentationInt(42, 42.0, 42.0, True)
+        solution_template = SolutionVoidInt(42, 42.0, 42.0, True)
         te_support_mock = mocker.MagicMock(spec=TeOperationsSupport)
         te_optimizer = TeOptimizer(problem=problem, 
                             solution_template=solution_template, 
@@ -448,7 +448,7 @@ class TestFromConstructionTuple(unittest.TestCase):
         # Arrange
         construction_tuple = TeOptimizerConstructionParameters()
         construction_tuple.problem = ProblemVoidMinSO("problem name", True)
-        construction_tuple.solution_template = SolutionVoidRepresentationInt(42, 42.0, 42.0, True)
+        construction_tuple.solution_template = SolutionVoidInt(42, 42.0, 42.0, True)
         construction_tuple.te_operations_support = mocker.MagicMock(spec=TeOperationsSupport)
         # Act
         te_optimizer = TeOptimizer.from_construction_tuple(construction_tuple)
@@ -466,7 +466,7 @@ class TestFromConstructionTuple(unittest.TestCase):
         # Arrange
         construction_tuple = TeOptimizerConstructionParameters()
         construction_tuple.problem = ProblemVoidMinSO("problem name", True)
-        construction_tuple.solution_template = SolutionVoidRepresentationInt(42, 42.0, 42.0, True)
+        construction_tuple.solution_template = SolutionVoidInt(42, 42.0, 42.0, True)
         construction_tuple.te_operations_support = mocker.MagicMock(spec=TeOperationsSupport)
         # Act
         te_optimizer = TeOptimizer.from_construction_tuple(construction_tuple)
@@ -479,7 +479,7 @@ class TestFromConstructionTuple(unittest.TestCase):
         construction_tuple = TeOptimizerConstructionParameters()
         construction_tuple.output_control = "not an instance of OutputControl"
         construction_tuple.problem = ProblemVoidMinSO("problem name", True)
-        construction_tuple.solution_template = SolutionVoidRepresentationInt(42, 42.0, 42.0, True)
+        construction_tuple.solution_template = SolutionVoidInt(42, 42.0, 42.0, True)
         construction_tuple.te_operations_support = mocker.MagicMock(spec=TeOperationsSupport)
         # Act & Assert
         with self.assertRaises(TypeError):
@@ -491,7 +491,7 @@ class TestFromConstructionTuple(unittest.TestCase):
         construction_tuple = TeOptimizerConstructionParameters()
         construction_tuple.output_control = OutputControl()
         construction_tuple.problem = "not an instance of Problem"
-        construction_tuple.solution_template = SolutionVoidRepresentationInt(42, 42.0, 42.0, True)
+        construction_tuple.solution_template = SolutionVoidInt(42, 42.0, 42.0, True)
         construction_tuple.te_operations_support = mocker.MagicMock(spec=TeOperationsSupport)
         # Act & Assert
         with self.assertRaises(TypeError):

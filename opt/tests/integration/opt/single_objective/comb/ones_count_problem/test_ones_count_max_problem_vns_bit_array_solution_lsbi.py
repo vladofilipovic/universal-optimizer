@@ -8,10 +8,10 @@ from random import choice
 
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_bit_array import \
-        VnsShakingSupportRepresentationBitArray
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_rep_bit_array import \
-        VnsLocalSearchSupportRepresentationBitArray
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_standard_bit_array import \
+        VnsShakingSupportStandardBitArray
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_standard_bi_bit_array import \
+        VnsLocalSearchSupportStandardBestImprovementBitArray
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
@@ -32,10 +32,10 @@ class TestOnesCountMaxProblemVnsBitArraySolutionLsbi(unittest.TestCase):
         self.solution:OnesCountMaxProblemBitArraySolution = OnesCountMaxProblemBitArraySolution(random_seed=43434343)
         self.finish_control:FinishControl = FinishControl(criteria='evaluations', evaluations_max=1000, 
                     iterations_max=0, seconds_max=0)
-        self.vns_shaking_support:VnsShakingSupportRepresentationBitArray = \
-                VnsShakingSupportRepresentationBitArray(problem_dim)
-        self.vns_ls_support:VnsLocalSearchSupportRepresentationBitArray= \
-                VnsLocalSearchSupportRepresentationBitArray(problem_dim)
+        self.vns_shaking_support:VnsShakingSupportStandardBitArray = \
+                VnsShakingSupportStandardBitArray(problem_dim)
+        self.vns_ls_support:VnsLocalSearchSupportStandardBestImprovementBitArray= \
+                VnsLocalSearchSupportStandardBestImprovementBitArray(problem_dim)
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
         vns_construction_params.problem = self.problem_to_solve
         vns_construction_params.solution_template = self.solution

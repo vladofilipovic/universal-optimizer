@@ -11,7 +11,7 @@ from uo.algorithm.output_control import OutputControl
 from uo.problem.problem import Problem
 from uo.problem.problem_void_min_so import ProblemVoidMinSO
 from uo.solution.solution import Solution
-from uo.solution.solution_void_representation_int import SolutionVoidRepresentationInt
+from uo.solution.solution_void_representation_int import SolutionVoidInt
 
 
 from uo.algorithm.optimizer import Optimizer
@@ -20,7 +20,7 @@ from uo.algorithm.algorithm import Algorithm
 class AlgorithmVoid(Algorithm):
     def __init__(self, 
             problem:Problem=ProblemVoidMinSO(), 
-            solution_template:Solution=SolutionVoidRepresentationInt(),            
+            solution_template:Solution=SolutionVoidInt(),            
             name:str="algorithm_void", 
             output_control:OutputControl=None
             )->None:

@@ -8,7 +8,7 @@ from uo.problem.problem_void_min_so import ProblemVoidMinSO
 
 from uo.solution.quality_of_solution import QualityOfSolution
 from uo.solution.solution import Solution 
-from uo.solution.solution_void_representation_int import SolutionVoidRepresentationInt
+from uo.solution.solution_void_representation_int import SolutionVoidInt
 
 class TestSolution2(unittest.TestCase):
 
@@ -16,7 +16,7 @@ class TestSolution2(unittest.TestCase):
     def test_set_get_fitness_value_attribute(self):
         # Arrange
         fitness_value = 0.5
-        solution = SolutionVoidRepresentationInt(None, None, None, False, False, 0, False, 0)
+        solution = SolutionVoidInt(None, None, None, False, False, 0, False, 0)
         # Act
         solution.fitness_value = fitness_value
         # Assert
@@ -26,7 +26,7 @@ class TestSolution2(unittest.TestCase):
     def test_set_get_fitness_values_attribute(self):
         # Arrange
         fitness_values = [0.2, 0.3, 0.4]
-        solution = SolutionVoidRepresentationInt(None, None, None, False, False, 0, False, 0)
+        solution = SolutionVoidInt(None, None, None, False, False, 0, False, 0)
         # Act
         solution.fitness_values = fitness_values
         # Assert
@@ -36,7 +36,7 @@ class TestSolution2(unittest.TestCase):
     def test_set_get_objective_value_attribute(self):
         # Arrange
         objective_value = 100
-        solution = SolutionVoidRepresentationInt(None, None, None, False, False, 0, False, 0)
+        solution = SolutionVoidInt(None, None, None, False, False, 0, False, 0)
         # Act
         solution.objective_value = objective_value
         # Assert
@@ -46,7 +46,7 @@ class TestSolution2(unittest.TestCase):
     def test_set_get_objective_values_attribute(self):
         # Arrange
         objective_values = [50, 75, 100]
-        solution = SolutionVoidRepresentationInt(None, None, None, False, False, 0, False, 0)
+        solution = SolutionVoidInt(None, None, None, False, False, 0, False, 0)
         # Act
         solution.objective_values = objective_values
         # Assert
@@ -66,7 +66,7 @@ class TestSolution2(unittest.TestCase):
         distance_calculation_cache_max_size = 200
         # Act & Assert
         with self.assertRaises(TypeError):
-            SolutionVoidRepresentationInt(name, random_seed, fitness_value, objective_value, is_feasible, 
+            SolutionVoidInt(name, random_seed, fitness_value, objective_value, is_feasible, 
                     evaluation_cache_is_used, evaluation_cache_max_size, 
                     distance_calculation_cache_is_used, distance_calculation_cache_max_size)
 
@@ -74,7 +74,7 @@ class TestSolution2(unittest.TestCase):
     def test_set_fitness_value_with_invalid_type(self):
         # Arrange
         fitness_value = "0.5"  # Invalid type
-        solution = SolutionVoidRepresentationInt(None, None, None, False, False, 0, False, 0)
+        solution = SolutionVoidInt(None, None, None, False, False, 0, False, 0)
         # Act & Assert
         with self.assertRaises(TypeError):
             solution.fitness_value = fitness_value
@@ -83,7 +83,7 @@ class TestSolution2(unittest.TestCase):
     def test_set_fitness_values_with_invalid_type(self):
         # Arrange
         fitness_values = "0.2, 0.3, 0.4"  # Invalid type
-        solution = SolutionVoidRepresentationInt(None, None, None, False, False, 0, False, 0)
+        solution = SolutionVoidInt(None, None, None, False, False, 0, False, 0)
         # Act & Assert
         with self.assertRaises(TypeError):
             solution.fitness_values = fitness_values
@@ -92,7 +92,7 @@ class TestSolution2(unittest.TestCase):
     def test_set_objective_value_with_invalid_type(self):
         # Arrange
         objective_value = "100"  # Invalid type
-        solution = SolutionVoidRepresentationInt(None, None, None, False, False, 0, False, 0)
+        solution = SolutionVoidInt(None, None, None, False, False, 0, False, 0)
         # Act & Assert
         with self.assertRaises(TypeError):
             solution.objective_value = objective_value
@@ -101,7 +101,7 @@ class TestSolution2(unittest.TestCase):
     def test_set_objective_values_with_invalid_type(self):
         # Arrange
         objective_values = "50, 75, 100"  # Invalid type
-        solution = SolutionVoidRepresentationInt(None, None, None, False, False, 0, False, 0)
+        solution = SolutionVoidInt(None, None, None, False, False, 0, False, 0)
         # Act & Assert
         with self.assertRaises(TypeError):
             solution.objective_values = objective_values
@@ -110,7 +110,7 @@ class TestSolution2(unittest.TestCase):
     def test_set_is_feasible_with_invalid_type(self):
         # Arrange
         is_feasible = "True"  # Invalid type
-        solution = SolutionVoidRepresentationInt(None, None, None, False, False, 0, False, 0)
+        solution = SolutionVoidInt(None, None, None, False, False, 0, False, 0)
         # Act & Assert
         with self.assertRaisesRegex(TypeError, "Parameter 'is_feasible'"):
             solution.is_feasible = is_feasible
@@ -118,7 +118,7 @@ class TestSolution2(unittest.TestCase):
     # Setting and getting the is_feasible attribute should work as expected.
     def test_set_and_get_is_feasible(self):
         # Arrange
-        solution = SolutionVoidRepresentationInt(None, None, None, False, False, 0, False, 0)
+        solution = SolutionVoidInt(None, None, None, False, False, 0, False, 0)
         # Act
         solution.is_feasible = True
         is_feasible = solution.is_feasible
@@ -128,7 +128,7 @@ class TestSolution2(unittest.TestCase):
     # The copy() method should create a deep copy of the Solution instance.
     def test_copy_method(self):
         # Arrange
-        solution = SolutionVoidRepresentationInt(None, 0.5, 100, True, True, 100, True, 200)
+        solution = SolutionVoidInt(None, 0.5, 100, True, True, 100, True, 200)
         # Act
         copied_solution = solution.copy()
         # Assert
@@ -148,10 +148,10 @@ class TestSolution2(unittest.TestCase):
     # The copy_from() method should copy all attributes from another Solution instance to the current instance.
     def test_copy_from_method(self):
         # Arrange
-        original_solution = SolutionVoidRepresentationInt(None, 0.5, 100, True, True, 100, True, 200)
+        original_solution = SolutionVoidInt(None, 0.5, 100, True, True, 100, True, 200)
         original_solution.fitness_values = [1, 2, 4]
         original_solution.objective_values = [5, 6, 7]
-        solution = SolutionVoidRepresentationInt(None, None, None, False, False, 0, False, 0)
+        solution = SolutionVoidInt(None, None, None, False, False, 0, False, 0)
         # Act
         solution.copy_from(original_solution)
         # Assert
@@ -174,7 +174,7 @@ class TestSolution2(unittest.TestCase):
         evaluation_cache_max_size = 100
         distance_calculation_cache_is_used = True
         distance_calculation_cache_max_size = 200
-        solution = SolutionVoidRepresentationInt(random_seed, fitness_value, objective_value, is_feasible, 
+        solution = SolutionVoidInt(random_seed, fitness_value, objective_value, is_feasible, 
                     evaluation_cache_is_used, evaluation_cache_max_size, 
                     distance_calculation_cache_is_used, distance_calculation_cache_max_size)
         # Act
@@ -194,7 +194,7 @@ class TestSolution2(unittest.TestCase):
         evaluation_cache_max_size = 100
         distance_calculation_cache_is_used = True
         distance_calculation_cache_max_size = 200
-        solution = SolutionVoidRepresentationInt(random_seed, fitness_value, objective_value, is_feasible, 
+        solution = SolutionVoidInt(random_seed, fitness_value, objective_value, is_feasible, 
                     evaluation_cache_is_used, evaluation_cache_max_size, 
                     distance_calculation_cache_is_used, distance_calculation_cache_max_size)
         # Act

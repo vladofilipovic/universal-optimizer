@@ -10,7 +10,7 @@ from uo.algorithm.algorithm import Algorithm
 from uo.algorithm.algorithm_void import AlgorithmVoid
 from uo.problem.problem_void_min_so import ProblemVoidMinSO
 from uo.solution.quality_of_solution import QualityOfSolution
-from uo.solution.solution_void_representation_int import SolutionVoidRepresentationInt
+from uo.solution.solution_void_representation_int import SolutionVoidInt
 
 class TestAlgorithmProperties(unittest.TestCase):
     
@@ -131,7 +131,7 @@ class TestAlgorithm(unittest.TestCase):
     def test_algorithm_string_representation(self):
         # Arrange
         problem = ProblemVoidMinSO()
-        solution = SolutionVoidRepresentationInt()
+        solution = SolutionVoidInt()
         output_control = OutputControl(output_file=None, fields='iteration, evaluation', moments='after_algorithm')
         algorithm = AlgorithmVoid(name='MyAlgorithm', output_control=output_control, problem=problem, solution_template=solution)
         # Act

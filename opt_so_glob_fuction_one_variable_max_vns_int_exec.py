@@ -4,10 +4,10 @@ from random import choice
 
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_int import \
-        VnsShakingSupportRepresentationInt
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_rep_int import \
-        VnsLocalSearchSupportRepresentationInt
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_standard_int import \
+        VnsShakingSupportStandardInt
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_standard_bi_int import \
+        VnsLocalSearchSupportStandardBestImprovementInt
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
@@ -29,10 +29,10 @@ def main():
         print('Solution: {}'.format(solution))
         finish:FinishControl = FinishControl(criteria='evaluations & seconds', evaluations_max=5000, seconds_max=10)
         repr_length:int = 32
-        vns_shaking_support:VnsShakingSupportRepresentationInt[str] = \
-                VnsShakingSupportRepresentationInt[str](repr_length)
-        vns_ls_support:VnsLocalSearchSupportRepresentationInt[str] = \
-                VnsLocalSearchSupportRepresentationInt[str](repr_length)
+        vns_shaking_support:VnsShakingSupportStandardInt[str] = \
+                VnsShakingSupportStandardInt[str](repr_length)
+        vns_ls_support:VnsLocalSearchSupportStandardBestImprovementInt[str] = \
+                VnsLocalSearchSupportStandardBestImprovementInt[str](repr_length)
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
         vns_construction_params.problem = problem_to_solve
         vns_construction_params.solution_template = solution

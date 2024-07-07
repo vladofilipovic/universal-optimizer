@@ -5,10 +5,10 @@ from random import choice
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_bit_array import \
-        VnsShakingSupportRepresentationBitArray
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_rep_bit_array import \
-        VnsLocalSearchSupportRepresentationBitArray
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_standard_bit_array import \
+        VnsShakingSupportStandardBitArray
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_standard_bi_bit_array import \
+        VnsLocalSearchSupportStandardBestImprovementBitArray
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
@@ -22,10 +22,10 @@ def main():
         problem_to_solve:OnesCountMaxProblem = OnesCountMaxProblem.from_dimension(dimension=problem_dimension)
         solution:OnesCountMaxProblemBitArraySolution = OnesCountMaxProblemBitArraySolution()
         finish:FinishControl = FinishControl(criteria='evaluations', evaluations_max=5000)
-        vns_shaking_support:VnsShakingSupportRepresentationBitArray[str] = \
-                VnsShakingSupportRepresentationBitArray[str](k_max=problem_dimension)
-        vns_ls_support:VnsLocalSearchSupportRepresentationBitArray[str] = \
-                VnsLocalSearchSupportRepresentationBitArray[str](k_max=problem_dimension)
+        vns_shaking_support:VnsShakingSupportStandardBitArray[str] = \
+                VnsShakingSupportStandardBitArray[str](k_max=problem_dimension)
+        vns_ls_support:VnsLocalSearchSupportStandardBestImprovementBitArray[str] = \
+                VnsLocalSearchSupportStandardBestImprovementBitArray[str](k_max=problem_dimension)
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
         vns_construction_params.problem = problem_to_solve
         vns_construction_params.solution_template = solution

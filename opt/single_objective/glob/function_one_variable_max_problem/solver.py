@@ -41,14 +41,14 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support impo
         VnsLocalSearchSupport
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support import \
         VnsShakingSupport
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_rep_int import \
-        VnsLocalSearchSupportRepresentationInt
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_int import \
-        VnsShakingSupportRepresentationInt
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_rep_bit_array import \
-        VnsLocalSearchSupportRepresentationBitArray
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_bit_array import \
-        VnsShakingSupportRepresentationBitArray
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_standard_bi_int import \
+        VnsLocalSearchSupportStandardBestImprovementInt
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_standard_int import \
+        VnsShakingSupportStandardInt
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_standard_bi_bit_array import \
+        VnsLocalSearchSupportStandardBestImprovementBitArray
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_standard_bit_array import \
+        VnsShakingSupportStandardBitArray
         
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
@@ -202,9 +202,9 @@ def main():
                                 distance_calculation_cache_is_used=calculation_solution_distance_cache_is_used,
                                 distance_calculation_cache_max_size=calculation_solution_distance_cache_max_size)
                 vns_shaking_support: VnsShakingSupport = \
-                        VnsShakingSupportRepresentationInt(solution.number_of_intervals)
+                        VnsShakingSupportStandardInt(solution.number_of_intervals)
                 vns_ls_support:VnsLocalSearchSupport = \
-                        VnsLocalSearchSupportRepresentationInt(solution.number_of_intervals)
+                        VnsLocalSearchSupportStandardBestImprovementInt(solution.number_of_intervals)
             elif solution_type=='BitArray':
                 solution:FunctionOneVariableMaxProblemBitArraySolution = \
                         FunctionOneVariableMaxProblemBitArraySolution(
@@ -217,9 +217,9 @@ def main():
                                 distance_calculation_cache_is_used=calculation_solution_distance_cache_is_used,
                                 distance_calculation_cache_max_size=calculation_solution_distance_cache_max_size)
                 vns_shaking_support: VnsShakingSupport = \
-                        VnsShakingSupportRepresentationBitArray(solution.number_of_intervals)
+                        VnsShakingSupportStandardBitArray(solution.number_of_intervals)
                 vns_ls_support:VnsLocalSearchSupport = \
-                        VnsLocalSearchSupportRepresentationBitArray(solution.number_of_intervals)            
+                        VnsLocalSearchSupportStandardBestImprovementBitArray(solution.number_of_intervals)            
             else:
                 raise ValueError("Invalid solution/representation type is chosen.")
             # solver construction parameters

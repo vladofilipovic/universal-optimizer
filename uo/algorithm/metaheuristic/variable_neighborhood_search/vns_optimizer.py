@@ -45,7 +45,6 @@ class VnsOptimizerConstructionParameters:
         """
         vns_shaking_support: VnsShakingSupport = None
         vns_ls_support: VnsLocalSearchSupport = None
-        local_search_type: Optional[str] = None
         k_min: Optional[int] = None
         k_max: Optional[int] = None
         finish_control: Optional[FinishControl] = None
@@ -64,7 +63,6 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
     def __init__(self, 
             vns_shaking_support:VnsShakingSupport, 
             vns_ls_support:VnsLocalSearchSupport, 
-            local_search_type:str,
             k_min:int, 
             k_max:int, 
             finish_control:FinishControl, 
@@ -91,15 +89,11 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         execution, which depend of precise solution type 
         :param int k_min: `k_min` parameter for VNS
         :param int k_max: `k_max` parameter for VNS
-        :param local_search_type: type of the local search
-        :type local_search_type: str, possible values: 'localSearchBestImprovement', 'localSearchFirstImprovement' 
         """
         if not isinstance(vns_shaking_support, VnsShakingSupport):
                 raise TypeError('Parameter \'vns_shaking_support\' must be \'VnsShakingSupport\'.')        
         if not isinstance(vns_ls_support, VnsLocalSearchSupport):
                 raise TypeError('Parameter \'vns_ls_support\' must be \'VnsLocalSearchSupport\'.')        
-        if not isinstance(local_search_type, str):
-                raise TypeError('Parameter \'local_search_type\' must be \'str\'.')        
         if not isinstance(k_min, int):
                 raise TypeError('Parameter \'k_min\' must be \'int\'.')        
         if not isinstance(k_max, int):
@@ -111,18 +105,8 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
                 output_control=output_control, 
                 problem=problem,
                 solution_template=solution_template)
-        self.__local_search_type:str = local_search_type
         self.__vns_shaking_support:VnsShakingSupport = vns_shaking_support
-        self.__shaking_method = self.__vns_shaking_support.shaking
         self.__vns_ls_support:VnsLocalSearchSupport = vns_ls_support
-        self.__implemented_local_searches:dict[str,function] = {
-            'localSearchBestImprovement':  self.__vns_ls_support.local_search_best_improvement,
-            'localSearchFirstImprovement':  self.__vns_ls_support.local_search_first_improvement,
-        }
-        if( self.__local_search_type not in self.__implemented_local_searches.keys()):
-            raise ValueError( 'Value \'{}\' for VNS local_search_type is not supported'.format(
-                    self.__local_search_type))
-        self.__ls_method = self.__implemented_local_searches[self.__local_search_type]
         self.__k_min:int = k_min
         self.__k_max:int = k_max
         # current value of the vns parameter k
@@ -138,7 +122,6 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         return cls( 
             construction_tuple.vns_shaking_support, 
             construction_tuple.vns_ls_support, 
-            construction_tuple.local_search_type,
             construction_tuple.k_min, 
             construction_tuple.k_max, 
             construction_tuple.finish_control,
@@ -204,14 +187,15 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
         One iteration within main loop of the VNS algorithm
         """
         self.write_output_values_if_needed("before_step_in_iteration", "shaking")
-        if not self.__shaking_method(self.__k_current, self.problem, self.current_solution, self):
+        if not self.__vns_shaking_support.shaking(self.__k_current, self.problem, self.current_solution, self):
             self.write_output_values_if_needed("after_step_in_iteration", "shaking")
             return
         self.write_output_values_if_needed("after_step_in_iteration", "shaking")
         self.iteration += 1
         while self.__k_current <= self.__k_max:
             self.write_output_values_if_needed("before_step_in_iteration", "ls")
-            improvement:bool = self.__ls_method(self.__k_current, self.problem, self.current_solution, self)
+            improvement:bool = self.__vns_ls_support.local_search(self.__k_current, self.problem, self.current_solution, 
+                                            self)
             self.write_output_values_if_needed("after_step_in_iteration", "ls")
             if improvement:
                 # update auxiliary structure that keeps all solution codes
@@ -264,9 +248,6 @@ class VnsOptimizer(SingleSolutionMetaheuristic):
             s += indentation_symbol  
         s += '__vns_ls_support=' + self.__vns_ls_support.string_rep(delimiter, 
                 indentation + 1, indentation_symbol, group_start, group_end) + delimiter 
-        for _ in range(0, indentation):
-            s += indentation_symbol  
-        s += '__local_search_type=' + str(self.__local_search_type) + delimiter
         for _ in range(0, indentation):
             s += indentation_symbol  
         s += group_end 

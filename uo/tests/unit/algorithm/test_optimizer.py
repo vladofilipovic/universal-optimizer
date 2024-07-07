@@ -12,7 +12,7 @@ from uo.algorithm.optimizer import Optimizer
 from uo.algorithm.optimizer_void import OptimizerVoid
 from uo.problem.problem_void_min_so import ProblemVoidMinSO
 from uo.solution.quality_of_solution import QualityOfSolution
-from uo.solution.solution_void_representation_int import SolutionVoidRepresentationInt
+from uo.solution.solution_void_representation_int import SolutionVoidInt
 from uo.utils import logger
 
 
@@ -242,7 +242,7 @@ class Test__Optimizer__(unittest.TestCase):
                     output_control=output_control
             )
         optimizer.execution_started = datetime.now()
-        optimizer.best_solution = SolutionVoidRepresentationInt(43, 0, 0, True)
+        optimizer.best_solution = SolutionVoidInt(43, 0, 0, True)
         # Act
         string_rep = optimizer.string_rep("|")
         # Assert

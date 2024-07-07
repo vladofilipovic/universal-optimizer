@@ -6,14 +6,14 @@ from bitstring import BitArray
 
 
 from uo.algorithm.output_control import OutputControl
-from uo.algorithm.exact.total_enumeration.te_operations_support_rep_bit_array import \
-    TeOperationsSupportRepresentationBitArray
+from uo.algorithm.exact.total_enumeration.te_operations_support_bit_array import \
+    TeOperationsSupportBitArray
 from uo.algorithm.algorithm_void import AlgorithmVoid
 
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution import OnesCountMaxProblemBitArraySolution
 
-class TestTeOperationsSupportRepresentationBitArray(unittest.TestCase):
+class TestTeOperationsSupportBitArray(unittest.TestCase):
 
     # can reset the internal counter of the total enumerator and set the internal state of the solution to reflect reset operation
     def test_reset_internal_counter_and_state(self):
@@ -23,11 +23,11 @@ class TestTeOperationsSupportRepresentationBitArray(unittest.TestCase):
         solution.init_from(BitArray(bin=result), problem)
         optimizer = AlgorithmVoid(name="test", 
                             problem=problem)
-        te_support = TeOperationsSupportRepresentationBitArray()
+        te_support = TeOperationsSupportBitArray()
     
         te_support.reset(problem, solution, optimizer)
     
-        self.assertEqual(te_support._TeOperationsSupportRepresentationBitArray__bit_array_counter.current_state(), BitArray(bin=result))
+        self.assertEqual(te_support._TeOperationsSupportBitArray__bit_array_counter.current_state(), BitArray(bin=result))
         self.assertEqual(solution.representation, BitArray(bin=result))
         self.assertEqual(optimizer.evaluation, 1)
 
@@ -39,12 +39,12 @@ class TestTeOperationsSupportRepresentationBitArray(unittest.TestCase):
         solution.init_from(BitArray(bin=result), problem)
         optimizer = AlgorithmVoid(name="test", 
                             problem=problem)
-        te_support = TeOperationsSupportRepresentationBitArray()
+        te_support = TeOperationsSupportBitArray()
     
         te_support.reset(problem, solution, optimizer)
         te_support.progress(problem, solution, optimizer)
     
-        self.assertEqual(te_support._TeOperationsSupportRepresentationBitArray__bit_array_counter.current_state(), BitArray(bin=result))
+        self.assertEqual(te_support._TeOperationsSupportBitArray__bit_array_counter.current_state(), BitArray(bin=result))
         self.assertEqual(solution.representation, BitArray(bin=result))
         self.assertEqual(optimizer.evaluation, 2)
 
@@ -55,7 +55,7 @@ class TestTeOperationsSupportRepresentationBitArray(unittest.TestCase):
         solution = OnesCountMaxProblemBitArraySolution()
         solution.init_from(BitArray(bin=result), problem)
         optimizer = AlgorithmVoid()
-        te_support = TeOperationsSupportRepresentationBitArray()
+        te_support = TeOperationsSupportBitArray()
     
         te_support.reset(problem, solution, optimizer)
     

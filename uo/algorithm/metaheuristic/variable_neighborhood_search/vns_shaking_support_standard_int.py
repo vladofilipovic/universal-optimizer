@@ -1,13 +1,14 @@
 """ 
-..  _py_minimum_multi_cut_problem_bit_array_solution_vns_support:
+.. _py_vns_shaking_support_standard_int:
 
-The :mod:`~opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_bit_array_solution_vns_support` 
-contains class :class:`~opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_bit_array_solution_vns_support.MinimumMultiCutProblemBitArraySolutionVnsSupport`, 
-that represents supporting parts of the `VNS` algorithm, where solution of the :ref:`Problem_MinimumMultiCut` have `BitArray` 
-representation.
+The :mod:`~uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_standard_int` contains 
+class :class:`~uo.algorithm.metaheuristic.variable_neighborhood_search.VnsShakingSupportStandardInt`, 
+that represents VNS shaking support, where `int` representation of the problem has been used.
 """
+
 import sys
 from pathlib import Path
+from typing import Optional
 directory = Path(__file__).resolve()
 sys.path.append(directory)
 sys.path.append(directory.parent)
@@ -16,10 +17,13 @@ sys.path.append(directory.parent.parent.parent)
 
 from copy import deepcopy
 from random import choice
+from random import randint
+
 
 from typing import TypeVar
 
-from bitstring import BitArray
+from uo.utils.logger import logger
+from uo.utils.complex_counter_uniform_ascending import ComplexCounterUniformAscending
 
 from uo.problem.problem import Problem
 from uo.solution.solution import Solution
@@ -28,45 +32,45 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support
 
 A_co = TypeVar("A_co", covariant=True)
 
-class VnsShakingSupportRepresentationBitArray(VnsShakingSupport[BitArray,A_co]):
+class VnsShakingSupportStandardInt(VnsShakingSupport[int,A_co]):
     
     def __init__(self, dimension:int)->None:
         """
-        Create new `VnsLocalSearchSupportRepresentationBitArray` instance
+        Create new `VnsLocalSearchSupportStandardBestImprovementBitArray` instance
         """
         super().__init__(dimension=dimension)
 
 
     def __copy__(self):
         """
-        Internal copy of the `VnsShakingSupportRepresentationBitArray`
+        Internal copy of the `VnsShakingSupportStandardInt`
 
-        :return: new `VnsShakingSupportRepresentationBitArray` instance with the same properties
-        :rtype: `VnsShakingSupportRepresentationBitArray`
+        :return: new `VnsShakingSupportStandardInt` instance with the same properties
+        :rtype: VnsShakingSupportStandardInt
         """
-        sol = deepcopy(self)
-        return sol
+        sup = deepcopy(self)
+        return sup
 
     def copy(self):
         """
-        Copy the `VnsShakingSupportRepresentationBitArray` instance
-
-        :return: new `VnsShakingSupportRepresentationBitArray` instance with the same properties
-        :rtype: `VnsShakingSupportRepresentationBitArray`
-        """
+        Copy the `VnsShakingSupportStandardInt`
+        
+        :return: new `VnsShakingSupportStandardInt` instance with the same properties
+        :rtype: `VnsShakingSupportStandardInt`
+        """        
         return self.__copy__()
-
+        
     def shaking(self, k:int, problem:Problem, solution:Solution, 
             optimizer:SingleSolutionMetaheuristic)->bool:
         """
-        Random shaking of k parts such that new solution code does not differ more than k from all solution codes 
+        Random VNS shaking of k parts such that new solution code does not differ more than k from all solution codes 
         inside shakingPoints 
 
         :param int k: int parameter for VNS
         :param `Problem` problem: problem that is solved
         :param `Solution` solution: solution used for the problem that is solved
-        :param `SingleSolutionMetaheuristic` optimizer: optimizer that is executed
-        :return: if randomization is successful
+        :param `Metaheuristic` optimizer: metaheuristic optimizer that is executed
+        :return: if shaking is successful
         :rtype: bool
         """    
         if optimizer.should_finish():
@@ -76,26 +80,25 @@ class VnsShakingSupportRepresentationBitArray(VnsShakingSupport[BitArray,A_co]):
         tries:int = 0
         limit:int = 10000
         while tries < limit:
-            repres:BitArray = BitArray(solution.representation)
             positions:list[int] = []
             for _ in range(0,k):
-                positions.append(choice(range(len(repres))))
-            for pos in positions:
-                repres.invert(pos)
-            solution.representation = repres
+                positions.append(choice(range(self.dimension)))
+            mask:int = 0
+            for p in positions:
+                mask |= 1 << p
+            solution.representation ^= mask
             all_ok:bool = True
-            if solution.representation.count(value=1) > self.dimension:
+            if solution.representation.bit_count() > self.dimension:
                 all_ok = False
             if all_ok:
                 break
         if tries < limit:
             if optimizer.should_finish():
-                return False
+                return solution
             optimizer.write_output_values_if_needed("before_evaluation", "b_e")
             optimizer.evaluation += 1
             solution.evaluate(problem)
             optimizer.write_output_values_if_needed("after_evaluation", "a_e")
-            optimizer.write_output_values_if_needed("after_step_in_iteration", "shaking")
             return True
         else:
             return False 
@@ -103,7 +106,7 @@ class VnsShakingSupportRepresentationBitArray(VnsShakingSupport[BitArray,A_co]):
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
         """
-        String representation of the vns support structure
+        String representation of the vns support instance
 
         :param delimiter: delimiter between fields
         :type delimiter: str
@@ -118,7 +121,7 @@ class VnsShakingSupportRepresentationBitArray(VnsShakingSupport[BitArray,A_co]):
         :return: string representation of vns support instance
         :rtype: str
         """        
-        return 'VnsShakingSupportRepresentationBitArray'
+        return 'VnsShakingSupportStandardInt'
 
     def __str__(self)->str:
         """
@@ -148,4 +151,3 @@ class VnsShakingSupportRepresentationBitArray(VnsShakingSupport[BitArray,A_co]):
         :rtype: str
         """
         return self.string_rep('|')
-

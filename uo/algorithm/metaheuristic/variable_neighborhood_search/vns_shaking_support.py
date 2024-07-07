@@ -24,7 +24,7 @@ class VnsShakingSupport(Generic[R_co,A_co], metaclass=ABCMeta):
 
     def __init__(self, dimension:int)->None:
         """
-        Create new `VnsLocalSearchSupportRepresentationInt` instance
+        Create new `VnsLocalSearchSupportStandardBestImprovementInt` instance
 
         :param int inner_dimension: determine neighborhood size where local search is executed
         """

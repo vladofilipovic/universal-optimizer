@@ -1,9 +1,9 @@
 """ 
-.. _py_vns_shaking_support_rep_int:
+.. _py_vns_ls_support_standard_bi_int:
 
-The :mod:`~uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_int` contains 
-class :class:`~uo.algorithm.metaheuristic.variable_neighborhood_search.VnsShakingSupportRepresentationInt`, 
-that represents VNS shaking support, where `int` representation of the problem has been used.
+The :mod:`~uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_standard_bi_int` contains 
+class :class:`~uo.algorithm.metaheuristic.variable_neighborhood_search.VnsLocalSearchSupportIdle`, 
+that represents VNS local search support, where `int` representation of the problem has been used.
 """
 
 import sys
@@ -19,89 +19,55 @@ from copy import deepcopy
 from random import choice
 from random import randint
 
-
 from typing import TypeVar
 
 from uo.utils.logger import logger
 from uo.utils.complex_counter_uniform_ascending import ComplexCounterUniformAscending
 
+
 from uo.problem.problem import Problem
 from uo.solution.solution import Solution
 from uo.algorithm.metaheuristic.single_solution_metaheuristic import SingleSolutionMetaheuristic
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support import VnsShakingSupport
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support import VnsLocalSearchSupport
 
+R_co = TypeVar("R_co", covariant=True)
 A_co = TypeVar("A_co", covariant=True)
 
-class VnsShakingSupportRepresentationInt(VnsShakingSupport[int,A_co]):
+class VnsLocalSearchSupportIdle(VnsLocalSearchSupport[R_co,A_co]):
     
-    def __init__(self, dimension:int)->None:
-        """
-        Create new `VnsLocalSearchSupportRepresentationBitArray` instance
-        """
-        super().__init__(dimension=dimension)
-
-
     def __copy__(self):
         """
-        Internal copy of the `VnsShakingSupportRepresentationInt`
+        Internal copy of the `VnsLocalSearchSupportIdle`
 
-        :return: new `VnsShakingSupportRepresentationInt` instance with the same properties
-        :rtype: VnsShakingSupportRepresentationInt
+        :return: new `VnsLocalSearchSupportIdle` instance with the same properties
+        :rtype: VnsLocalSearchSupportIdle
         """
         sup = deepcopy(self)
         return sup
 
     def copy(self):
         """
-        Copy the `VnsShakingSupportRepresentationInt`
+        Copy the `VnsLocalSearchSupportIdle`
         
-        :return: new `VnsShakingSupportRepresentationInt` instance with the same properties
-        :rtype: `VnsShakingSupportRepresentationInt`
+        :return: new `VnsLocalSearchSupportIdle` instance with the same properties
+        :rtype: `VnsLocalSearchSupportIdle`
         """        
         return self.__copy__()
         
-    def shaking(self, k:int, problem:Problem, solution:Solution, 
+
+    def local_search(self, k:int, problem:Problem, solution:Solution, 
             optimizer:SingleSolutionMetaheuristic)->bool:
         """
-        Random VNS shaking of k parts such that new solution code does not differ more than k from all solution codes 
-        inside shakingPoints 
-
+        Executes the "idle" local search procedure 
+        
         :param int k: int parameter for VNS
         :param `Problem` problem: problem that is solved
         :param `Solution` solution: solution used for the problem that is solved
-        :param `Metaheuristic` optimizer: metaheuristic optimizer that is executed
-        :return: if shaking is successful
-        :rtype: bool
-        """    
-        if optimizer.should_finish():
-            return False
-        if k < optimizer.k_min or k > optimizer.k_max:
-            return False
-        tries:int = 0
-        limit:int = 10000
-        while tries < limit:
-            positions:list[int] = []
-            for _ in range(0,k):
-                positions.append(choice(range(self.dimension)))
-            mask:int = 0
-            for p in positions:
-                mask |= 1 << p
-            solution.representation ^= mask
-            all_ok:bool = True
-            if solution.representation.bit_count() > self.dimension:
-                all_ok = False
-            if all_ok:
-                break
-        if tries < limit:
-            if optimizer.should_finish():
-                return solution
-            optimizer.write_output_values_if_needed("before_evaluation", "b_e")
-            optimizer.evaluation += 1
-            solution.evaluate(problem)
-            optimizer.write_output_values_if_needed("after_evaluation", "a_e")
-            return True
-        else:
-            return False 
+        :param `SingleSolutionMetaheuristic` optimizer: metaheuristic optimizer that is executed
+        :return: result of the local search procedure 
+        :rtype: if local search is successful
+        """
+        return False
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
@@ -121,7 +87,7 @@ class VnsShakingSupportRepresentationInt(VnsShakingSupport[int,A_co]):
         :return: string representation of vns support instance
         :rtype: str
         """        
-        return 'VnsShakingSupportRepresentationInt'
+        return 'VnsLocalSearchSupportIdle'
 
     def __str__(self)->str:
         """

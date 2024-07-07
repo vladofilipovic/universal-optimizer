@@ -28,30 +28,24 @@ from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support import Ga
 
 A_co = TypeVar("A_co", covariant=True)
 
-class GaCrossoverSupportIdleRepresentationBitArray(GaCrossoverSupport[BitArray,A_co]):
-
-    def __init__(self, crossover_probability:float)->None:
-        """
-        Create new `GaCrossoverSupportIdleRepresentationBitArray` instance
-        """
-        pass
+class GaCrossoverSupportIdleBitArray(GaCrossoverSupport[BitArray,A_co]):
 
     def __copy__(self):
         """
-        Internal copy of the `GaCrossoverSupportIdleRepresentationBitArray`
+        Internal copy of the `GaCrossoverSupportIdleBitArray`
 
-        :return: new `GaCrossoverSupportIdleRepresentationBitArray` instance with the same properties
-        :rtype: `GaCrossoverSupportIdleRepresentationBitArray`
+        :return: new `GaCrossoverSupportIdleBitArray` instance with the same properties
+        :rtype: `GaCrossoverSupportIdleBitArray`
         """
         sol = deepcopy(self)
         return sol
 
     def copy(self):
         """
-        Copy the `GaCrossoverSupportIdleRepresentationBitArray` instance
+        Copy the `GaCrossoverSupportIdleBitArray` instance
 
-        :return: new `GaCrossoverSupportIdleRepresentationBitArray` instance with the same properties
-        :rtype: `GaCrossoverSupportIdleRepresentationBitArray`
+        :return: new `GaCrossoverSupportIdleBitArray` instance with the same properties
+        :rtype: `GaCrossoverSupportIdleBitArray`
         """
         return self.__copy__()
 
@@ -68,9 +62,8 @@ class GaCrossoverSupportIdleRepresentationBitArray(GaCrossoverSupport[BitArray,A
         :param `PopulationBasedMetaheuristic` optimizer: optimizer that is executed
         :rtype: None
         """
-        pass
+        return None
         
-
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
         """
@@ -89,7 +82,7 @@ class GaCrossoverSupportIdleRepresentationBitArray(GaCrossoverSupport[BitArray,A
         :return: string representation of ga support instance
         :rtype: str
         """
-        return 'GaCrossoverSupportIdleRepresentationBitArray'
+        return 'GaCrossoverSupportIdleBitArray'
 
     def __str__(self)->str:
         """

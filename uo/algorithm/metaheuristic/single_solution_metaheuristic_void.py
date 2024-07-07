@@ -17,7 +17,7 @@ from typing import Optional
 from uo.problem.problem import Problem
 from uo.problem.problem_void_min_so import ProblemVoidMinSO
 from uo.solution.solution import Solution
-from uo.solution.solution_void_representation_int import SolutionVoidRepresentationInt
+from uo.solution.solution_void_representation_int import SolutionVoidInt
 
 from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
@@ -29,7 +29,7 @@ class SingleSolutionMetaheuristicVoid(SingleSolutionMetaheuristic):
     def __init__(self, 
             finish_control:FinishControl,
             problem:Problem=ProblemVoidMinSO(),
-            solution_template:Optional[Solution]=SolutionVoidRepresentationInt(),   
+            solution_template:Optional[Solution]=SolutionVoidInt(),   
             name:str='ss_metaheuristic_void', 
             output_control:Optional[OutputControl]=None, 
             random_seed:Optional[int]=None, 

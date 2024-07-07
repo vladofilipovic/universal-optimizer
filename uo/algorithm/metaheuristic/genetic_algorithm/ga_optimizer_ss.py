@@ -171,14 +171,15 @@ class GaOptimizerSteadyState(GaOptimizer):
             sel_ind2:int = choice(indices_for_selection)
             child1:Solution = self.solution_template.copy()
             child2:Solution = self.solution_template.copy()
-            self.ga_crossover_method(self.problem, self.current_population[sel_ind1], self.current_population[sel_ind2], 
+            self.ga_crossover_support.crossover(self.problem, self.current_population[sel_ind1], 
+                                self.current_population[sel_ind2], 
                                 child1, child2, self)
             self.current_population[sel_ind1] = child1
             self.current_population[sel_ind2] = child2
         self.write_output_values_if_needed("after_step_in_iteration", "crossover")
         self.write_output_values_if_needed("before_step_in_iteration", "mutation")
         for i in range(l_lim, len(self.current_population)):
-            self.ga_mutation_method(self.problem, self.current_population[i], self)
+            self.ga_mutation_support.mutation(self.problem, self.current_population[i], self)
         self.write_output_values_if_needed("after_step_in_iteration", "mutation")
         self.best_solution = self.current_population[self.index_of_best_in_population()]
         self.update_additional_statistics_if_required(self.current_population)

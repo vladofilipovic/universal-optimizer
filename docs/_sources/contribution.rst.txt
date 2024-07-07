@@ -105,9 +105,9 @@ a. Contribution in the designing novel **optimization methods**:
         
         5. Structure, organization and main loop implementation - [VladimirFilipovic]_ 
 
-        6. Implementation of shaking and local searches with binary representation  (in class :class:`~uo.algorithm.variable_neighborhood_search.VnsShakingSupportRepresentationInt`, using :type:`int` predefined type) - [VladimirFilipovic]_ 
+        6. Implementation of shaking and local searches with binary representation  (in class :class:`~uo.algorithm.variable_neighborhood_search.VnsShakingSupportStandardInt`, using :type:`int` predefined type) - [VladimirFilipovic]_ 
 
-        7. Implementation of shaking and local searches with binary representation (in class :class:`~uo.algorithm.variable_neighborhood_search.VnsShakingSupportRepresentationBitArray`,using :class:`bitstring.BitArray` class) - [VladimirFilipovic]_ 
+        7. Implementation of shaking and local searches with binary representation (in class :class:`~uo.algorithm.variable_neighborhood_search.VnsShakingSupportStandardBitArray`,using :class:`bitstring.BitArray` class) - [VladimirFilipovic]_ 
 
     a.4. Genetic Algorithms :ref:`Algorithm_Genetic_Algorithms` (GA) metaheuristics:
         
@@ -117,9 +117,9 @@ a. Contribution in the designing novel **optimization methods**:
 
         10. Implementation of GA selection methods (in classes: :class:`~uo.algorithm.metaheuristic.genetic_algorithm.GaSelectionIdle`, :class:`~uo.algorithm.metaheuristic.genetic_algorithm.GaSelectionRoulette`)  - [MarkoRadosavljevic]_
 
-        11. Implementation of GA crossover one point method (contained within class: :class:`~uo.algorithm.metaheuristic.genetic_algorithm.GaCrossoverSupportOnePointRepresentationBitArray`), with binary representation (using `bitstring.BitArray` class) - [MarkoRadosavljevic]_ 
+        11. Implementation of GA crossover one point method (contained within class: :class:`~uo.algorithm.metaheuristic.genetic_algorithm.GaCrossoverSupportOnePointBitArray`), with binary representation (using `bitstring.BitArray` class) - [MarkoRadosavljevic]_ 
 
-        12. Implementation of GA mutation one point method (contained within class: :class:`~uo.algorithm.metaheuristic.genetic_algorithm.GaMutationSupportOnePointRepresentationBitArray`), with binary representation (using `bitstring.BitArray` class) - [MarkoRadosavljevic]_ 
+        12. Implementation of GA mutation one point method (contained within class: :class:`~uo.algorithm.metaheuristic.genetic_algorithm.GaMutationSupportOnePointBitArray`), with binary representation (using `bitstring.BitArray` class) - [MarkoRadosavljevic]_ 
 
 b. Contribution in solving **combinatorial** optimization problems:
 

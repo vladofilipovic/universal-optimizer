@@ -24,7 +24,7 @@ class VnsLocalSearchSupport(Generic[R_co,A_co], metaclass=ABCMeta):
     
     def __init__(self, dimension:int)->None:
         """
-        Create new `VnsLocalSearchSupportRepresentationInt` instance
+        Create new `VnsLocalSearchSupportStandardBestImprovementInt` instance
 
         :param int inner_dimension: determine neighborhood size where local search is executed
         """
@@ -46,25 +46,10 @@ class VnsLocalSearchSupport(Generic[R_co,A_co], metaclass=ABCMeta):
         return self.__dimension
 
     @abstractmethod
-    def local_search_best_improvement(self, k:int, problem:Problem, solution:Solution[R_co,A_co], 
+    def local_search(self, k:int, problem:Problem, solution:Solution[R_co,A_co], 
             optimizer:SingleSolutionMetaheuristic)->bool:
         """
-        Executes "best improvement" variant of the local search procedure 
-        
-        :param int k: int parameter for VNS
-        :param `Problem` problem: problem that is solved
-        :param `Solution` solution: solution used for the problem that is solved
-        :param `SingleSolutionMetaheuristic` optimizer: metaheuristic optimizer that is executed
-        :return: result of the local search procedure 
-        :rtype: if local search is successful
-        """
-        raise NotImplementedError
-
-    @abstractmethod
-    def local_search_first_improvement(self, k:int, problem:Problem, solution:Solution[R_co,A_co], 
-            optimizer:SingleSolutionMetaheuristic)->bool:
-        """
-        Executes "first improvement" variant of the local search procedure 
+        Executes the local search procedure 
         
         :param int k: int parameter for VNS
         :param `Problem` problem: problem that is solved

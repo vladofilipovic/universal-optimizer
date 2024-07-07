@@ -11,7 +11,7 @@ from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support import Ga
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support import GaMutationSupport
 
 from uo.problem.problem_void_min_so import ProblemVoidMinSO
-from uo.solution.solution_void_representation_int import SolutionVoidRepresentationInt
+from uo.solution.solution_void_representation_int import SolutionVoidInt
 
 
 class TestGaOptimizerGenerational(unittest.TestCase):
@@ -22,7 +22,7 @@ class TestGaOptimizerGenerational(unittest.TestCase):
         finish_control = FinishControl()
         random_seed = 123
         problem = ProblemVoidMinSO("a problem", True)
-        solution_template = SolutionVoidRepresentationInt( 43, 43, 43, True)
+        solution_template = SolutionVoidInt( 43, 43, 43, True)
         selection_stub = mocker.MagicMock(spec=GaSelection)
         type(selection_stub).selection = mocker.CallableMixin(spec=lambda x: x)
         ga_crossover_support_stub = mocker.MagicMock(spec=GaCrossoverSupport)
@@ -51,7 +51,7 @@ class TestGaOptimizerGenerational(unittest.TestCase):
         finish_control = FinishControl()
         random_seed = 123
         problem = ProblemVoidMinSO("a problem", True)
-        solution_template = SolutionVoidRepresentationInt( 43, 0, 0, False)
+        solution_template = SolutionVoidInt( 43, 0, 0, False)
         selection_stub = mocker.MagicMock(spec=GaSelection)
         type(selection_stub).selection = mocker.CallableMixin(spec=lambda x: x)
         ga_crossover_support_stub = mocker.MagicMock(spec=GaCrossoverSupport)
@@ -79,7 +79,7 @@ class TestGaOptimizerGenerational(unittest.TestCase):
         finish_control = FinishControl()
         random_seed = None
         problem = ProblemVoidMinSO("a problem", True)
-        solution_template = SolutionVoidRepresentationInt( 43, 0, 0, False)
+        solution_template = SolutionVoidInt( 43, 0, 0, False)
         selection_stub = mocker.MagicMock(spec=GaSelection)
         type(selection_stub).selection = mocker.CallableMixin(spec=lambda x: x)
         ga_crossover_support_stub = mocker.MagicMock(spec=GaCrossoverSupport)
@@ -132,7 +132,7 @@ class TestGaOptimizerGenerational(unittest.TestCase):
         finish_control = FinishControl()
         random_seed = None
         problem = ProblemVoidMinSO("a problem", True)
-        solution_template = SolutionVoidRepresentationInt( 43, 43, 43, True)
+        solution_template = SolutionVoidInt( 43, 43, 43, True)
         selection_stub = mocker.MagicMock(spec=GaSelection)
         type(selection_stub).selection = mocker.CallableMixin(spec=lambda x: x)
         ga_crossover_support_stub = mocker.MagicMock(spec=GaCrossoverSupport)
@@ -163,7 +163,7 @@ class TestGaOptimizerGenerational(unittest.TestCase):
         finish_control = FinishControl()
         random_seed = None
         problem = ProblemVoidMinSO("a problem", True)
-        solution_template = SolutionVoidRepresentationInt( 43, 43, 43, True)
+        solution_template = SolutionVoidInt( 43, 43, 43, True)
         selection_stub = mocker.MagicMock(spec=GaSelection)
         type(selection_stub).selection = mocker.CallableMixin(spec=lambda x: x)
         ga_crossover_support_stub = mocker.MagicMock(spec=GaCrossoverSupport)
@@ -194,7 +194,7 @@ class TestGaOptimizerGenerational(unittest.TestCase):
         finish_control = "not a FinishControl"
         random_seed = 123
         problem = ProblemVoidMinSO("a problem", True)
-        solution_template = SolutionVoidRepresentationInt( 43, 43, 43, True)
+        solution_template = SolutionVoidInt( 43, 43, 43, True)
         selection_stub = mocker.MagicMock(spec=GaSelection)
         type(selection_stub).selection = mocker.CallableMixin(spec=lambda x: x)
         ga_crossover_support_stub = mocker.MagicMock(spec=GaCrossoverSupport)
@@ -221,7 +221,7 @@ class TestGaOptimizerGenerational(unittest.TestCase):
         finish_control = FinishControl()
         random_seed = "not an int"
         problem = ProblemVoidMinSO("a problem", True)
-        solution_template = SolutionVoidRepresentationInt( 43, 43, 43, True)
+        solution_template = SolutionVoidInt( 43, 43, 43, True)
         selection_stub = mocker.MagicMock(spec=GaSelection)
         type(selection_stub).selection = mocker.CallableMixin(spec=lambda x: x)
         ga_crossover_support_stub = mocker.MagicMock(spec=GaCrossoverSupport)
@@ -249,7 +249,7 @@ class TestGaOptimizerGenerational(unittest.TestCase):
         random_seed = 123
         additional_statistics_control = "not a valid type"
         problem = ProblemVoidMinSO("a problem", True)
-        solution_template = SolutionVoidRepresentationInt( 43, 43, 43, True)
+        solution_template = SolutionVoidInt( 43, 43, 43, True)
         selection_stub = mocker.MagicMock(spec=GaSelection)
         type(selection_stub).selection = mocker.CallableMixin(spec=lambda x: x)
         ga_crossover_support_stub = mocker.MagicMock(spec=GaCrossoverSupport)
@@ -304,7 +304,7 @@ class TestGaOptimizerGenerational(unittest.TestCase):
         finish_control = FinishControl()
         random_seed = 123
         problem = ProblemVoidMinSO("a problem", True)
-        solution_template = SolutionVoidRepresentationInt( 43, 43, 43, True)        
+        solution_template = SolutionVoidInt( 43, 43, 43, True)        
         selection_stub = mocker.MagicMock(spec=GaSelection)
         type(selection_stub).selection = mocker.CallableMixin(spec=lambda x: x)
         ga_crossover_support_stub = "not appropriate type"
@@ -330,7 +330,7 @@ class TestGaOptimizerGenerational(unittest.TestCase):
         finish_control = FinishControl()
         random_seed = 123
         problem = ProblemVoidMinSO("a problem", True)
-        solution_template = SolutionVoidRepresentationInt( 43, 43, 43, True)         
+        solution_template = SolutionVoidInt( 43, 43, 43, True)         
         selection_stub = mocker.MagicMock(spec=GaSelection)
         type(selection_stub).selection = mocker.CallableMixin(spec=lambda x: x)
         ga_crossover_support_stub = mocker.MagicMock(spec=GaCrossoverSupport)

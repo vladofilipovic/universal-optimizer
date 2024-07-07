@@ -6,7 +6,7 @@ from uo.problem.problem import Problem
 from uo.problem.problem_void_min_so import ProblemVoidMinSO
 
 from uo.solution.solution import Solution
-from uo.solution.solution_void_representation_int import SolutionVoidRepresentationInt
+from uo.solution.solution_void_representation_int import SolutionVoidInt
 
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalStatisticsControl
@@ -44,7 +44,7 @@ class TestMetaheuristicProperties(unittest.TestCase):
         type(self.problem_mock).is_minimization = True
         self.problem_mock.copy = mocker.Mock(return_value=self.problem_mock)
 
-        self.solution_mock = mocker.MagicMock(spec=SolutionVoidRepresentationInt)
+        self.solution_mock = mocker.MagicMock(spec=SolutionVoidInt)
         type(self.solution_mock).name = 'some_solution'
 
         self.optimizer = MetaheuristicVoid(
@@ -170,7 +170,7 @@ class TestMetaheuristic2(unittest.TestCase):
         random_seed = 12345
         output_control = OutputControl()
         problem = ProblemVoidMinSO("aaa", True)
-        solution = SolutionVoidRepresentationInt()
+        solution = SolutionVoidInt()
         metaheuristic = MetaheuristicVoid(name="Test", 
                             finish_control=finish_control, 
                             random_seed=random_seed,  
@@ -190,7 +190,7 @@ class TestMetaheuristic2(unittest.TestCase):
         random_seed = 12345
         output_control = OutputControl()
         problem = ProblemVoidMinSO()
-        solution = SolutionVoidRepresentationInt()
+        solution = SolutionVoidInt()
         metaheuristic = MetaheuristicVoid(name="Test", 
                             finish_control=finish_control, 
                             random_seed=random_seed,  
@@ -211,7 +211,7 @@ class TestMetaheuristic2(unittest.TestCase):
         random_seed = 12345
         output_control = OutputControl()
         problem = ProblemVoidMinSO()
-        solution = SolutionVoidRepresentationInt()
+        solution = SolutionVoidInt()
         metaheuristic = MetaheuristicVoid(name="Test", 
                             finish_control=finish_control, 
                             random_seed=random_seed,  
@@ -449,7 +449,7 @@ class TestRandomSeed(unittest.TestCase):
                                 finish_control=FinishControl(), 
                                 random_seed=12345, 
                                 problem=ProblemVoidMinSO(), 
-                                solution_template=SolutionVoidRepresentationInt())    
+                                solution_template=SolutionVoidInt())    
         # Act
         seed = metaheuristic.random_seed
         # Assert
@@ -461,7 +461,7 @@ class TestRandomSeed(unittest.TestCase):
         metaheuristic = MetaheuristicVoid(finish_control=FinishControl(), 
                                 random_seed=54321, 
                                 problem=ProblemVoidMinSO(), 
-                                solution_template=SolutionVoidRepresentationInt())
+                                solution_template=SolutionVoidInt())
         # Act
         seed = metaheuristic.random_seed
         # Assert
@@ -474,7 +474,7 @@ class TestRandomSeed(unittest.TestCase):
             MetaheuristicVoid(finish_control=FinishControl(), 
                                 random_seed="abc", 
                                 problem=ProblemVoidMinSO(), 
-                                solution_template=SolutionVoidRepresentationInt())
+                                solution_template=SolutionVoidInt())
 
     # Raises no errors when the random seed is set to 0.
     def test_raises_no_errors_when_random_seed_is_zero(self):
@@ -482,7 +482,7 @@ class TestRandomSeed(unittest.TestCase):
         metaheuristic = MetaheuristicVoid(finish_control=FinishControl(), 
                                 random_seed=0, 
                                 problem=ProblemVoidMinSO(), 
-                                solution_template=SolutionVoidRepresentationInt())
+                                solution_template=SolutionVoidInt())
         # Act
         seed = metaheuristic.random_seed
         # Assert
@@ -500,7 +500,7 @@ class TestAdditionalStatisticsControl(unittest.TestCase):
                             random_seed=None, 
                             additional_statistics_control=additional_statistics_control, 
                             problem=ProblemVoidMinSO(),
-                            solution_template = SolutionVoidRepresentationInt())
+                            solution_template = SolutionVoidInt())
         # Act
         result = metaheuristic.additional_statistics_control
         # Assert
@@ -515,7 +515,7 @@ class TestAdditionalStatisticsControl(unittest.TestCase):
                             random_seed=None, 
                             additional_statistics_control=additional_statistics_control,  
                             problem=ProblemVoidMinSO(),
-                            solution_template=SolutionVoidRepresentationInt())
+                            solution_template=SolutionVoidInt())
         # Act
         result = metaheuristic.additional_statistics_control
         # Assert
@@ -530,7 +530,7 @@ class TestAdditionalStatisticsControl(unittest.TestCase):
                             random_seed=None, 
                             additional_statistics_control=additional_statistics_control,  
                             problem=ProblemVoidMinSO(),
-                            solution_template = SolutionVoidRepresentationInt()) 
+                            solution_template = SolutionVoidInt()) 
         # Act
         result = metaheuristic.additional_statistics_control
         # Assert
@@ -545,7 +545,7 @@ class TestAdditionalStatisticsControl(unittest.TestCase):
                             random_seed=None, 
                             additional_statistics_control=additional_statistics_control,  
                             problem=ProblemVoidMinSO(),
-                            solution_template = SolutionVoidRepresentationInt())
+                            solution_template = SolutionVoidInt())
         # Act
         result = metaheuristic.additional_statistics_control
         # Assert
@@ -560,7 +560,7 @@ class TestMainLoopIteration(unittest.TestCase):
                                     finish_control=FinishControl(),
                                     random_seed=123,
                                     problem=ProblemVoidMinSO(),
-                                    solution_template=SolutionVoidRepresentationInt())
+                                    solution_template=SolutionVoidInt())
         # Act
         metaheuristic.main_loop_iteration()
         # Assert
@@ -578,7 +578,7 @@ class TestMainLoopIteration(unittest.TestCase):
                                     finish_control=finish_control,
                                     random_seed=123,
                                     problem=ProblemVoidMinSO("aaa", False),
-                                    solution_template=SolutionVoidRepresentationInt())
+                                    solution_template=SolutionVoidInt())
     
         # Act
         metaheuristic.main_loop_iteration()
@@ -600,7 +600,7 @@ class TestStringRep(unittest.TestCase):
                             finish_control=FinishControl(), 
                             random_seed=1234, 
                             problem=ProblemVoidMinSO("aaa"), 
-                            solution_template=SolutionVoidRepresentationInt())    
+                            solution_template=SolutionVoidInt())    
         # Act
         result = metaheuristic.string_rep("|")
         # Assert
@@ -613,7 +613,7 @@ class TestStringRep(unittest.TestCase):
                             finish_control=FinishControl(), 
                             random_seed=1234, 
                             problem=ProblemVoidMinSO(), 
-                            solution_template=SolutionVoidRepresentationInt())
+                            solution_template=SolutionVoidInt())
         # Act
         result = metaheuristic.string_rep("|", indentation=2, indentation_symbol="-", group_start="[", group_end="]")
         # Assert
@@ -631,7 +631,7 @@ class TestStringRep(unittest.TestCase):
                             finish_control=FinishControl(), 
                             random_seed=1234, 
                             problem=ProblemVoidMinSO("aaa", False), 
-                            solution_template=SolutionVoidRepresentationInt())
+                            solution_template=SolutionVoidInt())
         # Act
         result = metaheuristic.string_rep("")
         # Assert

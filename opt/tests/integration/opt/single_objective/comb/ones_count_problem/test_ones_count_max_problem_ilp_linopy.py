@@ -14,8 +14,8 @@ from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem imp
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp_linopy import OnesCountMaxProblemIntegerLinearProgrammingSolver
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_ilp_linopy import OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters
 from uo.solution.solution import Solution
-from uo.solution.solution_void_representation_int import SolutionVoidRepresentationInt
-from uo.solution.solution_void_representation_object import SolutionVoidRepresentationIntObject
+from uo.solution.solution_void_representation_int import SolutionVoidInt
+from uo.solution.solution_void_representation_object import SolutionVoidIntObject
 
 class TestOnesCountMaxProblemIlpLinopy(unittest.TestCase):
     
@@ -78,7 +78,7 @@ class TestOnesCountMaxProblemIlpLinopy(unittest.TestCase):
     # creating an instance of OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters with OutputControl and Problem parameters of different types should raise a TypeError
     def test_different_types(self):
         # Arrange
-        problem = SolutionVoidRepresentationInt(42, None, None, False)
+        problem = SolutionVoidInt(42, None, None, False)
         # Act & Assert
         with self.assertRaises(TypeError):
             OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters(problem)
@@ -86,7 +86,7 @@ class TestOnesCountMaxProblemIlpLinopy(unittest.TestCase):
     # creating an instance of OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters with OutputControl and Problem parameters of the same type but different from OutputControl and Problem should raise a TypeError
     def test_same_types_different_classes(self):
         # Arrange
-        problem = SolutionVoidRepresentationIntObject()
+        problem = SolutionVoidIntObject()
         # Act & Assert
         with self.assertRaises(TypeError):
             OnesCountMaxProblemIntegerLinearProgrammingSolverConstructionParameters(problem)

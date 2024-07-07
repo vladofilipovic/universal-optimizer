@@ -10,10 +10,10 @@ from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_probl
 from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_bit_array_solution import \
     MinimumMultiCutProblemBitArraySolution
 
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_rep_bit_array import \
-    VnsLocalSearchSupportRepresentationBitArray
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_bit_array import \
-    VnsShakingSupportRepresentationBitArray
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_standard_bi_bit_array import \
+    VnsLocalSearchSupportStandardBestImprovementBitArray
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_standard_bit_array import \
+    VnsShakingSupportStandardBitArray
 
 
 class TestMinimumMultiCutProblemBitArraySolutionVnsSupport(unittest.TestCase):
@@ -42,7 +42,7 @@ class TestMinimumMultiCutProblemBitArraySolutionVnsSupport(unittest.TestCase):
         problem = MinimumMultiCutProblem(graph=graph, source_terminal_pairs=source_terminal_pairs)
         solution = MinimumMultiCutProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray(length=edges), problem)
-        vns_shaking_support = VnsShakingSupportRepresentationBitArray(len(problem.graph.edges))
+        vns_shaking_support = VnsShakingSupportStandardBitArray(len(problem.graph.edges))
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
@@ -79,7 +79,7 @@ class TestMinimumMultiCutProblemBitArraySolutionVnsSupport(unittest.TestCase):
         solution = MinimumMultiCutProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray(length=edges), problem)
         solution.evaluate(problem)
-        vns_ls_support = VnsLocalSearchSupportRepresentationBitArray(len(problem.graph.edges))
+        vns_ls_support = VnsLocalSearchSupportStandardBestImprovementBitArray(len(problem.graph.edges))
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
@@ -91,7 +91,7 @@ class TestMinimumMultiCutProblemBitArraySolutionVnsSupport(unittest.TestCase):
         optimizer_stub.k_max = 10
         # Act
         old_fitness = solution.fitness_value
-        result = vns_ls_support.local_search_best_improvement(3, problem, solution, optimizer_stub)
+        result = vns_ls_support.local_search(3, problem, solution, optimizer_stub)
         # Assert
         self.assertTrue(result)
         self.assertGreaterEqual(solution.fitness_value, old_fitness)
@@ -117,7 +117,7 @@ class TestMinimumMultiCutProblemBitArraySolutionVnsSupport(unittest.TestCase):
         problem = MinimumMultiCutProblem(graph=graph, source_terminal_pairs=source_terminal_pairs)
         solution = MinimumMultiCutProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray(bin='0' * edges), problem)
-        vns_shaking_support = VnsShakingSupportRepresentationBitArray(len(problem.graph.edges))
+        vns_shaking_support = VnsShakingSupportStandardBitArray(len(problem.graph.edges))
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
@@ -154,7 +154,7 @@ class TestMinimumMultiCutProblemBitArraySolutionVnsSupport(unittest.TestCase):
         solution = MinimumMultiCutProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray(length=edges), problem)
         solution.evaluate(problem)
-        vns_ls_support = VnsLocalSearchSupportRepresentationBitArray(len(problem.graph.edges))
+        vns_ls_support = VnsLocalSearchSupportStandardBestImprovementBitArray(len(problem.graph.edges))
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
@@ -166,7 +166,7 @@ class TestMinimumMultiCutProblemBitArraySolutionVnsSupport(unittest.TestCase):
         optimizer_stub.k_max = 10
         # Act
         old_fitness = solution.fitness_value
-        result = vns_ls_support.local_search_best_improvement(3, problem, solution, optimizer_stub)
+        result = vns_ls_support.local_search(3, problem, solution, optimizer_stub)
         # Assert
         self.assertTrue(result)
         self.assertGreaterEqual(solution.fitness_value, old_fitness)

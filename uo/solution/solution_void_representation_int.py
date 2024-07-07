@@ -18,7 +18,7 @@ from uo.solution.solution import Solution
 from uo.solution.evaluation_cache_control_statistics import EvaluationCacheControlStatistics
 from uo.solution.distance_calculation_cache_control_statistics import DistanceCalculationCacheControlStatistics
 
-class SolutionVoidRepresentationInt(Solution[int, str]):
+class SolutionVoidInt(Solution[int, str]):
     
     def __init__(self, random_seed:int=None, 
             fitness_value:float=-math.inf, 

@@ -94,9 +94,7 @@ class GaOptimizer(PopulationBasedMetaheuristic, metaclass=ABCMeta):
                 random_seed=random_seed,
                 additional_statistics_control=additional_statistics_control)
         self.__ga_crossover_support:GaCrossoverSupport = ga_crossover_support
-        self.__crossover_method = self.__ga_crossover_support.crossover
         self.__ga_mutation_support:GaMutationSupport = ga_mutation_support
-        self.__mutation_method = self.__ga_mutation_support.mutation
         self.__ga_selection = ga_selection 
         self.__population_size:int = population_size
         self.__elite_count:int = elite_count
@@ -189,15 +187,6 @@ class GaOptimizer(PopulationBasedMetaheuristic, metaclass=ABCMeta):
         return self.__ga_crossover_support
 
     @property
-    def ga_crossover_method(self):
-        """
-        Property getter for the crossover method of GA
-        
-        :return: Crossover method of the GA 
-        """
-        return self.__crossover_method
-
-    @property
     def ga_mutation_support(self)->GaMutationSupport:
         """
         Property getter for the mutation support of GA
@@ -205,16 +194,7 @@ class GaOptimizer(PopulationBasedMetaheuristic, metaclass=ABCMeta):
         :return: Mutation support of the GA 
         :rtype: `GaMutationSupport`
         """
-        return self.__ga_crossover_support
-
-    @property
-    def ga_mutation_method(self):
-        """
-        Property getter for the mutation method of GA
-        
-        :return: Mutation method of the GA 
-        """
-        return self.__mutation_method
+        return self.__ga_mutation_support
     
     def index_of_best_in_population(self):
         pos:int = 0

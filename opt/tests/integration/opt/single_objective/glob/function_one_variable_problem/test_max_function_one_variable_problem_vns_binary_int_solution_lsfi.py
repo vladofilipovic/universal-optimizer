@@ -6,10 +6,10 @@ from random import seed
 
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_int import \
-        VnsShakingSupportRepresentationInt
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_rep_int import \
-        VnsLocalSearchSupportRepresentationInt
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_standard_int import \
+        VnsShakingSupportStandardInt
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_standard_bi_int import \
+        VnsLocalSearchSupportStandardBestImprovementInt
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import \
         VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
@@ -39,10 +39,10 @@ class TestMaxFunctionOneVariableMaxProblemIntSolutionLsfi(unittest.TestCase):
         self.solution.evaluate(self.problem_to_solve)           
         self.finish_control:FinishControl = FinishControl(criteria='evaluations & seconds', evaluations_max=10000, 
                 seconds_max=100)
-        self.vns_shaking_support:VnsShakingSupportRepresentationInt = \
-                VnsShakingSupportRepresentationInt(self.solution.number_of_intervals)
-        self.vns_ls_support:VnsLocalSearchSupportRepresentationInt = \
-                VnsLocalSearchSupportRepresentationInt(self.solution.number_of_intervals)
+        self.vns_shaking_support:VnsShakingSupportStandardInt = \
+                VnsShakingSupportStandardInt(self.solution.number_of_intervals)
+        self.vns_ls_support:VnsLocalSearchSupportStandardBestImprovementInt = \
+                VnsLocalSearchSupportStandardBestImprovementInt(self.solution.number_of_intervals)
         self.vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
         self.vns_construction_params.problem = self.problem_to_solve
         self.vns_construction_params.solution_template = self.solution

@@ -14,8 +14,8 @@ from random import choice
 from bitstring import Bits, BitArray, BitStream, pack
 
 from uo.algorithm.output_control import OutputControl
-from uo.algorithm.exact.total_enumeration.te_operations_support_rep_bit_array import \
-    TeOperationsSupportRepresentationBitArray
+from uo.algorithm.exact.total_enumeration.te_operations_support_bit_array import \
+    TeOperationsSupportBitArray
 from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizerConstructionParameters
 from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizer
 
@@ -31,7 +31,7 @@ class TestOnesCountMaxProblemTeBitArraySolution(unittest.TestCase):
     def setUp(self):
         self.problem_to_solve:OnesCountMaxProblem = OnesCountMaxProblem.from_dimension(dimension=12)
         self.solution:OnesCountMaxProblemBitArraySolution = OnesCountMaxProblemBitArraySolution(random_seed=43434343)
-        self.te_support:TeOperationsSupportRepresentationBitArray = TeOperationsSupportRepresentationBitArray()
+        self.te_support:TeOperationsSupportBitArray = TeOperationsSupportBitArray()
         construction_params:TeOptimizerConstructionParameters = TeOptimizerConstructionParameters()
         construction_params.problem = self.problem_to_solve
         construction_params.solution_template = self.solution

@@ -1,14 +1,13 @@
 """ 
-.. _py_vns_ls_support_rep_int:
+..  _py_minimum_multi_cut_problem_bit_array_solution_vns_support:
 
-The :mod:`~uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_rep_int` contains 
-class :class:`~uo.algorithm.metaheuristic.variable_neighborhood_search.VnsLocalSearchSupportRepresentationInt`, 
-that represents VNS local search support, where `int` representation of the problem has been used.
+The :mod:`~opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_bit_array_solution_vns_support` 
+contains class :class:`~opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_bit_array_solution_vns_support.MinimumMultiCutProblemBitArraySolutionVnsSupport`, 
+that represents supporting parts of the `VNS` algorithm, where solution of the :ref:`Problem_MinimumMultiCut` have `BitArray` 
+representation.
 """
-
 import sys
 from pathlib import Path
-from typing import Optional
 directory = Path(__file__).resolve()
 sys.path.append(directory)
 sys.path.append(directory.parent)
@@ -17,13 +16,12 @@ sys.path.append(directory.parent.parent.parent)
 
 from copy import deepcopy
 from random import choice
-from random import randint
 
 from typing import TypeVar
 
-from uo.utils.logger import logger
-from uo.utils.complex_counter_uniform_ascending import ComplexCounterUniformAscending
+from bitstring import BitArray
 
+from uo.utils.complex_counter_uniform_ascending import ComplexCounterUniformAscending
 
 from uo.problem.problem import Problem
 from uo.solution.solution import Solution
@@ -32,36 +30,35 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support impo
 
 A_co = TypeVar("A_co", covariant=True)
 
-class VnsLocalSearchSupportRepresentationInt(VnsLocalSearchSupport[int,A_co]):
+class VnsLocalSearchSupportStandardBestImprovementBitArray(VnsLocalSearchSupport[BitArray,A_co]):
     
     def __init__(self, dimension:int)->None:
         """
-        Create new `VnsLocalSearchSupportRepresentationBitArray` instance
+        Create new `VnsLocalSearchSupportStandardBestImprovementBitArray` instance
         """
         super().__init__(dimension=dimension)
 
     def __copy__(self):
         """
-        Internal copy of the `VnsLocalSearchSupportRepresentationInt`
+        Internal copy of the `VnsLocalSearchSupportStandardBestImprovementBitArray`
 
-        :return: new `VnsLocalSearchSupportRepresentationInt` instance with the same properties
-        :rtype: VnsLocalSearchSupportRepresentationInt
+        :return: new `VnsLocalSearchSupportStandardBestImprovementBitArray` instance with the same properties
+        :rtype: `VnsLocalSearchSupportStandardBestImprovementBitArray`
         """
-        sup = deepcopy(self)
-        return sup
+        sol = deepcopy(self)
+        return sol
 
     def copy(self):
         """
-        Copy the `VnsLocalSearchSupportRepresentationInt`
-        
-        :return: new `VnsLocalSearchSupportRepresentationInt` instance with the same properties
-        :rtype: `VnsLocalSearchSupportRepresentationInt`
-        """        
-        return self.__copy__()
-        
+        Copy the `VnsLocalSearchSupportStandardBestImprovementBitArray` instance
 
-    def local_search_best_improvement(self, k:int, problem:Problem, solution:Solution, 
-            optimizer:SingleSolutionMetaheuristic)->bool:
+        :return: new `VnsLocalSearchSupportStandardBestImprovementBitArray` instance with the same properties
+        :rtype: `VnsLocalSearchSupportStandardBestImprovementBitArray`
+        """
+        return self.__copy__()
+
+    def local_search(self, k:int, problem:Problem, solution:Solution, 
+            optimizer: SingleSolutionMetaheuristic)->bool:
         """
         Executes "best improvement" variant of the local search procedure 
         
@@ -86,10 +83,7 @@ class VnsLocalSearchSupportRepresentationInt(VnsLocalSearchSupport[int,A_co]):
             # collect positions for inversion from indexes
             positions:list[int] = indexes.current_state()
             # invert and compare, switch of new is better
-            mask:int = 0
-            for i in positions:
-                mask |= 1 << i
-            solution.representation ^= mask 
+            solution.representation.invert(positions) 
             if optimizer.should_finish():
                 solution.copy_from(start_sol)
                 return False
@@ -100,62 +94,19 @@ class VnsLocalSearchSupportRepresentationInt(VnsLocalSearchSupport[int,A_co]):
             if solution.is_better(best_sol, problem):
                 better_sol_found = True
                 best_sol.copy_from(solution)
-            solution.representation ^= mask 
-            # increment indexes and set in_loop accordingly
+            solution.representation.invert(positions)
+            # increment indexes and set in_loop according to the state
             in_loop = indexes.progress()
         if better_sol_found:
             solution.copy_from(best_sol)
             return True
         solution.copy_from(start_sol)
         return False
-
-    def local_search_first_improvement(self, k:int, problem:Problem, solution:Solution, 
-            optimizer: SingleSolutionMetaheuristic)->bool:
-        """
-        Executes "first improvement" variant of the local search procedure 
-        
-        :param int k: int parameter for VNS
-        :param `Problem` problem: problem that is solved
-        :param `Solution` solution: solution used for the problem that is solved
-        :param `SingleSolutionMetaheuristic` optimizer: metaheuristic optimizer that is executed
-        :return: result of the local search procedure 
-        :rtype: if local search is successful
-        """
-        if optimizer.should_finish():
-            return False
-        if k < optimizer.k_min or k > optimizer.k_max:
-            return False
-        start_sol:Solution = solution.copy()
-        # initialize indexes
-        indexes:ComplexCounterUniformAscending = ComplexCounterUniformAscending(k, self.dimension)
-        in_loop:bool = indexes.reset()
-        while in_loop:
-            # collect positions for inversion from indexes
-            positions:list[int] = indexes.current_state()
-            # invert and compare, switch and exit if new is better
-            mask:int = 0
-            for i in positions:
-                mask |= 1 << i
-            solution.representation ^= mask 
-            if optimizer.should_finish():
-                solution.copy_from(start_sol)
-                return False
-            optimizer.write_output_values_if_needed("before_evaluation", "b_e")
-            optimizer.evaluation += 1
-            solution.evaluate(problem)
-            optimizer.write_output_values_if_needed("after_evaluation", "a_e")
-            if solution.is_better(start_sol, problem):
-                return True
-            solution.representation ^= mask
-            # increment indexes and set in_loop accordingly
-            in_loop = indexes.progress()
-        solution.copy_from(start_sol)
-        return False
-
+    
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
         """
-        String representation of the vns support instance
+        String representation of the vns support structure
 
         :param delimiter: delimiter between fields
         :type delimiter: str
@@ -170,7 +121,7 @@ class VnsLocalSearchSupportRepresentationInt(VnsLocalSearchSupport[int,A_co]):
         :return: string representation of vns support instance
         :rtype: str
         """        
-        return 'VnsLocalSearchSupportRepresentationInt'
+        return 'VnsLocalSearchSupportStandardBestImprovementBitArray'
 
     def __str__(self)->str:
         """
@@ -200,3 +151,5 @@ class VnsLocalSearchSupportRepresentationInt(VnsLocalSearchSupport[int,A_co]):
         :rtype: str
         """
         return self.string_rep('|')
+
+

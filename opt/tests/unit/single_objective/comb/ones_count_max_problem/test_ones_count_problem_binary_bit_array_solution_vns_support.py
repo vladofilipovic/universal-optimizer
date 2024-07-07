@@ -5,10 +5,12 @@ import unittest.mock as mocker
 from bitstring import BitArray
 from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
 
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_rep_bit_array import \
-        VnsShakingSupportRepresentationBitArray
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_rep_bit_array import \
-        VnsLocalSearchSupportRepresentationBitArray
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_standard_bit_array import \
+        VnsShakingSupportStandardBitArray
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_standard_bi_bit_array import \
+        VnsLocalSearchSupportStandardBestImprovementBitArray
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_standard_fi_bit_array import \
+        VnsLocalSearchSupportStandardFirstImprovementBitArray
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import \
         VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import \
@@ -27,7 +29,7 @@ class TestOnesCountMaxProblemBitArraySolutionVnsSupport(unittest.TestCase):
         problem = OnesCountMaxProblem(dim=5)
         solution = OnesCountMaxProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray('0b10101'), problem)
-        vns_support = VnsShakingSupportRepresentationBitArray(problem.dimension)
+        vns_support = VnsShakingSupportStandardBitArray(problem.dimension)
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
@@ -49,7 +51,7 @@ class TestOnesCountMaxProblemBitArraySolutionVnsSupport(unittest.TestCase):
         solution = OnesCountMaxProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray('0b00110010'), problem)
         solution.evaluate(problem)
-        vns_support = VnsLocalSearchSupportRepresentationBitArray(problem.dimension)
+        vns_support = VnsLocalSearchSupportStandardBestImprovementBitArray(problem.dimension)
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
@@ -61,7 +63,7 @@ class TestOnesCountMaxProblemBitArraySolutionVnsSupport(unittest.TestCase):
         optimizer_stub.k_max = 10
         # Act
         old_fitness = solution.fitness_value
-        result = vns_support.local_search_best_improvement(3, problem, solution, optimizer_stub)
+        result = vns_support.local_search(3, problem, solution, optimizer_stub)
         # Assert
         self.assertTrue(result)
         self.assertGreaterEqual(solution.fitness_value, old_fitness)
@@ -73,7 +75,7 @@ class TestOnesCountMaxProblemBitArraySolutionVnsSupport(unittest.TestCase):
         solution = OnesCountMaxProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray('0b000001'), problem)
         solution.evaluate(problem)
-        vns_support = VnsLocalSearchSupportRepresentationBitArray(problem.dimension)
+        vns_support = VnsLocalSearchSupportStandardBestImprovementBitArray(problem.dimension)
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
@@ -85,7 +87,7 @@ class TestOnesCountMaxProblemBitArraySolutionVnsSupport(unittest.TestCase):
         optimizer_stub.k_max = 10
         # Act
         old_fitness = solution.fitness_value
-        result = vns_support.local_search_first_improvement(3, problem, solution, optimizer_stub)
+        result = vns_support.local_search(3, problem, solution, optimizer_stub)
         # Assert
         self.assertTrue(result)
         self.assertGreaterEqual(solution.fitness_value, old_fitness)
@@ -97,7 +99,7 @@ class TestOnesCountMaxProblemBitArraySolutionVnsSupport(unittest.TestCase):
         problem = OnesCountMaxProblem(dim=5)
         solution = OnesCountMaxProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray(bin='0' * problem.dimension), problem)
-        vns_support = VnsShakingSupportRepresentationBitArray(problem.dimension)
+        vns_support = VnsShakingSupportStandardBitArray(problem.dimension)
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
@@ -119,7 +121,7 @@ class TestOnesCountMaxProblemBitArraySolutionVnsSupport(unittest.TestCase):
         solution = OnesCountMaxProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray('0b00110010'), problem)
         solution.evaluate(problem)
-        vns_support = VnsLocalSearchSupportRepresentationBitArray(problem.dimension)
+        vns_support = VnsLocalSearchSupportStandardBestImprovementBitArray(problem.dimension)
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
@@ -131,7 +133,7 @@ class TestOnesCountMaxProblemBitArraySolutionVnsSupport(unittest.TestCase):
         optimizer_stub.k_max = 10
         # Act
         old_fitness = solution.fitness_value
-        result = vns_support.local_search_best_improvement(3, problem, solution, optimizer_stub)
+        result = vns_support.local_search(3, problem, solution, optimizer_stub)
         # Assert
         self.assertTrue(result)
         self.assertGreaterEqual(solution.fitness_value, old_fitness)
@@ -143,7 +145,7 @@ class TestOnesCountMaxProblemBitArraySolutionVnsSupport(unittest.TestCase):
         solution = OnesCountMaxProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray('0b00110010'), problem)
         solution.evaluate(problem)
-        vns_support = VnsLocalSearchSupportRepresentationBitArray(problem.dimension)
+        vns_support = VnsLocalSearchSupportStandardFirstImprovementBitArray(problem.dimension)
         finish_control_stub = mocker.MagicMock()
         type(finish_control_stub).is_finished = mocker.Mock(return_value=False)
         optimizer_stub = mocker.MagicMock()
@@ -155,7 +157,7 @@ class TestOnesCountMaxProblemBitArraySolutionVnsSupport(unittest.TestCase):
         optimizer_stub.k_max = 10
         # Act
         old_fitness = solution.fitness_value
-        result = vns_support.local_search_first_improvement(3, problem, solution, optimizer_stub)
+        result = vns_support.local_search(3, problem, solution, optimizer_stub)
         # Assert
         self.assertTrue(result)
         self.assertGreaterEqual(solution.fitness_value, old_fitness)

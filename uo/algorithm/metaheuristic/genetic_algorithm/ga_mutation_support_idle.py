@@ -30,32 +30,27 @@ from uo.solution.solution import Solution
 from uo.algorithm.metaheuristic.population_based_metaheuristic import PopulationBasedMetaheuristic
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support import GaMutationSupport
 
+R_co = TypeVar("R_co", covariant=True)
 A_co = TypeVar("A_co", covariant=True)
 
-class GaMutationSupportIdleRepresentationBitArray(GaMutationSupport[BitArray,A_co]):
-
-    def __init__(self, mutation_probability:float)->None:
-        """
-        Create new `GaMutationSupportIdleRepresentationBitArray` instance
-        """
-        pass
+class GaMutationSupportIdle(GaMutationSupport[R_co,A_co]):
 
     def __copy__(self):
         """
-        Internal copy of the `GaMutationSupportIdleRepresentationBitArray`
+        Internal copy of the `GaMutationSupportIdle`
 
-        :return: new `GaMutationSupportIdleRepresentationBitArray` instance with the same properties
-        :rtype: `GaMutationSupportIdleRepresentationBitArray`
+        :return: new `GaMutationSupportIdle` instance with the same properties
+        :rtype: `GaMutationSupportIdle`
         """
         sol = deepcopy(self)
         return sol
 
     def copy(self):
         """
-        Copy the `GaMutationSupportIdleRepresentationBitArray` instance
+        Copy the `GaMutationSupportIdle` instance
 
-        :return: new `GaMutationSupportIdleRepresentationBitArray` instance with the same properties
-        :rtype: `GaMutationSupportIdleRepresentationBitArray`
+        :return: new `GaMutationSupportIdle` instance with the same properties
+        :rtype: `GaMutationSupportIdle`
         """
         return self.__copy__()
 
@@ -70,7 +65,7 @@ class GaMutationSupportIdleRepresentationBitArray(GaMutationSupport[BitArray,A_c
         :param `PopulationBasedMetaheuristic` optimizer: optimizer that is executed
         :rtype: None
         """
-        pass
+        return None
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
@@ -90,7 +85,7 @@ class GaMutationSupportIdleRepresentationBitArray(GaMutationSupport[BitArray,A_c
         :return: string representation of ga support instance
         :rtype: str
         """
-        return 'GaMutationSupportIdleRepresentationBitArray'
+        return 'GaMutationSupportIdle'
 
     def __str__(self)->str:
         """
