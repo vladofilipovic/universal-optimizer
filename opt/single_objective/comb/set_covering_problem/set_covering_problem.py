@@ -64,7 +64,7 @@ class SetCoveringProblem(TargetProblem):
         self.__dimension = len(subsets)
 
     @classmethod
-    def from_another_set_covering_problem(cls, universe:Set[int], subsets:list):
+    def from_universe_and_subset_files(cls, universe:Set[int], subsets:list):
         """
         Additional constructor. Create new `SetCoveringProblem` instance where the universe and subsets are specified.
         
