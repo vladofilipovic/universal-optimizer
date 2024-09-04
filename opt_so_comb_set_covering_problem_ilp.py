@@ -12,18 +12,23 @@ from opt.single_objective.comb.set_covering_problem.set_covering_problem_ilp_lin
 
 def main():
         n = randint(0, 1000)
-        universe = np.linspace(o, n, n + 1)
+        #universe_set = set(np.linspace(0, n, n + 1))
+        #universe_list = list(universe_set)
 
-        m = randint(0, 10)
-        subsets = []
+        #m = randint(0, 10)
+        #subsets = []
 
-        for i in range(m):
-            number_of_elements = randint(0, 500)
-            random.shuffle(universe)
-            subset = set(universe[0:number_of_elements])
-            subsets.append(subset)
+        #for i in range(m):
+        #    number_of_elements = randint(0, 500)
+        #    random.shuffle(universe_list)
+        #    subset = set(universe_list[0:number_of_elements])
+        #    subsets.append(subset)
 
-        problem_to_solve:SetCoveringProblem = SetCoveringProblem(universe, subsets)
+        universe_set = {0, 1, 2, 3, 4}
+        universe_list = list(universe_set)
+        subsets = [ {1, 3}, {0, 1, 2}, {2, 3, 4}, {0, 4}, {3}]
+        subsets
+        problem_to_solve:SetCoveringProblem = SetCoveringProblem(universe_set, subsets)
         solver:SetCoveringProblemIntegerLinearProgrammingSolver = SetCoveringProblemIntegerLinearProgrammingSolver(
                         problem=problem_to_solve)
         bs = solver.optimize()

@@ -18,10 +18,10 @@ from copy import deepcopy
 from linopy import Model
 import json
 
-from uo.target_problem.target_problem import TargetProblem
+from uo.problem.problem import Problem
 from uo.utils.logger import logger
 
-class SetCoveringProblem(TargetProblem):
+class SetCoveringProblem(Problem):
     """
     Class representing the Minimum Set Covering Problem.
 
