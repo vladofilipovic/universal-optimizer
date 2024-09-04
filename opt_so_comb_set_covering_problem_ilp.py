@@ -24,9 +24,9 @@ def main():
         #    subset = set(universe_list[0:number_of_elements])
         #    subsets.append(subset)
 
-        universe_set = {0, 1, 2, 3, 4}
+        universe_set = {0, 1, 2, 3, 4, 5, 6}
         universe_list = list(universe_set)
-        subsets = [ {1, 3}, {0, 1, 2}, {2, 3, 4}, {0, 4}, {3}]
+        subsets = [ {1, 3, 5}, {0, 1, 2, 6}, {2, 3, 4}, {0, 4}, {3}]
         subsets
         problem_to_solve:SetCoveringProblem = SetCoveringProblem(universe_set, subsets)
         solver:SetCoveringProblemIntegerLinearProgrammingSolver = SetCoveringProblemIntegerLinearProgrammingSolver(

@@ -12,12 +12,15 @@ from datetime import datetime
 
 import xarray as xr
 from linopy import Model
+from linopy import constraints
 
 from uo.utils.logger import logger
 
 from typing import Optional
 from typing import Set
 import numpy as np
+
+from linopy.expressions import LinearExpression
 
 from uo.problem.problem import Problem
 from uo.solution.solution import Solution
@@ -141,34 +144,30 @@ class SetCoveringProblemIntegerLinearProgrammingSolver(Optimizer):
         l = []
         universe = self.problem.universe
         subsets = self.problem.subsets
-        print("Dimension: ")
-        print(self.problem.dimension)
-        for _ in range(self.problem.dimension):
-            l.append(0)
-        coords = xr.DataArray(l)
-        print(coords)
+        
+
+        l = np.arange(self.problem.dimension)
+        coords = xr.DataArray(l, dims="dim_i")
+
 
         # The field result_matrix_ij is set to 1 if element i is located in the set j
         result_matrix = np.zeros((len(universe), len(subsets)))
-        x = self.model.add_variables(binary=True, coords=[coords], name='x')
-        print("subsets:", subsets)
-        print("universe: ", universe)
-
-        print("n: ", len(result_matrix))
-        print("m: ", len(result_matrix[0]))
-        print("coords: ", coords)
 
         for i in range(len(subsets)):
-            ### OVDE TREBA NEKAKO PRONACI KAKO DA UGURAM X U OGRANICENJE
-            transposed_vector = np.transpose(result_matrix[i])
-            print("Dot prod: ", np.dot(transposed_vector, x.at[i]))
-            Model.add_constraints(np.dot(transposed_vector, x[i]) >= 1)
+            subset = subsets[i]
+            for element in subset:
+                result_matrix[element][i] = 1
 
-        #logger.debug(self.model.variables)
-        if self.problem.is_minimization:
-            self.model.add_objective((x).sum(), sense="min")
-        else:
-            self.model.add_objective((x).sum(),sense="max")
+        x = self.model.add_variables(binary=True, coords = [coords] , name='x')
+
+
+        np_coords = coords.values
+
+        for i in range(len(universe)):
+            transposed_vector = np.transpose(result_matrix[i])
+            linear_expr = LinearExpression.dot(x, transposed_vector)
+            self.model.add_constraints(linear_expr, ">=", 1)
+        self.model.add_objective((x).sum(), sense="min")
 
         self.model.solve()
         self.execution_ended = datetime.now()
@@ -176,6 +175,7 @@ class SetCoveringProblemIntegerLinearProgrammingSolver(Optimizer):
         self.best_solution = SetCoveringProblemIntegerLinearProgrammingSolution( self.model.solution.x )
         #logger.debug(self.model.solution.x)
         return self.best_solution
+
 
     def string_rep(self, delimiter:str, indentation:int=0, indentation_symbol:str='', group_start:str ='{', 
         group_end:str ='}')->str:
