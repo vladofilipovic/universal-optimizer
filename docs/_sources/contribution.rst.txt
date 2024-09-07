@@ -105,7 +105,7 @@ a. Contribution in the designing novel **optimization methods**:
         
         5. Structure, organization and main loop implementation - [VladimirFilipovic]_ 
 
-        6. Implementation of shaking and local searches with binary representation  (in class :class:`~uo.algorithm.variable_neighborhood_search.VnsShakingSupportStandardInt`, using :type:`int` predefined type) - [VladimirFilipovic]_ 
+        6. Implementation of shaking and local searches with binary representation  (in class :class:`~uo.algorithm.variable_neighborhood_search.VnsShakingSupportStandardInt`, using `int` predefined type) - [VladimirFilipovic]_ 
 
         7. Implementation of shaking and local searches with binary representation (in class :class:`~uo.algorithm.variable_neighborhood_search.VnsShakingSupportStandardBitArray`,using :class:`bitstring.BitArray` class) - [VladimirFilipovic]_ 
 
@@ -162,6 +162,6 @@ c. Contribution in solving **global** optimization problems:
 Contributor List
 ----------------
 
-.. [VladimirFilipovic] Vladimir Filipović, `Github <https://github.com/vladofilipovic>`_ e-mail: vladofilipovic@hotmail.com
+.. [VladimirFilipovic] Vladimir Filipović, `<https://github.com/vladofilipovic>`_ e-mail: vladofilipovic@hotmail.com
 
-.. [MarkoRadosavljevic] Marko Radosavljević, `Github <https://github.com/Markic01>`_ e-mail: mi20079@alas.matf.bg.ac.rs
+.. [MarkoRadosavljevic] Marko Radosavljević, `<https://github.com/Markic01>`_ e-mail: mi20079@alas.matf.bg.ac.rs
