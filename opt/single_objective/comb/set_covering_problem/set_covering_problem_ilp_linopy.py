@@ -144,8 +144,6 @@ class SetCoveringProblemIntegerLinearProgrammingSolver(Optimizer):
         l = []
         universe = self.problem.universe
         subsets = self.problem.subsets
-        print("Universe: ", universe)
-        print("Subsets:", subsets)
 
         l = np.arange(self.problem.dimension)
         coords = xr.DataArray(l, dims="dim_i")
@@ -157,8 +155,6 @@ class SetCoveringProblemIntegerLinearProgrammingSolver(Optimizer):
         for i in range(len(subsets)):
             subset = subsets[i]
             for element in subset:
-                print("Sebset element: ", element)
-                print(type(element))
                 result_matrix[element][i] = 1
 
         x = self.model.add_variables(binary=True, coords = [coords] , name='x')
@@ -168,7 +164,11 @@ class SetCoveringProblemIntegerLinearProgrammingSolver(Optimizer):
 
         for i in range(len(universe)):
             transposed_vector = np.transpose(result_matrix[i])
-            linear_expr = LinearExpression.dot(x, transposed_vector)
+            linear_expr = 0
+            for i in range(len(np_coords)):
+                linear_expr += transposed_vector[i] * x.at[i]
+            #linear_expr = sum(coef * var for coef, var in zip(transposed_vector, x))
+            #linear_expr = LinearExpression.dot(x, transposed_vector)
             self.model.add_constraints(linear_expr, ">=", 1)
         self.model.add_objective((x).sum(), sense="min")
 
