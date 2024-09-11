@@ -11,8 +11,7 @@ from opt.single_objective.comb.set_covering_problem.set_covering_problem_ilp_lin
                 SetCoveringProblemIntegerLinearProgrammingSolver
 
 def main():
-        #n = randint(0, 1000)
-        n = randint(0, 10)
+        n = randint(0, 500)
         universe_set = set(np.linspace(0, n, n + 1))
 
         universe_list = list(universe_set)
@@ -21,8 +20,7 @@ def main():
                 universe_set_integer.add(int(universe_list[i]))
         universe_list = list(universe_set_integer)
 
-        #m = randint(1, 100)
-        m = randint(1, 5)
+        m = randint(1, 50)
         subsets = []
 
         for i in range(len(universe_set_integer)):
