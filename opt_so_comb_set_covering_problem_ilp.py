@@ -11,17 +11,18 @@ from opt.single_objective.comb.set_covering_problem.set_covering_problem_ilp_lin
                 SetCoveringProblemIntegerLinearProgrammingSolver
 
 def main():
-        n = randint(0, 1000)
+        #n = randint(0, 1000)
+        n = randint(0, 10)
         universe_set = set(np.linspace(0, n, n + 1))
 
         universe_list = list(universe_set)
-        print(type(int(universe_list[0])))
         universe_set_integer = set()
         for i in range(len(universe_list)):
                 universe_set_integer.add(int(universe_list[i]))
         universe_list = list(universe_set_integer)
 
-        m = randint(1, 100)
+        #m = randint(1, 100)
+        m = randint(1, 5)
         subsets = []
 
         for i in range(len(universe_set_integer)):
@@ -32,8 +33,6 @@ def main():
             random.shuffle(universe_list)
             subset = set(universe_list[0:number_of_elements])
             subsets.append(subset)
-        print("Universe: ", universe_set_integer)
-        print("Subsets:", subsets)
 
         #universe_set = {0, 1, 2, 3, 4, 5, 6}
         #universe_list = list(universe_set)
@@ -42,9 +41,9 @@ def main():
         problem_to_solve:SetCoveringProblem = SetCoveringProblem(universe_set_integer, subsets)
         solver:SetCoveringProblemIntegerLinearProgrammingSolver = SetCoveringProblemIntegerLinearProgrammingSolver(
                         problem=problem_to_solve)
+        print("String representation: ", problem_to_solve.string_rep)
         bs = solver.optimize()
-        print('Best solution: {}'.format(bs.string_representation()))
-        #print('Best solution code: {}'.format(solver.model.solution.x))            
+        print('Best solution: {}'.format(bs.string_representation()))           
 
 if __name__ == '__main__':
         main()

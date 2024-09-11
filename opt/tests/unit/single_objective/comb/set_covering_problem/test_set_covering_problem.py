@@ -35,9 +35,10 @@ class TestSetCoveringProblem(unittest.TestCase):
     
         # Act
         string_rep = str(problem)
+        print("String rep: ", string_rep)
     
         # Assert
-        self.assertIn('universe =' + str(universe), string_rep)
+        self.assertIn('universe = ' + str(universe), string_rep)
         self.assertIn('subsets=' + str(subsets), string_rep)
 
     # Copying an instance of SetCoveringProblem creates a new instance with the same properties
@@ -57,17 +58,26 @@ class TestSetCoveringProblem(unittest.TestCase):
         self.assertEqual(problem.universe, copy_problem.universe)
         self.assertEqual(problem.subsets, copy_problem.subsets)
 
-
-    # The SetCoveringProblem class can be instantiated from an input that is written in files
-    def test_instantiation_from_input_file(self):
+    # Attempting to instantiate an instance of SetCoveringProblem with a universe type that is not set raises a TypeError
+    def test_instantiation_with_non_set_universe_raises_type_error(self):
         # Arrange
-        input_universe_path = 'universe.txt'
-        input_subset_path = 'subsets.json'
-        with mocker.patch.object(SetCoveringProblem, '__load_from_file__', side_effect=ValueError):
+        universe = '5'
+        subsets = [{1, 2, 3}, {3, 4, 5}]
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            problem = SetCoveringProblem(universe, subsets)
+
+    # The created instance has the correct dimension value
+    def test_correct_dimension_value(self):
+        # Arrange
+        universe = {0, 1, 2, 3}
+        subsets = [{0, 1, 2}, {1, 3}]
     
-            # Act & Assert
-            with self.assertRaises(ValueError):
-                problem = SetCoveringProblem.from_input_file(input_universe_path, input_subset_path)
+        # Act
+        problem = SetCoveringProblem(universe, subsets)
+    
+        # Assert
+        self.assertEqual(problem.dimension, len(problem.subsets))
 
     # Attempting to copy an instance of OnesCountMaxProblem creates a new instance with the same properties, but which is not the same object
     def test_copy_creates_new_instance_with_same_properties_but_not_same_object(self):
