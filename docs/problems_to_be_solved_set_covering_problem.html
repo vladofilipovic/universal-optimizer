@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ones Count Max Problem &mdash; Optimization Algorithms Library 0.1.0 documentation</title>
+  <title>Set Covering Problem &mdash; Optimization Algorithms Library 0.1.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
@@ -22,8 +22,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Minimum Multi Cut Problem" href="problems_to_be_solved_minimum_multi_cut.html" />
-    <link rel="prev" title="Problems to be solved" href="problems_to_be_solved.html" /> 
+    <link rel="next" title="Function One Variable Max Problem" href="problems_to_be_solved_function_one_variable_max.html" />
+    <link rel="prev" title="Minimum Multi Cut Problem" href="problems_to_be_solved_minimum_multi_cut.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -54,9 +54,9 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="implemented_algorithms.html">Implemented algorithms</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="problems_to_be_solved.html">Problems to be solved</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Ones Count Max Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems_to_be_solved_ones_count.html">Ones Count Max Problem</a></li>
 <li class="toctree-l2"><a class="reference internal" href="problems_to_be_solved_minimum_multi_cut.html">Minimum Multi Cut Problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="problems_to_be_solved_set_covering_problem.html">Set Covering Problem</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Set Covering Problem</a></li>
 <li class="toctree-l2"><a class="reference internal" href="problems_to_be_solved_function_one_variable_max.html">Function One Variable Max Problem</a></li>
 </ul>
 </li>
@@ -88,9 +88,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="problems_to_be_solved.html">Problems to be solved</a></li>
-      <li class="breadcrumb-item active">Ones Count Max Problem</li>
+      <li class="breadcrumb-item active">Set Covering Problem</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/problems_to_be_solved_ones_count.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/problems_to_be_solved_set_covering_problem.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -98,16 +98,17 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="ones-count-max-problem">
-<span id="problem-ones-count-max"></span><h1>Ones Count Max Problem<a class="headerlink" href="#ones-count-max-problem" title="Link to this heading"></a></h1>
-<ul>
-<li><p>Max Ones Problem. Problem is represented with class <a class="reference internal" href="opt.single_objective.comb.ones_count_max_problem.html#py-ones-count-max-problem"><span class="std std-ref">OnesCountMaxProblem</span></a>.</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><cite>BitArray</cite> representation for solution of Max Ones Problem. Implementation of the solution with such representation is given with class <span class="xref std std-ref">OnesCountMaxProblemBinaryBitArraySolution</span>.</p></li>
-<li><p><cite>int</cite> representation for solution of Max Ones Problem. Implementation of the solution with such representation is given with class <span class="xref std std-ref">OnesCountMaxProblemBinaryIntSolution</span>.</p></li>
+  <section id="set-covering-problem">
+<span id="problem-set-covering"></span><h1>Set Covering Problem<a class="headerlink" href="#set-covering-problem" title="Link to this heading"></a></h1>
+<p>Set Covering Problem is the NP-hard problem often found in combinatoral optimization. The main goal is to find minimal number of subsets that cover initial set.</p>
+<p>Problem Definition</p>
+<ul class="simple">
+<li><p><strong>Instance:</strong> An initial set U (called universe), and a set S = {S1, S2, ..., Sn} ⊆ U of subsets of U.</p></li>
+<li><p><strong>Solution:</strong> Find a set of subsets from S that cover entire set U.</p></li>
+<li><p><strong>Measure:</strong> Minimize the number of sets found in a solution.</p></li>
 </ul>
-</div></blockquote>
+<ul>
+<li><p>Set Covering Problem. Problem is represented with class <a class="reference internal" href="opt.single_objective.comb.set_covering_problem.html#py-set-covering-problem"><span class="std std-ref">SetCoveringProblem</span></a>.</p>
 </li>
 </ul>
 </section>
@@ -116,8 +117,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="problems_to_be_solved.html" class="btn btn-neutral float-left" title="Problems to be solved" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="problems_to_be_solved_minimum_multi_cut.html" class="btn btn-neutral float-right" title="Minimum Multi Cut Problem" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="problems_to_be_solved_minimum_multi_cut.html" class="btn btn-neutral float-left" title="Minimum Multi Cut Problem" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="problems_to_be_solved_function_one_variable_max.html" class="btn btn-neutral float-right" title="Function One Variable Max Problem" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
