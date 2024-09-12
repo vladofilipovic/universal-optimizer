@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Set Covering Problem &mdash; Optimization Algorithms Library 0.1.0 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -15,7 +17,7 @@
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
         <script src="_static/documentation_options.js?v=01f34227"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="_static/copybutton.js?v=f281be69"></script>
@@ -101,15 +103,14 @@
   <section id="set-covering-problem">
 <span id="problem-set-covering"></span><h1>Set Covering Problem<a class="headerlink" href="#set-covering-problem" title="Link to this heading"></a></h1>
 <p>Set Covering Problem is the NP-hard problem often found in combinatoral optimization. The main goal is to find minimal number of subsets that cover initial set.</p>
-<p>Problem Definition</p>
+<p>## Problem Definition</p>
 <ul class="simple">
-<li><p><strong>Instance:</strong> An initial set U (called universe), and a set S = {S1, S2, ..., Sn} ⊆ U of subsets of U.</p></li>
-<li><p><strong>Solution:</strong> Find a set of subsets from S that cover entire set U.</p></li>
+<li><p><strong>Instance:</strong> An initial set U (called universe), and a set S = {S1, S2, …, Sn} ⊆ U of subsets of U.</p></li>
+<li><p><strong>Solution:</strong>  Find a set of subsets from S that cover entire set U.</p></li>
 <li><p><strong>Measure:</strong> Minimize the number of sets found in a solution.</p></li>
 </ul>
-<ul>
-<li><p>Set Covering Problem. Problem is represented with class <a class="reference internal" href="opt.single_objective.comb.set_covering_problem.html#py-set-covering-problem"><span class="std std-ref">SetCoveringProblem</span></a>.</p>
-</li>
+<ul class="simple">
+<li><p>Minimum Multi Cut Problem. Problem is represented with class <a class="reference internal" href="opt.single_objective.comb.set_covering_problem.html#py-set-covering-problem"><span class="std std-ref">SetCoveringProblemProblem</span></a>.</p></li>
 </ul>
 </section>
 
