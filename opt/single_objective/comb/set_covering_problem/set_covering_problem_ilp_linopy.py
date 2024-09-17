@@ -166,7 +166,7 @@ class SetCoveringProblemIntegerLinearProgrammingSolver(Optimizer):
             transposed_vector = np.transpose(result_matrix[i])
             linear_expr = 0
             for i in range(len(np_coords)):
-                linear_expr += transposed_vector[i] * x.at[i]
+                linear_expr += transposed_vector[i] * x[i]
             #linear_expr = sum(coef * var for coef, var in zip(transposed_vector, x))
             #linear_expr = LinearExpression.dot(x, transposed_vector)
             self.model.add_constraints(linear_expr, ">=", 1)
