@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>opt.single_objective.constraint package &mdash; Optimization Algorithms Library 0.1.0 documentation</title>
+  <title>Set Covering Problem &mdash; Optimization Algorithms Library 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -23,7 +23,9 @@
         <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Function One Variable Max Problem" href="problems_to_be_solved_function_one_variable_max.html" />
+    <link rel="prev" title="Minimum Multi Cut Problem" href="problems_to_be_solved_minimum_multi_cut.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -51,9 +53,15 @@
 <li class="toctree-l1"><a class="reference internal" href="how_to_guides.html">How-to Guides</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">In-depth Information</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="implemented_algorithms.html">Implemented algorithms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="problems_to_be_solved.html">Problems to be solved</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="problems_to_be_solved.html">Problems to be solved</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="problems_to_be_solved_ones_count.html">Ones Count Max Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems_to_be_solved_minimum_multi_cut.html">Minimum Multi Cut Problem</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Set Covering Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems_to_be_solved_function_one_variable_max.html">Function One Variable Max Problem</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Program code</span></p>
 <ul>
@@ -81,9 +89,10 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">opt.single_objective.constraint package</li>
+          <li class="breadcrumb-item"><a href="problems_to_be_solved.html">Problems to be solved</a></li>
+      <li class="breadcrumb-item active">Set Covering Problem</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/opt.single_objective.constraint.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/problems_to_be_solved_set_covering_problem.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -91,17 +100,27 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="opt-single-objective-constraint-package">
-<h1>opt.single_objective.constraint package<a class="headerlink" href="#opt-single-objective-constraint-package" title="Link to this heading"></a></h1>
-<section id="module-opt.single_objective.constraint">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-opt.single_objective.constraint" title="Link to this heading"></a></h2>
-</section>
+  <section id="set-covering-problem">
+<span id="problem-set-covering"></span><h1>Set Covering Problem<a class="headerlink" href="#set-covering-problem" title="Link to this heading"></a></h1>
+<p>Set Covering Problem is the NP-hard problem often found in combinatoral optimization. The main goal is to find minimal number of subsets that cover initial set.</p>
+<p>## Problem Definition</p>
+<ul class="simple">
+<li><p><strong>Instance:</strong> An initial set U (called universe), and a set S = {S1, S2, …, Sn} ⊆ U of subsets of U.</p></li>
+<li><p><strong>Solution:</strong>  Find a set of subsets from S that cover entire set U.</p></li>
+<li><p><strong>Measure:</strong> Minimize the number of sets found in a solution.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Minimum Multi Cut Problem. Problem is represented with class <a class="reference internal" href="opt.single_objective.comb.set_covering_problem.html#py-set-covering-problem"><span class="std std-ref">SetCoveringProblemProblem</span></a>.</p></li>
+</ul>
 </section>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="problems_to_be_solved_minimum_multi_cut.html" class="btn btn-neutral float-left" title="Minimum Multi Cut Problem" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="problems_to_be_solved_function_one_variable_max.html" class="btn btn-neutral float-right" title="Function One Variable Max Problem" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

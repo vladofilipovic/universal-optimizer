@@ -8,6 +8,7 @@ Subpackages
    :maxdepth: 4
 
    opt.tests.integration.opt.single_objective.comb.ones_count_problem
+   opt.tests.integration.opt.single_objective.comb.set_covering_problem
 
 Module contents
 ---------------
