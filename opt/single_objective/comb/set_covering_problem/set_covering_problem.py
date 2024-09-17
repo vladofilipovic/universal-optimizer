@@ -180,10 +180,9 @@ class SetCoveringProblem(Problem):
         s += group_start
         s+= super().string_rep(delimiter, indentation, indentation_symbol, '', '')
         s+= delimiter
-        for _ in range(0, indentation):
-            s += indentation_symbol  
-        s += 'universe =' + str(self.__universe) + delimiter
-        s += 'subsets =' + str(self.__subsets) + delimiter
+        s += 'universe = ' + str(self.__universe)
+        s += delimiter
+        s += 'subsets=' + str(self.__subsets)
         s += group_end 
         return s
 

@@ -72,6 +72,11 @@ from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support_idle_bit_a
                 GaMutationSupportIdleBitArray
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support_one_point_bit_array import \
                 GaMutationSupportOnePointBitArray
+from uo.algorithm.metaheuristic.electro_magnetism_like_metaheuristic.em_attraction_support_one_point_bit_array import \
+                EmAttractionSupportOnePointBitArray
+from uo.algorithm.metaheuristic.electro_magnetism_like_metaheuristic.em_mutation_support_one_point_bit_array import \
+                EmMutationSupportOnePointBitArray
+from uo.algorithm.metaheuristic.electro_magnetism_like_metaheuristic.em_optimizer import EmOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer_gen import GaOptimizerGenerationalConstructionParameters
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer_gen import GaOptimizerGenerational
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer_ss import GaOptimizerSteadyStateConstructionParameters
