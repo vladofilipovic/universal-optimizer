@@ -95,9 +95,9 @@ class TestSetCoveringProblemBitArraySolution(unittest.TestCase):
         # Act
         quality = solution.calculate_quality_directly(representation, problem)
         # Assert
-        self.assertEqual(quality.objective_value, float('-inf'))
+        self.assertEqual(quality.objective_value, float('inf'))
         self.assertIsNone(quality.fitness_values)
-        self.assertEqual(quality.fitness_value, float('inf'))
+        self.assertEqual(quality.fitness_value, float('-inf'))
         self.assertIsNone(quality.objective_values)
         self.assertFalse(quality.is_feasible)
 

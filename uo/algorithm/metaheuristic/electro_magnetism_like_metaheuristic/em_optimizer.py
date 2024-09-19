@@ -74,7 +74,6 @@ class EmOptimizer(PopulationBasedMetaheuristic, metaclass=ABCMeta):
         if not isinstance(em_mutation_support, EmMutationSupport):
                 raise TypeError('Parameter \'em_mutation_support\' must be \'EmMutationSupport\'.')
         if not isinstance(em_direction_support, EmDirectionSupport):
-                #print(type(em_direction_support))
                 raise TypeError('Parameter \'em_direction_support\' must be \'EmDirectionSupport\'.')
         if not isinstance(population_size, int):
                 raise TypeError('Parameter \'population_size\' must be \'int\'.')
@@ -177,7 +176,7 @@ class EmOptimizer(PopulationBasedMetaheuristic, metaclass=ABCMeta):
         pos:int = 0
 
         for i in range(1, self.population_size):
-            if self.__current_population[i].fitness_value < self.__current_population[pos].fitness_value:
+            if self.__current_population[i].fitness_value > self.__current_population[pos].fitness_value:
                 pos = i
         print("Pos:", pos)
         return pos
@@ -191,7 +190,7 @@ class EmOptimizer(PopulationBasedMetaheuristic, metaclass=ABCMeta):
             self.evaluation = 1
             self.__current_population[i].evaluate(self.problem)
         print(self.__current_population)
-        self.best_solution = min(self.__current_population, key=lambda individual: individual.fitness_value)
+        self.best_solution = max(self.__current_population, key=lambda individual: individual.fitness_value)
 
     @abstractmethod
     def main_loop_iteration(self)->None:

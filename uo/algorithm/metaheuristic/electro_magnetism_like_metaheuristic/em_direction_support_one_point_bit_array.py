@@ -36,19 +36,7 @@ class EmDirectionSupportOnePointBitArray(EmDirectionSupport[BitArray,A_co]):
     def __init__(self)->None:
         """
         Create new `EmDirectionSupport` instance
-        """
-        #self.__direction_probability:float = direction_probability
-
-    # TREBACE SAMO AKO BUDEM NESTO DODAVALA U KONSTRUKTOR
-    #@property
-    #def direction_probability(self)->float:
-        """
-        Property getter for direction probability 
-
-        :return: direction probability 
-        :rtype: float
-        """
-      #  return self.__direction_probability    
+        """  
 
     def __copy__(self):
         """
@@ -69,7 +57,7 @@ class EmDirectionSupportOnePointBitArray(EmDirectionSupport[BitArray,A_co]):
         """
         return self.__copy__()
 
-    def direction(self, problem:Problem, solution1:Solution, solution2:Solution, optimizer:PopulationBasedMetaheuristic) -> None:
+    def direction(self, problem:Problem, solution1:Solution, solution2:Solution, optimizer:PopulationBasedMetaheuristic) -> int:
         """
         Executes direction within EM 
         
@@ -77,7 +65,7 @@ class EmDirectionSupportOnePointBitArray(EmDirectionSupport[BitArray,A_co]):
         :param `Solution` solution1: first parent 
         :param `Solution` solution2: second parent
         :param `PopulationBasedMetaheuristic` optimizer: optimizer that is executed
-        :rtype: None
+        :rtype: int
         """
         
         if solution1.representation is not None and solution2.representation is not None :

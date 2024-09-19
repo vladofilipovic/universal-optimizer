@@ -8,6 +8,8 @@ from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.electro_magnetism_like_metaheuristic.em_optimizer_gen import EmOptimizerGenerational
 from uo.algorithm.metaheuristic.electro_magnetism_like_metaheuristic.em_attraction_support import EmAttractionSupport
 from uo.algorithm.metaheuristic.electro_magnetism_like_metaheuristic.em_mutation_support import EmMutationSupport
+from uo.algorithm.metaheuristic.electro_magnetism_like_metaheuristic.em_direction_support import EmDirectionSupport
+from uo.algorithm.metaheuristic.electro_magnetism_like_metaheuristic.em_direction_support_one_point_bit_array import EmDirectionSupportOnePointBitArray
 
 from uo.problem.problem_void_min_so import ProblemVoidMinSO
 from uo.solution.solution_void_representation_int import SolutionVoidInt
@@ -26,10 +28,13 @@ class TestEmOptimizerGenerational(unittest.TestCase):
         type(em_attraction_support_stub).attraction = mocker.CallableMixin(spec=lambda x: x)
         em_mutation_support_stub = mocker.MagicMock(spec=EmMutationSupport)
         type(em_mutation_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
+        em_direction_support_stub = mocker.MagicMock(spec=EmDirectionSupport)
+        type(em_direction_support_stub).direction = mocker.CallableMixin(spec=lambda x: x) 
         population_size = 100
         # Act
         em_optimizer = EmOptimizerGenerational( em_attraction_support=em_attraction_support_stub, 
                                 em_mutation_support=em_mutation_support_stub, 
+                                em_direction_support=em_direction_support_stub,
                                 population_size=population_size, 
                                 finish_control=finish_control, 
                                 problem=problem, 
@@ -50,10 +55,13 @@ class TestEmOptimizerGenerational(unittest.TestCase):
         type(em_attraction_support_stub).attraction = mocker.CallableMixin(spec=lambda x: x)
         em_mutation_support_stub = mocker.MagicMock(spec=EmMutationSupport)
         type(em_mutation_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
+        em_direction_support_stub = mocker.MagicMock(spec=EmDirectionSupport)
+        type(em_direction_support_stub).direction = mocker.CallableMixin(spec=lambda x: x) 
         population_size = 100
         # Act
         em_optimizer = EmOptimizerGenerational(em_attraction_support=em_attraction_support_stub, 
                                 em_mutation_support=em_mutation_support_stub, 
+                                em_direction_support=em_direction_support_stub,
                                 population_size=population_size, 
                                 finish_control=finish_control, 
                                 problem=problem, 
@@ -73,10 +81,13 @@ class TestEmOptimizerGenerational(unittest.TestCase):
         type(em_attraction_support_stub).attraction = mocker.CallableMixin(spec=lambda x: x)
         em_mutation_support_stub = mocker.MagicMock(spec=EmMutationSupport)
         type(em_mutation_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
+        em_direction_support_stub = mocker.MagicMock(spec=EmDirectionSupport)
+        type(em_direction_support_stub).direction = mocker.CallableMixin(spec=lambda x: x) 
         population_size = 100
         # Act
         em_optimizer = EmOptimizerGenerational(em_attraction_support=em_attraction_support_stub, 
-                                em_mutation_support=em_mutation_support_stub,  
+                                em_mutation_support=em_mutation_support_stub, 
+                                em_direction_support=em_direction_support_stub, 
                                 population_size=population_size, 
                                 finish_control=finish_control, 
                                 problem=problem, 
@@ -94,11 +105,14 @@ class TestEmOptimizerGenerational(unittest.TestCase):
         em_attraction_support_stub = None
         em_mutation_support_stub = mocker.MagicMock(spec=EmMutationSupport)
         type(em_mutation_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
+        em_direction_support_stub = mocker.MagicMock(spec=EmDirectionSupport)
+        type(em_direction_support_stub).direction = mocker.CallableMixin(spec=lambda x: x) 
         population_size = 100
         # Act & Assert
         with self.assertRaises(TypeError):
             EmOptimizerGenerational(em_attraction_support=em_attraction_support_stub, 
                                 em_mutation_support=em_mutation_support_stub, 
+                                em_direction_support = em_direction_support_stub,
                                 population_size=population_size, 
                                 finish_control=finish_control, 
                                 problem=problem, 
@@ -116,9 +130,12 @@ class TestEmOptimizerGenerational(unittest.TestCase):
         type(em_attraction_support_stub).attraction = mocker.CallableMixin(spec=lambda x: x)
         em_mutation_support_stub = mocker.MagicMock(spec=EmMutationSupport)
         type(em_mutation_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
+        em_direction_support_stub = mocker.MagicMock(spec=EmDirectionSupport)
+        type(em_direction_support_stub).direction = mocker.CallableMixin(spec=lambda x: x) 
         population_size = 100
         em_optimizer = EmOptimizerGenerational(em_attraction_support=em_attraction_support_stub, 
                                 em_mutation_support=em_mutation_support_stub, 
+                                em_direction_support=em_direction_support_stub,
                                 population_size=population_size, 
                                 finish_control=finish_control, 
                                 problem=problem, 
@@ -142,9 +159,12 @@ class TestEmOptimizerGenerational(unittest.TestCase):
         type(em_attraction_support_stub).attraction = mocker.CallableMixin(spec=lambda x: x)
         em_mutation_support_stub = mocker.MagicMock(spec=EmMutationSupport)
         type(em_mutation_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
+        em_direction_support_stub = mocker.MagicMock(spec=EmDirectionSupport)
+        type(em_direction_support_stub).direction = mocker.CallableMixin(spec=lambda x: x) 
         population_size = 100
         em_optimizer = EmOptimizerGenerational(em_attraction_support=em_attraction_support_stub, 
                                 em_mutation_support=em_mutation_support_stub, 
+                                em_direction_support=em_direction_support_stub,
                                 population_size=population_size,
                                 finish_control=finish_control, 
                                 problem=problem, 
@@ -157,6 +177,33 @@ class TestEmOptimizerGenerational(unittest.TestCase):
         self.assertEqual(em_optimizer.random_seed, copied_optimizer.random_seed)
         self.assertEqual(em_optimizer.finish_control.criteria, copied_optimizer.finish_control.criteria)
 
+        # em_direction_support getter works 
+    def test_em_direction_support_getter(self):
+        # Arrange
+        finish_control = FinishControl()
+        random_seed = 123
+        problem = ProblemVoidMinSO("a problem", True)
+        solution_template = SolutionVoidInt( 43, 43, 43, True)
+        em_attraction_support_stub = mocker.MagicMock(spec=EmAttractionSupport)
+        type(em_attraction_support_stub).attraction = mocker.CallableMixin(spec=lambda x: x)
+        em_mutation_support_stub = mocker.MagicMock(spec=EmMutationSupport)
+        type(em_mutation_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
+        em_dir_support_stub = EmDirectionSupportOnePointBitArray()
+        type(em_dir_support_stub).direction = mocker.CallableMixin(spec=lambda x: x) 
+        population_size = 100
+        # Act
+        em_optimizer = EmOptimizerGenerational( em_attraction_support=em_attraction_support_stub, 
+                                em_mutation_support=em_mutation_support_stub, 
+                                em_direction_support=em_dir_support_stub,
+                                population_size=population_size, 
+                                finish_control=finish_control, 
+                                problem=problem, 
+                                solution_template=solution_template,
+                                random_seed=random_seed   
+                    )
+        # Assert
+        self.assertEqual(em_optimizer.em_direction_support, em_dir_support_stub)
+    
     # EmOptimizerGenerational raises TypeError if finish_control parameter is not of type FinishControl
     def test_finish_control_type_error(self):
         # Arrange
@@ -168,11 +215,14 @@ class TestEmOptimizerGenerational(unittest.TestCase):
         type(em_attraction_support_stub).attraction = mocker.CallableMixin(spec=lambda x: x)
         em_mutation_support_stub = mocker.MagicMock(spec=EmMutationSupport)
         type(em_mutation_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
+        em_direction_support_stub = mocker.MagicMock(spec=EmDirectionSupport)
+        type(em_direction_support_stub).direction = mocker.CallableMixin(spec=lambda x: x) 
         population_size = 100
         # Act & Assert
         with self.assertRaises(TypeError):
             EmOptimizerGenerational(em_attraction_support=em_attraction_support_stub, 
                                 em_mutation_support=em_mutation_support_stub, 
+                                em_direction_support=em_direction_support_stub,
                                 population_size=population_size, 
                                 finish_control=finish_control, 
                                 problem=problem, 
@@ -190,11 +240,14 @@ class TestEmOptimizerGenerational(unittest.TestCase):
         type(em_attraction_support_stub).attraction = mocker.CallableMixin(spec=lambda x: x)
         em_mutation_support_stub = mocker.MagicMock(spec=EmMutationSupport)
         type(em_mutation_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
+        em_direction_support_stub = mocker.MagicMock(spec=EmDirectionSupport)
+        type(em_direction_support_stub).direction = mocker.CallableMixin(spec=lambda x: x) 
         population_size = 100
         # Act & Assert
         with self.assertRaises(TypeError):
             EmOptimizerGenerational(em_attraction_support=em_attraction_support_stub, 
                                 em_mutation_support=em_mutation_support_stub, 
+                                em_direction_support=em_direction_support_stub,
                                 population_size=population_size, 
                                 finish_control=finish_control, 
                                 problem=problem, 
@@ -213,11 +266,14 @@ class TestEmOptimizerGenerational(unittest.TestCase):
         type(em_attraction_support_stub).attraction = mocker.CallableMixin(spec=lambda x: x)
         em_mutation_support_stub = mocker.MagicMock(spec=EmMutationSupport)
         type(em_mutation_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
+        em_direction_support_stub = mocker.MagicMock(spec=EmDirectionSupport)
+        type(em_direction_support_stub).direction = mocker.CallableMixin(spec=lambda x: x) 
         population_size = 100
         # Act & Assert
         with self.assertRaises(TypeError):
             EmOptimizerGenerational(em_attraction_support=em_attraction_support_stub, 
                                 em_mutation_support=em_mutation_support_stub, 
+                                em_direction_support=em_direction_support_stub,
                                 population_size=population_size, 
                                 finish_control=finish_control, 
                                 problem=problem, 
@@ -236,11 +292,14 @@ class TestEmOptimizerGenerational(unittest.TestCase):
         type(em_attraction_support_stub).attraction = mocker.CallableMixin(spec=lambda x: x)
         em_mutation_support_stub = mocker.MagicMock(spec=EmMutationSupport)
         type(em_mutation_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
+        em_direction_support_stub = mocker.MagicMock(spec=EmDirectionSupport)
+        type(em_direction_support_stub).direction = mocker.CallableMixin(spec=lambda x: x) 
         population_size = 100
         # Act & Assert
         with self.assertRaises(TypeError):
             EmOptimizerGenerational(em_attraction_support=em_attraction_support_stub, 
                                 em_mutation_support=em_mutation_support_stub, 
+                                em_direction_support=em_direction_support_stub,
                                 population_size=population_size, 
                                 finish_control=finish_control, 
                                 problem=problem, 
@@ -257,16 +316,44 @@ class TestEmOptimizerGenerational(unittest.TestCase):
         em_attraction_support_stub = "not appropriate type"
         em_mutation_support_stub = mocker.MagicMock(spec=EmMutationSupport)
         type(em_mutation_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
+        em_direction_support_stub = mocker.MagicMock(spec=EmDirectionSupport)
+        type(em_direction_support_stub).direction = mocker.CallableMixin(spec=lambda x: x) 
         population_size = 100
         # Act & Assert
         with self.assertRaises(TypeError):
             EmOptimizerGenerational(em_attraction_support=em_attraction_support_stub, 
                                 em_mutation_support=em_mutation_support_stub,  
+                                em_direction_support=em_direction_support_stub,
                                 population_size=population_size, 
                                 finish_control=finish_control, 
                                 problem=problem, 
                                 solution_template=solution_template,
                                 random_seed=random_seed)
+
+    # EmOptimizerGenerational raises TypeError if em_direction_support parameter is not of type EmDirectionSupport
+    def test_em_direction_support_parameter_type_error(self):
+        # Arrange
+        finish_control = FinishControl()
+        random_seed = 123
+        problem = ProblemVoidMinSO("a problem", True)
+        solution_template = SolutionVoidInt( 43, 43, 43, True)        
+        em_attraction_support_stub = mocker.MagicMock(spec=EmAttractionSupport)
+        type(em_attraction_support_stub).attraction = mocker.CallableMixin(spec=lambda x: x)
+        em_mutation_support_stub = mocker.MagicMock(spec=EmMutationSupport)
+        type(em_mutation_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
+        em_direction_support_stub = "not appropriate type"
+        population_size = 100
+        # Act & Assert
+        with self.assertRaises(TypeError):
+            EmOptimizerGenerational(em_attraction_support=em_attraction_support_stub, 
+                                em_mutation_support=em_mutation_support_stub,  
+                                em_direction_support=em_direction_support_stub,
+                                population_size=population_size, 
+                                finish_control=finish_control, 
+                                problem=problem, 
+                                solution_template=solution_template,
+                                random_seed=random_seed)
+
 
     # EmOptimizerGenerational raises TypeError if population_size parameter is not of type int
     def test_population_size_parameter_type_error(self):
@@ -279,11 +366,14 @@ class TestEmOptimizerGenerational(unittest.TestCase):
         type(em_attraction_support_stub).attraction = mocker.CallableMixin(spec=lambda x: x)
         em_mutation_support_stub = mocker.MagicMock(spec=EmMutationSupport)
         type(em_mutation_support_stub).mutation = mocker.CallableMixin(spec=lambda x: x)
+        em_direction_support_stub = mocker.MagicMock(spec=EmDirectionSupport)
+        type(em_direction_support_stub).direction = mocker.CallableMixin(spec=lambda x: x) 
         population_size = 100.2
         # Act & Assert
         with self.assertRaises(TypeError):
             EmOptimizerGenerational(em_attraction_support=em_attraction_support_stub, 
                                 em_mutation_support=em_mutation_support_stub, 
+                                em_direction_support= em_direction_support_stub,
                                 population_size=population_size, 
                                 finish_control=finish_control, 
                                 problem=problem, 

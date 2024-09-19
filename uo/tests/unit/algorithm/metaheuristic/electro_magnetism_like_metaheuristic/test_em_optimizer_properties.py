@@ -8,6 +8,7 @@ from uo.algorithm.output_control import OutputControl
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 from uo.algorithm.metaheuristic.electro_magnetism_like_metaheuristic.em_optimizer_gen import EmOptimizerGenerational
 from uo.algorithm.metaheuristic.electro_magnetism_like_metaheuristic.em_attraction_support import EmAttractionSupport
+from uo.algorithm.metaheuristic.electro_magnetism_like_metaheuristic.em_direction_support import EmDirectionSupport
 from uo.algorithm.metaheuristic.electro_magnetism_like_metaheuristic.em_mutation_support import EmMutationSupport
 from uo.solution.solution_void_representation_int import SolutionVoidInt
 
@@ -30,7 +31,9 @@ class TestEmOptimizerGenerationalProperties(unittest.TestCase):
         self.em_support_attraction_stub = mocker.MagicMock(spec=EmAttractionSupport)
         type(self.em_support_attraction_stub).copy = mocker.CallableMixin(spec="return self")        
         self.em_support_mutation_stub = mocker.MagicMock(spec=EmMutationSupport)
-        type(self.em_support_mutation_stub).copy = mocker.CallableMixin(spec="return self")        
+        type(self.em_support_mutation_stub).copy = mocker.CallableMixin(spec="return self")  
+        self.em_support_direction_stub = mocker.MagicMock(spec=EmDirectionSupport)
+        type(self.em_support_direction_stub).copy = mocker.CallableMixin(spec="return self")       
         
         self.evaluations_max = 42
         self.iterations_max = 42
@@ -52,6 +55,7 @@ class TestEmOptimizerGenerationalProperties(unittest.TestCase):
                 solution_template=SolutionVoidInt( 43, 0, 0, False),
                 em_attraction_support=self.em_support_attraction_stub,
                 em_mutation_support=self.em_support_mutation_stub,
+                em_direction_support=self.em_support_direction_stub,
                 finish_control=self.finish_control_mock,
                 random_seed=self.random_seed,
                 population_size=self.population_size,

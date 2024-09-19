@@ -46,7 +46,7 @@ def main():
 
         problem_to_solve:SetCoveringProblem = SetCoveringProblem(universe_set, subsets)
         solution:SetCoveringProblemBitArraySolution = SetCoveringProblemBitArraySolution()
-        finish:FinishControl = FinishControl(criteria='iterations', iterations_max=10)
+        finish:FinishControl = FinishControl(criteria='iterations', iterations_max=100)
         em_attraction_support:EmAttractionSupportOnePointBitArray[str] = \
                 EmAttractionSupportOnePointBitArray[str]()
         em_mut_support:EmMutationSupportOnePointBitArray[str] = \
@@ -62,7 +62,7 @@ def main():
         em_construction_params.em_mutation_support = em_mut_support
         em_construction_params.em_direction_support = em_dir_support
         em_construction_params.random_seed = 43434343
-        em_construction_params.population_size = 5
+        em_construction_params.population_size = 10
         optimizer:EmOptimizerGenerational = EmOptimizerGenerational.from_construction_tuple(em_construction_params)
         optimizer.optimize()
 

@@ -46,6 +46,7 @@ class SetCoveringProblemBitArraySolution(Solution[BitArray,str]):
                 evaluation_cache_max_size=evaluation_cache_max_size,
                 distance_calculation_cache_is_used=distance_calculation_cache_is_used,
                 distance_calculation_cache_max_size=distance_calculation_cache_max_size)
+        self.is_minimization = True
 
     def __copy__(self)->'SetCoveringProblemBitArraySolution':
         """
@@ -137,12 +138,12 @@ class SetCoveringProblemBitArraySolution(Solution[BitArray,str]):
     
     def calc_fitness(self, representation:BitArray, universe: set[int], subsets:list[set[int]]) -> tuple[bool,float]:
         if not self.is_feasible_sol(representation, universe, subsets):
-            return (False, float('-inf'), float('inf'))
+            return (False, float('inf'), float('-inf'))
         selected_subsets = [subsets[i] for i in range(representation.len) if representation[i] == 1]
         covered_elements = set().union(*selected_subsets)
         uncovered_elements = universe - covered_elements 
-        num_selected_subsets = representation.count(True)# da li bitarray ima sum
-        return (True, 0, num_selected_subsets)
+        num_selected_subsets = representation.count(True)
+        return (True, len(universe), len(covered_elements)/num_selected_subsets)
         
     def calculate_quality_directly(self, representation:BitArray, 
             problem:SetCoveringProblem)->QualityOfSolution:

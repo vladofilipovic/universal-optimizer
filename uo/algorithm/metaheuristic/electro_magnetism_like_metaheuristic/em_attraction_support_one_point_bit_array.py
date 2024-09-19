@@ -36,18 +36,7 @@ class EmAttractionSupportOnePointBitArray(EmAttractionSupport[BitArray,A_co]):
         """
         Create new `EmAttractionSupport` instance
         """
-        #self.__attraction_probability:float = attraction_probability
-
-    # TREBACE SAMO AKO BUDEM NESTO DODAVALA U KONSTRUKTOR
-    #@property
-    #def attraction_probability(self)->float:
-        """
-        Property getter for attraction probability 
-
-        :return: attraction probability 
-        :rtype: float
-        """
-      #  return self.__attraction_probability    
+   
 
     def __copy__(self):
         """
@@ -68,7 +57,7 @@ class EmAttractionSupportOnePointBitArray(EmAttractionSupport[BitArray,A_co]):
         """
         return self.__copy__()
 
-    def attraction(self, problem:Problem, solution1:Solution, solution2:Solution, charge1:float, charge2: float, optimizer:PopulationBasedMetaheuristic) -> None:
+    def attraction(self, problem:Problem, solution1:Solution, solution2:Solution, charge1:float, charge2: float, optimizer:PopulationBasedMetaheuristic) -> float:
         """
         Executes attraction within EM 
         
@@ -78,7 +67,7 @@ class EmAttractionSupportOnePointBitArray(EmAttractionSupport[BitArray,A_co]):
         :param 'float' charge1: charge of the first particle
         :param 'float' charge2: charge of the second particle
         :param `PopulationBasedMetaheuristic` optimizer: optimizer that is executed
-        :rtype: None
+        :rtype: float
         """
         
         if solution1.representation is not None and solution2.representation is not None :
