@@ -3,12 +3,19 @@ How-to Guides
 
 - **Installation the library from provided source code**
 
-    1. Installing  and initializing `poetry`
+    1. Installing  and initializing `poetry` through `pipx`
+
+    .. code-block::
+        :caption: Installing pipx
+
+            > python -m pip install --user pipx 
+            > python -m pipx ensurepath
+
 
     .. code-block::
         :caption: Installing poetry
 
-            > pip install poetry
+            > pipx install poetry
 
     2. Check if `poetry` is successfully installed
 
@@ -17,14 +24,14 @@ How-to Guides
 
             > poetry --version
 
-    3. Create virtual environment with `poetry` (if environment is already created, same command activate it, and command `deactivate` is used for deactivation) 
+    3. Install project's packets and documentation builder packets with `poetry` 
 
     .. code-block::
-        :caption: Create/activate virtual environment
+        :caption: Specify that `poetry` will work with python version 3.11 
 
-            > poetry shell
+            > poetry env use 3.11
 
-    4. Install project's packets and documentation builder packets with `poetry` 
+    The previous command will create virtual environment based on `python3.11` in subdirectory `/.venv` 
 
     .. code-block::
         :caption: Install dependencies (and documentation dependencies) with `poetry`

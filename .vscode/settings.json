@@ -3,6 +3,7 @@
         "bitstring",
         "ccud",
         "eccs",
+        "ensurepath",
         "Filipovic",
         "Filipović",
         "intersphinx",
@@ -19,6 +20,7 @@
         "NOSONAR",
         "nsup",
         "optimas",
+        "pipx",
         "quickstart",
         "rdcs",
         "repres",
@@ -27,6 +29,7 @@
         "tobitarray",
         "tobytes",
         "toctree",
+        "venv",
         "viewcode",
         "xarray"
     ],
