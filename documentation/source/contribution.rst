@@ -123,31 +123,44 @@ a. Contribution in the designing novel **optimization methods**:
 
         12. Implementation of GA mutation one point method (contained within class: :class:`~uo.algorithm.metaheuristic.genetic_algorithm.GaMutationSupportOnePointBitArray`), with binary representation (using `bitstring.BitArray` class) - [MarkoRadosavljevic]_ 
 
+    a.4. Electromagnetism-like :ref:`Algorithm_Electromagnetism_Like` (EM) metaheuristics:
+        
+        13. Structure, organization and main loop implementation - [AndjelaDamnjanovic]_
+
+
 b. Contribution in solving **combinatorial** optimization problems:
 
     b.1. Ones Count Max Problem :ref:`Problem_Ones_Count_Max`:
 
-        13. Representation of the problem (in class :class:`~opt.single_objective.comb.ones_count_max.OnesCountMaxProblem`) and solution (`BitArray`-based in class :class:`~opt.single_objective.comb.ones_count_max.OnesCountMaxProblemBitArraySolution` and `int`-based in class :class:`~opt.single_objective.comb.ones_count_max.OnesCountMaxProblemIntSolution`) - [VladimirFilipovic]_
+        1. Representation of the problem (in class :class:`~opt.single_objective.comb.ones_count_max.OnesCountMaxProblem`) and solution (`BitArray`-based in class :class:`~opt.single_objective.comb.ones_count_max.OnesCountMaxProblemBitArraySolution` and `int`-based in class :class:`~opt.single_objective.comb.ones_count_max.OnesCountMaxProblemIntSolution`) - [VladimirFilipovic]_
         
-        14. Integer Linear Programming method (using `linopy` library) - [VladimirFilipovic]_  
+        2. Integer Linear Programming method (using `linopy` library) - [VladimirFilipovic]_  
 
-        15. Total Enumeration method, with solution that has binary `BitArray` representation - [VladimirFilipovic]_  
+        3. Total Enumeration method, with solution that has binary `BitArray` representation - [VladimirFilipovic]_  
 
-        16. Variable Neighborhood Search method, with solution that has binary `BitArray` representation - [VladimirFilipovic]_  
+        4. Variable Neighborhood Search method, with solution that has binary `BitArray` representation - [VladimirFilipovic]_  
 
-        17. Variable Neighborhood Search method, with solution that has binary `int` representation - [VladimirFilipovic]_  
+        5. Variable Neighborhood Search method, with solution that has binary `int` representation - [VladimirFilipovic]_  
 
-        18. Genetic Algorithm method, with solution that has binary `BitArray` representation - [VladimirFilipovic]_  
+        6. Genetic Algorithm method, with solution that has binary `BitArray` representation - [VladimirFilipovic]_  
 
-        19. Entry point of the all methods for solving this problem, in file :file:`/opt/single_objective/comb/ones_count_max_problem/solver.py`. All parameters that governs method execution are accessible to user through command-line.  - [VladimirFilipovic]_  
+        7. Entry point of the all methods for solving this problem, in file :file:`/opt/single_objective/comb/ones_count_max_problem/solver.py`. All parameters that governs method execution are accessible to user through command-line.  - [VladimirFilipovic]_  
 
     b.2. Minimum Multi Cut Problem :ref:`Problem_Minimum_Multi_Cut`:
 
-        20. Representation of the problem (in class :class:`~opt.single_objective.comb.minimum_multi_cut_problem.MinimumMultiCutProblem`, that uses `ng.Graph` class for class representation) and solution with `BitArray`-based representation (in class :class:`~opt.single_objective.comb.minimum_multi_cut_problem.MinimumMultiCutProblemBitArraySolution`) - [MarkoRadosavljevic]_
+        8. Representation of the problem (in class :class:`~opt.single_objective.comb.minimum_multi_cut_problem.MinimumMultiCutProblem`, that uses `ng.Graph` class for class representation) and solution with `BitArray`-based representation (in class :class:`~opt.single_objective.comb.minimum_multi_cut_problem.MinimumMultiCutProblemBitArraySolution`) - [MarkoRadosavljevic]_
         
-        21. Variable Neighborhood Search method, with solution that has binary `BitArray` representation - [MarkoRadosavljevic]_  
+        9. Variable Neighborhood Search method, with solution that has binary `BitArray` representation - [MarkoRadosavljevic]_  
 
-        22. Genetic Algorithm method, with solution that has binary `BitArray` representation - [MarkoRadosavljevic]_  
+        10. Genetic Algorithm method, with solution that has binary `BitArray` representation - [MarkoRadosavljevic]_  
+
+    b.3. Set Covering Problem :ref:`Problem_Set_Covering`:
+
+        11. Representation of the problem (in class :class:`~opt.single_objective.comb.set_covering_problem.set_covering_problem.SetCoveringProblem`and solution with `BitArray`-based representation (in class :class:`~~opt.single_objective.comb.set_covering_problem.set_covering_problem_bit_array_solution.SetCoveringProblemBitArraySolution`) - [AndjelaDamnjanovic]_
+        
+        12. Electromagnetism-like Metaheuristic method, with solution that has binary `BitArray` representation - [AndjelaDamnjanovic]_  
+
+        13. ILP model, with `linopy` library and `Gurobi` solver - [AndjelaDamnjanovic]_  
 
 
 c. Contribution in solving **global** optimization problems:
@@ -155,11 +168,11 @@ c. Contribution in solving **global** optimization problems:
 
     c.1. Max Function One Variable Problem:
 
-        23. Variable Neighborhood Search method, with solution that has binary `BitArray` representation - [VladimirFilipovic]_  
+        1. Variable Neighborhood Search method, with solution that has binary `BitArray` representation - [VladimirFilipovic]_  
 
-        24. Variable Neighborhood Search method, with solution that has binary `int` representation - [VladimirFilipovic]_  
+        2. Variable Neighborhood Search method, with solution that has binary `int` representation - [VladimirFilipovic]_  
 
-        25. Entry point of the all methods for solving this problem, in file :file:`/opt/single_objective/glob/function_one_variable_max_problem/solver.py`. All parameters that governs method execution are accessible to user through command-line.  - [VladimirFilipovic]_  
+        3. Entry point of the all methods for solving this problem, in file :file:`/opt/single_objective/glob/function_one_variable_max_problem/solver.py`. All parameters that governs method execution are accessible to user through command-line.  - [VladimirFilipovic]_  
 
 Contributor List
 ----------------
@@ -167,3 +180,5 @@ Contributor List
 .. [VladimirFilipovic] Vladimir Filipović, `<https://github.com/vladofilipovic>`_ e-mail: vladofilipovic@hotmail.com
 
 .. [MarkoRadosavljevic] Marko Radosavljević, `<https://github.com/Markic01>`_ e-mail: mi20079@alas.matf.bg.ac.rs
+
+.. [AndjelaDamnjanovic] Anđela Damjanović, `<https://github.com/AndjelaDamnjanovic>`_ e-mail: mi19059@alas.matf.bg.ac.rs
