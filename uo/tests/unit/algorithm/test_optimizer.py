@@ -18,6 +18,19 @@ from uo.utils import logger
 
 class Test__Optimizer__(unittest.TestCase):
 
+    def test_retrieve_optimizer_name_successfully(self):
+        # Mocking the Optimizer class
+        class MockOptimizer:
+            def __init__(self, name):
+                self.__name = name
+        
+            @property
+            def name(self):
+                return self.__name
+    
+        optimizer = MockOptimizer("TestOptimizer")
+        assert optimizer.name == "TestOptimizer"
+
     # Creates a new instance of Optimizer with valid parameters.
     def test_valid_parameters2(self):
         # Arrange
