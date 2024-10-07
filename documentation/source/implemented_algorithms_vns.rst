@@ -17,7 +17,7 @@ There are several books important for understanding VNS, like Handbook of Metahe
 Structure of the algorithm
 --------------------------
 
-According to autors, VNS systematically performs the procedure of neighborhood change, both in descent to local minima and in escape from the valleys which contain them.
+According to authors, VNS systematically performs the procedure of neighborhood change, both in descent to local minima and in escape from the valleys which contain them.
 
 VNS is built upon the following perceptions:
 
