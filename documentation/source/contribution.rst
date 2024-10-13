@@ -111,7 +111,7 @@ a. Contribution in the designing novel **optimization methods**:
 
         7. Implementation of shaking and local searches with binary representation (in class :class:`~uo.algorithm.variable_neighborhood_search.VnsShakingSupportStandardBitArray`,using :class:`bitstring.BitArray` class) - [VladimirFilipovic]_ 
 
-    a.4. Genetic Algorithms :ref:`Algorithm_Genetic_Algorithms` (GA) metaheuristics:
+    a.4. Genetic Algorithms :ref:`Algorithm_Genetic_Algorithm` (GA) metaheuristics:
         
         8. Structure, organization and main loop implementation - [MarkoRadosavljevic]_, [VladimirFilipovic]_ 
 
@@ -123,7 +123,7 @@ a. Contribution in the designing novel **optimization methods**:
 
         12. Implementation of GA mutation one point method (contained within class: :class:`~uo.algorithm.metaheuristic.genetic_algorithm.GaMutationSupportOnePointBitArray`), with binary representation (using `bitstring.BitArray` class) - [MarkoRadosavljevic]_ 
 
-    a.4. Electromagnetism-like :ref:`Algorithm_Electromagnetism_Like` (EM) metaheuristics:
+    a.4. Electromagnetism-like :ref:`Algorithm_Electromagnetism_Like_Metaheuristic` (EM) metaheuristics:
         
         13. Structure, organization and main loop implementation - [AndjelaDamnjanovic]_
 

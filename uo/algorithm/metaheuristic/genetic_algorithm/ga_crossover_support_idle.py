@@ -1,10 +1,9 @@
 """
-..  _py_ones_count_max_problem_bit_array_solution_ga_support:
+..  _py_ga_crossover_support_idle:
 
-The :mod:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution_ga_support`
-contains class :class:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution_ga_support.OnesCountMaxProblemBitArraySolutionGaSupport`, 
-that represents supporting parts of the `GA` algorithm, where solution of the :ref:`Problem_MinimumMultiCut` have `BitArray` 
-representation.
+The :mod:`~uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support_idle`
+contains class :class:`uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support_idle.GaCrossoverSupportIdle`, 
+that represents supporting parts of the `GA` algorithm.
 """
 import sys
 from pathlib import Path
