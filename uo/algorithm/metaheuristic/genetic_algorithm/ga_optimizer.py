@@ -1,7 +1,7 @@
 """ 
 ..  _py_ga_optimizer:
 
-The :mod:`~uo.algorithm.metaheuristic.genetic_algorithm.genetic_algorithm` contains class :class:`~.uo.metaheuristic.genetic_algorithm.genetic_algorithm.GaOptimizer`, that represents implements algorithm :ref:`GA<Genetic_Algorithm>`.
+The :mod:`~uo.algorithm.metaheuristic.genetic_algorithm.genetic_algorithm` contains class :class:`~.uo.metaheuristic.genetic_algorithm.genetic_algorithm.GaOptimizer`, that represents implements algorithm :ref:`GA<Algorithm_Genetic_Algorithm>`.
 """
 
 from pathlib import Path

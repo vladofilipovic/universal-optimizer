@@ -1,5 +1,5 @@
 """ 
-..  _py_ones_count_max_problem_bit_array_solution_te_support:
+..  _py_te_operations_support_bit_array:
 
 The :mod:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution_te_support` 
 contains class :class:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution_te_support.OnesCountMaxProblemBitArraySolutionTeSupport`, 

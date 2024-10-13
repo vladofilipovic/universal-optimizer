@@ -1,5 +1,5 @@
 """ 
-The :mod:`~uo.problem.problem` module describes the class :class:`~uo.problem.Problem`.
+:no-index:The :mod:`~uo.problem.problem` module describes the class :class:`~uo.problem.Problem`.
 """
 
 from pathlib import Path

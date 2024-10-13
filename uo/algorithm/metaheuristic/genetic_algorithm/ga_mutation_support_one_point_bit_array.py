@@ -1,5 +1,5 @@
 """
-..  _py_ones_count_max_problem_bit_array_solution_ga_support:
+..  _py_ga_mutation_support_one_point_bit_array:
 
 The :mod:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution_ga_support`
 contains class :class:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution_ga_support.OnesCountMaxProblemBitArraySolutionGaSupport`, 
