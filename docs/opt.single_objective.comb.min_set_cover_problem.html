@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>opt.single_objective.comb.min_set_cover_problem package &mdash; Optimization Algorithms Library 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=01f34227"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Optimization Algorithms Library
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Tutorials and How-To Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how_to_guides.html">How-to Guides</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">In-depth Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="implemented_algorithms.html">Implemented algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="problems_to_be_solved.html">Problems to be solved</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Program code</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html#optimization">Optimization</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Changelog and Contribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribution.html">How to Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribution.html#contributors">Contributors</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Optimization Algorithms Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">opt.single_objective.comb.min_set_cover_problem package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/opt.single_objective.comb.min_set_cover_problem.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="opt-single-objective-comb-min-set-cover-problem-package">
+<h1>opt.single_objective.comb.min_set_cover_problem package<a class="headerlink" href="#opt-single-objective-comb-min-set-cover-problem-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem">
+<span id="opt-single-objective-comb-min-set-cover-problem-min-set-cover-problem-module"></span><h2>opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem module<a class="headerlink" href="#module-opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem" title="Link to this heading"></a></h2>
+<dl class="py class" id="py-set-covering-problem">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.</span></span><span class="sig-name descname"><span class="pre">MinSetCoverProblem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">universe</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.13)"><span class="pre">Set</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subsets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.13)"><span class="pre">Set</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="uo.target_problem.html#uo.problem.problem.Problem" title="uo.problem.problem.Problem"><code class="xref py py-class docutils literal notranslate"><span class="pre">Problem</span></code></a></p>
+<p>Class representing the Minimum Set Cover Problem.</p>
+<p>This class inherits from the TargetProblem class and is used to define and solve the Set Covering Problem Problem. The problem is defined by a set U and a list of subsets of U named S.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem.universe">
+<span class="sig-name descname"><span class="pre">universe</span></span><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem.universe" title="Link to this definition"></a></dt>
+<dd><p>set of elements U that should be covered.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Set[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)">int</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem.subsets">
+<span class="sig-name descname"><span class="pre">subsets</span></span><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem.subsets" title="Link to this definition"></a></dt>
+<dd><p>list of subsets. Each subset covers some of the elements form U.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)">list</a>[Set[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)">int</a>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">__init__(universe</span></span></dt>
+<dd><p>Set[int], subsets: list[Set[int]]): Initializes a new instance of the MinSetCoverProblem class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">__load_from_files__(universe_file_path</span></span></dt>
+<dd><p>str, subsets_file_path: str) -&gt; tuple: Static function that reads problem data from files.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">from_input_files(universe_file_path</span></span></dt>
+<dd><p>str, subsets_file_path: str): Creates a new MinSetCoverProblem instance when the input file and input format are specified.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem.__copy__">
+<span class="sig-name descname"><span class="pre">__copy__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem" title="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem"><span class="pre">MinSetCoverProblem</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem.__copy__" title="Link to this definition"></a></dt>
+<dd><p>Internal copy of the MinSetCoverProblem problem.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem.copy">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem" title="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem"><span class="pre">MinSetCoverProblem</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem.copy" title="Link to this definition"></a></dt>
+<dd><p>Copy the MinSetCoverProblem problem.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">universe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd><p>Property getter for the set that should be covered in the target problem.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">subsets</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#id1" title="Link to this definition"></a></dt>
+<dd><p>Property getter for the list of subsets S of the target problem.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem.dimension">
+<span class="sig-name descname"><span class="pre">dimension</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem.dimension" title="Link to this definition"></a></dt>
+<dd><p>Property getter for the dimension of the target problem.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">string_rep(delimiter</span></span></dt>
+<dd><p>str, indentation: int = 0, indentation_symbol: str = ‘’, group_start: str = ‘{’, group_end: str = ‘}’) -&gt; str: String representation of the MinSetCoverProblem instance.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem.__str__">
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem.__str__" title="Link to this definition"></a></dt>
+<dd><p>String representation of the MinSetCoverProblem structure.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem.__repr__">
+<span class="sig-name descname"><span class="pre">__repr__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem.__repr__" title="Link to this definition"></a></dt>
+<dd><p>Representation of the MinSetCoverProblem instance.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem.__format__">
+<span class="sig-name descname"><span class="pre">__format__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem.__format__" title="Link to this definition"></a></dt>
+<dd><p>Formatted MinSetCoverProblem instance.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem" title="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem"><span class="pre">MinSetCoverProblem</span></a></span></span><a class="headerlink" href="#id2" title="Link to this definition"></a></dt>
+<dd><p>Copy the <cite>MinSetCoverProblem</cite> problem</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>new <cite>MinSetCoverProblem</cite> instance with the same properties</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem" title="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem">MinSetCoverProblem</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="id3">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dimension</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#id3" title="Link to this definition"></a></dt>
+<dd><p>Property getter for dimension of the target problem</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dimension of the target problem instance</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem.from_input_files">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_input_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">universe_file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">subsets_file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem" title="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem"><span class="pre">MinSetCoverProblem</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem.from_input_files" title="Link to this definition"></a></dt>
+<dd><p>Additional constructor. Create new <cite>MinSetCoverProblem</cite> instance when input file and input format are specified</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>universe_file_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – path to the file that contains elements of the set U</p></li>
+<li><p><strong>subsets_file_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – path to the file that contains list of subsets and their elements</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>class instance</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="opt.single_objective.comb.min_multi_cut_problem.html#opt.single_objective.comb.min_multi_cut_problem.min_multi_cut_problem.MinMultiCutProblem" title="opt.single_objective.comb.min_multi_cut_problem.min_multi_cut_problem.MinMultiCutProblem">MinMultiCutProblem</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem.from_universe_and_subset_files">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_universe_and_subset_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">universe</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.13)"><span class="pre">Set</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subsets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem.from_universe_and_subset_files" title="Link to this definition"></a></dt>
+<dd><p>Additional constructor. Create new <cite>MinSetCoverProblem</cite> instance where the universe and subsets are specified.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>universe</strong> (<em>Set</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>]</em>) – initial set U that should be covered in the problem</p></li>
+<li><p><strong>subsets</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><em>Set</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>]</em><em>]</em>) – list of subsets S that should cover U in the problem</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem.string_rep">
+<span class="sig-name descname"><span class="pre">string_rep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">indentation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indentation_symbol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'{'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'}'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem.string_rep" title="Link to this definition"></a></dt>
+<dd><p>String representation of the <cite>MinSetCoverProblem</cite> instance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – delimiter between fields</p></li>
+<li><p><strong>indentation</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em><em>, </em><em>default value 0</em>) – level of indentation</p></li>
+<li><p><strong>indentation_symbol</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em><em>, </em><em>default value ''</em>) – indentation symbol</p></li>
+<li><p><strong>group_start</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em><em>, </em><em>default value '{'</em>) – group start string</p></li>
+<li><p><strong>group_end</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em><em>, </em><em>default value '}'</em>) – group end string</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>string representation of instance that controls output</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="id4">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">subsets</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.13)"><span class="pre">Set</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id4" title="Link to this definition"></a></dt>
+<dd><p>Property getter for the list of subsets S of the target problem</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of subsets S of the target problem instance</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)">list</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="id5">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">universe</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.13)"><span class="pre">Set</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id5" title="Link to this definition"></a></dt>
+<dd><p>Property getter for the initial set U of the target problem</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set U of the target problem instance</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Set[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)">int</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution">
+<span id="opt-single-objective-comb-min-set-cover-problem-min-set-cover-problem-bit-array-solution-module"></span><h2>opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution module<a class="headerlink" href="#module-opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution" title="Link to this heading"></a></h2>
+<p id="py-set-covering-problem-bit-array-solution">The <code class="xref py py-mod docutils literal notranslate"><span class="pre">set_covering_problem_bit_array_solution</span></code> contains class <code class="xref py py-class docutils literal notranslate"><span class="pre">MinSetCoverProblemBitArraySolution</span></code>, that represents solution of the <a class="reference internal" href="problems_to_be_solved_set_covering_problem.html#problem-set-covering"><span class="std std-ref">Minimum Set Cover Problem</span></a>, where <cite>BitArray</cite> representation of the problem has been used.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution.MinSetCoverProblemBitArraySolution">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution.</span></span><span class="sig-name descname"><span class="pre">MinSetCoverProblemBitArraySolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">random_seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evaluation_cache_is_used</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evaluation_cache_max_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance_calculation_cache_is_used</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance_calculation_cache_max_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution.MinSetCoverProblemBitArraySolution" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="uo.target_solution.html#uo.solution.solution.Solution" title="uo.solution.solution.Solution"><code class="xref py py-class docutils literal notranslate"><span class="pre">Solution</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">BitArray</span></code>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution.MinSetCoverProblemBitArraySolution.argument">
+<span class="sig-name descname"><span class="pre">argument</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">representation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BitArray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution.MinSetCoverProblemBitArraySolution.argument" title="Link to this definition"></a></dt>
+<dd><p>Argument of the target solution</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>representation</strong> (<cite>BitArray</cite>) – internal representation of the solution</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>solution code</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution.MinSetCoverProblemBitArraySolution.calc_fitness">
+<span class="sig-name descname"><span class="pre">calc_fitness</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">representation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BitArray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">universe</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.13)"><span class="pre">set</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subsets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.13)"><span class="pre">set</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution.MinSetCoverProblemBitArraySolution.calc_fitness" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution.MinSetCoverProblemBitArraySolution.calculate_quality_directly">
+<span class="sig-name descname"><span class="pre">calculate_quality_directly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">representation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BitArray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">problem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem" title="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem"><span class="pre">MinSetCoverProblem</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="uo.solution.html#uo.solution.quality_of_solution.QualityOfSolution" title="uo.solution.quality_of_solution.QualityOfSolution"><span class="pre">QualityOfSolution</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution.MinSetCoverProblemBitArraySolution.calculate_quality_directly" title="Link to this definition"></a></dt>
+<dd><p>Fitness calculation of the set covering binary BitArray solution</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>representation</strong> (<em>BitArray</em>) – native representation of solution whose fitness is calculated</p></li>
+<li><p><strong>problem</strong> (<a class="reference internal" href="uo.target_problem.html#uo.problem.problem.Problem" title="uo.problem.problem.Problem"><em>Problem</em></a>) – problem that is solved</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>objective value, fitness value and feasibility of the solution instance</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><cite>QualityOfSolution</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution.MinSetCoverProblemBitArraySolution.copy">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution.MinSetCoverProblemBitArraySolution" title="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution.MinSetCoverProblemBitArraySolution"><span class="pre">MinSetCoverProblemBitArraySolution</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution.MinSetCoverProblemBitArraySolution.copy" title="Link to this definition"></a></dt>
+<dd><p>Copy the <cite>MinSetCoverProblemBitArraySolution</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>new <cite>MinSetCoverProblemBitArraySolution</cite> instance with the same properties</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><cite>MinSetCoverProblemBitArraySolution</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution.MinSetCoverProblemBitArraySolution.copy_from">
+<span class="sig-name descname"><span class="pre">copy_from</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">original</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution.MinSetCoverProblemBitArraySolution.copy_from" title="Link to this definition"></a></dt>
+<dd><p>Copy all data from the original target solution</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution.MinSetCoverProblemBitArraySolution.init_from">
+<span class="sig-name descname"><span class="pre">init_from</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">representation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BitArray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">problem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.target_problem.html#uo.problem.problem.Problem" title="uo.problem.problem.Problem"><span class="pre">Problem</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution.MinSetCoverProblemBitArraySolution.init_from" title="Link to this definition"></a></dt>
+<dd><p>Initialization of the solution, by setting its native representation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>representation</strong> (<em>BitArray</em>) – representation that will be ste to solution</p></li>
+<li><p><strong>problem</strong> (<a class="reference internal" href="uo.target_problem.html#uo.problem.problem.Problem" title="uo.problem.problem.Problem"><em>Problem</em></a>) – problem which is solved by solution</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution.MinSetCoverProblemBitArraySolution.init_random">
+<span class="sig-name descname"><span class="pre">init_random</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">problem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.target_problem.html#uo.problem.problem.Problem" title="uo.problem.problem.Problem"><span class="pre">Problem</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution.MinSetCoverProblemBitArraySolution.init_random" title="Link to this definition"></a></dt>
+<dd><p>Random initialization of the solution</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>problem</strong> (<a class="reference internal" href="uo.target_problem.html#uo.problem.problem.Problem" title="uo.problem.problem.Problem"><em>Problem</em></a>) – problem which is solved by solution</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution.MinSetCoverProblemBitArraySolution.is_feasible_sol">
+<span class="sig-name descname"><span class="pre">is_feasible_sol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">representation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BitArray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">universe</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.13)"><span class="pre">set</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subsets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.13)"><span class="pre">set</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution.MinSetCoverProblemBitArraySolution.is_feasible_sol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution.MinSetCoverProblemBitArraySolution.native_representation">
+<span class="sig-name descname"><span class="pre">native_representation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">representation_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">BitArray</span></span></span><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution.MinSetCoverProblemBitArraySolution.native_representation" title="Link to this definition"></a></dt>
+<dd><p>Obtain <cite>BitArray</cite> representation from string representation of the BitArray binary solution of the Set Covering Problem</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>representation_str</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – solution’s representation as string</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>solution’s representation as BitArray</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><cite>BitArray</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution.MinSetCoverProblemBitArraySolution.representation_distance_directly">
+<span class="sig-name descname"><span class="pre">representation_distance_directly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">solution_code_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">solution_code_2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution.MinSetCoverProblemBitArraySolution.representation_distance_directly" title="Link to this definition"></a></dt>
+<dd><p>Calculating distance between two solutions determined by its code</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>solution_code_1</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – solution code for the first solution</p></li>
+<li><p><strong>solution_code_2</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – solution code for the second solution</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>distance between two solutions represented by its code</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution.MinSetCoverProblemBitArraySolution.string_rep">
+<span class="sig-name descname"><span class="pre">string_rep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'\n'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indentation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indentation_symbol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'</span>&#160;&#160; <span class="pre">'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'{'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'}'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution.MinSetCoverProblemBitArraySolution.string_rep" title="Link to this definition"></a></dt>
+<dd><p>String representation of the solution instance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – delimiter between fields</p></li>
+<li><p><strong>indentation</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em><em>, </em><em>default value 0</em>) – level of indentation</p></li>
+<li><p><strong>indentation_symbol</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em><em>, </em><em>default value ''</em>) – indentation symbol</p></li>
+<li><p><strong>group_start</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em><em>, </em><em>default value '{'</em>) – group start string</p></li>
+<li><p><strong>group_end</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em><em>, </em><em>default value '}'</em>) – group end string</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>string representation of instance that controls output</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution.random">
+<span class="sig-prename descclassname"><span class="pre">opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution.</span></span><span class="sig-name descname"><span class="pre">random</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">x</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">interval</span> <span class="pre">[0,</span> <span class="pre">1).</span></span></span><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution.random" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy">
+<span id="opt-single-objective-comb-min-set-cover-problem-min-set-cover-problem-ilp-linopy-module"></span><h2>opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy module<a class="headerlink" href="#module-opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.MinSetCoverProblemIntegerLinearProgrammingSolution">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.</span></span><span class="sig-name descname"><span class="pre">MinSetCoverProblemIntegerLinearProgrammingSolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.MinSetCoverProblemIntegerLinearProgrammingSolver" title="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.MinSetCoverProblemIntegerLinearProgrammingSolver"><span class="pre">MinSetCoverProblemIntegerLinearProgrammingSolver</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.MinSetCoverProblemIntegerLinearProgrammingSolution" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">SolutionVoidIntObject</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.MinSetCoverProblemIntegerLinearProgrammingSolution.string_representation">
+<span class="sig-name descname"><span class="pre">string_representation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.MinSetCoverProblemIntegerLinearProgrammingSolution.string_representation" title="Link to this definition"></a></dt>
+<dd><p>String representation of the target solution</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>representation</strong> (<em>R_co</em>) – internal representation of the solution</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>string representation of the solution</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.MinSetCoverProblemIntegerLinearProgrammingSolver">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.</span></span><span class="sig-name descname"><span class="pre">MinSetCoverProblemIntegerLinearProgrammingSolver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_control</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.algorithm.html#uo.algorithm.output_control.OutputControl" title="uo.algorithm.output_control.OutputControl"><span class="pre">OutputControl</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">problem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem" title="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem.MinSetCoverProblem"><span class="pre">MinSetCoverProblem</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.MinSetCoverProblemIntegerLinearProgrammingSolver" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Optimizer</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.MinSetCoverProblemIntegerLinearProgrammingSolver.copy">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.MinSetCoverProblemIntegerLinearProgrammingSolver.copy" title="Link to this definition"></a></dt>
+<dd><p>Copy the current algorithm</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>new <cite>MinSetCoverProblemIntegerLinearProgrammingSolver</cite> instance with the same properties</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>:class:<code class="docutils literal notranslate"><span class="pre">MinSetCoverProblemIntegerLinearProgrammingSolver</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.MinSetCoverProblemIntegerLinearProgrammingSolver.from_construction_tuple">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_construction_tuple</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">construction_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.MinSetCoverProblemIntegerLinearProgrammingSolverConstructionParameters" title="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.MinSetCoverProblemIntegerLinearProgrammingSolverConstructionParameters"><span class="pre">MinSetCoverProblemIntegerLinearProgrammingSolverConstructionParameters</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.MinSetCoverProblemIntegerLinearProgrammingSolver.from_construction_tuple" title="Link to this definition"></a></dt>
+<dd><p>Additional constructor. Create new <cite>MinSetCoverProblemIntegerLinearProgrammingSolver</cite> instance from construction parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>construction_params</strong> (<a class="reference internal" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.MinSetCoverProblemIntegerLinearProgrammingSolverConstructionParameters" title="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.MinSetCoverProblemIntegerLinearProgrammingSolverConstructionParameters"><em>MinSetCoverProblemIntegerLinearProgrammingSolverConstructionParameters</em></a>) – parameters for construction</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.MinSetCoverProblemIntegerLinearProgrammingSolver.model">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">model</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Model</span></em><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.MinSetCoverProblemIntegerLinearProgrammingSolver.model" title="Link to this definition"></a></dt>
+<dd><p>Property getter for the ILP model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>model of the problem</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><cite>Model</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.MinSetCoverProblemIntegerLinearProgrammingSolver.optimize">
+<span class="sig-name descname"><span class="pre">optimize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.MinSetCoverProblemIntegerLinearProgrammingSolution" title="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.MinSetCoverProblemIntegerLinearProgrammingSolution"><span class="pre">MinSetCoverProblemIntegerLinearProgrammingSolution</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.MinSetCoverProblemIntegerLinearProgrammingSolver.optimize" title="Link to this definition"></a></dt>
+<dd><p>Uses ILP model in order to solve MinSetCoverProblem</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.MinSetCoverProblemIntegerLinearProgrammingSolver.string_rep">
+<span class="sig-name descname"><span class="pre">string_rep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">indentation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indentation_symbol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'{'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'}'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.MinSetCoverProblemIntegerLinearProgrammingSolver.string_rep" title="Link to this definition"></a></dt>
+<dd><p>String representation of the ‘MinSetCoverProblemIntegerLinearProgrammingSolver’ instance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – delimiter between fields</p></li>
+<li><p><strong>indentation</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em><em>, </em><em>default value 0</em>) – level of indentation</p></li>
+<li><p><strong>indentation_symbol</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em><em>, </em><em>default value ''</em>) – indentation symbol</p></li>
+<li><p><strong>group_start</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em><em>, </em><em>default value '{'</em>) – group start string</p></li>
+<li><p><strong>group_end</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em><em>, </em><em>default value '}'</em>) – group end string</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>string representation of instance that controls output</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.MinSetCoverProblemIntegerLinearProgrammingSolverConstructionParameters">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.</span></span><span class="sig-name descname"><span class="pre">MinSetCoverProblemIntegerLinearProgrammingSolverConstructionParameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">problem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.target_problem.html#uo.problem.problem.Problem" title="uo.problem.problem.Problem"><span class="pre">Problem</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_control</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.algorithm.html#uo.algorithm.output_control.OutputControl" title="uo.algorithm.output_control.OutputControl"><span class="pre">OutputControl</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.MinSetCoverProblemIntegerLinearProgrammingSolverConstructionParameters" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Instance of the class <a class="reference internal" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.MinSetCoverProblemIntegerLinearProgrammingSolverConstructionParameters" title="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.MinSetCoverProblemIntegerLinearProgrammingSolverConstructionParameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">MinSetCoverProblemIntegerLinearProgrammingSolverConstructionParameters</span></code></a> represents constructor parameters for set covering problem ILP solver.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.MinSetCoverProblemIntegerLinearProgrammingSolverConstructionParameters.output_control">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">output_control</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="uo.algorithm.html#uo.algorithm.output_control.OutputControl" title="uo.algorithm.output_control.OutputControl"><span class="pre">OutputControl</span></a></em><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.MinSetCoverProblemIntegerLinearProgrammingSolverConstructionParameters.output_control" title="Link to this definition"></a></dt>
+<dd><p>Property getter for the output control</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>output control</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><cite>OutputControl</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.MinSetCoverProblemIntegerLinearProgrammingSolverConstructionParameters.problem">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">problem</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="uo.target_problem.html#uo.problem.problem.Problem" title="uo.problem.problem.Problem"><span class="pre">Problem</span></a></em><a class="headerlink" href="#opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_ilp_linopy.MinSetCoverProblemIntegerLinearProgrammingSolverConstructionParameters.problem" title="Link to this definition"></a></dt>
+<dd><p>Property getter for the output control</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>problem that is solved</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><cite>Problem</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-opt.single_objective.comb.min_set_cover_problem">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-opt.single_objective.comb.min_set_cover_problem" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Vladimir Filipovic.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

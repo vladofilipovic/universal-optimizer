@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>opt.single_objective.comb.max_ones_count_problem package &mdash; Optimization Algorithms Library 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=01f34227"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Optimization Algorithms Library
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Tutorials and How-To Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how_to_guides.html">How-to Guides</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">In-depth Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="implemented_algorithms.html">Implemented algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="problems_to_be_solved.html">Problems to be solved</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Program code</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html#optimization">Optimization</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Changelog and Contribution</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribution.html">How to Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribution.html#contributors">Contributors</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Optimization Algorithms Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">opt.single_objective.comb.max_ones_count_problem package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/opt.single_objective.comb.max_ones_count_problem.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="opt-single-objective-comb-max-ones-count-problem-package">
+<h1>opt.single_objective.comb.max_ones_count_problem package<a class="headerlink" href="#opt-single-objective-comb-max-ones-count-problem-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-opt.single_objective.comb.max_ones_count_problem.command_line">
+<span id="opt-single-objective-comb-max-ones-count-problem-command-line-module"></span><h2>opt.single_objective.comb.max_ones_count_problem.command_line module<a class="headerlink" href="#module-opt.single_objective.comb.max_ones_count_problem.command_line" title="Link to this heading"></a></h2>
+<p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">command_line</span></code> module is used for obtaining execution parameters for execution of the optimizers for max ones problem.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.command_line.parse_arguments">
+<span class="sig-prename descclassname"><span class="pre">opt.single_objective.comb.max_ones_count_problem.command_line.</span></span><span class="sig-name descname"><span class="pre">parse_arguments</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.command_line.parse_arguments" title="Link to this definition"></a></dt>
+<dd><p>The <cite>parse_arguments</cite> function parses execution parameters for execution of the optimizers for max
+ones problem.</p>
+</dd></dl>
+
+</section>
+<section id="module-opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem">
+<span id="opt-single-objective-comb-max-ones-count-problem-max-ones-count-problem-module"></span><h2>opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem module<a class="headerlink" href="#module-opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem" title="Link to this heading"></a></h2>
+<dl class="py class" id="py-ones-count-max-problem">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem.MaxOnesCountProblem">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem.</span></span><span class="sig-name descname"><span class="pre">MaxOnesCountProblem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem.MaxOnesCountProblem" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="uo.target_problem.html#uo.problem.problem.Problem" title="uo.problem.problem.Problem"><code class="xref py py-class docutils literal notranslate"><span class="pre">Problem</span></code></a></p>
+<p>Class representing the Ones Count Max Problem.</p>
+<p>This class inherits from the Problem class and is used to define and solve the Ones Count Max Problem. The problem is defined by a dimension, which represents the number of variables in the problem.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem.MaxOnesCountProblem.dimension">
+<span class="sig-name descname"><span class="pre">dimension</span></span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem.MaxOnesCountProblem.dimension" title="Link to this definition"></a></dt>
+<dd><p>The dimension of the problem.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">__init__(dim</span></span></dt>
+<dd><p>int): Initializes a new instance of the MaxOnesCountProblem class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">from_dimension(dimension</span></span></dt>
+<dd><p>int): Creates a new MaxOnesCountProblem instance when the dimension is specified.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">__load_from_file__(file_path</span></span></dt>
+<dd><p>str, data_format: str) -&gt; int: Static function that reads problem data from a file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">from_input_file(input_file_path</span></span></dt>
+<dd><p>str, input_format: str): Creates a new MaxOnesCountProblem instance when the input file and input format are specified.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem.MaxOnesCountProblem.__copy__">
+<span class="sig-name descname"><span class="pre">__copy__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem.MaxOnesCountProblem" title="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem.MaxOnesCountProblem"><span class="pre">MaxOnesCountProblem</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem.MaxOnesCountProblem.__copy__" title="Link to this definition"></a></dt>
+<dd><p>Internal copy of the MaxOnesCountProblem problem.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem.MaxOnesCountProblem.copy">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem.MaxOnesCountProblem" title="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem.MaxOnesCountProblem"><span class="pre">MaxOnesCountProblem</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem.MaxOnesCountProblem.copy" title="Link to this definition"></a></dt>
+<dd><p>Copy the MaxOnesCountProblem problem.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">dimension</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd><p>Property getter for the dimension of the target problem.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">string_rep(delimiter</span></span></dt>
+<dd><p>str, indentation: int = 0, indentation_symbol: str = ‘’, group_start: str = ‘{’, group_end: str = ‘}’) -&gt; str: String representation of the MaxOnesCountProblem instance.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem.MaxOnesCountProblem.__str__">
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem.MaxOnesCountProblem.__str__" title="Link to this definition"></a></dt>
+<dd><p>String representation of the MaxOnesCountProblem structure.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem.MaxOnesCountProblem.__repr__">
+<span class="sig-name descname"><span class="pre">__repr__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem.MaxOnesCountProblem.__repr__" title="Link to this definition"></a></dt>
+<dd><p>Representation of the MaxOnesCountProblem instance.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">__format__(spec</span></span></dt>
+<dd><p>str) -&gt; str: Formatted MaxOnesCountProblem instance.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id1" title="Link to this definition"></a></dt>
+<dd><p>Copy the <cite>MaxOnesCountProblem</cite> problem</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>new <cite>MaxOnesCountProblem</cite> instance with the same properties</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem.MaxOnesCountProblem" title="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem.MaxOnesCountProblem">MaxOnesCountProblem</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="id2">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dimension</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#id2" title="Link to this definition"></a></dt>
+<dd><p>Property getter for dimension of the target problem</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dimension of the target problem instance</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem.MaxOnesCountProblem.from_dimension">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dimension</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem.MaxOnesCountProblem.from_dimension" title="Link to this definition"></a></dt>
+<dd><p>Additional constructor. Create new <cite>MaxOnesCountProblem</cite> instance when dimension is specified</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dimension</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – dimension of the problem</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem.MaxOnesCountProblem.from_input_file">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_input_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem.MaxOnesCountProblem.from_input_file" title="Link to this definition"></a></dt>
+<dd><p>Additional constructor. Create new <cite>MaxOnesCountProblem</cite> instance when input file and input format are specified</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_file_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – path of the input file with problem data</p></li>
+<li><p><strong>input_format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – format of the input</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem.MaxOnesCountProblem.string_rep">
+<span class="sig-name descname"><span class="pre">string_rep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">indentation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indentation_symbol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'{'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'}'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem.MaxOnesCountProblem.string_rep" title="Link to this definition"></a></dt>
+<dd><p>String representation of the <cite>MaxOneProblem</cite> instance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – delimiter between fields</p></li>
+<li><p><strong>indentation</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em><em>, </em><em>default value 0</em>) – level of indentation</p></li>
+<li><p><strong>indentation_symbol</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em><em>, </em><em>default value ''</em>) – indentation symbol</p></li>
+<li><p><strong>group_start</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em><em>, </em><em>default value '{'</em>) – group start string</p></li>
+<li><p><strong>group_end</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em><em>, </em><em>default value '}'</em>) – group end string</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>string representation of instance that controls output</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit_array_solution">
+<span id="opt-single-objective-comb-max-ones-count-problem-max-ones-count-problem-bit-array-solution-module"></span><h2>opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit_array_solution module<a class="headerlink" href="#module-opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit_array_solution" title="Link to this heading"></a></h2>
+<p id="py-ones-count-max-problem-bit-array-solution">The <code class="xref py py-mod docutils literal notranslate"><span class="pre">ones_count_max_problem_bit_array_solution</span></code> contains class <code class="xref py py-class docutils literal notranslate"><span class="pre">MaxOnesCountProblemBitArraySolution</span></code>, that represents solution of the <a class="reference internal" href="problems_to_be_solved_ones_count.html#problem-ones-count-max"><span class="std std-ref">Ones Count Max Problem</span></a>, where <cite>BitArray</cite> representation of the problem has been used.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit_array_solution.MaxOnesCountProblemBitArraySolution">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit_array_solution.</span></span><span class="sig-name descname"><span class="pre">MaxOnesCountProblemBitArraySolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">random_seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evaluation_cache_is_used</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evaluation_cache_max_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance_calculation_cache_is_used</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance_calculation_cache_max_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit_array_solution.MaxOnesCountProblemBitArraySolution" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="uo.target_solution.html#uo.solution.solution.Solution" title="uo.solution.solution.Solution"><code class="xref py py-class docutils literal notranslate"><span class="pre">Solution</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">BitArray</span></code>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit_array_solution.MaxOnesCountProblemBitArraySolution.argument">
+<span class="sig-name descname"><span class="pre">argument</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">representation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BitArray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit_array_solution.MaxOnesCountProblemBitArraySolution.argument" title="Link to this definition"></a></dt>
+<dd><p>Argument of the target solution</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>representation</strong> (<cite>BitArray</cite>) – internal representation of the solution</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>solution code</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit_array_solution.MaxOnesCountProblemBitArraySolution.calculate_quality_directly">
+<span class="sig-name descname"><span class="pre">calculate_quality_directly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">representation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BitArray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">problem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.target_problem.html#uo.problem.problem.Problem" title="uo.problem.problem.Problem"><span class="pre">Problem</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="uo.solution.html#uo.solution.quality_of_solution.QualityOfSolution" title="uo.solution.quality_of_solution.QualityOfSolution"><span class="pre">QualityOfSolution</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit_array_solution.MaxOnesCountProblemBitArraySolution.calculate_quality_directly" title="Link to this definition"></a></dt>
+<dd><p>Fitness calculation of the max ones binary BitArray solution</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>representation</strong> (<em>BitArray</em>) – native representation of solution whose fitness is calculated</p></li>
+<li><p><strong>problem</strong> (<a class="reference internal" href="uo.target_problem.html#uo.problem.problem.Problem" title="uo.problem.problem.Problem"><em>Problem</em></a>) – problem that is solved</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>objective value, fitness value and feasibility of the solution instance</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><cite>QualityOfSolution</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit_array_solution.MaxOnesCountProblemBitArraySolution.copy">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit_array_solution.MaxOnesCountProblemBitArraySolution.copy" title="Link to this definition"></a></dt>
+<dd><p>Copy the <cite>MaxOnesCountProblemBitArraySolution</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>new <cite>MaxOnesCountProblemBitArraySolution</cite> instance with the same properties</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><cite>MaxOnesCountProblemBitArraySolution</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit_array_solution.MaxOnesCountProblemBitArraySolution.copy_from">
+<span class="sig-name descname"><span class="pre">copy_from</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">original</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit_array_solution.MaxOnesCountProblemBitArraySolution.copy_from" title="Link to this definition"></a></dt>
+<dd><p>Copy all data from the original target solution</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit_array_solution.MaxOnesCountProblemBitArraySolution.init_from">
+<span class="sig-name descname"><span class="pre">init_from</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">representation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BitArray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">problem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.target_problem.html#uo.problem.problem.Problem" title="uo.problem.problem.Problem"><span class="pre">Problem</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit_array_solution.MaxOnesCountProblemBitArraySolution.init_from" title="Link to this definition"></a></dt>
+<dd><p>Initialization of the solution, by setting its native representation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>representation</strong> (<em>BitArray</em>) – representation that will be ste to solution</p></li>
+<li><p><strong>problem</strong> (<a class="reference internal" href="uo.target_problem.html#uo.problem.problem.Problem" title="uo.problem.problem.Problem"><em>Problem</em></a>) – problem which is solved by solution</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit_array_solution.MaxOnesCountProblemBitArraySolution.init_random">
+<span class="sig-name descname"><span class="pre">init_random</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">problem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.target_problem.html#uo.problem.problem.Problem" title="uo.problem.problem.Problem"><span class="pre">Problem</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit_array_solution.MaxOnesCountProblemBitArraySolution.init_random" title="Link to this definition"></a></dt>
+<dd><p>Random initialization of the solution</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>problem</strong> (<a class="reference internal" href="uo.target_problem.html#uo.problem.problem.Problem" title="uo.problem.problem.Problem"><em>Problem</em></a>) – problem which is solved by solution</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit_array_solution.MaxOnesCountProblemBitArraySolution.native_representation">
+<span class="sig-name descname"><span class="pre">native_representation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">representation_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">BitArray</span></span></span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit_array_solution.MaxOnesCountProblemBitArraySolution.native_representation" title="Link to this definition"></a></dt>
+<dd><p>Obtain <cite>BitArray</cite> representation from string representation of the BitArray binary solution of the Max Ones problem</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>representation_str</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – solution’s representation as string</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>solution’s representation as BitArray</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><cite>BitArray</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit_array_solution.MaxOnesCountProblemBitArraySolution.representation_distance_directly">
+<span class="sig-name descname"><span class="pre">representation_distance_directly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">solution_code_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">solution_code_2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit_array_solution.MaxOnesCountProblemBitArraySolution.representation_distance_directly" title="Link to this definition"></a></dt>
+<dd><p>Calculating distance between two solutions determined by its code</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>solution_code_1</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – solution code for the first solution</p></li>
+<li><p><strong>solution_code_2</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – solution code for the second solution</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>distance between two solutions represented by its code</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit_array_solution.MaxOnesCountProblemBitArraySolution.string_rep">
+<span class="sig-name descname"><span class="pre">string_rep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'\n'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indentation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indentation_symbol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'</span>&#160;&#160; <span class="pre">'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'{'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'}'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit_array_solution.MaxOnesCountProblemBitArraySolution.string_rep" title="Link to this definition"></a></dt>
+<dd><p>String representation of the solution instance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – delimiter between fields</p></li>
+<li><p><strong>indentation</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em><em>, </em><em>default value 0</em>) – level of indentation</p></li>
+<li><p><strong>indentation_symbol</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em><em>, </em><em>default value ''</em>) – indentation symbol</p></li>
+<li><p><strong>group_start</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em><em>, </em><em>default value '{'</em>) – group start string</p></li>
+<li><p><strong>group_end</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em><em>, </em><em>default value '}'</em>) – group end string</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>string representation of instance that controls output</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit_array_solution.random">
+<span class="sig-prename descclassname"><span class="pre">opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit_array_solution.</span></span><span class="sig-name descname"><span class="pre">random</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">x</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">interval</span> <span class="pre">[0,</span> <span class="pre">1).</span></span></span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit_array_solution.random" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy">
+<span id="opt-single-objective-comb-max-ones-count-problem-max-ones-count-problem-ilp-linopy-module"></span><h2>opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy module<a class="headerlink" href="#module-opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.MaxOnesCountProblemIntegerLinearProgrammingSolution">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.</span></span><span class="sig-name descname"><span class="pre">MaxOnesCountProblemIntegerLinearProgrammingSolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.MaxOnesCountProblemIntegerLinearProgrammingSolver" title="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.MaxOnesCountProblemIntegerLinearProgrammingSolver"><span class="pre">MaxOnesCountProblemIntegerLinearProgrammingSolver</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.MaxOnesCountProblemIntegerLinearProgrammingSolution" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">SolutionVoidIntObject</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.MaxOnesCountProblemIntegerLinearProgrammingSolution.string_representation">
+<span class="sig-name descname"><span class="pre">string_representation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.MaxOnesCountProblemIntegerLinearProgrammingSolution.string_representation" title="Link to this definition"></a></dt>
+<dd><p>String representation of the target solution</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>representation</strong> (<em>R_co</em>) – internal representation of the solution</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>string representation of the solution</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.MaxOnesCountProblemIntegerLinearProgrammingSolver">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.</span></span><span class="sig-name descname"><span class="pre">MaxOnesCountProblemIntegerLinearProgrammingSolver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_control</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.algorithm.html#uo.algorithm.output_control.OutputControl" title="uo.algorithm.output_control.OutputControl"><span class="pre">OutputControl</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">problem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem.MaxOnesCountProblem" title="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem.MaxOnesCountProblem"><span class="pre">MaxOnesCountProblem</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.MaxOnesCountProblemIntegerLinearProgrammingSolver" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Optimizer</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.MaxOnesCountProblemIntegerLinearProgrammingSolver.copy">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.MaxOnesCountProblemIntegerLinearProgrammingSolver.copy" title="Link to this definition"></a></dt>
+<dd><p>Copy the current algorithm</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>new <cite>MaxOnesCountProblemIntegerLinearProgrammingSolver</cite> instance with the same properties</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>:class:<code class="docutils literal notranslate"><span class="pre">MaxOnesCountProblemIntegerLinearProgrammingSolver</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.MaxOnesCountProblemIntegerLinearProgrammingSolver.from_construction_tuple">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_construction_tuple</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">construction_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.MaxOnesCountProblemIntegerLinearProgrammingSolverConstructionParameters" title="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.MaxOnesCountProblemIntegerLinearProgrammingSolverConstructionParameters"><span class="pre">MaxOnesCountProblemIntegerLinearProgrammingSolverConstructionParameters</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.MaxOnesCountProblemIntegerLinearProgrammingSolver.from_construction_tuple" title="Link to this definition"></a></dt>
+<dd><p>Additional constructor. Create new <cite>MaxOnesCountProblemIntegerLinearProgrammingSolver</cite> instance from construction parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>construction_params</strong> (<a class="reference internal" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.MaxOnesCountProblemIntegerLinearProgrammingSolverConstructionParameters" title="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.MaxOnesCountProblemIntegerLinearProgrammingSolverConstructionParameters"><em>MaxOnesCountProblemIntegerLinearProgrammingSolverConstructionParameters</em></a>) – parameters for construction</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.MaxOnesCountProblemIntegerLinearProgrammingSolver.model">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">model</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Model</span></em><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.MaxOnesCountProblemIntegerLinearProgrammingSolver.model" title="Link to this definition"></a></dt>
+<dd><p>Property getter for the ILP model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>model of the problem</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><cite>Model</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.MaxOnesCountProblemIntegerLinearProgrammingSolver.optimize">
+<span class="sig-name descname"><span class="pre">optimize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.MaxOnesCountProblemIntegerLinearProgrammingSolution" title="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.MaxOnesCountProblemIntegerLinearProgrammingSolution"><span class="pre">MaxOnesCountProblemIntegerLinearProgrammingSolution</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.MaxOnesCountProblemIntegerLinearProgrammingSolver.optimize" title="Link to this definition"></a></dt>
+<dd><p>Uses ILP model in order to solve MaxOnesCountProblem</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.MaxOnesCountProblemIntegerLinearProgrammingSolver.string_rep">
+<span class="sig-name descname"><span class="pre">string_rep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">indentation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indentation_symbol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'{'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'}'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.MaxOnesCountProblemIntegerLinearProgrammingSolver.string_rep" title="Link to this definition"></a></dt>
+<dd><p>String representation of the ‘MaxOnesCountProblemIntegerLinearProgrammingSolver’ instance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – delimiter between fields</p></li>
+<li><p><strong>indentation</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em><em>, </em><em>default value 0</em>) – level of indentation</p></li>
+<li><p><strong>indentation_symbol</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em><em>, </em><em>default value ''</em>) – indentation symbol</p></li>
+<li><p><strong>group_start</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em><em>, </em><em>default value '{'</em>) – group start string</p></li>
+<li><p><strong>group_end</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em><em>, </em><em>default value '}'</em>) – group end string</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>string representation of instance that controls output</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.MaxOnesCountProblemIntegerLinearProgrammingSolverConstructionParameters">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.</span></span><span class="sig-name descname"><span class="pre">MaxOnesCountProblemIntegerLinearProgrammingSolverConstructionParameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">problem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.target_problem.html#uo.problem.problem.Problem" title="uo.problem.problem.Problem"><span class="pre">Problem</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_control</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.algorithm.html#uo.algorithm.output_control.OutputControl" title="uo.algorithm.output_control.OutputControl"><span class="pre">OutputControl</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.MaxOnesCountProblemIntegerLinearProgrammingSolverConstructionParameters" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Instance of the class <a class="reference internal" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.MaxOnesCountProblemIntegerLinearProgrammingSolverConstructionParameters" title="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.MaxOnesCountProblemIntegerLinearProgrammingSolverConstructionParameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">MaxOnesCountProblemIntegerLinearProgrammingSolverConstructionParameters</span></code></a> represents constructor parameters for max ones problem ILP solver.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.MaxOnesCountProblemIntegerLinearProgrammingSolverConstructionParameters.output_control">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">output_control</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="uo.algorithm.html#uo.algorithm.output_control.OutputControl" title="uo.algorithm.output_control.OutputControl"><span class="pre">OutputControl</span></a></em><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.MaxOnesCountProblemIntegerLinearProgrammingSolverConstructionParameters.output_control" title="Link to this definition"></a></dt>
+<dd><p>Property getter for the output control</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>output control</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><cite>OutputControl</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.MaxOnesCountProblemIntegerLinearProgrammingSolverConstructionParameters.problem">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">problem</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="uo.target_problem.html#uo.problem.problem.Problem" title="uo.problem.problem.Problem"><span class="pre">Problem</span></a></em><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_ilp_linopy.MaxOnesCountProblemIntegerLinearProgrammingSolverConstructionParameters.problem" title="Link to this definition"></a></dt>
+<dd><p>Property getter for the output control</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>problem that is solved</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><cite>Problem</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_int_solution">
+<span id="opt-single-objective-comb-max-ones-count-problem-max-ones-count-problem-int-solution-module"></span><h2>opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_int_solution module<a class="headerlink" href="#module-opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_int_solution" title="Link to this heading"></a></h2>
+<p id="py-ones-count-max-problem-int-solution">The <code class="xref py py-mod docutils literal notranslate"><span class="pre">ones_count_max_problem_int_solution</span></code> contains class <code class="xref py py-class docutils literal notranslate"><span class="pre">MaxOnesCountProblemIntSolution</span></code>, that represents solution of the <a class="reference internal" href="problems_to_be_solved_ones_count.html#problem-ones-count-max"><span class="std std-ref">Ones Count Max Problem</span></a>, where <cite>int</cite> representation of the problem has been used.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_int_solution.MaxOnesCountProblemIntSolution">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_int_solution.</span></span><span class="sig-name descname"><span class="pre">MaxOnesCountProblemIntSolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">random_seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evaluation_cache_is_used</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evaluation_cache_max_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance_calculation_cache_is_used</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance_calculation_cache_max_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_int_solution.MaxOnesCountProblemIntSolution" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="uo.target_solution.html#uo.solution.solution.Solution" title="uo.solution.solution.Solution"><code class="xref py py-class docutils literal notranslate"><span class="pre">Solution</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_int_solution.MaxOnesCountProblemIntSolution.argument">
+<span class="sig-name descname"><span class="pre">argument</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">representation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_int_solution.MaxOnesCountProblemIntSolution.argument" title="Link to this definition"></a></dt>
+<dd><p>Argument of the target solution for specific problem</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>representation</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – internal representation of the solution</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>solution representation as string</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_int_solution.MaxOnesCountProblemIntSolution.calculate_quality_directly">
+<span class="sig-name descname"><span class="pre">calculate_quality_directly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">representation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">problem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.target_problem.html#uo.problem.problem.Problem" title="uo.problem.problem.Problem"><span class="pre">Problem</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="uo.solution.html#uo.solution.quality_of_solution.QualityOfSolution" title="uo.solution.quality_of_solution.QualityOfSolution"><span class="pre">QualityOfSolution</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_int_solution.MaxOnesCountProblemIntSolution.calculate_quality_directly" title="Link to this definition"></a></dt>
+<dd><p>Fitness calculation of the max ones binary int solution</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>representation</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – native representation of the solution whose fitness, objective and feasibility is calculated</p></li>
+<li><p><strong>problem</strong> (<a class="reference internal" href="uo.target_problem.html#uo.problem.problem.Problem" title="uo.problem.problem.Problem"><em>Problem</em></a>) – problem that is solved</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>objective value, fitness value and feasibility of the solution instance</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><cite>QualityOfSolution</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_int_solution.MaxOnesCountProblemIntSolution.copy">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_int_solution.MaxOnesCountProblemIntSolution.copy" title="Link to this definition"></a></dt>
+<dd><p>Copy the <cite>MaxOnesCountProblemIntSolution</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>new <cite>MaxOnesCountProblemIntSolution</cite> instance with the same properties</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><cite>MaxOnesCountProblemIntSolution</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_int_solution.MaxOnesCountProblemIntSolution.init_from">
+<span class="sig-name descname"><span class="pre">init_from</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">representation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">problem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.target_problem.html#uo.problem.problem.Problem" title="uo.problem.problem.Problem"><span class="pre">Problem</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_int_solution.MaxOnesCountProblemIntSolution.init_from" title="Link to this definition"></a></dt>
+<dd><p>Initialization of the solution, by setting its native representation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>representation</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – representation that will be ste to solution</p></li>
+<li><p><strong>problem</strong> (<a class="reference internal" href="uo.target_problem.html#uo.problem.problem.Problem" title="uo.problem.problem.Problem"><em>Problem</em></a>) – problem which is solved by solution</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_int_solution.MaxOnesCountProblemIntSolution.init_random">
+<span class="sig-name descname"><span class="pre">init_random</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">problem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem.MaxOnesCountProblem" title="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem.MaxOnesCountProblem"><span class="pre">MaxOnesCountProblem</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_int_solution.MaxOnesCountProblemIntSolution.init_random" title="Link to this definition"></a></dt>
+<dd><p>Random initialization of the solution</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>problem</strong> (<a class="reference internal" href="uo.target_problem.html#uo.problem.problem.Problem" title="uo.problem.problem.Problem"><em>Problem</em></a>) – problem which is solved by solution</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_int_solution.MaxOnesCountProblemIntSolution.native_representation">
+<span class="sig-name descname"><span class="pre">native_representation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">representation_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_int_solution.MaxOnesCountProblemIntSolution.native_representation" title="Link to this definition"></a></dt>
+<dd><p>Obtain <cite>int</cite> representation from string representation of the integer binary solution of the Max Ones problem</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>representation_str</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – solution’s representation as string</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>solution’s representation as int</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_int_solution.MaxOnesCountProblemIntSolution.obtain_feasible_representation">
+<span class="sig-name descname"><span class="pre">obtain_feasible_representation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">problem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uo.target_problem.html#uo.problem.problem.Problem" title="uo.problem.problem.Problem"><span class="pre">Problem</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_int_solution.MaxOnesCountProblemIntSolution.obtain_feasible_representation" title="Link to this definition"></a></dt>
+<dd><p>Helper function that modifies representation to be feasible</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>problem</strong> (<a class="reference internal" href="uo.target_problem.html#uo.problem.problem.Problem" title="uo.problem.problem.Problem"><em>Problem</em></a>) – problem which is solved by solution</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_int_solution.MaxOnesCountProblemIntSolution.representation_distance_directly">
+<span class="sig-name descname"><span class="pre">representation_distance_directly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">solution_code_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">solution_code_2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_int_solution.MaxOnesCountProblemIntSolution.representation_distance_directly" title="Link to this definition"></a></dt>
+<dd><p>Calculating distance between two solutions determined by its code</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>solution_code_1</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – solution code for the first solution</p></li>
+<li><p><strong>solution_code_2</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – solution code for the second solution</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>distance between two solutions represented by its code</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_int_solution.MaxOnesCountProblemIntSolution.string_rep">
+<span class="sig-name descname"><span class="pre">string_rep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'\n'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indentation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indentation_symbol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'</span>&#160;&#160; <span class="pre">'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'{'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'}'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_int_solution.MaxOnesCountProblemIntSolution.string_rep" title="Link to this definition"></a></dt>
+<dd><p>String representation of the solution instance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – delimiter between fields</p></li>
+<li><p><strong>indentation</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em><em>, </em><em>default value 0</em>) – level of indentation</p></li>
+<li><p><strong>indentation_symbol</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em><em>, </em><em>default value ''</em>) – indentation symbol</p></li>
+<li><p><strong>group_start</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em><em>, </em><em>default value '{'</em>) – group start string</p></li>
+<li><p><strong>group_end</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em><em>, </em><em>default value '}'</em>) – group end string</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>string representation of instance that controls output</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-opt.single_objective.comb.max_ones_count_problem.solver">
+<span id="opt-single-objective-comb-max-ones-count-problem-solver-module"></span><h2>opt.single_objective.comb.max_ones_count_problem.solver module<a class="headerlink" href="#module-opt.single_objective.comb.max_ones_count_problem.solver" title="Link to this heading"></a></h2>
+<p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">opt.single_objective.comb.ones_count_max_problem.solver</span></code> contains programming code that optimize <a class="reference internal" href="problems_to_be_solved_ones_count.html#problem-ones-count-max"><span class="std std-ref">Max Ones</span></a> Problem with various optimization techniques.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="opt.single_objective.comb.max_ones_count_problem.solver.main">
+<span class="sig-prename descclassname"><span class="pre">opt.single_objective.comb.max_ones_count_problem.solver.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opt.single_objective.comb.max_ones_count_problem.solver.main" title="Link to this definition"></a></dt>
+<dd><p>This function executes solver.</p>
+<p>Which solver will be executed depends of command-line parameter algorithm.</p>
+</dd></dl>
+
+</section>
+<section id="module-opt.single_objective.comb.max_ones_count_problem">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-opt.single_objective.comb.max_ones_count_problem" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Vladimir Filipovic.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
