@@ -20,7 +20,7 @@ from uo.algorithm.metaheuristic.electro_magnetism_like_metaheuristic.em_optimize
 from opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem import MinSetCoverProblem
 from opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution import \
         MinSetCoverProblemBitArraySolution
-from uo.algorithm.metaheuristic.electro_magnetism_like_metaheuristic.em_optimizer_gen import EmOptimizerGenerationalConstructionParameters
+from uo.algorithm.metaheuristic.electro_magnetism_like_metaheuristic.em_optimizer import EmOptimizerConstructionParameters
 
 def main():
         n = randint(0, 500)
@@ -53,8 +53,8 @@ def main():
                 EmMutationSupportOnePointBitArray(mutation_probability=0.05)
         em_dir_support:EmDirectionSupportOnePointBitArray[str] = \
                 EmDirectionSupportOnePointBitArray[str]()
-        em_construction_params:EmOptimizerGenerationalConstructionParameters = \
-                EmOptimizerGenerationalConstructionParameters()
+        em_construction_params:EmOptimizerConstructionParameters = \
+                EmOptimizerConstructionParameters()
         em_construction_params.problem = problem_to_solve
         em_construction_params.solution_template = solution
         em_construction_params.finish_control = finish

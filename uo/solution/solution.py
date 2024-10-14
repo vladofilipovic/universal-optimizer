@@ -8,7 +8,7 @@ import sys
 sys.path.append(directory.parent)
 
 from copy import deepcopy
-from random import random, randrange
+from random import random, randrange, choice
 
 from abc import ABCMeta, abstractmethod
 from typing import TypeVar
@@ -438,9 +438,9 @@ class Solution(Generic[R_co,A_co], metaclass=ABCMeta):
                 eccs.increment_cache_hit_count()
                 return eccs.cache[rep]
             qos:QualityOfSolution = self.calculate_quality_directly(self.representation, problem)
-            if len(eccs.cache) >= eccs.max_cache_size:
+            if len(eccs.cache) >= eccs.max_cache_size and len(eccs.cache)>0:
                 # removing random
-                code:str = random.choice(eccs.cache.keys())
+                code:str = choice(eccs.cache.keys())
                 del eccs.cache[code]
             eccs.cache[rep] = qos
             return qos
@@ -489,9 +489,9 @@ class Solution(Generic[R_co,A_co], metaclass=ABCMeta):
                 rdcs.increment_cache_hit_count()
                 return rdcs.cache[pair]
             ret:float = self.representation_distance_directly(representation_1, representation_2)
-            if len(rdcs.cache) >= rdcs.max_cache_size:
+            if len(rdcs.cache) >= rdcs.max_cache_size and len(rdcs.cache)>0:
                 # removing random
-                code:(R_co,R_co) = random.choice(rdcs.cache.keys())
+                code:(R_co,R_co) = choice(rdcs.cache.keys())
                 del rdcs.cache[code]
             rdcs.cache[pair] = ret
             return ret

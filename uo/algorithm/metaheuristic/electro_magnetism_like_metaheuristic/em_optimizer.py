@@ -19,6 +19,8 @@ from random import choice
 from abc import ABCMeta, abstractmethod
 from typing import Optional
 
+from dataclasses import dataclass
+
 from uo.utils.logger import logger
 
 from uo.problem.problem import Problem
@@ -32,6 +34,24 @@ from uo.algorithm.metaheuristic.population_based_metaheuristic import Population
 from uo.algorithm.metaheuristic.electro_magnetism_like_metaheuristic.em_attraction_support import EmAttractionSupport
 from uo.algorithm.metaheuristic.electro_magnetism_like_metaheuristic.em_mutation_support import EmMutationSupport
 from uo.algorithm.metaheuristic.electro_magnetism_like_metaheuristic.em_direction_support import EmDirectionSupport
+
+@dataclass
+class EmOptimizerConstructionParameters:
+        """
+        Instance of the class :class:`~uo.algorithm.metaheuristic.electro_magnetism_like_metaheuristic_constructor_parameters.
+        EmOptimizerConstructionParameters` represents constructor parameters for EM algorithm.
+        """
+        em_attraction_support: EmAttractionSupport = None
+        em_mutation_support: EmMutationSupport = None
+        em_direction_support: EmDirectionSupport = None
+        population_size: Optional[int] = None
+        finish_control: Optional[FinishControl] = None
+        problem: Problem = None
+        solution_template: Optional[Solution] = None
+        output_control: Optional[OutputControl] = None
+        random_seed: Optional[int] = None
+        additional_statistics_control: Optional[AdditionalStatisticsControl] = None
+
 
 class EmOptimizer(PopulationBasedMetaheuristic, metaclass=ABCMeta):
     """

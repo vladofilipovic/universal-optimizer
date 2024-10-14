@@ -21,8 +21,6 @@ from bitstring import BitArray
 
 from typing import Optional
 
-from dataclasses import dataclass
-
 from uo.utils.logger import logger
 
 from uo.problem.problem import Problem
@@ -34,26 +32,9 @@ from uo.algorithm.metaheuristic.additional_statistics_control import AdditionalS
 
 from uo.algorithm.metaheuristic.electro_magnetism_like_metaheuristic.em_attraction_support import EmAttractionSupport
 from uo.algorithm.metaheuristic.electro_magnetism_like_metaheuristic.em_mutation_support import EmMutationSupport
-from uo.algorithm.metaheuristic.electro_magnetism_like_metaheuristic.em_optimizer import EmOptimizer
 from uo.algorithm.metaheuristic.electro_magnetism_like_metaheuristic.em_direction_support import EmDirectionSupport
-
-@dataclass
-class EmOptimizerGenerationalConstructionParameters:
-        """
-        Instance of the class :class:`~uo.algorithm.metaheuristic.electro_magnetism_like_metaheuristic_constructor_parameters.
-        EmOptimizerConstructionParameters` represents constructor parameters for EM algorithm.
-        """
-        em_attraction_support: EmAttractionSupport = None
-        em_mutation_support: EmMutationSupport = None
-        em_direction_support: EmDirectionSupport = None
-        population_size: Optional[int] = None
-        finish_control: Optional[FinishControl] = None
-        problem: Problem = None
-        solution_template: Optional[Solution] = None
-        output_control: Optional[OutputControl] = None
-        random_seed: Optional[int] = None
-        additional_statistics_control: Optional[AdditionalStatisticsControl] = None
-
+from uo.algorithm.metaheuristic.electro_magnetism_like_metaheuristic.em_optimizer import EmOptimizer
+from uo.algorithm.metaheuristic.electro_magnetism_like_metaheuristic.em_optimizer import EmOptimizerConstructionParameters
 
 
 class EmOptimizerGenerational(EmOptimizer):
@@ -106,7 +87,7 @@ class EmOptimizerGenerational(EmOptimizer):
         )
 
     @classmethod
-    def from_construction_tuple(cls, construction_tuple:EmOptimizerGenerationalConstructionParameters):
+    def from_construction_tuple(cls, construction_tuple:EmOptimizerConstructionParameters):
         """
         Additional constructor, that creates new instance of class :class:`~uo.algorithm.metaheuristic.electro_magnetism_like_metaheuristic.EmOptimizerGenerational`. 
 
