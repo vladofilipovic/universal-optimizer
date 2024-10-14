@@ -14,9 +14,9 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer impor
         VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
-from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem import \
-        FunctionOneVariableMaxProblemMax
-from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_int_solution \
+from opt.single_objective.glob.max_function_one_variable_problem.max_function_one_variable_problem import \
+        MaxFunctionOneVariableMaxProblem
+from opt.single_objective.glob.max_function_one_variable_problem.max_function_one_variable_problem_int_solution \
         import FunctionOneVariableMaxProblemIntSolution
 
 class TestMaxFunctionOneVariableMaxProblemIntSolutionLsfi(unittest.TestCase):
@@ -27,7 +27,7 @@ class TestMaxFunctionOneVariableMaxProblemIntSolutionLsfi(unittest.TestCase):
 
     def setUp(self):
         # Arrange
-        self.problem_to_solve:FunctionOneVariableMaxProblemMax = FunctionOneVariableMaxProblemMax(
+        self.problem_to_solve:MaxFunctionOneVariableMaxProblem = MaxFunctionOneVariableMaxProblem(
                 expression='7-x*x',
                 domain_low=-3,
                 domain_high=3 )

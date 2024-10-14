@@ -13,12 +13,12 @@ from uo.algorithm.metaheuristic.electro_magnetism_like_metaheuristic.em_mutation
 from uo.algorithm.metaheuristic.electro_magnetism_like_metaheuristic.em_direction_support_one_point_bit_array import \
     EmDirectionSupportOnePointBitArray
 
-from opt.single_objective.comb.set_covering_problem.set_covering_problem import SetCoveringProblem
-from opt.single_objective.comb.set_covering_problem.set_covering_problem_bit_array_solution import \
-    SetCoveringProblemBitArraySolution
+from opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem import MinSetCoverProblem
+from opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution import \
+    MinSetCoverProblemBitArraySolution
 
 
-class TestSetCoveringProblemBitArraySolutionEmSupport(unittest.TestCase):
+class TestMinSetCoverProblemBitArraySolutionEmSupport(unittest.TestCase):
 
     # mutation method returns True when mutation is successful
     def test_mutation_returns_none(self):
@@ -28,8 +28,8 @@ class TestSetCoveringProblemBitArraySolutionEmSupport(unittest.TestCase):
             {1, 2, 3}, {3, 4}, {3, 4, 5}, {1, 5}, {4}
         ]
 
-        problem = SetCoveringProblem(universe=universe, subsets=subsets)
-        solution = SetCoveringProblemBitArraySolution(random_seed=434343)
+        problem = MinSetCoverProblem(universe=universe, subsets=subsets)
+        solution = MinSetCoverProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray(length=len(subsets)), problem)
         em_attr_support = EmAttractionSupportOnePointBitArray()
         em_mut_support = EmMutationSupportOnePointBitArray(0.005)
@@ -53,8 +53,8 @@ class TestSetCoveringProblemBitArraySolutionEmSupport(unittest.TestCase):
             {1, 2, 3}, {3, 4}, {3, 4, 5}, {1, 5}, {4}
         ]
 
-        problem = SetCoveringProblem(universe=universe, subsets=subsets)
-        solution = SetCoveringProblemBitArraySolution(random_seed=434343)
+        problem = MinSetCoverProblem(universe=universe, subsets=subsets)
+        solution = MinSetCoverProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray(length=len(subsets)), problem)
         em_attr_support = EmAttractionSupportOnePointBitArray()
         em_mut_support = EmMutationSupportOnePointBitArray(0.005)

@@ -15,20 +15,20 @@ from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support_one_point_
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer_gen import GaOptimizerGenerationalConstructionParameters
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_optimizer_gen import GaOptimizerGenerational
 
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution import \
-                OnesCountMaxProblemBitArraySolution
+from opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem import MaxOnesCountProblem
+from opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit_array_solution import \
+                MaxOnesCountProblemBitArraySolution
 
 
-class TestOnesCountMaxProblemGaBitArraySolution(unittest.TestCase):
+class TestMaxOnesCountProblemGaBitArraySolution(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
-        print("setUpClass TestOnesCountMaxProblemGaBitArraySolution\n")
+        print("setUpClass TestMaxOnesCountProblemGaBitArraySolution\n")
 
     def setUp(self):
-        self.problem_to_solve:OnesCountMaxProblem = OnesCountMaxProblem.from_dimension(dimension=7)
-        self.solution:OnesCountMaxProblemBitArraySolution = OnesCountMaxProblemBitArraySolution()
+        self.problem_to_solve:MaxOnesCountProblem = MaxOnesCountProblem.from_dimension(dimension=7)
+        self.solution:MaxOnesCountProblemBitArraySolution = MaxOnesCountProblemBitArraySolution()
         self.finish:FinishControl = FinishControl(criteria='evaluations', evaluations_max=5000)
         self.ga_selection:GaSelectionRoulette = GaSelectionRoulette()
         self.ga_crossover_support:GaCrossoverSupportOnePointBitArray[str]= \
@@ -69,7 +69,7 @@ class TestOnesCountMaxProblemGaBitArraySolution(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        print("\ntearDownClass TestOnesCountMaxProblemGaBitArraySolution")
+        print("\ntearDownClass TestMaxOnesCountProblemGaBitArraySolution")
     
 if __name__ == '__main__':
     unittest.main()

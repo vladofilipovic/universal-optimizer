@@ -19,18 +19,18 @@ from uo.algorithm.exact.total_enumeration.te_operations_support_bit_array import
 from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizerConstructionParameters
 from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizer
 
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution import OnesCountMaxProblemBitArraySolution
+from opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem import MaxOnesCountProblem
+from opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit_array_solution import MaxOnesCountProblemBitArraySolution
 
-class TestOnesCountMaxProblemTeBitArraySolution(unittest.TestCase):
+class TestMaxOnesCountProblemTeBitArraySolution(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
-        print("setUpClass TestIntegrationOnesCountMaxProblemTeBitArraySolution\n")
+        print("setUpClass TestIntegrationMaxOnesCountProblemTeBitArraySolution\n")
 
     def setUp(self):
-        self.problem_to_solve:OnesCountMaxProblem = OnesCountMaxProblem.from_dimension(dimension=12)
-        self.solution:OnesCountMaxProblemBitArraySolution = OnesCountMaxProblemBitArraySolution(random_seed=43434343)
+        self.problem_to_solve:MaxOnesCountProblem = MaxOnesCountProblem.from_dimension(dimension=12)
+        self.solution:MaxOnesCountProblemBitArraySolution = MaxOnesCountProblemBitArraySolution(random_seed=43434343)
         self.te_support:TeOperationsSupportBitArray = TeOperationsSupportBitArray()
         construction_params:TeOptimizerConstructionParameters = TeOptimizerConstructionParameters()
         construction_params.problem = self.problem_to_solve
@@ -70,7 +70,7 @@ class TestOnesCountMaxProblemTeBitArraySolution(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        print("\ntearDownClass TestIntegrationOnesCountMaxProblemTeBitArraySolution")
+        print("\ntearDownClass TestIntegrationMaxOnesCountProblemTeBitArraySolution")
     
 if __name__ == '__main__':
     unittest.main()

@@ -132,7 +132,7 @@ b. Contribution in solving **combinatorial** optimization problems:
 
     b.1. Ones Count Max Problem :ref:`Problem_Ones_Count_Max`:
 
-        1. Representation of the problem (in class :class:`~opt.single_objective.comb.ones_count_max.OnesCountMaxProblem`) and solution (`BitArray`-based in class :class:`~opt.single_objective.comb.ones_count_max.OnesCountMaxProblemBitArraySolution` and `int`-based in class :class:`~opt.single_objective.comb.ones_count_max.OnesCountMaxProblemIntSolution`) - [VladimirFilipovic]_
+        1. Representation of the problem (in class :class:`~opt.single_objective.comb.ones_count_max.MaxOnesCountProblem`) and solution (`BitArray`-based in class :class:`~opt.single_objective.comb.ones_count_max.MaxOnesCountProblemBitArraySolution` and `int`-based in class :class:`~opt.single_objective.comb.ones_count_max.MaxOnesCountProblemIntSolution`) - [VladimirFilipovic]_
         
         2. Integer Linear Programming method (using `linopy` library) - [VladimirFilipovic]_  
 
@@ -148,7 +148,7 @@ b. Contribution in solving **combinatorial** optimization problems:
 
     b.2. Minimum Multi Cut Problem :ref:`Problem_Minimum_Multi_Cut`:
 
-        8. Representation of the problem (in class :class:`~opt.single_objective.comb.minimum_multi_cut_problem.MinimumMultiCutProblem`, that uses `ng.Graph` class for class representation) and solution with `BitArray`-based representation (in class :class:`~opt.single_objective.comb.minimum_multi_cut_problem.MinimumMultiCutProblemBitArraySolution`) - [MarkoRadosavljevic]_
+        8. Representation of the problem (in class :class:`~opt.single_objective.comb.minimum_multi_cut_problem.MinMultiCutProblem`, that uses `ng.Graph` class for class representation) and solution with `BitArray`-based representation (in class :class:`~opt.single_objective.comb.minimum_multi_cut_problem.MinMultiCutProblemBitArraySolution`) - [MarkoRadosavljevic]_
         
         9. Variable Neighborhood Search method, with solution that has binary `BitArray` representation - [MarkoRadosavljevic]_  
 
@@ -156,7 +156,7 @@ b. Contribution in solving **combinatorial** optimization problems:
 
     b.3. Set Covering Problem :ref:`Problem_Set_Covering`:
 
-        11. Representation of the problem (in class :class:`~opt.single_objective.comb.set_covering_problem.set_covering_problem.SetCoveringProblem`and solution with `BitArray`-based representation (in class :class:`~~opt.single_objective.comb.set_covering_problem.set_covering_problem_bit_array_solution.SetCoveringProblemBitArraySolution`) - [AndjelaDamnjanovic]_
+        11. Representation of the problem (in class :class:`~opt.single_objective.comb.set_covering_problem.set_covering_problem.MinSetCoverProblem`and solution with `BitArray`-based representation (in class :class:`~~opt.single_objective.comb.set_covering_problem.set_covering_problem_bit_array_solution.MinSetCoverProblemBitArraySolution`) - [AndjelaDamnjanovic]_
         
         12. Electromagnetism-like Metaheuristic method, with solution that has binary `BitArray` representation - [AndjelaDamnjanovic]_  
 

@@ -17,19 +17,19 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_stan
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_int_solution import \
-        OnesCountMaxProblemIntSolution
+from opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem import MaxOnesCountProblem
+from opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_int_solution import \
+        MaxOnesCountProblemIntSolution
 
-class TestOnesCountMaxProblemVnsIntSolutionLsfi(unittest.TestCase):
+class TestMaxOnesCountProblemVnsIntSolutionLsfi(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
-        print("setUpClass TestIntegrationOnesCountMaxProblemVnsIntSolutionLsfi\n")
+        print("setUpClass TestIntegrationMaxOnesCountProblemVnsIntSolutionLsfi\n")
 
     def setUp(self):
-        self.problem_to_solve:OnesCountMaxProblem = OnesCountMaxProblem.from_dimension(dimension=22)
-        self.solution:OnesCountMaxProblemIntSolution = OnesCountMaxProblemIntSolution()
+        self.problem_to_solve:MaxOnesCountProblem = MaxOnesCountProblem.from_dimension(dimension=22)
+        self.solution:MaxOnesCountProblemIntSolution = MaxOnesCountProblemIntSolution()
         self.finish_control:FinishControl = FinishControl(criteria='evaluations', evaluations_max=5000)
         self.vns_shaking_support:VnsShakingSupportStandardInt = \
                 VnsShakingSupportStandardInt(self.problem_to_solve.dimension)
@@ -59,7 +59,7 @@ class TestOnesCountMaxProblemVnsIntSolutionLsfi(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        print("\ntearDownClass TestIntegrationOnesCountMaxProblemVnsIntSolutionLsfi")
+        print("\ntearDownClass TestIntegrationMaxOnesCountProblemVnsIntSolutionLsfi")
     
 if __name__ == '__main__':
     unittest.main()

@@ -15,11 +15,11 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_stan
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_standard_fi_int import \
     VnsLocalSearchSupportStandardFirstImprovementInt
 
-from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem import \
-    FunctionOneVariableMaxProblemMax
-from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem import \
-    FunctionOneVariableMaxProblemMaxElements
-from opt.single_objective.glob.function_one_variable_max_problem.function_one_variable_max_problem_int_solution import \
+from opt.single_objective.glob.max_function_one_variable_problem.max_function_one_variable_problem import \
+    MaxFunctionOneVariableMaxProblem
+from opt.single_objective.glob.max_function_one_variable_problem.max_function_one_variable_problem import \
+    MaxFunctionOneVariableMaxProblemElements
+from opt.single_objective.glob.max_function_one_variable_problem.max_function_one_variable_problem_int_solution import \
     FunctionOneVariableMaxProblemIntSolution
 
 
@@ -28,7 +28,7 @@ class TestFunctionOneVariableMaxProblemIntSolutionVnsSupport(unittest.TestCase):
     # shaking method returns True when k is greater than 0 and the solution is valid
     def test_shaking_returns_true_when_k_is_greater_than_0_and_solution_is_valid(self):
         # Arrange
-        problem = FunctionOneVariableMaxProblemMax("x**2", 0, 10)
+        problem = MaxFunctionOneVariableMaxProblem("x**2", 0, 10)
         solution = FunctionOneVariableMaxProblemIntSolution(0, 10, 4)
         solution.representation = 3
         vns_sh_support = VnsShakingSupportStandardInt(solution.number_of_intervals)
@@ -49,7 +49,7 @@ class TestFunctionOneVariableMaxProblemIntSolutionVnsSupport(unittest.TestCase):
     # local_search_best_improvement method returns a new solution with a better fitness value
     def test_local_search_best_improvement_returns_new_solution_with_better_fitness_value(self):
         # Arrange
-        problem = FunctionOneVariableMaxProblemMax("x**2", 0, 10)
+        problem = MaxFunctionOneVariableMaxProblem("x**2", 0, 10)
         solution = FunctionOneVariableMaxProblemIntSolution(0, 10, 4)
         solution.representation = 3
         solution.evaluate(problem)
@@ -73,7 +73,7 @@ class TestFunctionOneVariableMaxProblemIntSolutionVnsSupport(unittest.TestCase):
     # local_search_first_improvement method returns a new solution with a better fitness value
     def test_local_search_first_improvement_returns_new_solution_with_better_fitness_value(self):
         # Arrange
-        problem = FunctionOneVariableMaxProblemMax("x**2", 0, 10)
+        problem = MaxFunctionOneVariableMaxProblem("x**2", 0, 10)
         solution = FunctionOneVariableMaxProblemIntSolution(0, 10, 4)
         solution.representation = 3
         solution.evaluate(problem)
@@ -97,7 +97,7 @@ class TestFunctionOneVariableMaxProblemIntSolutionVnsSupport(unittest.TestCase):
     # shaking method returns False when k is less than or equal to 0
     def test_shaking_returns_false_when_k_is_less_than_or_equal_to_0(self):
         # Arrange
-        problem = FunctionOneVariableMaxProblemMax("x**2", 0, 10)
+        problem = MaxFunctionOneVariableMaxProblem("x**2", 0, 10)
         solution = FunctionOneVariableMaxProblemIntSolution(0, 10, 4)
         solution.representation = 3
         solution.evaluate(problem)
@@ -120,7 +120,7 @@ class TestFunctionOneVariableMaxProblemIntSolutionVnsSupport(unittest.TestCase):
     # local_search_best_improvement method returns the same solution when k is less than 1 or greater than the representation length
     def test_local_search_best_improvement_returns_same_solution_when_k_is_less_than_1_or_greater_than_representation_length(self):
         # Arrange
-        problem = FunctionOneVariableMaxProblemMax("x**2", 0, 10)
+        problem = MaxFunctionOneVariableMaxProblem("x**2", 0, 10)
         solution = FunctionOneVariableMaxProblemIntSolution(0, 10, 4)
         solution.representation = 3
         solution.evaluate(problem)
@@ -147,7 +147,7 @@ class TestFunctionOneVariableMaxProblemIntSolutionVnsSupport(unittest.TestCase):
     # local_search_first_improvement method returns the same solution when k is less than 1 or greater than the representation length
     def test_local_search_first_improvement_returns_same_solution_when_k_is_less_than_1_or_greater_than_representation_length(self):
         # Arrange
-        problem = FunctionOneVariableMaxProblemMax("x**2", 0, 10)
+        problem = MaxFunctionOneVariableMaxProblem("x**2", 0, 10)
         solution = FunctionOneVariableMaxProblemIntSolution(0, 10, 4)
         solution.representation = 3
         solution.evaluate(problem)

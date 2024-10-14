@@ -11,12 +11,12 @@ from uo.algorithm.metaheuristic.genetic_algorithm.ga_crossover_support_one_point
 from uo.algorithm.metaheuristic.genetic_algorithm.ga_mutation_support_one_point_bit_array import \
     GaMutationSupportOnePointBitArray
 
-from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem import MinimumMultiCutProblem
-from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_bit_array_solution import \
-    MinimumMultiCutProblemBitArraySolution
+from opt.single_objective.comb.min_multi_cut_problem.min_multi_cut_problem import MinMultiCutProblem
+from opt.single_objective.comb.min_multi_cut_problem.min_multi_cut_problem_bit_array_solution import \
+    MinMultiCutProblemBitArraySolution
 
 
-class TestMinimumMultiCutProblemBitArraySolutionGaSupport(unittest.TestCase):
+class TestMinMultiCutProblemBitArraySolutionGaSupport(unittest.TestCase):
 
     # mutation method returns True when mutation is successful
     def test_mutation_returns_none(self):
@@ -36,8 +36,8 @@ class TestMinimumMultiCutProblemBitArraySolutionGaSupport(unittest.TestCase):
             terminal = choice(terminal_candidates)
             source_terminal_pairs.append((source, terminal))
 
-        problem = MinimumMultiCutProblem(graph=graph, source_terminal_pairs=source_terminal_pairs)
-        solution = MinimumMultiCutProblemBitArraySolution(random_seed=434343)
+        problem = MinMultiCutProblem(graph=graph, source_terminal_pairs=source_terminal_pairs)
+        solution = MinMultiCutProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray(length=edges), problem)
         ga_cross_support = GaCrossoverSupportOnePointBitArray(0.995)
         ga_mut_support = GaMutationSupportOnePointBitArray(0.005)

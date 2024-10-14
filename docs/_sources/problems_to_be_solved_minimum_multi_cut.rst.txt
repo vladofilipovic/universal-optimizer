@@ -13,8 +13,8 @@ Minimum Multi Cut problem is the NP-hard problem of finding the minimum multi cu
 
 - **Measure:** Minimize the weight of the cut, defined as the sum of weights in E'
 
-* Minimum Multi Cut Problem. Problem is represented with class :ref:`MinimumMultiCutProblemProblem<py_minimum_multi_cut_problem>`.
+* Minimum Multi Cut Problem. Problem is represented with class :ref:`MinMultiCutProblemProblem<py_minimum_multi_cut_problem>`.
 
-    - `BitArray` representation for solution of Max Ones Problem. Implementation of the solution with such representation is given with class :ref:`MinimumMultiCutProblemProblemBitArraySolution <py_minimum_multi_cut_problem_bit_array_solution>`.  
+    - `BitArray` representation for solution of Max Ones Problem. Implementation of the solution with such representation is given with class :ref:`MinMultiCutProblemProblemBitArraySolution <py_minimum_multi_cut_problem_bit_array_solution>`.  
 
 

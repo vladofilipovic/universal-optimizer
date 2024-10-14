@@ -2,7 +2,7 @@
 ..  _py_set_covering_problem_bit_array_solution_em_support:
 
 The :mod:`~opt.single_objective.comb.set_covering_problem.set_covering_problem_bit_array_solution_em_support`
-contains class :class:`~opt.single_objective.comb.set_covering_problem.set_covering_problem_bit_array_solution_em_support.SetCoveringProblemBitArraySolutionEmSupport`, 
+contains class :class:`~opt.single_objective.comb.set_covering_problem.set_covering_problem_bit_array_solution_em_support.MinSetCoverProblemBitArraySolutionEmSupport`, 
 that represents supporting parts of the `EM` algorithm, where solution of the :ref:`Problem_SetCovering` have `BitArray` 
 representation.
 """

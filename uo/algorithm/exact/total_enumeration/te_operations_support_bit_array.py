@@ -2,7 +2,7 @@
 ..  _py_te_operations_support_bit_array:
 
 The :mod:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution_te_support` 
-contains class :class:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution_te_support.OnesCountMaxProblemBitArraySolutionTeSupport`, 
+contains class :class:`~opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution_te_support.MaxOnesCountProblemBitArraySolutionTeSupport`, 
 that represents supporting parts of the `Total enumeration` algorithm, where solution of the :ref:`Problem_Ones_Count_Max` have `BitArray` 
 representation.
 """
@@ -60,7 +60,7 @@ class TeOperationsSupportBitArray(TeOperationsSupport[BitArray,A_co]):
         """
         Copy the `TeOperationsSupportBitArray` instance
 
-        :return: new `OnesCountMaxProblemBitArraySolutionTeSupport` instance with the same properties
+        :return: new `MaxOnesCountProblemBitArraySolutionTeSupport` instance with the same properties
         :rtype: `TeOperationsSupportBitArray`
         """
         return self.__copy__()
@@ -70,8 +70,8 @@ class TeOperationsSupportBitArray(TeOperationsSupport[BitArray,A_co]):
         Resets internal counter of the total enumerator, so process will start over. Internal state of the solution 
         will be set to reflect reset operation. 
 
-        :param `OnesCountMaxProblem` problem: problem that is solved
-        :param `OnesCountMaxProblemBitArraySolution` solution: solution used for the problem that is solved
+        :param `MaxOnesCountProblem` problem: problem that is solved
+        :param `MaxOnesCountProblemBitArraySolution` solution: solution used for the problem that is solved
         :param `Algorithm` optimizer: optimizer that is executed
         """        
         self.__bit_array_counter = ComplexCounterBitArrayFull(problem.dimension)

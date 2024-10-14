@@ -6,9 +6,9 @@ import networkx as nx
 from bitstring import BitArray
 from random import randint, choice
 
-from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem import MinimumMultiCutProblem
-from opt.single_objective.comb.minimum_multi_cut_problem.minimum_multi_cut_problem_bit_array_solution import \
-    MinimumMultiCutProblemBitArraySolution
+from opt.single_objective.comb.min_multi_cut_problem.min_multi_cut_problem import MinMultiCutProblem
+from opt.single_objective.comb.min_multi_cut_problem.min_multi_cut_problem_bit_array_solution import \
+    MinMultiCutProblemBitArraySolution
 
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_standard_bi_bit_array import \
     VnsLocalSearchSupportStandardBestImprovementBitArray
@@ -16,7 +16,7 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support
     VnsShakingSupportStandardBitArray
 
 
-class TestMinimumMultiCutProblemBitArraySolutionVnsSupport(unittest.TestCase):
+class TestMinMultiCutProblemBitArraySolutionVnsSupport(unittest.TestCase):
 
     # shaking method returns True when randomization is successful
     def test_shaking_returns_true_when_randomization_is_successful(self):
@@ -39,8 +39,8 @@ class TestMinimumMultiCutProblemBitArraySolutionVnsSupport(unittest.TestCase):
             terminal = choice(terminal_candidates)
             source_terminal_pairs.append((source, terminal))
 
-        problem = MinimumMultiCutProblem(graph=graph, source_terminal_pairs=source_terminal_pairs)
-        solution = MinimumMultiCutProblemBitArraySolution(random_seed=434343)
+        problem = MinMultiCutProblem(graph=graph, source_terminal_pairs=source_terminal_pairs)
+        solution = MinMultiCutProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray(length=edges), problem)
         vns_shaking_support = VnsShakingSupportStandardBitArray(len(problem.graph.edges))
         finish_control_stub = mocker.MagicMock()
@@ -75,8 +75,8 @@ class TestMinimumMultiCutProblemBitArraySolutionVnsSupport(unittest.TestCase):
             terminal = choice(terminal_candidates)
             source_terminal_pairs.append((source, terminal))
 
-        problem = MinimumMultiCutProblem(graph=graph, source_terminal_pairs=source_terminal_pairs)
-        solution = MinimumMultiCutProblemBitArraySolution(random_seed=434343)
+        problem = MinMultiCutProblem(graph=graph, source_terminal_pairs=source_terminal_pairs)
+        solution = MinMultiCutProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray(length=edges), problem)
         solution.evaluate(problem)
         vns_ls_support = VnsLocalSearchSupportStandardBestImprovementBitArray(len(problem.graph.edges))
@@ -114,8 +114,8 @@ class TestMinimumMultiCutProblemBitArraySolutionVnsSupport(unittest.TestCase):
             terminal = choice(terminal_candidates)
             source_terminal_pairs.append((source, terminal))
 
-        problem = MinimumMultiCutProblem(graph=graph, source_terminal_pairs=source_terminal_pairs)
-        solution = MinimumMultiCutProblemBitArraySolution(random_seed=434343)
+        problem = MinMultiCutProblem(graph=graph, source_terminal_pairs=source_terminal_pairs)
+        solution = MinMultiCutProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray(bin='0' * edges), problem)
         vns_shaking_support = VnsShakingSupportStandardBitArray(len(problem.graph.edges))
         finish_control_stub = mocker.MagicMock()
@@ -150,8 +150,8 @@ class TestMinimumMultiCutProblemBitArraySolutionVnsSupport(unittest.TestCase):
             terminal = choice(terminal_candidates)
             source_terminal_pairs.append((source, terminal))
 
-        problem = MinimumMultiCutProblem(graph=graph, source_terminal_pairs=source_terminal_pairs)
-        solution = MinimumMultiCutProblemBitArraySolution(random_seed=434343)
+        problem = MinMultiCutProblem(graph=graph, source_terminal_pairs=source_terminal_pairs)
+        solution = MinMultiCutProblemBitArraySolution(random_seed=434343)
         solution.init_from( BitArray(length=edges), problem)
         solution.evaluate(problem)
         vns_ls_support = VnsLocalSearchSupportStandardBestImprovementBitArray(len(problem.graph.edges))

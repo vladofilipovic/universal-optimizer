@@ -5,19 +5,19 @@ from random import choice, randint
 
 from bitstring import BitArray
 
-from opt.single_objective.comb.set_covering_problem.set_covering_problem_bit_array_solution import SetCoveringProblemBitArraySolution
+from opt.single_objective.comb.min_set_cover_problem.min_set_cover_problem_bit_array_solution import MinSetCoverProblemBitArraySolution
 
 from uo.problem.problem_void_min_so import ProblemVoidMinSO
 from uo.solution.solution import Solution
 
 
-class TestSetCoveringProblemBitArraySolution(unittest.TestCase):
+class TestMinSetCoverProblemBitArraySolution(unittest.TestCase):
 
-    # Initialize a new instance of SetCoveringProblemBitArraySolution with default parameters and verify that all properties are set correctly.
+    # Initialize a new instance of MinSetCoverProblemBitArraySolution with default parameters and verify that all properties are set correctly.
     def test_initialize_instance_with_default_parameters(self):
         # Arrange
         # Act
-        solution = SetCoveringProblemBitArraySolution()
+        solution = MinSetCoverProblemBitArraySolution()
         # Assert
         self.assertIsNone(solution.fitness_value)
         self.assertIsNone(solution.fitness_values)
@@ -38,7 +38,7 @@ class TestSetCoveringProblemBitArraySolution(unittest.TestCase):
         problem = ProblemVoidMinSO('problem name', is_minimization=True)
         problem.universe = universe
         problem.subsets = subsets
-        solution = SetCoveringProblemBitArraySolution()
+        solution = MinSetCoverProblemBitArraySolution()
         # Act
         solution.init_random(problem)
         # Assert
@@ -51,7 +51,7 @@ class TestSetCoveringProblemBitArraySolution(unittest.TestCase):
         problem = ProblemVoidMinSO('problem name', is_minimization=True)
         problem.dimension = 10
         representation = BitArray(bin="1010101010")
-        solution = SetCoveringProblemBitArraySolution()
+        solution = MinSetCoverProblemBitArraySolution()
         # Act
         solution.init_from(representation, problem)
         # Assert
@@ -61,7 +61,7 @@ class TestSetCoveringProblemBitArraySolution(unittest.TestCase):
     def test_native_representation_method_with_string_representation(self):
         # Arrange
         representation_str = "1010101010"
-        solution = SetCoveringProblemBitArraySolution()
+        solution = MinSetCoverProblemBitArraySolution()
         # Act
         native_representation = solution.native_representation(representation_str)
         # Assert
@@ -72,7 +72,7 @@ class TestSetCoveringProblemBitArraySolution(unittest.TestCase):
         # Arrange
         solution_code_1 = "1010101010"
         solution_code_2 = "1111000011"
-        solution = SetCoveringProblemBitArraySolution()
+        solution = MinSetCoverProblemBitArraySolution()
         # Act
         distance = solution.representation_distance_directly(solution_code_1, solution_code_2)
         # Assert
@@ -90,7 +90,7 @@ class TestSetCoveringProblemBitArraySolution(unittest.TestCase):
         problem = ProblemVoidMinSO('problem name', is_minimization=True)
         problem.universe = universe
         problem.subsets = subsets
-        solution = SetCoveringProblemBitArraySolution()
+        solution = MinSetCoverProblemBitArraySolution()
         representation = solution.native_representation("1"*len(subsets))
         # Act
         quality = solution.calculate_quality_directly(representation, problem)
@@ -101,10 +101,10 @@ class TestSetCoveringProblemBitArraySolution(unittest.TestCase):
         self.assertIsNone(quality.objective_values)
         self.assertFalse(quality.is_feasible)
 
-    # Call the copy() method and verify that the returned SetCoveringProblemBitArraySolution instance is a deep copy of the original instance.
+    # Call the copy() method and verify that the returned MinSetCoverProblemBitArraySolution instance is a deep copy of the original instance.
     def test_copy_method_returns_deep_copy(self):
         # Arrange
-        solution = SetCoveringProblemBitArraySolution()
+        solution = MinSetCoverProblemBitArraySolution()
         # Act
         copy_solution = solution.copy()
         # Assert
@@ -118,7 +118,7 @@ class TestSetCoveringProblemBitArraySolution(unittest.TestCase):
     # Call the representation_distance_directly() method with two string representations of BitArray instances that have different lengths and verify that the method raises a ValueError.
     def test_representation_distance_directly_raises_value_error(self):
         # Arrange
-        solution = SetCoveringProblemBitArraySolution()
+        solution = MinSetCoverProblemBitArraySolution()
         representation_1 = "101010"
         representation_2 = "10101010"
         # Act & Assert
@@ -128,7 +128,7 @@ class TestSetCoveringProblemBitArraySolution(unittest.TestCase):
     # Call the argument() method with a BitArray instance as an argument and verify that the returned string representation is correct.
     def test_argument_method_returns_correct_string_representation(self):
         # Arrange
-        solution = SetCoveringProblemBitArraySolution()
+        solution = MinSetCoverProblemBitArraySolution()
         representation = BitArray(bin="101010")
         # Act
         argument = solution.argument(representation)
@@ -142,7 +142,7 @@ class TestArgument(unittest.TestCase):
     def test_returns_string_representation(self):
         # Arrange
         representation = BitArray(bin='101010')
-        solution = SetCoveringProblemBitArraySolution()
+        solution = MinSetCoverProblemBitArraySolution()
     
         # Act
         argument = solution.argument(representation)
@@ -154,7 +154,7 @@ class TestArgument(unittest.TestCase):
     def test_returns_binary_string_representation(self):
         # Arrange
         representation = BitArray(bin='101010')
-        solution = SetCoveringProblemBitArraySolution()
+        solution = MinSetCoverProblemBitArraySolution()
     
         # Act
         argument = solution.argument(representation)
@@ -167,7 +167,7 @@ class TestArgument(unittest.TestCase):
     def test_returns_empty_string_for_empty_representation(self):
         # Arrange
         representation = BitArray()
-        solution = SetCoveringProblemBitArraySolution()
+        solution = MinSetCoverProblemBitArraySolution()
     
         # Act
         argument = solution.argument(representation)
@@ -179,7 +179,7 @@ class TestArgument(unittest.TestCase):
     def test_returns_string_representation_with_leading_zeros_for_all_false_bits(self):
         # Arrange
         representation = BitArray(bin='000000')
-        solution = SetCoveringProblemBitArraySolution()
+        solution = MinSetCoverProblemBitArraySolution()
     
         # Act
         argument = solution.argument(representation)
@@ -195,7 +195,7 @@ class TestInitFrom(unittest.TestCase):
         # Arrange
         representation = BitArray(bin='101010')
         problem = ProblemVoidMinSO('problem name', is_minimization=True)
-        solution = SetCoveringProblemBitArraySolution()
+        solution = MinSetCoverProblemBitArraySolution()
 
         # Act
         solution.init_from(representation, problem)
@@ -208,7 +208,7 @@ class TestInitFrom(unittest.TestCase):
         # Arrange
         representation = '101010'
         problem = ProblemVoidMinSO('problem name', is_minimization=True)
-        solution = SetCoveringProblemBitArraySolution()
+        solution = MinSetCoverProblemBitArraySolution()
 
         # Act & Assert
         with self.assertRaises(TypeError):
@@ -221,7 +221,7 @@ class TestNativeRepresentation(unittest.TestCase):
     def test_valid_binary_string_representation(self):
         # Arrange
         representation_str = "101010"
-        solution = SetCoveringProblemBitArraySolution()
+        solution = MinSetCoverProblemBitArraySolution()
     
         # Act
         native_representation = solution.native_representation(representation_str)
@@ -233,7 +233,7 @@ class TestNativeRepresentation(unittest.TestCase):
     def test_same_binary_representation(self):
         # Arrange
         representation_str = "101010"
-        solution = SetCoveringProblemBitArraySolution()
+        solution = MinSetCoverProblemBitArraySolution()
     
         # Act
         native_representation = solution.native_representation(representation_str)
@@ -245,7 +245,7 @@ class TestNativeRepresentation(unittest.TestCase):
     def test_length_1_representation(self):
         # Arrange
         representation_str = "1"
-        solution = SetCoveringProblemBitArraySolution()
+        solution = MinSetCoverProblemBitArraySolution()
     
         # Act
         native_representation = solution.native_representation(representation_str)
@@ -257,7 +257,7 @@ class TestNativeRepresentation(unittest.TestCase):
     def test_non_string_representation(self):
         # Arrange
         representation_str = 101010
-        solution = SetCoveringProblemBitArraySolution()
+        solution = MinSetCoverProblemBitArraySolution()
     
         # Act & Assert
         with self.assertRaises(TypeError):
@@ -268,7 +268,7 @@ class TestNativeRepresentation(unittest.TestCase):
     def test_invalid_characters_representation(self):
         # Arrange
         representation_str = "10102"
-        solution = SetCoveringProblemBitArraySolution()
+        solution = MinSetCoverProblemBitArraySolution()
     
         # Act & Assert
         with self.assertRaises(ValueError):
@@ -280,7 +280,7 @@ class TestRepresentationDistanceDirectly(unittest.TestCase):
     # Calculate distance between two identical solutions
     def test_identical_solutions(self):
         # Arrange
-        solution = SetCoveringProblemBitArraySolution()
+        solution = MinSetCoverProblemBitArraySolution()
         solution_code_1 = "101010"
         solution_code_2 = "101010"
     
@@ -293,7 +293,7 @@ class TestRepresentationDistanceDirectly(unittest.TestCase):
     # Calculate distance between two completely different solutions
     def test_completely_different_solutions(self):
         # Arrange
-        solution = SetCoveringProblemBitArraySolution()
+        solution = MinSetCoverProblemBitArraySolution()
         solution_code_1 = "101010"
         solution_code_2 = "000000"
     
@@ -306,7 +306,7 @@ class TestRepresentationDistanceDirectly(unittest.TestCase):
     # Calculate distance between two solutions with only one different bit
     def test_one_different_bit(self):
         # Arrange
-        solution = SetCoveringProblemBitArraySolution()
+        solution = MinSetCoverProblemBitArraySolution()
         solution_code_1 = "101010"
         solution_code_2 = "101011"
     
@@ -319,7 +319,7 @@ class TestRepresentationDistanceDirectly(unittest.TestCase):
     # Calculate distance between two empty solutions
     def test_empty_solutions(self):
         # Arrange
-        solution = SetCoveringProblemBitArraySolution()
+        solution = MinSetCoverProblemBitArraySolution()
         solution_code_1 = ""
         solution_code_2 = ""
     
@@ -332,7 +332,7 @@ class TestRepresentationDistanceDirectly(unittest.TestCase):
     # Calculate distance between two solutions with different lengths
     def test_different_lengths(self):
         # Arrange
-        solution = SetCoveringProblemBitArraySolution()
+        solution = MinSetCoverProblemBitArraySolution()
         solution_code_1 = "101010"
         solution_code_2 = "10101010"
     
@@ -343,7 +343,7 @@ class TestRepresentationDistanceDirectly(unittest.TestCase):
     # Calculate distance between two solutions with different types
     def test_different_types(self):
         # Arrange
-        solution = SetCoveringProblemBitArraySolution()
+        solution = MinSetCoverProblemBitArraySolution()
         solution_code_1 = "101010"
         solution_code_2 = 101010
     
@@ -358,7 +358,7 @@ class TestStringRep(unittest.TestCase):
     def test_returns_string_representation(self):
         # Arrange
         problem = ProblemVoidMinSO("x**2", True)
-        solution = SetCoveringProblemBitArraySolution()
+        solution = MinSetCoverProblemBitArraySolution()
         solution.init_from(BitArray('0b1110'), problem)
         # Act
         result = solution.string_rep()
@@ -369,7 +369,7 @@ class TestStringRep(unittest.TestCase):
     def test_includes_super_class_representation(self):
         # Arrange
         problem = ProblemVoidMinSO("x**2", True)
-        solution = SetCoveringProblemBitArraySolution()
+        solution = MinSetCoverProblemBitArraySolution()
         solution.init_from(BitArray('0b1110'), problem)
         # Act
         result = solution.string_rep()
@@ -380,7 +380,7 @@ class TestStringRep(unittest.TestCase):
     def test_includes_string_representation(self):
         # Arrange
         problem = ProblemVoidMinSO("x**2", True)
-        solution = SetCoveringProblemBitArraySolution()
+        solution = MinSetCoverProblemBitArraySolution()
         solution.init_from(BitArray('0b1110'), problem)
     
         # Act
@@ -393,7 +393,7 @@ class TestStringRep(unittest.TestCase):
     def test_optional_parameters(self):
         # Arrange
         problem = ProblemVoidMinSO("x**2", True)
-        solution = SetCoveringProblemBitArraySolution()
+        solution = MinSetCoverProblemBitArraySolution()
         solution.init_from(BitArray('0b1110'), problem)
     
         # Act
@@ -406,7 +406,7 @@ class TestStringRep(unittest.TestCase):
     def test_default_values(self):
         # Arrange
         problem = ProblemVoidMinSO("x**2", True)
-        solution = SetCoveringProblemBitArraySolution()
+        solution = MinSetCoverProblemBitArraySolution()
         solution.init_from(BitArray('0b1110'), problem)
     
         # Act
@@ -419,7 +419,7 @@ class TestStringRep(unittest.TestCase):
     # If delimiter is None, it raises a TypeError.
     def test_delimiter_is_none(self):
         # Arrange
-        solution = SetCoveringProblemBitArraySolution()
+        solution = MinSetCoverProblemBitArraySolution()
     
         # Act & Assert
         with self.assertRaises(TypeError):
@@ -428,7 +428,7 @@ class TestStringRep(unittest.TestCase):
     # If indentation is None, it raises a TypeError.
     def test_indentation_is_none(self):
         # Arrange
-        solution = SetCoveringProblemBitArraySolution()
+        solution = MinSetCoverProblemBitArraySolution()
     
         # Act & Assert
         with self.assertRaises(TypeError):
@@ -437,7 +437,7 @@ class TestStringRep(unittest.TestCase):
     # If group_start is None, it raises a TypeError.
     def test_group_start_is_none(self):
         # Arrange
-        solution = SetCoveringProblemBitArraySolution()
+        solution = MinSetCoverProblemBitArraySolution()
     
         # Act & Assert
         with self.assertRaises(TypeError):

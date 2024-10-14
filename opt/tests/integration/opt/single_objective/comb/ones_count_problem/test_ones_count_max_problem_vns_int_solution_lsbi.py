@@ -13,18 +13,18 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_stan
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_int_solution import OnesCountMaxProblemIntSolution
+from opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem import MaxOnesCountProblem
+from opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_int_solution import MaxOnesCountProblemIntSolution
 
-class TestOnesCountMaxProblemVnsIntSolutionLsbi(unittest.TestCase):
+class TestMaxOnesCountProblemVnsIntSolutionLsbi(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
-        print("setUpClass TestIntegrationOnesCountMaxProblemVnsIntSolutionLsbi\n")
+        print("setUpClass TestIntegrationMaxOnesCountProblemVnsIntSolutionLsbi\n")
 
     def setUp(self):
-        self.problem_to_solve:OnesCountMaxProblem = OnesCountMaxProblem.from_dimension(dimension=22)
-        self.solution:OnesCountMaxProblemIntSolution = OnesCountMaxProblemIntSolution()
+        self.problem_to_solve:MaxOnesCountProblem = MaxOnesCountProblem.from_dimension(dimension=22)
+        self.solution:MaxOnesCountProblemIntSolution = MaxOnesCountProblemIntSolution()
         self.finish_control:FinishControl = FinishControl(criteria='evaluations', evaluations_max=1000)
         self.vns_shaking_support:VnsShakingSupportStandardInt = \
             VnsShakingSupportStandardInt(self.problem_to_solve.dimension)
@@ -54,7 +54,7 @@ class TestOnesCountMaxProblemVnsIntSolutionLsbi(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        print("\ntearDownClass TestIntegrationOnesCountMaxProblemVnsIntSolutionLsbi")
+        print("\ntearDownClass TestIntegrationMaxOnesCountProblemVnsIntSolutionLsbi")
     
 if __name__ == '__main__':
     unittest.main()

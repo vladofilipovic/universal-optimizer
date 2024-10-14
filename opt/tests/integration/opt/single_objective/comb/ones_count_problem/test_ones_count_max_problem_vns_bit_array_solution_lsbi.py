@@ -15,21 +15,21 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_stan
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem import OnesCountMaxProblem
-from opt.single_objective.comb.ones_count_max_problem.ones_count_max_problem_bit_array_solution import \
-    OnesCountMaxProblemBitArraySolution
+from opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem import MaxOnesCountProblem
+from opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit_array_solution import \
+    MaxOnesCountProblemBitArraySolution
 
 
-class TestOnesCountMaxProblemVnsBitArraySolutionLsbi(unittest.TestCase):
+class TestMaxOnesCountProblemVnsBitArraySolutionLsbi(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
-        print("setUpClass TestIntegrationOnesCountMaxProblemVnsBitArraySolutionLsbi\n")
+        print("setUpClass TestIntegrationMaxOnesCountProblemVnsBitArraySolutionLsbi\n")
 
     def setUp(self):
         problem_dim:int = 24
-        self.problem_to_solve:OnesCountMaxProblem = OnesCountMaxProblem.from_dimension(dimension=problem_dim)
-        self.solution:OnesCountMaxProblemBitArraySolution = OnesCountMaxProblemBitArraySolution(random_seed=43434343)
+        self.problem_to_solve:MaxOnesCountProblem = MaxOnesCountProblem.from_dimension(dimension=problem_dim)
+        self.solution:MaxOnesCountProblemBitArraySolution = MaxOnesCountProblemBitArraySolution(random_seed=43434343)
         self.finish_control:FinishControl = FinishControl(criteria='evaluations', evaluations_max=1000, 
                     iterations_max=0, seconds_max=0)
         self.vns_shaking_support:VnsShakingSupportStandardBitArray = \
@@ -66,7 +66,7 @@ class TestOnesCountMaxProblemVnsBitArraySolutionLsbi(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        print("\ntearDownClass TestIntegrationOnesCountMaxProblemVnsBitArraySolutionLsbi")
+        print("\ntearDownClass TestIntegrationMaxOnesCountProblemVnsBitArraySolutionLsbi")
     
 if __name__ == '__main__':
     unittest.main()

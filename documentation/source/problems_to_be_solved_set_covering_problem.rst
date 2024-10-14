@@ -13,4 +13,4 @@ Set Covering Problem is the NP-hard problem often found in combinatoral optimiza
 
 - **Measure:** Minimize the number of sets found in a solution.
 
-* Minimum Multi Cut Problem. Problem is represented with class :ref:`SetCoveringProblemProblem<py_set_covering_problem>`. 
+* Minimum Multi Cut Problem. Problem is represented with class :ref:`MinSetCoverProblemProblem<py_set_covering_problem>`. 
