@@ -13,7 +13,7 @@ from uo.algorithm.algorithm_void import AlgorithmVoid
 from opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem import MaxOnesCountProblem
 from opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit_array_solution import MaxOnesCountProblemBitArraySolution
 
-class TestTeOperationsSupportBitArray(unittest.TestCase):
+class TestMaxOnesCountProblemBitArraySolutionTeSupport(unittest.TestCase):
 
     # can reset the internal counter of the total enumerator and set the internal state of the solution to reflect reset operation
     def test_reset_internal_counter_and_state(self):

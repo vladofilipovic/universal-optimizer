@@ -18,7 +18,7 @@ from uo.solution.solution import Solution
 
 import unittest
 
-class TestFunctionOneVariableMaxProblemIntSolution(unittest.TestCase):
+class TestMaxFunctionOneVariableProblemIntSolution(unittest.TestCase):
 
     # Creating an instance of FunctionOneVariableMaxProblemIntSolution with valid arguments should initialize the object correctly
     def test_valid_arguments_initialization(self):

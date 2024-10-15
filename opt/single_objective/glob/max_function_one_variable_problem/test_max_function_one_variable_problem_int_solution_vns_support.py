@@ -23,7 +23,7 @@ from opt.single_objective.glob.max_function_one_variable_problem.max_function_on
     FunctionOneVariableMaxProblemIntSolution
 
 
-class TestFunctionOneVariableMaxProblemIntSolutionVnsSupport(unittest.TestCase):
+class TestMaxFunctionOneVariableProblemIntSolutionVnsSupport(unittest.TestCase):
 
     # shaking method returns True when k is greater than 0 and the solution is valid
     def test_shaking_returns_true_when_k_is_greater_than_0_and_solution_is_valid(self):

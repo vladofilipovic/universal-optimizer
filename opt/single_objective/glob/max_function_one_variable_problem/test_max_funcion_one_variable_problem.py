@@ -11,7 +11,7 @@ from unittest.mock import mock_open
 from opt.single_objective.glob.max_function_one_variable_problem.max_function_one_variable_problem import MaxFunctionOneVariableMaxProblem
 from opt.single_objective.glob.max_function_one_variable_problem.max_function_one_variable_problem import MaxFunctionOneVariableMaxProblemElements
 
-class TestFunctionOneVariableMaxProblem(unittest.TestCase):
+class TestMaxFunctionOneVariableProblem(unittest.TestCase):
 
     # Creating a new instance of MaxFunctionOneVariableMaxProblem with valid expression, domain_low and domain_high parameters should return a MaxFunctionOneVariableMaxProblem object.
     def test_valid_instance_creation(self):
