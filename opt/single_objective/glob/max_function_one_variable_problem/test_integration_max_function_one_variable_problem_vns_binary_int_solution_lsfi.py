@@ -19,7 +19,7 @@ from opt.single_objective.glob.max_function_one_variable_problem.max_function_on
 from opt.single_objective.glob.max_function_one_variable_problem.max_function_one_variable_problem_int_solution \
         import FunctionOneVariableMaxProblemIntSolution
 
-class TestMaxFunctionOneVariableMaxProblemIntSolutionLsfi(unittest.TestCase):
+class TestIntegrationMaxFunctionOneVariableMaxProblemIntSolutionLsfi(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):

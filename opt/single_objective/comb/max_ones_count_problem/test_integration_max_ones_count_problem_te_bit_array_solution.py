@@ -22,7 +22,7 @@ from uo.algorithm.exact.total_enumeration.te_optimizer import TeOptimizer
 from opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem import MaxOnesCountProblem
 from opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit_array_solution import MaxOnesCountProblemBitArraySolution
 
-class TestMaxOnesCountProblemTeBitArraySolution(unittest.TestCase):
+class TestIntegrationMaxOnesCountProblemTeBitArraySolution(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):

@@ -8,28 +8,33 @@ from random import choice
 
 from uo.algorithm.metaheuristic.finish_control import FinishControl
 
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_standard_int import VnsShakingSupportStandardInt
-from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_standard_bi_int import VnsLocalSearchSupportStandardBestImprovementInt
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_shaking_support_standard_int import \
+        VnsShakingSupportStandardInt
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_standard_bi_int import \
+        VnsLocalSearchSupportStandardBestImprovementInt
+from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_ls_support_standard_fi_int import \
+        VnsLocalSearchSupportStandardFirstImprovementInt
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizerConstructionParameters
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
 from opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem import MaxOnesCountProblem
-from opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_int_solution import MaxOnesCountProblemIntSolution
+from opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_int_solution import \
+        MaxOnesCountProblemIntSolution
 
-class TestMaxOnesCountProblemVnsIntSolutionLsbi(unittest.TestCase):
+class TestIntegrationMaxOnesCountProblemVnsIntSolutionLsfi(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
-        print("setUpClass TestIntegrationMaxOnesCountProblemVnsIntSolutionLsbi\n")
+        print("setUpClass TestIntegrationMaxOnesCountProblemVnsIntSolutionLsfi\n")
 
     def setUp(self):
         self.problem_to_solve:MaxOnesCountProblem = MaxOnesCountProblem.from_dimension(dimension=22)
         self.solution:MaxOnesCountProblemIntSolution = MaxOnesCountProblemIntSolution()
-        self.finish_control:FinishControl = FinishControl(criteria='evaluations', evaluations_max=1000)
+        self.finish_control:FinishControl = FinishControl(criteria='evaluations', evaluations_max=5000)
         self.vns_shaking_support:VnsShakingSupportStandardInt = \
-            VnsShakingSupportStandardInt(self.problem_to_solve.dimension)
-        self.vns_ls_support:VnsLocalSearchSupportStandardBestImprovementInt = \
-            VnsLocalSearchSupportStandardBestImprovementInt(self.problem_to_solve.dimension)
+                VnsShakingSupportStandardInt(self.problem_to_solve.dimension)
+        self.vns_ls_support:VnsLocalSearchSupportStandardFirstImprovementInt = \
+                VnsLocalSearchSupportStandardFirstImprovementInt(self.problem_to_solve.dimension)
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
         vns_construction_params.problem = self.problem_to_solve
         vns_construction_params.solution_template = self.solution
@@ -54,7 +59,7 @@ class TestMaxOnesCountProblemVnsIntSolutionLsbi(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        print("\ntearDownClass TestIntegrationMaxOnesCountProblemVnsIntSolutionLsbi")
+        print("\ntearDownClass TestIntegrationMaxOnesCountProblemVnsIntSolutionLsfi")
     
 if __name__ == '__main__':
     unittest.main()

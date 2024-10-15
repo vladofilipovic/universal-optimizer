@@ -1,8 +1,3 @@
-from pathlib import Path
-directory = Path(__file__).resolve()
-import sys
-sys.path.append(directory.parent)
-
 
 import unittest   
 import unittest.mock as mocker
@@ -21,22 +16,26 @@ from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer impor
 from uo.algorithm.metaheuristic.variable_neighborhood_search.vns_optimizer import VnsOptimizer
 
 from opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem import MaxOnesCountProblem
-from opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit_array_solution import MaxOnesCountProblemBitArraySolution
+from opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit_array_solution import \
+    MaxOnesCountProblemBitArraySolution
 
-class TestMaxOnesCountProblemVnsBitArraySolutionLsbi(unittest.TestCase):
+
+class TestIntegrationMaxOnesCountProblemVnsBitArraySolutionLsbi(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
         print("setUpClass TestIntegrationMaxOnesCountProblemVnsBitArraySolutionLsbi\n")
 
     def setUp(self):
-        self.problem_to_solve:MaxOnesCountProblem = MaxOnesCountProblem.from_dimension(dimension=24)
+        problem_dim:int = 24
+        self.problem_to_solve:MaxOnesCountProblem = MaxOnesCountProblem.from_dimension(dimension=problem_dim)
         self.solution:MaxOnesCountProblemBitArraySolution = MaxOnesCountProblemBitArraySolution(random_seed=43434343)
-        self.finish_control:FinishControl = FinishControl(criteria='evaluations', evaluations_max=1000)
+        self.finish_control:FinishControl = FinishControl(criteria='evaluations', evaluations_max=1000, 
+                    iterations_max=0, seconds_max=0)
         self.vns_shaking_support:VnsShakingSupportStandardBitArray = \
-                VnsShakingSupportStandardBitArray(self.problem_to_solve.dimension)
-        self.vns_ls_support:VnsLocalSearchSupportStandardBestImprovementBitArray = \
-                VnsLocalSearchSupportStandardBestImprovementBitArray(self.problem_to_solve.dimension)
+                VnsShakingSupportStandardBitArray(problem_dim)
+        self.vns_ls_support:VnsLocalSearchSupportStandardBestImprovementBitArray= \
+                VnsLocalSearchSupportStandardBestImprovementBitArray(problem_dim)
         vns_construction_params:VnsOptimizerConstructionParameters = VnsOptimizerConstructionParameters()
         vns_construction_params.problem = self.problem_to_solve
         vns_construction_params.solution_template = self.solution
@@ -48,8 +47,8 @@ class TestMaxOnesCountProblemVnsBitArraySolutionLsbi(unittest.TestCase):
         vns_construction_params.k_max = 3
         self.optimizer:VnsOptimizer = VnsOptimizer.from_construction_tuple(vns_construction_params)
         self.bs = self.optimizer.optimize()
-    
-    def test_best_solution_after_optimization_should_be_all_optimal(self):
+
+    def test_best_solution_after_optimization_should_be_optimal(self):
         result:str = '111111111111111111111111'
         self.assertEqual(self.optimizer.best_solution.string_representation(), result)
 

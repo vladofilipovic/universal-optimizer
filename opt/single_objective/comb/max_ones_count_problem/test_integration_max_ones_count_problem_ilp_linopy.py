@@ -102,7 +102,7 @@ if __name__ == '__main__':
     unittest.main()
 
 
-class TestOptimize(unittest.TestCase):
+class TestIntegration(unittest.TestCase):
 
     # The method runs without errors when called with a valid instance of MaxOnesCountProblemIntegerLinearProgrammingSolver.
     def test_valid_instance_no_errors(self):
