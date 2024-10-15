@@ -20,7 +20,7 @@ from opt.single_objective.comb.max_ones_count_problem.max_ones_count_problem_bit
                 MaxOnesCountProblemBitArraySolution
 
 
-class TestMaxOnesCountProblemGaBitArraySolution(unittest.TestCase):
+class TestIntegrationMaxOnesCountProblemGaBitArraySolution(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
